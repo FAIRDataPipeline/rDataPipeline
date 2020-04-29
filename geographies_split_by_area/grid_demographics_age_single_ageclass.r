@@ -25,7 +25,6 @@ grid_50 <- st_make_grid(st_as_sfc(st_bbox(datazones)), cellsize = c(grid.size, g
 #use bounding box grid to "crop" datazones so that parts in different grid cells are distinct
 intersected_grid_contain<-st_intersection(grid_50, datazones)
 grid_subset<-grid_50[match(intersected_grid_contain$grid_id,grid_50$grid_id,),]
-st_write(grid_subset, dsn="1km_scotland_grid.shp")
 #find area of each of the newly created distinct datazone components
 intersection_area<-data.frame("grid_id"=intersected_grid_contain$grid_id, "datazone"=intersected_grid_contain$DataZone, "area"=st_area(intersected_grid_contain))
 datazone_area<-data.frame("datazone"=datazones$DataZone, "full_zone_area"=st_area(datazones))
