@@ -28,3 +28,6 @@ intersection_datazone_grid<-data.frame("grid_id"=intersected_grid_contain$grid_i
 intersection_datazone_grid<-left_join(intersection_datazone_grid, datazone.demographics, by="datazone")
 grid_demographics<-intersection_datazone_grid %>% group_by(grid_id, .drop = FALSE) %>% summarise(mean = mean(simd2020_inc_rate))
 
+
+h5write(grid_populations, file="scrc_demographics.h5", name="griddata/income_deprivation_scotland_10kmgrid")
+h5ls("scrc_demographics.h5")
