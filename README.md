@@ -12,7 +12,7 @@ processing_population_data.r takes raw population from National Records for Scot
 
 ### Demographic data
 
-processing_demographic_data.r (currently) takes raw SIMD data and processes this to a useable version for income deprivation. Raw data and processed data are stored in hdf5 file.
+processing_demographic_data.r (currently) takes raw SIMD data and processes this to a useable version for income deprivation. Processed data is stored in hdf5 file.
 
 grid_non_population_demographics.r calculates the mean value of the demographic data of the census geographies contained in each grid cell. This works for income deprivation (I think) which is all I've looked at so far but might have to be changed for other demographic indicators.
 
