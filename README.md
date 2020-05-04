@@ -6,7 +6,7 @@ geographies_split_by_area folder contains scripts which split populations betwee
 
 geographies_split_by_postcode folder contains scripts which split populations between grid cells base on the proportion of the postcodes contained in the census geography which are in each of the grid cells. 
 
-Both folders contain different folders for splitting  single age and multiple age class population data. 
+Both folders contain different scripts for splitting  single age and multiple age class population data. 
 
 processing_population_data.r takes raw population from National Records for Scotland and processes this to useable versions. Raw data and processed data are stored in hdf5 file.
 
