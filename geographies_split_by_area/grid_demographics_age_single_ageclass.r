@@ -1,19 +1,18 @@
-rm(list=ls())
-library("rgdal")
-library("ggplot2")
+library(rgdal)
+library(ggplot2)
 library(stringr)
 library(readxl)
 library(sf)
 library(tidyverse)
 library(spdep)
-library("rhdf5")
+library(rhdf5)
 
 ##Single age class
-grid.size=10000
+grid.size <- 10000
 
 #Read in 2018 population estimates for Scotland in 2018 and extract datazone codes and population size
 datazone.populations.full <- h5read(file="scrc_demographics.h5", name="processeddata/populations_single_year/datazone_population_persons_singleyear_2013")
-datazone.populations<-data.frame(datazone.populations[,1],rowSums(datazone.populations.full[,-1]))
+datazone.populations <- data.frame(datazone.populations[,1],rowSums(datazone.populations.full[,-1]))
 colnames(datazone.populations)[1]<-c("DataZone")
 #Read in datazones shapefile
 shape<-readOGR(dsn = "C:/Users/2117658m/Documents/demographics_scrc_shape_files/SG_DataZone_Bdry_2011.shp")

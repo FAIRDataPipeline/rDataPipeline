@@ -1,10 +1,17 @@
-library("rhdf5")
+# 2
+library(rhdf5)
 library(readxl)
 
-#Create subgroup for processed population data
-h5createGroup("scrc_demographics.h5", "processeddata/SIMD_income")
+h5filename <- "scrc_demographics.h5"
 
-simd<-read.csv("C:/Users/2117658m/Documents/aggregating_demographics/raw_data/DataZone2011_simd2020.csv")
-simd_income<-simd[,c(1,34)]
-simd_income[,1]<-as.character(simd_income[,1])            
-h5write(simd_income, "scrc_demographics.h5",name="processeddata/SIMD_income/simd_datazone_income")
+
+# Create subgroup for processed population data
+h5createGroup(h5filename, "processeddata/SIMD_income")
+
+simd <- read.csv("data-raw/DataZone2011_simd2020.csv")
+simd_income <- simd %>% 
+  select(dz2011, simd2020_inc_rate) %>% 
+  rename(datazone = dz2011)
+
+h5write(simd_income, h5filename,
+        name = "processeddata/SIMD_income/simd_datazone_income")

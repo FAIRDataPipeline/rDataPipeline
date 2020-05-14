@@ -1,33 +1,56 @@
-rm(list=ls())
-library("rgdal")
-library("ggplot2")
+# 3
+library(rgdal)
+library(ggplot2)
 library(stringr)
 library(readxl)
 library(sf)
 library(tidyverse)
 library(spdep)
-library("rhdf5")
+library(rhdf5)
+library(magrittr)
 
-##Single age class
-grid.size=10000
+h5filename <- "scrc_demographics.h5"
 
-#Read in 2018 population estimates for Scotland in 2018 and extract datazone codes and population size
-datazone.demographics <- h5read(file="scrc_demographics.h5", name="processeddata/SIMD_income/simd_datazone_income")
-colnames(datazone.demographics)[1]<-c("datazone")
-#Read in datazones shapefile
-shape<-readOGR(dsn = "C:/Users/2117658m/Documents/demographics_scrc_shape_files/SG_DataZone_Bdry_2011.shp")
-#spacial object to sf object
-datazones <- st_as_sf(shape)
-#Make grid of n*n (each measured in metres) over bounding box of datazone shapefile. It should be possible to replace this with any sf object which contains a grid of polygons to end with the same effect.
-grid_50 <- st_make_grid(st_as_sfc(st_bbox(datazones)), cellsize = c(grid.size, grid.size)) %>% 
-  st_sf(grid_id = 1:length(.))
-#use bounding box grid to "crop" datazones so that parts in different grid cells are distinct
-intersected_grid_contain<-st_intersection(grid_50, datazones)
-#find area of each of the newly created distinct datazone components
-intersection_datazone_grid<-data.frame("grid_id"=intersected_grid_contain$grid_id, "datazone"=as.character(intersected_grid_contain$DataZone))
-intersection_datazone_grid<-left_join(intersection_datazone_grid, datazone.demographics, by="datazone")
-grid_demographics<-intersection_datazone_grid %>% group_by(grid_id, .drop = FALSE) %>% summarise(mean = mean(simd2020_inc_rate))
+# Single age class
+grid.size <- 10000
 
+# Read in 2018 population estimates for Scotland in 2018 and extract datazone 
+# codes and population size
+datazone.demographics <- h5read(file = h5filename, 
+                                name = file.path("processeddata/SIMD_income", 
+                                                 "simd_datazone_income"))
 
-h5write(grid_populations, file="scrc_demographics.h5", name="griddata/income_deprivation_scotland_10kmgrid")
-h5ls("scrc_demographics.h5")
+# Read in datazones shapefile and check for non-intersecting geometries
+shape <- st_read("data-raw/shapefiles/SG_DataZone_Bdry_2011.shp")
+check <- sf::st_is_valid(x, reason = TRUE)
+if (any(check != "Valid Geometry")) {
+  datazones <- st_make_valid(shape)
+  assertthat::assert_that(sum(st_area(shape)) == sum(st_area(datazones)))
+} else 
+  datazones <- shape
+
+# Make grid of n*n (each measured in metres) over bounding box of datazone 
+# shapefile. It should be possible to replace this with any sf object which 
+# contains a grid of polygons to end with the same effect.
+grids <- st_make_grid(st_as_sfc(st_bbox(datazones)), 
+                        cellsize = c(grid.size, grid.size)) %>% 
+  st_sf(grid_id = seq_along(.))
+
+# Use bounding box grid to "crop" datazones so that parts in different grid 
+# cells are distinct
+intersected_grid_contain <- st_intersection(grids, datazones) 
+
+# Find area of each of the newly created distinct datazone components
+intersection_datazone_grid <- intersected_grid_contain %>% 
+  data.frame() %>% 
+  tibble::remove_rownames() %>% 
+  select(grid_id, DataZone) %>% 
+  rename(datazone = DataZone) %>% 
+  merge(datazone.demographics, by = "datazone", all.x = T)
+
+grid_demographics <- intersection_datazone_grid %>% 
+  group_by(grid_id, .drop = FALSE) %>% 
+  summarise(mean = mean(simd2020_inc_rate))
+
+h5write(grid_demographics, file = h5filename,
+        name = "griddata/income_deprivation_scotland_10kmgrid")
