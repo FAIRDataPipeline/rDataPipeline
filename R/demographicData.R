@@ -11,31 +11,24 @@ demographicData <- function(
   datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
   simd_path = "data-raw/DataZone2011_simd2020.csv") 
 {
-  
   # Initialise hdf5 file ----------------------------------------------------
   
   # Create hdf5 file
   rhdf5::h5createFile(h5filename)
   
-  # Create scotland_2018 group with datazone and griddata subgroups
+  # Create groups for each dataset
   rhdf5::h5createGroup(h5filename, "scotland_2018")
-  rhdf5::h5createGroup(h5filename, "scotland_2018/datazone")
-  rhdf5::h5createGroup(h5filename, "scotland_2018/griddata")
-  
-  # Create simd_income group with datazone and griddata subgroups
   rhdf5::h5createGroup(h5filename, "simd_income")
-  rhdf5::h5createGroup(h5filename, "simd_income/datazone")
-  rhdf5::h5createGroup(h5filename, "simd_income/griddata")
 
   
   # Population data --------------------------------------------------------
   
-  # Process data
-  sape_persons <- process_population(path)
+  # Process data and write to group
+  sape_persons <- process_population(datazone_path)
   rhdf5::h5write(sape_persons, file = h5filename, 
                  name = file.path("scotland_2018/datazone"))
   
-  # Add attributes / metadata
+  # Add attributes / metadata 
   fid <- rhdf5::H5Fopen(h5filename)
   
   gid <- rhdf5::H5Gopen(fid, name = "scotland_2018/") 
@@ -49,15 +42,15 @@ demographicData <- function(
   did <- rhdf5::H5Dopen(fid, "scotland_2018/datazone")
   h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
   
-  rhdf5::H5Fclose(fid)
-  rhdf5::H5Fclose(gid)
   rhdf5::H5Dclose(did)
+  rhdf5::H5Gclose(gid)
+  rhdf5::H5Fclose(fid)
   
   
   # SIMD data --------------------------------------------------------------
   
   # Process data
-  simd_income <- process_simd(path)
+  simd_income <- process_simd(simd_path)
   h5write(simd_income, h5filename,
           name = "simd_income/datazone")
   
@@ -71,7 +64,8 @@ demographicData <- function(
   did <- rhdf5::H5Dopen(fid, "simd_income/datazone")
   h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
   
-  rhdf5::H5Fclose(fid)
-  rhdf5::H5Fclose(gid)
   rhdf5::H5Dclose(did)
+  rhdf5::H5Gclose(gid)
+  rhdf5::H5Fclose(fid)
+  
 } 
