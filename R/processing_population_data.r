@@ -1,21 +1,6 @@
 # 1
 
-h5filename <- "scrc_demographics.h5"
 
-
-# Create hdf5 file
-rhdf5::h5createFile(h5filename)
-
-# Create group for datazones and subgroup for scotland2018
-rhdf5::h5createGroup(h5filename, "datazone")
-rhdf5::h5createGroup(h5filename, "datazone/scotland2018")
-
-# Create group for grid data
-rhdf5::h5createGroup(h5filename, "griddata")
-
-
-
-# Population data ---------------------------------------------------------
 
 filename <- "data-raw/population_datazone/sape-2018-persons.xlsx"
 
@@ -49,18 +34,32 @@ sape_persons %<>%
         dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric)
 
 h5write(sape_persons, file = h5filename, 
-        name = file.path("datazone/scotland2018"))
+        name = file.path("scotland2018/datazone"))
 
 
 # Metadata/attributes -----------------------------------------------------
 
+# Open file
 fid <- H5Fopen(h5filename)
 
-H5D_name <- file.path("/datazone/scotland2018")
-did <- H5Dopen(fid, name = H5D_name) 
-H5D_attr <- paste("Population of datazones in Scotland in 2018 contains data for single year of age from age 0 to 89 and a 90+ age class and all ages, data from National Records Scotland, available at https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series. Downloaded 24/4/20. Processed to remove unnecessary identifier columns/rows. Raw data available: /rawdata/scotlandpopulations/datazone_population_persons_singleyear_2018")
-h5writeAttribute(did, name = "Description", attr = H5D_attr)
+# Add some attributes to the group
+gid <- H5Gopen(fid, name = "scotland2018/") 
+
+h5writeAttribute(did, attr = "Population of datazones in Scotland in 2018 contains data for single year of age from age 0 to 89 and a 90+ age class and all ages. Processed to remove unnecessary identifier columns/rows.", 
+                 name = "Description")
+h5writeAttribute(did, attr = "24/4/20", name = "DownloadDate")
+h5writeAttribute(did, attr = "1", name = "RawWarningScore")
+h5writeAttribute(did, attr = "National Records Scotland", name = "Source")
+h5writeAttribute(did, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
+
+# Add some attributes to the dataset (datazone)
+did <- H5Dopen(fid, "scotland2018/datazone")
+
+h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
+
+# Close file, groups, and datasets
+H5Fclose(fid)
+H5Fclose(gid)
 H5Dclose(did)
 
-H5Fclose(fid)
 
