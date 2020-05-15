@@ -29,106 +29,112 @@
 #'     cells, I have a work-around which is explained in the code.
 #' 
 #' 
-#' @param 
+#' @param population_dz datazone population data
+#' @param datazone_sf path to datazone shape file 
+#' @param postcode_sf path to postcode shape file 
+#' @param grid_size grid size (length) in metres
 #' 
-dz2grid_pop <- function(pop_datazone, 
+dz2grid_pop <- function(population_dz, 
                         datazone_sf,
                         postcode_sf,
                         grid_size = 10000) {
   # Age class agreggation ---------------------------------------------------
   
   # Remove empty datazones ("S01010206", "S01010226", and "S01010227")
-  pop_datazone %<>% 
-    filter(rowSums(select(., -datazone)) != 0)
+  population_dz %<>% 
+    dplyr::filter(rowSums(dplyr::select(., -datazone)) != 0)
   
-  datazone_populations <- pop_datazone %>% 
-    mutate(AllAges = rowSums(select(., -datazone))) %>% 
-    select(datazone, AllAges) 
+  datazone_populations <- population_dz %>% 
+    dplyr::mutate(AllAges = rowSums(dplyr::select(., -datazone))) %>% 
+    dplyr::select(datazone, AllAges) 
   
   # Read in datazone shapefile and check for non-intersecting geometries
-  shape <- st_read(datazone_sf)
+  shape <- sf::st_read(datazone_sf)
   check <- sf::st_is_valid(shape, reason = TRUE)
   if(any(check != "Valid Geometry")) {
-    datazones <- st_make_valid(shape)
-    assertthat::assert_that(sum(st_area(shape)) == sum(st_area(datazones)))
+    datazones <- sf::st_make_valid(shape)
+    assertthat::assert_that(sum(sf::st_area(shape)) == sum(sf::st_area(datazones)))
   } else 
     datazones <- shape
   
   # Datazone-grid conversion -----------------------------------------------
   
   # Generate grid over bounding box of datazone shapefile
-  grids <- st_make_grid(st_as_sfc(st_bbox(datazones)), 
+  grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
                         cellsize = c(grid_size, grid_size)) %>% 
-    st_sf(grid_id = seq_along(.))
+    sf::st_sf(grid_id = seq_along(.))
   
   # Use grid to subdivide datazones
-  dz_subdivisions <- st_intersection(grids, datazones)
+  dz_subdivisions <- sf::st_intersection(grids, datazones)
   
   # Read in postcode shapefile 
-  postcode <- st_read(postcode_sf) 
+  postcode <- sf::st_read(postcode_sf) 
   
   
   # Find the total number of postcodes in each datazone ---------------------
   
   dz_postcode <- postcode 
-  st_geometry(dz_postcode) <- NULL
+  sf::st_geometry(dz_postcode) <- NULL
   
   dz_postcode_table <- dz_postcode %>% 
-    rename(datazone = DZ11) %>% 
-    select(Postcode, datazone) %>%  
-    unique() %>% 
-    group_by(datazone, .drop = FALSE) %>%
-    # using postcode shapefile datazones
-    summarise(postcodes_in_dz = n()) 
+    dplyr::rename(datazone = DZ11) %>% 
+    dplyr::select(Postcode, datazone) %>%  
+    dplyr::unique() %>% 
+    dplyr::group_by(datazone, .drop = FALSE) %>%
+    # using postcode shapefile datazones !!!
+    dplyr::summarise(postcodes_in_dz = n()) 
   
   
   # Find the total number of postcodes in each dz_subdivision ---------------
   
-  dz_grid_postcode <- st_join(postcode, dz_subdivisions) 
+  dz_grid_postcode <- sf::st_join(postcode, dz_subdivisions) 
   
   # Remove PA75 6NUB (it doesnt exist within postcode shapefile datazones)
-  dz_grid_postcode %<>% filter(!is.na(DataZone))  
+  dz_grid_postcode %<>% dplyr::filter(!is.na(DataZone))  
+  sf::st_geometry(dz_grid_postcode) <- NULL
   
-  st_geometry(dz_grid_postcode) <- NULL
-  dz_grid_postcode %<>% select(Postcode, DZ11, grid_id) %>% unique()
+  dz_grid_postcode %<>% 
+    dplyr::select(Postcode, DZ11, grid_id) %>%
+    dplyr::unique()
   
   dz_grid_postcode_table <- dz_grid_postcode %>% 
-    rename(datazone = DZ11) %>%  
-    group_by(datazone, grid_id, .drop = FALSE) %>% 
-    # using postcode shapefile datazones
-    summarise(postcodes_in_dz_component = n()) 
+    dplyr::rename(datazone = DZ11) %>%  
+    dplyr::group_by(datazone, grid_id, .drop = FALSE) %>% 
+    # using postcode shapefile datazones !!!
+    dplyr::summarise(postcodes_in_dz_component = n()) 
   
   
   # Calculate the proportion of postcodes in each dz_subdivision ------------
   # (relative to dz)
   postcode_prop <- left_join(dz_grid_postcode_table, 
                              dz_postcode_table, by = "datazone") %>% 
-    mutate(proportion = postcodes_in_dz_component / postcodes_in_dz)
+    dplyr::mutate(proportion = postcodes_in_dz_component / postcodes_in_dz)
   
   # Find the sum of the proportions within each dz
   combined_areas <- postcode_prop %>% 
-    select(datazone, grid_id, proportion) 
+    dplyr::select(datazone, grid_id, proportion) 
   combined_areas_total_prop <- combined_areas %>% 
-    group_by(datazone, .drop = FALSE) %>%
-    summarise(sum = sum(proportion))
+    dplyr::group_by(datazone, .drop = FALSE) %>%
+    dplyr::summarise(sum = sum(proportion))
   
   # This value is greater than 1 when postcodes exist in multiple grids. 
   # To prevent this, normalise within each dz
   combined_areas <- left_join(combined_areas, combined_areas_total_prop, 
                               by = "datazone") %>% 
-    mutate(proportion2 = proportion / sum) %>% 
-    select(datazone, grid_id, proportion2)
+    dplyr::mutate(proportion2 = proportion / sum) %>% 
+    dplyr::select(datazone, grid_id, proportion2)
   
   # Create matrix containing the proportion of postcodes in each dz_subdivision 
   wide_new_table <- tidyr::pivot_wider(combined_areas, 
                                        names_from = "datazone",
                                        values_from = "proportion2", 
                                        values_fill = list("proportion2" = 0)) %>% 
-    select(grid_id, datazone_populations$datazone)
+    # using datazone shapefile datazones !!!
+    dplyr::select(grid_id, datazone_populations$datazone)
   
   # Make new tables to fill in population proportions
   prop_dat <- wide_new_table %>% 
-    select(-grid_id)
+    dplyr::select(-grid_id)
   
   output <- wide_new_table %>% 
     data.frame() %>% 

@@ -35,5 +35,6 @@ process_population <- function(datazone_path) {
     # Remove columns 2:4
     dplyr::select_at(vars(-dplyr::ends_with("Name"),
                           -AllAges)) %>% 
-    dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric)
+    dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric) %>% 
+    dplyr::rename(datazone = DataZone2011Code)
 }

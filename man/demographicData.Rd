@@ -7,7 +7,9 @@
 demographicData(
   h5filename = "scrc_demographics.h5",
   datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
-  simd_path = "data-raw/DataZone2011_simd2020.csv"
+  simd_path = "data-raw/DataZone2011_simd2020.csv",
+  datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
+  postcode_sf = "data-raw/shapefiles/PC_Cut_20_1.shp"
 )
 }
 \arguments{
@@ -16,6 +18,10 @@ demographicData(
 \item{datazone_path}{path to demographic data file (datazones)}
 
 \item{simd_path}{path to simd data file}
+
+\item{datazone_sf}{path to datazone shape file}
+
+\item{postcode_sf}{path to postcode shape file}
 }
 \description{
 demographicData

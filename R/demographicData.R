@@ -3,6 +3,8 @@
 #' @param h5filename Name of the hd5f file you want to create
 #' @param datazone_path path to demographic data file (datazones)
 #' @param simd_path path to simd data file 
+#' @param datazone_sf path to datazone shape file 
+#' @param postcode_sf path to postcode shape file 
 #' 
 #' @export
 #' 
@@ -10,7 +12,8 @@ demographicData <- function(
   h5filename = "scrc_demographics.h5",
   datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
   simd_path = "data-raw/DataZone2011_simd2020.csv",
-  shapefile_path = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp") 
+  datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
+  postcode_sf = "data-raw/shapefiles/PC_Cut_20_1.shp") 
 {
   # Initialise hdf5 file ----------------------------------------------------
   
@@ -22,11 +25,11 @@ demographicData <- function(
   rhdf5::h5createGroup(h5filename, "simd_income")
   
   
-  # Population data --------------------------------------------------------
+  # Population data (datazones) ---------------------------------------------
   
   # Process data and write to group
-  sape_persons <- process_population(datazone_path)
-  rhdf5::h5write(sape_persons, file = h5filename, 
+  population_dz <- process_population(datazone_path = datazone_path)
+  rhdf5::h5write(population_dz, file = h5filename, 
                  name = file.path("scotland_2018/datazone"))
   
   # Add attributes / metadata 
@@ -48,13 +51,20 @@ demographicData <- function(
   rhdf5::H5Fclose(fid)
   
   
+  # Population data (grids) -------------------------------------------------
+  
+  population_grid <- dz2grid_pop(pop_datazone = population_dz, 
+                                 datazone_sf = datazone_sf, 
+                                 postcode_sf = postcode_sf, 
+                                 grid_size = grid_size)
+  h5write(population_grid, file = h5filename, 
+          name = "scotland_2018/grid_10km")
   
   # SIMD (datazones) -------------------------------------------------------
   
   # Process data
-  simd_income <- process_simd(simd_path)
-  h5write(simd_income, h5filename,
-          name = "simd_income/datazone")
+  simd_datazone <- process_simd(simd_path = simd_path)
+  h5write(simd_datazone, h5filename, name = "simd_income/datazone")
   
   # Add attributes / metadata 
   fid <- rhdf5::H5Fopen(h5filename)
@@ -73,8 +83,10 @@ demographicData <- function(
   
   # SIMD (grids) -----------------------------------------------------------
   
-  grid_demographics <- dz2grid_simd(simd_income, shapefile_path, grid_size)
-  rhdf5::h5write(grid_demographics, file = h5filename,
-                 name = "simd_income/10km_grid")
+  simd_grid <- dz2grid_simd(simd_datazone = simd_datazone, 
+                            datazone_sf = datazone_sf, 
+                            grid_size = grid_size)
+  rhdf5::h5write(simd_grid, file = h5filename,
+                 name = "simd_income/grid_10km")
   
 } 

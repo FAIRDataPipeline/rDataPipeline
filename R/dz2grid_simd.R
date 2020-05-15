@@ -2,21 +2,24 @@
 #' 
 #' Converts simd data from datazone to grid format.
 #' 
-#' @param simd_datazone processed datazone dataset; population estimates for 
-#' Scotland in 2018
-#' @param shapefile_path path to datazone shape data file 
+#' @param simd_datazone datazone simd data
+#' @param datazone_sf path to datazone shape file 
 #' @param grid_size grid size (length) in metres
 #' 
-dz2grid_simd <- function(simd_datazone, shapefile_path, grid_size = 10000) {
+dz2grid_simd <- function(simd_datazone, 
+                         datazone_sf, 
+                         grid_size = 10000) {
   
-  # Read in shapefile (datazone) and check for non-intersecting geometries
-  shape <- sf::st_read(shapefile_path)
+  # Read in datazone shapefile and check for non-intersecting geometries
+  shape <- sf::st_read(datazone_sf)
   check <- sf::st_is_valid(shape, reason = TRUE)
   if (any(check != "Valid Geometry")) {
     datazones <- sf::st_make_valid(shape)
     assertthat::assert_that(sum(st_area(shape)) == sum(st_area(datazones)))
   } else 
     datazones <- shape
+  
+  # Datazone-grid conversion -----------------------------------------------
   
   # Generate grid over bounding box of datazone shapefile
   grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
