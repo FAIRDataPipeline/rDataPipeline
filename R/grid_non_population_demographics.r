@@ -1,13 +1,6 @@
 # 3
-library(rgdal)
-library(ggplot2)
-library(stringr)
-library(readxl)
-library(sf)
-library(tidyverse)
-library(spdep)
-library(rhdf5)
-library(magrittr)
+# library(tidyverse)
+# library(spdep)
 
 h5filename <- "scrc_demographics.h5"
 

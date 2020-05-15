@@ -1,6 +1,4 @@
 # 2
-library(rhdf5)
-library(readxl)
 
 h5filename <- "scrc_demographics.h5"
 

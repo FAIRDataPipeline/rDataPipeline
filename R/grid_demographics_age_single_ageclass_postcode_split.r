@@ -1,11 +1,4 @@
-library(rgdal)
-library(ggplot2)
-library(stringr)
-library(readxl)
-library(sf)
-library(tidyverse)
-library(spdep)
-library(rhdf5)
+
 
 # Multiple age classes
 #
