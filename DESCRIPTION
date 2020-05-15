@@ -8,6 +8,7 @@ Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
 Description: Generates an hd5f file comprising demographic data
 License: GPL-3
 Imports:
+    dplyr,
     magrittr,
     readxl,
     rgdal,

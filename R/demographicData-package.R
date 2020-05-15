@@ -5,7 +5,8 @@
 #' @name demographicData-package
 #' @aliases demographicData
 #' @docType package
-#'
+#' 
+#' @import dplyr
 #' @import magrittr
 #' @import readxl
 #' @import rgdal
