@@ -1,13 +1,15 @@
 #' process_population
 #' 
-#' @param path path to demographic data input file (datazones)
+#' @param datazone_path path to demographic data file (datazones)
 #' 
-process_population <- function(path) {
-  # Read raw data
-  sape_persons <- readxl::read_excel(path, col_names = FALSE)
+process_population <- function(datazone_path) {
+  
+  # Read raw data -----------------------------------------------------------
+  
+  sape_persons <- readxl::read_excel(datazone_path, col_names = FALSE)
   
   # Extract header
-  header <- readxl::read_excel(path, skip = 3, n_max = 2) 
+  header <- readxl::read_excel(datazone_path, skip = 3, n_max = 2) 
   
   # Rename first 4 columns
   header %<>% dplyr::rename_at(vars(grep("^\\...[1-3]", names(.))), 
@@ -15,7 +17,9 @@ process_population <- function(path) {
     dplyr::rename(AllAges = "...4") %>% 
     names()
   
-  # Process data
+  
+  # Process data ------------------------------------------------------------
+  
   sape_persons %<>%
     # Remove first 6 rows
     .[-c(1:6),] %>% 

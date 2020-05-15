@@ -1,56 +1,76 @@
 #' demographicData
 #' 
 #' @param h5filename Name of the hd5f file you want to create
-#' @param path path to demographic data input file (datazones)
+#' @param datazone_path path to demographic data file (datazones)
+#' @param simd_path path to simd data file 
 #' 
 #' @export
 #' 
-demographicData <- function(h5filename = "scrc_demographics.h5",
-                            path = "data-raw/population_datazone/sape-2018-persons.xlsx"
-) {
+demographicData <- function(
+  h5filename = "scrc_demographics.h5",
+  datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
+  simd_path = "data-raw/DataZone2011_simd2020.csv") 
+{
   
   # Initialise hdf5 file ----------------------------------------------------
   
   # Create hdf5 file
   rhdf5::h5createFile(h5filename)
   
-  # Create group for scotland2018 
-  rhdf5::h5createGroup(h5filename, "scotland2018")
+  # Create scotland_2018 group with datazone and griddata subgroups
+  rhdf5::h5createGroup(h5filename, "scotland_2018")
+  rhdf5::h5createGroup(h5filename, "scotland_2018/datazone")
+  rhdf5::h5createGroup(h5filename, "scotland_2018/griddata")
   
-  # Create subgroups for datazone and griddata
-  rhdf5::h5createGroup(h5filename, "scotland2018/datazone")
-  rhdf5::h5createGroup(h5filename, "scotland2018/griddata")
+  # Create simd_income group with datazone and griddata subgroups
+  rhdf5::h5createGroup(h5filename, "simd_income")
+  rhdf5::h5createGroup(h5filename, "simd_income/datazone")
+  rhdf5::h5createGroup(h5filename, "simd_income/griddata")
+
   
+  # Population data --------------------------------------------------------
   
-  # Process data ------------------------------------------------------------
-  
+  # Process data
   sape_persons <- process_population(path)
-  
   rhdf5::h5write(sape_persons, file = h5filename, 
-                 name = file.path("scotland2018/datazone"))
+                 name = file.path("scotland_2018/datazone"))
   
-  
-  # Add attributes / metadata -----------------------------------------------
-  
-  # Open file
+  # Add attributes / metadata
   fid <- rhdf5::H5Fopen(h5filename)
   
-  # Add some attributes to the group
-  gid <- rhdf5::H5Gopen(fid, name = "scotland2018/") 
-  
-  rhdf5::h5writeAttribute(did, attr = "Population of datazones in Scotland in 2018 contains data for single year of age from age 0 to 89 and a 90+ age class and all ages. Processed to remove unnecessary identifier columns/rows.", 
+  gid <- rhdf5::H5Gopen(fid, name = "scotland_2018/") 
+  rhdf5::h5writeAttribute(gid, attr = "Population of datazones in Scotland in 2018 contains data for single year of age from age 0 to 89 and a 90+ age class and all ages. Processed to remove unnecessary identifier columns/rows.", 
                           name = "Description")
-  rhdf5::h5writeAttribute(did, attr = "24/4/20", name = "DownloadDate")
-  rhdf5::h5writeAttribute(did, attr = "1", name = "RawWarningScore")
-  rhdf5::h5writeAttribute(did, attr = "National Records Scotland", name = "Source")
-  rhdf5::h5writeAttribute(did, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
+  rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
+  rhdf5::h5writeAttribute(gid, attr = "1", name = "RawWarningScore")
+  rhdf5::h5writeAttribute(gid, attr = "National Records Scotland", name = "Source")
+  rhdf5::h5writeAttribute(gid, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
   
-  # Add some attributes to the dataset (datazone)
-  did <- rhdf5::H5Dopen(fid, "scotland2018/datazone")
-  
+  did <- rhdf5::H5Dopen(fid, "scotland_2018/datazone")
   h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
   
-  # Close file, groups, and datasets
+  rhdf5::H5Fclose(fid)
+  rhdf5::H5Fclose(gid)
+  rhdf5::H5Dclose(did)
+  
+  
+  # SIMD data --------------------------------------------------------------
+  
+  # Process data
+  simd_income <- process_simd(path)
+  h5write(simd_income, h5filename,
+          name = "simd_income/datazone")
+  
+  # Add attributes / metadata 
+  fid <- rhdf5::H5Fopen(h5filename)
+  
+  gid <- rhdf5::H5Gopen(fid, name = "simd_income/") 
+  rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
+  rhdf5::h5writeAttribute(gid, attr = "1", name = "RawWarningScore")
+  
+  did <- rhdf5::H5Dopen(fid, "simd_income/datazone")
+  h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
+  
   rhdf5::H5Fclose(fid)
   rhdf5::H5Fclose(gid)
   rhdf5::H5Dclose(did)
