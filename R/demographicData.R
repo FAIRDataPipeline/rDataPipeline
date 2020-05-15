@@ -9,7 +9,8 @@
 demographicData <- function(
   h5filename = "scrc_demographics.h5",
   datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
-  simd_path = "data-raw/DataZone2011_simd2020.csv") 
+  simd_path = "data-raw/DataZone2011_simd2020.csv",
+  shapefile_path = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp") 
 {
   # Initialise hdf5 file ----------------------------------------------------
   
@@ -19,7 +20,7 @@ demographicData <- function(
   # Create groups for each dataset
   rhdf5::h5createGroup(h5filename, "scotland_2018")
   rhdf5::h5createGroup(h5filename, "simd_income")
-
+  
   
   # Population data --------------------------------------------------------
   
@@ -47,7 +48,8 @@ demographicData <- function(
   rhdf5::H5Fclose(fid)
   
   
-  # SIMD data --------------------------------------------------------------
+  
+  # SIMD (datazones) -------------------------------------------------------
   
   # Process data
   simd_income <- process_simd(simd_path)
@@ -67,5 +69,12 @@ demographicData <- function(
   rhdf5::H5Dclose(did)
   rhdf5::H5Gclose(gid)
   rhdf5::H5Fclose(fid)
+  
+  
+  # SIMD (grids) -----------------------------------------------------------
+  
+  grid_demographics <- dz2grid(simd_income, shapefile_path, grid_size)
+  rhdf5::h5write(grid_demographics, file = h5filename,
+                 name = "simd_income/10km_grid")
   
 } 

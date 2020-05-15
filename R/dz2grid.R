@@ -1,0 +1,41 @@
+#' dz2grid
+#' 
+#' Converts simd data from datazone to grid format.
+#' 
+#' @param simd_datazone processed datazone dataset; population estimates for 
+#' Scotland in 2018
+#' @param shapefile_path path to datazone shape data file 
+#' @param grid_size grid size (length) in metres
+#' 
+dz2grid <- function(simd_datazone, shapefile_path, grid_size = 10000) {
+  
+  # Read in shapefile (datazone) and check for non-intersecting geometries
+  shape <- sf::st_read(shapefile_path)
+  check <- sf::st_is_valid(shape, reason = TRUE)
+  if (any(check != "Valid Geometry")) {
+    datazones <- sf::st_make_valid(shape)
+    assertthat::assert_that(sum(st_area(shape)) == sum(st_area(datazones)))
+  } else 
+    datazones <- shape
+  
+  # Generate grid over bounding box of datazone shapefile
+  grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
+                            cellsize = c(grid_size, grid_size)) %>% 
+    sf::st_sf(grid_id = seq_along(.))
+  
+  # Use grid to subdivide datazones
+  dz_subdivisions <- sf::st_intersection(grids, datazones) %>% 
+    dplyr::rename(datazone = DataZone) %>% 
+    data.frame() %>% 
+    tibble::remove_rownames()
+  
+  # Find simd of each datazone subdivision
+  simd_dz_subdivisions <- dz_subdivisions %>% 
+    dplyr::select(grid_id, datazone) %>% 
+    merge(simd_datazone, by = "datazone", all.x = T)
+  
+  # Find mean across each grid square
+  simd_dz_subdivisions %>% 
+    dplyr::group_by(grid_id, .drop = FALSE) %>% 
+    dplyr::summarise(mean = mean(simd2020_inc_rate))
+}
