@@ -73,7 +73,7 @@ demographicData <- function(
   
   # SIMD (grids) -----------------------------------------------------------
   
-  grid_demographics <- dz2grid(simd_income, shapefile_path, grid_size)
+  grid_demographics <- dz2grid_simd(simd_income, shapefile_path, grid_size)
   rhdf5::h5write(grid_demographics, file = h5filename,
                  name = "simd_income/10km_grid")
   

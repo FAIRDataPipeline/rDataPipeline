@@ -1,4 +1,4 @@
-#' dz2grid
+#' dz2grid_simd
 #' 
 #' Converts simd data from datazone to grid format.
 #' 
@@ -7,7 +7,7 @@
 #' @param shapefile_path path to datazone shape data file 
 #' @param grid_size grid size (length) in metres
 #' 
-dz2grid <- function(simd_datazone, shapefile_path, grid_size = 10000) {
+dz2grid_simd <- function(simd_datazone, shapefile_path, grid_size = 10000) {
   
   # Read in shapefile (datazone) and check for non-intersecting geometries
   shape <- sf::st_read(shapefile_path)
