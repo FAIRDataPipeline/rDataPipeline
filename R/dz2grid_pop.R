@@ -36,6 +36,7 @@
 dz2grid_pop <- function(population_dz, 
                         datazone_sf,
                         postcode_sf,
+                        method,
                         gridsize = 10000,
                         ageclasses) {
   
@@ -88,9 +89,8 @@ dz2grid_pop <- function(population_dz,
   } else 
     datazones <- shape
   
-  if(!missing(ageclasses))
-    # Remove empty datazones
-    datazones %<>% filter(DataZone %in% population_dz$datazone) 
+  # Remove empty datazones
+  datazones %<>% filter(DataZone %in% population_dz$datazone) 
   
   
   # Datazone-grid conversion -----------------------------------------------
@@ -103,70 +103,99 @@ dz2grid_pop <- function(population_dz,
   # Use grid to subdivide datazones
   dz_subdivisions <- sf::st_intersection(grids, datazones)
   
-  # Read in postcode shapefile 
-  postcode <- sf::st_read(postcode_sf) 
-  postcode <- st_make_valid(postcode)
   
-  # Find the total number of postcodes in each datazone ---------------------
+  if(method == "postcode") {
+    # Read in postcode shapefile 
+    postcode <- sf::st_read(postcode_sf) 
+    postcode <- st_make_valid(postcode)
+    
+    # Find the total number of postcodes in each datazone ---------------------
+    
+    dz_postcode <- postcode 
+    sf::st_geometry(dz_postcode) <- NULL
+    
+    dz_postcode_table <- dz_postcode %>% 
+      dplyr::rename(datazone = DZ11) %>% 
+      dplyr::select(Postcode, datazone) %>%  
+      unique() %>% 
+      dplyr::group_by(datazone, .drop = FALSE) %>%
+      # using postcode shapefile datazones !!!
+      dplyr::summarise(postcodes_in_dz = n()) 
+    
+    
+    # Find the total number of postcodes in each dz_subdivision ---------------
+    
+    dz_grid_postcode <- sf::st_join(postcode, dz_subdivisions) 
+    
+    # Remove PA75 6NUB (it doesnt exist within postcode shapefile datazones)
+    dz_grid_postcode %<>% dplyr::filter(!is.na(DataZone))  
+    sf::st_geometry(dz_grid_postcode) <- NULL
+    
+    dz_grid_postcode %<>% 
+      dplyr::select(Postcode, DZ11, grid_id) %>%
+      unique()
+    
+    dz_grid_postcode_table <- dz_grid_postcode %>% 
+      dplyr::rename(datazone = DZ11) %>%  
+      dplyr::group_by(datazone, grid_id, .drop = FALSE) %>% 
+      # using postcode shapefile datazones !!!
+      dplyr::summarise(postcodes_in_dz_component = n()) 
+    
+    
+    # Calculate the proportion of postcodes in each dz_subdivision ------------
+    # (relative to dz)
+    postcode_prop <- left_join(dz_grid_postcode_table, 
+                               dz_postcode_table, by = "datazone") %>% 
+      dplyr::mutate(proportion = postcodes_in_dz_component / postcodes_in_dz)
+    
+    # Find the sum of the proportions within each dz
+    combined_areas <- postcode_prop %>% 
+      dplyr::select(datazone, grid_id, proportion) 
+    combined_areas_total_prop <- combined_areas %>% 
+      dplyr::group_by(datazone, .drop = FALSE) %>%
+      dplyr::summarise(sum = sum(proportion))
+    
+    # This value is greater than 1 when postcodes exist in multiple grids. 
+    # To prevent this, normalise within each dz
+    combined_areas <- left_join(combined_areas, combined_areas_total_prop, 
+                                by = "datazone") %>% 
+      dplyr::mutate(proportion2 = proportion / sum) %>% 
+      dplyr::select(datazone, grid_id, proportion2)
+    
+    # Create matrix containing the proportion of postcodes in each dz_subdivision 
+    wide_new_table <- tidyr::pivot_wider(combined_areas, 
+                                         names_from = "datazone",
+                                         values_from = "proportion2", 
+                                         values_fill = list("proportion2" = 0)) %>% 
+      # using datazone shapefile datazones !!!
+      dplyr::select(grid_id, datazone_populations$datazone)
+    
+  } else if(method == "area") {
+    
+    # Find area of each of the newly created distinct datazone components
+    intersection_area <- data.frame(grid_id = dz_subdivisions$grid_id,
+                                    datazone = dz_subdivisions$DataZone, 
+                                    area = as.numeric(st_area(dz_subdivisions)))
+    datazone_area <- data.frame(datazone = datazones$DataZone, 
+                                full_zone_area = as.numeric(st_area(datazones)))
+    
+    # Join full area of each datazone to this data.frame and use to find 
+    # the proportion of each datazone in each grid cell
+    combined_areas <- left_join(intersection_area, datazone_area, 
+                                by = "datazone") %>% 
+      dplyr::mutate(proportion = area / full_zone_area) %>% 
+      dplyr::select(grid_id, datazone, proportion)
+
+    # Create matrix of grid cells by datazones containing the proportion of 
+    # each datazone in each grid cell with 0's
+    wide_new_table <- tidyr::pivot_wider(combined_areas, 
+                                  names_from = "datazone", 
+                                  values_from = "proportion") %>%
+      replace(is.na(.), 0)
+    
+  } else 
+    stop("Method not valid.")
   
-  dz_postcode <- postcode 
-  sf::st_geometry(dz_postcode) <- NULL
-  
-  dz_postcode_table <- dz_postcode %>% 
-    dplyr::rename(datazone = DZ11) %>% 
-    dplyr::select(Postcode, datazone) %>%  
-    unique() %>% 
-    dplyr::group_by(datazone, .drop = FALSE) %>%
-    # using postcode shapefile datazones !!!
-    dplyr::summarise(postcodes_in_dz = n()) 
-  
-  
-  # Find the total number of postcodes in each dz_subdivision ---------------
-  
-  dz_grid_postcode <- sf::st_join(postcode, dz_subdivisions) 
-  
-  # Remove PA75 6NUB (it doesnt exist within postcode shapefile datazones)
-  dz_grid_postcode %<>% dplyr::filter(!is.na(DataZone))  
-  sf::st_geometry(dz_grid_postcode) <- NULL
-  
-  dz_grid_postcode %<>% 
-    dplyr::select(Postcode, DZ11, grid_id) %>%
-    unique()
-  
-  dz_grid_postcode_table <- dz_grid_postcode %>% 
-    dplyr::rename(datazone = DZ11) %>%  
-    dplyr::group_by(datazone, grid_id, .drop = FALSE) %>% 
-    # using postcode shapefile datazones !!!
-    dplyr::summarise(postcodes_in_dz_component = n()) 
-  
-  
-  # Calculate the proportion of postcodes in each dz_subdivision ------------
-  # (relative to dz)
-  postcode_prop <- left_join(dz_grid_postcode_table, 
-                             dz_postcode_table, by = "datazone") %>% 
-    dplyr::mutate(proportion = postcodes_in_dz_component / postcodes_in_dz)
-  
-  # Find the sum of the proportions within each dz
-  combined_areas <- postcode_prop %>% 
-    dplyr::select(datazone, grid_id, proportion) 
-  combined_areas_total_prop <- combined_areas %>% 
-    dplyr::group_by(datazone, .drop = FALSE) %>%
-    dplyr::summarise(sum = sum(proportion))
-  
-  # This value is greater than 1 when postcodes exist in multiple grids. 
-  # To prevent this, normalise within each dz
-  combined_areas <- left_join(combined_areas, combined_areas_total_prop, 
-                              by = "datazone") %>% 
-    dplyr::mutate(proportion2 = proportion / sum) %>% 
-    dplyr::select(datazone, grid_id, proportion2)
-  
-  # Create matrix containing the proportion of postcodes in each dz_subdivision 
-  wide_new_table <- tidyr::pivot_wider(combined_areas, 
-                                       names_from = "datazone",
-                                       values_from = "proportion2", 
-                                       values_fill = list("proportion2" = 0)) %>% 
-    # using datazone shapefile datazones !!!
-    dplyr::select(grid_id, datazone_populations$datazone)
   
   # Make new tables to fill in population proportions
   prop_dat <- wide_new_table %>% 

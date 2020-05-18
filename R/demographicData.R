@@ -53,20 +53,39 @@ demographicData <- function(
   
   # Population data (grids) -------------------------------------------------
   
-  population_grid_allages <- dz2grid_pop(population_dz = population_dz, 
-                                         datazone_sf = datazone_sf, 
-                                         postcode_sf = postcode_sf, 
-                                         grid_size = grid_size)
-  h5write(population_grid_allages, file = h5filename, 
-          name = "scotland_2018/grid_10km_allages")
+  population_grid_allages_pc <- dz2grid_pop(population_dz = population_dz, 
+                                            datazone_sf = datazone_sf, 
+                                            postcode_sf = postcode_sf, 
+                                            method = "postcode",
+                                            grid_size = grid_size)
+  h5write(population_grid_allages_pc, file = h5filename, 
+          name = "scotland_2018/grid_10km_allages_pc")
   
-  population_grid_agegroups <- dz2grid_pop(population_dz = population_dz, 
-                                           datazone_sf = datazone_sf, 
-                                           postcode_sf = postcode_sf, 
-                                           grid_size = grid_size,
-                                           ageclasses = seq(0, 90, 5))
-  h5write(population_grid_agegroups, file = h5filename, 
-          name = "scotland_2018/grid_10km_agegroups")
+  population_grid_agegroups_pc <- dz2grid_pop(population_dz = population_dz, 
+                                              datazone_sf = datazone_sf, 
+                                              postcode_sf = postcode_sf, 
+                                              method = "postcode",
+                                              grid_size = grid_size,
+                                              ageclasses = seq(0, 90, 5))
+  h5write(population_grid_agegroups_pc, file = h5filename, 
+          name = "scotland_2018/grid_10km_agegroups_pc")
+  
+  population_grid_allages_area <- dz2grid_pop(population_dz = population_dz, 
+                                              datazone_sf = datazone_sf, 
+                                              postcode_sf = postcode_sf, 
+                                              method = "area",
+                                              grid_size = grid_size)
+  h5write(population_grid_allages_area, file = h5filename, 
+          name = "scotland_2018/grid_10km_allages_area")
+  
+  population_grid_agegroups_area <- dz2grid_pop(population_dz = population_dz, 
+                                                datazone_sf = datazone_sf, 
+                                                postcode_sf = postcode_sf, 
+                                                method = "area",
+                                                grid_size = grid_size,
+                                                ageclasses = seq(0, 90, 5))
+  h5write(population_grid_agegroups_area, file = h5filename, 
+          name = "scotland_2018/grid_10km_agegroups_area")
   
   
   # SIMD (datazones) -------------------------------------------------------

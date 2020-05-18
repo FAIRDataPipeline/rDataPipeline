@@ -6,7 +6,7 @@
 #' @aliases demographicData
 #' @docType package
 #' 
-#' @import assertthat
+#' @importFrom assertthat assert_that
 #' @import dplyr
 #' @import magrittr
 #' @import readxl
