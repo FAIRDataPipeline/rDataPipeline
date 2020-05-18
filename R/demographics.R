@@ -43,7 +43,7 @@ demographics <- function(
   fid <- rhdf5::H5Fopen(h5filename)
   
   gid <- rhdf5::H5Gopen(fid, name = "scotland_2018/") 
-  rhdf5::h5writeAttribute(gid, attr = "Population of datazones in Scotland in 2018 contains data for single year of age from age 0 to 89 and a 90+ age class and all ages. Processed to remove unnecessary identifier columns/rows.", 
+  rhdf5::h5writeAttribute(gid, attr = "Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.", 
                           name = "Description")
   rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
   rhdf5::h5writeAttribute(gid, attr = "1", name = "RawWarningScore")
@@ -51,8 +51,9 @@ demographics <- function(
   rhdf5::h5writeAttribute(gid, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
   
   did <- rhdf5::H5Dopen(fid, "scotland_2018/datazone")
-  rhdf5::h5writeAttribute(did, attr = "Datazone population counts", 
-                          name = "Description")
+  rhdf5::h5writeAttribute(did, attr = "population counts", name = "Description")
+  rhdf5::h5writeAttribute(did, attr = 1:90, name = "Age classes")
+  rhdf5::h5writeAttribute(did, attr = "datazones", name = "Units")
   rhdf5::h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
   
   rhdf5::H5Dclose(did)
@@ -62,7 +63,7 @@ demographics <- function(
   
   # Population data (grids) -------------------------------------------------
   
-  cat("\nConverting datazones to grids using postcode data...\n")
+  cat("\nConverting datazones to grids using postcode data...\n\n")
   
   # Read in datazone shapefile and check for non-intersecting geometries
   datazones <- sf::st_read(datazone_sf) %>% sf::st_make_valid()
@@ -99,7 +100,7 @@ demographics <- function(
                  name = tag2)
   
   
-  cat("\nConverting datazones to grids using area data...\n")
+  cat("\n\nConverting datazones to grids using area data...\n\n")
   
   # Datazones split by area; all ages combined
   grid_all_area <- dz2grid_pop(population_dz = population_dz, 
@@ -122,34 +123,37 @@ demographics <- function(
   rhdf5::h5write(grid_groups_area, file = h5filename, 
                  name = tag4)
   
-  assertthat::assert_that(sum(rowSums(population_dz[-1])) ==
-                            unique(c(sum(rowSums(grid_all_pc[-1])),
-                                     sum(rowSums(grid_groups_pc[-1])),
-                                     sum(rowSums(grid_all_area[-1])),
-                                     sum(rowSums(grid_groups_area[-1])))))
-  
   # Add attributes / metadata 
   fid <- rhdf5::H5Fopen(h5filename)
   
+  grid_tag <- paste0(gridsize, "km grid")
   did1 <- rhdf5::H5Dopen(fid, tag1)
-  txt <- paste0(gridsize, " km grid population counts")
-  rhdf5::h5writeAttribute(did1, attr = txt, name = "Description")
+  rhdf5::h5writeAttribute(did1, attr = "population counts", name = "Description")
+  rhdf5::h5writeAttribute(did1, attr = "pooled", name = "Age classes")
+  rhdf5::h5writeAttribute(did1, attr = grid_tag, name = "Units")
+  rhdf5::h5writeAttribute(did1, attr = "postcode", name = "Conversion")
   rhdf5::h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
   
   did2 <- rhdf5::H5Dopen(fid, tag2)
-  rhdf5::h5writeAttribute(did1, attr = "Datazone population counts", 
-                          name = "Description")
-  rhdf5::h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  rhdf5::h5writeAttribute(did2, attr = "population counts", name = "Description")
+  rhdf5::h5writeAttribute(did2, attr = ageclasses, name = "Age classes")
+  rhdf5::h5writeAttribute(did2, attr = grid_tag, name = "Units")
+  rhdf5::h5writeAttribute(did2, attr = "postcode", name = "Conversion")
+  rhdf5::h5writeAttribute(did2, attr = "1", name = "ProcessedWarningScore")
   
-  did3 <- rhdf5::H5Dopen(fid, tag2)
-  rhdf5::h5writeAttribute(did1, attr = "Datazone population counts", 
-                          name = "Description")
-  rhdf5::h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  did3 <- rhdf5::H5Dopen(fid, tag3)
+  rhdf5::h5writeAttribute(did3, attr = "population counts", name = "Description")
+  rhdf5::h5writeAttribute(did3, attr = "pooled", name = "Age classes")
+  rhdf5::h5writeAttribute(did3, attr = grid_tag, name = "Units")
+  rhdf5::h5writeAttribute(did3, attr = "area", name = "Conversion")
+  rhdf5::h5writeAttribute(did3, attr = "1", name = "ProcessedWarningScore")
   
-  did4 <- rhdf5::H5Dopen(fid, tag2)
-  rhdf5::h5writeAttribute(did1, attr = "Datazone population counts", 
-                          name = "Description")
-  rhdf5::h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  did4 <- rhdf5::H5Dopen(fid, tag4)
+  rhdf5::h5writeAttribute(did4, attr = "population counts", name = "Description")
+  rhdf5::h5writeAttribute(did4, attr = ageclasses, name = "Age classes")
+  rhdf5::h5writeAttribute(did4, attr = grid_tag, name = "Units")
+  rhdf5::h5writeAttribute(did4, attr = "area", name = "Conversion")
+  rhdf5::h5writeAttribute(did4, attr = "1", name = "ProcessedWarningScore")
   
   rhdf5::H5Dclose(did1)
   rhdf5::H5Dclose(did2)
@@ -160,7 +164,7 @@ demographics <- function(
   
   # SIMD (datazones) -------------------------------------------------------
   
-  cat("\nGenerating SIMD data...\n")
+  cat("\n\nGenerating SIMD data...\n\n")
   
   # Process data
   simd_datazone <- process_simd(simd_path = simd_path)

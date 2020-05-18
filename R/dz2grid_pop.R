@@ -249,12 +249,6 @@ dz2grid_pop <- function(population_dz,
   assertthat::assert_that(all(colSums(grid_pop[,-1, drop = F]) == 
                                 colSums(datazone_populations)))
   
-  # Check that redistributed population size matches datazone population size 
-  # assertthat::assert_that(sum(this_ageclass[,i]) == 
-  #                           datazone_populations %>%
-  #                           filter(datazone == ))
-  
-  
   colnames(grid_pop) <- c("grid_id", age_class_tags)
   as.data.frame(grid_pop)
 }

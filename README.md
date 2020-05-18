@@ -18,3 +18,40 @@ grid_non_population_demographics.r calculates the mean value of the demographic 
 
 ### hdf5 file
 Im not sure how best to share this, the version in the repository isn't the correct version and wont update but my computer wont let me change the .gitignore to stop uploading it...
+
+
+```{r}
+library(demographicData)
+library(rhdf5)
+
+
+# Generate hdf5 file
+demographics()
+
+filename <- "scrc_demographics.h5"
+
+h5ls(filename)
+
+h5readAttributes(file = filename, name = "scotland_2018")
+h5readAttributes(file = filename, name = "scotland_2018/datazone")
+h5readAttributes(file = filename, name = "scotland_2018/allages_postcode_10k")
+h5readAttributes(file = filename, name = "scotland_2018/allages_area_10k")
+h5readAttributes(file = filename, name = "scotland_2018/groupages_area_10k")
+h5readAttributes(file = filename, name = "scotland_2018/groupages_postcode_10k")
+
+
+h5read(file = filename, name = "scotland_2018/groupages_postcode_10k")[,-1] %>%
+  rowSums() %>% head()
+h5read(file = filename, name = "scotland_2018/allages_postcode_10k")[,-1] %>% 
+  head()
+
+h5read(file = filename, name = "scotland_2018/groupages_area_10k")[,-1] %>%
+  rowSums() %>% head()
+h5read(file = filename, name = "scotland_2018/allages_area_10k")[,-1] %>% 
+  head()
+
+h5read(file = filename, name = "simd_income/datazone") %>% head()
+h5read(file = filename, name = "simd_income/grid_10k") %>% head()
+
+
+```
