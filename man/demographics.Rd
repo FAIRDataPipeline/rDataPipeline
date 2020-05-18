@@ -6,9 +6,8 @@
 \usage{
 demographics(
   h5filename = "scrc_demographics.h5",
-  method,
-  gridsize = 10000,
-  ageclasses,
+  gridsize = 10,
+  ageclasses = seq(0, 90, 5),
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
   postcode_sf = "data-raw/shapefiles/PC_Cut_20_1.shp",
   datazone_path = "data-raw/sape-2018-persons.xlsx",
@@ -18,13 +17,11 @@ demographics(
 \arguments{
 \item{h5filename}{Name of the hd5f file you want to create}
 
-\item{method}{c("postcode", "area")}
-
 \item{gridsize}{grid size (length) in metres}
 
-\item{ageclasses}{vector of class numeric corresponding to the upper limit
-of each age class; when missing, a single age class is generated (all ages
-combined)}
+\item{ageclasses}{vector of class numeric corresponding to the lower bound
+of each age class; when missing, a single age class is generated (all
+ages combined)}
 
 \item{datazone_sf}{path to datazone shape file}
 
