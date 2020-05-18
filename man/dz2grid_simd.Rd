@@ -4,14 +4,14 @@
 \alias{dz2grid_simd}
 \title{dz2grid_simd}
 \usage{
-dz2grid_simd(simd_datazone, datazone_sf, grid_size = 10000)
+dz2grid_simd(simd_datazone, gridsize, datazone_sf)
 }
 \arguments{
 \item{simd_datazone}{datazone simd data}
 
-\item{datazone_sf}{path to datazone shape file}
+\item{gridsize}{grid size (length) in metres}
 
-\item{grid_size}{grid size (length) in metres}
+\item{datazone_sf}{path to datazone shape file}
 }
 \description{
 Converts simd data from datazone to grid format.

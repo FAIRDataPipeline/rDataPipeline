@@ -1,20 +1,21 @@
-#' demographicData
+#' demographics
 #' 
 #' @param h5filename Name of the hd5f file you want to create
-#' @param datazone_path path to demographic data file (datazones)
-#' @param simd_path path to simd data file 
+#' @param gridsize grid size (length) in km
 #' @param datazone_sf path to datazone shape file 
 #' @param postcode_sf path to postcode shape file 
+#' @param datazone_path path to demographic data file (datazones)
+#' @param simd_path path to simd data file 
 #' 
 #' @export
 #' 
-demographicData <- function(
+demographics <- function(
   h5filename = "scrc_demographics.h5",
-  datazone_path = "data-raw/population_datazone/sape-2018-persons.xlsx",
-  simd_path = "data-raw/DataZone2011_simd2020.csv",
+  gridsize = 10,
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
-  postcode_sf = "data-raw/shapefiles/PC_Cut_20_1.shp") 
-{
+  postcode_sf = "data-raw/shapefiles/PC_Cut_20_1.shp",
+  datazone_path = "data-raw/sape-2018-persons.xlsx",
+  simd_path = "data-raw/DataZone2011_simd2020.csv") {
   # Initialise hdf5 file ----------------------------------------------------
   
   # Create hdf5 file
@@ -44,6 +45,7 @@ demographicData <- function(
   rhdf5::h5writeAttribute(gid, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
   
   did <- rhdf5::H5Dopen(fid, "scotland_2018/datazone")
+  h5writeAttribute(did, attr = "Datazone population counts", name = "Description")
   h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
   
   rhdf5::H5Dclose(did)
@@ -53,39 +55,73 @@ demographicData <- function(
   
   # Population data (grids) -------------------------------------------------
   
+  # Datazones split by postcode; all ages combined
   population_grid_allages_pc <- dz2grid_pop(population_dz = population_dz, 
-                                            datazone_sf = datazone_sf, 
-                                            postcode_sf = postcode_sf, 
                                             method = "postcode",
-                                            grid_size = grid_size)
+                                            gridsize = gridsize*1000,
+                                            datazone_sf = datazone_sf, 
+                                            postcode_sf = postcode_sf)
+  tag1 <- paste0("scotland_2018/allages_postcode_", gridsize, "k")
   h5write(population_grid_allages_pc, file = h5filename, 
-          name = "scotland_2018/grid_10km_allages_pc")
+          name = tag1)
   
+  # Datazones split by postcode; multiple age classes
   population_grid_agegroups_pc <- dz2grid_pop(population_dz = population_dz, 
-                                              datazone_sf = datazone_sf, 
-                                              postcode_sf = postcode_sf, 
                                               method = "postcode",
-                                              grid_size = grid_size,
-                                              ageclasses = seq(0, 90, 5))
-  h5write(population_grid_agegroups_pc, file = h5filename, 
-          name = "scotland_2018/grid_10km_agegroups_pc")
-  
-  population_grid_allages_area <- dz2grid_pop(population_dz = population_dz, 
+                                              gridsize = gridsize*1000,
+                                              ageclasses = seq(0, 90, 5),
                                               datazone_sf = datazone_sf, 
-                                              postcode_sf = postcode_sf, 
-                                              method = "area",
-                                              grid_size = grid_size)
-  h5write(population_grid_allages_area, file = h5filename, 
-          name = "scotland_2018/grid_10km_allages_area")
+                                              postcode_sf = postcode_sf)
+  tag2 <- paste0("scotland_2018/agegroups_postcode_", gridsize, "k")
+  h5write(population_grid_agegroups_pc, file = h5filename, 
+          name = tag2)
   
-  population_grid_agegroups_area <- dz2grid_pop(population_dz = population_dz, 
-                                                datazone_sf = datazone_sf, 
-                                                postcode_sf = postcode_sf, 
+  # Datazones split by area; all ages combined
+  population_grid_allages_area <- dz2grid_pop(population_dz = population_dz, 
+                                              method = "area",
+                                              gridsize = gridsize*1000,
+                                              datazone_sf = datazone_sf, 
+                                              postcode_sf = postcode_sf)
+  tag3 <- paste0("scotland_2018/allages_area_", gridsize, "k")
+  h5write(population_grid_allages_area, file = h5filename, 
+          name = tag3)
+  
+  # Datazones split by area; multiple age classes
+  population_grid_agegroups_area <- dz2grid_pop(population_dz = population_dz,
                                                 method = "area",
-                                                grid_size = grid_size,
-                                                ageclasses = seq(0, 90, 5))
+                                                gridsize = gridsize*1000,
+                                                ageclasses = seq(0, 90, 5),
+                                                datazone_sf = datazone_sf, 
+                                                postcode_sf = postcode_sf)
+  tag4 <- paste0("scotland_2018/agegroups_area_", gridsize, "k")
   h5write(population_grid_agegroups_area, file = h5filename, 
-          name = "scotland_2018/grid_10km_agegroups_area")
+          name = tag4)
+  
+  # Add attributes / metadata 
+  fid <- rhdf5::H5Fopen(h5filename)
+  
+  did1 <- rhdf5::H5Dopen(fid, tag1)
+  txt <- paste0(gridsize, " km grid population counts")
+  h5writeAttribute(did1, attr = txt, name = "Description")
+  h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  
+  did2 <- rhdf5::H5Dopen(fid, tag2)
+  h5writeAttribute(did1, attr = "Datazone population counts", name = "Description")
+  h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  
+  did3 <- rhdf5::H5Dopen(fid, tag2)
+  h5writeAttribute(did1, attr = "Datazone population counts", name = "Description")
+  h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  
+  did4 <- rhdf5::H5Dopen(fid, tag2)
+  h5writeAttribute(did1, attr = "Datazone population counts", name = "Description")
+  h5writeAttribute(did1, attr = "1", name = "ProcessedWarningScore")
+  
+  rhdf5::H5Dclose(did1)
+  rhdf5::H5Dclose(did2)
+  rhdf5::H5Dclose(did3)
+  rhdf5::H5Dclose(did4)
+  rhdf5::H5Fclose(fid)
   
   
   # SIMD (datazones) -------------------------------------------------------
@@ -112,9 +148,10 @@ demographicData <- function(
   # SIMD (grids) -----------------------------------------------------------
   
   simd_grid <- dz2grid_simd(simd_datazone = simd_datazone, 
-                            datazone_sf = datazone_sf, 
-                            grid_size = grid_size)
+                            gridsize = gridsize*1000,
+                            datazone_sf = datazone_sf)
+  tag <- paste0("simd_income/grid_", gridsize, "k")
   rhdf5::h5write(simd_grid, file = h5filename,
-                 name = "simd_income/grid_10km")
+                 name = tag)
   
 } 

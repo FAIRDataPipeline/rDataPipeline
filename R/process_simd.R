@@ -8,6 +8,6 @@ process_simd <- function(simd_path) {
   
   # Process data 
   simd %>% 
-    select(dz2011, simd2020_inc_rate) %>% 
-    rename(datazone = dz2011)
+    dplyr::select(dz2011, simd2020_inc_rate) %>% 
+    dplyr::rename(datazone = dz2011)
 }

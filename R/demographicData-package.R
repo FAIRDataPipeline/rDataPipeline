@@ -8,12 +8,10 @@
 #' 
 #' @importFrom assertthat assert_that
 #' @import dplyr
-#' @import magrittr
 #' @import readxl
-#' @import rgdal
 #' @import rhdf5
 #' @import sf
-#' @import stringr
 #' @import tibble
+#' @import tidyr
 #'
 NULL

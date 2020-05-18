@@ -4,16 +4,29 @@
 \alias{dz2grid_pop}
 \title{dz2grid_pop}
 \usage{
-dz2grid_pop(population_dz, datazone_sf, postcode_sf, grid_size = 10000)
+dz2grid_pop(
+  population_dz,
+  method,
+  gridsize,
+  ageclasses,
+  datazone_sf,
+  postcode_sf
+)
 }
 \arguments{
 \item{population_dz}{datazone population data}
 
+\item{method}{c("postcode", "area")}
+
+\item{gridsize}{grid size (length) in metres}
+
+\item{ageclasses}{vector of class numeric corresponding to the upper limit
+of each age class; when missing, a single age class is generated (all ages
+combined)}
+
 \item{datazone_sf}{path to datazone shape file}
 
 \item{postcode_sf}{path to postcode shape file}
-
-\item{grid_size}{grid size (length) in metres}
 }
 \description{
 This script transforms age class population data from census geographies to
@@ -34,7 +47,6 @@ columns 2:92 single year population totals for age 0 to 89 and 90+ ageclass
 \item A grid shapefile which overlays the census geographies. (IF this is not
 available this script automatically makes a grid, the dimensions of which
 can be chosen (in m))
-\itemize{
 \item A shapefile containing the boundaries of postcodes contained in the
 census geographies
 }
@@ -46,5 +58,4 @@ This vector should contain the lower age bound of each age class
 
 There is an issue of rounding when the population are being divided between
 cells, I have a work-around which is explained in the code.
-}
 }

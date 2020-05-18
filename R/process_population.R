@@ -12,15 +12,16 @@ process_population <- function(datazone_path) {
   header <- readxl::read_excel(datazone_path, skip = 3, n_max = 2) 
   
   # Rename first 4 columns
-  header %<>% dplyr::rename_at(vars(grep("^\\...[1-3]", names(.))), 
-                               ~ as.character(header[2, 1:3])) %>% 
+  header <- header %>% 
+    dplyr::rename_at(vars(grep("^\\...[1-3]", names(.))), 
+                     ~ as.character(header[2, 1:3])) %>% 
     dplyr::rename(AllAges = "...4") %>% 
     names()
   
   
   # Process data ------------------------------------------------------------
   
-  sape_persons %<>%
+  sape_persons <- sape_persons %>% 
     # Remove first 6 rows
     .[-c(1:6),] %>% 
     # Rename columns

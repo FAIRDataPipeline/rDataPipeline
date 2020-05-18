@@ -3,12 +3,12 @@
 #' Converts simd data from datazone to grid format.
 #' 
 #' @param simd_datazone datazone simd data
+#' @param gridsize grid size (length) in metres
 #' @param datazone_sf path to datazone shape file 
-#' @param grid_size grid size (length) in metres
 #' 
 dz2grid_simd <- function(simd_datazone, 
-                         datazone_sf, 
-                         grid_size = 10000) {
+                         gridsize,
+                         datazone_sf) {
   
   # Read in datazone shapefile and check for non-intersecting geometries
   shape <- sf::st_read(datazone_sf)
@@ -23,7 +23,7 @@ dz2grid_simd <- function(simd_datazone,
   
   # Generate grid over bounding box of datazone shapefile
   grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
-                            cellsize = c(grid_size, grid_size)) %>% 
+                            cellsize = c(gridsize, gridsize)) %>% 
     sf::st_sf(grid_id = seq_along(.))
   
   # Use grid to subdivide datazones

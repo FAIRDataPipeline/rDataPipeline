@@ -29,19 +29,23 @@
 #' cells, I have a work-around which is explained in the code.
 #' 
 #' @param population_dz datazone population data
+#' @param method c("postcode", "area")
+#' @param gridsize grid size (length) in metres
+#' @param ageclasses vector of class numeric corresponding to the upper limit
+#' of each age class; when missing, a single age class is generated (all ages 
+#' combined)
 #' @param datazone_sf path to datazone shape file 
 #' @param postcode_sf path to postcode shape file 
-#' @param grid_size grid size (length) in metres
 #' 
 dz2grid_pop <- function(population_dz, 
-                        datazone_sf,
-                        postcode_sf,
                         method,
-                        gridsize = 10000,
-                        ageclasses) {
+                        gridsize,
+                        ageclasses,
+                        datazone_sf,
+                        postcode_sf) {
   
   # Remove empty datazones ("S01010206", "S01010226", and "S01010227")
-  population_dz %<>% 
+  population_dz <- population_dz %>% 
     dplyr::filter(rowSums(dplyr::select(., -datazone)) != 0)
   
   
@@ -65,12 +69,13 @@ dz2grid_pop <- function(population_dz,
     
     # Find total number of individuals in each age class
     for(i in seq_along(ageclasses)) {
-      endcol <- if_else(i == length(ageclasses), 90, (ageclasses[i + 1] - 1))
+      endcol <- dplyr::if_else(i == length(ageclasses), 90, 
+                               (ageclasses[i + 1] - 1))
       columns <- paste0("AGE", ageclasses[i]:endcol)
       
       datazone_populations[,i] <- population_dz %>% 
-        rename(AGE90 = "AGE90+") %>% 
-        select(all_of(columns)) %>% 
+        dplyr::rename(AGE90 = "AGE90+") %>% 
+        dplyr::select(dplyr::contains(columns)) %>% 
         rowSums()
     }
     datazone_populations <- cbind.data.frame(datazone = population_dz$datazone,
@@ -90,7 +95,7 @@ dz2grid_pop <- function(population_dz,
     datazones <- shape
   
   # Remove empty datazones
-  datazones %<>% filter(DataZone %in% population_dz$datazone) 
+  datazones <- datazones %>% dplyr::filter(DataZone %in% population_dz$datazone) 
   
   
   # Datazone-grid conversion -----------------------------------------------
@@ -107,7 +112,7 @@ dz2grid_pop <- function(population_dz,
   if(method == "postcode") {
     # Read in postcode shapefile 
     postcode <- sf::st_read(postcode_sf) 
-    postcode <- st_make_valid(postcode)
+    postcode <- sf::st_make_valid(postcode)
     
     # Find the total number of postcodes in each datazone ---------------------
     
@@ -128,10 +133,11 @@ dz2grid_pop <- function(population_dz,
     dz_grid_postcode <- sf::st_join(postcode, dz_subdivisions) 
     
     # Remove PA75 6NUB (it doesnt exist within postcode shapefile datazones)
-    dz_grid_postcode %<>% dplyr::filter(!is.na(DataZone))  
+    dz_grid_postcode <- dz_grid_postcode %>% 
+      dplyr::filter(!is.na(DataZone))  
     sf::st_geometry(dz_grid_postcode) <- NULL
     
-    dz_grid_postcode %<>% 
+    dz_grid_postcode <- dz_grid_postcode %>% 
       dplyr::select(Postcode, DZ11, grid_id) %>%
       unique()
     
@@ -144,7 +150,7 @@ dz2grid_pop <- function(population_dz,
     
     # Calculate the proportion of postcodes in each dz_subdivision ------------
     # (relative to dz)
-    postcode_prop <- left_join(dz_grid_postcode_table, 
+    postcode_prop <- dplyr::left_join(dz_grid_postcode_table, 
                                dz_postcode_table, by = "datazone") %>% 
       dplyr::mutate(proportion = postcodes_in_dz_component / postcodes_in_dz)
     
@@ -157,7 +163,8 @@ dz2grid_pop <- function(population_dz,
     
     # This value is greater than 1 when postcodes exist in multiple grids. 
     # To prevent this, normalise within each dz
-    combined_areas <- left_join(combined_areas, combined_areas_total_prop, 
+    combined_areas <- dplyr::left_join(combined_areas, 
+                                       combined_areas_total_prop, 
                                 by = "datazone") %>% 
       dplyr::mutate(proportion2 = proportion / sum) %>% 
       dplyr::select(datazone, grid_id, proportion2)
@@ -175,9 +182,9 @@ dz2grid_pop <- function(population_dz,
     # Find area of each of the newly created distinct datazone components
     intersection_area <- data.frame(grid_id = dz_subdivisions$grid_id,
                                     datazone = dz_subdivisions$DataZone, 
-                                    area = as.numeric(st_area(dz_subdivisions)))
+                                    area = as.numeric(sf::st_area(dz_subdivisions)))
     datazone_area <- data.frame(datazone = datazones$DataZone, 
-                                full_zone_area = as.numeric(st_area(datazones)))
+                                full_zone_area = as.numeric(sf::st_area(datazones)))
     
     # Join full area of each datazone to this data.frame and use to find 
     # the proportion of each datazone in each grid cell
@@ -226,7 +233,7 @@ dz2grid_pop <- function(population_dz,
       # Total population count in each datazone
       dz_total <- datazone_populations %>% 
         dplyr::filter(datazone == colnames(in_gridcell))  %>% 
-        select(all_of(tag)) %>% 
+        dplyr::select(contains(tag)) %>% 
         as.numeric()
       
       rounded_pops <- round(in_gridcell*dz_total)

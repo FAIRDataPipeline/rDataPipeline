@@ -5,18 +5,16 @@ Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
                   role = c("cre", "aut"), comment = c(ORCID = "0000-0003-1536-2066")),
              person("Ciaran", "McMonagle", email = "2117658M@student.gla.ac.uk",
                   role = "aut", comment = c(ORCID = "")))
-Description: Generates an hd5f file comprising demographic data
+Description: Generates an hd5f file comprising demographic data.
 License: GPL-3
 Imports:
     assertthat,
     dplyr,
-    magrittr,
     readxl,
-    rgdal,
     rhdf5,
     sf,
-    stringr,
-    tibble
+    tibble,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
