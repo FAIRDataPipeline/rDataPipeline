@@ -8,9 +8,9 @@ dz2grid_pop(
   population_dz,
   method,
   ageclasses,
-  datazones,
-  dz_subdivisions,
-  postcode
+  gridsize,
+  datazone_sf,
+  postcode_sf
 )
 }
 \arguments{
@@ -22,11 +22,11 @@ dz2grid_pop(
 of each age class; when missing, a single age class is generated (all
 ages combined)}
 
-\item{datazones}{object of class sf and data.frame}
+\item{datazone_sf}{datazone shape file path}
 
-\item{dz_subdivisions}{object of class sf and data.frame}
+\item{postcode_sf}{postcode shape file path}
 
-\item{postcode}{path to postcode shape file}
+\item{grids}{grid size}
 }
 \description{
 This script transforms age class population data from census geographies to

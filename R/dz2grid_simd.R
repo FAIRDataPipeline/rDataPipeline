@@ -37,8 +37,9 @@ dz2grid_simd <- function(simd_datazone,
     dplyr::select(grid_id, datazone) %>% 
     merge(simd_datazone, by = "datazone", all.x = T)
   
-  # Find mean across each grid square
+  # Find mean across each grid squares
   simd_dz_subdivisions %>% 
     dplyr::group_by(grid_id, .drop = FALSE) %>% 
-    dplyr::summarise(mean = mean(simd2020_inc_rate))
+    dplyr::summarise(mean = mean(simd2020_inc_rate)) %>% 
+    dplyr::rename(simd_income = mean)
 }

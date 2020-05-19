@@ -65,26 +65,12 @@ demographics <- function(
   
   cat("\nConverting datazones to grids using postcode data...\n\n")
   
-  # Read in datazone shapefile and check for non-intersecting geometries
-  datazones <- sf::st_read(datazone_sf) %>% sf::st_make_valid()
-  
-  # Generate grid over bounding box of datazone shapefile
-  grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
-                            cellsize = c(gridsize*1000, gridsize*1000)) %>% 
-    sf::st_sf(grid_id = seq_along(.))
-  
-  # Use grid to subdivide datazones
-  dz_subdivisions <- sf::st_intersection(grids, datazones)
-  
-  # Read in postcode shapefile 
-  postcode <- sf::st_read(postcode_sf) %>% sf::st_make_valid()
-  
-  
   # Datazones split by postcode; all ages combined
   grid_all_pc <- dz2grid_pop(population_dz = population_dz, 
                              method = "postcode",
-                             dz_subdivisions = dz_subdivisions, 
-                             postcode = postcode)
+                             gridsize = gridsize,
+                             datazone_sf = datazone_sf, 
+                             postcode_sf = postcode_sf)
   tag1 <- paste0("scotland_2018/allages_postcode_", gridsize, "k")
   rhdf5::h5write(grid_all_pc, file = h5filename, 
                  name = tag1)
@@ -93,8 +79,9 @@ demographics <- function(
   grid_groups_pc <- dz2grid_pop(population_dz = population_dz, 
                                 method = "postcode",
                                 ageclasses = ageclasses,
-                                dz_subdivisions = dz_subdivisions, 
-                                postcode = postcode)
+                                gridsize = gridsize,
+                                datazone_sf = datazone_sf, 
+                                postcode_sf = postcode_sf)
   tag2 <- paste0("scotland_2018/groupages_postcode_", gridsize, "k")
   rhdf5::h5write(grid_groups_pc, file = h5filename, 
                  name = tag2)
@@ -105,9 +92,9 @@ demographics <- function(
   # Datazones split by area; all ages combined
   grid_all_area <- dz2grid_pop(population_dz = population_dz, 
                                method = "area",
-                               datazones = datazones,
-                               dz_subdivisions = dz_subdivisions, 
-                               postcode = postcode)
+                               gridsize = gridsize,
+                               datazone_sf = datazone_sf, 
+                               postcode_sf = postcode_sf)
   tag3 <- paste0("scotland_2018/allages_area_", gridsize, "k")
   rhdf5::h5write(grid_all_area, file = h5filename, 
                  name = tag3)
@@ -116,9 +103,9 @@ demographics <- function(
   grid_groups_area <- dz2grid_pop(population_dz = population_dz,
                                   method = "area",
                                   ageclasses = ageclasses,
-                                  datazones = datazones,
-                                  dz_subdivisions = dz_subdivisions, 
-                                  postcode = postcode)
+                                  gridsize = gridsize,
+                                  datazone_sf = datazone_sf, 
+                                  postcode_sf = postcode_sf)
   tag4 <- paste0("scotland_2018/groupages_area_", gridsize, "k")
   rhdf5::h5write(grid_groups_area, file = h5filename, 
                  name = tag4)

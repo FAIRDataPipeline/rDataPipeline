@@ -33,16 +33,30 @@
 #' @param ageclasses vector of class numeric corresponding to the lower bound
 #' of each age class; when missing, a single age class is generated (all 
 #' ages combined)
-#' @param datazones object of class sf and data.frame
-#' @param dz_subdivisions object of class sf and data.frame
-#' @param postcode path to postcode shape file 
+#' @param grids grid size
+#' @param datazone_sf datazone shape file path
+#' @param postcode_sf postcode shape file path
 #' 
 dz2grid_pop <- function(population_dz, 
                         method,
                         ageclasses,
-                        datazones,
-                        dz_subdivisions,
-                        postcode) {
+                        gridsize,
+                        datazone_sf,
+                        postcode_sf) {
+  
+  # Read in datazone shapefile and check for non-intersecting geometries
+  datazones <- sf::st_read(datazone_sf) %>% sf::st_make_valid()
+  
+  # Generate grid over bounding box of datazone shapefile
+  grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
+                            cellsize = c(gridsize*1000, gridsize*1000)) %>% 
+    sf::st_sf(grid_id = seq_along(.))
+  
+  # Use grid to subdivide datazones
+  dz_subdivisions <- sf::st_intersection(grids, datazones)
+  
+  # Read in postcode shapefile 
+  postcode <- sf::st_read(postcode_sf) %>% sf::st_make_valid()
   
   # Remove empty datazones ("S01010206", "S01010226", and "S01010227")
   dat <- population_dz %>% 

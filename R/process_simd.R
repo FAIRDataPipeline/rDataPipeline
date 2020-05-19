@@ -9,5 +9,6 @@ process_simd <- function(simd_path) {
   # Process data 
   simd %>% 
     dplyr::select(dz2011, simd2020_inc_rate) %>% 
-    dplyr::rename(datazone = dz2011)
+    dplyr::rename(datazone = dz2011,
+                  simd_income = simd2020_inc_rate) 
 }
