@@ -33,30 +33,17 @@
 #' @param ageclasses vector of class numeric corresponding to the lower bound
 #' of each age class; when missing, a single age class is generated (all 
 #' ages combined)
-#' @param grids grid size
-#' @param datazone_sf datazone shape file path
-#' @param postcode_sf postcode shape file path
+#' @param shapefiles 
 #' 
 dz2grid_pop <- function(population_dz, 
                         method,
                         ageclasses,
-                        gridsize,
-                        datazone_sf,
-                        postcode_sf) {
-  
-  # Read in datazone shapefile and check for non-intersecting geometries
-  datazones <- sf::st_read(datazone_sf) %>% sf::st_make_valid()
-  
-  # Generate grid over bounding box of datazone shapefile
-  grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)), 
-                            cellsize = c(gridsize*1000, gridsize*1000)) %>% 
-    sf::st_sf(grid_id = seq_along(.))
-  
-  # Use grid to subdivide datazones
-  dz_subdivisions <- sf::st_intersection(grids, datazones)
-  
-  # Read in postcode shapefile 
-  postcode <- sf::st_read(postcode_sf) %>% sf::st_make_valid()
+                        shapefiles) {
+  # Read in shapefiles
+  datazones <- shapefiles$datazones
+  grids <- shapefiles$grids
+  dz_subdivisions <- shapefiles$dz_subdivisions
+  postcode <- shapefiles$postcode
   
   # Remove empty datazones ("S01010206", "S01010226", and "S01010227")
   dat <- population_dz %>% 
@@ -204,6 +191,8 @@ dz2grid_pop <- function(population_dz,
   prop_dat <- wide_new_table[-1] %>% 
     as_tibble()
   
+  assertthat::assert_that(!any(is.na(prop_dat)))
+  
   this_ageclass <- wide_new_table[-1] %>% 
     as_tibble()
   dzs <- colnames(this_ageclass)
@@ -224,7 +213,7 @@ dz2grid_pop <- function(population_dz,
                  "; datazone ", i, " of ", 
           ncol(this_ageclass), "..."))
       
-      in_gridcell <- prop_dat[which(is.na(prop_dat[,i])==FALSE),i]
+      in_gridcell <- prop_dat[,i]
       
       true_pop <- datazone_populations[dzs[i], as.character(ageclasses[j])]
       rounded_pops <- round(in_gridcell * true_pop)
@@ -251,7 +240,7 @@ dz2grid_pop <- function(population_dz,
         }
       }
       
-      this_ageclass[which(is.na(prop_dat[,i]) == FALSE), i] <- rounded_pops
+      this_ageclass[, i] <- rounded_pops
       
     }
     
