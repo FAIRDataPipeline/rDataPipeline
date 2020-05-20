@@ -1,20 +1,51 @@
 ## demographics_aggregation_scrc
 
-### Population data 
 
-geographies_split_by_area folder contains scripts which split populations between grid cells base on the area of the census geography which each grid cell contains. I'm working on updating it to make sure it works however, the postcode based conversion should probably be used as it is likely to be closert to reality.
+View file structure
+```{r}
+h5ls("scrc_demographics.h5")
+```
+scrc_demographics.h5 contains 2 groups, scotland_2018 (containing 5 datasets) 
+and simd_income (containing 2 datasets).
 
-geographies_split_by_postcode folder contains scripts which split populations between grid cells base on the proportion of the postcodes contained in the census geography which are in each of the grid cells. 
+View attributes associated with the **scotland_2018 group**
+```{r}
+h5readAttributes(file = filename, name = "scotland_2018")
+```
 
-Both folders contain different scripts for splitting  single age and multiple age class population data. 
+View attributes associated with each of the 5 datasets in scotland_2018
+```{r}
+h5readAttributes(file = filename, name = "scotland_2018/datazone")
+h5readAttributes(file = filename, name = "scotland_2018/allages_postcode_10k")
+h5readAttributes(file = filename, name = "scotland_2018/allages_area_10k")
+h5readAttributes(file = filename, name = "scotland_2018/groupages_area_10k")
+h5readAttributes(file = filename, name = "scotland_2018/groupages_postcode_10k")
+```
 
-processing_population_data.r takes raw population from National Records for Scotland and processes this to useable versions. Raw data and processed data are stored in hdf5 file.
+View the first 5 lines of each dataset in scotland_2018
+```{r}
+h5read(file = filename, name = "scotland_2018/datazone") %>% head()
 
-### Demographic data
+h5read(file = filename, name = "scotland_2018/allages_postcode_10k") %>% head()
+h5read(file = filename, name = "scotland_2018/groupages_postcode_10k") %>% head()
 
-processing_demographic_data.r (currently) takes raw SIMD data and processes this to a useable version for income deprivation. Processed data is stored in hdf5 file.
+h5read(file = filename, name = "scotland_2018/allages_area_10k") %>% head()
+h5read(file = filename, name = "scotland_2018/groupages_area_10k") %>% head()
+```
 
-grid_non_population_demographics.r calculates the mean value of the demographic data of the census geographies contained in each grid cell. This works for income deprivation (I think) which is all I've looked at so far but might have to be changed for other demographic indicators.
+View attributes associated with the **simd_income group**
+```{r}
+h5readAttributes(file = filename, name = "simd_income")
+```
 
-### hdf5 file
-Im not sure how best to share this, the version in the repository isn't the correct version and wont update but my computer wont let me change the .gitignore to stop uploading it...
+View attributes associated with each of the 2 datasets in simd_income
+```{r}
+h5readAttributes(file = filename, name = "simd_income/datazone")
+h5readAttributes(file = filename, name = "simd_income/grid_10k") 
+```
+
+View the first 5 lines of each dataset in simd_income
+```{r}
+h5read(file = filename, name = "simd_income/datazone") %>% head()
+h5read(file = filename, name = "simd_income/grid_10k") %>% head()
+```
