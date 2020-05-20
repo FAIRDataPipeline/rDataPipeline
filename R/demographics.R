@@ -46,7 +46,7 @@ demographics <- function(
   rhdf5::h5writeAttribute(gid, attr = "Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.", 
                           name = "Description")
   rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
-  rhdf5::h5writeAttribute(gid, attr = "1", name = "RawWarningScore")
+  rhdf5::h5writeAttribute(gid, attr = "1", name = "SourceWarningScore")
   rhdf5::h5writeAttribute(gid, attr = "National Records Scotland", name = "Source")
   rhdf5::h5writeAttribute(gid, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")
   
@@ -162,10 +162,14 @@ demographics <- function(
   
   gid <- rhdf5::H5Gopen(fid, name = "simd_income/") 
   rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
-  rhdf5::h5writeAttribute(gid, attr = "1", name = "RawWarningScore")
+  rhdf5::h5writeAttribute(did, attr = "datazones", name = "Units")
+  rhdf5::h5writeAttribute(gid, attr = "1", name = "SourceWarningScore")
   
   did <- rhdf5::H5Dopen(fid, "simd_income/datazone")
-  rhdf5::h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
+  rhdf5::h5writeAttribute(gid, attr = "24/4/20", name = "DownloadDate")
+  rhdf5::h5writeAttribute(gid, attr = "1", name = "ProcessedWarningScore")
+  rhdf5::h5writeAttribute(gid, attr = "National Records Scotland", name = "Source")
+  rhdf5::h5writeAttribute(gid, attr = "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series", name = "URL")  
   
   rhdf5::H5Dclose(did)
   rhdf5::H5Gclose(gid)
@@ -182,5 +186,17 @@ demographics <- function(
   tag <- paste0("simd_income/grid_", gridsize, "k")
   rhdf5::h5write(simd_grid, file = h5filename,
                  name = tag)
+  
+  # Add attributes / metadata 
+  fid <- rhdf5::H5Fopen(h5filename)
+  
+  grid_tag <- paste0(gridsize, "km grid")
+  did <- rhdf5::H5Dopen(fid, tag)
+  rhdf5::h5writeAttribute(did, attr = "simd (income)", name = "Description")
+  rhdf5::h5writeAttribute(did, attr = grid_tag, name = "Units")
+  rhdf5::h5writeAttribute(did, attr = "1", name = "ProcessedWarningScore")
+  
+  rhdf5::H5Dclose(did)
+  rhdf5::H5Fclose(fid)
   
 } 
