@@ -10,8 +10,8 @@ License: GPL-3
 Imports:
     assertthat,
     dplyr,
+    hdf5r,
     readxl,
-    rhdf5,
     sf,
     tibble,
     tidyr
