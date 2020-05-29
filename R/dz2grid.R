@@ -1,41 +1,84 @@
 #' dz2grid
 #'
-dz2grid <- function(wide_new_table,
-                    datazone_populations,
-                    age_class_tags,
-                    ageclasses,
+#' This script transforms age class population data from census geographies to
+#' a grid based system.
+#' If the census geography is split across two grid cells this script splits
+#' the population between these cells according to the proportion of the
+#' postcodes in the geography which are present in each cell.
+#' i.e. if a datazone containing 5 postcodes is split between 2 grid cells
+#' with 3 postcodes in cell A and 2 in cell B, 60% of the population goes to cell A.
+#' It takes:
+#' - shapefile of the census geographies from which the populations should
+#' be drawn
+#' - a population dataset containing single-year age classes for each
+#' census geography (alternatively a population dataset with preset age
+#' classes can be used) in the structure: 1st column - Geographical identifier,
+#' columns 2:92 single year population totals for age 0 to 89 and 90+ ageclass
+#' - A grid shapefile which overlays the census geographies. (IF this is not
+#' available this script automatically makes a grid, the dimensions of which
+#' can be chosen (in m))
+#' - A shapefile containing the boundaries of postcodes contained in the
+#' census geographies
+#'
+#' If a single-year age class dataset is supplied and a different structure is
+#' desired (i.e. 5-year age classes) the structure of this new age class must
+#' be set as a vector called: age_class_structure
+#' This vector should contain the lower age bound of each age class
+#'
+#' There is an issue of rounding when the population are being divided between
+#' cells, I have a work-around which is explained in the code.
+#'
+#' @param dat datazone population data
+#' @param datazones
+#' @param dz_subdivisions
+#'
+dz2grid <- function(dat,
                     datazones,
                     dz_subdivisions) {
 
-  num_ageclasses <- length(ageclasses)
+  # Find area of each of the newly created distinct datazone components
+  intersection_area <- data.frame(grid_id = dz_subdivisions$grid_id,
+                                  datazone = dz_subdivisions$DataZone,
+                                  area = as.numeric(sf::st_area(dz_subdivisions)))
+  datazone_area <- data.frame(datazone = datazones$DataZone,
+                              full_zone_area = as.numeric(sf::st_area(datazones)))
+
+  # Join full area of each datazone to this data.frame and use to find
+  # the proportion of each datazone in each grid cell
+  combined_areas <- left_join(intersection_area, datazone_area,
+                              by = "datazone") %>%
+    dplyr::mutate(proportion = area / full_zone_area) %>%
+    dplyr::select(grid_id, datazone, proportion) %>%
+    dplyr::filter(datazone %in% rownames(dat))
+
+  # Create matrix of grid cells by datazones containing the proportion of
+  # each datazone in each grid cell with 0's
+  wide_new_table <- reshape2::dcast(combined_areas, grid_id ~ datazone,
+                                    value.var = "proportion", fill = 0)
 
   # Make new tables to fill in population proportions
-  prop_dat <- wide_new_table[-1] %>%
-    as_tibble()
+  prop_dat <- as.matrix(wide_new_table[-1])
+  this_ageclass <- as.matrix(wide_new_table[-1])
 
-  assertthat::assert_that(!any(is.na(prop_dat)))
-
-  this_ageclass <- wide_new_table[-1] %>%
-    as_tibble()
   dzs <- colnames(this_ageclass)
+  bins <- colnames(dat)
 
   grid_pop <- matrix(data = 0, nrow = nrow(this_ageclass),
-                     ncol = (num_ageclasses))
-  colnames(grid_pop) <- ageclasses
+                     ncol = length(bins))
+  colnames(grid_pop) <- bins
 
   # Loop over each row (grid_id) and find the proportion of the population
   # of each datazone in each grid cell
 
-  for(j in seq_along(ageclasses)) {
+  for(j in seq_along(bins)) {
 
     for(i in seq_along(dzs)) {
-      cat(paste0('\rAge class ', j, " of ", length(seq_along(ageclasses)),
+      cat(paste0('\rAge class ', j, " of ", length(bins),
                  "; datazone ", i, " of ",
-                 ncol(this_ageclass), "..."))
+                 length(dzs), "..."))
 
-      in_gridcell <- prop_dat[,i]
-
-      true_pop <- datazone_populations[dzs[i], as.character(ageclasses[j])]
+      in_gridcell <- prop_dat[, i, drop = FALSE]
+      true_pop <- dat[dzs[i], bins[j]]
       rounded_pops <- round(in_gridcell * true_pop)
 
       # Work around for the rounding issue:
@@ -45,10 +88,11 @@ dz2grid <- function(wide_new_table,
       # causes a higher population than expected, remove individuals from the
       # grid cells furthest from the nearest integer.
 
-      if(sum(rounded_pops) != sum(true_pop)) {
+      if(sum(rounded_pops) != true_pop) {
         non_rounded_pops <- in_gridcell * true_pop
         difference <- non_rounded_pops - rounded_pops
         remainder <- sum(non_rounded_pops) - sum(rounded_pops)
+
         if(remainder > 0){
           next.biggest <- order(difference[, 1], decreasing = TRUE)[1:remainder]
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] + 1
@@ -65,14 +109,12 @@ dz2grid <- function(wide_new_table,
     }
 
     # Sum across datazones to find total population in each grid cell
-    grid_pop[, as.character(ageclasses[j])] <- rowSums(this_ageclass)
+    grid_pop[, bins[j]] <- rowSums(this_ageclass)
   }
 
   # Check age group counts
   assertthat::assert_that(all(colSums(grid_pop) ==
-                                colSums(datazone_populations)))
-
-  colnames(grid_pop) <- age_class_tags
+                                colSums(dat)))
 
   list(grid_id = unlist(wide_new_table[,1]),
        grid_pop = grid_pop)
