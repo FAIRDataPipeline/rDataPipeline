@@ -2,7 +2,9 @@
 #'
 #' deaths-involving-coronavirus-covid-19
 #'
-processScotDeaths <- function() {
+processScotDeaths <- function(
+  h5filename = "deaths-involving-coronavirus-covid-19.h5") {
+
   endpoint <- "https://statistics.gov.scot/sparql"
 
   query <- 'PREFIX qb: <http://purl.org/linked-data/cube#>
@@ -35,13 +37,13 @@ WHERE {
   ?period rdfs:label ?date .
 }'
 
-  scotDeaths <- SPARQL::SPARQL(endpoint, query)$results
-
-  download.file("https://statistics.gov.scot/downloads/cube-table?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19",
-                "deaths.csv")
-
-  assertthat::assert_that(nrow(read.csv2("deaths.csv", sep = ",")) ==
-                            nrow(scotDeaths))
+  # scotDeaths <- SPARQL::SPARQL(endpoint, query)$results
+  #
+  # download.file("https://statistics.gov.scot/downloads/cube-table?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19",
+  #               "deaths.csv")
+  #
+  # assertthat::assert_that(nrow(read.csv2("deaths.csv", sep = ",")) ==
+  #                           nrow(scotDeaths))
 
 
   # Table1 - COVID deaths ---------------------------------------------------
@@ -246,51 +248,28 @@ WHERE {
 
 
   # Create hdf5 file
-  h5filename <- "deaths-involving-coronavirus-covid-19.h5"
-  rhdf5::h5createFile(h5filename)
-  rhdf5::h5createGroup(h5filename, "datasets")
+  file.h5 <- H5File$new(h5filename, mode = "w")
+  datasets.grp <- file.h5$create_group("datasets")
 
   # Attach datasets
   for (i in seq_along(datasets))
-    rhdf5::h5write(get(datasets[i]), file = h5filename,
-                   name = file.path("datasets/", datasets[i]))
+    datasets.grp[[datasets[i]]] <- get(datasets[i])
 
   # Attach attributes to group
-  fid <- rhdf5::H5Fopen(h5filename)
-  gid <- rhdf5::H5Gopen(fid, name = "datasets/")
-
-  rhdf5::h5writeAttribute(gid, attr = paste0(
+  h5attr(datasets.grp, "Description") <- paste0(
     "This dataset presents the weekly, and year to date, provisional number",
     "of deaths associated with coronavirus (COVID-19) alongside the total",
-    "number of deaths registered in Scotland, broken down by age, sex."),
-    name = "Description")
-  rhdf5::h5writeAttribute(gid, attr = Sys.time(), name = "DownloadDate")
-  rhdf5::h5writeAttribute(gid, attr = "National Records of Scotland",
-                          name = "Source")
-  rhdf5::h5writeAttribute(gid, attr = paste0(
+    "number of deaths registered in Scotland, broken down by age, sex.")
+  h5attr(datasets.grp, "DownloadDate") <- paste0(as.character(Sys.time()))
+  h5attr(datasets.grp, "Source") <- "National Records of Scotland"
+  h5attr(datasets.grp, "URL") <- paste0(
     "https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.",
-    "scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19"), name = "URL")
+    "scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19")
 
   # Attach attributes to datasets
-  for(i in seq_along(datasets)) {
-    did <- rhdf5::H5Dopen(fid, paste0("datasets/", datasets[i]))
-    rhdf5::h5writeAttribute(did, attr = description[i],
-                            name = "Description")
-    rhdf5::H5Dclose(did)
-  }
-
-  rhdf5::H5Gclose(gid)
-  rhdf5::H5Fclose(fid)
+  for(i in seq_along(datasets))
+    h5attr(datasets.grp[[datasets[i]]], "Description") <- description[i]
 
 }
-
-
-
-
-
-
-
-
-
 
 
