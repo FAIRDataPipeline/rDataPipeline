@@ -1,21 +1,20 @@
 #' bin_ages
 #'
-bin_ages <- function(population_dz, ageclasses) {
+bin_ages <- function(dat, ageclasses) {
 
-  # Remove empty datazones ("S01010206", "S01010226", and "S01010227")
-  dat <- population_dz %>%
-    dplyr::filter(rowSums(dplyr::select(., -datazone)) != 0)
+  # Remove empty DZcodes ("S01010206", "S01010226", and "S01010227")
+  # dat <- dat %>%
+  #   dplyr::filter(rowSums(dplyr::select(., -DZcode)) != 0)
 
-  if(all(ageclasses == "AllAges")) {
-    datazone_pop <- dat %>%
-      dplyr::mutate(AllAges = rowSums(dplyr::select(., -datazone))) %>%
-      dplyr::select(datazone, AllAges) %>%
-      tibble::column_to_rownames("datazone")
+  if(all(ageclasses == "total")) {
+    output <- dat %>%
+      dplyr::mutate(total = rowSums(dplyr::select(., -DZcode))) %>%
+      dplyr::select(DZcode, total)
 
   } else {
     # Find total number of individuals in each age class
-    datazone_pop <- matrix(data = 0, ncol = length(ageclasses),
-                                   nrow = nrow(dat))
+    output <- matrix(data = 0, ncol = length(ageclasses),
+                         nrow = nrow(dat))
 
     for(i in seq_along(ageclasses)) {
 
@@ -23,12 +22,11 @@ bin_ages <- function(population_dz, ageclasses) {
                                (ageclasses[i + 1] - 1))
       columns <- paste0("AGE", ageclasses[i]:endcol)
 
-      datazone_pop[,i] <- dat %>%
+      output[,i] <- dat %>%
         dplyr::rename(AGE90 = "AGE90+") %>%
         dplyr::select(dplyr::one_of(columns)) %>%
         rowSums()
     }
-    rownames(datazone_pop) <- dat$datazone
 
     tag_ageclass <- lapply(seq_along(ageclasses), function(x)
       if(x != length(ageclasses)) {
@@ -38,9 +36,10 @@ bin_ages <- function(population_dz, ageclasses) {
       }
     ) %>% unlist()
 
-    colnames(datazone_pop) <- tag_ageclass
+    colnames(output) <- paste0("AGE", tag_ageclass)
 
+    output <- cbind.data.frame(DZcode = dat$DZcode, output)
   }
 
-  datazone_pop
+  output
 }

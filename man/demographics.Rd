@@ -6,25 +6,13 @@
 \usage{
 demographics(
   filename = "demographics",
-  gridsizes = c(10, 1),
-  ageclasses = seq(0, 90, 5),
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
-  datazone_path = "data-raw/sape-2018-persons.xlsx"
+  datazone_path = "data-raw/sape-2018-persons.xlsx",
+  grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km", "grid10km"),
+  subgrp.names = c("total", "1year", "5year", "10year"),
+  age.classes = list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10))
 )
 }
-\arguments{
-\item{filename}{Name of output hd5f file}
-
-\item{gridsizes}{vector of lengths (grid sizes), in metres}
-
-\item{ageclasses}{vector of class numeric corresponding to the lower bound
-of each age class; when missing, a single age class is generated (all
-ages combined)}
-
-\item{datazone_sf}{path to datazone shape file}
-
-\item{datazone_path}{path to demographic data file (datazones)}
-}
 \description{
-demographics
+Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.
 }

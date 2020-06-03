@@ -16,28 +16,28 @@ PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
 PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
 SELECT ?count ?type ?age ?cause ?location ?gender ?areaname ?areatypename ?date
 WHERE {
-  ?indicator qb:dataSet data:deaths-involving-coronavirus-covid-19 ;
-              mp:count ?count ;
-              qb:measureType ?measType ;
-              sdim:age ?value ;
-              sdim:causeOfDeath ?causeDeath ;
-              sdim:locationOfDeath ?locDeath ;
-              sdim:sex ?sex ;
-              dim:refArea ?area ;
-              dim:refPeriod ?period .
+  ?indicator qb:dataSet data:deaths-involving-coronavirus-covid-19;
+              mp:count ?count;
+              qb:measureType ?measType;
+              sdim:age ?value;
+              sdim:causeOfDeath ?causeDeath;
+              sdim:locationOfDeath ?locDeath;
+              sdim:sex ?sex;
+              dim:refArea ?area;
+              dim:refPeriod ?period.
 
-  ?measType rdfs:label ?type .
-  ?value rdfs:label ?age .
-  ?causeDeath rdfs:label ?cause .
-  ?locDeath rdfs:label ?location .
-  ?sex rdfs:label ?gender .
-  ?area stat:code ?areatype ;
-      rdfs:label ?areaname .
-  ?areatype rdfs:label ?areatypename .
-  ?period rdfs:label ?date .
+              ?measType rdfs:label ?type.
+              ?value rdfs:label ?age.
+              ?causeDeath rdfs:label ?cause.
+              ?locDeath rdfs:label ?location.
+              ?sex rdfs:label ?gender.
+              ?area stat:code ?areatype;
+                rdfs:label ?areaname.
+              ?areatype rdfs:label ?areatypename.
+              ?period rdfs:label ?date.
 }'
 
-  # scotDeaths <- SPARQL::SPARQL(endpoint, query)$results
+  scotDeaths <- SPARQL::SPARQL(endpoint, query)$results
   #
   # download.file("https://statistics.gov.scot/downloads/cube-table?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fdeaths-involving-coronavirus-covid-19",
   #               "deaths.csv")
@@ -189,9 +189,17 @@ WHERE {
 
   # dataset 10 - all_deaths_per_week
   all_deaths_per_week <- ad_week_allages %>%
-    dplyr::filter(location == "All")
+    dplyr::filter(location == "All",
+                  cause == "All causes")
   datasets <- c(datasets, "all_deaths_per_week")
   description <- c(description, "Total deaths per week")
+
+  # dataset 11 - all_deaths_per_week_averaged_over_5years
+  all_deaths_per_week_averaged_over_5years <- ad_week_allages %>%
+    dplyr::filter(location == "All",
+                  cause != "All causes")
+  datasets <- c(datasets, "all_deaths_per_week_averaged_over_5years")
+  description <- c(description, "Total deaths per week averaged over 5 years")
 
   # dataset (total & persons - year to date)
   all_deaths_year_to_date <- ad_total %>%
@@ -203,12 +211,13 @@ WHERE {
                                nrow(all_deaths_per_week_by_councilarea) +
                                nrow(all_deaths_per_week_by_agegroup) +
                                nrow(all_deaths_per_week_by_location) +
-                               nrow(all_deaths_per_week)))
+                               nrow(all_deaths_per_week) +
+                               nrow(all_deaths_per_week_averaged_over_5years)))
 
 
   # Table3 - deaths by location ---------------------------------------------
 
-  # dataset 11 - covid_deaths_by_nhsboard_and_location
+  # dataset 12 - covid_deaths_by_nhsboard_and_location
   covid_deaths_by_nhsboard_and_location <- cd_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location != "All") %>%
@@ -217,7 +226,7 @@ WHERE {
   description <- c(description, paste0(
     "Covid related deaths by NHS Health Board Area and location"))
 
-  # dataset 12 - all_deaths_by_nhsboard_and_location
+  # dataset 13 - all_deaths_by_nhsboard_and_location
   all_deaths_by_nhsboard_and_location <- ad_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location != "All") %>%
@@ -226,7 +235,7 @@ WHERE {
   description <- c(description, paste0(
     "All deaths by NHS Health Board Area and location"))
 
-  # dataset 13 - covid_deaths_by_councilarea_and_location
+  # dataset 14 - covid_deaths_by_councilarea_and_location
   covid_deaths_by_councilarea_and_location <- cd_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location != "All") %>%
@@ -235,7 +244,7 @@ WHERE {
   description <- c(description, paste0(
     "Covid related deaths by Council Area and location"))
 
-  # dataset 14 - all_deaths_by_councilarea_and_location
+  # dataset 15 - all_deaths_by_councilarea_and_location
   all_deaths_by_councilarea_and_location <- ad_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location != "All") %>%
@@ -269,6 +278,8 @@ WHERE {
   # Attach attributes to datasets
   for(i in seq_along(datasets))
     h5attr(datasets.grp[[datasets[i]]], "Description") <- description[i]
+
+  file.h5$close_all()
 
 }
 

@@ -1,133 +1,143 @@
 #' demographics
 #'
-#' @param filename Name of output hd5f file
-#' @param gridsizes vector of lengths (grid sizes), in metres
-#' @param ageclasses vector of class numeric corresponding to the lower bound
-#' of each age class; when missing, a single age class is generated (all
-#' ages combined)
-#' @param datazone_sf path to datazone shape file
-#' @param datazone_path path to demographic data file (datazones)
+#' Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.
 #'
 #' @export
+#' source = National Records Scotland
+#'datazone_sf = https://data.gov.uk/dataset/ab9f1f20-3b7f-4efa-9bd2-239acf63b540/data-zone-boundaries-2011
+#' datazone_dat = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series
 #'
 demographics <- function(
   filename = "demographics",
-  gridsizes = c(10, 1),
-  ageclasses = seq(0, 90, 5),
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
-  datazone_path = "data-raw/sape-2018-persons.xlsx") {
+  datazone_path = "data-raw/sape-2018-persons.xlsx",
+  grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
+  "grid10km"),
+  subgrp.names = c("total", "1year", "5year", "10year"),
+  age.classes = list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10))
+) {
 
-  # Create hdf5 file
+  # Prepare hdf5 file -------------------------------------------------------
+
+  h5filename <- paste0(filename, ".h5")
   file.h5 <- H5File$new(h5filename, mode = "w")
 
+  grp.objects <- paste0(tolower(grp.names), ".grp")
+  subgrp.objects <- paste0(grp.names, subgrp.names, ".subgrp")
+
+
   # Create groups
-  scotland_2018.grp <- file.h5$create_group("scotland_2018")
+  for(i in seq_along(grp.names))
+    assign(grp.objects[i], file.h5$create_group(grp.names[i]))
+
+  # Create subgroups
+  for(i in seq_along(grp.names)) {
+    for(j in seq_along(subgrp.names)) {
+      cmd <- paste0(grp.objects[i], "$create_group(subgrp.names[j])")
+      subgroup_obj <- paste0(grp.names[i], ".", subgrp.names[j], ".subgrp")
+      assign(subgroup_obj, eval(parse(text = cmd)))
+    }
+  }
 
 
-  # Attach attributes to scotland_2018
-  hdf5r::h5attr(scotland_2018.grp, "Description") <- "Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+."
-  hdf5r::h5attr(scotland_2018.grp, "DownloadDate") <- as.character(Sys.time())
-  hdf5r::h5attr(scotland_2018.grp, "SourceWarningScore") <- "0"
-  hdf5r::h5attr(scotland_2018.grp, "Source") <- "National Records Scotland"
-  hdf5r::h5attr(scotland_2018.grp, "datazone_dat") <- "https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series"
-  hdf5r::h5attr(scotland_2018.grp, "datazone_sf") <- "https://data.gov.uk/dataset/ab9f1f20-3b7f-4efa-9bd2-239acf63b540/data-zone-boundaries-2011"
+  # Prepare dz2grid ---------------------------------------------------------
 
-
-  # Attach datazone dataset
-  population_dz <- process_population(datazone_path = datazone_path)
-  scotland_2018.grp[["datazone_id"]] <- population_dz$datazone
-  scotland_2018.grp[["datazone_raw"]] <- as.matrix(population_dz[-1])
-
-  # Attach datazone attributes
-  hdf5r::h5attr(scotland_2018.grp[["datazone_raw"]], "Description") <- "Population counts (original spatial resolution)"
-  hdf5r::h5attr(scotland_2018.grp[["datazone_raw"]], "Age classes") <- gsub("AGE", "", colnames(population_dz)[-1])
-  hdf5r::h5attr(scotland_2018.grp[["datazone_raw"]], "Units") <- "datazones"
-  hdf5r::h5attr(scotland_2018.grp[["datazone_raw"]], "ProcessedWarningScore") <- "0"
-
+  # Original dataset
+  original.dat <- process_population(datazone_path = datazone_path)
 
   # Read in datazone shapefile and check for non-intersecting geometries
   datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>% sf::st_make_valid()
 
-  # Convert datazones to grids
-  for(i in seq_along(gridsizes)) {
+  gridsize <- 10
+  tmp <- grid_intersection(datazones, gridsize)
+  dz_subdivisions_10km <- tmp$dz_subdivisions
+  grid_matrix_10km <- tmp$grid_matrix
 
-    cat(paste0("\nConverting datazones to ", gridsizes[i],
-               "k grids...\n\n"))
-    cat("Initialising...\n\n")
+  gridsize <- 1
+  tmp <- grid_intersection(datazones, gridsize)
+  dz_subdivisions_1km <- tmp$dz_subdivisions
+  grid_matrix_1km <- tmp$grid_matrix
 
-    # Generate grid over bounding box of datazone shapefile
-    n <- gridsizes[i]*1000
-    grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(datazones)),
-                              cellsize = c(n, n))
+  conversion.table <- readxl::read_excel(
+    "data-raw/SIMD+2020v2+-+datazone+lookup.xlsx",
+    sheet = 3) %>%
+    dplyr::rename(DZcode = DZ,
+                  URcode = URclass) %>%
+    dplyr::select_if(grepl("name$|code$", colnames(.)))
 
-    width <- sf::st_bbox(datazones)$xmax - sf::st_bbox(datazones)$xmin
-    height <- sf::st_bbox(datazones)$ymax - sf::st_bbox(datazones)$ymin
-    num_columns <- ceiling(width / n)
-    num_rows <- ceiling(height / n)
-    grid_labels <- paste0(1:num_rows, "-", rep(1:num_columns, each = num_rows))
-    grid_matrix <- cbind.data.frame(x = 1:num_rows,
-                                    y = rep(1:num_columns, each = num_rows))
+  # Attach data to hdf5 file ------------------------------------------------
 
-    grids <- sf::st_sf(grids, grid_id = grid_labels)
+  for(j in seq_along(subgrp.names)) {
 
-    # Use grid to subdivide datazones
-    dz_subdivisions <- sf::st_intersection(grids, datazones)
+    # Aggregate age classes
+    if(subgrp.names[j] == "1year") {
+      transage.dat <- original.dat
 
-    datazone_pop <- bin_ages(ageclasses = ageclasses,
-                             population_dz = population_dz)
+    } else if(subgrp.names[j] == "total") {
+      transage.dat <- bin_ages(original.dat, age.classes[[j]])
 
-    # Datazones split by area; total population
-    grid_all <- dz2grid(dat = datazone_pop,
-                        datazones = datazones,
-                        dz_subdivisions = dz_subdivisions)
+    } else {
+      transage.dat <- bin_ages(original.dat, age.classes[[j]])
+    }
 
-    # Add to hdf5
-    grid_all_tag <- paste0("grid", gridsizes[i], "k_total")
-    scotland_2018.grp[[grid_all_tag]] <- grid_all$grid_pop
+    for(i in seq_along(grp.names)) {
+      cat(paste0("\r", j, "/", length(subgrp.names), ": ",
+                 i, "/", length(grp.names), "..."))
 
-    grid_tag <- paste0(gridsizes[i], "km grid")
-    hdf5r::h5attr(scotland_2018.grp[[grid_all_tag]],
-                  "Description") <-
-      "Population counts"
-    age_tag <- paste0(min(ageclasses), "-", max(ageclasses), "+")
-    hdf5r::h5attr(scotland_2018.grp[[grid_all_tag]],
-                  "Age classes") <- age_tag
-    hdf5r::h5attr(scotland_2018.grp[[grid_all_tag]],
-                  "Units") <- grid_tag
-    hdf5r::h5attr(scotland_2018.grp[[grid_all_tag]],
-                  "ProcessedWarningScore") <- "2"
+      if(grp.names[i] %in% c("dz", "ur", "iz", "la", "hb", "mmw", "spc")) {
 
+        # Transformed data (non-grid transformed)
+        tmp.dat <- dz2lower(transage.dat, grp.names[i], conversion.table)
+        transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
+                              grid_id = tmp.dat$data[, 1])
+        area.names <- tmp.dat$area.names
 
-    # Datazones split by area; binned age classes
-    grid_groups <- dz2grid(dat = datazone_pop,
-                           datazones = datazones,
-                           dz_subdivisions = dz_subdivisions)
+      } else if(grepl("grid",  grp.names[i])) {
 
-    # Add to hdf5
-    grid_groups_tag <- paste0("grid", gridsizes[i], "k_binned")
-    scotland_2018.grp[[grid_groups_tag]] <- grid_groups$grid_pop
+        if(grepl("10km$", grp.names[i])) {
+          dz_subdivisions <- dz_subdivisions_10km
+          grid_matrix <- grid_matrix_10km
 
-    assertthat::assert_that(all(grid_all$grid_id == grid_groups$grid_id))
-    grid_id_tag <- paste0("grid", gridsizes[i], "k_id")
-    scotland_2018.grp[[grid_id_tag]] <- grid_matrix
+        } else if(grepl("1km$", grp.names[i])) {
+          dz_subdivisions <- dz_subdivisions_1km
+          grid_matrix <- grid_matrix_1km
 
-    age_tag <- sapply(seq_along(ageclasses), function(x) {
-      if(x != length(ageclasses)) {
-        paste0(ageclasses[x], "-", ageclasses[x+1]-1)
-      } else
-        paste0(ageclasses[x], "+")
-    })
+        } else
+          stop("OMG! - grids")
 
-    hdf5r::h5attr(scotland_2018.grp[[grid_groups_tag]],
-                  "Description") <- "Population counts"
-    hdf5r::h5attr(scotland_2018.grp[[grid_groups_tag]],
-                  "Age classes") <- age_tag
-    hdf5r::h5attr(scotland_2018.grp[[grid_groups_tag]],
-                  "Units") <- grid_tag
-    hdf5r::h5attr(scotland_2018.grp[[grid_groups_tag]],
-                  "ProcessedWarningScore") <- "2"
+        # Transformed data (grid transformed)
+        transarea.dat <- dz2grid(dat = transage.dat,
+                                 datazones = datazones,
+                                 dz_subdivisions = dz_subdivisions)
 
+      } else {
+        stop("OMG! - grpnames")
+      }
+
+      # Attach data
+      subgroup_obj <- paste0(grp.names[i], ".", subgrp.names[j], ".subgrp")
+
+      eval(parse(text = paste0(subgroup_obj,
+                               "[[\"dataset\"]] <- transarea.dat$grid_pop")))
+
+      # Attach colnames
+      eval(parse(text = paste0(subgroup_obj, "[[\"colNames\"]] <- ",
+                               "colnames(transarea.dat$grid_pop)")))
+      # Attach rownames
+      eval(parse(text = paste0(subgroup_obj,
+                               "[[\"rowNames\"]] <- transarea.dat$grid_id")))
+
+      if(grepl("grid",  grp.names[i]))
+        eval(parse(text = paste0(subgroup_obj,
+                                 "[[\"gridXY\"]] <- grid_matrix")))
+
+      if(grp.names[i] %in%
+         c("dz", "ur", "iz", "la", "hb", "mmw", "spc"))
+        eval(parse(text = paste0(subgroup_obj,
+                                 "[[\"areaNames\"]] <- area.names")))
+
+    }
   }
-  file.h5$close_all()
 
+  file.h5$close_all()
 }

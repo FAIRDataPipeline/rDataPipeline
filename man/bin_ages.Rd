@@ -4,7 +4,7 @@
 \alias{bin_ages}
 \title{bin_ages}
 \usage{
-bin_ages(population_dz, ageclasses)
+bin_ages(dat, ageclasses)
 }
 \description{
 bin_ages

@@ -36,6 +36,8 @@ dz2grid <- function(dat,
                     datazones,
                     dz_subdivisions) {
 
+  dat <- dat %>% tibble::column_to_rownames("DZcode")
+
   # Find area of each of the newly created distinct datazone components
   intersection_area <- data.frame(grid_id = dz_subdivisions$grid_id,
                                   datazone = dz_subdivisions$DataZone,
