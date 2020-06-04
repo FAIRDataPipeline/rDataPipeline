@@ -5,7 +5,7 @@ Functions to generate and process hd5f files.
 To install:
 ```{r}
 library(devtools)
-install_github("ScottishCovidResponse/hdf5processing")
+install_github("ScottishCovidResponse/SCRCdataAPI")
 ```
 
 To generate hdf5 files in R:
