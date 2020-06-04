@@ -36,6 +36,7 @@ each dimension (e.g. list element 2 corresponds to columns)}
 Function to populate hdf5 file with array type data.
 }
 \examples{
+\donttest{
 filename <- "array.h5"
 component <- "dz/total"
 array <- matrix(1:10, 5)
@@ -59,5 +60,6 @@ file.h5[["dz/total/Dimension_2_title"]][]
 file.h5[["dz/total/Dimension_2_units"]][]
 file.h5[["dz/total/Dimension_2_values"]][]
 file.h5$close_all()
+}
 
 }
