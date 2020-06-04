@@ -41,7 +41,7 @@ file.h5$close_all()
 ```
 
 
-In the following example, we will populate "table.h5" with table type data.
+In the following example, we will populate "array.h5" with array type data.
 
 To create an array:
 ```{r}
@@ -53,11 +53,11 @@ rownames(array) <- paste0("dz", 1:5)
 dimension_names <- list(`area names` = rownames(array), 
 `age classes` = colnames(array))
 
-dimension_values <- list(NA, data.frame(x = 1:2, y = 3:4))
+# demonstrating column values with missing row values
+dimension_values <- list(NA, data.frame(a = 1:2, b = 3:4))
 dimension_units <- list("10km", "5years")
 
-create_array(filename, component, array, dimension_names, dimension_values,
-dimension_units)
+create_array(filename, component, array, dimension_names, dimension_values, dimension_units)
 ```
 
 To check contents:
