@@ -11,7 +11,7 @@ create_table(filename, component, df, row_title, row_names, column_units)
 
 \item{component}{a \code{string} specifying a location within the hdf5 file}
 
-\item{df}{a \code{data.frame} containing the data}
+\item{df}{a \code{dataframe} containing the data}
 
 \item{row_title}{(optional) a \code{string} descriptor for rownames}
 

@@ -4,11 +4,12 @@
 #'
 #' @param filename a \code{string} specifying the name of the hdf5 file
 #' @param component a \code{string} specifying a location within the hdf5 file
-#' @param df a \code{data.frame} containing the data
+#' @param df a \code{dataframe} containing the data
 #' @param row_title (optional) a \code{string} descriptor for rownames
 #' @param row_names (optional) a vector of \code{rownames}
 #' @param column_units (optional) a \code{vector} where each element describes
 #' the units of the corresponding column
+#'
 #' @export
 #'
 create_table <- function(filename,
