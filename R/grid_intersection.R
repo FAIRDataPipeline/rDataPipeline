@@ -10,10 +10,11 @@ grid_intersection <- function(datazones, gridsize) {
   height <- sf::st_bbox(datazones)$ymax - sf::st_bbox(datazones)$ymin
   num_columns <- ceiling(width / n)
   num_rows <- ceiling(height / n)
-  grid_labels <- paste0(rep(1:num_rows, each = num_columns), "-", 1:num_columns)
+  grid_labels <- paste0(1:num_columns, "-", rep(1:num_rows, each = num_columns))
   grid_matrix <- strsplit(grid_labels, "-") %>% do.call(rbind.data.frame, .)
-  colnames(grid_matrix) <- c("y", "x")
-  grid_matrix <- select(grid_matrix, x, y)
+  colnames(grid_matrix) <- c("x", "y")
+  grid_matrix <- grid_matrix %>%
+    dplyr::mutate_if(is.character, as.numeric)
 
   grids <- sf::st_sf(grids, grid_id = grid_labels)
 
