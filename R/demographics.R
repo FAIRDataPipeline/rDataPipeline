@@ -1,14 +1,12 @@
 #' demographics
 #'
-#' Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.
+#' Estimated population by sex, single year of age, 2011 Data Zone area, and
+#' council area: 30 June 2018.
 #'
 #' @export
-#' source = National Records Scotland
-#'datazone_sf = https://data.gov.uk/dataset/ab9f1f20-3b7f-4efa-9bd2-239acf63b540/data-zone-boundaries-2011
-#' datazone_dat = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series
 #'
 demographics <- function(
-  filename = "demographics",
+  filename = "demographics.h5",
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
   datazone_path = "data-raw/sape-2018-persons.xlsx",
   grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
@@ -19,8 +17,7 @@ demographics <- function(
 
   # Prepare hdf5 file -------------------------------------------------------
 
-  h5filename <- paste0(filename, ".h5")
-  file.h5 <- H5File$new(h5filename, mode = "w")
+  file.h5 <- H5File$new(filename, mode = "w")
 
   grp.objects <- paste0(tolower(grp.names), ".grp")
   subgrp.objects <- paste0(grp.names, subgrp.names, ".subgrp")
@@ -118,23 +115,28 @@ demographics <- function(
       subgroup_obj <- paste0(grp.names[i], ".", subgrp.names[j], ".subgrp")
 
       eval(parse(text = paste0(subgroup_obj,
-                               "[[\"dataset\"]] <- transarea.dat$grid_pop")))
+                               "[[\"array\"]] <- transarea.dat$grid_pop")))
 
       # Attach colnames
-      eval(parse(text = paste0(subgroup_obj, "[[\"colNames\"]] <- ",
+      eval(parse(text = paste0(subgroup_obj, "[[\"Dimension_2_title\"]] <- ",
+                               "\"age groups\"")))
+      eval(parse(text = paste0(subgroup_obj, "[[\"Dimension_2_names\"]] <- ",
                                "colnames(transarea.dat$grid_pop)")))
+
       # Attach rownames
       eval(parse(text = paste0(subgroup_obj,
-                               "[[\"rowNames\"]] <- transarea.dat$grid_id")))
+                               "[[\"Dimension_1_title\"]] <- \"feature names\"")))
+      eval(parse(text = paste0(subgroup_obj,
+                               "[[\"Dimension_1_names\"]] <- transarea.dat$grid_id")))
 
-      if(grepl("grid",  grp.names[i]))
+      # For grids
+      if(grepl("grid",  grp.names[i])) {
         eval(parse(text = paste0(subgroup_obj,
-                                 "[[\"gridXY\"]] <- grid_matrix")))
-
-      if(grp.names[i] %in%
-         c("dz", "ur", "iz", "la", "hb", "mmw", "spc"))
+                                 "[[\"Dimension_1_values\"]] <- grid_matrix")))
+        units <- gsub("grid", "", grp.names[i])
         eval(parse(text = paste0(subgroup_obj,
-                                 "[[\"areaNames\"]] <- area.names")))
+                                 "[[\"Dimension_1_units\"]] <- units")))
+      }
 
     }
   }

@@ -4,18 +4,21 @@
 #'
 #' @param filename a \code{string} specifying the name of the hdf5 file
 #' @param component a \code{string} specifying a location within the hdf5 file
-#' @param array a \code{matrix}
-#' @param dimension_names a \code{list} where each element contains the labels
-#' associated with a particular dimension (e.g. element 1 corresponds to
-#' dimension 1, which corresponds to row names) and the name of each element
-#' describes the contents of each dimension (e.g. age classes).
-#' @param dimension_values a \code{list}
-#' @param dimension_units a \code{list}
+#' @param array a \code{matrix} containing the data
+#' @param dimension_names a \code{list} where each element is a vector
+#' containing the labels associated with a particular dimension (e.g.
+#' element 1 corresponds to dimension 1, which corresponds to row names) and
+#' the name of each element describes the contents of each dimension (e.g. age
+#' classes).
+#' @param dimension_values (optional) a \code{list} of values corresponding to
+#' each dimension (e.g. list element 2 corresponds to columns)
+#' @param dimension_units (optional) a \code{list} of units corresponding to
+#' each dimension (e.g. list element 2 corresponds to columns)
 #'
 #' @export
 #'
 #' @examples
-#' filename <- "test.h5"
+#' filename <- "array.h5"
 #' component <- "dz/total"
 #' array <- matrix(1:10, 5)
 #' colnames(array) <- paste0("age", 1:2)
@@ -48,7 +51,6 @@ create_array <- function(filename,
 
   file.h5 <- H5File$new(filename)
   current.groups <- names(file.h5)
-
 
   if(grepl("/", component)) { # If there's a subgroup as well as a group
 
@@ -96,7 +98,6 @@ create_array <- function(filename,
       eval(parse(text = paste0("location[[\"Dimension_", i,
                                "_values\"]] <- dimension_values[[i]]")))
   }
-
 
   if(!missing(dimension_units)) {
     dimensions.with.units <- which(!is.na(dimension_units))

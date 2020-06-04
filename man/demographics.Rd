@@ -5,7 +5,7 @@
 \title{demographics}
 \usage{
 demographics(
-  filename = "demographics",
+  filename = "demographics.h5",
   datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp",
   datazone_path = "data-raw/sape-2018-persons.xlsx",
   grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km", "grid10km"),
@@ -14,5 +14,6 @@ demographics(
 )
 }
 \description{
-Population counts for Scottish datazones in 2018. Contains data from ages 0 to 89 in single year increments, as well as 90+.
+Estimated population by sex, single year of age, 2011 Data Zone area, and
+council area: 30 June 2018.
 }
