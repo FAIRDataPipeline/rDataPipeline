@@ -4,7 +4,7 @@
 \alias{download_from_url}
 \title{download_from_url}
 \usage{
-download_from_url(url, path, store)
+download_from_url(url, path, local)
 }
 \description{
 download_from_url

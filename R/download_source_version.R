@@ -10,14 +10,14 @@ download_source_version <- function(dataset) {
     download_from_url(
       url = "http://sedsh127.sedsh.gov.uk",
       path = "Atom_data/ScotGov/ZippedShapefiles/SG_DataZoneBdry_2011.zip",
-      store = "data-raw/datazone_shapefile")
+      local = "data-raw/datazone_shapefile")
 
   } else if(dataset == "scot_dz_demographics") {
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
       path = file.path("files/statistics/population-estimates",
                        "sape-time-series/persons/sape-2018-persons.xlsx"),
-      store = "data-raw")
+      local = "data-raw")
 
   }else if(dataset == "scot_gov_deaths") {
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
@@ -51,7 +51,8 @@ WHERE {
 }"
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
-                     store = "data-raw")
+                     local = "data-raw",
+                     filename = "deaths-involving-coronavirus-covid-19.csv")
 
   }
 

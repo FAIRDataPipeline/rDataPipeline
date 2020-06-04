@@ -4,7 +4,7 @@
 \alias{download_from_db}
 \title{download_from_db}
 \usage{
-download_from_db(url, path, store)
+download_from_db(url, path, local, filename)
 }
 \description{
 download_from_db

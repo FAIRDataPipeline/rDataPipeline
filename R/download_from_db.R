@@ -1,13 +1,34 @@
 #' download_from_db
 #'
-download_from_db <- function(url, path, store) {
+download_from_db <- function(url, path, local, filename) {
+
+  # Prepare local directory -------------------------------------------------
+
+  # Remove beginning or trailing slashes
+  local <- gsub("^/*", "", local)
+  local <- gsub("/*$", "", local)
+
+  # Extract directory structure
+  directory.structure <- strsplit(local, "/")[[1]]
+
+  levels <- length(directory.structure)
+
+  for(i in seq_along(directory.structure)) {
+    if(i == 1) directory <- directory.structure[1]
+
+    # If the directory doesn't exist then create it
+    if(!file.exists(directory)) dir.create(directory)
+
+    # Identify the next level to be generated
+    if(i %in% seq_along(directory.structure)[-levels])
+      directory <- file.path(directory, directory.structure[i+1])
+  }
+
+  # Save file ---------------------------------------------------------------
 
   # Download file
   dat <- SPARQL::SPARQL(url, path)$results
 
-  # Extract filename
-  filename <- "deaths-involving-coronavirus-covid-19.csv"
-
   # Save file
-  write.csv(dat, file.path(store, filename))
+  write.csv(dat, file.path(local, filename))
 }

@@ -1,13 +1,15 @@
 #' download_from_url
 #'
-download_from_url <- function(url, path, store) {
+download_from_url <- function(url, path, local) {
+
+  # Prepare local directory -------------------------------------------------
 
   # Remove beginning or trailing slashes
-  store <- gsub("^/*", "", store)
-  store <- gsub("/*$", "", store)
+  local <- gsub("^/*", "", local)
+  local <- gsub("/*$", "", local)
 
   # Extract directory structure
-  directory.structure <- strsplit(store, "/")[[1]]
+  directory.structure <- strsplit(local, "/")[[1]]
 
   levels <- length(directory.structure)
 
@@ -21,6 +23,8 @@ download_from_url <- function(url, path, store) {
     if(i %in% seq_along(directory.structure)[-levels])
       directory <- file.path(directory, directory.structure[i+1])
   }
+
+  # Save file ---------------------------------------------------------------
 
   # Extract filename
   filename <- strsplit(paste0("/", path), "/")[[1]]
