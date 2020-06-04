@@ -29,8 +29,8 @@
 #' cells, I have a work-around which is explained in the code.
 #'
 #' @param dat datazone population data
-#' @param datazones
-#' @param dz_subdivisions
+#' @param datazones datazones
+#' @param dz_subdivisions datazone subdivisions
 #'
 dz2grid <- function(dat,
                     datazones,

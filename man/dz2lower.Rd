@@ -7,9 +7,11 @@
 dz2lower(dat, convert_to, conversion_table)
 }
 \arguments{
+\item{dat}{data}
+
 \item{convert_to}{c("dz", "ur", "iz", "la", "hb", "mmw", "spc")}
 
-\item{conversion_table}{}
+\item{conversion_table}{conversion table}
 }
 \description{
 dz2lower

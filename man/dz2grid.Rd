@@ -9,7 +9,9 @@ dz2grid(dat, datazones, dz_subdivisions)
 \arguments{
 \item{dat}{datazone population data}
 
-\item{dz_subdivisions}{}
+\item{datazones}{datazones}
+
+\item{dz_subdivisions}{datazone subdivisions}
 }
 \description{
 This script transforms age class population data from census geographies to

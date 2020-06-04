@@ -1,8 +1,8 @@
 #' dz2lower
 #'
-#' @param dat
+#' @param dat data
 #' @param convert_to c("dz", "ur", "iz", "la", "hb", "mmw", "spc")
-#' @param conversion_table
+#' @param conversion_table conversion table
 #'
 dz2lower <- function(dat, convert_to, conversion_table) {
   # Check that convert_to is valid

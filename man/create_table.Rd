@@ -6,6 +6,19 @@
 \usage{
 create_table(filename, component, df, row_title, row_names, column_units)
 }
+\arguments{
+\item{filename}{a \code{string} specifying the name of the hdf5 file}
+
+\item{component}{a \code{string} specifying a location within the hdf5 file}
+
+\item{df}{a \code{dataframe} containing the data}
+
+\item{row_title}{a \code{string} descriptor of rownames}
+
+\item{row_names}{a \code{vector} of rownames}
+
+\item{column_units}{a \code{vector} comprising column units}
+}
 \description{
-create_table
+Function to populate hdf5 file with array type data.
 }
