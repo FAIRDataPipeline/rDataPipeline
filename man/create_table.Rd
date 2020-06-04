@@ -6,20 +6,6 @@
 \usage{
 create_table(filename, component, df, row_title, row_names, column_units)
 }
-\arguments{
-\item{filename}{a \code{string} specifying the name of the hdf5 file}
-
-\item{component}{a \code{string} specifying a location within the hdf5 file}
-
-\item{df}{a \code{dataframe} containing the data}
-
-\item{row_title}{(optional) a \code{string} descriptor for rownames}
-
-\item{row_names}{(optional) a vector of rownames}
-
-\item{column_units}{(optional) a \code{vector} where each element describes
-the units of the corresponding column}
-}
 \description{
-Function to populate hdf5 file with table type data.
+create_table
 }

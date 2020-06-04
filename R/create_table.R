@@ -1,15 +1,4 @@
 #' create_table
-#'
-#' Function to populate hdf5 file with table type data.
-#'
-#' @param filename a \code{string} specifying the name of the hdf5 file
-#' @param component a \code{string} specifying a location within the hdf5 file
-#' @param df a \code{dataframe} containing the data
-#' @param row_title (optional) a \code{string} descriptor for rownames
-#' @param row_names (optional) a vector of rownames
-#' @param column_units (optional) a \code{vector} where each element describes
-#' the units of the corresponding column
-#'
 #' @export
 #'
 create_table <- function(filename,
