@@ -2,25 +2,25 @@
 #'
 #' @param dat
 #' @param convert_to c("dz", "ur", "iz", "la", "hb", "mmw", "spc")
-#' @param conversion.table
+#' @param conversion_table
 #'
-dz2lower <- function(dat, convert_to, conversion.table) {
+dz2lower <- function(dat, convert_to, conversion_table) {
   # Check that convert_to is valid
-  assertthat::assert_that(toupper(convert_to) %in% (colnames(conversion.table) %>%
+  assertthat::assert_that(toupper(convert_to) %in% (colnames(conversion_table) %>%
                                                       .[grepl("name$", .)] %>%
                                                       gsub("name", "", .)))
 
   # Check that all dat datazones are in the lookup table
   assertthat::assert_that(all(dat$datazone %in%
-                                conversion.table$DZcode))
+                                conversion_table$DZcode))
 
   # Convert datazones
   regex <- paste0("DZ|", toupper(convert_to))
-  columns <- colnames(conversion.table) %>% .[grepl(regex, .)]
+  columns <- colnames(conversion_table) %>% .[grepl(regex, .)]
   target.code <- paste0(toupper(convert_to), "code")
   target.name <- paste0(toupper(convert_to), "name")
 
-  subset.table <- conversion.table %>%
+  subset.table <- conversion_table %>%
     dplyr::select(dplyr::contains(columns))
 
 

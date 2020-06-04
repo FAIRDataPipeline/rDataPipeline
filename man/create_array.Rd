@@ -36,7 +36,7 @@ each dimension (e.g. list element 2 corresponds to columns)}
 Function to populate hdf5 file with array type data.
 }
 \examples{
-\donttest{
+\dontrun{
 filename <- "array.h5"
 component <- "dz/total"
 array <- matrix(1:10, 5)

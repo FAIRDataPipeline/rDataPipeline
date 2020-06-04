@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' filename <- "table.h5"
 #' component <- "dz/total"
 #' df <- cbind.data.frame(animals = c("duck", "sheep"), count = c(222, 3))

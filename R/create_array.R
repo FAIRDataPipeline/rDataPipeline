@@ -18,7 +18,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' filename <- "array.h5"
 #' component <- "dz/total"
 #' array <- matrix(1:10, 5)

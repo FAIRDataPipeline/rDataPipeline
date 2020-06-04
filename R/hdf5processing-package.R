@@ -8,6 +8,7 @@
 #'
 #' @importFrom assertthat assert_that
 #' @import dplyr
+#' @import hdf5r
 #' @import readxl
 #' @import sf
 #' @import tibble

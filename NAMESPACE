@@ -2,8 +2,8 @@
 
 export(create_array)
 export(create_table)
-export(demographics)
 import(dplyr)
+import(hdf5r)
 import(readxl)
 import(sf)
 import(tibble)

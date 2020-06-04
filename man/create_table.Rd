@@ -24,7 +24,7 @@ the units of the corresponding column}
 Function to populate hdf5 file with table type data.
 }
 \examples{
-\donttest{
+\dontrun{
 filename <- "table.h5"
 component <- "dz/total"
 df <- cbind.data.frame(animals = c("duck", "sheep"), count = c(222, 3))
