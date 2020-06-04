@@ -14,6 +14,8 @@
 #' each dimension (e.g. list element 2 corresponds to columns)
 #' @param dimension_units (optional) a \code{list} of units corresponding to
 #' each dimension (e.g. list element 2 corresponds to columns)
+#' @param units (optional) a \code{string} specifying the units of the data as
+#' a whole
 #'
 #' @export
 #'
@@ -29,9 +31,10 @@
 #'
 #' dimension_values <- list(NA, data.frame(x = 1:2, y = 3:4))
 #' dimension_units <- list(NA, "apples")
+#' units <- "seconds"
 #'
 #' create_array(filename, component, array, dimension_names,
-#' dimension_values, dimension_units)
+#' dimension_values, dimension_units, units)
 #'
 #' file.h5 <- H5File$new(filename)
 #' file.h5$ls(recursive = TRUE)
@@ -41,6 +44,7 @@
 #' file.h5[["dz/total/Dimension_2_title"]][]
 #' file.h5[["dz/total/Dimension_2_units"]][]
 #' file.h5[["dz/total/Dimension_2_values"]][]
+#' file.h5[["dz/total/units"]][]
 #' file.h5$close_all()
 #' }
 #'
@@ -49,7 +53,8 @@ create_array <- function(filename,
                          array,
                          dimension_names,
                          dimension_values,
-                         dimension_units) {
+                         dimension_units,
+                         units) {
 
   file.h5 <- H5File$new(filename)
   current.groups <- names(file.h5)
@@ -108,6 +113,9 @@ create_array <- function(filename,
       eval(parse(text = paste0("location[[\"Dimension_", i,
                                "_units\"]] <- dimension_units[[i]]")))
   }
+
+  if(!missing(units))
+      eval(parse(text = paste0("location[[\"units\"]] <- units")))
 
   file.h5$close_all()
 }

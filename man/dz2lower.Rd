@@ -4,12 +4,12 @@
 \alias{dz2lower}
 \title{dz2lower}
 \usage{
-dz2lower(dat, convert_to, conversion.table)
+dz2lower(dat, convert_to, conversion_table)
 }
 \arguments{
 \item{convert_to}{c("dz", "ur", "iz", "la", "hb", "mmw", "spc")}
 
-\item{conversion.table}{}
+\item{conversion_table}{}
 }
 \description{
 dz2lower

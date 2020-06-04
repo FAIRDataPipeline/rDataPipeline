@@ -10,7 +10,8 @@ create_array(
   array,
   dimension_names,
   dimension_values,
-  dimension_units
+  dimension_units,
+  units
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ each dimension (e.g. list element 2 corresponds to columns)}
 
 \item{dimension_units}{(optional) a \code{list} of units corresponding to
 each dimension (e.g. list element 2 corresponds to columns)}
+
+\item{units}{(optional) a \code{string} specifying the units of the data as
+a whole}
 }
 \description{
 Function to populate hdf5 file with array type data.
@@ -47,9 +51,10 @@ dimension_names <- list(`age classes` = colnames(array),
 
 dimension_values <- list(NA, data.frame(x = 1:2, y = 3:4))
 dimension_units <- list(NA, "apples")
+units <- "seconds"
 
 create_array(filename, component, array, dimension_names,
-dimension_values, dimension_units)
+dimension_values, dimension_units, units)
 
 file.h5 <- H5File$new(filename)
 file.h5$ls(recursive = TRUE)
@@ -59,6 +64,7 @@ file.h5[["dz/total/Dimension_2_names"]][]
 file.h5[["dz/total/Dimension_2_title"]][]
 file.h5[["dz/total/Dimension_2_units"]][]
 file.h5[["dz/total/Dimension_2_values"]][]
+file.h5[["dz/total/units"]][]
 file.h5$close_all()
 }
 
