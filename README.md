@@ -50,11 +50,11 @@ component <- "dz/total"
 array <- matrix(1:10, 5)
 colnames(array) <- paste0("age", 1:2)
 rownames(array) <- paste0("dz", 1:5)
-dimension_names <- list(`age classes` = colnames(array), 
-`area names` = rownames(array))
+dimension_names <- list(`area names` = rownames(array), 
+`age classes` = colnames(array))
 
 dimension_values <- list(NA, data.frame(x = 1:2, y = 3:4))
-dimension_units <- list(NA, "apples")
+dimension_units <- list("10km", "5years")
 
 create_array(filename, component, array, dimension_names, dimension_values,
 dimension_units)
