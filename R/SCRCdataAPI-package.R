@@ -1,9 +1,9 @@
-#' hdf5processing
+#' SCRCdataAPI
 #'
 #' Functions to generate and process hd5f files
 #'
-#' @name hdf5processing-package
-#' @aliases hdf5processing
+#' @name SCRCdataAPI-package
+#' @aliases SCRCdataAPI
 #' @docType package
 #'
 #' @importFrom assertthat assert_that

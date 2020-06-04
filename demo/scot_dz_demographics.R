@@ -1,0 +1,15 @@
+#' Small Area Population Estimates 2018. Estimated population by sex,
+#' single year of age, 2011 Data Zone area, and council area: 30 June 2018.
+#'
+#' https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/2011-based-special-area-population-estimates/small-area-population-estimates/time-series
+#'
+
+library(SCRCdataAPI)
+
+# Download source data
+download_source_version(dataset = "scot_dz_demographics")
+
+# Process data and generate hdf5 file
+process_scot_dz_demographics(sourcefile = "data-raw/sape-2018-persons.xlsx",
+                             h5filename = "demographics.h5")
+

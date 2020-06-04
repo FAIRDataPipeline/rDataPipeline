@@ -2,6 +2,9 @@
 
 export(create_array)
 export(create_table)
+export(download_source_version)
+export(process_scot_dz_demographics)
+export(process_scot_gov_deaths)
 import(dplyr)
 import(hdf5r)
 import(readxl)

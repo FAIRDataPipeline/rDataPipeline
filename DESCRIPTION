@@ -1,4 +1,4 @@
-Package: hdf5processing
+Package: SCRCdataAPI
 Title: Functions to generate and process hd5f files 
 Version: 1.0
 Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
