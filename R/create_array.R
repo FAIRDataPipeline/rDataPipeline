@@ -1,9 +1,14 @@
 #' create_array
 #'
-#' @param filename a \code{string} specifying the name of the h5 file
-#' @param component a \code{string} specifying a location within the h5 file
+#' Function to populate hdf5 file with array type data.
+#'
+#' @param filename a \code{string} specifying the name of the hdf5 file
+#' @param component a \code{string} specifying a location within the hdf5 file
 #' @param array a \code{matrix}
-#' @param dimension_names a \code{list}
+#' @param dimension_names a \code{list} where each element contains the labels
+#' associated with a particular dimension (e.g. element 1 corresponds to
+#' dimension 1, which corresponds to row names) and the name of each element
+#' describes the contents of each dimension (e.g. age classes).
 #' @param dimension_values a \code{list}
 #' @param dimension_units a \code{list}
 #'
