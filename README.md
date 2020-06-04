@@ -1,14 +1,16 @@
-## demographics_aggregation_scrc
+## hdf5processing
 
+Functions to generate and process hd5f files.
+
+To install:
 ```{r}
-library(rhdf5)
-library(dplyr)
-
-h5filename <- "demographics.h5"
+library(devtools)
+install_github("ScottishCovidResponse/hdf5processing")
 ```
-scotland_2018 group
+
+To generate hdf5 files in R:
 ```{r}
-h5ls(h5filename)
+library(hdf5r)
 ```
 
 scotland_2018 group attributes

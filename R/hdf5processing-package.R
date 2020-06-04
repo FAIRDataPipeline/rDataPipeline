@@ -1,9 +1,9 @@
-#' demographicData
+#' hdf5processing
 #'
-#' scrc demographicData package
+#' Functions to generate and process hd5f files
 #'
-#' @name demographicData-package
-#' @aliases demographicData
+#' @name hdf5processing-package
+#' @aliases hdf5processing
 #' @docType package
 #'
 #' @importFrom assertthat assert_that
