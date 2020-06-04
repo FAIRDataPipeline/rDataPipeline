@@ -5,7 +5,7 @@
 process_scot_dz_demographics <- function(sourcefile, h5filename) {
 
   # Input parameters
-  datazone_sf = "data-raw/shapefiles/SG_DataZone_Bdry_2011.shp"
+  datazone_sf = "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
   grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
                 "grid10km")
   subgrp.names = c("total", "1year", "5year", "10year")
