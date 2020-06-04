@@ -39,33 +39,3 @@ a whole}
 \description{
 Function to populate hdf5 file with array type data.
 }
-\examples{
-\dontrun{
-filename <- "array.h5"
-component <- "dz/total"
-array <- matrix(1:10, 5)
-colnames(array) <- paste0("age", 1:2)
-rownames(array) <- paste0("dz", 1:5)
-dimension_names <- list(`age classes` = colnames(array),
-`area names` = rownames(array))
-
-dimension_values <- list(NA, data.frame(x = 1:2, y = 3:4))
-dimension_units <- list(NA, "apples")
-units <- "seconds"
-
-create_array(filename, component, array, dimension_names,
-dimension_values, dimension_units, units)
-
-file.h5 <- H5File$new(filename)
-file.h5$ls(recursive = TRUE)
-file.h5[["dz/total/Dimension_1_names"]][]
-file.h5[["dz/total/Dimension_1_title"]][]
-file.h5[["dz/total/Dimension_2_names"]][]
-file.h5[["dz/total/Dimension_2_title"]][]
-file.h5[["dz/total/Dimension_2_units"]][]
-file.h5[["dz/total/Dimension_2_values"]][]
-file.h5[["dz/total/units"]][]
-file.h5$close_all()
-}
-
-}

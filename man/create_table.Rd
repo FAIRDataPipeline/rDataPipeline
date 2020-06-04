@@ -23,18 +23,3 @@ the units of the corresponding column}
 \description{
 Function to populate hdf5 file with table type data.
 }
-\examples{
-\dontrun{
-filename <- "table.h5"
-component <- "dz/total"
-df <- cbind.data.frame(animals = c("duck", "sheep"), count = c(222, 3))
-
-create_table(filename, component, df)
-
-file.h5 <- H5File$new(filename)
-file.h5$ls(recursive = TRUE)
-file.h5[["dz/total/table"]][]
-file.h5$close_all()
-}
-
-}
