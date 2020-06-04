@@ -15,7 +15,7 @@ create_table(filename, component, df, row_title, row_names, column_units)
 
 \item{row_title}{(optional) a \code{string} descriptor for rownames}
 
-\item{row_names}{(optional) a vector of \code rownames}
+\item{row_names}{(optional) a vector of \code{rownames}}
 
 \item{column_units}{(optional) a \code{vector} where each element describes
 the units of the corresponding column}
