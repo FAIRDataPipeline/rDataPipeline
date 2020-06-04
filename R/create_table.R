@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' filename <- "table.h5"
 #' component <- "dz/total"
 #' df <- cbind.data.frame(animals = c("duck", "sheep"), count = c(222, 3))
@@ -22,6 +23,7 @@
 #' file.h5$ls(recursive = TRUE)
 #' file.h5[["dz/total/table"]][]
 #' file.h5$close_all()
+#' }
 #'
 create_table <- function(filename,
                          component,

@@ -18,6 +18,7 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' filename <- "array.h5"
 #' component <- "dz/total"
 #' array <- matrix(1:10, 5)
@@ -41,6 +42,7 @@
 #' file.h5[["dz/total/Dimension_2_units"]][]
 #' file.h5[["dz/total/Dimension_2_values"]][]
 #' file.h5$close_all()
+#' }
 #'
 create_array <- function(filename,
                          component,
