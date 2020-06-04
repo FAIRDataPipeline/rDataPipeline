@@ -18,7 +18,7 @@ download_source_version(dataset = "scot_gov_deaths")
 
 # Process data and generate hdf5 file
 sourcefile <- "data-raw/deaths-involving-coronavirus-covid-19.csv"
-h5filename <- "data-raw/deaths-involving-coronavirus-covid-19.h5"
+h5filename <- "deaths-involving-coronavirus-covid-19.h5"
 process_scot_gov_deaths(sourcefile = sourcefile,
                         h5filename = h5filename)
 
