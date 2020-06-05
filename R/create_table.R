@@ -2,7 +2,7 @@
 #'
 #' Function to populate hdf5 file with array type data.
 #'
-#' @param filename a \code{string} specifying the name of the hdf5 file
+#' @param h5filename a \code{string} specifying the name of the hdf5 file
 #' @param component a \code{string} specifying a location within the hdf5 file
 #' @param df a \code{dataframe} containing the data
 #' @param row_title a \code{string} descriptor of rownames
@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-create_table <- function(filename,
+create_table <- function(h5filename,
                          component,
                          df,
                          row_title,
@@ -20,7 +20,7 @@ create_table <- function(filename,
 
   # Generate hdf5 structure
 
-  file.h5 <- H5File$new(filename)
+  file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)

@@ -2,7 +2,7 @@
 #'
 #' Function to populate hdf5 file with array type data.
 #'
-#' @param filename a \code{string} specifying the name of the hdf5 file
+#' @param h5filename a \code{string} specifying the name of the hdf5 file
 #' @param component a \code{string} specifying a location within the hdf5 file
 #' @param array a \code{matrix} containing the data
 #' @param dimension_names a \code{list} where each element is a vector
@@ -19,7 +19,7 @@
 #'
 #' @export
 #'
-create_array <- function(filename,
+create_array <- function(h5filename,
                          component,
                          array,
                          dimension_names,
@@ -29,7 +29,7 @@ create_array <- function(filename,
 
   # Generate hdf5 structure
 
-  file.h5 <- H5File$new(filename)
+  file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)
@@ -45,38 +45,40 @@ create_array <- function(filename,
     tmp.groups <- names(file.h5[[tmp.path]])
   }
 
+
+
   # Attach data
-  location[["array"]] <- array
+  file.h5[[file.path(component, "array")]] <- array
 
   dimension_titles <- names(dimension_names)
 
   # Attach row attributes
-  location[["Dimension_1_title"]] <- dimension_titles[1]
-  location[["Dimension_1_names"]] <- dimension_names[[1]]
+  file.h5[[file.path(component, "Dimension_1_title")]] <- dimension_titles[1]
+  file.h5[[file.path(component, "Dimension_1_names")]] <- dimension_names[[1]]
 
   # Attach column atttributes
-  location[["Dimension_2_title"]] <- dimension_titles[2]
-  location[["Dimension_2_names"]] <- dimension_names[[2]]
+  file.h5[[file.path(component, "Dimension_2_title")]] <- dimension_titles[2]
+  file.h5[[file.path(component, "Dimension_2_names")]] <- dimension_names[[2]]
 
   # Attach additional attributes
   if(!missing(dimension_values)) {
     dimensions.with.values <- which(!is.na(dimension_values))
 
     for(i in dimensions.with.values)
-      eval(parse(text = paste0("location[[\"Dimension_", i,
-                               "_values\"]] <- dimension_values[[i]]")))
+      eval(parse(text = paste0("file.h5[[file.path(component, \"Dimension_", i,
+                               "_values\")]] <- dimension_values[[i]]")))
   }
 
   if(!missing(dimension_units)) {
     dimensions.with.units <- which(!is.na(dimension_units))
 
     for(i in dimensions.with.units)
-      eval(parse(text = paste0("location[[\"Dimension_", i,
-                               "_units\"]] <- dimension_units[[i]]")))
+      eval(parse(text = paste0("file.h5[[file.path(component, \"Dimension_", i,
+                               "_units\")]] <- dimension_units[[i]]")))
   }
 
   if(!missing(units))
-    eval(parse(text = paste0("location[[\"units\"]] <- units")))
+    eval(parse(text = paste0("file.h5[[file.path(component, \"units\")]] <- units")))
 
   file.h5$close_all()
 }
