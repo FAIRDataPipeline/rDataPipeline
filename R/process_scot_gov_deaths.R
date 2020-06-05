@@ -29,7 +29,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ date, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c("covid_deaths_per_week_by_nhsboard")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_nhsboard",
+               array = as.matrix(covid_deaths_per_week_by_nhsboard),
+               dimension_names = list(
+                 `health board` = rownames(covid_deaths_per_week_by_nhsboard),
+                 `week commencing` = colnames(covid_deaths_per_week_by_nhsboard)))
 
   # don't include
   covid_deaths_by_nhsboard <- cd_total %>%
@@ -43,7 +49,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ date, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "covid_deaths_per_week_by_councilarea")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_councilarea",
+               array = as.matrix(covid_deaths_per_week_by_councilarea),
+               dimension_names = list(
+                 `council area` = rownames(covid_deaths_per_week_by_councilarea),
+                 `week commencing` = colnames(covid_deaths_per_week_by_councilarea)))
 
   # don't include
   covid_deaths_by_councilarea <- cd_total %>%
@@ -64,21 +76,39 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::filter(gender == "Female") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_f")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_agegroup/female",
+               array = as.matrix(covid_deaths_per_week_by_agegroup_f),
+               dimension_names = list(
+                 `age group` = rownames(covid_deaths_per_week_by_agegroup_f),
+                 `week commencing` = colnames(covid_deaths_per_week_by_agegroup_f)))
 
   # dataset 4 - covid_deaths_per_week_by_agegroup_m
   covid_deaths_per_week_by_agegroup_m <- covid_deaths_per_week_by_agegroup %>%
     dplyr::filter(gender == "Male") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_m")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_agegroup/male",
+               array = as.matrix(covid_deaths_per_week_by_agegroup_m),
+               dimension_names = list(
+                 `age group` = rownames(covid_deaths_per_week_by_agegroup_m),
+                 `week commencing` = colnames(covid_deaths_per_week_by_agegroup_m)))
 
   # dataset 5 - covid_deaths_per_week_by_agegroup_all
   covid_deaths_per_week_by_agegroup_all <- covid_deaths_per_week_by_agegroup %>%
     dplyr::filter(gender == "All") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_all")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_agegroup/all",
+               array = as.matrix(covid_deaths_per_week_by_agegroup_all),
+               dimension_names = list(
+                 `age group` = rownames(covid_deaths_per_week_by_agegroup_all),
+                 `week commencing` = colnames(covid_deaths_per_week_by_agegroup_all)))
 
   cd_week_allages <- cd_week_country %>%
     dplyr::filter(age == "All")
@@ -89,7 +119,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(location ~ date, value.var = "count") %>%
     tibble::column_to_rownames("location")
-  datasets <- c(datasets, "covid_deaths_per_week_by_location")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/per_week/by_location",
+               array = as.matrix(covid_deaths_per_week_by_location),
+               dimension_names = list(
+                 `location` = rownames(covid_deaths_per_week_by_location),
+                 `week commencing` = colnames(covid_deaths_per_week_by_location)))
 
   # don't include
   covid_deaths_per_week <- cd_week_allages %>%
@@ -121,7 +157,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ date, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "all_deaths_per_week_by_nhsboard")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_nhsboard",
+               array = as.matrix(all_deaths_per_week_by_nhsboard),
+               dimension_names = list(
+                 `health board` = rownames(all_deaths_per_week_by_nhsboard),
+                 `week commencing` = colnames(all_deaths_per_week_by_nhsboard)))
 
   # don't include
   all_deaths_by_nhsboard <- ad_total %>%
@@ -135,7 +177,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ date, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "all_deaths_per_week_by_councilarea")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_councilarea",
+               array = as.matrix(all_deaths_per_week_by_councilarea),
+               dimension_names = list(
+                 `council area` = rownames(all_deaths_per_week_by_councilarea),
+                 `week commencing` = colnames(all_deaths_per_week_by_councilarea)))
 
   # don't include
   all_deaths_by_councilarea <- ad_total %>%
@@ -156,21 +204,39 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::filter(gender == "Female") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_f")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_agegroup/female",
+               array = as.matrix(all_deaths_per_week_by_agegroup_f),
+               dimension_names = list(
+                 `age group` = rownames(all_deaths_per_week_by_agegroup_f),
+                 `week commencing` = colnames(all_deaths_per_week_by_agegroup_f)))
 
   # dataset 10 - all_deaths_per_week_by_agegroup_m
   all_deaths_per_week_by_agegroup_m <- all_deaths_per_week_by_agegroup %>%
     dplyr::filter(gender == "Male") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_m")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_agegroup/male",
+               array = as.matrix(all_deaths_per_week_by_agegroup_m),
+               dimension_names = list(
+                 `age group` = rownames(all_deaths_per_week_by_agegroup_m),
+                 `week commencing` = colnames(all_deaths_per_week_by_agegroup_m)))
 
   # dataset 11 - all_deaths_per_week_by_agegroup_all
   all_deaths_per_week_by_agegroup_all <- all_deaths_per_week_by_agegroup %>%
     dplyr::filter(gender == "All") %>%
     reshape2::dcast(age ~ date, value.var = "count") %>%
     tibble::column_to_rownames("age")
-  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_all")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_agegroup/all",
+               array = as.matrix(all_deaths_per_week_by_agegroup_all),
+               dimension_names = list(
+                 `age group` = rownames(all_deaths_per_week_by_agegroup_all),
+                 `week commencing` = colnames(all_deaths_per_week_by_agegroup_all)))
 
   ad_week_allages <- ad_week_country %>%
     dplyr::filter(age == "All")
@@ -181,7 +247,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(location ~ date, value.var = "count") %>%
     tibble::column_to_rownames("location")
-  datasets <- c(datasets, "all_deaths_per_week_by_location")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/by_location",
+               array = as.matrix(all_deaths_per_week_by_location),
+               dimension_names = list(
+                 `location` = rownames(all_deaths_per_week_by_location),
+                 `week commencing` = colnames(all_deaths_per_week_by_location)))
 
   # don't include
   all_deaths_per_week <- ad_week_allages %>%
@@ -197,7 +269,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(. ~ date, value.var = "count") %>%
     dplyr::select(-`.`)
-  datasets <- c(datasets, "all_deaths_per_week_averaged_over_5years")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/per_week/averaged_over_5years",
+               array = as.matrix(all_deaths_per_week_averaged_over_5years),
+               dimension_names = list(
+                 `total` = rownames(all_deaths_per_week_averaged_over_5years),
+                 `week commencing` = colnames(all_deaths_per_week_averaged_over_5years)))
 
   # don't include
   all_deaths_year_to_date <- ad_total %>%
@@ -215,7 +293,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ location, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "covid_deaths_by_nhsboard_and_location")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/nhsboard_vs_location",
+               array = as.matrix(covid_deaths_by_nhsboard_and_location),
+               dimension_names = list(
+                 `health board` = rownames(covid_deaths_by_nhsboard_and_location),
+                 `location` = colnames(covid_deaths_by_nhsboard_and_location)))
 
   # dataset 15 - all_deaths_by_nhsboard_and_location
   all_deaths_by_nhsboard_and_location <- ad_total %>%
@@ -224,7 +308,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ location, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "all_deaths_by_nhsboard_and_location")
+
+  create_array(h5filename = h5filename,
+               component = "all_deaths/nhsboard_vs_location",
+               array = as.matrix(all_deaths_by_nhsboard_and_location),
+               dimension_names = list(
+                 `health board` = rownames(all_deaths_by_nhsboard_and_location),
+                 `location` = colnames(all_deaths_by_nhsboard_and_location)))
 
   # dataset 16 - covid_deaths_by_councilarea_and_location
   covid_deaths_by_councilarea_and_location <- cd_total %>%
@@ -233,7 +323,13 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ location, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "covid_deaths_by_councilarea_and_location")
+
+  create_array(h5filename = h5filename,
+               component = "covid_related_deaths/councilarea_vs_location",
+               array = as.matrix(covid_deaths_by_councilarea_and_location),
+               dimension_names = list(
+                 `council area` = rownames(covid_deaths_by_councilarea_and_location),
+                 `location` = colnames(covid_deaths_by_councilarea_and_location)))
 
   # dataset 17 - all_deaths_by_councilarea_and_location
   all_deaths_by_councilarea_and_location <- ad_total %>%
@@ -242,19 +338,12 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(featurecode ~ location, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
-  datasets <- c(datasets, "all_deaths_by_councilarea_and_location")
 
-
-  # -------------------------------------------------------------------------
-
-  # Populate hdf5 file
-  for(i in seq_along(datasets)) {
-    create_array(h5filename = h5filename,
-                 component = datasets[i],
-                 array = as.matrix(get(datasets[i])),
-                 dimension_names = list(
-                   `feature names` = rownames(get(datasets[i])),
-                   `week commencing` = colnames(get(datasets[i]))))
-  }
+  create_array(h5filename = h5filename,
+               component = "all_deaths/councilarea_vs_location",
+               array = as.matrix(all_deaths_by_councilarea_and_location),
+               dimension_names = list(
+                 `council area` = rownames(all_deaths_by_councilarea_and_location),
+                 `location` = colnames(all_deaths_by_councilarea_and_location)))
 
 }
