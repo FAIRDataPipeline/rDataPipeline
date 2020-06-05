@@ -10,7 +10,9 @@ library(SCRCdataAPI)
 download_source_version(dataset = "scot_dz_demographics")
 
 # Process data and generate hdf5 file
-sourcefile <- "data-raw/sape-2018-persons.xlsx"
+sourcefile <- c("data-raw/sape-2018-persons.xlsx",
+                "data-raw/sape-2018-females.xlsx",
+                "data-raw/sape-2018-males.xlsx")
 h5filename <- "demographics.h5"
 process_scot_dz_demographics(sourcefile = sourcefile,
                              h5filename = h5filename)
