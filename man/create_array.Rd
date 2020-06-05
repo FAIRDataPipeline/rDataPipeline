@@ -5,7 +5,7 @@
 \title{create_array}
 \usage{
 create_array(
-  filename,
+  h5filename,
   component,
   array,
   dimension_names,
@@ -15,7 +15,7 @@ create_array(
 )
 }
 \arguments{
-\item{filename}{a \code{string} specifying the name of the hdf5 file}
+\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file}
 

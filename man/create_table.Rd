@@ -4,10 +4,10 @@
 \alias{create_table}
 \title{create_table}
 \usage{
-create_table(filename, component, df, row_title, row_names, column_units)
+create_table(h5filename, component, df, row_title, row_names, column_units)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the name of the hdf5 file}
+\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file}
 
