@@ -217,26 +217,11 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
 
   # -------------------------------------------------------------------------
 
-
-  # Create hdf5 file
-  file.h5 <- H5File$new(h5filename, mode = "w")
-
-
   # Create groups
-  grp.names <- datasets
-  grp.objects <- paste0(tolower(grp.names), ".grp")
-  for(i in seq_along(datasets))
-    assign(grp.objects[i], file.h5$create_group(grp.names[i]))
-
-
-  for (i in seq_along(datasets)) {
-    # Attach datasets
-    eval(parse(text = paste0(grp.objects[i],
-                             "[[\"dataset\"]] <- get(datasets[i])")))
-    # Attach colnames
-    eval(parse(text = paste0(grp.objects[i], "[[\"colNames\"]] <- ",
-                             "colnames(get(datasets[i]))")))
+  for(i in seq_along(datasets)) {
+    create_table(h5filename,
+                 datasets[i],
+                 get(datasets[i]))
   }
 
-  file.h5$close_all()
 }
