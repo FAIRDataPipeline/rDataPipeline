@@ -11,9 +11,6 @@ install_github("ScottishCovidResponse/SCRCdataAPI")
 In the following example, we will populate "array.h5" with array type data downloaded from `https://github.com/ScottishCovidResponse/simple_network_sim/blob/master/sample_output_files/sample-1591198608.csv`. The component path is input via the 
 `component` argument, e.g. group `dz`, subgroup `total`. 
 
-If you want to populate a group directly, simply enter the name of your chosen group into the component argument. Currently, only 2 group levels are supported. If you require more, let me know.
-
-
 ```{r}
 download.file("https://github.com/ScottishCovidResponse/simple_network_sim/raw/master/sample_output_files/sample-1591198608.csv", "sample.csv")
 sample <- read.csv("sample.csv")
