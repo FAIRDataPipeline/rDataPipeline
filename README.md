@@ -1,6 +1,6 @@
-## hdf5processing
+## SCRCdataAPI
 
-Functions to generate and process hd5f files.
+Functions to generate and process data files for the SCRC data pipeline.
 
 To install:
 ```{r}
