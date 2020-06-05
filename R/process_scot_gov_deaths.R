@@ -17,20 +17,21 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
 
   cd_week <- covid_deaths %>%
     dplyr::filter(date != "2020") %>%
-    dplyr::mutate(date = gsub("^w/c", "", date))
+    dplyr::mutate(date = gsub("^w/c ", "", date))
 
   cd_total <- covid_deaths %>%
     dplyr::filter(date == "2020") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
 
-  # dataset 1 - covid_deaths_per_week_by_nhsboard
+  # dataset 1 - Covid related deaths per week by NHS Health Board Area
   covid_deaths_per_week_by_nhsboard <- cd_week %>%
     dplyr::filter(areatypename == "Health Board Areas") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c("covid_deaths_per_week_by_nhsboard")
-  description <- c("Covid related deaths per week by NHS Health Board Area")
 
-  # dataset (nhsboard - year to date)
+  # don't include
   covid_deaths_by_nhsboard <- cd_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location == "All") %>%
@@ -39,11 +40,12 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   # dataset 2 - covid_deaths_per_week_by_councilarea
   covid_deaths_per_week_by_councilarea <- cd_week %>%
     dplyr::filter(areatypename == "Council Areas") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "covid_deaths_per_week_by_councilarea")
-  description <- c(description, "Covid related deaths per week by Council Area")
 
-  # dataset (councilarea - year to date)
+  # don't include
   covid_deaths_by_councilarea <- cd_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location == "All") %>%
@@ -53,41 +55,50 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::filter(areatypename == "Country") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
 
-  # dataset 3 - covid_deaths_per_week_by_agegroup
   covid_deaths_per_week_by_agegroup <- cd_week_country %>%
     dplyr::filter(age != "All") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
-  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup")
-  description <- c(description, "Covid related deaths per week by age group")
+
+  # dataset 3 - covid_deaths_per_week_by_agegroup_f
+  covid_deaths_per_week_by_agegroup_f <- covid_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "Female") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_f")
+
+  # dataset 4 - covid_deaths_per_week_by_agegroup_m
+  covid_deaths_per_week_by_agegroup_m <- covid_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "Male") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_m")
+
+  # dataset 5 - covid_deaths_per_week_by_agegroup_all
+  covid_deaths_per_week_by_agegroup_all <- covid_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "All") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "covid_deaths_per_week_by_agegroup_all")
 
   cd_week_allages <- cd_week_country %>%
     dplyr::filter(age == "All")
 
-  # dataset 4 - covid_deaths_per_week_by_location
+  # dataset 6 - covid_deaths_per_week_by_location
   covid_deaths_per_week_by_location <- cd_week_allages %>%
     dplyr::filter(location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(location ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("location")
   datasets <- c(datasets, "covid_deaths_per_week_by_location")
-  description <- c(description, "Total Covid related deaths per week by location")
 
-  # dataset 5 - covid_deaths_per_week
+  # don't include
   covid_deaths_per_week <- cd_week_allages %>%
     dplyr::filter(location == "All")
-  datasets <- c(datasets, "covid_deaths_per_week")
-  description <- c(description, "Total Covid related deaths per week")
 
-  # dataset (total & persons - year to date)
+  # don't include
   covid_deaths_year_to_date <- cd_total %>%
     dplyr::filter(areatypename == "Country") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
-
-  assertthat::assert_that(nrow(cd_week) ==
-                            (nrow(covid_deaths_per_week_by_nhsboard) +
-                               nrow(covid_deaths_per_week_by_councilarea) +
-                               nrow(covid_deaths_per_week_by_agegroup) +
-                               nrow(covid_deaths_per_week_by_location) +
-                               nrow(covid_deaths_per_week)))
-
 
 
   # All deaths --------------------------------------------------------------
@@ -104,27 +115,29 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::filter(date == "2020") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
 
-  # dataset 6 - all_deaths_per_week_by_nhsboard
+  # dataset 7 - all_deaths_per_week_by_nhsboard
   all_deaths_per_week_by_nhsboard <- ad_week %>%
     dplyr::filter(areatypename == "Health Board Areas") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "all_deaths_per_week_by_nhsboard")
-  description <- c(description, "All deaths by NHS Health Board Area")
 
-  # dataset (nhsboard - year to date)
+  # don't include
   all_deaths_by_nhsboard <- ad_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location == "All") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
 
-  # dataset 7 - all_deaths_per_week_by_councilarea
+  # dataset 8 - all_deaths_per_week_by_councilarea
   all_deaths_per_week_by_councilarea <- ad_week %>%
     dplyr::filter(areatypename == "Council Areas") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "all_deaths_per_week_by_councilarea")
-  description <- c(description, "All deaths by Council Area")
 
-  # dataset (councilarea - year to date)
+  # don't include
   all_deaths_by_councilarea <- ad_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location == "All") %>%
@@ -134,99 +147,114 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::filter(areatypename == "Country") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
 
-  # dataset 8 - all_deaths_per_week_by_agegroup
   all_deaths_per_week_by_agegroup <- ad_week_country %>%
     dplyr::filter(age != "All") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
-  datasets <- c(datasets, "all_deaths_per_week_by_agegroup")
-  description <- c(description, "All deaths by age group")
+
+  # dataset 9 - all_deaths_per_week_by_agegroup_f
+  all_deaths_per_week_by_agegroup_f <- all_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "Female") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_f")
+
+  # dataset 10 - all_deaths_per_week_by_agegroup_m
+  all_deaths_per_week_by_agegroup_m <- all_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "Male") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_m")
+
+  # dataset 11 - all_deaths_per_week_by_agegroup_all
+  all_deaths_per_week_by_agegroup_all <- all_deaths_per_week_by_agegroup %>%
+    dplyr::filter(gender == "All") %>%
+    reshape2::dcast(age ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("age")
+  datasets <- c(datasets, "all_deaths_per_week_by_agegroup_all")
 
   ad_week_allages <- ad_week_country %>%
     dplyr::filter(age == "All")
 
-  # dataset 9 - all_deaths_per_week_by_location
+  # dataset 12 - all_deaths_per_week_by_location
   all_deaths_per_week_by_location <- ad_week_allages %>%
     dplyr::filter(location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(location ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("location")
   datasets <- c(datasets, "all_deaths_per_week_by_location")
-  description <- c(description, "Total deaths per week by location")
 
-  # dataset 10 - all_deaths_per_week
+  # don't include
   all_deaths_per_week <- ad_week_allages %>%
     dplyr::filter(location == "All",
                   cause == "All causes") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
-  datasets <- c(datasets, "all_deaths_per_week")
-  description <- c(description, "Total deaths per week")
 
-  # dataset 11 - all_deaths_per_week_averaged_over_5years
+  # dataset 13 - all_deaths_per_week_averaged_over_5years
+  tmp <- "All causes - average of corresponding week over previous 5 years"
   all_deaths_per_week_averaged_over_5years <- ad_week_allages %>%
     dplyr::filter(location == "All",
-                  cause != "All causes") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+                  cause == tmp) %>%
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(. ~ date, value.var = "count") %>%
+    dplyr::select(-`.`)
   datasets <- c(datasets, "all_deaths_per_week_averaged_over_5years")
-  description <- c(description, "Total deaths per week averaged over 5 years")
 
-  # dataset (total & persons - year to date)
+  # don't include
   all_deaths_year_to_date <- ad_total %>%
     dplyr::filter(areatypename == "Country") %>%
     dplyr::select_if(~ length(unique(.)) != 1)
-
-  assertthat::assert_that(nrow(ad_week) ==
-                            (nrow(all_deaths_per_week_by_nhsboard) +
-                               nrow(all_deaths_per_week_by_councilarea) +
-                               nrow(all_deaths_per_week_by_agegroup) +
-                               nrow(all_deaths_per_week_by_location) +
-                               nrow(all_deaths_per_week) +
-                               nrow(all_deaths_per_week_averaged_over_5years)))
 
 
 
   # Deaths by location ------------------------------------------------------
 
-  # dataset 12 - covid_deaths_by_nhsboard_and_location
+  # dataset 14 - covid_deaths_by_nhsboard_and_location
   covid_deaths_by_nhsboard_and_location <- cd_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ location, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "covid_deaths_by_nhsboard_and_location")
-  description <- c(description, paste0(
-    "Covid related deaths by NHS Health Board Area and location"))
 
-  # dataset 13 - all_deaths_by_nhsboard_and_location
+  # dataset 15 - all_deaths_by_nhsboard_and_location
   all_deaths_by_nhsboard_and_location <- ad_total %>%
     dplyr::filter(areatypename == "Health Board Areas",
                   location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ location, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "all_deaths_by_nhsboard_and_location")
-  description <- c(description, paste0(
-    "All deaths by NHS Health Board Area and location"))
 
-  # dataset 14 - covid_deaths_by_councilarea_and_location
+  # dataset 16 - covid_deaths_by_councilarea_and_location
   covid_deaths_by_councilarea_and_location <- cd_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ location, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "covid_deaths_by_councilarea_and_location")
-  description <- c(description, paste0(
-    "Covid related deaths by Council Area and location"))
 
-  # dataset 15 - all_deaths_by_councilarea_and_location
+  # dataset 17 - all_deaths_by_councilarea_and_location
   all_deaths_by_councilarea_and_location <- ad_total %>%
     dplyr::filter(areatypename == "Council Areas",
                   location != "All") %>%
-    dplyr::select_if(~ length(unique(.)) != 1)
+    dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ location, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
   datasets <- c(datasets, "all_deaths_by_councilarea_and_location")
-  description <- c(description, paste0(
-    "All deaths by Council Area and location"))
+
 
   # -------------------------------------------------------------------------
 
-  # Create groups
+  # Populate hdf5 file
   for(i in seq_along(datasets)) {
-    create_table(h5filename,
-                 datasets[i],
-                 get(datasets[i]))
+    create_array(h5filename = h5filename,
+                 component = datasets[i],
+                 array = as.matrix(get(datasets[i])),
+                 dimension_names = list(
+                   `feature names` = rownames(get(datasets[i])),
+                   `week commencing` = colnames(get(datasets[i]))))
   }
 
 }

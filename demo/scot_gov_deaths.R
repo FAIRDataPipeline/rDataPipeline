@@ -12,6 +12,7 @@
 #'
 
 library(SCRCdataAPI)
+library(SPARQL)
 
 # Download source data
 download_source_version(dataset = "scot_gov_deaths")
