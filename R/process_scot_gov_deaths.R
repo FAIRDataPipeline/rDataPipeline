@@ -129,7 +129,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/bothgenders/by_agegroup",
+               component = "scotland/per_week/covid_related_deaths/all_genders/by_agegroup",
                array = as.matrix(covid_deaths_per_week_by_agegroup_all),
                dimension_names = list(
                  `age group` = rownames(covid_deaths_per_week_by_agegroup_all),
@@ -138,7 +138,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   covid_deaths_per_week_allages_all <- colSums(covid_deaths_per_week_by_agegroup_all)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/bothgenders/all_ages",
+               component = "scotland/per_week/covid_related_deaths/all_genders/all_ages",
                array = matrix(covid_deaths_per_week_allages_all, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -291,7 +291,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/bothgenders/by_agegroup",
+               component = "scotland/per_week/all_deaths/all_genders/by_agegroup",
                array = as.matrix(all_deaths_per_week_by_agegroup_all),
                dimension_names = list(
                  `age group` = rownames(all_deaths_per_week_by_agegroup_all),
@@ -302,7 +302,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   all_deaths_per_week_allages_all <- colSums(all_deaths_per_week_by_agegroup_all)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/bothgenders/all_ages",
+               component = "scotland/per_week/all_deaths/all_genders/all_ages",
                array = matrix(all_deaths_per_week_allages_all, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -343,7 +343,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select(-`.`)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/averaged_over_5years/all_deaths",
+               component = "scotland/per_week/all_deaths/all_genders/averaged_over_5years",
                array = as.matrix(all_deaths_per_week_averaged_over_5years),
                dimension_names = list(
                  `total` = rownames(all_deaths_per_week_averaged_over_5years),
