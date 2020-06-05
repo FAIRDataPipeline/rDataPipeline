@@ -76,15 +76,22 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
   # Read in datazone shapefile and check for non-intersecting geometries
   datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>% sf::st_make_valid()
 
-  gridsize <- 10
-  tmp <- grid_intersection(datazones, gridsize)
-  dz_subdivisions_10km <- tmp$dz_subdivisions
-  grid_matrix_10km <- tmp$grid_matrix
+  # Prepare grid sizes
+  if(any(grepl("^grid", grp.names))) {
+    gridsizes <- grp.names[grepl("^grid", grp.names)] %>%
+      sapply(function(x) gsub("grid", "", x) %>% gsub("km", "", .)) %>%
+      as.numeric()
 
-  gridsize <- 1
-  tmp <- grid_intersection(datazones, gridsize)
-  dz_subdivisions_1km <- tmp$dz_subdivisions
-  grid_matrix_1km <- tmp$grid_matrix
+    for(i in gridsizes) {
+      tmp <- grid_intersection(datazones, gridsizes[i])
+      object.name <- paste0("dz_subdivisions_", gridsizes[i], "km")
+      assign(object.name, tmp$dz_subdivisions)
+      object.name <- paste0("grid_matrix_", gridsizes[i], "km")
+      assign(object.name, tmp$grid_matrixs)
+    }
+  }
+
+
 
   conversion.table <- readxl::read_excel(
     "data-raw/SIMD+2020v2+-+datazone+lookup.xlsx",
