@@ -8,12 +8,6 @@ library(devtools)
 install_github("ScottishCovidResponse/SCRCdataAPI")
 ```
 
-To generate hdf5 files in R:
-```{r}
-library(hdf5r)
-H5File$new(filename)
-```
-
 In the following example, we will populate "array.h5" with array type data downloaded from `https://github.com/ScottishCovidResponse/simple_network_sim/blob/master/sample_output_files/sample-1591198608.csv`. The component path is input via the 
 `component` argument, e.g. group `dz`, subgroup `total`. 
 
@@ -29,6 +23,8 @@ To add this data to `table.h5`:
 ```{r}
 create_table(filename = "table.h5", component = "dz/total", df = sample)
 ```
+Note that the filename argument can take the name of a file you want to create, 
+or an existing `*.h5` file.
 
 To check contents:
 ```{r}
