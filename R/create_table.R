@@ -18,33 +18,22 @@ create_table <- function(filename,
                          row_names,
                          column_units) {
 
+  # Generate hdf5 structure
+
   file.h5 <- H5File$new(filename)
-  current.groups <- names(file.h5)
 
+  directory.structure <- strsplit(component, "/")[[1]]
+  levels <- length(directory.structure)
 
-  if(grepl("/", component)) { # If there's a subgroup as well as a group
+  tmp.path <- ""
+  tmp.groups <- names(file.h5)
 
-    tmp <- strsplit(component, "/")[[1]]
-    this.group <- tmp[1]
+  for (i in seq_along(directory.structure)) {
+    if(!directory.structure[i] %in% tmp.groups)
+      file.h5$create_group(file.path(tmp.path, directory.structure[i]))
 
-    if(this.group %in% current.groups)
-      group <- file.h5[[this.group]] else
-        group <- file.h5$create_group(this.group)
-
-    this.subgroup <- tmp[2]
-    current.subgroups <- names(group)
-
-    if(this.subgroup %in% current.subgroups)
-      location <- group[[this.subgroup]] else
-        location <- group$create_group(this.subgroup)
-
-
-  } else { # If there's only a group
-    this.group <- component
-
-    if(this.group %in% current.groups)
-      location <- file.h5[[this.group]] else
-        location <- file.h5$create_group(this.group)
+    tmp.path <- file.path(tmp.path, directory.structure[i])
+    tmp.groups <- names(file.h5[[tmp.path]])
   }
 
   # Attach data
