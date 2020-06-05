@@ -4,13 +4,8 @@ download_from_db <- function(url, path, local, filename) {
 
   # Prepare local directory -------------------------------------------------
 
-  # Remove beginning or trailing slashes
-  local <- gsub("^/*", "", local)
-  local <- gsub("/*$", "", local)
-
   # Extract directory structure
   directory.structure <- strsplit(local, "/")[[1]]
-
   levels <- length(directory.structure)
 
   for(i in seq_along(directory.structure)) {
