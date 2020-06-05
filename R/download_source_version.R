@@ -15,8 +15,12 @@ download_source_version <- function(dataset) {
   } else if(dataset == "scot_dz_demographics") {
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
-      path = file.path("files/statistics/population-estimates",
-                       "sape-time-series/persons/sape-2018-persons.xlsx"),
+      path = file.path("files//statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"),
+      local = "data-raw")
+
+    download_from_url(
+      url = "https://www.nrscotland.gov.uk",
+      path = file.path("files//statistics/population-estimates/sape-time-series/females/sape-2018-females.xlsx"),
       local = "data-raw")
 
   }else if(dataset == "scot_gov_deaths") {

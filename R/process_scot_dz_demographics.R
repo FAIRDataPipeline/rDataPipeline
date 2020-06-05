@@ -4,74 +4,19 @@
 #'
 process_scot_dz_demographics <- function(sourcefile, h5filename) {
 
-  # Input parameters
-  datazone_sf = "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
-  grp.names = c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
+
+  # Input parameters --------------------------------------------------------
+
+  datazone_sf <-  "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
+  grp.names <-  c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
                 "grid10km")
-  subgrp.names = c("total", "1year", "5year", "10year")
-  age.classes = list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10))
-
-
-  # Prepare hdf5 file -------------------------------------------------------
-
-  file.h5 <- H5File$new(h5filename, mode = "w")
-
-  grp.objects <- paste0(tolower(grp.names), ".grp")
-  subgrp.objects <- paste0(grp.names, subgrp.names, ".subgrp")
-
-
-  # Create groups
-  for(i in seq_along(grp.names))
-    assign(grp.objects[i], file.h5$create_group(grp.names[i]))
-
-  # Create subgroups
-  for(i in seq_along(grp.names)) {
-    for(j in seq_along(subgrp.names)) {
-      cmd <- paste0(grp.objects[i], "$create_group(subgrp.names[j])")
-      subgroup_obj <- paste0(grp.names[i], ".", subgrp.names[j], ".subgrp")
-      assign(subgroup_obj, eval(parse(text = cmd)))
-    }
-  }
+  subgrp.names <- c("total", "1year", "5year", "10year",
+                    "sg_deaths_scheme")
+  age.classes <- list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10),
+                      c(0, 1, 15, 45, 65, 75, 85))
 
 
   # Prepare dz2grid ---------------------------------------------------------
-
-  # Original dataset
-  # Read raw data -----------------------------------------------------------
-
-  sape_persons <- readxl::read_excel(sourcefile, col_names = FALSE)
-
-  # Extract header
-  header <- readxl::read_excel(sourcefile, skip = 3, n_max = 2)
-
-  # Rename first 4 columns
-  header <- header %>%
-    dplyr::rename_at(vars(grep("^\\...[1-3]", names(.))),
-                     ~ as.character(header[2, 1:3])) %>%
-    dplyr::rename(AllAges = "...4") %>%
-    names()
-
-
-  # Process data ------------------------------------------------------------
-
-  original.dat <- sape_persons %>%
-    # Remove first 6 rows
-    .[-c(1:6),] %>%
-    # Rename columns
-    dplyr::rename_all(~header) %>%
-    # Remove empty columns (the 5th column)
-    dplyr::select_if(~sum(!is.na(.)) > 0) %>%
-    # Remove blank rows
-    dplyr::filter_all(any_vars(!is.na(.))) %>%
-    # Remove copyright
-    dplyr::filter_at(vars(dplyr::ends_with("Code")),
-                     ~!grepl("Copyright", .)) %>%
-    # Remove columns 2:4
-    dplyr::select_at(vars(-dplyr::ends_with("Name"),
-                          -AllAges)) %>%
-    dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric) %>%
-    dplyr::rename(DZcode = DataZone2011Code) %>%
-    as.data.frame()
 
   # Read in datazone shapefile and check for non-intersecting geometries
   datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>% sf::st_make_valid()
@@ -82,17 +27,19 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
       sapply(function(x) gsub("grid", "", x) %>% gsub("km", "", .)) %>%
       as.numeric()
 
-    for(i in gridsizes) {
-      tmp <- grid_intersection(datazones, gridsizes[i])
-      object.name <- paste0("dz_subdivisions_", gridsizes[i], "km")
-      assign(object.name, tmp$dz_subdivisions)
-      object.name <- paste0("grid_matrix_", gridsizes[i], "km")
-      assign(object.name, tmp$grid_matrixs)
+    dz_subdivisions <- list()
+    grid_matrix <- list()
+    for(g in seq_along(gridsizes)) {
+      tmp <- grid_intersection(datazones, gridsizes[g])
+      tag <- paste0("grid", gridsizes[g], "km")
+      dz_subdivisions[[g]] <- tmp$dz_subdivisions
+      names(dz_subdivisions)[g] <- tag
+      grid_matrix[[g]] <- tmp$grid_matrix
+      names(grid_matrix)[g] <- tag
     }
   }
 
-
-
+  # Prepare conversion table
   conversion.table <- readxl::read_excel(
     "data-raw/SIMD+2020v2+-+datazone+lookup.xlsx",
     sheet = 3) %>%
@@ -100,84 +47,104 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
                   URcode = URclass) %>%
     dplyr::select_if(grepl("name$|code$", colnames(.)))
 
-  # Attach data to hdf5 file ------------------------------------------------
 
-  for(j in seq_along(subgrp.names)) {
 
-    # Aggregate age classes
-    if(subgrp.names[j] == "1year") {
-      transage.dat <- original.dat
+  # Process raw data --------------------------------------------------------
 
-    } else if(subgrp.names[j] == "total") {
-      transage.dat <- bin_ages(original.dat, age.classes[[j]])
+  original.dat <- lapply(seq_along(sourcefile), function(k) {
 
-    } else {
-      transage.dat <- bin_ages(original.dat, age.classes[[j]])
-    }
+    dataset <- sourcefile[k] %>%
+      gsub("data-raw/sape-2018-", "", .) %>%
+      gsub(".xlsx", "", .)
 
-    for(i in seq_along(grp.names)) {
-      cat(paste0("\r", j, "/", length(subgrp.names), ": ",
-                 i, "/", length(grp.names), "..."))
+    sape_tmp <- readxl::read_excel(sourcefile[k], col_names = FALSE)
+    header <- readxl::read_excel(sourcefile[k], skip = 3, n_max = 2)
+    header <- header %>%
+      dplyr::rename_at(vars(grep("^\\...[1-3]", names(.))),
+                       ~ as.character(header[2, 1:3])) %>%
+      dplyr::rename(AllAges = "...4") %>%
+      names()
 
-      if(grp.names[i] %in% c("dz", "ur", "iz", "la", "hb", "mmw", "spc")) {
+    original.dat <- sape_tmp %>%
+      # Remove first 6 rows
+      .[-c(1:6),] %>%
+      # Rename columns
+      dplyr::rename_all(~header) %>%
+      # Remove empty columns (the 5th column)
+      dplyr::select_if(~sum(!is.na(.)) > 0) %>%
+      # Remove blank rows
+      dplyr::filter_all(any_vars(!is.na(.))) %>%
+      # Remove copyright
+      dplyr::filter_at(vars(dplyr::ends_with("Code")),
+                       ~!grepl("Copyright", .)) %>%
+      # Remove columns 2:4
+      dplyr::select_at(vars(-dplyr::ends_with("Name"),
+                            -AllAges)) %>%
+      dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric) %>%
+      dplyr::rename(DZcode = DataZone2011Code) %>%
+      as.data.frame()
 
-        # Transformed data (non-grid transformed)
-        tmp.dat <- dz2lower(transage.dat, grp.names[i], conversion.table)
-        transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
-                              grid_id = tmp.dat$data[, 1])
-        area.names <- tmp.dat$area.names
 
-      } else if(grepl("grid",  grp.names[i])) {
+    # Generate data and attach to hdf5 file -----------------------------------
 
-        if(grepl("10km$", grp.names[i])) {
-          dz_subdivisions <- dz_subdivisions_10km
-          grid_matrix <- grid_matrix_10km
+    for(j in seq_along(subgrp.names)) {
 
-        } else if(grepl("1km$", grp.names[i])) {
-          dz_subdivisions <- dz_subdivisions_1km
-          grid_matrix <- grid_matrix_1km
+      # Aggregate age classes
+      if(subgrp.names[j] == "1year") {
+        transage.dat <- original.dat
 
-        } else
-          stop("OMG! - grids")
-
-        # Transformed data (grid transformed)
-        transarea.dat <- dz2grid(dat = transage.dat,
-                                 datazones = datazones,
-                                 dz_subdivisions = dz_subdivisions)
+      } else if(subgrp.names[j] == "total") {
+        transage.dat <- bin_ages(original.dat, age.classes[[j]])
 
       } else {
-        stop("OMG! - grpnames")
+        transage.dat <- bin_ages(original.dat, age.classes[[j]])
       }
 
-      # Attach data
-      subgroup_obj <- paste0(grp.names[i], ".", subgrp.names[j], ".subgrp")
+      for(i in seq_along(grp.names)) {
+        cat(paste0("\rProcessing ", j, "/", length(subgrp.names), ": ",
+                   i, "/", length(grp.names), "..."))
 
-      eval(parse(text = paste0(subgroup_obj,
-                               "[[\"array\"]] <- transarea.dat$grid_pop")))
+        if(grp.names[i] %in% c("dz", "ur", "iz", "la", "hb", "mmw", "spc")) {
 
-      # Attach colnames
-      eval(parse(text = paste0(subgroup_obj, "[[\"Dimension_2_title\"]] <- ",
-                               "\"age groups\"")))
-      eval(parse(text = paste0(subgroup_obj, "[[\"Dimension_2_names\"]] <- ",
-                               "colnames(transarea.dat$grid_pop)")))
+          # Transformed data (non-grid transformed)
+          tmp.dat <- dz2lower(transage.dat, grp.names[i], conversion.table)
+          transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
+                                grid_id = tmp.dat$data[, 1])
+          area.names <- tmp.dat$area.names
 
-      # Attach rownames
-      eval(parse(text = paste0(subgroup_obj,
-                               "[[\"Dimension_1_title\"]] <- \"feature names\"")))
-      eval(parse(text = paste0(subgroup_obj,
-                               "[[\"Dimension_1_names\"]] <- transarea.dat$grid_id")))
+        } else if(grepl("grid",  grp.names[i])) {
 
-      # For grids
-      if(grepl("grid",  grp.names[i])) {
-        eval(parse(text = paste0(subgroup_obj,
-                                 "[[\"Dimension_1_values\"]] <- grid_matrix")))
-        units <- gsub("grid", "", grp.names[i])
-        eval(parse(text = paste0(subgroup_obj,
-                                 "[[\"Dimension_1_units\"]] <- units")))
+          # Transformed data (grid transformed)
+          transarea.dat <- dz2grid(dat = transage.dat,
+                                   datazones = datazones,
+                                   dz_subdivisions = dz_subdivisions[[grp.names[i]]])
+
+        } else {
+          stop("OMG! - grpnames")
+        }
+
+        location <- file.path(grp.names[i], subgrp.names[j], dataset)
+
+        if(grepl("grid",  grp.names[i])) {
+          create_array(h5filename = h5filename,
+                       component = location,
+                       array = transarea.dat$grid_pop,
+                       dimension_names = list(
+                         `feature names` = transarea.dat$grid_id,
+                         `age groups` = colnames(transarea.dat$grid_pop)),
+                       dimension_values = list(grid_matrix[[grp.names[i]]]),
+                       dimension_units = list(gsub("grid", "", grp.names[i])))
+
+        } else {
+          create_array(h5filename = h5filename,
+                       component = location,
+                       array = transarea.dat$grid_pop,
+                       dimension_names = list(
+                         `feature names` = transarea.dat$grid_id,
+                         `age groups` = colnames(transarea.dat$grid_pop)))
+        }
       }
-
     }
-  }
+  })
 
-  file.h5$close_all()
 }
