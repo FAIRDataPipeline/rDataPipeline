@@ -7,9 +7,14 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
 
   # Input parameters --------------------------------------------------------
 
-  datazone_sf <-  "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
-  grp.names <-  c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
-                "grid10km")
+  datazone_sf <- "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
+  grp.names <- c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
+                 "grid10km")
+  full.names <- c("data zone", "urban rural classification",
+                  "intermediate zone", "local authority",
+                  "health board", "multi member ward",
+                  "scottish parliamentary constituency", "grid area",
+                  "grid area")
   subgrp.names <- c("total", "1year", "5year", "10year",
                     "sg_deaths_scheme")
   age.classes <- list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10),
@@ -125,13 +130,15 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
 
         location <- file.path(grp.names[i], subgrp.names[j], dataset)
 
+        dimension_names <- list(transarea.dat$grid_id,
+                                colnames(transarea.dat$grid_pop))
+        names(dimension_names) <- c(full.names[i], "age groups")
+
         if(grepl("grid",  grp.names[i])) {
           create_array(h5filename = h5filename,
                        component = location,
                        array = transarea.dat$grid_pop,
-                       dimension_names = list(
-                         `feature names` = transarea.dat$grid_id,
-                         `age groups` = colnames(transarea.dat$grid_pop)),
+                       dimension_names = dimension_names,
                        dimension_values = list(grid_matrix[[grp.names[i]]]),
                        dimension_units = list(gsub("grid", "", grp.names[i])))
 
@@ -139,9 +146,7 @@ process_scot_dz_demographics <- function(sourcefile, h5filename) {
           create_array(h5filename = h5filename,
                        component = location,
                        array = transarea.dat$grid_pop,
-                       dimension_names = list(
-                         `feature names` = transarea.dat$grid_id,
-                         `age groups` = colnames(transarea.dat$grid_pop)))
+                       dimension_names = dimension_names)
         }
       }
     }
