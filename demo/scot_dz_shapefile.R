@@ -14,9 +14,7 @@
 #' Data zones also represent a relatively stable geography that can be used
 #' to analyse change over time, with changes only occurring after a Census.
 #' Following the update to data zones using 2011 Census data, there are now
-#' 6,976 data zones covering the whole of Scotland.
-#'
-#' @references https://data.gov.uk/dataset/ab9f1f20-3b7f-4efa-9bd2-239acf63b540/data-zone-boundaries-2011
+#' 6,976 data zones covering the whole of Scotland. (From: https://data.gov.uk/dataset/ab9f1f20-3b7f-4efa-9bd2-239acf63b540/data-zone-boundaries-2011)
 #'
 
 library(SCRCdataAPI)

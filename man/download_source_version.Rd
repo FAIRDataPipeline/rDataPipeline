@@ -7,7 +7,8 @@
 download_source_version(dataset)
 }
 \arguments{
-\item{dataset}{name of dataset}
+\item{dataset}{name of dataset c("scot_dz_shapefile", "scot_dz_demographics",
+"scot_gov_deaths", "scot_gov_simd")}
 }
 \description{
 download_source_version
