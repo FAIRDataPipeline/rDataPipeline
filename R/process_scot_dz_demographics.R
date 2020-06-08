@@ -45,7 +45,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
 
   # Prepare conversion table
   conversion.table <- readxl::read_excel(
-    "data-raw/scotgov_dz_lookup.csv",
+    "data-raw/SIMD+2020v2+-+datazone+lookup.xlsx",
     sheet = 3) %>%
     dplyr::rename(DZcode = DZ,
                   URcode = URclass) %>%
