@@ -10,7 +10,9 @@
 #' @import dplyr
 #' @import hdf5r
 #' @import readxl
+#' @import reshape2
 #' @import sf
+#' @import SPARQL
 #' @import tibble
 #' @import tidyr
 #'

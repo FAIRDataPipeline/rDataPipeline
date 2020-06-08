@@ -12,7 +12,9 @@ Imports:
     dplyr,
     hdf5r,
     readxl,
+    reshape2,
     sf,
+    SPARQL,
     tibble,
     tidyr
 Encoding: UTF-8
