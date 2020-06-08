@@ -18,7 +18,11 @@ bin_ages <- function(dat, ageclasses) {
 
     for(i in seq_along(ageclasses)) {
 
-      endcol <- dplyr::if_else(i == length(ageclasses), max(ageclasses),
+      maxage <- colnames(dat)[ncol(dat)] %>%
+        gsub("AGE", "", .) %>%
+        gsub("\\+", "", .) %>%
+        as.numeric()
+      endcol <- dplyr::if_else(i == length(ageclasses), maxage,
                                (ageclasses[i + 1] - 1))
       columns <- paste0("AGE", ageclasses[i]:endcol)
 
