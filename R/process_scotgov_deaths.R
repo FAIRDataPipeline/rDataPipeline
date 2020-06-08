@@ -343,7 +343,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     dplyr::select(-`.`)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/all_genders/averaged_over_5years",
+               component = "scotland/per_week/all_deaths/persons/averaged_over_5years",
                array = as.matrix(all_deaths_per_week_averaged_over_5years),
                dimension_names = list(
                  `total` = rownames(all_deaths_per_week_averaged_over_5years),
