@@ -79,7 +79,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/female/by_agegroup",
+               component = "scotland/per_week/covid_related_deaths/females/by_agegroup",
                array = as.matrix(covid_deaths_per_week_by_agegroup_f),
                dimension_names = list(
                  `age group` = rownames(covid_deaths_per_week_by_agegroup_f),
@@ -90,7 +90,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   covid_deaths_per_week_allages_f <- colSums(covid_deaths_per_week_by_agegroup_f)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/female/all_ages",
+               component = "scotland/per_week/covid_related_deaths/females/all_ages",
                array = matrix(covid_deaths_per_week_allages_f, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -104,7 +104,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/male/by_agegroup",
+               component = "scotland/per_week/covid_related_deaths/males/by_agegroup",
                array = as.matrix(covid_deaths_per_week_by_agegroup_m),
                dimension_names = list(
                  `age group` = rownames(covid_deaths_per_week_by_agegroup_m),
@@ -115,7 +115,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   covid_deaths_per_week_allages_m <- colSums(covid_deaths_per_week_by_agegroup_m)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/male/all_ages",
+               component = "scotland/per_week/covid_related_deaths/males/all_ages",
                array = matrix(covid_deaths_per_week_allages_m, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -129,7 +129,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/all_genders/by_agegroup",
+               component = "scotland/per_week/covid_related_deaths/persons/by_agegroup",
                array = as.matrix(covid_deaths_per_week_by_agegroup_all),
                dimension_names = list(
                  `age group` = rownames(covid_deaths_per_week_by_agegroup_all),
@@ -138,7 +138,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   covid_deaths_per_week_allages_all <- colSums(covid_deaths_per_week_by_agegroup_all)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/covid_related_deaths/all_genders/all_ages",
+               component = "scotland/per_week/covid_related_deaths/persons/all_ages",
                array = matrix(covid_deaths_per_week_allages_all, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -244,7 +244,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/female/by_agegroup",
+               component = "scotland/per_week/all_deaths/females/by_agegroup",
                array = as.matrix(all_deaths_per_week_by_agegroup_f),
                dimension_names = list(
                  `age group` = rownames(all_deaths_per_week_by_agegroup_f),
@@ -253,7 +253,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   all_deaths_per_week_allages_f <- colSums(all_deaths_per_week_by_agegroup_f)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/female/all_ages",
+               component = "scotland/per_week/all_deaths/females/all_ages",
                array = matrix(all_deaths_per_week_allages_f, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -267,7 +267,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/male/by_agegroup",
+               component = "scotland/per_week/all_deaths/males/by_agegroup",
                array = as.matrix(all_deaths_per_week_by_agegroup_m),
                dimension_names = list(
                  `age group` = rownames(all_deaths_per_week_by_agegroup_m),
@@ -276,7 +276,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   all_deaths_per_week_allages_m <- colSums(all_deaths_per_week_by_agegroup_m)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/male/all_ages",
+               component = "scotland/per_week/all_deaths/males/all_ages",
                array = matrix(all_deaths_per_week_allages_m, nrow = 1),
                dimension_names = list(
                  `total` = 1,
@@ -291,7 +291,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("age")
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/all_genders/by_agegroup",
+               component = "scotland/per_week/all_deaths/persons/by_agegroup",
                array = as.matrix(all_deaths_per_week_by_agegroup_all),
                dimension_names = list(
                  `age group` = rownames(all_deaths_per_week_by_agegroup_all),
@@ -302,7 +302,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
   all_deaths_per_week_allages_all <- colSums(all_deaths_per_week_by_agegroup_all)
 
   create_array(h5filename = h5filename,
-               component = "scotland/per_week/all_deaths/all_genders/all_ages",
+               component = "scotland/per_week/all_deaths/persons/all_ages",
                array = matrix(all_deaths_per_week_allages_all, nrow = 1),
                dimension_names = list(
                  `total` = 1,
