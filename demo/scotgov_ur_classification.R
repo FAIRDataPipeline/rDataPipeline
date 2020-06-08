@@ -21,5 +21,4 @@
 library(SCRCdataAPI)
 
 # Download source data
-download_source_version(dataset = "scotgov_dz_lookup")
-
+download_source_version(dataset = "scotgov_ur_classification")
