@@ -20,5 +20,5 @@
 library(SCRCdataAPI)
 
 # Download source data
-download_source_version(dataset = "scot_dz_shapefile")
+download_source_version(dataset = "ukgov_scot_dz_shapefile")
 

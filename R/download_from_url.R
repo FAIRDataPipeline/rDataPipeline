@@ -1,6 +1,6 @@
 #' download_from_url
 #'
-download_from_url <- function(url, path, local) {
+download_from_url <- function(url, path, local, filename) {
 
   # Prepare local directory -------------------------------------------------
 
@@ -22,8 +22,10 @@ download_from_url <- function(url, path, local) {
   # Save file ---------------------------------------------------------------
 
   # Extract filename
-  filename <- strsplit(paste0("/", path), "/")[[1]]
-  filename <- filename[length(filename)]
+  if(missing(filename)) {
+    filename <- strsplit(paste0("/", path), "/")[[1]]
+    filename <- filename[length(filename)]
+  }
 
   # Download and save file
   download.file(url = file.path(url, path),

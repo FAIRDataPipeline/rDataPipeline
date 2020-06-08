@@ -7,13 +7,20 @@
 #'
 download_source_version <- function(dataset) {
 
-  if(dataset == "scot_dz_shapefile") {
+  if(dataset == "ukgov_scot_dz_shapefile") {
     download_from_url(
       url = "http://sedsh127.sedsh.gov.uk",
       path = "Atom_data/ScotGov/ZippedShapefiles/SG_DataZoneBdry_2011.zip",
       local = "data-raw/datazone_shapefile")
 
-  } else if(dataset == "scot_dz_demographics") {
+  } else if(dataset == "scotgov_dz_lookup") {
+    download_from_url(
+      url = "http://statistics.gov.scot",
+      path = "downloads/file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5%2FDatazone2011Lookup.csv",
+      local = "data-raw",
+      filename = "scotgov_dz_lookup.csv")
+
+  } else if(dataset == "nrs_demographics") {
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
       path = file.path("files//statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"),
@@ -24,7 +31,12 @@ download_source_version <- function(dataset) {
       path = file.path("files//statistics/population-estimates/sape-time-series/females/sape-2018-females.xlsx"),
       local = "data-raw")
 
-  } else if(dataset == "scot_gov_deaths") {
+    download_from_url(
+      url = "https://www.nrscotland.gov.uk",
+      path = file.path("files//statistics/population-estimates/sape-time-series/persons/sape-2018-persons.xlsx"),
+      local = "data-raw")
+
+  } else if(dataset == "scotgov_deaths") {
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX data: <http://statistics.gov.scot/data/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -58,9 +70,9 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "deaths-involving-coronavirus-covid-19.csv")
+                     filename = "scotgov_deaths.csv")
 
-  }else if(dataset == "scot_gov_simd") {
+  }else if(dataset == "scotgov_simd_income") {
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <http://statistics.gov.scot/data/>
@@ -68,18 +80,16 @@ PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX dim: <http://statistics.gov.scot/def/dimension/>
 PREFIX dom: <http://statistics.gov.scot/def/concept/simd-domain/>
 PREFIX ref: <http://reference.data.gov.uk/id/year/>
-PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
 PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
-SELECT ?featurecode ?featurename ?areatypename ?simd ?date ?rank
+PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
+SELECT ?featurecode ?featurename ?areatypename ?date ?rank
 WHERE {
   ?indicator qb:dataSet data:scottish-index-of-multiple-deprivation;
               mp:rank ?rank;
-              qb:measureType ?measuretype;
-              dim:simdDomain ?simddomain;
+              dim:simdDomain dom:income;
               sdmxd:refArea ?featurecode;
               sdmxd:refPeriod ?period.
 
-              ?simddomain rdfs:label ?simd.
               ?featurecode stat:code ?areatype;
                 rdfs:label ?featurename.
               ?areatype rdfs:label ?areatypename.
@@ -89,7 +99,7 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "scottish-index-of-multiple-deprivation.csv")
+                     filename = "scotgov_simd_income.csv")
   }
 
 }

@@ -10,7 +10,7 @@ library(SCRCdataAPI)
 library(SPARQL)
 
 # Download source data
-download_source_version(dataset = "scot_gov_deaths")
+download_source_version(dataset = "scotgov_deaths")
 
 # Process data and generate hdf5 file
 sourcefile <- "data-raw/deaths-involving-coronavirus-covid-19.csv"
