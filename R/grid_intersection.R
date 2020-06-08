@@ -21,7 +21,15 @@ grid_intersection <- function(datazones, gridsize) {
   assertthat::assert_that(max(as.numeric(grid_matrix$x)) == num_columns)
   assertthat::assert_that(max(as.numeric(grid_matrix$y)) == num_rows)
 
+  dz_subdivisions <- sf::st_intersection(grids, datazones)
+
+  ind <- which(grid_labels %in% unique(dz_subdivisions$grid_id))
+  grid_matrix <- grid_matrix[ind,]
+
+  tmp <- sort(apply(grid_matrix, 1, function(x) paste(x[1], x[2], sep = "-")))
+  assertthat::assert_that(all(tmp == sort(unique(dz_subdivisions$grid_id))))
+
   # Use grid to subdivide datazones
-  list(dz_subdivisions = sf::st_intersection(grids, datazones),
+  list(dz_subdivisions = dz_subdivisions,
        grid_matrix = grid_matrix)
 }
