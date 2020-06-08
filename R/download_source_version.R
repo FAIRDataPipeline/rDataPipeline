@@ -72,7 +72,7 @@ WHERE {
                      local = "data-raw",
                      filename = "scotgov_deaths.csv")
 
-  }else if(dataset == "scotgov_simd_income") {
+  } else if(dataset == "scotgov_simd_income") {
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <http://statistics.gov.scot/data/>
@@ -100,7 +100,33 @@ WHERE {
                      path = query,
                      local = "data-raw",
                      filename = "scotgov_simd_income.csv")
-  }
+
+  } else if(dataset == "scotgov_ur_classification") {
+    query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX data: <http://statistics.gov.scot/data/>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
+PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
+PREFIX year:<http://reference.data.gov.uk/id/year/>
+SELECT ?featurecode ?featurename ?areatypename ?rank
+WHERE {
+  ?indicator qb:dataSet data:urban-rural-classification;
+              mp:rank ?rank;
+              sdmxd:refArea ?featurecode;
+              sdmxd:refPeriod year:2016.
+
+              ?featurecode stat:code ?areatype;
+                rdfs:label ?featurename.
+              ?areatype rdfs:label ?areatypename.
+}"
+
+    download_from_db(url = "https://statistics.gov.scot/sparql",
+                     path = query,
+                     local = "data-raw",
+                     filename = "scotgov_ur_classification.csv")
+  } else
+    stop("Dataset not recognised.")
 
 }
 
