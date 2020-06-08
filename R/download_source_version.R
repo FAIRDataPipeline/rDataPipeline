@@ -58,6 +58,36 @@ WHERE {
                      local = "data-raw",
                      filename = "deaths-involving-coronavirus-covid-19.csv")
 
+  }else if(dataset == "scot_gov_simd") {
+    query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX data: <http://statistics.gov.scot/data/>
+PREFIX sdmxd: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX dim: <http://statistics.gov.scot/def/dimension/>
+PREFIX dom: <http://statistics.gov.scot/def/concept/simd-domain/>
+PREFIX ref: <http://reference.data.gov.uk/id/year/>
+PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
+PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
+SELECT ?rank ?simd ?featurecode ?featurename ?areatypename ?date
+WHERE {
+  ?indicator qb:dataSet data:scottish-index-of-multiple-deprivation;
+              mp:rank ?rank;
+              qb:measureType ?measuretype;
+              dim:simdDomain ?simddomain;
+              sdmxd:refArea ?featurecode;
+              sdmxd:refPeriod ?period.
+
+              ?simddomain rdfs:label ?simd.
+              ?featurecode stat:code ?areatype;
+                rdfs:label ?featurename.
+              ?areatype rdfs:label ?areatypename.
+              ?period rdfs:label ?date.
+}"
+
+    download_from_db(url = "https://statistics.gov.scot/sparql",
+                     path = query,
+                     local = "data-raw",
+                     filename = "scottish-index-of-multiple-deprivation.csv")
   }
 
 }
