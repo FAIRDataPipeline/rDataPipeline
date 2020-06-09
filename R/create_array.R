@@ -53,6 +53,9 @@ create_array <- function(h5filename,
   dimension_titles <- names(dimension_names)
 
   # Attach row attributes
+  if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
+  if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
+
   file.h5[[file.path(component, "Dimension_1_title")]] <- dimension_titles[1]
   file.h5[[file.path(component, "Dimension_1_names")]] <- dimension_names[[1]]
 
