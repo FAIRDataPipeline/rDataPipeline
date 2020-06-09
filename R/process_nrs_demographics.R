@@ -6,7 +6,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
 
   # Input parameters --------------------------------------------------------
 
-  datazone_sf <- "data-raw/datazone_shapefile/SG_DataZone_Bdry_2011.shp"
+  datazone_sf <- file.path("data-raw", "datazone_shapefile", "SG_DataZone_Bdry_2011.shp")
   grp.names <- c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
                  "grid10km")
   full.names <- c("data zone", "urban rural classification",
@@ -19,6 +19,10 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
   age.classes <- list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10),
                       c(0, 1, 15, 45, 65, 75, 85))
 
+  # Get shapefile if not already downloaded by user -------------------------
+  if (!file.exists(datazone_sf)) {
+    download_source_version(dataset = "ukgov_scot_dz_shapefile")
+  }
 
   # Prepare dz2grid ---------------------------------------------------------
 
