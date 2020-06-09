@@ -133,7 +133,9 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
 
         location <- file.path(grp.names[i], subgrp.names[j], dataset)
 
-        dimension_names <- list(transarea.dat$grid_id,
+        tmp <- unlist(transarea.dat$grid_id)
+        names(tmp) <- NULL
+        dimension_names <- list(tmp,
                                 colnames(transarea.dat$grid_pop))
         names(dimension_names) <- c(full.names[i], "age groups")
 
