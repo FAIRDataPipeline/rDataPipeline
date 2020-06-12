@@ -20,7 +20,7 @@ process_scotgov_simd_income <- function(sourcefile, h5filename) {
 
   create_table(h5filename = h5filename,
                component = "simd/income",
-               df = as.matrix(scotSIMDinc),
+               df = scotSIMDinc,
                row_title = "datazones",
                row_names = rownames(scotSIMDinc),
                column_units = colnames(scotSIMDinc))
