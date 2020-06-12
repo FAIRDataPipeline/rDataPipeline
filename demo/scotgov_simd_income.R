@@ -12,3 +12,10 @@ library(SPARQL)
 # Download source data
 download_source_version(dataset = "scotgov_simd_income")
 
+# Process data and generate hdf5 file
+sourcefile <- "data-raw/scottish-index-of-multiple-deprivation-income.csv"
+h5filename <- "scottish-index-of-multiple-deprivation-income.h5"
+process_scot_gov_deaths(sourcefile = sourcefile,
+                        h5filename = h5filename)
+
+openssl::sha256(file(h5filename))

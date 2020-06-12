@@ -8,12 +8,18 @@
 download_source_version <- function(dataset) {
 
   if(dataset == "ukgov_scot_dz_shapefile") {
+
+    # ukgov_scot_dz_shapefile -------------------------------------------------
+
     download_from_url(
       url = "http://sedsh127.sedsh.gov.uk",
       path = "Atom_data/ScotGov/ZippedShapefiles/SG_DataZoneBdry_2011.zip",
       local = "data-raw/datazone_shapefile")
 
   } else if(dataset == "scotgov_dz_lookup") {
+
+    # scotgov_dz_lookup -------------------------------------------------------
+
     download_from_url(
       url = "http://statistics.gov.scot",
       path = "downloads/file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5%2FDatazone2011Lookup.csv",
@@ -37,6 +43,9 @@ download_source_version <- function(dataset) {
       local = "data-raw")
 
   } else if(dataset == "scotgov_deaths") {
+
+    # deaths-involving-coronavirus-covid-19 -----------------------------------
+
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX data: <http://statistics.gov.scot/data/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -70,9 +79,12 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "scotgov_deaths.csv")
+                     filename = "deaths-involving-coronavirus-covid-19.csv")
 
   } else if(dataset == "scotgov_simd_income") {
+
+    # scottish-index-of-multiple-deprivation ----------------------------------
+
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <http://statistics.gov.scot/data/>
@@ -99,9 +111,12 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "scotgov_simd_income.csv")
+                     filename = "scottish-index-of-multiple-deprivation-income.csv")
 
   } else if(dataset == "scotgov_ur_classification") {
+
+    # urban-rural-classification ----------------------------------------------
+
     query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX data: <http://statistics.gov.scot/data/>
@@ -124,7 +139,38 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "scotgov_ur_classification.csv")
+                     filename = "urban-rural-classification.csv")
+
+  } else if(dataset == "scotgov_management") {
+
+    # coronavirus-covid-19-management-information -----------------------------
+
+    query <- "PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX data: <http://statistics.gov.scot/data/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
+PREFIX dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdim: <http://statistics.gov.scot/def/dimension/>
+PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
+SELECT ?featurecode ?featurename ?date ?measure ?variable ?count
+WHERE {
+  ?indicator qb:dataSet data:coronavirus-covid-19-management-information;
+              dim:refArea ?featurecode;
+              dim:refPeriod ?period;
+              sdim:variable ?varname;
+              qb:measureType ?type.
+{?indicator mp:count ?count.} UNION {?indicator mp:ratio ?count.}
+
+  ?featurecode <http://publishmydata.com/def/ontology/foi/displayName> ?featurename.
+  ?period rdfs:label ?date.
+  ?varname rdfs:label ?variable.
+  ?type rdfs:label ?measure.
+}"
+
+    download_from_db(url = "https://statistics.gov.scot/sparql",
+                     path = query,
+                     local = "data-raw",
+                     filename = "coronavirus-covid-19-management-information.csv")
   } else
     stop("Dataset not recognised.")
 
