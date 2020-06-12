@@ -19,6 +19,7 @@
 #'
 
 library(SCRCdataAPI)
+library(SPARQL)
 
 # Download source data
 download_source_version(dataset = "scotgov_ur_classification")

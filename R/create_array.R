@@ -45,8 +45,6 @@ create_array <- function(h5filename,
     tmp.groups <- names(file.h5[[tmp.path]])
   }
 
-
-
   # Attach data
   file.h5[[file.path(component, "array")]] <- array
 
