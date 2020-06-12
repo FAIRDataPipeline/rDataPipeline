@@ -31,7 +31,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "nhsboard/per_week/covid_related_deaths",
+               component = "nhs_health_board/per_week/covid_related_deaths",
                array = as.matrix(covid_deaths_per_week_by_nhsboard),
                dimension_names = list(
                  `health board` = rownames(covid_deaths_per_week_by_nhsboard),
@@ -51,7 +51,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "councilarea/per_week/covid_related_deaths",
+               component = "council_area/per_week/covid_related_deaths",
                array = as.matrix(covid_deaths_per_week_by_councilarea),
                dimension_names = list(
                  `council area` = rownames(covid_deaths_per_week_by_councilarea),
@@ -195,7 +195,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "nhsboard/per_week/all_deaths",
+               component = "nhs_health_board/per_week/all_deaths",
                array = as.matrix(all_deaths_per_week_by_nhsboard),
                dimension_names = list(
                  `health board` = rownames(all_deaths_per_week_by_nhsboard),
@@ -216,7 +216,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "councilarea/per_week/all_deaths",
+               component = "council_area/per_week/all_deaths",
                array = as.matrix(all_deaths_per_week_by_councilarea),
                dimension_names = list(
                  `council area` = rownames(all_deaths_per_week_by_councilarea),
@@ -368,7 +368,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "nhsboard/per_location/covid_related_deaths",
+               component = "nhs_health_board/per_location/covid_related_deaths",
                array = as.matrix(covid_deaths_by_nhsboard_and_location),
                dimension_names = list(
                  `health board` = rownames(covid_deaths_by_nhsboard_and_location),
@@ -384,7 +384,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "nhsboard/per_location/all_deaths",
+               component = "nhs_health_board/per_location/all_deaths",
                array = as.matrix(all_deaths_by_nhsboard_and_location),
                dimension_names = list(
                  `health board` = rownames(all_deaths_by_nhsboard_and_location),
@@ -399,7 +399,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "councilarea/per_location/covid_related_deaths",
+               component = "council_area/per_location/covid_related_deaths",
                array = as.matrix(covid_deaths_by_councilarea_and_location),
                dimension_names = list(
                  `council area` = rownames(covid_deaths_by_councilarea_and_location),
@@ -414,7 +414,7 @@ process_scot_gov_deaths <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
-               component = "councilarea/per_location/all_deaths",
+               component = "council_area/per_location/all_deaths",
                array = as.matrix(all_deaths_by_councilarea_and_location),
                dimension_names = list(
                  `council area` = rownames(all_deaths_by_councilarea_and_location),

@@ -4,7 +4,7 @@
 \alias{process_scotgov_management}
 \title{process_scotgov_management}
 \usage{
-process_scotgov_management()
+process_scotgov_management(sourcefile, h5filename)
 }
 \description{
 process_scotgov_management
