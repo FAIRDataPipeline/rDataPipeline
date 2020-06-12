@@ -26,8 +26,8 @@ download_source_version(dataset = "scotgov_ur_classification")
 # Process data and generate hdf5 file
 sourcefile <- "data-raw/urban-rural-classification.csv"
 h5filename <- "urban-rural-classification.h5"
-process_scot_gov_deaths(sourcefile = sourcefile,
-                        h5filename = h5filename)
+process_scotgov_ur_classification(sourcefile = sourcefile,
+                                  h5filename = h5filename)
 
 openssl::sha256(file(h5filename))
 
