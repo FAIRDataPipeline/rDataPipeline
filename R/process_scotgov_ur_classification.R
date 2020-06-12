@@ -24,6 +24,6 @@ process_scotgov_ur_classification <- function(sourcefile, h5filename) {
                component = "conversion",
                df = scotUR,
                row_title = "datazones",
-               row_names = rownames(scotSIMDinc),
-               column_units = colnames(scotSIMDinc))
+               row_names = rownames(scotUR),
+               column_units = colnames(scotUR))
 }
