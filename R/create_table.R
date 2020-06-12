@@ -37,12 +37,15 @@ create_table <- function(h5filename,
   }
 
   # Attach data
-  location[["table"]] <- df
+  file.h5[[file.path(component, "table")]] <- df
 
   # Attach attributes
-  if(!missing(row_title)) location[["row_title"]] <- row_title
-  if(!missing(row_names)) location[["row_names"]] <- row_names
-  if(!missing(column_units)) location[["column_units"]] <- column_units
+  if(!missing(row_title))
+    file.h5[[file.path(component, "row_title")]] <- row_title
+  if(!missing(row_names))
+    file.h5[[file.path(component, "row_names")]] <- row_names
+  if(!missing(column_units))
+    file.h5[[file.path(component, "column_units")]] <- column_units
 
   file.h5$close_all()
 }
