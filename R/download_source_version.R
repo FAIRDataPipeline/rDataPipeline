@@ -13,8 +13,9 @@ download_source_version <- function(dataset) {
 
     download_from_url(
       url = "http://sedsh127.sedsh.gov.uk",
-      path = "Atom_data/ScotGov/ZippedShapefiles/SG_DataZoneBdry_2011.zip",
-      local = "data-raw/datazone_shapefile")
+      path = file.path("Atom_data", "ScotGov", "ZippedShapefiles",
+                       "SG_DataZoneBdry_2011.zip"),
+      local = file.path("data-raw", "datazone_shapefile"))
 
   } else if(dataset == "scotgov_dz_lookup") {
 
@@ -22,24 +23,29 @@ download_source_version <- function(dataset) {
 
     download_from_url(
       url = "http://statistics.gov.scot",
-      path = "downloads/file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5%2FDatazone2011Lookup.csv",
+      path = file.path(
+        "downloads",
+        "file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5%2FDatazone2011Lookup.csv"),
       local = "data-raw",
       filename = "scotgov_dz_lookup.csv")
 
   } else if(dataset == "nrs_demographics") {
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
-      path = file.path("files//statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"),
+      path = file.path("files//statistics", "population-estimates",
+                       "sape-time-series", "males", "sape-2018-males.xlsx"),
       local = "data-raw")
 
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
-      path = file.path("files//statistics/population-estimates/sape-time-series/females/sape-2018-females.xlsx"),
+      path = file.path("files//statistics", "population-estimates",
+                       "sape-time-series/females/sape-2018-females.xlsx"),
       local = "data-raw")
 
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
-      path = file.path("files//statistics/population-estimates/sape-time-series/persons/sape-2018-persons.xlsx"),
+      path = file.path("files//statistics", "population-estimates",
+                       "sape-time-series", "persons", "sape-2018-persons.xlsx"),
       local = "data-raw")
 
   } else if(dataset == "scotgov_deaths") {
@@ -94,7 +100,7 @@ PREFIX dom: <http://statistics.gov.scot/def/concept/simd-domain/>
 PREFIX ref: <http://reference.data.gov.uk/id/year/>
 PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
 PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
-SELECT ?featurecode ?featurename ?areatypename ?date ?rank
+SELECT ?featurecode ?featurename ?areatypename ?date ?value
 WHERE {
   ?indicator qb:dataSet data:scottish-index-of-multiple-deprivation;
               mp:rank ?rank;
@@ -108,10 +114,11 @@ WHERE {
               ?period rdfs:label ?date.
 }"
 
+    fn <- "scottish-index-of-multiple-deprivation-income.csv"
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "scottish-index-of-multiple-deprivation-income.csv")
+                     filename = fn)
 
   } else if(dataset == "scotgov_ur_classification") {
 
@@ -170,7 +177,8 @@ WHERE {
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = "coronavirus-covid-19-management-information.csv")
+                     filename =
+                       "coronavirus-covid-19-management-information.csv")
   } else
     stop("Dataset not recognised.")
 
