@@ -13,7 +13,15 @@ library(SPARQL)
 download_source_version(dataset = "scotgov_simd_income")
 
 # Process data and generate hdf5 file
-sourcefile <- "data-raw/scottish-index-of-multiple-deprivation-income.csv"
+sourcefile <- c(file.path(
+  "data-raw", "scottish-index-of-multiple-deprivation-income-rank.csv"),
+  file.path(
+    "data-raw", "scottish-index-of-multiple-deprivation-income-quintile.csv"),
+  file.path(
+    "data-raw", "scottish-index-of-multiple-deprivation-income-vigintile.csv"),
+  file.path(
+    "data-raw", "scottish-index-of-multiple-deprivation-income-decile.csv"))
+
 h5filename <- "scottish-index-of-multiple-deprivation-income.h5"
 process_scotgov_simd_income(sourcefile = sourcefile,
                             h5filename = h5filename)
