@@ -27,8 +27,9 @@ create_array <- function(h5filename,
                          dimension_units,
                          units) {
 
-if(!is.matrix(array))
-  stop("Argument array must be a matrix")
+  if(!is.matrix(array)) stop("Argument array must be a matrix")
+  if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
+  if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
 
   # Generate hdf5 structure
   file.h5 <- H5File$new(h5filename)
@@ -53,9 +54,6 @@ if(!is.matrix(array))
   dimension_titles <- names(dimension_names)
 
   # Attach row attributes
-  if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
-  if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
-
   file.h5[[file.path(component, "Dimension_1_title")]] <- dimension_titles[1]
   file.h5[[file.path(component, "Dimension_1_names")]] <- dimension_names[[1]]
 
