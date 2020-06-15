@@ -7,6 +7,8 @@
 #'
 download_source_version <- function(dataset) {
 
+  require(SPARQL, quietly = TRUE)
+
   if(dataset == "ukgov_scot_dz_shapefile") {
 
     # ukgov_scot_dz_shapefile -------------------------------------------------
