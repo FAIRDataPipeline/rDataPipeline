@@ -38,31 +38,59 @@ process_scotgov_management <- function(sourcefile, h5filename) {
 
   # Country
   hosp.country.dat <- hospital.dat %>%
-    dplyr::filter(areatypename == "Country") %>%
-    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    dplyr::filter(areatypename == "Country")
+
+  patients.in.hospital.dat <- hosp.country.dat %>%
+    dplyr::filter(grepl("hospital", variable)) %>%
     reshape2::dcast(variable ~ date, value.var = "count") %>%
     tibble::column_to_rownames("variable")
 
   create_array(h5filename = h5filename,
                component = "scotland/hospital",
-               array = as.matrix(hosp.country.dat),
+               array = as.matrix(patients.in.hospital.dat),
                dimension_names = list(
-                 status = rownames(hosp.country.dat),
-                 date = colnames(hosp.country.dat)))
+                 status = rownames(patients.in.hospital.dat),
+                 date = colnames(patients.in.hospital.dat)))
+
+  patients.in.icu.dat <- hosp.country.dat %>%
+    dplyr::filter(grepl("ICU", variable)) %>%
+    reshape2::dcast(variable ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("variable")
+
+  create_array(h5filename = h5filename,
+               component = "scotland/icu",
+               array = as.matrix(patients.in.icu.dat),
+               dimension_names = list(
+                 status = rownames(patients.in.icu.dat),
+                 date = colnames(patients.in.icu.dat)))
 
   # Special health board
   hosp.special.dat <- hospital.dat %>%
-    dplyr::filter(areatypename == "Special board") %>%
-    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    dplyr::filter(areatypename == "Special board")
+
+  special.patients.in.hosp.dat <- hosp.special.dat %>%
+    dplyr::filter(grepl("hospital", variable)) %>%
     reshape2::dcast(variable ~ date, value.var = "count") %>%
     tibble::column_to_rownames("variable")
 
   create_array(h5filename = h5filename,
                component = "special_health_board/hospital",
-               array = as.matrix(hosp.special.dat),
+               array = as.matrix(special.patients.in.hosp.dat),
                dimension_names = list(
-                 status = rownames(hosp.special.dat),
-                 date = colnames(hosp.special.dat)))
+                 status = rownames(special.patients.in.hosp.dat),
+                 date = colnames(special.patients.in.hosp.dat)))
+
+  special.patients.in.icu.dat <- hosp.special.dat %>%
+    dplyr::filter(grepl("ICU", variable)) %>%
+    reshape2::dcast(variable ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("variable")
+
+  create_array(h5filename = h5filename,
+               component = "special_health_board/icu",
+               array = as.matrix(special.patients.in.icu.dat),
+               dimension_names = list(
+                 status = rownames(special.patients.in.icu.dat),
+                 date = colnames(special.patients.in.icu.dat)))
 
   # NHS health board
   hosp.nhs.dat <- hospital.dat %>%
@@ -74,18 +102,6 @@ process_scotgov_management <- function(sourcefile, h5filename) {
     reshape2::dcast(featurecode ~ date, value.var = "count") %>%
     tibble::column_to_rownames("featurecode")
 
-  hosp.nhs.suspected.dat <- hosp.nhs.dat %>%
-    dplyr::filter(grepl("Suspected", variable)) %>%
-    # dplyr::select_if(~ length(unique(.)) != 1) %>%
-    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
-    tibble::column_to_rownames("featurecode")
-
-  hosp.nhs.confirmed.dat <- hosp.nhs.dat %>%
-    dplyr::filter(grepl("Confirmed", variable)) %>%
-    # dplyr::select_if(~ length(unique(.)) != 1) %>%
-    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
-    tibble::column_to_rownames("featurecode")
-
   create_array(h5filename = h5filename,
                component = "nhs_health_board/hospital/total",
                array = as.matrix(hosp.nhs.total.dat),
@@ -93,12 +109,24 @@ process_scotgov_management <- function(sourcefile, h5filename) {
                  `health board` = rownames(hosp.nhs.total.dat),
                  date = colnames(hosp.nhs.total.dat)))
 
+  hosp.nhs.suspected.dat <- hosp.nhs.dat %>%
+    dplyr::filter(grepl("Suspected", variable)) %>%
+    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
+
   create_array(h5filename = h5filename,
                component = "nhs_health_board/hospital/suspected",
                array = as.matrix(hosp.nhs.suspected.dat),
                dimension_names = list(
                  `health board` = rownames(hosp.nhs.suspected.dat),
                  date = colnames(hosp.nhs.suspected.dat)))
+
+  hosp.nhs.confirmed.dat <- hosp.nhs.dat %>%
+    dplyr::filter(grepl("Confirmed", variable)) %>%
+    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(featurecode ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("featurecode")
 
   create_array(h5filename = h5filename,
                component = "nhs_health_board/hospital/confirmed",
@@ -113,7 +141,6 @@ process_scotgov_management <- function(sourcefile, h5filename) {
   ambulance.dat <- scotMan %>%
     dplyr::filter(grepl("Ambulance attendances", variable)) %>%
     # dplyr::select_if(~ length(unique(.)) != 1) %>%
-    dplyr::mutate(variable = gsub("Ambulance attendances - ", "", variable)) %>%
     reshape2::dcast(variable ~ date, value.var = "count") %>%
     tibble::column_to_rownames("variable")
 
@@ -245,19 +272,49 @@ process_scotgov_management <- function(sourcefile, h5filename) {
   carehomes.dat <- scotMan %>%
     dplyr::filter(grepl("Adult care homes", variable))
 
-  # Adult care homes ratio data
+  # Adult care homes count data
   carehomes.ratio.dat <- carehomes.dat %>%
-    dplyr::filter(measure == "Ratio") %>%
+    dplyr::filter(measure == "Ratio")
+
+  # Adult care homes ratio data
+  carehomes.proportion.dat <- carehomes.ratio.dat %>%
+    dplyr::filter(grepl("Proportion that", variable)) %>%
     # dplyr::select_if(~ length(unique(.)) != 1) %>%
     reshape2::dcast(variable ~ date, value.var = "count") %>%
     tibble::column_to_rownames("variable")
 
   create_array(h5filename = h5filename,
-               component = "scotland/carehomes/ratio_data",
-               array = as.matrix(carehomes.ratio.dat),
+               component = "scotland/carehomes/proportion_of_cases",
+               array = as.matrix(carehomes.proportion.dat),
                dimension_names = list(
-                 delayed = rownames(carehomes.ratio.dat),
-                 date = colnames(carehomes.ratio.dat)))
+                 delayed = rownames(carehomes.proportion.dat),
+                 date = colnames(carehomes.proportion.dat)))
+
+  carehomes.absence.rate.dat <- carehomes.ratio.dat %>%
+    dplyr::filter(grepl("Staff absence rate", variable)) %>%
+    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(variable ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("variable")
+
+  create_array(h5filename = h5filename,
+               component = "scotland/carehomes/staff_absence_rate",
+               array = as.matrix(carehomes.absence.rate.dat),
+               dimension_names = list(
+                 delayed = rownames(carehomes.absence.rate.dat),
+                 date = colnames(carehomes.absence.rate.dat)))
+
+  carehomes.response.rate.dat <- carehomes.ratio.dat %>%
+    dplyr::filter(grepl("Response rate", variable)) %>%
+    # dplyr::select_if(~ length(unique(.)) != 1) %>%
+    reshape2::dcast(variable ~ date, value.var = "count") %>%
+    tibble::column_to_rownames("variable")
+
+  create_array(h5filename = h5filename,
+               component = "scotland/carehomes/response_rate",
+               array = as.matrix(carehomes.response.rate.dat),
+               dimension_names = list(
+                 delayed = rownames(carehomes.response.rate.dat),
+                 date = colnames(carehomes.response.rate.dat)))
 
   # Adult care homes count data
   carehomes.count.dat <- carehomes.dat %>%
