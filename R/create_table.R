@@ -18,8 +18,10 @@ create_table <- function(h5filename,
                          row_names,
                          column_units) {
 
-  # Generate hdf5 structure
+if(!is.data.frame(df))
+  stop("Argument df must be a data.frame.")
 
+  # Generate hdf5 structure
   file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]

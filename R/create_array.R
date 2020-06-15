@@ -27,8 +27,10 @@ create_array <- function(h5filename,
                          dimension_units,
                          units) {
 
-  # Generate hdf5 structure
+if(!is.matrix(array))
+  stop("Argument array must be a matrix")
 
+  # Generate hdf5 structure
   file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
