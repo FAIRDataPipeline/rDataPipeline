@@ -7,9 +7,12 @@ process_scotgov_management <- function(sourcefile, h5filename) {
   scotMan <- read.csv(file = sourcefile) %>%
     dplyr::select(-X) %>%
     dplyr::mutate(featurecode = gsub(
-      "<http://statistics.gov.scot/id/statistical-geography/", "",
-      featurecode),
-      featurecode = gsub(">", "", featurecode))
+                    "<http://statistics.gov.scot/id/statistical-geography/",
+                    "", featurecode),
+                  featurecode = gsub(">", "", featurecode)) %>%
+    dplyr::mutate(count = dplyr::case_when(count == "*" ~ "0",
+                                           T ~ count)) %>%
+    dplyr::mutate(count = as.numeric(count))
 
   # 1 -----------------------------------------------------------------------
   # Numbers of calls to NHS 111 and the coronavirus helpline
@@ -226,7 +229,7 @@ process_scotgov_management <- function(sourcefile, h5filename) {
     tibble::column_to_rownames("variable")
 
   create_array(h5filename = h5filename,
-               component = "scotland/testing/culumative/people_tested",
+               component = "scotland/testing/cumulative/people_tested",
                array = as.matrix(testing.country.cumulative),
                dimension_names = list(
                  delayed = rownames(testing.country.cumulative),

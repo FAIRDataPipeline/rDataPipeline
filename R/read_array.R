@@ -3,7 +3,7 @@
 #' @export
 #'
 read_array <- function(h5filename, path) {
-  file.h5 <- H5File$new(h5filename, mode = "r+")
+  file.h5 <- H5File$new(h5filename, mode = "r")
 
   object <- file.h5[[paste0(path, "/array")]][,]
   if(is.vector(object)) object <- matrix(object)
