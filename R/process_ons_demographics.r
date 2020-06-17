@@ -39,6 +39,7 @@ process_ons_demographics <- function (sourcefile, h5filename){
     grid_matrix <- list()
     for (g in seq_along(gridsizes)) {
       tmp <- grid_intersection(output_areas, gridsizes[g])
+      names(tmp)[1] = "oa_subdivisions"
       tag <- paste0("grid", gridsizes[g], "km")
       oa_subdivisions[[g]] <- tmp$oa_subdivisions
       names(oa_subdivisions)[g] <- tag
@@ -148,8 +149,7 @@ process_ons_demographics <- function (sourcefile, h5filename){
                        dimension_names = dimension_names, 
                        dimension_values = list(grid_matrix[[grp.names[i]]]), 
                        dimension_units = list(gsub("grid", "", grp.names[i])))
-        }
-        else {
+        }else {
           create_array(h5filename = h5filename, 
                        component = location, 
                        array = transarea.dat$grid_pop, 
