@@ -281,40 +281,7 @@ WHERE {
                      local = "data-raw",
                      filename =
                        "coronavirus-covid-19-management-information.csv")
-  } else if (dataset == "ukgov_eng_lookup"){
-    
-    # England/Wales look up tables --------------------------------------------
-    
-    download_from_url(url = "http://geoportal1-ons.opendata.arcgis.com/datasets", 
-                      path = "c721b6da8ea04f189baa27a1f3e32e06_0.csv", 
-                      local = "data-raw/england_lookup",
-                      filename = "output_to_ward_to_LA.csv")
-    download_from_url(url = "http://geoportal1-ons.opendata.arcgis.com/datasets", 
-                      path = "6ecda95a83304543bc8feedbd1a58303_0.csv", 
-                      local = "data-raw/england_lookup",
-                      filename = "output_to_LSOA_MSOA_to_LA.csv")
-    download_from_url(url = "https://opendata.arcgis.com/datasets", 
-                      path = "520e9cd294c84dfaaf97cc91494237ac_0.csv", 
-                      local = "data-raw/england_lookup",
-                      filename = "LSOA_to_CCG.csv")
-    download_from_url(url = "http://geoportal1-ons.opendata.arcgis.com/datasets", 
-                      path = "e6d0a1c8ce3344a7b79ce1c24e3174c9_0.csv", 
-                      local = "data-raw/england_lookup",
-                      filename = "ward_to_UA_wales.csv")
-    download_from_url(url = "https://opendata.arcgis.com/datasets", 
-                      path = "680c9b730655473787cb594f328a86fa_0.csv", 
-                      local = "data-raw/england_lookup",
-                      filename = "UA_to_healthboard_wales.csv")
-    
-  }else if (dataset == "ukgov_eng_oa_shapefile"){
-    
-    # UK government output area shapefile -------------------------------------
-    
-    download_from_url(url = "https://opendata.arcgis.com/datasets", 
-                      path = "ff8151d927974f349de240e7c8f6c140_0.zip?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D", 
-                      local = "data-raw/outputarea_shapefile",
-                      filename = "ff8151d927974f349de240e7c8f6c140_0.zip")
-  }else
+  } else
     stop("Dataset not recognised.")
 
 }
