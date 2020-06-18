@@ -4,27 +4,17 @@
 \alias{create_distribution}
 \title{create_distribution}
 \usage{
-create_distribution(
-  h5filename,
-  component,
-  distribution,
-  parameter_values,
-  parameter_names
-)
+create_distribution(toml_filename, distribution, values, names)
 }
 \arguments{
-\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
-
-\item{component}{a \code{string} specifying a location within the hdf5 file}
+\item{toml_filename}{a \code{string} specifying the name of the toml file}
 
 \item{distribution}{a \code{string} specifying the name of the distribution}
 
-\item{parameter_values}{a \code{numeric} \code{vector} specifying the
-parameter values}
+\item{values}{a \code{numeric} \code{vector} specifying parameter values}
 
-\item{parameter_names}{a \code{vector} specifying the name of each parameter
-value}
+\item{names}{a \code{vector} specifying the name of each parameter value}
 }
 \description{
-Function to populate hdf5 file with distribution type data.
+Function to populate toml file with distribution type data.
 }

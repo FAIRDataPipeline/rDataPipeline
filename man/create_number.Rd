@@ -4,17 +4,15 @@
 \alias{create_number}
 \title{create_number}
 \usage{
-create_number(h5filename, component, number, name)
+create_number(toml_filename, value, name)
 }
 \arguments{
-\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
+\item{toml_filename}{a \code{string} specifying the name of the toml file}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file}
-
-\item{number}{a \code{numeric} object specifying the value}
+\item{value}{a \code{numeric} object specifying the value}
 
 \item{name}{a \code{string} descriptor}
 }
 \description{
-Function to populate hdf5 file with number type data.
+Function to populate toml file with number type data.
 }
