@@ -314,7 +314,30 @@ WHERE {
                       path = "ff8151d927974f349de240e7c8f6c140_0.zip?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D", 
                       local = "data-raw/outputarea_shapefile",
                       filename = "ff8151d927974f349de240e7c8f6c140_0.zip")
-  }else
+  }else if(dataset == "ons_eng_wales_population"){
+    genders=c("Persons", "Males", "Females")
+      for(sex in seq_along(genders)){
+      for(age in 101:191){
+        temp_pop_table<-nomisr::nomis_get_data(id = "NM_2010_1", time = "latest",
+                                               geography = c("TYPE299"),
+                                               gender = c(sex-1),
+                                               c_age = age,
+                                               measures = 20100) %>%
+          dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE, GEOGRAPHY_TYPE,
+                        GENDER_NAME, C_AGE_NAME, MEASURES_NAME, OBS_VALUE)
+        names(temp_pop_table)[8]=unique(temp_pop_table$C_AGE_NAME)
+        geography_value=temp_pop_table[,c(2,8)]
+        if(age==101){
+          population_table=geography_value
+        }else{
+          population_table=left_join(population_table,geography_value,by="GEOGRAPHY_NAME")
+        }
+      }
+      
+      write_csv(population_table, paste0("england_",genders[sex],".csv"))
+    }
+  }
+    
     stop("Dataset not recognised.")
 
 }
