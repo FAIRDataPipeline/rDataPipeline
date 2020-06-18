@@ -34,7 +34,7 @@ create_array <- function(h5filename,
   if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
   if(length(dimension_names[[1]]) != nrow(array))
     stop("Dimension_1_names length must match nrows in array")
-  if(length(dimension_names[[2]]) != nrow(array))
+  if(length(dimension_names[[2]]) != ncol(array))
     stop("Dimension_2_names length must match nrows in array")
 
     # Generate hdf5 structure
