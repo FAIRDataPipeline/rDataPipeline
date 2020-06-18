@@ -8,21 +8,20 @@ component <- "level"
 test_that("function behaves as it should", {
   # Incorrect file name should throw error
   testthat::expect_error(create_table(h5filename = "test_table",
-                                      component = "level",
+                                      component = component,
                                       df = data.frame(a = 1:2, b = 3:4)))
 
-  # Incorrect data format should throw error
+  # Incorrect df format should throw error
   testthat::expect_error(
     create_table(h5filename = h5filename,
                  component = component,
                  df = as.matrix(data.frame(a = 1:2, b = 3:4)))
   )
 
+  # File should be h5 format
   create_table(h5filename = h5filename,
                component = component,
                df = data.frame(a = 1:2, b = 3:4))
-
-  # File should be h5 format
   testthat::expect_true(hdf5r::is.h5file(h5filename))
 
   # Component name should be "level"
@@ -33,4 +32,4 @@ test_that("function behaves as it should", {
 
 
 # Remove test file
-file.remove("test_table.h5")
+file.remove(h5filename)

@@ -9,12 +9,11 @@ test_that("function behaves as it should", {
                         names = c("shape", "scale"))
   )
 
+  # File should be toml format
   create_distribution(toml_filename = "test_distribution.toml",
                       distribution = "gamma",
                       values = c(3.0, 2.0),
                       names = c("shape", "scale"))
-
-  # File should be toml format
   testthat::expect_true(is.toml.file("test_distribution.toml"))
 
   # Section name should be "point-estimate"

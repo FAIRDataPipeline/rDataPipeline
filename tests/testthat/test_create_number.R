@@ -7,11 +7,10 @@ test_that("function behaves as it should", {
                                        value = 3.0,
                                        name = "shape"))
 
+  # File should be toml format
   create_number(toml_filename = "test_number.toml",
                 value = 3.0,
                 name = "shape")
-
-  # File should be toml format
   testthat::expect_true(is.toml.file("test_number.toml"))
 
   # Section name should be "point-estimate"
