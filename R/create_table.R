@@ -18,7 +18,8 @@ create_table <- function(h5filename,
                          row_names,
                          column_units) {
 
-if(!is.data.frame(df)) stop("Argument df must be a data.frame.")
+  if(!grepl(".h5$", h5filename)) stop("h5filename must be *.h5")
+  if(!is.data.frame(df)) stop("df must be a data.frame")
 
   # Generate hdf5 structure
   file.h5 <- H5File$new(h5filename)

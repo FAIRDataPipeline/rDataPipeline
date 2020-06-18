@@ -27,8 +27,8 @@ create_array <- function(h5filename,
                          dimension_units,
                          units) {
 
-  if(!is.numeric(array)) stop("Argument array must be a numeric")
-  if(!is.matrix(array)) stop("Argument array must be a matrix")
+  if(!is.numeric(array)) stop("array must be a numeric")
+  if(!is.matrix(array)) stop("array must be a matrix")
   if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
   if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
 

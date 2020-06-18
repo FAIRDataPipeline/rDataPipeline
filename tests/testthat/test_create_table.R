@@ -10,6 +10,7 @@ test_that("function behaves as it should", {
   testthat::expect_error(create_table(h5filename = "test_table",
                                       component = "level",
                                       df = data.frame(a = 1:2, b = 3:4)))
+
   # Incorrect data format should throw error
   testthat::expect_error(
     create_table(h5filename = h5filename,

@@ -12,7 +12,7 @@ create_number <- function(toml_filename,
                           value,
                           name) {
   # Check file name
-  if(!(grepl(".toml$", toml_filename))) stop("toml_filename must be toml.")
+  if(!(grepl(".toml$", toml_filename))) stop("toml_filename must be *.toml")
 
   # Write toml
   cat(paste0("[point-estimate]\nname = \"", name,

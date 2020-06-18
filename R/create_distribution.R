@@ -14,8 +14,9 @@ create_distribution <- function(toml_filename,
                                 values,
                                 names) {
   # Check file name
-  if(!(grepl(".toml$", toml_filename))) stop("toml_filename must be toml.")
-  # Write toml
+  if(!(grepl(".toml$", toml_filename))) stop("toml_filename must be *.toml")
+
+   # Write toml
   tmp <- sapply(seq_along(values), function(x)
     paste0(names[x], " = ", values[x], "\n")) %>%
     paste0(collapse = "")
