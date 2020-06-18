@@ -4,7 +4,6 @@
 #'
 
 library(SCRCdataAPI)
-library(SPARQL)
 
 # Download source data
 download_source_version(dataset = "nrs_demographics")
