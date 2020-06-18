@@ -9,6 +9,7 @@ Description: Functions to generate and process hd5f files
 License: GPL-3
 Imports:
     assertthat,
+    configr,
     dplyr,
     hdf5r,
     readxl,
