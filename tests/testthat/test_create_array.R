@@ -25,15 +25,6 @@ test_that("function behaves as it should", {
                                         colvalue = colnames(df)))
   )
 
-  # Incorrect array format should throw error
-  testthat::expect_error(
-    create_array(h5filename = h5filename,
-                 component = component,
-                 array = as.matrix(df),
-                 dimension_names = list(rowvalue = rownames(df),
-                                        colvalue = colnames(df)))
-  )
-
   # Incorrect dimension_names format should throw error
   testthat::expect_error(
     create_array(h5filename = h5filename,
