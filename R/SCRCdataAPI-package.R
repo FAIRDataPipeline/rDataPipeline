@@ -7,6 +7,7 @@
 #' @docType package
 #'
 #' @importFrom assertthat assert_that
+#' @import configr
 #' @import dplyr
 #' @import hdf5r
 #' @import readxl
