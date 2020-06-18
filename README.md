@@ -2,67 +2,85 @@
 
 Functions to generate and process data files for the SCRC data pipeline.
 
-To install:
+* [Installation](#installation)
+* [Create array](#create-array)
+* [Create table](#create-table)
+* [Create distribution](#create-distribution)
+* [Create point estimate](#create-point-estimate)
+
+
+## Installation
+
 ```{r}
 library(devtools)
 install_github("ScottishCovidResponse/SCRCdataAPI")
 ```
 
-In the following example, we will populate "array.h5" with array type data downloaded from `https://github.com/ScottishCovidResponse/simple_network_sim/blob/master/sample_output_files/sample-1591198608.csv`. The component path is input via the 
-`component` argument, e.g. group `dz`, subgroup `total`. 
+and load it into R:
+```{r}
+library(SCRCdataAPI)
+```
+
+
+## Create table
+
+In the following example, we will populate `test_table.h5` with table type data downloaded from `https://github.com/ScottishCovidResponse/simple_network_sim/blob/master/sample_output_files/sample-1591198608.csv`.  
 
 ```{r}
 download.file("https://github.com/ScottishCovidResponse/simple_network_sim/raw/master/sample_output_files/sample-1591198608.csv", "sample.csv")
 sample <- read.csv("sample.csv")
 ```
 
-To add this data to `table.h5`:
+We want to put this data in a directory called `sample1`:
+
 ```{r}
-create_table(filename = "table.h5", component = "dz/total", df = sample)
+# Create *.h5 file
+create_table(h5filename = "test_table.h5", component = "sample1", df = sample)
 ```
+
 Note that the filename argument can take the name of a file you want to create, 
 or an existing `*.h5` file.
 
-To check contents:
+To read the data file:
+
 ```{r}
-file.h5 <- H5File$new(filename)
-file.h5$ls(recursive = TRUE)
-file.h5[["dz/total/table"]][]
-file.h5$close_all()
+read_table(h5filename = "test_table.h5", path = "sample1")
 ```
 
+
+## Create array
 
 In the following example, we will populate "array.h5" with array type data.
 
-To create an array:
+First we generate an array:
+
 ```{r}
-filename <- "array.h5"
-component <- "dz/total"
 array <- matrix(1:10, 5)
 colnames(array) <- paste0("age", 1:2)
 rownames(array) <- paste0("dz", 1:5)
+```
+
+Then we extract row and column names (and specify descriptors):
+
+```{r}
 dimension_names <- list(`area names` = rownames(array), 
 `age classes` = colnames(array))
-
-# demonstrating column values with missing row values
-dimension_values <- list(NA, data.frame(a = 1:2, b = 3:4))
-dimension_units <- list("10km", "5years")
-
-create_array(filename, component, array, dimension_names, dimension_values, dimension_units)
 ```
 
-To check contents:
+We want to put this data in a directory called `dz`, in a subdirectory called `total`:
+
 ```{r}
-file.h5 <- H5File$new(filename)
-file.h5$ls(recursive = TRUE)
-file.h5[["dz/total/Dimension_1_names"]][]
-file.h5[["dz/total/Dimension_1_title"]][]
-file.h5[["dz/total/Dimension_2_names"]][]
-file.h5[["dz/total/Dimension_2_title"]][]
-file.h5[["dz/total/Dimension_2_units"]][]
-file.h5[["dz/total/Dimension_2_values"]][]
-file.h5$close_all()
+# Create *.h5 file
+create_array(h5filename = "test_array.h5", component = "dz/total", array, dimension_names)
 ```
 
+To read the data file:
 
+```{r}
+read_array(h5filename = "test_array.h5", path = "dz/total")
+```
+
+## Create distribution
+
+## Create point estimate
 
