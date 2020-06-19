@@ -4,7 +4,15 @@
 \alias{process_nrs_demographics}
 \title{process_nrs_demographics}
 \usage{
-process_nrs_demographics(sourcefile, h5filename)
+process_nrs_demographics(
+  sourcefile,
+  h5filename,
+  datazone_sf,
+  grp.names,
+  full.names,
+  subgrp.names,
+  age.classes
+)
 }
 \description{
 process_nrs_demographics

@@ -2,10 +2,6 @@
 #'
 bin_ages <- function(dat, ageclasses) {
 
-  # Remove empty DZcodes ("S01010206", "S01010226", and "S01010227")
-  # dat <- dat %>%
-  #   dplyr::filter(rowSums(dplyr::select(., -DZcode)) != 0)
-
   if(all(ageclasses == "total")) {
     output <- dat %>%
       dplyr::mutate(total = rowSums(dplyr::select(., -DZcode))) %>%
@@ -42,7 +38,7 @@ bin_ages <- function(dat, ageclasses) {
 
     colnames(output) <- paste0("AGE", tag_ageclass)
 
-    output <- cbind.data.frame(DZcode = dat$DZcode, output)
+    output <- cbind.data.frame(AREAcode = dat$AREAcode, output)
   }
 
   output

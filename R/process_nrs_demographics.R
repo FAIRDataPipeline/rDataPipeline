@@ -2,32 +2,21 @@
 #'
 #' @export
 #'
-process_nrs_demographics <- function(sourcefile, h5filename) {
-
-  # Input parameters --------------------------------------------------------
-
-  datazone_sf <- file.path("data-raw", "datazone_shapefile", "SG_DataZone_Bdry_2011.shp")
-  grp.names <- c("dz", "ur", "iz", "la", "hb", "mmw", "spc", "grid1km",
-                 "grid10km")
-  full.names <- c("data zone", "urban rural classification",
-                  "intermediate zone", "local authority",
-                  "health board", "multi member ward",
-                  "scottish parliamentary constituency", "grid area",
-                  "grid area")
-  subgrp.names <- c("total", "1year", "5year", "10year",
-                    "sg_deaths_scheme")
-  age.classes <- list("total", 0:90, seq(0, 90, 5), seq(0, 90, 10),
-                      c(0, 1, 15, 45, 65, 75, 85))
+process_nrs_demographics <- function(sourcefile, h5filename, datazone_sf,
+                                     grp.names, full.names, subgrp.names,
+                                     age.classes) {
 
   # Get shapefile if not already downloaded by user -------------------------
   if (!file.exists(datazone_sf)) {
     download_source_version(dataset = "ukgov_scot_dz_shapefile")
   }
 
-  # Prepare dz2grid ---------------------------------------------------------
+  # Prepare convert2grid ----------------------------------------------------
 
   # Read in datazone shapefile and check for non-intersecting geometries
-  datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>% sf::st_make_valid()
+  datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>%
+    sf::st_make_valid() %>%
+    dplyr::rename(AREAcode = DataZone)
 
   # Prepare grid sizes
   if(any(grepl("^grid", grp.names))) {
@@ -40,7 +29,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
     for(g in seq_along(gridsizes)) {
       tmp <- grid_intersection(datazones, gridsizes[g])
       tag <- paste0("grid", gridsizes[g], "km")
-      dz_subdivisions[[g]] <- tmp$dz_subdivisions
+      dz_subdivisions[[g]] <- tmp$subdivisions
       names(dz_subdivisions)[g] <- tag
       grid_matrix[[g]] <- tmp$grid_matrix
       names(grid_matrix)[g] <- tag
@@ -51,7 +40,8 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
   conversion.table <- readxl::read_excel(
     "data-raw/SIMD+2020v2+-+datazone+lookup.xlsx",
     sheet = 3) %>%
-    dplyr::rename(DZcode = DZ,
+    dplyr::rename(AREAcode = DZ,
+                  AREAname = DZname,
                   URcode = URclass) %>%
     dplyr::select_if(grepl("name$|code$", colnames(.)))
 
@@ -89,7 +79,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
       dplyr::select_at(vars(-dplyr::ends_with("Name"),
                             -AllAges)) %>%
       dplyr::mutate_at(vars(dplyr::starts_with("AGE")), as.numeric) %>%
-      dplyr::rename(DZcode = DataZone2011Code) %>%
+      dplyr::rename(AREAcode = DataZone2011Code) %>%
       as.data.frame()
 
 
@@ -112,10 +102,24 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
         cat(paste0("\rProcessing ", j, "/", length(subgrp.names), ": ",
                    i, "/", length(grp.names), "..."))
 
-        if(grp.names[i] %in% c("dz", "ur", "iz", "la", "hb", "mmw", "spc")) {
+        if(grp.names[i] %in% "dz") {
 
           # Transformed data (non-grid transformed)
-          tmp.dat <- dz2lower(transage.dat, grp.names[i], conversion.table)
+          tmp.dat <- list(data = transage.dat,
+                          area.names = conversion.table %>%
+                            rename(DZcode = AREAcode,
+                                   DZname = AREAname) %>%
+                            select(DZcode, DZname))
+          transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
+                                grid_id = tmp.dat$data[, 1])
+          area.names <- tmp.dat$area.names
+
+        } else if(grp.names[i] %in% c("ur", "iz", "la", "hb", "mmw", "spc")) {
+
+          # Transformed data (non-grid transformed)
+          tmp.dat <- convert2lower(dat = transage.dat,
+                                   convert_to = grp.names[i],
+                                   conversion_table = conversion.table)
           transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
                                 grid_id = tmp.dat$data[, 1])
           area.names <- tmp.dat$area.names
@@ -123,9 +127,10 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
         } else if(grepl("grid",  grp.names[i])) {
 
           # Transformed data (grid transformed)
-          transarea.dat <- dz2grid(dat = transage.dat,
-                                   datazones = datazones,
-                                   dz_subdivisions = dz_subdivisions[[grp.names[i]]])
+          transarea.dat <- convert2grid(
+            dat = transage.dat,
+            shapefile = datazones,
+            subdivisions = dz_subdivisions[[grp.names[i]]])
 
         } else {
           stop("OMG! - grpnames")

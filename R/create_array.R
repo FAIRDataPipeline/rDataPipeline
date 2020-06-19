@@ -27,12 +27,18 @@ create_array <- function(h5filename,
                          dimension_units,
                          units) {
 
-  if(!is.matrix(array)) stop("Argument array must be a matrix")
+  if(!grepl(".h5$", h5filename)) stop("h5filename must be *.h5")
+  if(!is.numeric(array)) stop("array must be a numeric")
+  if(!is.matrix(array)) stop("array must be a matrix")
   if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
   if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
+  if(length(dimension_names[[1]]) != nrow(array))
+    stop("Dimension_1_names length must match nrows in array")
+  if(length(dimension_names[[2]]) != ncol(array))
+    stop("Dimension_2_names length must match nrows in array")
 
-  # Generate hdf5 structure
-  file.h5 <- H5File$new(h5filename)
+    # Generate hdf5 structure
+    file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)
