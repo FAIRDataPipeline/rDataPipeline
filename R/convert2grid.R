@@ -11,26 +11,26 @@ convert2grid <- function(dat,
                          shapefile,
                          subdivisions) {
 
-  dat <- dat %>% tibble::column_to_rownames("DZcode")
+  dat <- dat %>% tibble::column_to_rownames("AREAcode")
 
   # Find area of each of the newly created distinct datazone components
   intersection_area <- data.frame(grid_id = subdivisions$grid_id,
-                                  datazone = subdivisions$DataZone,
+                                  AREAcode = subdivisions$AREAcode,
                                   area = as.numeric(sf::st_area(subdivisions)))
-  datazone_area <- data.frame(datazone = shapefile$DataZone,
+  datazone_area <- data.frame(AREAcode = shapefile$AREAcode,
                               full_zone_area = as.numeric(sf::st_area(shapefile)))
 
   # Join full area of each datazone to this data.frame and use to find
   # the proportion of each datazone in each grid cell
   combined_areas <- left_join(intersection_area, datazone_area,
-                              by = "datazone") %>%
+                              by = "AREAcode") %>%
     dplyr::mutate(proportion = area / full_zone_area) %>%
-    dplyr::select(grid_id, datazone, proportion) %>%
-    dplyr::filter(datazone %in% rownames(dat))
+    dplyr::select(grid_id, AREAcode, proportion) %>%
+    dplyr::filter(AREAcode %in% rownames(dat))
 
   # Create matrix of grid cells by shapefile containing the proportion of
   # each datazone in each grid cell with 0's
-  wide_new_table <- reshape2::dcast(combined_areas, grid_id ~ datazone,
+  wide_new_table <- reshape2::dcast(combined_areas, grid_id ~ AREAcode,
                                     value.var = "proportion", fill = 0)
 
   # Make new tables to fill in population proportions

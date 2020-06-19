@@ -4,7 +4,7 @@
 \alias{grid_intersection}
 \title{grid_intersection}
 \usage{
-grid_intersection(datazones, gridsize)
+grid_intersection(shapefile, gridsize)
 }
 \description{
 grid_intersection
