@@ -24,7 +24,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
     download_source_version(dataset = "ukgov_scot_dz_shapefile")
   }
 
-  # Prepare dz2grid ---------------------------------------------------------
+  # Prepare convert2grid ---------------------------------------------------------
 
   # Read in datazone shapefile and check for non-intersecting geometries
   datazones <- sf::st_read(datazone_sf, quiet = TRUE) %>% sf::st_make_valid()
@@ -115,7 +115,7 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
         if(grp.names[i] %in% c("dz", "ur", "iz", "la", "hb", "mmw", "spc")) {
 
           # Transformed data (non-grid transformed)
-          tmp.dat <- dz2lower(transage.dat, grp.names[i], conversion.table)
+          tmp.dat <- convert2lower(transage.dat, grp.names[i], conversion.table)
           transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
                                 grid_id = tmp.dat$data[, 1])
           area.names <- tmp.dat$area.names
@@ -123,9 +123,9 @@ process_nrs_demographics <- function(sourcefile, h5filename) {
         } else if(grepl("grid",  grp.names[i])) {
 
           # Transformed data (grid transformed)
-          transarea.dat <- dz2grid(dat = transage.dat,
-                                   datazones = datazones,
-                                   dz_subdivisions = dz_subdivisions[[grp.names[i]]])
+          transarea.dat <- convert2grid(dat = transage.dat,
+                                   shapefile = datazones,
+                                   subdivisions = dz_subdivisions[[grp.names[i]]])
 
         } else {
           stop("OMG! - grpnames")
