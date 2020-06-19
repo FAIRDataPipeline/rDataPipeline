@@ -1,4 +1,4 @@
-#' process_nrs_demographics
+#' process_ons_demographics
 #'
 #' @export
 #'
