@@ -1,24 +1,24 @@
-#' dz2grid
+#' convert2grid
 #'
 #' This script transforms age class population data from census geographies to
 #' a grid based system.
 #'
-#' @param dat datazone population data
-#' @param datazones datazones
-#' @param dz_subdivisions datazone subdivisions
+#' @param dat population data
+#' @param shapefile shapefile
+#' @param subdivisions subdivisions
 #'
-dz2grid <- function(dat,
-                    datazones,
-                    dz_subdivisions) {
+convert2grid <- function(dat,
+                         shapefile,
+                         subdivisions) {
 
   dat <- dat %>% tibble::column_to_rownames("DZcode")
 
   # Find area of each of the newly created distinct datazone components
-  intersection_area <- data.frame(grid_id = dz_subdivisions$grid_id,
-                                  datazone = dz_subdivisions$DataZone,
-                                  area = as.numeric(sf::st_area(dz_subdivisions)))
-  datazone_area <- data.frame(datazone = datazones$DataZone,
-                              full_zone_area = as.numeric(sf::st_area(datazones)))
+  intersection_area <- data.frame(grid_id = subdivisions$grid_id,
+                                  datazone = subdivisions$DataZone,
+                                  area = as.numeric(sf::st_area(subdivisions)))
+  datazone_area <- data.frame(datazone = shapefile$DataZone,
+                              full_zone_area = as.numeric(sf::st_area(shapefile)))
 
   # Join full area of each datazone to this data.frame and use to find
   # the proportion of each datazone in each grid cell
@@ -28,7 +28,7 @@ dz2grid <- function(dat,
     dplyr::select(grid_id, datazone, proportion) %>%
     dplyr::filter(datazone %in% rownames(dat))
 
-  # Create matrix of grid cells by datazones containing the proportion of
+  # Create matrix of grid cells by shapefile containing the proportion of
   # each datazone in each grid cell with 0's
   wide_new_table <- reshape2::dcast(combined_areas, grid_id ~ datazone,
                                     value.var = "proportion", fill = 0)
@@ -85,7 +85,7 @@ dz2grid <- function(dat,
 
     }
 
-    # Sum across datazones to find total population in each grid cell
+    # Sum across shapefile to find total population in each grid cell
     grid_pop[, bins[j]] <- rowSums(this_ageclass)
   }
 

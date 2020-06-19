@@ -1,10 +1,10 @@
-#' dz2lower
+#' convert2lower
 #'
 #' @param dat data
 #' @param convert_to c("dz", "ur", "iz", "la", "hb", "mmw", "spc")
 #' @param conversion_table conversion table
 #'
-dz2lower <- function(dat, convert_to, conversion_table) {
+convert2lower <- function(dat, convert_to, conversion_table) {
   # Check that convert_to is valid
   assertthat::assert_that(toupper(convert_to) %in% (colnames(conversion_table) %>%
                                                       .[grepl("name$", .)] %>%
@@ -12,7 +12,7 @@ dz2lower <- function(dat, convert_to, conversion_table) {
 
   # Check that all dat datazones are in the lookup table
   assertthat::assert_that(all(dat$datazone %in%
-                                conversion_table$DZcode))
+                                conversion_table$area))
 
   # Convert datazones
   regex <- paste0("DZ|", toupper(convert_to))
