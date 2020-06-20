@@ -1,8 +1,12 @@
 #' grid_intersection
 #'
 grid_intersection <- function(shapefile, gridsize) {
+  # Check units of shapefile: assuming metres below
+  sh_unit <- sf::st_crs(shapefile, parameters = TRUE)$units_gdal
+  assertthat::assert_that(sh_unit == "metre", msg = "Unexpected CRS: shapefile distances should be in metres")
+
   # Generate grid over bounding box of datazone shapefile
-  n <- gridsize*1000
+  n <- gridsize*1000  # Assume gridsize given in km
   grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(shapefile)),
                             cellsize = c(n, n))
 
