@@ -4,8 +4,8 @@ bin_ages <- function(dat, ageclasses) {
 
   if(all(ageclasses == "total")) {
     output <- dat %>%
-      dplyr::mutate(total = rowSums(dplyr::select(., -DZcode))) %>%
-      dplyr::select(DZcode, total)
+      dplyr::mutate(total = rowSums(dplyr::select(., -AREAcode))) %>%
+      dplyr::select(AREAcode, total)
 
   } else {
     # Find total number of individuals in each age class
