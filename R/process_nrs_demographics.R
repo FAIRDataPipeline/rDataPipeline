@@ -83,7 +83,7 @@ process_nrs_demographics <- function(sourcefile, h5filename, datazone_sf,
       as.data.frame()
 
 
-    # Generate data and attach to hdf5 file -----------------------------------
+    # Generate data and attach to hdf5 file ---------------------------------
 
     for(j in seq_along(subgrp.names)) {
 
@@ -110,8 +110,9 @@ process_nrs_demographics <- function(sourcefile, h5filename, datazone_sf,
                             rename(DZcode = AREAcode,
                                    DZname = AREAname) %>%
                             select(DZcode, DZname))
-          transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1, drop = FALSE]),
-                                grid_id = tmp.dat$data[, 1])
+          transarea.dat <- list(
+            grid_pop = as.matrix(tmp.dat$data[, -1, drop = FALSE]),
+            grid_id = tmp.dat$data[, 1])
           area.names <- tmp.dat$area.names
 
         } else if(grp.names[i] %in% c("ur", "iz", "la", "hb", "mmw", "spc")) {
