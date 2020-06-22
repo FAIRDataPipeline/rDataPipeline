@@ -35,7 +35,7 @@ We want to put this data in a directory called `sample1`:
 
 ```{r}
 # Create *.h5 file
-create_table(filename = "test_table.h5", component = "sample1", df = sample)
+create_table(h5filename = "test_table.h5", component = "sample1", df = sample)
 ```
 
 Note that the filename argument can take the name of a file you want to create, 
