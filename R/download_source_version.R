@@ -21,7 +21,7 @@ download_source_version <- function(dataset) {
 
   } else if(dataset == "scotgov_dz_lookup") {
 
-    # scotgov_dz_lookup -------------------------------------------------------
+    # scotgov_dz_lookup -----------------------------------------------------
 
     download_from_url(
       url = "http://statistics.gov.scot",
@@ -31,7 +31,40 @@ download_source_version <- function(dataset) {
       local = "data-raw",
       filename = "scotgov_dz_lookup.csv")
 
+  } else if(dataset == "ons_eng_wales_population") {
+
+    # ons_eng_wales_population ----------------------------------------------
+
+    genders <- c("Persons", "Males", "Females")
+
+    for(sex in seq_along(genders)) {
+      for(age in 101:191) {
+        temp_pop_table<-nomisr::nomis_get_data(id = "NM_2010_1",
+                                               time = "latest",
+                                               geography = c("TYPE299"),
+                                               gender = c(sex-1),
+                                               c_age = age,
+                                               measures = 20100) %>%
+          dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE, GEOGRAPHY_TYPE,
+                        GENDER_NAME, C_AGE_NAME, MEASURES_NAME, OBS_VALUE)
+        names(temp_pop_table)[8] = unique(temp_pop_table$C_AGE_NAME)
+        geography_value=temp_pop_table[, c(2, 8)]
+        if(age == 101) {
+          population_table=geography_value
+        } else {
+          population_table = left_join(population_table,
+                                       geography_value,
+                                       by="GEOGRAPHY_NAME")
+        }
+      }
+
+      write_csv(population_table, paste0("england_", genders[sex], ".csv"))
+    }
+
   } else if(dataset == "nrs_demographics") {
+
+    # nrs_demographics ------------------------------------------------------
+
     download_from_url(
       url = "https://www.nrscotland.gov.uk",
       path = file.path("files//statistics", "population-estimates",
