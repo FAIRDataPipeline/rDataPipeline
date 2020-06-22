@@ -8,7 +8,10 @@
 #'
 #' @export
 #'
-new_storage_root <- function(name, description, uri, type) {
+new_storage_root <- function(name,
+                             description,
+                             uri,
+                             type) {
 
   list(name = name,
        description = description,

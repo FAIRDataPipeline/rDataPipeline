@@ -4,7 +4,12 @@
 \alias{new_source_type}
 \title{new_source_type}
 \usage{
-new_source_type()
+new_source_type(name, description)
+}
+\arguments{
+\item{name}{name of the source}
+
+\item{description}{free text description of the source}
 }
 \description{
 new_source_type
