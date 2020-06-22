@@ -2,8 +2,13 @@
 #'
 #' @export
 #'
-process_ons_demographics <- function (sourcefile, h5filename, output_area_sf,
-                                      grp.names, full.names, subgrp.names,
+process_ons_demographics <- function (sourcefile,
+                                      h5filename,
+                                      output_area_sf,
+                                      oa_conversion_table,
+                                      grp.names,
+                                      full.names,
+                                      subgrp.names,
                                       age.classes){
 
   # Get shapefile if not already downloaded by user -------------------------
@@ -33,36 +38,8 @@ process_ons_demographics <- function (sourcefile, h5filename, output_area_sf,
       names(grid_matrix)[g] <- tag
     }
   }
-  # Prepare conversion table
-  OA_EW_LA <- readr::read_csv("data-raw/england_lookup/output_to_ward_to_LA.csv",
-                              col_types = cols(.default = "c"))  %>%
-    dplyr::rename(AREAcode = OA11CD, EWcode = WD19CD, EWname = WD19NM,
-                  LAcode = LAD19CD, LAname = LAD19NM) %>%
-    dplyr::select_if(grepl("name$|code$", colnames(.)))
-  OA_LSOA_MSOA_LA <- readr::read_csv("data-raw/england_lookup/output_to_LSOA_MSOA_to_LA.csv",
-                                     col_types = cols(.default = "c"))  %>%
-    dplyr::rename(AREAcode = OA11CD, LSOAcode = LSOA11CD, LSOAname = LSOA11NM,
-                  MSOAcode = MSOA11CD, MSOAname = MSOA11NM) %>%
-    dplyr::select_if(grepl("name$|code$", colnames(.)))
-  LSOA_CCG <- readr::read_csv("data-raw/england_lookup/LSOA_to_CCG.csv",
-                              col_types = cols(.default = "c"))  %>%
-    dplyr::rename(LSOAcode = LSOA11CD, CCGcode = CCG19CD, CCGname = CCG19NM,
-                  STPcode = STP19CD, STP19name = STP19NM) %>%
-    dplyr::select_if(grepl("name$|code$", colnames(.)))
-  EW_UA <- readr::read_csv("data-raw/england_lookup/ward_to_UA_wales.csv",
-                           col_types = cols(.default = "c"))  %>%
-    dplyr::rename(EWcode = WD19CD, UAcode = UA19CD, UAname = UA19NM) %>%
-    dplyr::select_if(grepl("name$|code$", colnames(.)))
-  UA_HB <- readr::read_csv("data-raw/england_lookup/UA_to_healthboard_wales.csv",
-                           col_types = cols(.default = "c"))  %>%
-    dplyr::rename(UAcode = UA19CD, LHBcode = LHB19CD, LHBname = LHB19NM) %>%
-    dplyr::select_if(grepl("name$|code$", colnames(.)))
 
-  conversion.table <- OA_EW_LA %>% left_join(.,OA_LSOA_MSOA_LA,by = "AREAcode") %>%
-    left_join(.,LSOA_CCG,by = "LSOAcode") %>%
-    left_join(.,EW_UA,by = "EWcode") %>%
-    left_join(.,UA_HB,by = "UAcode")
-  conversion.table$AREAname <- conversion.table$AREAcode
+  conversion.table <- read.csv(oa_conversion_table)
 
   # Process raw data --------------------------------------------------------
 

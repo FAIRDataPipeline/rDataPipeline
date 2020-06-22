@@ -7,7 +7,8 @@
 process_ons_demographics(
   sourcefile,
   h5filename,
-  datazone_sf,
+  output_area_sf,
+  oa_conversion_table,
   grp.names,
   full.names,
   subgrp.names,
