@@ -110,7 +110,7 @@ process_nrs_demographics <- function(sourcefile, h5filename, datazone_sf,
                             rename(DZcode = AREAcode,
                                    DZname = AREAname) %>%
                             select(DZcode, DZname))
-          transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1]),
+          transarea.dat <- list(grid_pop = as.matrix(tmp.dat$data[, -1, drop = FALSE]),
                                 grid_id = tmp.dat$data[, 1])
           area.names <- tmp.dat$area.names
 
