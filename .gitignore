@@ -36,3 +36,4 @@ vignettes/*.pdf
 *.knit.md
 
 .h5
+.DS_Store
