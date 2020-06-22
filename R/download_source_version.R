@@ -39,7 +39,7 @@ download_source_version <- function(dataset) {
 
     for(sex in seq_along(genders)) {
       for(age in 101:191) {
-        temp_pop_table<-nomisr::nomis_get_data(id = "NM_2010_1",
+        temp_pop_table <- nomisr::nomis_get_data(id = "NM_2010_1",
                                                time = "latest",
                                                geography = c("TYPE299"),
                                                gender = c(sex-1),
@@ -47,14 +47,16 @@ download_source_version <- function(dataset) {
                                                measures = 20100) %>%
           dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE, GEOGRAPHY_TYPE,
                         GENDER_NAME, C_AGE_NAME, MEASURES_NAME, OBS_VALUE)
-        names(temp_pop_table)[8] = unique(temp_pop_table$C_AGE_NAME)
-        geography_value=temp_pop_table[, c(2, 8)]
+        names(temp_pop_table)[8] <- unique(temp_pop_table$C_AGE_NAME)
+        geography_value <- temp_pop_table[,c(2,8)]
+
         if(age == 101) {
-          population_table=geography_value
+          population_table = geography_value
+
         } else {
           population_table = left_join(population_table,
                                        geography_value,
-                                       by="GEOGRAPHY_NAME")
+                                       by = "GEOGRAPHY_NAME")
         }
       }
 

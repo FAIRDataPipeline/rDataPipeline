@@ -12,6 +12,7 @@
 #' @import hdf5r
 #' @import httr
 #' @import jsonlite
+#' @import nomisr
 #' @import readxl
 #' @import reshape2
 #' @import sf
