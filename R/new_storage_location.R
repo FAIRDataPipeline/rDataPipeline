@@ -1,12 +1,15 @@
 #' new_storage_location
 #'
-#' @param name
-#' @param description
-#' @param path
-#' @param hash
-#' @param local_cache_url
-#' @param responsible_person
-#' @param store_root
+#' @param name name of the storage_location, e.g. "Model File"
+#' @param description free text description of the storage_location, e.g.
+#' "Storage on Boydorr FTP for SCRC model"
+#' @param path path to the data from the root of the store, e.g.
+#' "models/my_model.txt"
+#' @param hash SHA1 hash of the file
+#' @param local_cache_url reference to a local store of the data, most likely
+#' left blank
+#' @param responsible_person reference to the responsible_person
+#' @param store_root reference to the storage_root
 #'
 #' @export
 #'

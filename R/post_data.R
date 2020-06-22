@@ -1,5 +1,7 @@
 #' post_data
 #'
+#' Post data to registry
+#'
 #' @param table
 #' @param data
 #' @param headers

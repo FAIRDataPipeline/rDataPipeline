@@ -15,7 +15,22 @@ new_storage_location(
 )
 }
 \arguments{
-\item{store_root}{}
+\item{name}{name of the storage_location, e.g. "Model File"}
+
+\item{description}{free text description of the storage_location, e.g.
+"Storage on Boydorr FTP for SCRC model"}
+
+\item{path}{path to the data from the root of the store, e.g.
+"models/my_model.txt"}
+
+\item{hash}{SHA1 hash of the file}
+
+\item{local_cache_url}{reference to a local store of the data, most likely
+left blank}
+
+\item{responsible_person}{reference to the responsible_person}
+
+\item{store_root}{reference to the storage_root}
 }
 \description{
 new_storage_location

@@ -14,6 +14,5 @@ get_responsible_person <- function(full_name) {
   ind <- lapply(tmp, function(x) x$full_name == full_name) %>%
     unlist() %>%
     which()
-
   tmp[[ind]]$url
 }

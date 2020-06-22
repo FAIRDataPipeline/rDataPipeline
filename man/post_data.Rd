@@ -10,5 +10,5 @@ post_data(table, data, headers)
 \item{headers}{}
 }
 \description{
-post_data
+Post data to registry
 }
