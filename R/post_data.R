@@ -1,20 +1,19 @@
 #' post_data
 #'
-#' @param endpoint api endpoint
 #' @param table
 #' @param data
+#' @param headers
 #'
 #' @export
 #'
-post_data <- function(endpoint = "http://data.scrc.uk/api",
-                      table,
-                      data) {
+post_data <- function(table,
+                      data,
+                      headers) {
 
-  result <- httr::POST(file.path(endpoint, table),
+  result <- httr::POST(file.path("http://data.scrc.uk/api", table, ""),
                        body =  jsonlite::toJSON(data, pretty = T, auto_unbox = T),
-                       httr::add_headers(headers),
                        httr::content_type('application/json'),
-                       # encode = "json",
+                       httr::add_headers(.headers = headers),
                        verbose())
 
   if(results$status == 200)
