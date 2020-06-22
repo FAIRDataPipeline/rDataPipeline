@@ -4,12 +4,10 @@
 \alias{post_data}
 \title{post_data}
 \usage{
-post_data(endpoint = "http://data.scrc.uk/api", table, data)
+post_data(table, data, headers)
 }
 \arguments{
-\item{endpoint}{api endpoint}
-
-\item{data}{}
+\item{headers}{}
 }
 \description{
 post_data

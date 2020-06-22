@@ -4,7 +4,7 @@
 \alias{get_existing}
 \title{get_existing}
 \usage{
-get_existing(endpoint = "http://data.scrc.uk/api", table, user_keys = "name")
+get_existing(endpoint = "http://data.scrc.uk/api", table, key)
 }
 \arguments{
 \item{endpoint}{api endpoint}
