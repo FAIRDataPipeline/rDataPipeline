@@ -12,6 +12,8 @@ Imports:
     configr,
     dplyr,
     hdf5r,
+    httr,
+    jsonlite,
     readxl,
     reshape2,
     sf,

@@ -10,6 +10,8 @@
 #' @import configr
 #' @import dplyr
 #' @import hdf5r
+#' @import httr
+#' @import jsonlite
 #' @import readxl
 #' @import reshape2
 #' @import sf
