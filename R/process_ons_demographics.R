@@ -9,7 +9,7 @@ process_ons_demographics <- function (sourcefile,
                                       grp.names,
                                       full.names,
                                       subgrp.names,
-                                      age.classes){
+                                      age.classes) {
 
   # Get shapefile if not already downloaded by user -------------------------
   if (!file.exists(output_area_sf)) {
@@ -19,7 +19,8 @@ process_ons_demographics <- function (sourcefile,
   # Prepare dz2grid ---------------------------------------------------------
 
   # Read in datazone shapefile and check for non-intersecting geometries
-  output_areas <- sf::st_read(output_area_sf, quiet = TRUE) %>% sf::st_make_valid()
+  output_areas <- sf::st_read(output_area_sf, quiet = TRUE) %>%
+    sf::st_make_valid()
 
   # Prepare grid sizes
   if (any(grepl("^grid", grp.names))) {
