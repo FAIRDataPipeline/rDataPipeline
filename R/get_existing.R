@@ -8,14 +8,18 @@
 #'
 get_existing <- function(endpoint = "http://data.scrc.uk/api",
                          table,
-                         user_keys = "name") {
+                         key) {
 
-  out <- httr::GET(file.path(endpoint, table)) %>%
+  tmp <- httr::GET(file.path(endpoint, table, ""),
+                   httr::add_headers(.headers = headers)) %>%
     httr::content("text") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  if(!missing(user_keys))
-    lapply(out, function(x) x[user_keys]) %>% unlist(use.names = FALSE)
+  output <- lapply(tmp, function(x) x$name) %>%
+    unlist(use.names = FALSE)
 
-  out
+  if(!missing(key))
+    output <- tmp[[which(output == key)]]
+
+  output
 }
