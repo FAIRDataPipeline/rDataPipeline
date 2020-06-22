@@ -7,7 +7,10 @@
 new_storage_type(name, description)
 }
 \arguments{
-\item{description}{}
+\item{name}{Name of storage type, e.g. ftp, https}
+
+\item{description}{free text description of the storage type, e.g. "File
+Transfer Protocol"}
 }
 \description{
 new_storage_type

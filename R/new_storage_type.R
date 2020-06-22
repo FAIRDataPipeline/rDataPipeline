@@ -1,7 +1,8 @@
 #' new_storage_type
 #'
-#' @param name
-#' @param description
+#' @param name Name of storage type, e.g. ftp, https
+#' @param description free text description of the storage type, e.g. "File
+#' Transfer Protocol"
 #'
 #' @export
 #'
