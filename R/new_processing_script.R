@@ -1,8 +1,8 @@
 #' new_processing_script
 #'
-#' @param name
-#' @param responsible_person
-#' @param store
+#' @param name Name of the processing script
+#' @param responsible_person Name of the responsible person
+#' @param store Name of the storage_location, e.g. "Model File"
 #' @param versions
 #' @param key GitHub key
 #'
@@ -23,5 +23,4 @@ new_processing_script <- function(name,
                         store = location_url,
                         versions = versions),
             key)
-
 }

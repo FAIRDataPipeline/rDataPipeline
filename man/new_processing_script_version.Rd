@@ -16,6 +16,18 @@ new_processing_script_version(
 )
 }
 \arguments{
+\item{version_identifier}{Version identifier of the source_version, e.g. 1}
+
+\item{responsible_person}{Name of the responsible person}
+
+\item{supercedes}{Superseded source_version}
+
+\item{processing_script}{Name of the processing script}
+
+\item{store}{Name of the storage_location, e.g. "Model File"}
+
+\item{accessibility}{Name of accessibility type}
+
 \item{key}{GitHub key}
 }
 \description{

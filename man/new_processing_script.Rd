@@ -7,6 +7,12 @@
 new_processing_script(name, responsible_person, store, versions, key)
 }
 \arguments{
+\item{name}{Name of the processing script}
+
+\item{responsible_person}{Name of the responsible person}
+
+\item{store}{Name of the storage_location, e.g. "Model File"}
+
 \item{key}{GitHub key}
 }
 \description{

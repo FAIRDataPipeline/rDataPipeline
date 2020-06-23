@@ -1,11 +1,11 @@
 #' new_processing_script_version
 #'
-#' @param version_identifier
-#' @param responsible_person
-#' @param supercedes
-#' @param processing_script
-#' @param store
-#' @param accessibility
+#' @param version_identifier Version identifier of the source_version, e.g. 1
+#' @param responsible_person Name of the responsible person
+#' @param supercedes Superseded source_version
+#' @param processing_script Name of the processing script
+#' @param store Name of the storage_location, e.g. "Model File"
+#' @param accessibility Name of accessibility type
 #' @param data_product_versions
 #' @param key GitHub key
 #'
