@@ -1,18 +1,22 @@
 #' get_responsible_person
 #'
 #' @param full_name
+#' @param key
 #'
 #' @export
 #'
-get_responsible_person <- function(full_name) {
+get_responsible_person <- function(full_name, key) {
+
+  h <- c(Authorization = paste("token", key))
 
   tmp <- httr::GET(file.path(endpoint, "users", ""),
-                   httr::add_headers(.headers = headers)) %>%
+                   httr::add_headers(.headers = h)) %>%
     httr::content("text") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   ind <- lapply(tmp, function(x) x$full_name == full_name) %>%
     unlist() %>%
     which()
+
   tmp[[ind]]$url
 }

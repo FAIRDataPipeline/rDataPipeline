@@ -4,12 +4,14 @@
 \alias{new_source_type}
 \title{new_source_type}
 \usage{
-new_source_type(name, description)
+new_source_type(name, description, key)
 }
 \arguments{
-\item{name}{name of the source}
+\item{name}{Name of the source type}
 
-\item{description}{free text description of the source}
+\item{description}{Free text description of the source}
+
+\item{key}{GitHub key}
 }
 \description{
 new_source_type

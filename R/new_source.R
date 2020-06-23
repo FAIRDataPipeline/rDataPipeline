@@ -1,10 +1,11 @@
 #' new_source
 #'
-#' @param name name of the source
-#' @param description free text description of the source
-#' @param responsible_person reference to the responsible_person
-#' @param store reference to the storage_location
-#' @param source_type reference to the source_type
+#' @param name Name of the source
+#' @param description Free text description of the source
+#' @param responsible_person Name of the responsible person
+#' @param store Name of the storage_location, e.g. "Model File"
+#' @param source_type Name of source type
+#' @param key GitHub key
 #'
 #' @export
 #'
@@ -12,11 +13,19 @@ new_source <- function(name,
                        description,
                        responsible_person,
                        store,
-                       source_type) {
+                       source_type,
+                       key) {
 
-  list(name = name,
-       description = description,
-       responsible_person = responsible_person,
-       store = store,
-       source_type = source_type)
+  rp_url <- get_responsible_person(responsible_person, key)
+  store_url <- get_existing(table = "storage_location", key = store)$url
+  type_url <- get_existing(table = "source_type", key = source_type)$url
+
+  post_data(
+    table = "source",
+    data =  list(name = name,
+                 description = description,
+                 responsible_person = rp_url,
+                 store = store_url,
+                 source_type = type_url),
+    key)
 }

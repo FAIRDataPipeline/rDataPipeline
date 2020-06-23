@@ -1,17 +1,20 @@
 #' get_existing
 #'
-#' @param endpoint api endpoint
 #' @param table
-#' @param user_keys
+#' @param key
+#' @param endpoint api endpoint
 #'
 #' @export
 #'
-get_existing <- function(endpoint = "http://data.scrc.uk/api",
-                         table,
-                         key) {
+#' @examples
+#' get_existing(table = "storage_type")
+#' get_existing(table = "storage_type", key = "ftp")
+#'
+get_existing <- function(table,
+                         key,
+                         endpoint = "http://data.scrc.uk/api") {
 
-  tmp <- httr::GET(file.path(endpoint, table, ""),
-                   httr::add_headers(.headers = headers)) %>%
+  tmp <- httr::GET(file.path(endpoint, table, "")) %>%
     httr::content("text") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 

@@ -4,13 +4,16 @@
 \alias{get_existing}
 \title{get_existing}
 \usage{
-get_existing(endpoint = "http://data.scrc.uk/api", table, key)
+get_existing(table, key, endpoint = "http://data.scrc.uk/api")
 }
 \arguments{
 \item{endpoint}{api endpoint}
-
-\item{user_keys}{}
 }
 \description{
 get_existing
+}
+\examples{
+get_existing(table = "storage_type")
+get_existing(table = "storage_type", key = "ftp")
+
 }

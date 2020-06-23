@@ -4,10 +4,14 @@
 \alias{post_data}
 \title{post_data}
 \usage{
-post_data(table, data, headers)
+post_data(table, data, key)
 }
 \arguments{
-\item{headers}{}
+\item{table}{table}
+
+\item{data}{data}
+
+\item{key}{key}
 }
 \description{
 Post data to registry

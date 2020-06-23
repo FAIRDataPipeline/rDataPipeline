@@ -4,13 +4,15 @@
 \alias{new_storage_type}
 \title{new_storage_type}
 \usage{
-new_storage_type(name, description)
+new_storage_type(name, description, key)
 }
 \arguments{
 \item{name}{Name of storage type, e.g. ftp, https}
 
-\item{description}{free text description of the storage type, e.g. "File
+\item{description}{Free text description of the storage type, e.g. "File
 Transfer Protocol"}
+
+\item{key}{GitHub key}
 }
 \description{
 new_storage_type

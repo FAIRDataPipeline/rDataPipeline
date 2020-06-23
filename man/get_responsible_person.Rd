@@ -4,10 +4,10 @@
 \alias{get_responsible_person}
 \title{get_responsible_person}
 \usage{
-get_responsible_person(full_name)
+get_responsible_person(full_name, key)
 }
 \arguments{
-\item{full_name}{}
+\item{key}{}
 }
 \description{
 get_responsible_person

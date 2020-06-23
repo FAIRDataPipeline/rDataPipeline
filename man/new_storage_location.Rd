@@ -11,26 +11,29 @@ new_storage_location(
   hash,
   local_cache_url,
   responsible_person,
-  store_root
+  storage_root,
+  key
 )
 }
 \arguments{
-\item{name}{name of the storage_location, e.g. "Model File"}
+\item{name}{Name of the storage_location, e.g. "Model File"}
 
-\item{description}{free text description of the storage_location, e.g.
+\item{description}{Free text description of the storage_location, e.g.
 "Storage on Boydorr FTP for SCRC model"}
 
-\item{path}{path to the data from the root of the store, e.g.
+\item{path}{Path to the data from the root of the store, e.g.
 "models/my_model.txt"}
 
 \item{hash}{SHA1 hash of the file}
 
-\item{local_cache_url}{reference to a local store of the data, most likely
+\item{local_cache_url}{Reference to a local store of the data, most likely
 left blank}
 
-\item{responsible_person}{reference to the responsible_person}
+\item{responsible_person}{Name of the responsible person}
 
-\item{store_root}{reference to the storage_root}
+\item{key}{GitHub key}
+
+\item{store_root}{Name of the storage root, e.g. "Boydorr"}
 }
 \description{
 new_storage_location

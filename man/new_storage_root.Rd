@@ -4,17 +4,19 @@
 \alias{new_storage_root}
 \title{new_storage_root}
 \usage{
-new_storage_root(name, description, uri, type)
+new_storage_root(name, description, uri, type, key)
 }
 \arguments{
-\item{name}{name of the storage root, e.g. "Boydorr"}
+\item{name}{Name of the storage root, e.g. "Boydorr"}
 
-\item{description}{free text description of the storage root, e.g. "Boydorr
+\item{description}{Free text description of the storage root, e.g. "Boydorr
 FTP server"}
 
-\item{uri}{link to the root of the storage, e.g. "ftp://srv/ftp/scrc"}
+\item{uri}{Link to the root of the storage, e.g. "ftp://srv/ftp/scrc"}
 
-\item{type}{reference to the storage type used}
+\item{type}{Name of storage type, e.g. ftp, https}
+
+\item{key}{GitHub key}
 }
 \description{
 new_storage_root
