@@ -1,43 +1,38 @@
 #' post_source_data
 #'
-#' @param name Name of dataset
-#' @param description Description of dataset
-#' @param hash SHA1 hash of the file
-#' @param responsible_person Name of the responsible person
-#' @param key GitHub key
 #' @param storage_type Name of storage type, e.g. ftp, https
 #' @param storage_root Name of the storage root, e.g. "Boydorr"
 #' @param storage_location Name of the storage_location, e.g. "Model File"
 #' @param accessibility Name of accessibility type
 #' @param source_type Name of the source type
 #' @param source Name of the source
-#' @param source_version Version identifier of the source_version, e.g. 1
+#' @param source_version_identifier
 #' @param source_version_description Free text description of the source_version
+#' @param responsible_person Name of the responsible person
+#' @param source_version_supercedes
+#' @param key GitHub key
 #'
 #' @export
 #'
-post_source_data <- function(name,
-                             description,
-                             hash,
-                             responsible_person,
-                             key,
-                             storage_type,
+post_source_data <- function(storage_type,
                              storage_root,
                              storage_location,
                              accessibility,
                              source_type,
                              source,
-                             source_version,
                              source_version_identifier,
                              source_version_description,
-                             source_version_supercedes) {
+                             responsible_person,
+                             source_version_supercedes,
+                             key) {
 
   arguments <- c("storage_type",
                  "storage_root",
-                 "responsible_person",
+                 "storage_location",
+                 "accessibility",
                  "source_type",
                  "source",
-                 "accessibility")
+                 "responsible_person")
 
   for(i in seq_along(arguments)) {
     available <- get_existing(table = arguments[i])
@@ -51,16 +46,6 @@ post_source_data <- function(name,
       )
   }
 
-  new_storage_location(
-    name = name,
-    description = description,
-    path = storage_location,
-    hash = hash,
-    local_cache_url = "",
-    responsible_person = responsible_person,
-    storage_root = storage_root,
-    key = key)
-
   new_source_version(
     version_identifier = source_version_identifier,
     description = source_version_description,
@@ -70,5 +55,4 @@ post_source_data <- function(name,
     store = storage_location,
     accessibility = accessibility,
     key = key)
-
 }

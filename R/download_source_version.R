@@ -125,9 +125,6 @@ WHERE {
                      local = "data-raw",
                      filename = filename)
 
-    return(as.character(openssl::sha1(file(file.path("data-raw", filename)))))
-
-
   } else if(dataset == "scotgov_simd_income") {
 
     # scottish-index-of-multiple-deprivation ----------------------------------

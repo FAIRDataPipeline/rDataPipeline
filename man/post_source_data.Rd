@@ -5,34 +5,20 @@
 \title{post_source_data}
 \usage{
 post_source_data(
-  name,
-  description,
-  hash,
-  responsible_person,
-  key,
   storage_type,
   storage_root,
   storage_location,
   accessibility,
   source_type,
   source,
-  source_version,
   source_version_identifier,
   source_version_description,
-  source_version_supercedes
+  responsible_person,
+  source_version_supercedes,
+  key
 )
 }
 \arguments{
-\item{name}{Name of dataset}
-
-\item{description}{Description of dataset}
-
-\item{hash}{SHA1 hash of the file}
-
-\item{responsible_person}{Name of the responsible person}
-
-\item{key}{GitHub key}
-
 \item{storage_type}{Name of storage type, e.g. ftp, https}
 
 \item{storage_root}{Name of the storage root, e.g. "Boydorr"}
@@ -45,9 +31,11 @@ post_source_data(
 
 \item{source}{Name of the source}
 
-\item{source_version}{Version identifier of the source_version, e.g. 1}
-
 \item{source_version_description}{Free text description of the source_version}
+
+\item{responsible_person}{Name of the responsible person}
+
+\item{key}{GitHub key}
 }
 \description{
 post_source_data

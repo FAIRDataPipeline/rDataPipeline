@@ -14,5 +14,4 @@ new_source_type <- function(name,
             data = list(name = name,
                         description = description),
             key)
-
 }

@@ -15,18 +15,7 @@ new_storage_root <- function(name,
                              type,
                              key) {
 
-  available <- get_existing(table = "storage_type")
-
-  if(any(type %in% available)) {
-    type_url <- get_existing(table = "storage_type", key = type)$url
-
-  } else {
-    stop(
-      paste(type, "does not exist. Please select from the following options",
-            "or create a new entry using new_storage_type():\n",
-            paste(available, collapse = "\n"))
-    )
-  }
+  type_url <- get_url(table = "storage_type", key = type)
 
   post_data(table = "storage_root",
             data = list(name = name,

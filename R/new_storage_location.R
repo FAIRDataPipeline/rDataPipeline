@@ -23,20 +23,8 @@ new_storage_location <- function(name,
                                  storage_root,
                                  key) {
 
-  available <- get_existing(table = "storage_root")
-
-  if(any(storage_root %in% available)) {
-    root_url <- get_existing(table = "storage_root", key = storage_root)$url
-
-  } else {
-    stop(
-      paste(storage_root, "does not exist. Please select from the following options",
-            "or create a new entry using new_storage_root():\n",
-            paste(available, collapse = "\n"))
-    )
-  }
-
   rp_url <- get_responsible_person(responsible_person, key)
+  root_url <- get_url(table = "storage_root", key = storage_root)
 
   post_data(table = "storage_location",
             data = list(name = name,
