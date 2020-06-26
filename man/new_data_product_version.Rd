@@ -20,9 +20,15 @@ new_data_product_version(
 )
 }
 \arguments{
+\item{version_identifier}{Version identifier of the data_product_version, e.g. 1}
+
+\item{description}{Free text description of the source_version}
+
 \item{responsible_person}{Name of the responsible person}
 
 \item{supercedes}{Superseded source_version}
+
+\item{data_product}{Name of the data product}
 
 \item{store}{Name of the storage_location, e.g. "Model File"}
 

@@ -4,10 +4,10 @@
 \alias{get_url}
 \title{get_url}
 \usage{
-get_url(table, key)
+get_url(table, query = list())
 }
 \arguments{
-\item{key}{GitHub key}
+\item{query}{}
 }
 \description{
 get_url

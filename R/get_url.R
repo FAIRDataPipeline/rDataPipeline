@@ -1,22 +1,21 @@
 #' get_url
 #'
 #' @param table
-#' @param key GitHub key
+#' @param query
 #'
 #' @export
 #'
-get_url <- function(table, key) {
+get_url <- function(table, query = list()) {
+  tmp <- httr::GET(file.path("http://data.scrc.uk/api", table, ""),
+                   query = query) %>%
+    httr::content("text") %>%
+    jsonlite::fromJSON(simplifyVector = FALSE)
 
-  available <- get_existing(table = table)
-
-  if(any(key %in% available)) {
-    return(get_existing(table = table, key = key)$url)
-
+  if(length(tmp) > 1) {
+    stop("More than 1 object was returned")
+  } else if(length(tmp) == 0) {
+    stop("No objects were returned")
   } else {
-    stop(
-      paste(key, "does not exist. Please select from the following options",
-            "or create a new entry using new_", table, "():\n",
-            paste(available, collapse = "\n"))
-    )
+    return(tmp[[1]]$url)
   }
 }

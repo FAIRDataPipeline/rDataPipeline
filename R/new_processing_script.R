@@ -15,7 +15,7 @@ new_processing_script <- function(name,
                                   key) {
 
   rp_url <- get_responsible_person(responsible_person, key)
-  location_url <- get_url(table = "storage_location", key = store)
+  location_url <- get_url("storage_location", list(name = store))
 
   post_data(table = "processing_script",
             data = list(name = name,

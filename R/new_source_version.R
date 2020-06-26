@@ -21,9 +21,9 @@ new_source_version <- function(version_identifier,
                                key) {
 
   rp_url <- get_responsible_person(responsible_person, key)
-  source_url <- get_url(table = "source", key = source)
-  store_url <- get_url(table = "storage_location", key = store)
-  access_url <- get_url(table = "accessibility", key = accessibility)
+  source_url <- get_url("source", list(name = source))
+  store_url <- get_url("storage_location", list(name = store))
+  access_url <- get_url("accessibility", list(name = accessibility))
 
   post_data(table = "source_version",
             data =  list(version_identifier = version_identifier,

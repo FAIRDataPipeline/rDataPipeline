@@ -15,7 +15,7 @@ new_storage_root <- function(name,
                              type,
                              key) {
 
-  type_url <- get_url(table = "storage_type", key = type)
+  type_url <- get_url("storage_type", list(name = type))
 
   post_data(table = "storage_root",
             data = list(name = name,

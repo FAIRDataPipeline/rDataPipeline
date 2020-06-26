@@ -17,8 +17,8 @@ new_source <- function(name,
                        key) {
 
   rp_url <- get_responsible_person(responsible_person, key)
-  store_url <- get_url(table = "storage_location", key = store)
-  type_url <- get_url(table = "source_type", key = source_type)
+  store_url <- get_url("storage_location", list(name = store))
+  type_url <- get_url("source_type", list(name = source_type))
 
   post_data(
     table = "source",

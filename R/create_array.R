@@ -37,8 +37,8 @@ create_array <- function(h5filename,
   if(length(dimension_names[[2]]) != ncol(array))
     stop("Dimension_2_names length must match nrows in array")
 
-    # Generate hdf5 structure
-    file.h5 <- H5File$new(h5filename)
+  # Generate hdf5 structure
+  file.h5 <- H5File$new(h5filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)

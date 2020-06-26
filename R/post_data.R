@@ -27,6 +27,6 @@ post_data <- function(table,
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   if(result$status == 201)
-    paste("Data added to", table) else
+    return(tmp$url) else
       stop("Adding new data returned non-201 status code:", tmp)
 }

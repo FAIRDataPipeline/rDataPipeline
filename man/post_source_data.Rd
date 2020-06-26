@@ -5,17 +5,16 @@
 \title{post_source_data}
 \usage{
 post_source_data(
-  storage_type,
-  storage_root,
-  storage_location,
-  accessibility,
-  source_type,
-  source,
-  source_version_identifier,
-  source_version_description,
-  responsible_person,
-  source_version_supercedes,
-  key
+  storage_type = "ftp",
+  storage_root = "Boydorr",
+  accessibility = "public",
+  source_type = "database",
+  source = "statistics.gov.scot",
+  storage_location = "deaths-involving-coronavirus-covid-19.csv",
+  source_version = "0.1.0",
+  target_path = file.path("human", "infection", "SARS-CoV-2", "scotland", "mortality",
+    "deaths-involving-coronavirus-covid-19.csv"),
+  hash = get_hash(file.path("data-raw", "deaths-involving-coronavirus-covid-19.csv"))
 )
 }
 \arguments{
@@ -23,13 +22,13 @@ post_source_data(
 
 \item{storage_root}{Name of the storage root, e.g. "Boydorr"}
 
-\item{storage_location}{Name of the storage_location, e.g. "Model File"}
-
 \item{accessibility}{Name of accessibility type}
 
 \item{source_type}{Name of the source type}
 
 \item{source}{Name of the source}
+
+\item{storage_location}{Name of the storage_location, e.g. "Model File"}
 
 \item{source_version_description}{Free text description of the source_version}
 

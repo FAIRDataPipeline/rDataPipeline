@@ -24,7 +24,7 @@ new_storage_location <- function(name,
                                  key) {
 
   rp_url <- get_responsible_person(responsible_person, key)
-  root_url <- get_url(table = "storage_root", key = storage_root)
+  root_url <- get_url("storage_root", list(name = storage_root))
 
   post_data(table = "storage_location",
             data = list(name = name,
