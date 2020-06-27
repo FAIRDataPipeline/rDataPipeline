@@ -2,6 +2,8 @@
 #'
 download_from_db <- function(url, path, local, filename) {
 
+  require(SPARQL, quietly = TRUE)
+
   # Prepare local directory -------------------------------------------------
 
   # Extract directory structure
