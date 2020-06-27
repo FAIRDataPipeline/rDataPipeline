@@ -40,11 +40,11 @@ download_source_version <- function(dataset) {
     for(sex in seq_along(genders)) {
       for(age in 101:191) {
         temp_pop_table <- nomisr::nomis_get_data(id = "NM_2010_1",
-                                                 time = "latest",
-                                                 geography = c("TYPE299"),
-                                                 gender = c(sex-1),
-                                                 c_age = age,
-                                                 measures = 20100) %>%
+                                               time = "latest",
+                                               geography = c("TYPE299"),
+                                               gender = c(sex-1),
+                                               c_age = age,
+                                               measures = 20100) %>%
           dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE, GEOGRAPHY_TYPE,
                         GENDER_NAME, C_AGE_NAME, MEASURES_NAME, OBS_VALUE)
         names(temp_pop_table)[8] <- unique(temp_pop_table$C_AGE_NAME)
@@ -119,11 +119,10 @@ WHERE {
               ?period rdfs:label ?date.
 }"
 
-    filename <- "deaths-involving-coronavirus-covid-19.csv"
     download_from_db(url = "https://statistics.gov.scot/sparql",
                      path = query,
                      local = "data-raw",
-                     filename = filename)
+                     filename = "deaths-involving-coronavirus-covid-19.csv")
 
   } else if(dataset == "scotgov_simd_income") {
 
