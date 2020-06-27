@@ -102,8 +102,8 @@ WHERE {
               mp:count ?count;
               qb:measureType ?measType;
               sdim:age ?value;
-              sdim:causeOfDeath ?causeDeath;
-              sdim:locationOfDeath ?locDeath;
+              sdim:causeofdeath ?causeDeath;
+              sdim:locationofdeath ?locDeath;
               sdim:sex ?sex;
               dim:refArea ?featurecode;
               dim:refPeriod ?period.
