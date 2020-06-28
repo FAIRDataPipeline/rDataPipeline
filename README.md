@@ -82,5 +82,15 @@ read_array(h5filename = "test_array.h5", path = "dz/total")
 
 ## Create distribution
 
-## Create point estimate
+```{r}
+# Create *.toml file
+create_distribution(toml_filename = "test_distribution.toml", distribution = "gamma", values = c(3.0, 2.0), names = c("shape", "scale"))
+```
+
+## Create number
+
+```{r}
+# Create *.toml file
+create_number("test_number.toml", value = 1.0, name = "value_name")
+```
 
