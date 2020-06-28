@@ -71,12 +71,11 @@ convert2grid <- function(dat,
         remainder <- sum(non_rounded_pops) - sum(rounded_pops)
 
         if(remainder > 0){
-          next.biggest <- order(difference[, 1], decreasing = TRUE)[1:remainder]
+          next.biggest <- rank(-difference[, 1], ties.method = "random")[1:remainder]
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] + 1
         }
         if(remainder < 0){
-          next.biggest <- order((0-difference[,1]),
-                                decreasing = TRUE)[1:(0-remainder)]
+          next.biggest <- rank(-(0-difference[,1]), ties.method = "random")[1:(0-remainder)]
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] - 1
         }
       }

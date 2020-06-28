@@ -96,3 +96,56 @@ test_that("convert2grid() maintains population size when correcting for non-inte
   result <- convert2grid(dat = pop_data, shapefile = shapefile, subdivisions = subdivisions)
   testthat::expect_equal(sum(result$grid_pop), sum(pop_data$Population))
 })
+
+
+test_that("convert2grid() distributes integers broadly equally when there are ties", {
+  # When several cells cover the same proportion of the map and the underlying areas have the same population size,
+  # they should receive the same number of individuals - this may not be possible while maintaining integers, but
+  # at least no cell should be favoured over another when dividing the few remaining individuals among cells
+  pop_size <- 3
+  pop_data <- data.frame(AREAcode = LETTERS[1:25],
+                         Population1 = 3)  # This means each grid cell should actually have the same number
+  expected_result <- (pop_size * 4) + (pop_size * 4 * 0.5) + (pop_size * 0.25) %>%
+    round()
+
+  result <- convert2grid(dat = pop_data, shapefile = shapefile, subdivisions = subdivisions)
+
+  # Expect a tolerance of +/- 1
+  testthat::expect_equal(range(result$grid_pop), c(expected_result - 1, expected_result + 1))
+})
+
+
+test_that("convert2grid() distributes integers to the correct cells", {
+  # When correcting for non-integer cell counts, the cells closest to an integer should be adjusted
+  # - Create a shapefile which is larger than the geometry it contains
+  # - This means the grid will extend beyond the edge of the geom
+  max_dim <- 1000
+  tr_offset <- max_dim + 5
+  map_extent <- max_dim + tr_offset
+  square_coords <- rbind(c(0,0), c(max_dim,0), c(max_dim,max_dim), c(0,max_dim), c(0,0))
+  triangle_coords <- rbind(c(tr_offset, tr_offset),
+                           c(max_dim + tr_offset, tr_offset),
+                           c(max_dim + tr_offset, max_dim + tr_offset),
+                           c(tr_offset, tr_offset))
+  polygon <- sf::st_sfc(sf::st_polygon(list(square_coords)),
+                        sf::st_point(c(tr_offset, tr_offset)))
+  complex_shapefile <- sf::st_sf(polygon, crs = 27700) %>%
+    mutate(AREAcode = LETTERS[1:2])
+
+  subdivisions <- grid_intersection(complex_shapefile, gridsize = map_extent/5/1000)$subdivisions
+
+  # Map contains a single cell, while the grid contains 4 complete and 5 partial cells
+  # - Expect the 4 complete cells to receive 2, 4 largest partial cells to reveive 1, and the remaining,
+  #   smallest, cell to receive 0:
+  pop_data <- data.frame(AREAcode = LETTERS[1:2],
+                         Population1 = c(2*4 + 1*4, 0))
+
+  result <- convert2grid(dat = pop_data, shapefile = complex_shapefile, subdivisions = subdivisions)
+
+  cell_size_order <- sf::st_area(subdivisions) %>%
+    order(decreasing = TRUE)
+
+  size_ordered_result <- result$grid_pop[cell_size_order, 1]
+
+  testthat::expect_equal(size_ordered_result, c(2,2,2,2, 1,1,1,1, 0))
+})
