@@ -25,6 +25,12 @@ grid_intersection <- function(shapefile, gridsize) {
 
   subdivisions <- sf::st_intersection(grids, shapefile)
 
+  # Remove cells which intersect simply because they touch the shapefile
+  # - These are reduced to lines or points in the intersection
+  is_polygon <- sapply(subdivisions$grids, function(x) "POLYGON" %in% class(x))
+  subdivisions <- subdivisions[is_polygon, , drop = FALSE]
+
+  # Adjust grid labels to match
   ind <- which(grid_labels %in% unique(subdivisions$grid_id))
   grid_matrix <- grid_matrix[ind,]
 

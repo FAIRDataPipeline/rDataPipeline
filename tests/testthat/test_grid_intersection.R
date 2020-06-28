@@ -44,6 +44,7 @@ test_that("grid_intersection() should produce cells of expected size", {
 # - Here we need a more complex shapefile
 max_dim <- 1000
 tr_offset <- max_dim*2
+map_extent <- max_dim + tr_offset
 square_coords <- rbind(c(0,0), c(max_dim,0), c(max_dim,max_dim), c(0,max_dim), c(0,0))
 triangle_coords <- rbind(c(tr_offset, tr_offset),
                          c(max_dim + tr_offset, tr_offset),
@@ -63,7 +64,6 @@ test_that("grid_intersection() result should not extend beyond shapefile boundin
 
 
 test_that("grid_intersection() should return only parts of grid which intersect with features", {
-  map_extent <- max_dim + tr_offset
   grid_size <- map_extent/12/1000
   result <- grid_intersection(complex_shapefile, grid_size)
 
@@ -90,4 +90,22 @@ test_that("grid_intersection() should produce cells of expected size at edges of
   expected_area <- units::set_units(expected_area, "m^2")
 
   testthat::expect_equal(sf::st_area(result$subdivisions$grids[1]), expected_area)
+})
+
+
+test_that("grid_intersection() should not return or enumerate non-grid objects", {
+  # Expect all features to represent parts of the grid, otherwise, indexing, etc. may be off
+  result <- SCRCdataAPI:::grid_intersection(complex_shapefile, gridsize = map_extent/12/1000)
+
+  # All shapefile objects should be of class POLYGON:
+  is_polygon <- sapply(result$subdivisions$grids, function(x) "POLYGON" %in% class(x))
+  testthat::expect_true(all(is_polygon))
+})
+
+
+test_that("ids returned by grid_intersection() should match in both subdivision and grid_matrix", {
+  result <- SCRCdataAPI:::grid_intersection(complex_shapefile, gridsize = map_extent/12/1000)
+
+  matrix_ids <- paste(result$grid_matrix[, 1], result$grid_matrix[, 2], sep = "-")
+  testthat::expect_true(all(matrix_ids %in% result$subdivisions$grid_id))
 })
