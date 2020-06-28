@@ -5,8 +5,6 @@ Functions to generate and process data files for the SCRC data pipeline.
 * [Installation](#installation)
 * [Create array](#create-array)
 * [Create table](#create-table)
-* [Create distribution](#create-distribution)
-* [Create point estimate](#create-point-estimate)
 
 
 ## Installation
@@ -79,4 +77,3 @@ To read the data file:
 ```{r}
 read_array(h5filename = "test_array.h5", path = "dz/total")
 ```
-
