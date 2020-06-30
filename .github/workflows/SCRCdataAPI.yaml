@@ -42,8 +42,9 @@ jobs:
         env:
             DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: |
-              install.packages("devtools")
-              install_github("ScottishCovidResponse/SCRCdataAPI")
+            install.packages("devtools")
+            library(devtools)
+            install_github("ScottishCovidResponse/SCRCdataAPI")
         shell: Rscript {0}
   
       - name: Test API import
