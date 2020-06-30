@@ -38,3 +38,16 @@ jobs:
             install.packages("utils")
         shell: Rscript {0}
         
+    - name: Install SCRC Data SCRCdataAPI
+      env:
+          DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
+      run: |
+            install.packages("devtools")
+            github_install("ScottishCovidResponse/SCRCdataAPI")
+      shell: Rscript{0}
+  
+    - name: Test API import
+      run: |
+          library(SCRCdataAPI)
+      shell: Rscript{0}
+        
