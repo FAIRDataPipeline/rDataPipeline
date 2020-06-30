@@ -44,10 +44,10 @@ jobs:
         run: |
               install.packages("devtools")
               github_install("ScottishCovidResponse/SCRCdataAPI")
-        shell: Rscript{0}
+        shell: Rscript {0}
   
       - name: Test API import
         run: |
             library(SCRCdataAPI)
-        shell: Rscript{0}
+        shell: Rscript {0}
         
