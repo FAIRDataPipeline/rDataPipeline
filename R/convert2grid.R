@@ -70,12 +70,21 @@ convert2grid <- function(dat,
         difference <- non_rounded_pops - rounded_pops
         remainder <- sum(non_rounded_pops) - sum(rounded_pops)
 
+        # Find cells to adjust
+        next.biggest <- order(abs(difference[,1]), decreasing = TRUE)[1:abs(remainder)]
+
+        # Break any ties: choose randomly to avoid a systematic bias by cell order
+        tied_first <- difference[, 1] %in% difference[next.biggest, 1]
+
+        if (!isTRUE(all.equal(sum(tied_first), abs(remainder)))) {
+          next.biggest <- sample(which(tied_first), size = round(abs(remainder)))
+        }
+
+        # Make adjustment
         if(remainder > 0){
-          next.biggest <- rank(-difference[, 1], ties.method = "random")[1:remainder]
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] + 1
         }
         if(remainder < 0){
-          next.biggest <- rank(-(0-difference[,1]), ties.method = "random")[1:(0-remainder)]
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] - 1
         }
       }

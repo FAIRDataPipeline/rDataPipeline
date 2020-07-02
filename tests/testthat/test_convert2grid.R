@@ -89,9 +89,9 @@ test_that("convert2grid() returns only integers", {
 
 
 test_that("convert2grid() maintains population size when correcting for non-integer results", {
-  pop_size <- c(3, 5, 6, 7, 9, 10, 11, 13, 14)  # Not divisible by 4, so would yield non-integer numbers unless this is handled by convert2grid
+  pop_size <- c(3, 5, 6, 7, 9)  # Not divisible by 4, so would yield non-integer numbers unless this is handled by convert2grid
   pop_data <- data.frame(AREAcode = LETTERS[1:25],
-                         Population = sample(pop_size, size = 25, replace = TRUE))
+                         Population = pop_size)
 
   result <- convert2grid(dat = pop_data, shapefile = shapefile, subdivisions = subdivisions)
   testthat::expect_equal(sum(result$grid_pop), sum(pop_data$Population))
@@ -102,16 +102,34 @@ test_that("convert2grid() distributes integers broadly equally when there are ti
   # When several cells cover the same proportion of the map and the underlying areas have the same population size,
   # they should receive the same number of individuals - this may not be possible while maintaining integers, but
   # at least no cell should be favoured over another when dividing the few remaining individuals among cells
-  pop_size <- 3
+
+  # Every cell in the 5 x 5 shapefile gets divided into 4:
+  subdivisions <- grid_intersection(shapefile, gridsize = 1/10)$subdivisions
+
+  # Each cell in the shapefile has the same population size, and this is a
+  # prime number, so all grid cells will have a rounding issue:
   pop_data <- data.frame(AREAcode = LETTERS[1:25],
-                         Population1 = 3)  # This means each grid cell should actually have the same number
-  expected_result <- (pop_size * 4) + (pop_size * 4 * 0.5) + (pop_size * 0.25) %>%
-    round()
+                         Population1 = 89)
 
-  result <- convert2grid(dat = pop_data, shapefile = shapefile, subdivisions = subdivisions)
+  # Tests: repeated since result is stochastic
+  tolerance <- c()
+  rank_correlation <- c()
 
-  # Expect a tolerance of +/- 1
-  testthat::expect_equal(range(result$grid_pop), c(expected_result - 1, expected_result + 1))
+  for (i in 1:10) {
+    result <- convert2grid(dat = pop_data, shapefile = shapefile, subdivisions = subdivisions)
+    tolerance <- c(tolerance,
+                   max(result$grid_pop) - min(result$grid_pop))
+    rank_correlation <- c(rank_correlation,
+                          abs(cor(result$grid_pop[, ], 1:nrow(result$grid_pop), method = 'spearman')))
+  }
+
+
+  # Expect a tolerance of +/- 1 in all runs:
+  testthat::expect_true(all(tolerance == 1))
+
+  # Expect little correlation with order of cells:
+  rank_correlation <- abs(cor(result$grid_pop[, ], 1:nrow(result$grid_pop), method = 'spearman'))
+  testthat::expect_true(all(rank_correlation < 0.15))
 })
 
 
