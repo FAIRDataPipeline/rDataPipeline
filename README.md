@@ -5,9 +5,13 @@ Functions to generate and process data files for the SCRC data pipeline.
 * [Installation](#installation)
 * [Create array](#create-array)
 * [Create table](#create-table)
+* [Create distribution](#create-distribution)
+* [Create point estimate](#create-point-estimate)
 
 
 ## Installation
+
+Note to Linux users: installing devtools may require libcurl4-openssl-dev, libhdf5-dev libudunits2-dev, and libgdal-dev.
 
 ```{r}
 library(devtools)
@@ -15,6 +19,7 @@ install_github("ScottishCovidResponse/SCRCdataAPI")
 ```
 
 and load it into R:
+
 ```{r}
 library(SCRCdataAPI)
 ```
@@ -77,3 +82,22 @@ To read the data file:
 ```{r}
 read_array(h5filename = "test_array.h5", path = "dz/total")
 ```
+
+## Create distribution
+
+In the following example, we populate "test_distribution.toml":
+
+```{r}
+# Create *.toml file
+create_distribution(toml_filename = "test_distribution.yaml", distribution = "gamma", values = c(3.0, 2.0), names = c("shape", "scale"))
+```
+
+## Create number
+
+In the following example, we populate "test_number.toml":
+
+```{r}
+# Create *.toml file
+create_number("test_number.toml", value = 1.0, name = "value_name")
+```
+
