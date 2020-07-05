@@ -17,7 +17,11 @@
 #' @import reshape2
 #' @import sf
 #' @import SPARQL
+#' @importFrom stats setNames
+#' @import testthat
 #' @import tibble
 #' @import tidyr
+#' @import units
+#' @importFrom utils download.file read.csv unzip write.csv
 #'
 NULL
