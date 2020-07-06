@@ -4,17 +4,26 @@
 \alias{create_distribution}
 \title{create_distribution}
 \usage{
-create_distribution(toml_filename, distribution, values, names)
+create_distribution(filename, descriptor, distribution, parameters)
 }
 \arguments{
-\item{toml_filename}{a \code{string} specifying the name of the toml file}
+\item{filename}{a \code{string} specifying the name of the toml file}
+
+\item{descriptor}{a \code{string} specifying an associated descriptor}
 
 \item{distribution}{a \code{string} specifying the name of the distribution}
 
-\item{values}{a \code{numeric} \code{vector} specifying parameter values}
-
-\item{names}{a \code{vector} specifying the name of each parameter value}
+\item{parameters}{a named \code{list} specifying parameter values and
+associated names (see example)}
 }
 \description{
 Function to populate toml file with distribution type data.
+}
+\examples{
+filename <- "test.toml"
+descriptor <- "latency"
+distribution <- "gamma"
+parameters <- list(shape = 2.0, scale = 3.0)
+create_distribution(filename, descriptor, distribution, parameters)
+
 }

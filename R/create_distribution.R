@@ -2,25 +2,33 @@
 #'
 #' Function to populate toml file with distribution type data.
 #'
-#' @param toml_filename a \code{string} specifying the name of the toml file
+#' @param filename a \code{string} specifying the name of the toml file
+#' @param descriptor a \code{string} specifying an associated descriptor
 #' @param distribution a \code{string} specifying the name of the distribution
-#' @param values a \code{numeric} \code{vector} specifying parameter values
-#' @param names a \code{vector} specifying the name of each parameter value
+#' @param parameters a named \code{list} specifying parameter values and
+#' associated names (see example)
 #'
 #' @export
 #'
-create_distribution <- function(toml_filename,
+#' @examples
+#' filename <- "test.toml"
+#' descriptor <- "latency"
+#' distribution <- "gamma"
+#' parameters <- list(shape = 2.0, scale = 3.0)
+#' create_distribution(filename, descriptor, distribution, parameters)
+#'
+create_distribution <- function(filename,
+                                descriptor,
                                 distribution,
-                                values,
-                                names) {
+                                parameters) {
   # Check file name
-  if(!(grepl(".toml$", toml_filename))) stop("toml_filename must be *.toml")
+  if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
-   # Write toml
-  tmp <- sapply(seq_along(values), function(x)
-    paste0(names[x], " = ", values[x], "\n")) %>%
+  # Write toml
+  tmp <- sapply(seq_along(parameters), function(x)
+    paste0(names(parameters[x]), " = ", parameters[x], "\n")) %>%
     paste0(collapse = "")
 
-  cat(paste0("[distribution]\ndistribution = \"", distribution, "\"\n",
-             tmp, "\n"), file = toml_filename)
+  cat(paste0("[", descriptor, "]\ntype = \"distribution\"\ndistribtion = \"",
+             distribution, "\"\n", tmp, "\n"), file = filename)
 }
