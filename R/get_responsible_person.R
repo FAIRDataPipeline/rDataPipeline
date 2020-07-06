@@ -9,7 +9,7 @@ get_responsible_person <- function(full_name, key) {
 
   h <- c(Authorization = paste("token", key))
 
-  tmp <- httr::GET(file.path(endpoint, "users", ""),
+  tmp <- httr::GET(file.path("https://data.scrc.uk/api", "users", ""),
                    httr::add_headers(.headers = h)) %>%
     httr::content("text") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
