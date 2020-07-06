@@ -4,7 +4,7 @@
 \alias{get_responsible_person}
 \title{get_responsible_person}
 \usage{
-get_responsible_person(full_name, key)
+get_responsible_person(key)
 }
 \arguments{
 \item{key}{}
