@@ -14,7 +14,10 @@ get_existing <- function(table, full = F) {
       data.table::rbindlist(use.names = TRUE, fill = TRUE)
   )
 
-  if(full) {
+  if(length(output) == 0) {
+    print("Returned no entries")
+
+  } else if(full) {
     return(output)
 
   } else {
