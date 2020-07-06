@@ -29,8 +29,8 @@ get_existing <- function(table, full = F) {
       return(output %>% dplyr::select(name, description, uri, type))
     } else if (table == "storage_location") {
       return(output %>% dplyr::select(name, description, path, hash,
-                                      local_cache_url, responsible_person,
-                                      store_root))
+                                      valid_storage, responsible_person,
+                                      store_root, cached_storage_location))
     } else if (table == "accessibility") {
       return(output %>% dplyr::select(name, description, access_info))
     } else if (table == "source_type") {
