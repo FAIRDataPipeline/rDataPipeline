@@ -4,7 +4,10 @@
 \alias{read_number}
 \title{read_number}
 \usage{
-read_number(toml_filename)
+read_number(filename)
+}
+\arguments{
+\item{filename}{a \code{string} specifying the name of the toml file}
 }
 \description{
 read_number

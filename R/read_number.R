@@ -1,8 +1,10 @@
 #' read_number
 #'
+#' @param filename a \code{string} specifying the name of the toml file
+#'
 #' @export
 #'
-read_number <- function(toml_filename) {
-  tmp <- configr::read.config(file = toml_filename)$`point-estimate`
-  setNames(as.numeric(tmp$value), tmp$name)
+read_number <- function(filename) {
+  tmp <- configr::read.config(file = filename)
+  setNames(as.numeric(tmp[[1]]$value), names(tmp))
 }

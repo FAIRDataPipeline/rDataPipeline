@@ -4,10 +4,10 @@
 \alias{create_number}
 \title{create_number}
 \usage{
-create_number(toml_filename, value, name)
+create_number(filename, value, name)
 }
 \arguments{
-\item{toml_filename}{a \code{string} specifying the name of the toml file}
+\item{filename}{a \code{string} specifying the name of the toml file}
 
 \item{value}{a \code{numeric} object specifying the value}
 
@@ -15,4 +15,11 @@ create_number(toml_filename, value, name)
 }
 \description{
 Function to populate toml file with number type data.
+}
+\examples{
+filename <- "test.toml"
+value <- 2.0
+name <- "latency"
+create_number(filename, value, name)
+
 }
