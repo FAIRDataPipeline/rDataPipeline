@@ -23,7 +23,7 @@ post_data <- function(table,
                        verbose())
 
   tmp <- result %>%
-    httr::content("text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   if(result$status == 201)

@@ -9,7 +9,7 @@ get_existing <- function(table, full = F) {
 
   suppressWarnings(
     output <- httr::GET(file.path("http://data.scrc.uk/api", table, "")) %>%
-      httr::content("text") %>%
+      httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE) %>%
       data.table::rbindlist(use.names = TRUE, fill = TRUE)
   )

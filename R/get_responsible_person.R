@@ -11,7 +11,7 @@ get_responsible_person <- function(full_name, key) {
 
   tmp <- httr::GET(file.path("https://data.scrc.uk/api", "users", ""),
                    httr::add_headers(.headers = h)) %>%
-    httr::content("text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   ind <- lapply(tmp, function(x) x$full_name == full_name) %>%

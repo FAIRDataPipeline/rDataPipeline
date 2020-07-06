@@ -9,7 +9,7 @@ get_url <- function(table, query = list()) {
 
   tmp <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
                    query = query) %>%
-    httr::content("text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   if(length(tmp) > 1) {
