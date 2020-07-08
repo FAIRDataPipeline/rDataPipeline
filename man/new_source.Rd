@@ -4,20 +4,10 @@
 \alias{new_source}
 \title{new_source}
 \usage{
-new_source(name, description, responsible_person, store, source_type, key)
+new_source(id, name, abbreviation, website)
 }
 \arguments{
-\item{name}{Name of the source}
-
-\item{description}{Free text description of the source}
-
-\item{responsible_person}{Name of the responsible person}
-
-\item{store}{Name of the storage_location, e.g. "Model File"}
-
-\item{source_type}{Name of source type}
-
-\item{key}{GitHub key}
+\item{website}{}
 }
 \description{
 new_source

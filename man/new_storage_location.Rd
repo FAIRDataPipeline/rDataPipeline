@@ -4,36 +4,10 @@
 \alias{new_storage_location}
 \title{new_storage_location}
 \usage{
-new_storage_location(
-  name,
-  description,
-  path,
-  hash,
-  local_cache_url,
-  responsible_person,
-  storage_root,
-  key
-)
+new_storage_location(id, uri, text, hash, storage_root, accessibility_id)
 }
 \arguments{
-\item{name}{Name of the storage_location, e.g. "Model File"}
-
-\item{description}{Free text description of the storage_location, e.g.
-"Storage on Boydorr FTP for SCRC model"}
-
-\item{path}{Path to the data from the root of the store, e.g.
-"models/my_model.txt"}
-
-\item{hash}{SHA1 hash of the file}
-
-\item{local_cache_url}{Reference to a local store of the data, most likely
-left blank}
-
-\item{responsible_person}{Name of the responsible person}
-
-\item{key}{GitHub key}
-
-\item{store_root}{Name of the storage root, e.g. "Boydorr"}
+\item{accessibility_id}{}
 }
 \description{
 new_storage_location

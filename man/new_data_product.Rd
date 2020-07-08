@@ -4,18 +4,10 @@
 \alias{new_data_product}
 \title{new_data_product}
 \usage{
-new_data_product(name, description, responsible_person, type, versions, key)
+new_data_product(object_id, prefix_id, name, version)
 }
 \arguments{
-\item{name}{Name of the data product}
-
-\item{description}{Free text description of the data product}
-
-\item{responsible_person}{Name of the responsible person}
-
-\item{type}{Name of data product type}
-
-\item{key}{GitHub key}
+\item{version}{}
 }
 \description{
 new_data_product

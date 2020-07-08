@@ -1,31 +1,24 @@
 #' new_data_product
 #'
-#' @param name Name of the data product
-#' @param description Free text description of the data product
-#' @param responsible_person Name of the responsible person
-#' @param type Name of data product type
-#' @param versions
-#' @param key GitHub key
+#' @param object_id
+#' @param description
+#' @param name
+#' @param version
 #'
 #' @export
 #'
-new_data_product <- function(name,
-                             description,
-                             responsible_person,
-                             type,
-                             versions,
-                             key) {
+new_data_product <- function(object_id,
+                             prefix_id,
+                             name,
+                             version) {
 
-  rp_url <- get_responsible_person(responsible_person, key)
-  type_url <- get_url("data_product_type", list(name = type))
-  versions_url <- lapply(versions, function(x)
-    get_url("data_product_version_component", list(name = x)))
+  object_url <- get_url("Object", list(id = object_id))
+  prefix_url <- get_url("Prefix", list(id = prefix_id))
 
-  post_data(table = "data_product",
-            data =  list(name = name,
-                         description = description,
-                         responsible_person = rp_url,
-                         type = type_url,
-                         versions = versions),
+  post_data(table = "DataProduct",
+            data =  list(object_id = object_url,
+                         prefix_id = prefix_url,
+                         name = name,
+                         version = version),
             key)
 }
