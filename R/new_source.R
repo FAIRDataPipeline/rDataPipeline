@@ -1,21 +1,19 @@
 #' new_source
 #'
-#' @param id
 #' @param name
 #' @param abbreviation
 #' @param website
 #'
 #' @export
 #'
-new_source <- function(id,
-                       name,
+new_source <- function(name,
                        abbreviation,
                        website) {
 
   post_data(
     table = "source",
-    data =  list(id = id,
-                 name = name,
+    data =  list(name = name,
                  abbreviation = abbreviation,
-                 website = website))
+                 website = website),
+    key)
 }

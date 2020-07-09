@@ -1,18 +1,15 @@
 #' new_issue
 #'
-#' @param id
-#' @param description
 #' @param severity
+#' @param description
 #'
 #' @export
 #'
-new_issue <- function(id,
-                      description,
-                      severity) {
+new_issue <- function(severity,
+                      description) {
 
-  post_data(
-    table = "source",
-    data =  list(id = id,
-                 description = description,
-                 severity = severity))
+  post_data(table = "issue",
+            data =  list(severity = severity,
+                         description = description),
+            key)
 }

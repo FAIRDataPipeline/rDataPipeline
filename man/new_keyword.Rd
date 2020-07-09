@@ -4,10 +4,10 @@
 \alias{new_keyword}
 \title{new_keyword}
 \usage{
-new_keyword(object_id, phrase)
+new_keyword(keyphrase, object)
 }
 \arguments{
-\item{phrase}{}
+\item{keyphrase}{}
 }
 \description{
 new_keyword

@@ -4,10 +4,10 @@
 \alias{new_data_product}
 \title{new_data_product}
 \usage{
-new_data_product(object_id, prefix_id, name, version)
+new_data_product(name, version, object, namespace)
 }
 \arguments{
-\item{version}{}
+\item{namespace}{}
 }
 \description{
 new_data_product

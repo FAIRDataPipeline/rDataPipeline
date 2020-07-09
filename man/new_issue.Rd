@@ -4,10 +4,10 @@
 \alias{new_issue}
 \title{new_issue}
 \usage{
-new_issue(id, description, severity)
+new_issue(severity, description)
 }
 \arguments{
-\item{severity}{}
+\item{description}{}
 }
 \description{
 new_issue

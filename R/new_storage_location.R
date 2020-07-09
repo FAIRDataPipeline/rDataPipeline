@@ -1,28 +1,18 @@
 #' new_storage_location
 #'
-#' @param id
-#' @param uri
-#' @param text
+#' @param path
 #' @param hash
 #' @param storage_root
-#' @param accessibility_id
 #'
 #' @export
 #'
-new_storage_location <- function(id,
-                                 uri,
-                                 text,
+new_storage_location <- function(path,
                                  hash,
-                                 storage_root,
-                                 accessibility_id) {
+                                 storage_root) {
 
-  accessibility_url <- get_url("Accessibility", list(id = accessibility_id))
-
-  post_data(table = "StorageLocation",
-            data = list(id = id,
-                        uri = uri,
-                        text = text,
+  post_data(table = "storage_location",
+            data = list(path = path,
                         hash = hash,
-                        storage_root = storage_root,
-                        accessibility_id = accessibility_url))
+                        storage_root = storage_root),
+            key)
 }

@@ -4,7 +4,7 @@
 \alias{new_source}
 \title{new_source}
 \usage{
-new_source(id, name, abbreviation, website)
+new_source(name, abbreviation, website)
 }
 \arguments{
 \item{website}{}

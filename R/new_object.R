@@ -1,16 +1,14 @@
 #' new_object
 #'
-#' @param id
-#' @param store_id
+#' @param storage_location
 #'
 #' @export
 #'
-new_object <- function(id,
-                       store_id) {
+new_object <- function(storage_location) {
 
-  store_url <- get_url("StorageLocation", list(id = store_id))
+  store_url <- get_url("storage_location", list(id = store_id))
 
-  post_data(table = "Object",
-            data =  list(id = id,
-                         store_id = store_url))
+  post_data(table = "object",
+            data =  list(storage_location = store_url),
+            key)
 }

@@ -5,19 +5,19 @@
 \title{new_external_object}
 \usage{
 new_external_object(
-  object_id,
   doi_or_unique_name,
   primary_not_supplement,
   release_date,
   title,
   description,
-  source_id,
-  original_store_id,
-  version
+  version,
+  object,
+  source,
+  original_store
 )
 }
 \arguments{
-\item{version}{}
+\item{original_store}{}
 }
 \description{
 new_external_object

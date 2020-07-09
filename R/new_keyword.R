@@ -1,15 +1,16 @@
 #' new_keyword
 #'
-#' @param object_id
-#' @param phrase
+#' @param object
+#' @param keyphrase
 #'
 #' @export
 #'
-new_keyword <- function(object_id, phrase) {
+new_keyword <- function(keyphrase, object) {
 
-  object_url <- get_url("Object", list(id = object_id))
+  object_url <- get_url("object", list(id = object))
 
-  post_data(table = "Keyword",
-            data =  list(object_id = object_url,
-                         phrase = phrase))
+  post_data(table = "keyword",
+            data =  list(keyphrase = keyphrase,
+                         object = object_url),
+            key)
 }

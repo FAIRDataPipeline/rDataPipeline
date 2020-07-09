@@ -1,24 +1,24 @@
 #' new_data_product
 #'
-#' @param object_id
-#' @param description
 #' @param name
 #' @param version
+#' @param object
+#' @param namespace
 #'
 #' @export
 #'
-new_data_product <- function(object_id,
-                             prefix_id,
-                             name,
-                             version) {
+new_data_product <- function(name,
+                             version,
+                             object,
+                             namespace) {
 
-  object_url <- get_url("Object", list(id = object_id))
-  prefix_url <- get_url("Prefix", list(id = prefix_id))
+  object_url <- get_url("object", list(id = object))
+  Namespace_url <- get_url("namespace", list(id = namespace))
 
-  post_data(table = "DataProduct",
-            data =  list(object_id = object_url,
-                         prefix_id = prefix_url,
-                         name = name,
-                         version = version),
+  post_data(table = "data_product",
+            data =  list(name = name,
+                         version = version,
+                         object = object_url,
+                         namespace = Namespace_url),
             key)
 }

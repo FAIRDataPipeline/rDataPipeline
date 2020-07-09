@@ -4,10 +4,10 @@
 \alias{new_object}
 \title{new_object}
 \usage{
-new_object(id, store_id)
+new_object(storage_location)
 }
 \arguments{
-\item{store_id}{}
+\item{storage_location}{}
 }
 \description{
 new_object
