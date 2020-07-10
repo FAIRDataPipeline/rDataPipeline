@@ -5,7 +5,7 @@
 #' @export
 #'
 get_hash <- function(filename) {
-  file(filename) %>%
+    file(filename) %>%
     openssl::sha1() %>%
     as.character()
 }

@@ -15,7 +15,7 @@ post_data <- function(table,
   h <- c(Authorization = paste("token", key))
 
   result <- httr::POST(file.path("https://data.scrc.uk/api", table, ""),
-                       body =  jsonlite::toJSON(data, pretty = T,
+                       body = jsonlite::toJSON(data, pretty = T,
                                                 auto_unbox = T,
                                                 force = T),
                        httr::content_type('application/json'),

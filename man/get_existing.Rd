@@ -4,10 +4,10 @@
 \alias{get_existing}
 \title{get_existing}
 \usage{
-get_existing(table, full = F)
+get_existing(table)
 }
 \arguments{
-\item{full}{}
+\item{table}{}
 }
 \description{
 get_existing
