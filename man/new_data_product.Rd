@@ -4,7 +4,7 @@
 \alias{new_data_product}
 \title{new_data_product}
 \usage{
-new_data_product(name, version, object, namespace, key)
+new_data_product(name, version, objectId, namespaceId, key)
 }
 \description{
 new_data_product

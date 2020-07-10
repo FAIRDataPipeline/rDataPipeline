@@ -4,7 +4,7 @@
 \alias{new_object_component}
 \title{new_object_component}
 \usage{
-new_object_component(name, object, key)
+new_object_component(name, objectId, key)
 }
 \arguments{
 \item{key}{}

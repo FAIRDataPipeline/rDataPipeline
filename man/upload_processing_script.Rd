@@ -4,7 +4,10 @@
 \alias{upload_processing_script}
 \title{upload_processing_script}
 \usage{
-upload_processing_script()
+upload_processing_script(storage_root, path, hash, key)
+}
+\arguments{
+\item{storage_root}{}
 }
 \description{
 upload_processing_script

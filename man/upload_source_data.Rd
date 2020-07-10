@@ -24,7 +24,7 @@ upload_source_data(
 
 \item{source_root}{e.g. "https://statistics.gov.scot/sparql.json?query="}
 
-\item{source_path}{e.g. <query>}
+\item{source_path}{e.g. some query}
 
 \item{local_path}{e.g. "data-raw/deaths-involving-coronavirus-covid-19.csv"}
 

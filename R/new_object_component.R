@@ -1,19 +1,17 @@
 #' new_object_component
 #'
 #' @param name
-#' @param object
+#' @param objectId
 #' @param key
 #'
 #' @export
 #'
 new_object_component <- function(name,
-                                 object,
+                                 objectId,
                                  key) {
-
-  object_url <- get_url("object", list(id = object))
 
   post_data(table = "object_component",
             data = list(name = name,
-                        object = object_url ),
+                        object = objectId ),
             key)
 }
