@@ -4,10 +4,12 @@
 \alias{upload_processing_script}
 \title{upload_processing_script}
 \usage{
-upload_processing_script(storage_root, path, hash, key)
+upload_processing_script(storage_root, path, hash = get_github_hash(path), key)
 }
 \arguments{
-\item{storage_root}{}
+\item{path}{e.g. "ScottishCovidResponse/SCRCdata"}
+
+\item{key}{}
 }
 \description{
 upload_processing_script

@@ -1,10 +1,13 @@
 #' upload_processing_script
 #'
 #' @param storage_root
+#' @param path e.g. "ScottishCovidResponse/SCRCdata"
+#' @param hash
+#' @param key
 #'
 upload_processing_script <- function(storage_root,
                                      path,
-                                     hash,
+                                     hash = get_github_hash(path),
                                      key) {
 
   # Check if storage_root exists (where processing script is stored)
@@ -27,9 +30,7 @@ upload_processing_script <- function(storage_root,
   # upload processing script metadata to registry ---------------------------
 
   script_storeId <- new_storage_location(path = path,
-                                         hash = "b4e5ff9b34092cdb3baf16f789546e325a2427a0",
-                                         # system("git rev-parse HEAD",
-                                         #             intern = TRUE),
+                                         hash = hash,
                                          storage_root = storage_rootId,
                                          key = key)
 
