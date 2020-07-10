@@ -7,7 +7,7 @@
 check_exists <- function(table, query) {
 
   suppressWarnings(
-    tmp <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
+    output <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
                       query = query) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)
