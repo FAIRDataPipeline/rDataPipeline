@@ -47,11 +47,13 @@ upload_data_product <- function(storage_root,
   product_objectId <- new_object(storage_location_id = product_storeId,
                                  key = key)
 
-  components <- file_structure(filename)
-  for(i in seq_len(nrow(components))) {
-    componentId <- new_object_component(name = components$name[i],
-                                        object = product_objectId,
-                                        key = key)
+  if(grepl("h5", filename)) {
+    components <- file_structure(filename)
+    for(i in seq_len(nrow(components))) {
+      componentId <- new_object_component(name = components$name[i],
+                                          object = product_objectId,
+                                          key = key)
+    }
   }
 
   new_data_product(name = paste(dataset, "dataset"),
