@@ -6,9 +6,10 @@
 #' @param title
 #' @param description
 #' @param version
-#' @param object
-#' @param source
-#' @param original_store
+#' @param object_id
+#' @param source_id
+#' @param original_store_id
+#' @param key
 #'
 #' @export
 #'
@@ -18,13 +19,10 @@ new_external_object <- function(doi_or_unique_name,
                                 title,
                                 description,
                                 version,
-                                object,
-                                source,
-                                original_store) {
-
-  object_url <- get_url("object", list(id = object))
-  source_url <- get_url("source", list(id = source))
-  storage_location_url <- get_url("storage_location", list(id = original_store))
+                                object_id,
+                                source_id,
+                                original_store_id,
+                                key) {
 
   post_data(table = "external_object",
             data = list(doi_or_unique_name = doi_or_unique_name,
@@ -33,8 +31,8 @@ new_external_object <- function(doi_or_unique_name,
                         title = title,
                         description = description,
                         version = version,
-                        object = object_url,
-                        source = source_url,
-                        original_store = storage_location_url),
+                        object = object_id,
+                        source = source_id,
+                        original_store = original_store_id),
             key)
 }

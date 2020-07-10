@@ -3,12 +3,14 @@
 #' @param name
 #' @param abbreviation
 #' @param website
+#' @param key
 #'
 #' @export
 #'
 new_source <- function(name,
                        abbreviation,
-                       website) {
+                       website,
+                       key) {
 
   post_data(
     table = "source",

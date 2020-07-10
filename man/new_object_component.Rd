@@ -4,10 +4,10 @@
 \alias{new_object_component}
 \title{new_object_component}
 \usage{
-new_object_component(name, object)
+new_object_component(name, object, key)
 }
 \arguments{
-\item{object}{}
+\item{key}{}
 }
 \description{
 new_object_component

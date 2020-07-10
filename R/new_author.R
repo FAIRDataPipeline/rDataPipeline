@@ -3,12 +3,14 @@
 #' @param object
 #' @param family_name
 #' @param personal_name
+#' @param key
 #'
 #' @export
 #'
 new_author <- function(object,
                        family_name,
-                       personal_name) {
+                       personal_name,
+                       key) {
 
   object_url <- get_url("Object", list(id = object))
 

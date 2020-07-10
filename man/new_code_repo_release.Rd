@@ -4,10 +4,10 @@
 \alias{new_code_repo_release}
 \title{new_code_repo_release}
 \usage{
-new_code_repo_release(name, version, website, object)
+new_code_repo_release(name, version, website, object, key)
 }
 \arguments{
-\item{object}{}
+\item{key}{}
 }
 \description{
 new_code_repo_release

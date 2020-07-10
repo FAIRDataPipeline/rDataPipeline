@@ -4,10 +4,10 @@
 \alias{new_storage_root}
 \title{new_storage_root}
 \usage{
-new_storage_root(name, root, accessibility)
+new_storage_root(name, root, accessibility, key)
 }
 \arguments{
-\item{accessibility}{}
+\item{key}{}
 }
 \description{
 new_storage_root

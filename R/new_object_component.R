@@ -2,11 +2,13 @@
 #'
 #' @param name
 #' @param object
+#' @param key
 #'
 #' @export
 #'
 new_object_component <- function(name,
-                                 object) {
+                                 object,
+                                 key) {
 
   object_url <- get_url("object", list(id = object))
 

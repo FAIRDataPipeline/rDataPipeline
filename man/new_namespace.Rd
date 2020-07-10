@@ -4,10 +4,10 @@
 \alias{new_namespace}
 \title{new_namespace}
 \usage{
-new_namespace(name)
+new_namespace(name, key)
 }
 \arguments{
-\item{name}{}
+\item{key}{}
 }
 \description{
 new_namespace

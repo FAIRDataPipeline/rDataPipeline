@@ -2,10 +2,11 @@
 #'
 #' @param object
 #' @param keyphrase
+#' @param key
 #'
 #' @export
 #'
-new_keyword <- function(keyphrase, object) {
+new_keyword <- function(keyphrase, object, key) {
 
   object_url <- get_url("object", list(id = object))
 

@@ -11,13 +11,14 @@ new_external_object(
   title,
   description,
   version,
-  object,
-  source,
-  original_store
+  object_id,
+  source_id,
+  original_store_id,
+  key
 )
 }
 \arguments{
-\item{original_store}{}
+\item{key}{}
 }
 \description{
 new_external_object

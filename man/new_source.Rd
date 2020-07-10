@@ -4,10 +4,10 @@
 \alias{new_source}
 \title{new_source}
 \usage{
-new_source(name, abbreviation, website)
+new_source(name, abbreviation, website, key)
 }
 \arguments{
-\item{website}{}
+\item{key}{}
 }
 \description{
 new_source

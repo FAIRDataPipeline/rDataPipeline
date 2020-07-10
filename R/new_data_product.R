@@ -4,13 +4,15 @@
 #' @param version
 #' @param object
 #' @param namespace
-#'
+#' @param key
+
 #' @export
 #'
 new_data_product <- function(name,
                              version,
                              object,
-                             namespace) {
+                             namespace,
+                             key) {
 
   object_url <- get_url("object", list(id = object))
   Namespace_url <- get_url("namespace", list(id = namespace))

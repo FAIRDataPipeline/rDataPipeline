@@ -4,10 +4,10 @@
 \alias{new_storage_location}
 \title{new_storage_location}
 \usage{
-new_storage_location(path, hash, storage_root)
+new_storage_location(path, hash, storage_root, key)
 }
 \arguments{
-\item{storage_root}{}
+\item{key}{}
 }
 \description{
 new_storage_location

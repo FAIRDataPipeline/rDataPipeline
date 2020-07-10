@@ -4,13 +4,15 @@
 #' @param version
 #' @param website
 #' @param object
+#' @param key
 #'
 #' @export
 #'
 new_code_repo_release <- function(name,
                                   version,
                                   website,
-                                  object) {
+                                  object,
+                                  key) {
 
   object_url <- get_url("object", list(id = object))
 
