@@ -29,6 +29,6 @@ create_distribution <- function(filename,
     paste0(names(parameters[x]), " = ", parameters[x], "\n")) %>%
     paste0(collapse = "")
 
-  cat(paste0("[", descriptor, "]\ntype = \"distribution\"\ndistribtion = \"",
+  cat(paste0("[", descriptor, "]\ntype = \"distribution\"\ndistribution = \"",
              distribution, "\"\n", tmp, "\n"), file = filename)
 }
