@@ -47,16 +47,6 @@ upload_source_data <- function(dataset,
   }
 
 
-
-  # upload original-source metadata to registry ------------------------------
-
-  original_storeId <- new_storage_location(path = query, # query
-                                           hash = get_hash(local_path),
-                                           storage_root = original_storageRootId,
-                                           key = key)
-
-
-
   # download source data ----------------------------------------------------
 
   if(grepl("PREFIX", source_path) &
@@ -66,12 +56,21 @@ upload_source_data <- function(dataset,
   httr::GET(paste0(source_root,
                    utils::URLencode(source_path, reserved = TRUE)),
             httr::content_type("text/csv"),
-            httr::write_disk(file.path(local, filename)))
+            httr::write_disk(local_path, overwrite = TRUE))
 
   } else {
 
     stop("you still need to write the code to download csvs")
   }
+
+  # upload original-source metadata to registry ------------------------------
+
+  original_storeId <- new_storage_location(path = query, # query
+                                           hash = get_hash(local_path),
+                                           storage_root = original_storageRootId,
+                                           key = key)
+
+
 
   # upload source data to store ---------------------------------------------
 
