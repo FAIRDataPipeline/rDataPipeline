@@ -6,7 +6,9 @@
 #'
 #' @export
 #'
-read_array <- function(filename, component) {
+read_array <- function(filename,
+                       component) {
+
   file.h5 <- H5File$new(filename, mode = "r")
 
   object <- file.h5[[paste0(component, "/array")]][,]

@@ -6,9 +6,9 @@
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #' @param df a \code{dataframe} containing the data
-#' @param row_title a \code{string} descriptor of rownames
-#' @param row_names a \code{vector} of rownames
-#' @param column_units a \code{vector} comprising column units
+#' @param row_title (optional) a \code{string} descriptor of rownames
+#' @param row_names (optional) a \code{vector} of rownames
+#' @param column_units (optional) a \code{vector} comprising column units
 #'
 #' @export
 #'

@@ -14,11 +14,11 @@ e.g. "location/per_week/all_deaths"}
 
 \item{df}{a \code{dataframe} containing the data}
 
-\item{row_title}{a \code{string} descriptor of rownames}
+\item{row_title}{(optional) a \code{string} descriptor of rownames}
 
-\item{row_names}{a \code{vector} of rownames}
+\item{row_names}{(optional) a \code{vector} of rownames}
 
-\item{column_units}{a \code{vector} comprising column units}
+\item{column_units}{(optional) a \code{vector} comprising column units}
 }
 \description{
 Function to populate hdf5 file with array type data.
