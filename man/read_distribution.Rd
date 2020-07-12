@@ -7,7 +7,8 @@
 read_distribution(filename)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the name of the toml file}
+\item{filename}{a \code{string} specifying the name of the toml file, e.g.
+"0.1.0.toml"}
 }
 \description{
 read_distribution

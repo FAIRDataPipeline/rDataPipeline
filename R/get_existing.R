@@ -1,6 +1,6 @@
 #' get_existing
 #'
-#' @param table
+#' @param table table
 #'
 #' @export
 #'

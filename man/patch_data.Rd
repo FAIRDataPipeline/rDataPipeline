@@ -7,7 +7,11 @@
 patch_data(url, key, data)
 }
 \arguments{
-\item{data}{}
+\item{url}{url}
+
+\item{key}{key}
+
+\item{data}{data}
 }
 \description{
 patch_data

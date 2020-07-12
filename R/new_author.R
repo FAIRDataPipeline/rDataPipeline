@@ -1,22 +1,20 @@
 #' new_author
 #'
-#' @param object
-#' @param family_name
-#' @param personal_name
-#' @param key
+#' @param family_name e.g.
+#' @param personal_name e.g.
+#' @param object_id e.g.
+#' @param key key
 #'
 #' @export
 #'
-new_author <- function(object,
-                       family_name,
+new_author <- function(family_name,
                        personal_name,
+                       object_id,
                        key) {
 
-  object_url <- get_url("Object", list(id = object))
-
-  post_data(table = "Author",
+  post_data(table = "author",
             data =  list(family_name = family_name,
                          personal_name = personal_name,
-                         object = object_url),
+                         object = object_id),
             key)
 }

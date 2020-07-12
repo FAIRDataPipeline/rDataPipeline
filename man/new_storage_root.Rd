@@ -7,7 +7,13 @@
 new_storage_root(name, root, accessibility, key)
 }
 \arguments{
-\item{key}{}
+\item{name}{e.g.}
+
+\item{root}{e.g.}
+
+\item{accessibility}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_storage_root

@@ -1,6 +1,14 @@
 #' download_from_db
 #'
-download_from_db <- function(url, path, local, filename) {
+#' @param url url
+#' @param path path
+#' @param local local
+#' @param filename filename
+#'
+download_from_db <- function(url,
+                             path,
+                             local,
+                             filename) {
 
   require(SPARQL, quietly = TRUE)
 

@@ -4,10 +4,16 @@
 \alias{new_author}
 \title{new_author}
 \usage{
-new_author(object, family_name, personal_name, key)
+new_author(family_name, personal_name, object_id, key)
 }
 \arguments{
-\item{key}{}
+\item{family_name}{e.g.}
+
+\item{personal_name}{e.g.}
+
+\item{object_id}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_author

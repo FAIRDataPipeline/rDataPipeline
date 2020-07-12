@@ -7,7 +7,13 @@
 new_storage_location(path, hash, storage_root, key)
 }
 \arguments{
-\item{key}{}
+\item{path}{e.g.}
+
+\item{hash}{e.g.}
+
+\item{storage_root}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_storage_location

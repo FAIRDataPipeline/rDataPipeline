@@ -7,7 +7,9 @@
 new_namespace(name, key)
 }
 \arguments{
-\item{key}{}
+\item{name}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_namespace

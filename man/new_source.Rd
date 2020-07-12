@@ -7,7 +7,13 @@
 new_source(name, abbreviation, website, key)
 }
 \arguments{
-\item{key}{}
+\item{name}{e.g. "Scottish Government Open Data Repository"}
+
+\item{abbreviation}{e.g. "Scottish Government Open Data Repository"}
+
+\item{website}{e.g. "https://statistics.gov.scot/"}
+
+\item{key}{key}
 }
 \description{
 new_source

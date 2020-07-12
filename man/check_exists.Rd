@@ -7,7 +7,9 @@
 check_exists(table, query)
 }
 \arguments{
-\item{table}{}
+\item{table}{table}
+
+\item{query}{query}
 }
 \description{
 check_exists

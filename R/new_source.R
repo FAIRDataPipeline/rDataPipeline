@@ -1,9 +1,9 @@
 #' new_source
 #'
-#' @param name
-#' @param abbreviation
-#' @param website
-#' @param key
+#' @param name e.g. "Scottish Government Open Data Repository"
+#' @param abbreviation e.g. "Scottish Government Open Data Repository"
+#' @param website e.g. "https://statistics.gov.scot/"
+#' @param key key
 #'
 #' @export
 #'

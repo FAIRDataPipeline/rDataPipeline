@@ -32,13 +32,11 @@ upload_source_data(
 
 \item{target_path}{e.g. "human/infection/SARS-CoV-2/scotland/mortality/deaths-involving-coronavirus-covid-19.csv"}
 
-\item{download_date}{e.g. as.Date("2010-07-09", "\%Y-\%m-\%d")}
+\item{download_date}{e.g. as.POSIXct("2010-07-11 12:15:00", format = "\%Y-\%m-\%d \%H:\%M:\%S")}
 
 \item{version}{e.g. 0}
 
-\item{key}{}
-
-\item{accessibility}{e.g. "public"}
+\item{key}{key}
 }
 \description{
 upload_source_data

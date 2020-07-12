@@ -1,13 +1,17 @@
 #' check_entry
 #'
-#' @param entry
-#' @param table
-#' @param key
-#' @param convert_urls
+#' @param entry entry
+#' @param table table
+#' @param key key
+#' @param convert_urls convert_urls
 #'
 #' @export
 #'
-check_entry <- function(entry, table, field, key, convert_urls = FALSE) {
+check_entry <- function(entry,
+                        table,
+                        field,
+                        key,
+                        convert_urls = FALSE) {
 
   existing <- get_existing(table)
 

@@ -5,7 +5,7 @@
 \title{create_array}
 \usage{
 create_array(
-  h5filename,
+  filename,
   component,
   array,
   dimension_names,
@@ -15,9 +15,10 @@ create_array(
 )
 }
 \arguments{
-\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
+\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file}
+\item{component}{a \code{string} specifying a location within the hdf5 file,
+e.g. "location/per_week/all_deaths"}
 
 \item{array}{a \code{matrix} containing the data}
 

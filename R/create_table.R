@@ -2,8 +2,9 @@
 #'
 #' Function to populate hdf5 file with array type data.
 #'
-#' @param h5filename a \code{string} specifying the name of the hdf5 file
-#' @param component a \code{string} specifying a location within the hdf5 file
+#' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
+#' @param component a \code{string} specifying a location within the hdf5 file,
+#' e.g. "location/per_week/all_deaths"
 #' @param df a \code{dataframe} containing the data
 #' @param row_title a \code{string} descriptor of rownames
 #' @param row_names a \code{vector} of rownames
@@ -11,18 +12,18 @@
 #'
 #' @export
 #'
-create_table <- function(h5filename,
+create_table <- function(filename,
                          component,
                          df,
                          row_title,
                          row_names,
                          column_units) {
 
-  if(!grepl(".h5$", h5filename)) stop("h5filename must be *.h5")
+  if(!grepl(".h5$", filename)) stop("filename must be *.h5")
   if(!is.data.frame(df)) stop("df must be a data.frame")
 
   # Generate hdf5 structure
-  file.h5 <- H5File$new(h5filename)
+  file.h5 <- H5File$new(filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)

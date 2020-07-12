@@ -1,9 +1,9 @@
 #' new_storage_root
 #'
-#' @param name
-#' @param root
-#' @param accessibility
-#' @param key
+#' @param name e.g.
+#' @param root e.g.
+#' @param accessibility e.g.
+#' @param key key
 #'
 #' @export
 #'

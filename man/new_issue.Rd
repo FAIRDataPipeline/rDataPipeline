@@ -7,7 +7,11 @@
 new_issue(severity, description, key)
 }
 \arguments{
-\item{key}{}
+\item{severity}{e.g.}
+
+\item{description}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_issue

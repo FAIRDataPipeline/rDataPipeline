@@ -1,9 +1,9 @@
 #' new_storage_location
 #'
-#' @param path
-#' @param hash
-#' @param storage_root
-#' @param key
+#' @param path e.g.
+#' @param hash e.g.
+#' @param storage_root e.g.
+#' @param key key
 #'
 #' @export
 #'

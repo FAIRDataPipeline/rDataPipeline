@@ -1,6 +1,6 @@
 #' get_hash
 #'
-#' @param filename Filename
+#' @param filename filename
 #'
 #' @export
 #'

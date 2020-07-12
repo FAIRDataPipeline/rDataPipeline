@@ -7,9 +7,13 @@
 upload_processing_script(storage_root, path, hash = get_github_hash(path), key)
 }
 \arguments{
+\item{storage_root}{e.g.}
+
 \item{path}{e.g. "ScottishCovidResponse/SCRCdata"}
 
-\item{key}{}
+\item{hash}{e.g.}
+
+\item{key}{key}
 }
 \description{
 upload_processing_script

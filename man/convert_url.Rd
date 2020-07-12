@@ -6,6 +6,11 @@
 \usage{
 convert_url(url, key)
 }
+\arguments{
+\item{url}{url}
+
+\item{key}{key}
+}
 \description{
 convert_url
 }

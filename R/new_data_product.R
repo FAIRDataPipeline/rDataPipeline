@@ -1,23 +1,23 @@
 #' new_data_product
 #'
-#' @param name
-#' @param version
-#' @param objectId
-#' @param namespaceId
-#' @param key
+#' @param name e.g.
+#' @param version e.g.
+#' @param object_id e.g.
+#' @param namespace_id e.g.
+#' @param key key
 #' @export
 #'
 new_data_product <- function(name,
                              version,
-                             objectId,
-                             namespaceId,
+                             object_id,
+                             namespace_id,
                              key) {
 
-  if(missing(namespaceId)) {
+  if(missing(namespace_id)) {
     post_data(table = "data_product",
               data =  list(name = name,
                            version = version,
-                           object = objectId),
+                           object = object_id),
               key)
 
   } else {
@@ -25,8 +25,8 @@ new_data_product <- function(name,
     post_data(table = "data_product",
               data =  list(name = name,
                            version = version,
-                           object = objectId,
-                           namespace = namespaceId),
+                           object = object_id,
+                           namespace = namespace_id),
               key)
   }
 }

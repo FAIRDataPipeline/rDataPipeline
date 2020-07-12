@@ -7,7 +7,7 @@
 get_hash(filename)
 }
 \arguments{
-\item{filename}{Filename}
+\item{filename}{filename}
 }
 \description{
 get_hash

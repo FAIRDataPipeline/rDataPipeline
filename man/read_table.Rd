@@ -4,7 +4,13 @@
 \alias{read_table}
 \title{read_table}
 \usage{
-read_table(h5filename, path)
+read_table(filename, component)
+}
+\arguments{
+\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
+
+\item{component}{a \code{string} specifying a location within the hdf5 file,
+e.g. "location/per_week/all_deaths"}
 }
 \description{
 read_table

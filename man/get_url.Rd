@@ -7,7 +7,9 @@
 get_url(table, query = list())
 }
 \arguments{
-\item{query}{}
+\item{table}{table}
+
+\item{query}{query}
 }
 \description{
 get_url

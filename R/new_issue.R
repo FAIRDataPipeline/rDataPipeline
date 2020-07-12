@@ -1,8 +1,8 @@
 #' new_issue
 #'
-#' @param severity
-#' @param description
-#' @param key
+#' @param severity e.g.
+#' @param description e.g.
+#' @param key key
 #'
 #' @export
 #'

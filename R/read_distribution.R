@@ -1,6 +1,7 @@
 #' read_distribution
 #'
-#' @param filename a \code{string} specifying the name of the toml file
+#' @param filename a \code{string} specifying the name of the toml file, e.g.
+#' "0.1.0.toml"
 #'
 #' @export
 #'

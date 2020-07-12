@@ -1,11 +1,12 @@
 #' upload_data_product
 #'
-#' @param storage_root
-#' @param path
-#' @param dataset
-#' @param filename
-#' @param version
-#' @param key
+#' @param storage_root e.g.
+#' @param path e.g.
+#' @param dataset e.g.
+#' @param filename e.g.
+#' @param version e.g.
+#' @param namespace e.g.
+#' @param key key
 #'
 #' @export
 #'
@@ -22,7 +23,7 @@ upload_data_product <- function(storage_root,
   if(check_exists("storage_root", list(name = storage_root))) {
     storageRootId <- get_url("storage_root", list(name = storage_root))
 
-  } else {
+  } else {man
     stop(paste0("The storage_root \"", storage_root,
                 "\" does not currently exist in the data repository.",
                 "Please run new_storage_root() to write a new entry."))
@@ -39,8 +40,8 @@ upload_data_product <- function(storage_root,
   }
 
   product_storeId <- new_storage_location(
-    path = path,
-    hash = get_hash(filename),
+    path = file.path(path, filename),
+    hash = get_hash(file.path("data-raw", path, filename)),
     storage_root = storageRootId,
     key = key)
 
@@ -57,13 +58,13 @@ upload_data_product <- function(storage_root,
 
   for(i in seq_len(nrow(components))) {
     componentId <- new_object_component(name = components$name[i],
-                                        object = product_objectId,
+                                        object_id = product_objectId,
                                         key = key)
   }
 
-  new_data_product(name = paste(dataset, "dataset"),
+  new_data_product(name = path,
                    version = version,
-                   objectId = product_objectId,
-                   namespace = namespaceId,
+                   object_id = product_objectId,
+                   namespace_id = namespaceId,
                    key = key)
 }

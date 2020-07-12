@@ -1,9 +1,9 @@
 #' upload_processing_script
 #'
-#' @param storage_root
+#' @param storage_root e.g.
 #' @param path e.g. "ScottishCovidResponse/SCRCdata"
-#' @param hash
-#' @param key
+#' @param hash e.g.
+#' @param key key
 #'
 upload_processing_script <- function(storage_root,
                                      path,
@@ -34,18 +34,6 @@ upload_processing_script <- function(storage_root,
                                          storage_root = storage_rootId,
                                          key = key)
 
-  system("git ls-remote https://github.com/ScottishCovidResponse/SCRCdataAPI.git refs/heads/master")
-
-  # git ls-remote -h https://github.com/ScottishCovidResponse/SCRCdataAPI.git
-  git2r::repo("https://github.com/ScottishCovidResponse/SCRCdata/")
-
-  git2r::commits(repo = git2r::remote_url(repo=))
-
-
-  system("curl https://github.com/ScottishCovidResponse/SCRCdata/")
-
-
-
-  new_object(storage_location = script_storeId,
+  new_object(storage_location_id = script_storeId,
              key = key)
 }

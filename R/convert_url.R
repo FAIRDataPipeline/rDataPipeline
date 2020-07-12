@@ -1,8 +1,13 @@
 #' convert_url
 #'
+#' @param url url
+#' @param key key
+#'
 #' @export
 #'
-convert_url <- function(url, key) {
+convert_url <- function(url,
+                        key) {
+
   h <- c(Authorization = paste("token", key))
 
   output <- GET(url = url,

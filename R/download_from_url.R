@@ -1,6 +1,14 @@
 #' download_from_url
 #'
-download_from_url <- function(url, path, local, filename) {
+#' @param url url
+#' @param path path
+#' @param local local
+#' @param filename filename
+#'
+download_from_url <- function(url,
+                              path,
+                              local,
+                              filename) {
 
   # Prepare local directory -------------------------------------------------
 

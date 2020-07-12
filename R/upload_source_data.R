@@ -7,10 +7,9 @@
 #' @param local_path e.g. "data-raw/deaths-involving-coronavirus-covid-19.csv"
 #' @param storage_root e.g. "boydorr"
 #' @param target_path e.g. "human/infection/SARS-CoV-2/scotland/mortality/deaths-involving-coronavirus-covid-19.csv"
-#' @param download_date e.g. as.Date("2010-07-09", "%Y-%m-%d")
+#' @param download_date e.g. as.POSIXct("2010-07-11 12:15:00", format = "%Y-%m-%d %H:%M:%S")
 #' @param version e.g. 0
-#' @param accessibility e.g. "public"
-#' @param key
+#' @param key key
 #'
 #' @export
 #'
@@ -88,7 +87,7 @@ upload_source_data <- function(dataset,
                                             storage_root = storageRootId,
                                             key = key)
 
-  objectId <- new_object(storage_location = storageLocationId,
+  objectId <- new_object(storage_location_id = storageLocationId,
                          key = key)
 
   new_external_object(doi_or_unique_name = dataset,
@@ -97,8 +96,8 @@ upload_source_data <- function(dataset,
                       title = dataset,
                       description = paste(dataset, "dataset"),
                       version = create_version_number(download_date, version),
-                      object = objectId,
-                      source = sourceId,
-                      original_store = original_storeId,
+                      object_id = objectId,
+                      source_id = sourceId,
+                      original_store_id = original_storeId,
                       key = key)
 }
