@@ -6,7 +6,7 @@ Functions to generate and process data files for the SCRC data pipeline.
 * [Create array](#create-array)
 * [Create table](#create-table)
 * [Create distribution](#create-distribution)
-* [Create point estimate](#create-point-estimate)
+* [Create pointestimate](#create-pointestimate)
 
 
 ## Installation
@@ -99,7 +99,7 @@ read_distribution(filename = "data-raw/test_distribution.toml")
 ```
 
 
-## Create number
+## Create pointestimate
 
 In the following example, we populate "test_number.toml":
 
