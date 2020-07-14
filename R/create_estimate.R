@@ -1,4 +1,4 @@
-#' create_number
+#' create_estimate
 #'
 #' Function to populate toml file with number type data.
 #'
@@ -15,12 +15,12 @@
 #' path <- "data-raw/latency"
 #' value <- 2.0
 #' name <- "latency"
-#' create_number(filename, path, value, name)
+#' create_estimate(filename, path, value, name)
 #'
-create_number <- function(filename,
-                          path,
-                          value,
-                          name) {
+create_estimate <- function(filename,
+                            path,
+                            value,
+                            name) {
   # Check file name
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
@@ -30,5 +30,5 @@ create_number <- function(filename,
 
   # Write toml
   cat(paste0("[", name, "]\ntype = \"point-estimate\"",
-            "\nvalue = ", value, "\n"), file = file.path(path, filename))
+             "\nvalue = ", value, "\n"), file = file.path(path, filename))
 }
