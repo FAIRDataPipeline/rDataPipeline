@@ -7,6 +7,7 @@
 upload_data_product(
   storage_root_id,
   path,
+  name = name,
   component_name,
   filename,
   version,
@@ -18,6 +19,8 @@ upload_data_product(
 \item{storage_root_id}{e.g.}
 
 \item{path}{e.g.}
+
+\item{name}{e.g.}
 
 \item{component_name}{e.g.}
 

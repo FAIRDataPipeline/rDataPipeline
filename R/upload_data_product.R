@@ -2,6 +2,7 @@
 #'
 #' @param storage_root_id e.g.
 #' @param path e.g.
+#' @param name e.g.
 #' @param component_name e.g.
 #' @param filename e.g.
 #' @param version e.g.
@@ -12,6 +13,7 @@
 #'
 upload_data_product <- function(storage_root_id,
                                 path,
+                                name = name,
                                 component_name,
                                 filename,
                                 version,
@@ -19,7 +21,7 @@ upload_data_product <- function(storage_root_id,
                                 key) {
 
   product_storeId <- new_storage_location(
-    path = file.path(path, filename),
+    path = paste(path, filename, sep = "/"),
     hash = get_hash(file.path("data-raw", path, filename)),
     storage_root_id = storage_root_id,
     key = key)
@@ -41,7 +43,7 @@ upload_data_product <- function(storage_root_id,
                                         key = key)
   }
 
-  new_data_product(name = path,
+  new_data_product(name = name,
                    version = version,
                    object_id = product_objectId,
                    namespace_id = namespace_id,
