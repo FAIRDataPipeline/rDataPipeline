@@ -12,19 +12,19 @@ create_estimate(filename, path, parameters)
 
 \item{path}{a \code{string} specifying the name of the toml file (and path)}
 
-\item{parameters}{}
+\item{parameters}{a \code{list} (see example, below)}
 }
 \description{
 Function to populate toml file with number type data.
 }
 \examples{
-filename <- "multi.toml"
-path <- "data-raw/multi"
+filename <- "test.toml"
+path <- "data-raw/example"
 parameters <- list(asymptomatic_period = 192.0)
 create_estimate(filename, path, parameters)
 
-filename <- "multi.toml"
-path <- "data-raw/multi"
+filename <- "anothertest.toml"
+path <- "data-raw/example"
 parameters <- list(asymptomatic_period = 192.0, latent_period = 123.12)
 create_estimate(filename, path, parameters)
 

@@ -5,18 +5,18 @@
 #' @param filename a \code{string} specifying the name of the toml file, e.g.
 #' "0.1.0.toml"
 #' @param path a \code{string} specifying the name of the toml file (and path)
-#' @param parameters
+#' @param parameters a \code{list} (see example, below)
 #'
 #' @export
 #'
 #' @examples
-#' filename <- "multi.toml"
-#' path <- "data-raw/multi"
+#' filename <- "test.toml"
+#' path <- "data-raw/example"
 #' parameters <- list(asymptomatic_period = 192.0)
 #' create_estimate(filename, path, parameters)
 #'
-#' filename <- "multi.toml"
-#' path <- "data-raw/multi"
+#' filename <- "anothertest.toml"
+#' path <- "data-raw/example"
 #' parameters <- list(asymptomatic_period = 192.0, latent_period = 123.12)
 #' create_estimate(filename, path, parameters)
 #'
