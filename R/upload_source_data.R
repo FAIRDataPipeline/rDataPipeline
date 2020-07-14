@@ -1,103 +1,57 @@
 #' upload_source_data
 #'
-#' @param dataset e.g. "scottish deaths-involving-coronavirus-covid-19"
-#' @param source e.g. "Scottish Government Open Data Repository"
-#' @param source_root e.g. "https://statistics.gov.scot/sparql.json?query="
-#' @param source_path e.g. some query
-#' @param local_path e.g. "data-raw/deaths-involving-coronavirus-covid-19.csv"
-#' @param storage_root e.g. "boydorr"
-#' @param target_path e.g. "human/infection/SARS-CoV-2/scotland/mortality/deaths-involving-coronavirus-covid-19.csv"
+#' @param doi_or_unique_name e.g. "scottish deaths-involving-coronavirus-covid-19"
+#' @param original_source_id e.g. "https://data.scrc.uk/api/source/9/"
+#' @param original_root_id e.g.
+#' @param original_path e.g. query
+#' @param local_path e.g. "data-raw/human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"
+#' @param storage_root_id e.g. "https://data.scrc.uk/api/storage_root/9/"
+#' @param target_path e.g. "human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"
 #' @param download_date e.g. as.POSIXct("2010-07-11 12:15:00", format = "%Y-%m-%d %H:%M:%S")
-#' @param version e.g. 0
+#' @param version e.g. "20100711.0"
 #' @param key key
 #'
 #' @export
 #'
-upload_source_data <- function(dataset,
-                               source,
-                               source_root,
-                               source_path,
+upload_source_data <- function(doi_or_unique_name,
+                               original_source_id,
+                               original_root_id,
+                               original_path,
                                local_path,
-                               storage_root,
+                               storage_root_id,
                                target_path,
                                download_date,
                                version,
                                key) {
 
-  # Check if storage root already exists (root of where the source data is
-  # being stored)
-  if(check_exists("storage_root", list(name = storage_root))) {
-    storageRootId <- get_url("storage_root", list(name = storage_root))
-
-  } else {
-    stop(paste0("The storage_root \"", storage_root,
-                "\" does not currently exist in the data repository.",
-                "Please run new_storage_root() to write a new entry."))
-  }
-
-  # Check if source already exists (where source data came from)
-  if(check_exists("source", list(name = source))) {
-    sourceId <- get_url("source", list(name = source))
-
-  } else {
-    stop(paste0("The source \"", source,
-                "\" does not currently exist in the data repository.",
-                "Please run new_source() to write a new entry."))
-  }
-
-
-  # download source data ----------------------------------------------------
-
-  if(grepl("PREFIX", source_path) &
-     grepl("WHERE", source_path) &
-     grepl("SELECT", source_path)) {
-
-  httr::GET(paste0(source_root,
-                   utils::URLencode(source_path, reserved = TRUE)),
-            httr::content_type("text/csv"),
-            httr::write_disk(local_path, overwrite = TRUE))
-
-  } else {
-
-    stop("you still need to write the code to download csvs")
-  }
-
   # upload original-source metadata to registry ------------------------------
 
-  original_storeId <- new_storage_location(path = query, # query
-                                           hash = get_hash(local_path),
-                                           storage_root = original_storageRootId,
-                                           key = key)
+  hash <- get_hash(local_path)
 
-
-
-  # upload source data to store ---------------------------------------------
-
-  upload_to <- file.path(get_entry("storage_root",
-                                   list(name = "boydorr"))[[1]]$uri,
-                         target_path)
-
-  ####### need to automate this ########### !!!!!
-
+  original_storeId <- new_storage_location(
+    path = original_path,
+    hash = hash,
+    storage_root_id = original_root_id,
+    key = key)
 
   # upload source data metadata to registry ----------------------------------
 
   storageLocationId <- new_storage_location(path = target_path,
-                                            hash = get_hash(local_path),
-                                            storage_root = storageRootId,
+                                            hash = hash,
+                                            storage_root_id = storage_root_id,
                                             key = key)
 
   objectId <- new_object(storage_location_id = storageLocationId,
                          key = key)
 
-  new_external_object(doi_or_unique_name = dataset,
+  new_external_object(doi_or_unique_name = doi_or_unique_name,
                       primary_not_supplement = TRUE,
                       release_date = download_date,
-                      title = dataset,
-                      description = paste(dataset, "dataset"),
+                      title = doi_or_unique_name,
+                      description = paste(doi_or_unique_name, "dataset"),
                       version = create_version_number(download_date, version),
                       object_id = objectId,
-                      source_id = sourceId,
+                      source_id = source_id,
                       original_store_id = original_storeId,
                       key = key)
 }

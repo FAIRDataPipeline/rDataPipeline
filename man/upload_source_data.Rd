@@ -5,12 +5,10 @@
 \title{upload_source_data}
 \usage{
 upload_source_data(
-  dataset,
-  source,
-  source_root,
-  source_path,
+  doi_or_unique_name,
+  source_id,
   local_path,
-  storage_root,
+  storage_root_id,
   target_path,
   download_date,
   version,
@@ -18,17 +16,13 @@ upload_source_data(
 )
 }
 \arguments{
-\item{dataset}{e.g. "scottish deaths-involving-coronavirus-covid-19"}
+\item{doi_or_unique_name}{e.g. "scottish deaths-involving-coronavirus-covid-19"}
 
-\item{source}{e.g. "Scottish Government Open Data Repository"}
-
-\item{source_root}{e.g. "https://statistics.gov.scot/sparql.json?query="}
-
-\item{source_path}{e.g. some query}
+\item{source_id}{e.g. "Scottish Government Open Data Repository"}
 
 \item{local_path}{e.g. "data-raw/deaths-involving-coronavirus-covid-19.csv"}
 
-\item{storage_root}{e.g. "boydorr"}
+\item{storage_root_id}{e.g. "boydorr"}
 
 \item{target_path}{e.g. "human/infection/SARS-CoV-2/scotland/mortality/deaths-involving-coronavirus-covid-19.csv"}
 
