@@ -6,7 +6,7 @@ Functions to generate and process data files for the SCRC data pipeline.
 * [Create array](#create-array)
 * [Create table](#create-table)
 * [Create distribution](#create-distribution)
-* [Create pointestimate](#create-pointestimate)
+* [Create point-estimate](#create-point-estimate)
 
 
 ## Installation
@@ -89,7 +89,7 @@ In the following example, we populate "test_distribution.toml":
 
 ```{r}
 # Create *.toml file
-create_distribution(filename = "test_distribution.toml", path = "data-raw", descriptor = "latency", distribution = "gamma", parameters = list(shape = 2.0, scale = 3.0))
+create_distribution(filename = "test_distribution.toml", path = "data-raw", name = "latency", distribution = "gamma", parameters = list(shape = 2.0, scale = 3.0))
 ```
 
 To read the toml:
@@ -99,17 +99,24 @@ read_distribution(filename = "data-raw/test_distribution.toml")
 ```
 
 
-## Create pointestimate
+## Create point-estimate
 
-In the following example, we populate "test_number.toml":
+In the following example, we populate "test_number.toml" with a single point-estimate:
 
 ```{r}
 # Create *.toml file
-create_number(filename = "test_number.toml", path = "data-raw", value = 1.0, name = "value_name")
+create_estimate(filename = "test_number.toml", path = "data-raw", parameters = list(asymptomatic_period = 192.0))
+```
+
+To include multiple point-estimates:
+
+```{r}
+# Create *.toml file
+create_estimate(filename = "test_number.toml", path = "data-raw", parameters = list(asymptomatic_period = 192.0, latent_period = 123.12))
 ```
 
 To read the toml:
 
 ```{r}
-read_number(filename = "data-raw/test_number.toml")
+read_estimate(filename = "data-raw/test_number.toml")
 ```
