@@ -2,31 +2,21 @@
 #'
 #' @param storage_root_id e.g.
 #' @param path e.g.
-#' @param dataset e.g.
+#' @param component_name e.g.
 #' @param filename e.g.
 #' @param version e.g.
-#' @param namespace e.g.
+#' @param namespace_id e.g.
 #' @param key key
 #'
 #' @export
 #'
 upload_data_product <- function(storage_root_id,
                                 path,
-                                dataset,
+                                component_name,
                                 filename,
                                 version,
-                                namespace,
+                                namespace_id,
                                 key) {
-
-  # Check if namespace already exists
-  if(check_exists("namespace", list(name = namespace))) {
-    namespaceId <- get_url("namespace", list(name = namespace))
-
-  } else {
-    stop(paste0("The namespace \"", namespace,
-                "\" does not currently exist in the data repository.",
-                "Please run new_namespace() to write a new entry."))
-  }
 
   product_storeId <- new_storage_location(
     path = file.path(path, filename),
@@ -40,7 +30,7 @@ upload_data_product <- function(storage_root_id,
   if(grepl(".h5$", filename)) {
     components <- file_structure(filename)
   } else if(grepl(".toml$", filename)) {
-    components <- data.frame(name = dataset)
+    components <- data.frame(name = component_name)
   } else {
     stop("This code isn't ready for this filetype!")
   }
@@ -54,6 +44,6 @@ upload_data_product <- function(storage_root_id,
   new_data_product(name = path,
                    version = version,
                    object_id = product_objectId,
-                   namespace_id = namespaceId,
+                   namespace_id = namespace_id,
                    key = key)
 }

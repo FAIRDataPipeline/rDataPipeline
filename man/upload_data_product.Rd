@@ -7,10 +7,10 @@
 upload_data_product(
   storage_root_id,
   path,
-  dataset,
+  component_name,
   filename,
   version,
-  namespace,
+  namespace_id,
   key
 )
 }
@@ -19,13 +19,13 @@ upload_data_product(
 
 \item{path}{e.g.}
 
-\item{dataset}{e.g.}
+\item{component_name}{e.g.}
 
 \item{filename}{e.g.}
 
 \item{version}{e.g.}
 
-\item{namespace}{e.g.}
+\item{namespace_id}{e.g.}
 
 \item{key}{key}
 }
