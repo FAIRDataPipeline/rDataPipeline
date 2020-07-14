@@ -4,7 +4,7 @@
 \alias{create_estimate}
 \title{create_estimate}
 \usage{
-create_estimate(filename, path, value, name)
+create_estimate(filename, path, parameters)
 }
 \arguments{
 \item{filename}{a \code{string} specifying the name of the toml file, e.g.
@@ -12,18 +12,20 @@ create_estimate(filename, path, value, name)
 
 \item{path}{a \code{string} specifying the name of the toml file (and path)}
 
-\item{value}{a \code{numeric} object specifying the value}
-
-\item{name}{a \code{string} descriptor}
+\item{parameters}{}
 }
 \description{
 Function to populate toml file with number type data.
 }
 \examples{
-filename <- "test.toml"
-path <- "data-raw/latency"
-value <- 2.0
-name <- "latency"
-create_estimate(filename, path, value, name)
+filename <- "multi.toml"
+path <- "data-raw/multi"
+parameters <- list(asymptomatic_period = 192.0)
+create_estimate(filename, path, parameters)
+
+filename <- "multi.toml"
+path <- "data-raw/multi"
+parameters <- list(asymptomatic_period = 192.0, latent_period = 123.12)
+create_estimate(filename, path, parameters)
 
 }

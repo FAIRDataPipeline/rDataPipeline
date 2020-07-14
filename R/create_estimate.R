@@ -5,22 +5,24 @@
 #' @param filename a \code{string} specifying the name of the toml file, e.g.
 #' "0.1.0.toml"
 #' @param path a \code{string} specifying the name of the toml file (and path)
-#' @param value a \code{numeric} object specifying the value
-#' @param name a \code{string} descriptor
+#' @param parameters
 #'
 #' @export
 #'
 #' @examples
-#' filename <- "test.toml"
-#' path <- "data-raw/latency"
-#' value <- 2.0
-#' name <- "latency"
-#' create_estimate(filename, path, value, name)
+#' filename <- "multi.toml"
+#' path <- "data-raw/multi"
+#' parameters <- list(asymptomatic_period = 192.0)
+#' create_estimate(filename, path, parameters)
+#'
+#' filename <- "multi.toml"
+#' path <- "data-raw/multi"
+#' parameters <- list(asymptomatic_period = 192.0, latent_period = 123.12)
+#' create_estimate(filename, path, parameters)
 #'
 create_estimate <- function(filename,
                             path,
-                            value,
-                            name) {
+                            parameters) {
   # Check file name
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
@@ -29,6 +31,10 @@ create_estimate <- function(filename,
   if(missing(path)) path <- ""
 
   # Write toml
-  cat(paste0("[", name, "]\ntype = \"point-estimate\"",
-             "\nvalue = ", value, "\n"), file = file.path(path, filename))
+  tmp <- lapply(seq_along(parameters), function(i) {
+    paste0("[", names(parameters)[[i]], "]\ntype = \"point-estimate\"",
+           "\nvalue = ", parameters[[i]], "\n")
+  })
+
+  cat(paste(tmp, collapse = "\n"), file = file.path(path, filename))
 }
