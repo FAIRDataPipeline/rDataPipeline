@@ -30,6 +30,7 @@ post_data <- function(table,
 
   } else if(result$status == 409) {
     assertthat::assert_that(grepl("duplicate key value", tmp$detail) == T)
+
     tmp <- data[1]
     names(tmp) <- names(data[1])
     message(paste(table, "already exists"))
