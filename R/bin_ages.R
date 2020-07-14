@@ -3,6 +3,8 @@
 #' @param dat dat
 #' @param ageclasses ageclasses
 #'
+#' @export
+#'
 bin_ages <- function(dat,
                      ageclasses) {
 
