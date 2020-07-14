@@ -1,6 +1,6 @@
 #' upload_data_product
 #'
-#' @param storage_root e.g.
+#' @param storage_root_id e.g.
 #' @param path e.g.
 #' @param dataset e.g.
 #' @param filename e.g.
@@ -10,24 +10,13 @@
 #'
 #' @export
 #'
-upload_data_product <- function(storage_root,
+upload_data_product <- function(storage_root_id,
                                 path,
                                 dataset,
                                 filename,
                                 version,
-                                namespace = "SCRC",
+                                namespace,
                                 key) {
-
-  # Check if storage root already exists (root of where the data product is
-  # being stored)
-  if(check_exists("storage_root", list(name = storage_root))) {
-    storageRootId <- get_url("storage_root", list(name = storage_root))
-
-  } else {man
-    stop(paste0("The storage_root \"", storage_root,
-                "\" does not currently exist in the data repository.",
-                "Please run new_storage_root() to write a new entry."))
-  }
 
   # Check if namespace already exists
   if(check_exists("namespace", list(name = namespace))) {
@@ -42,7 +31,7 @@ upload_data_product <- function(storage_root,
   product_storeId <- new_storage_location(
     path = file.path(path, filename),
     hash = get_hash(file.path("data-raw", path, filename)),
-    storage_root = storageRootId,
+    storage_root_id = storage_root_id,
     key = key)
 
   product_objectId <- new_object(storage_location_id = product_storeId,

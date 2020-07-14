@@ -5,17 +5,17 @@
 \title{upload_data_product}
 \usage{
 upload_data_product(
-  storage_root,
+  storage_root_id,
   path,
   dataset,
   filename,
   version,
-  namespace = "SCRC",
+  namespace,
   key
 )
 }
 \arguments{
-\item{storage_root}{e.g.}
+\item{storage_root_id}{e.g.}
 
 \item{path}{e.g.}
 
