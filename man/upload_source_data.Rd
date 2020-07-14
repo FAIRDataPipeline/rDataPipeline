@@ -6,7 +6,9 @@
 \usage{
 upload_source_data(
   doi_or_unique_name,
-  source_id,
+  original_source_id,
+  original_root_id,
+  original_path,
   local_path,
   storage_root_id,
   target_path,
@@ -18,17 +20,21 @@ upload_source_data(
 \arguments{
 \item{doi_or_unique_name}{e.g. "scottish deaths-involving-coronavirus-covid-19"}
 
-\item{source_id}{e.g. "Scottish Government Open Data Repository"}
+\item{original_source_id}{e.g. "https://data.scrc.uk/api/source/9/"}
 
-\item{local_path}{e.g. "data-raw/deaths-involving-coronavirus-covid-19.csv"}
+\item{original_root_id}{e.g.}
 
-\item{storage_root_id}{e.g. "boydorr"}
+\item{original_path}{e.g. query}
 
-\item{target_path}{e.g. "human/infection/SARS-CoV-2/scotland/mortality/deaths-involving-coronavirus-covid-19.csv"}
+\item{local_path}{e.g. "data-raw/human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"}
+
+\item{storage_root_id}{e.g. "https://data.scrc.uk/api/storage_root/9/"}
+
+\item{target_path}{e.g. "human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"}
 
 \item{download_date}{e.g. as.POSIXct("2010-07-11 12:15:00", format = "\%Y-\%m-\%d \%H:\%M:\%S")}
 
-\item{version}{e.g. 0}
+\item{version}{e.g. "20100711.0"}
 
 \item{key}{key}
 }
