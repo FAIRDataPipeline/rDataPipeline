@@ -4,20 +4,21 @@
 \alias{create_table}
 \title{create_table}
 \usage{
-create_table(h5filename, component, df, row_title, row_names, column_units)
+create_table(filename, component, df, row_title, row_names, column_units)
 }
 \arguments{
-\item{h5filename}{a \code{string} specifying the name of the hdf5 file}
+\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file}
+\item{component}{a \code{string} specifying a location within the hdf5 file,
+e.g. "location/per_week/all_deaths"}
 
 \item{df}{a \code{dataframe} containing the data}
 
-\item{row_title}{a \code{string} descriptor of rownames}
+\item{row_title}{(optional) a \code{string} descriptor of rownames}
 
-\item{row_names}{a \code{vector} of rownames}
+\item{row_names}{(optional) a \code{vector} of rownames}
 
-\item{column_units}{a \code{vector} comprising column units}
+\item{column_units}{(optional) a \code{vector} comprising column units}
 }
 \description{
 Function to populate hdf5 file with array type data.

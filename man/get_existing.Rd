@@ -7,7 +7,7 @@
 get_existing(table)
 }
 \arguments{
-\item{table}{}
+\item{table}{table}
 }
 \description{
 get_existing

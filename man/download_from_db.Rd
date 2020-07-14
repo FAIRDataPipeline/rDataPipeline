@@ -6,6 +6,15 @@
 \usage{
 download_from_db(url, path, local, filename)
 }
+\arguments{
+\item{url}{url}
+
+\item{path}{path}
+
+\item{local}{local}
+
+\item{filename}{filename}
+}
 \description{
 download_from_db
 }

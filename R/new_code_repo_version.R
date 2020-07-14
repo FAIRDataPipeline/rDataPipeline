@@ -1,10 +1,10 @@
 #' new_code_repo_release
 #'
-#' @param name
-#' @param version
-#' @param website
-#' @param object
-#' @param key
+#' @param name e.g.
+#' @param version e.g.
+#' @param website e.g.
+#' @param object e.g.
+#' @param key key
 #'
 #' @export
 #'

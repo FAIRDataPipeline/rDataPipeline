@@ -19,8 +19,12 @@ Imports:
     reshape2,
     sf,
     SPARQL,
+    stats,
     tibble,
-    tidyr
+    tidyr,
+    utils
+Suggests:
+    testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

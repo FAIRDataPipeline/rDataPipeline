@@ -1,7 +1,7 @@
 #' get_entry
 #'
-#' @param table
-#' @param query
+#' @param table table
+#' @param query query
 #'
 #' @export
 #'

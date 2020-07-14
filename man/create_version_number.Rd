@@ -7,7 +7,9 @@
 create_version_number(download_date, version)
 }
 \arguments{
-\item{version}{}
+\item{download_date}{download_date}
+
+\item{version}{version}
 }
 \description{
 create_version_number

@@ -4,7 +4,10 @@
 \alias{file_structure}
 \title{file_structure}
 \usage{
-file_structure(h5filename)
+file_structure(filename)
+}
+\arguments{
+\item{filename}{filename}
 }
 \description{
 Look at internal file structure

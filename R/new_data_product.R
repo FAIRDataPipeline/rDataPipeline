@@ -1,26 +1,32 @@
 #' new_data_product
 #'
-#' @param name
-#' @param version
-#' @param object
-#' @param namespace
-#' @param key
-
+#' @param name e.g.
+#' @param version e.g.
+#' @param object_id e.g.
+#' @param namespace_id e.g.
+#' @param key key
 #' @export
 #'
 new_data_product <- function(name,
                              version,
-                             object,
-                             namespace,
+                             object_id,
+                             namespace_id,
                              key) {
 
-  object_url <- get_url("object", list(id = object))
-  Namespace_url <- get_url("namespace", list(id = namespace))
+  if(missing(namespace_id)) {
+    post_data(table = "data_product",
+              data =  list(name = name,
+                           version = version,
+                           object = object_id),
+              key)
 
-  post_data(table = "data_product",
-            data =  list(name = name,
-                         version = version,
-                         object = object_url,
-                         namespace = Namespace_url),
-            key)
+  } else {
+
+    post_data(table = "data_product",
+              data =  list(name = name,
+                           version = version,
+                           object = object_id,
+                           namespace = namespace_id),
+              key)
+  }
 }

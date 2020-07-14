@@ -2,10 +2,13 @@
 #'
 #' Look at internal file structure
 #'
+#' @param filename filename
+#'
 #' @export
 #'
-file_structure <- function(h5filename) {
-  file.h5 <- H5File$new(h5filename, mode = "r+")
+file_structure <- function(filename) {
+
+  file.h5 <- H5File$new(filename, mode = "r+")
 
   tmp <- file.h5$ls(recursive = TRUE) %>%
     dplyr::filter(grepl("array$", name)) %>%

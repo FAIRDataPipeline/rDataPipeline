@@ -6,6 +6,11 @@
 \usage{
 bin_ages(dat, ageclasses)
 }
+\arguments{
+\item{dat}{dat}
+
+\item{ageclasses}{ageclasses}
+}
 \description{
 bin_ages
 }

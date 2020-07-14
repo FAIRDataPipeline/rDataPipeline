@@ -1,6 +1,11 @@
 #' grid_intersection
 #'
-grid_intersection <- function(shapefile, gridsize) {
+#' @param shapefile shapefile
+#' @param gridsize gridsize
+#'
+grid_intersection <- function(shapefile,
+                              gridsize) {
+
   # Check units of shapefile: assuming metres below
   sh_unit <- sf::st_crs(shapefile, parameters = TRUE)$units_gdal
   assertthat::assert_that(sh_unit == "metre", msg = "Unexpected CRS: shapefile distances should be in metres")

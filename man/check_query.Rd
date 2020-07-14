@@ -7,7 +7,9 @@
 check_query(table, query)
 }
 \arguments{
-\item{query}{}
+\item{table}{table}
+
+\item{query}{query}
 }
 \description{
 Check whether entries exist in the database

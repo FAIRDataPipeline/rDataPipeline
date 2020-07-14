@@ -2,8 +2,9 @@
 #'
 #' Function to populate hdf5 file with array type data.
 #'
-#' @param h5filename a \code{string} specifying the name of the hdf5 file
-#' @param component a \code{string} specifying a location within the hdf5 file
+#' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
+#' @param component a \code{string} specifying a location within the hdf5 file,
+#' e.g. "location/per_week/all_deaths"
 #' @param array a \code{matrix} containing the data
 #' @param dimension_names a \code{list} where each element is a vector
 #' containing the labels associated with a particular dimension (e.g.
@@ -19,7 +20,7 @@
 #'
 #' @export
 #'
-create_array <- function(h5filename,
+create_array <- function(filename,
                          component,
                          array,
                          dimension_names,
@@ -27,7 +28,7 @@ create_array <- function(h5filename,
                          dimension_units,
                          units) {
 
-  if(!grepl(".h5$", h5filename)) stop("h5filename must be *.h5")
+  if(!grepl(".h5$", filename)) stop("filename must be *.h5")
   if(!is.numeric(array)) stop("array must be a numeric")
   if(!is.matrix(array)) stop("array must be a matrix")
   if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
@@ -38,7 +39,7 @@ create_array <- function(h5filename,
     stop("Dimension_2_names length must match nrows in array")
 
   # Generate hdf5 structure
-  file.h5 <- H5File$new(h5filename)
+  file.h5 <- H5File$new(filename)
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)

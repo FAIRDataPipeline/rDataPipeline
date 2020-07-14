@@ -7,7 +7,13 @@
 check_entry(entry, table, field, key, convert_urls = FALSE)
 }
 \arguments{
-\item{convert_urls}{}
+\item{entry}{entry}
+
+\item{table}{table}
+
+\item{key}{key}
+
+\item{convert_urls}{convert_urls}
 }
 \description{
 check_entry

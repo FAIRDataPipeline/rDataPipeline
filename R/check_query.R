@@ -2,12 +2,13 @@
 #'
 #' Check whether entries exist in the database
 #'
-#' @param table
-#' @param query
+#' @param table table
+#' @param query query
 #'
 #' @export
 #'
-check_query <- function(table, query) {
+check_query <- function(table,
+                        query) {
 
   response <- httr::GET(file.path("http://data.scrc.uk/api", table, ""),
                         query = query)

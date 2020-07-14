@@ -1,15 +1,15 @@
 #' new_external_object
 #'
-#' @param doi_or_unique_name
-#' @param primary_not_supplement
-#' @param release_date
-#' @param title
-#' @param description
-#' @param version
-#' @param object_id
-#' @param source_id
-#' @param original_store_id
-#' @param key
+#' @param doi_or_unique_name e.g.
+#' @param primary_not_supplement e.g.
+#' @param release_date e.g.
+#' @param title e.g.
+#' @param description e.g.
+#' @param version e.g.
+#' @param object_id e.g.
+#' @param source_id e.g.
+#' @param original_store_id e.g.
+#' @param key key
 #'
 #' @export
 #'

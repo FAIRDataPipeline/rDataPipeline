@@ -1,6 +1,12 @@
 #' bin_ages
 #'
-bin_ages <- function(dat, ageclasses) {
+#' @param dat dat
+#' @param ageclasses ageclasses
+#'
+#' @export
+#'
+bin_ages <- function(dat,
+                     ageclasses) {
 
   if(all(ageclasses == "total")) {
     output <- dat %>%

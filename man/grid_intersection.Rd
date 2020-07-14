@@ -6,6 +6,11 @@
 \usage{
 grid_intersection(shapefile, gridsize)
 }
+\arguments{
+\item{shapefile}{shapefile}
+
+\item{gridsize}{gridsize}
+}
 \description{
 grid_intersection
 }

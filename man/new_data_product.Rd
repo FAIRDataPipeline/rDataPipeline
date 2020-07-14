@@ -4,7 +4,18 @@
 \alias{new_data_product}
 \title{new_data_product}
 \usage{
-new_data_product(name, version, object, namespace, key)
+new_data_product(name, version, object_id, namespace_id, key)
+}
+\arguments{
+\item{name}{e.g.}
+
+\item{version}{e.g.}
+
+\item{object_id}{e.g.}
+
+\item{namespace_id}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_data_product

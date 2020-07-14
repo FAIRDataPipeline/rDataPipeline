@@ -1,7 +1,7 @@
 #' new_namespace
 #'
-#' @param name
-#' @param key
+#' @param name e.g.
+#' @param key key
 #'
 #' @export
 #'

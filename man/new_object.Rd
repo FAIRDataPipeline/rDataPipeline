@@ -7,7 +7,9 @@
 new_object(storage_location_id, key)
 }
 \arguments{
-\item{key}{}
+\item{storage_location_id}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_object

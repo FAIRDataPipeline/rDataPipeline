@@ -7,7 +7,15 @@
 new_code_repo_release(name, version, website, object, key)
 }
 \arguments{
-\item{key}{}
+\item{name}{e.g.}
+
+\item{version}{e.g.}
+
+\item{website}{e.g.}
+
+\item{object}{e.g.}
+
+\item{key}{key}
 }
 \description{
 new_code_repo_release
