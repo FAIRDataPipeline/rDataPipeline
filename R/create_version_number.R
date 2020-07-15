@@ -3,6 +3,8 @@
 #' @param download_date download_date
 #' @param version version
 #'
+#' @export
+#'
 create_version_number <- function(download_date,
                                   version) {
 
