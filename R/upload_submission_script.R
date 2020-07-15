@@ -1,15 +1,17 @@
-#' upload_processing_script
+#' upload_submission_script
 #'
 #' @param storage_root_id e.g.
 #' @param path e.g. "ScottishCovidResponse/SCRCdata"
-#' @param repo repo
 #' @param hash e.g.
+#' @param run_date e.g.
 #' @param key key
 #'
-upload_processing_script <- function(storage_root_id,
+#' @export
+#'
+upload_submission_script <- function(storage_root_id,
                                      path,
-                                     repo,
-                                     hash = get_github_hash(repo),
+                                     hash,
+                                     run_date,
                                      key) {
 
   script_storeId <- new_storage_location(path = path,
@@ -17,6 +19,9 @@ upload_processing_script <- function(storage_root_id,
                                          storage_root = storage_root_id,
                                          key = key)
 
-  new_object(storage_location_id = script_storeId,
-             key = key)
+  script_objectId <- new_object(storage_location_id = script_storeId,
+                                key = key)
+
+  list(script_storeId = script_storeId,
+       script_objectId = script_objectId)
 }
