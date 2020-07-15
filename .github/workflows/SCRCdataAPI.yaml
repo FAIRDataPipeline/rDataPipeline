@@ -32,7 +32,7 @@ jobs:
             install.packages("nomisr")
             install.packages("readxl")
             install.packages("reshape2")
-            install.packages("sf", type="mac.binary.mavericks", dependencies=TRUE)
+            install.packages("sf")
             install.packages("SQPARQL")
             install.packages("stats")
             install.packages("testthat")
