@@ -36,22 +36,34 @@ upload_source_data <- function(doi_or_unique_name,
 
   # upload source data metadata to registry ----------------------------------
 
-  storageLocationId <- new_storage_location(path = target_path,
-                                            hash = hash,
-                                            storage_root_id = storage_root_id,
-                                            key = key)
+  source_storageLocationId <- new_storage_location(
+    path = target_path,
+    hash = hash,
+    storage_root_id = storage_root_id,
+    key = key)
 
-  objectId <- new_object(storage_location_id = storageLocationId,
-                         key = key)
+  source_objectId <- new_object(storage_location_id = source_storageLocationId,
+                                key = key)
 
-  new_external_object(doi_or_unique_name = doi_or_unique_name,
-                      primary_not_supplement = TRUE,
-                      release_date = download_date,
-                      title = doi_or_unique_name,
-                      description = paste(doi_or_unique_name, "dataset"),
-                      version = create_version_number(download_date, version),
-                      object_id = objectId,
-                      source_id = source_id,
-                      original_store_id = original_storeId,
-                      key = key)
+  source_objectComponentId <- new_object_component(name = "table",
+                                                   object_id = source_objectId,
+                                                   key = key)
+
+  source_externalObjectId <- new_external_object(
+    doi_or_unique_name = doi_or_unique_name,
+    primary_not_supplement = TRUE,
+    release_date = download_date,
+    title = doi_or_unique_name,
+    description = paste(doi_or_unique_name, "dataset"),
+    version = create_version_number(download_date, version),
+    object_id = source_objectId,
+    source_id = original_source_id,
+    original_store_id = original_storeId,
+    key = key)
+
+  list(original_storeId = original_storeId,
+       source_storageLocationId = source_storageLocationId,
+       source_objectId = source_objectId,
+       source_objectComponentId = source_objectComponentId,
+       source_externalObjectId = source_externalObjectId)
 }
