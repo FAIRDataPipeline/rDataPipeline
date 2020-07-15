@@ -12,12 +12,12 @@ get_url <- function(table, query = list()) {
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  if(length(tmp) > 1) {
-    stop("More than 1 object was returned")
+  if(length(tmp) == 1) {
+    return(tmp[[1]]$url)
   } else if(length(tmp) == 0) {
     stop("No objects were returned")
   } else {
-    return(tmp[[1]]$url)
+    return(lapply(tmp, function(x) x$url))
   }
 
 }
