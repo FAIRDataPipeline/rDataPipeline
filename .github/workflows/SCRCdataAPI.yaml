@@ -18,6 +18,10 @@ jobs:
       - name: Install System Requirements (Ubuntu)
         run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev -y
         if: matrix.os == 'ubuntu-latest'
+        
+      - name: Install System Requirements (MacOS)
+        run : libgdal-dev -y
+        if: matrix.os == 'macos-latest'
       
       - name: Install required R libraries
         env:
