@@ -26,6 +26,7 @@ clean_query <- function(data) {
       tmp <- gsub("data_product", "", tmp)
       tmp <- gsub("code_repo_release", "", tmp)
       tmp <- gsub("key_value", "", tmp)
+      tmp <- gsub("text_file", "", tmp)
       tmp <- gsub("/", "", tmp)
     } else data[[x]]
   })
