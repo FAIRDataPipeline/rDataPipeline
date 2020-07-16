@@ -4,7 +4,7 @@
 \alias{upload_submission_script}
 \title{upload_submission_script}
 \usage{
-upload_submission_script(storage_root_id, path, hash, run_date, key)
+upload_submission_script(storage_root_id, path, hash, text, run_date, key)
 }
 \arguments{
 \item{storage_root_id}{e.g.}
