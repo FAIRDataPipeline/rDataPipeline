@@ -80,7 +80,7 @@ download_source_version <- function(dataset) {
         }
         else {
           population_table = left_join(population_table, 
-                                       geography_value, by = "GEOGRAPHY_NAME")
+                                       temp_population_table, by = "GEOGRAPHY_NAME")
         }
       }
       write.csv(population_table, paste0("data-raw/england_", genders[sex], 
