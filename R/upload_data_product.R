@@ -1,10 +1,10 @@
 #' upload_data_product
 #'
 #' @param storage_root_id e.g.
-#' @param path e.g.
 #' @param name e.g.
-#' @param component_name e.g.
-#' @param filename e.g.
+#' @param component_name (optional) used for toml files, not hdf5
+#' @param processed_path e.g.
+#' @param product_path e.g.
 #' @param version e.g.
 #' @param namespace_id e.g.
 #' @param key key
@@ -12,40 +12,45 @@
 #' @export
 #'
 upload_data_product <- function(storage_root_id,
-                                path,
-                                name = name,
+                                name,
                                 component_name,
-                                filename,
+                                processed_path,
+                                product_path,
                                 version,
                                 namespace_id,
                                 key) {
 
   product_storeId <- new_storage_location(
-    path = paste(path, filename, sep = "/"),
-    hash = get_hash(file.path("data-raw", path, filename)),
+    path = product_path,
+    hash = get_hash(processed_path),
     storage_root_id = storage_root_id,
     key = key)
 
   product_objectId <- new_object(storage_location_id = product_storeId,
                                  key = key)
 
-  if(grepl(".h5$", filename)) {
-    components <- file_structure(filename)
-  } else if(grepl(".toml$", filename)) {
+  if(grepl(".h5$", processed_path)) {
+    components <- file_structure(processed_path)
+  } else if(grepl(".toml$", processed_path)) {
     components <- data.frame(name = component_name)
   } else {
-    stop("This code isn't ready for this filetype!")
+    stop("Why is your data product not a toml or an h5 file?")
   }
 
-  for(i in seq_len(nrow(components))) {
-    componentId <- new_object_component(name = components$name[i],
-                                        object_id = product_objectId,
-                                        key = key)
-  }
+  product_objectComponentId <- lapply(seq_len(nrow(components)), function(i) {
+    new_object_component(name = components$name[i],
+                         object_id = product_objectId,
+                         key = key)
+  })
 
-  new_data_product(name = name,
-                   version = version,
-                   object_id = product_objectId,
-                   namespace_id = namespace_id,
-                   key = key)
+  product_dataProductId <- new_data_product(name = name,
+                                            version = version,
+                                            object_id = product_objectId,
+                                            namespace_id = namespace_id,
+                                            key = key)
+
+  list(product_storeId = product_storeId,
+       product_objectId = product_objectId,
+       product_objectComponentId = product_objectComponentId,
+       product_dataProductId = product_dataProductId)
 }

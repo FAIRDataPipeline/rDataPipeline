@@ -18,23 +18,23 @@ new_external_object(
 )
 }
 \arguments{
-\item{doi_or_unique_name}{e.g.}
+\item{doi_or_unique_name}{e.g. "scottish coronavirus-covid-19-management-information"}
 
-\item{primary_not_supplement}{e.g.}
+\item{primary_not_supplement}{e.g. TRUE}
 
-\item{release_date}{e.g.}
+\item{release_date}{e.g. "2010-07-11 12:15:00 BST"}
 
-\item{title}{e.g.}
+\item{title}{e.g. "scottish coronavirus-covid-19-management-information"}
 
-\item{description}{e.g.}
+\item{description}{e.g. "scottish coronavirus-covid-19-management-information dataset"}
 
-\item{version}{e.g.}
+\item{version}{e.g. "20100711.0"}
 
-\item{object_id}{e.g.}
+\item{object_id}{e.g. "https://data.scrc.uk/api/object/12/"}
 
-\item{source_id}{e.g.}
+\item{source_id}{e.g. "https://data.scrc.uk/api/source/9/"}
 
-\item{original_store_id}{e.g.}
+\item{original_store_id}{e.g. "https://data.scrc.uk/api/storage_location/19/"}
 
 \item{key}{key}
 }

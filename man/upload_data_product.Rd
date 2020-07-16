@@ -6,10 +6,10 @@
 \usage{
 upload_data_product(
   storage_root_id,
-  path,
-  name = name,
+  name,
   component_name,
-  filename,
+  processed_path,
+  product_path,
   version,
   namespace_id,
   key
@@ -18,13 +18,13 @@ upload_data_product(
 \arguments{
 \item{storage_root_id}{e.g.}
 
-\item{path}{e.g.}
-
 \item{name}{e.g.}
 
-\item{component_name}{e.g.}
+\item{component_name}{(optional) used for toml files, not hdf5}
 
-\item{filename}{e.g.}
+\item{processed_path}{e.g.}
+
+\item{product_path}{e.g.}
 
 \item{version}{e.g.}
 

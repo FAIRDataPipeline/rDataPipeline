@@ -30,10 +30,30 @@ post_data <- function(table,
 
   } else if(result$status == 409) {
     assertthat::assert_that(grepl("duplicate key value", tmp$detail) == T)
+
     tmp <- data[1]
     names(tmp) <- names(data[1])
     message(paste(table, "already exists"))
     return(get_url(table, tmp))
+
+  } else if(result$status == 400) {
+    if(table == "object") {
+      tmp <- gsub("https://data.scrc.uk/api/storage_location/", "",
+                  data)
+      tmp <- gsub("/", "", tmp)
+      message(paste(table, "already exists"))
+      return(get_url("object", list(storage_location = tmp)))
+
+    } else if(table == "code_repo_release") {
+      tmp <- gsub("https://data.scrc.uk/api/object/", "",
+                  data$object)
+      tmp <- gsub("/", "", tmp)
+      message(paste(table, "already exists"))
+      return(get_url("code_repo_release", list(object = tmp)))
+
+    } else {
+      stop("Adding new data returned non-201 status code:", tmp)
+    }
 
   } else {
     stop("Adding new data returned non-201 status code:", tmp)

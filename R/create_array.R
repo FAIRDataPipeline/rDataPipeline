@@ -30,7 +30,7 @@ create_array <- function(filename,
 
   if(!grepl(".h5$", filename)) stop("filename must be *.h5")
   if(!is.numeric(array)) stop("array must be a numeric")
-  if(!is.matrix(array)) stop("array must be a matrix")
+  if(!is.array(array)) stop("array must be a matrix")
   if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
   if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
   if(length(dimension_names[[1]]) != nrow(array))
