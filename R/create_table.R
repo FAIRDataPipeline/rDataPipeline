@@ -6,7 +6,6 @@
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #' @param df a \code{dataframe} containing the data
-#' @param row_title (optional) a \code{string} descriptor of rownames
 #' @param row_names (optional) a \code{vector} of rownames
 #' @param column_units (optional) a \code{vector} comprising column units
 #'
@@ -15,7 +14,6 @@
 create_table <- function(filename,
                          component,
                          df,
-                         row_title,
                          row_names,
                          column_units) {
 
@@ -43,8 +41,6 @@ create_table <- function(filename,
   file.h5[[file.path(component, "table")]] <- df
 
   # Attach attributes
-  if(!missing(row_title))
-    file.h5[[file.path(component, "row_title")]] <- row_title
   if(!missing(row_names))
     file.h5[[file.path(component, "row_names")]] <- row_names
   if(!missing(column_units))

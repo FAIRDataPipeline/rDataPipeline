@@ -4,7 +4,7 @@
 \alias{create_table}
 \title{create_table}
 \usage{
-create_table(filename, component, df, row_title, row_names, column_units)
+create_table(filename, component, df, row_names, column_units)
 }
 \arguments{
 \item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
@@ -13,8 +13,6 @@ create_table(filename, component, df, row_title, row_names, column_units)
 e.g. "location/per_week/all_deaths"}
 
 \item{df}{a \code{dataframe} containing the data}
-
-\item{row_title}{(optional) a \code{string} descriptor of rownames}
 
 \item{row_names}{(optional) a \code{vector} of rownames}
 

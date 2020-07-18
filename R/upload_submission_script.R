@@ -11,6 +11,7 @@
 upload_submission_script <- function(storage_root_id,
                                      path,
                                      hash,
+                                     text,
                                      run_date,
                                      key) {
 
@@ -19,9 +20,12 @@ upload_submission_script <- function(storage_root_id,
                                          storage_root = storage_root_id,
                                          key = key)
 
+  script_textFileId <- new_text_file(text = text)
+
   script_objectId <- new_object(storage_location_id = script_storeId,
                                 key = key)
 
   list(script_storeId = script_storeId,
+       script_textFileId = script_textFileId,
        script_objectId = script_objectId)
 }
