@@ -9,28 +9,21 @@
 #'
 convert2grid <- function(dat,
                          shapefile,
-                         subdivisions) {
+                         subdivisions,
+                         conversion.table,
+                         grid_size) {
 
   dat <- dat %>% tibble::column_to_rownames("AREAcode")
-
-  # Find area of each of the newly created distinct datazone components
-  intersection_area <- data.frame(grid_id = subdivisions$grid_id,
-                                  AREAcode = subdivisions$AREAcode,
-                                  area = as.numeric(sf::st_area(subdivisions)))
-  datazone_area <- data.frame(AREAcode = shapefile$AREAcode,
-                              full_zone_area = as.numeric(sf::st_area(shapefile)))
-
-  # Join full area of each datazone to this data.frame and use to find
-  # the proportion of each datazone in each grid cell
-  combined_areas <- left_join(intersection_area, datazone_area,
-                              by = "AREAcode") %>%
-    dplyr::mutate(proportion = area / full_zone_area) %>%
-    dplyr::select(grid_id, AREAcode, proportion) %>%
-    dplyr::filter(AREAcode %in% rownames(dat))
+  
+  conversion.table <- conversion.table %>% tibble() %>% select(colnames(conversion.table)[grepl(grid_size,colnames(conversion.table))],AREAcode)%>%
+    dplyr::filter(AREAcode %in% rownames(dat)) %>% rename(grid_id=paste0(grid_size,"_id"),proportion=paste0(grid_size,"_area_proportion") )
+  if(grid_size!="grid1km"){
+  conversion.table=conversion.table[which(duplicated(conversion.table[c("grid_id", "AREAcode")])==FALSE),]
+}
 
   # Create matrix of grid cells by shapefile containing the proportion of
   # each datazone in each grid cell with 0's
-  wide_new_table <- reshape2::dcast(combined_areas, grid_id ~ AREAcode,
+  wide_new_table <- reshape2::dcast(conversion.table, grid_id ~ AREAcode,
                                     value.var = "proportion", fill = 0)
 
   # Make new tables to fill in population proportions
