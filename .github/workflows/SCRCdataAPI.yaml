@@ -16,7 +16,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master # Nice fast way to setup R
       
       - name: Install System Requirements (MacOS)
-        run : brew install gdal
+        run : brew install gdal2 openssl hdf5 udunits proj
         if: matrix.os == 'macos-latest'
       
       - name: Install System Requirements (Ubuntu)
