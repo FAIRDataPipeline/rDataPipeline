@@ -46,7 +46,7 @@ post_data <- function(table,
   } else if(result$status == 400) {
     if(table == "object") {
       message(paste(table, "already exists"))
-      return(get_url("object", list(storage_location = clean_query(data))))
+      return(get_url("object", clean_query(data)))
 
     } else if(table == "code_repo_release") {
       message(paste(table, "already exists"))
