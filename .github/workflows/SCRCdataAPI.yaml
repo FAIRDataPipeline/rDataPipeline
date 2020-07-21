@@ -15,6 +15,10 @@ jobs:
       - uses: actions/checkout@v2 # Check out the code
       - uses: r-lib/actions/setup-r@master # Nice fast way to setup R
       
+      - name: Install System Requirements (MacOS)
+        run : brew install gdal
+        if: matrix.os == 'macos-latest'
+      
       - name: Install System Requirements (Ubuntu)
         run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev -y
         if: matrix.os == 'ubuntu-latest'
@@ -32,6 +36,7 @@ jobs:
             install.packages("nomisr")
             install.packages("readxl")
             install.packages("reshape2")
+            install.packages("rgdal")
             install.packages("sf")
             install.packages("SQPARQL")
             install.packages("stats")
