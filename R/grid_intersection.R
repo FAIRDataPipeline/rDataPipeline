@@ -32,8 +32,18 @@ grid_intersection <- function(shapefile,
 
   # Remove cells which intersect simply because they touch the shapefile
   # - These are reduced to lines or points in the intersection
-  is_polygon <- sapply(subdivisions$grids, function(x) "POLYGON" %in% class(x))
-  subdivisions <- subdivisions[is_polygon, , drop = FALSE]
+  #is_polygon <- sapply(subdivisions$grids, function(x) any(grepl("POLYGON",class(x))))
+  #subdivisions <- subdivisions[is_polygon, , drop = FALSE]
+  
+  #Check that datazone components add up to same area as original datazone
+  subdivision_area = data.frame("AREAcode"=subdivisions$AREAcode,
+                                "subd_area"=st_area(subdivisions))
+  subdivision_area = subdivision_area %>% group_by(AREAcode) %>% summarise(subd_area=sum(subd_area))
+  datazone_area = data.frame("AREAcode"=shapefile$AREAcode,
+                                "dz_area"=st_area(shapefile))
+  subdivision_area = subdivision_area %>% left_join(datazone_area, by="AREAcode")
+  subdivision_area$difference=subdivision_area$subd_area-subdivision_area$dz_area
+  assertthat::assert_that(all(round(as.numeric(subdivision_area$difference))==0))
 
   # Adjust grid labels to match
   ind <- which(grid_labels %in% unique(subdivisions$grid_id))

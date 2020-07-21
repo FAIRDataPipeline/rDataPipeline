@@ -30,8 +30,27 @@ download_source_version <- function(dataset) {
         "file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5%2FDatazone2011Lookup.csv"),
       local = "data-raw",
       filename = "scotgov_dz_lookup.csv")
+    download_from_url(
+      url = "https://www.gov.scot",
+      path = file.path(
+        "binaries",
+        "content",
+        "documents",
+        "govscot",
+        "publications",
+        "statistics",
+        "2020",
+        "01",
+        "scottish-index-of-multiple-deprivation-2020-data-zone-look-up-file",
+        "documents",
+        "scottish-index-of-multiple-deprivation-data-zone-look-up",
+        "scottish-index-of-multiple-deprivation-data-zone-look-up",
+        "govscot%3Adocument",
+        "SIMD%2B2020v2%2B-%2Bdatazone%2Blookup.xlsx?forceDownload=true"),
+      local = "data-raw",
+      filename = "scotgov_simd_lookup.xlsx")
 
-  } else if(dataset == "ons_eng_wales_population") {
+  } else if(dataset == "ons_demographics") {
 
     # ons_eng_wales_population ----------------------------------------------
     
@@ -61,7 +80,7 @@ download_source_version <- function(dataset) {
         }
         else {
           population_table = left_join(population_table, 
-                                       geography_value, by = "GEOGRAPHY_NAME")
+                                       temp_population_table, by = "GEOGRAPHY_NAME")
         }
       }
       write.csv(population_table, paste0("data-raw/england_", genders[sex], 
