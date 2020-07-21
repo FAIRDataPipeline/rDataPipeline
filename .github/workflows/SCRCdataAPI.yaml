@@ -18,7 +18,7 @@ jobs:
       - name: Install System Requirements (macOS)
         run : |
               rm /usr/local/bin/gfortran
-              brew install gdal2 openssl hdf5 udunits proj
+              brew install gdal openssl hdf5 udunits proj
         if: matrix.os == 'macos-latest'
       
       - name: Install System Requirements (Ubuntu)
