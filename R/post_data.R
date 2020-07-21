@@ -14,12 +14,21 @@ post_data <- function(table,
 
   h <- c(Authorization = paste("token", key))
 
-  result <- httr::POST(file.path("https://data.scrc.uk/api", table, ""),
+  api_url <- file.path("https://data.scrc.uk/api", table, "")
+
+  # Check there is a trailing slash (windows issue with file.path())
+  api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url, paste(api_url, "/", sep = ""))
+
+  result <- httr::POST(api_url,
                        body = jsonlite::toJSON(data, pretty = T,
                                                auto_unbox = T,
                                                force = T),
                        httr::content_type('application/json'),
                        httr::add_headers(.headers = h))
+
+  if(result$status == 404)
+    stop("Adding new data returned non-201 status code: (404) table does not exist")
+
 
   tmp <- result %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
@@ -44,11 +53,11 @@ post_data <- function(table,
       return(get_url("code_repo_release", clean_query(data)))
 
     } else {
-      stop("Adding new data returned non-201 status code:", tmp)
+      stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
     }
 
   } else {
-    stop("Adding new data returned non-201 status code:", tmp)
+    stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
   }
 
 }
