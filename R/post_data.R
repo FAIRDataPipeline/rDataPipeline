@@ -27,7 +27,7 @@ post_data <- function(table,
                        httr::add_headers(.headers = h))
 
   if(result$status == 404)
-    stop("Error: Is it possible the table does not exist?")
+    stop("Adding new data returned non-201 status code: (404) table does not exist")
 
 
   tmp <- result %>%
