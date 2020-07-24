@@ -10,10 +10,9 @@ read_array <- function(filename,
                        component) {
 
   file.h5 <- H5File$new(filename, mode = "r")
-
-  object <- file.h5[[paste0(component, "/array")]][,]
+  object <- file.h5[[paste0(component, "/array")]]$read()
   if(is.vector(object)) object <- t(matrix(object))
-  object <- as.data.frame(object)
+  #object <- as.data.frame(object)
   colnames(object) <- file.h5[[paste0(component, "/Dimension_2_names")]][]
   rownames(object) <- file.h5[[paste0(component, "/Dimension_1_names")]][]
 

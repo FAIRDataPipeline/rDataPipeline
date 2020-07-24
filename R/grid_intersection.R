@@ -44,7 +44,6 @@ grid_intersection <- function(shapefile,
   subdivision_area = subdivision_area %>% left_join(datazone_area, by="AREAcode")
   subdivision_area$difference=subdivision_area$subd_area-subdivision_area$dz_area
   assertthat::assert_that(all(round(as.numeric(subdivision_area$difference))==0))
-
   # Adjust grid labels to match
   ind <- which(grid_labels %in% unique(subdivisions$grid_id))
   grid_matrix <- grid_matrix[ind,]

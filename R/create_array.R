@@ -67,7 +67,12 @@ create_array <- function(filename,
   # Attach column atttributes
   file.h5[[file.path(component, "Dimension_2_title")]] <- dimension_titles[2]
   file.h5[[file.path(component, "Dimension_2_names")]] <- dimension_names[[2]]
-
+  
+  if(length(dimension_titles)>2){
+  # Attach 3rd dimension attributes
+  file.h5[[file.path(component, "Dimension_3_title")]] <- dimension_titles[3]
+  file.h5[[file.path(component, "Dimension_3_names")]] <- dimension_names[[3]]
+  }
   # Attach additional attributes
   if(!missing(dimension_values)) {
     dimensions.with.values <- which(!is.na(dimension_values))
