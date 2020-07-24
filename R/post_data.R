@@ -44,15 +44,6 @@ post_data <- function(table,
     message(paste(table, "already exists"))
     return(get_url(table, clean_query(data)))
 
-  } else if(result$status == 400) {
-    if(table == "object") {
-      message(paste(table, "already exists"))
-      return(get_url("object", clean_query(data)))
-
-    } else if(table == "code_repo_release") {
-      message(paste(table, "already exists"))
-      return(get_url("code_repo_release", clean_query(data)))
-
     } else {
       stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
     }
