@@ -17,7 +17,8 @@ post_data <- function(table,
   api_url <- file.path("https://data.scrc.uk/api", table, "")
 
   # Check there is a trailing slash (windows issue with file.path())
-  api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url, paste(api_url, "/", sep = ""))
+  api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url,
+                    paste(api_url, "/", sep = ""))
 
   result <- httr::POST(api_url,
                        body = jsonlite::toJSON(data, pretty = T,

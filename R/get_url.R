@@ -12,6 +12,8 @@ get_url <- function(table, query = list()) {
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
+  tmp <- tmp$results[[1]]
+
   if(length(tmp) == 1) {
     return(tmp[[1]]$url)
   } else if(length(tmp) == 0) {
