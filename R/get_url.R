@@ -12,7 +12,7 @@ get_url <- function(table, query = list()) {
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  tmp <- tmp$results[[1]]
+  tmp <- tmp$results
 
   if(length(tmp) == 1) {
     return(tmp[[1]]$url)
