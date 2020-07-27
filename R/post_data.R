@@ -39,11 +39,7 @@ post_data <- function(table,
 
   } else if(result$status == 409) {
 
-    tmp <- result %>%
-      httr::content(as = "text", encoding = "UTF-8") %>%
-      jsonlite::fromJSON(simplifyVector = FALSE)
-
-    message(paste(table, "already exists:", tmp$detail))
+    message(paste(table, "already exists"))
 
     return(get_url(table, clean_query(data)))
 
