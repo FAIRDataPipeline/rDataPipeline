@@ -15,12 +15,15 @@ upload_submission_script <- function(storage_root_id,
                                      run_date,
                                      key) {
 
-  script_storeId <- new_storage_location(path = path,
+  script_textFileId <- new_text_file(text = text)
+
+  tmp <- gsub("^.*/([0-9]+)/$", "\\1", script_textFileId)
+  script_path <- paste0(tmp, "/?format=text")
+
+  script_storeId <- new_storage_location(path = script_path,
                                          hash = hash,
                                          storage_root = storage_root_id,
                                          key = key)
-
-  script_textFileId <- new_text_file(text = text)
 
   script_objectId <- new_object(storage_location_id = script_storeId,
                                 key = key)

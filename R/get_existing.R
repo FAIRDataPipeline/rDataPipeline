@@ -12,6 +12,7 @@ get_existing <- function(table) {
       jsonlite::fromJSON(simplifyVector = FALSE) %>%
       dplyr::bind_rows()
   )
+  output <- output$results
 
   if(length(output) == 0)
     print("Returned no entries") else output

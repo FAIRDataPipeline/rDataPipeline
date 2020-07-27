@@ -4,7 +4,7 @@
 \alias{convert2grid}
 \title{convert2grid}
 \usage{
-convert2grid(dat, shapefile, subdivisions)
+convert2grid(dat, shapefile, subdivisions, conversion.table, grid_size)
 }
 \arguments{
 \item{dat}{population data}

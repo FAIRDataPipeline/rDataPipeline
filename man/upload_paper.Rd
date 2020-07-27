@@ -15,7 +15,7 @@ upload_paper(
   keywords,
   doi,
   primary_not_supplement = TRUE,
-  version = 1,
+  version = "1.0.0",
   key
 )
 }

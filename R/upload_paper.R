@@ -40,8 +40,14 @@ upload_paper <- function(title,
                          keywords,
                          doi,
                          primary_not_supplement = TRUE,
-                         version = 1.0,
+                         version = "1.0.0",
                          key) {
+
+  # Check if paper exists in the data registry ----------------------------
+
+  check_exists("external_object",
+               list(doi_or_unique_name = paste0("doi://", doi)))
+
 
   # Check if journal exists in the data registry ----------------------------
 
@@ -54,28 +60,6 @@ upload_paper <- function(title,
                            website = journal_website,
                            key = key)
   }
-
-
-  # Check if pdf website exists in the data registry ------------------------
-
-  # tmp <- httr::parse_url(pdf_website)
-  # root <- paste0(tmp$scheme, "://", tmp$hostname, "/")
-  # path <- tmp$path
-  #
-  # if(check_exists("storage_root", list(name = root))) {
-  #   original_storageRootId <- get_url("storage_root", list(name = root))
-  #
-  # } else {
-  #   original_storageRootId <- new_storage_root(name = root,
-  #                                              root = root,
-  #                                              key = key)
-  # }
-  #
-  # original_storeId <- new_storage_location(path = path,
-  #                                          hash = "",
-  #                                          storage_root = original_storageRootId,
-  #                                          key = key)
-
 
 
   # Add paper metadata ------------------------------------------------------
@@ -99,20 +83,23 @@ upload_paper <- function(title,
   }
 
   # Keywords
-  if(grepl("and", keywords)) {
-    keywordList <- as.list(strsplit(keywords, " and ")[[1]])
-  } else {
-    keywordList <- list(keywords)
+  if(!is.na(keywords)) {
+    if(grepl("and", keywords)) {
+      keywordList <- as.list(strsplit(keywords, " and ")[[1]])
+    } else {
+      keywordList <- list(keywords)
+    }
+
+    for(i in seq_along(keywordList)) {
+      new_keyword(keyphrase = keywordList[[i]],
+                  object_id = objectId,
+                  key = key)
+    }
   }
 
-  for(i in seq_along(keywordList)) {
-    new_keyword(keyphrase = keywordList[[i]],
-                object_id = objectId,
-                key = key)
-  }
 
   # Paper metadata
-  new_external_object(doi_or_unique_name = doi,
+  new_external_object(doi_or_unique_name = paste0("doi://", doi),
                       primary_not_supplement = primary_not_supplement,
                       release_date = release_date,
                       title = title,

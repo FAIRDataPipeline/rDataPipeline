@@ -5,7 +5,7 @@ test_that("function behaves as it should", {
   testthat::expect_error(
     create_distribution(filename = "test_distribution.tom",
                         path = "data-raw",
-                        descriptor = "latency",
+                        name = "latency",
                         distribution = "gamma",
                         parameters = list(shape = 2.0, scale = 3.0))
   )
@@ -13,7 +13,7 @@ test_that("function behaves as it should", {
   # File should be toml format
   create_distribution(filename = "test_distribution.toml",
                       path = "data-raw",
-                      descriptor = "latency",
+                      name = "latency",
                       distribution = "gamma",
                       parameters = list(shape = 2.0, scale = 3.0))
   testthat::expect_true(is.toml.file("data-raw/test_distribution.toml"))
