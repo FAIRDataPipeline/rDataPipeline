@@ -1,6 +1,7 @@
 DEFAULT_CRS <- 27700  # EPSG code for the Ordnance Survey National Grid
 
 
+
 # Check inputs:
 test_that("grid_intersection() should fail if shapefile not in metres", {
   # Grid intersection takes a gridsize in km and assumes the shapefile uses a CRS projected in metres -
@@ -17,7 +18,7 @@ test_that("grid_intersection() should produce expected number of cells", {
   max_dim <- 1000
   square <- sf::st_sfc(sf::st_polygon(list(rbind(c(0,0), c(max_dim,0), c(max_dim,max_dim), c(0,max_dim), c(0,0)))))
   shapefile <- sf::st_sf(square, crs = DEFAULT_CRS)
-
+  shapefile$AREAcode=1
   result <- grid_intersection(shapefile, max_dim/4/1000)  # 4 x 4 grid
 
   testthat::expect_equal(length(result$subdivisions$grids), 4*4)
@@ -29,7 +30,8 @@ test_that("grid_intersection() should produce cells of expected size", {
   max_dim <- 1000
   square <- sf::st_sfc(sf::st_polygon(list(rbind(c(0,0), c(max_dim,0), c(max_dim,max_dim), c(0,max_dim), c(0,0)))))
   shapefile <- sf::st_sf(square, crs = DEFAULT_CRS)
-
+  shapefile$AREAcode=1
+  
   result <- grid_intersection(shapefile, max_dim/4/1000)
   cell_size <- sf::st_bbox(result$subdivisions$grids[[1]])
 
@@ -53,6 +55,7 @@ triangle_coords <- rbind(c(tr_offset, tr_offset),
 polygon <- sf::st_sfc(sf::st_polygon(list(square_coords)),
                       sf::st_polygon(list(triangle_coords)))
 complex_shapefile <- sf::st_sf(polygon, crs = DEFAULT_CRS)
+complex_shapefile$AREAcode=c(1,2)
 
 
 test_that("grid_intersection() result should not extend beyond shapefile bounding box", {
@@ -82,7 +85,8 @@ test_that("grid_intersection() should produce cells of expected size at edges of
 
   triangle <- sf::st_sfc(sf::st_polygon(list(rbind(c(0,0), c(max_dim,0), c(max_dim,max_dim), c(0,0)))))
   tr_shapefile <- sf::st_sf(triangle, crs = DEFAULT_CRS)
-
+  tr_shapefile$AREAcode=1
+  
   result <- grid_intersection(tr_shapefile, grid_size/1000)
 
   # Expected area of cell 1-1 (which should be a triangle since it's at the left corner of the map)
