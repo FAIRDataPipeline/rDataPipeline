@@ -30,7 +30,6 @@ post_data <- function(table,
   if(result$status == 404)
     stop("Adding new data returned non-201 status code: (404) table does not exist")
 
-
   tmp <- result %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
@@ -39,9 +38,13 @@ post_data <- function(table,
     return(tmp$url)
 
   } else if(result$status == 409) {
-    assertthat::assert_that(grepl("duplicate key value", tmp$detail) == T)
 
-    message(paste(table, "already exists"))
+    tmp <- result %>%
+      httr::content(as = "text", encoding = "UTF-8") %>%
+      jsonlite::fromJSON(simplifyVector = FALSE)
+
+    message(paste(table, "already exists:", tmp$detail))
+
     return(get_url(table, clean_query(data)))
 
   } else {
