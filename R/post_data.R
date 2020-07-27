@@ -44,10 +44,6 @@ post_data <- function(table,
     message(paste(table, "already exists"))
     return(get_url(table, clean_query(data)))
 
-    } else {
-      stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
-    }
-
   } else {
     stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
   }
