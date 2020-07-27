@@ -81,7 +81,7 @@ convert2grid <- function(dat,
           rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] - 1
         }
       }
-      assert_that(sum(rounded_pops) != true_pop)
+      assert_that(sum(rounded_pops) == true_pop)
       this_ageclass[, i] <- rounded_pops
       
     }
