@@ -22,7 +22,7 @@
 #' @export
 #'
 create_array <- function(filename,
-                         path,
+                         path = ".",
                          component,
                          array,
                          dimension_names,
@@ -42,7 +42,6 @@ create_array <- function(filename,
 
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
-  if(missing(path)) path <- ""
 
   # Generate hdf5 structure
   file.h5 <- H5File$new(file.path(path, filename))

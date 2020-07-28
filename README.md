@@ -40,7 +40,7 @@ We want to put this data in a directory called `sample1`:
 
 ```{r}
 # Create *.h5 file
-create_table(filename = "test_table.h5", component = "sample1", df = sample)
+create_table(filename = "test_table.h5", path = "data-raw", component = "sample1", df = sample)
 ```
 
 Note that the filename argument can take the name of a file you want to create, 
@@ -49,7 +49,7 @@ or an existing `*.h5` file.
 To read the data file:
 
 ```{r}
-read_table(filename = "test_table.h5", component = "sample1")
+read_table(filename = "test_table.h5", path = "data-raw", component = "sample1")
 ```
 
 
@@ -76,13 +76,13 @@ We want to put this data in a directory called `dz`, in a subdirectory called `t
 
 ```{r}
 # Create *.h5 file
-create_array(filename = "test_array.h5", component = "dz/total", array = array, dimension_names = dimension_names)
+create_array(filename = "test_array.h5", path = "data-raw", component = "dz/total", array = array, dimension_names = dimension_names)
 ```
 
 To read the data file:
 
 ```{r}
-read_array(filename = "test_array.h5", component = "dz/total")
+read_array(filename = "test_array.h5", path = "data-raw", component = "dz/total")
 ```
 
 ## Create distribution
@@ -92,12 +92,6 @@ In the following example, we populate "test_distribution.toml":
 ```{r}
 # Create *.toml file
 create_distribution(filename = "test_distribution.toml", path = "data-raw", name = "latency", distribution = "gamma", parameters = list(shape = 2.0, scale = 3.0))
-```
-
-To read the toml:
-
-```{r}
-read_distribution(filename = "data-raw/test_distribution.toml")
 ```
 
 
@@ -115,10 +109,4 @@ To include multiple point-estimates:
 ```{r}
 # Create *.toml file
 create_estimate(filename = "test_number.toml", path = "data-raw", parameters = list(asymptomatic_period = 192.0, latent_period = 123.12))
-```
-
-To read the toml:
-
-```{r}
-read_estimate(filename = "data-raw/test_number.toml")
 ```

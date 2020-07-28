@@ -1,15 +1,17 @@
 #' read_array
 #'
 #' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
+#' @param path a \code{string} specifying the directory in which you want to save the h5 file
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #'
 #' @export
 #'
 read_array <- function(filename,
+                       path,
                        component) {
 
-  file.h5 <- H5File$new(filename, mode = "r")
+  file.h5 <- H5File$new(file.path(path, filename), mode = "r")
 
   object <- file.h5[[paste0(component, "/array")]][,]
   if(is.vector(object)) object <- t(matrix(object))
