@@ -8,6 +8,9 @@
 #'
 file_structure <- function(filename) {
 
+  if(!grepl("^/", filename))
+    filename <- paste0("/", filename)
+
   file.h5 <- H5File$new(filename, mode = "r+")
 
   tmp <- file.h5$ls(recursive = TRUE) %>%
