@@ -47,7 +47,12 @@ create_array <- function(filename,
   # Generate hdf5 structure
   file.h5 <- H5File$new(file.path(path, filename))
 
-  directory.structure <- strsplit(component, "/")[[1]]
+  if(grepl("/", component)) {
+    directory.structure <- strsplit(component, "/")[[1]]
+  } else {
+    directory.structure <- component
+  }
+
   levels <- length(directory.structure)
 
   tmp.path <- ""
