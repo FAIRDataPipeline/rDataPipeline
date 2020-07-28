@@ -4,7 +4,7 @@
 #'
 #' @param filename a \code{string} specifying the name of the toml file, e.g.
 #' "0.1.0.toml"
-#' @param path a \code{string} specifying the name of the toml file (and path)
+#' @param path a \code{string} specifying the directory in which you want to save the toml file
 #' @param parameters a \code{list} (see example, below)
 #'
 #' @export

@@ -3,6 +3,7 @@
 #' Function to populate hdf5 file with array type data.
 #'
 #' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
+#' @param path a \code{string} specifying the directory in which you want to save the h5 file
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #' @param df a \code{dataframe} containing the data
@@ -12,6 +13,7 @@
 #' @export
 #'
 create_table <- function(filename,
+                         path,
                          component,
                          df,
                          row_names,
@@ -20,8 +22,12 @@ create_table <- function(filename,
   if(!grepl(".h5$", filename)) stop("filename must be *.h5")
   if(!is.data.frame(df)) stop("df must be a data.frame")
 
+  # Generate directory structure
+  if(!file.exists(path)) dir.create(path, recursive = TRUE)
+  if(missing(path)) path <- ""
+
   # Generate hdf5 structure
-  file.h5 <- H5File$new(filename)
+  file.h5 <- H5File$new(file.path(path, filename))
 
   directory.structure <- strsplit(component, "/")[[1]]
   levels <- length(directory.structure)
