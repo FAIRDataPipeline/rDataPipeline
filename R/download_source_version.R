@@ -3,8 +3,6 @@
 #' @param dataset name of dataset c("scot_dz_shapefile", "scot_dz_demographics",
 #' "scot_gov_deaths", "scot_gov_simd")
 #'
-#' @export
-#'
 download_source_version <- function(dataset) {
 
   require(SPARQL, quietly = TRUE)
@@ -53,22 +51,22 @@ download_source_version <- function(dataset) {
   } else if(dataset == "ons_demographics") {
 
     # ons_eng_wales_population ----------------------------------------------
-    
+
     genders <- c("Persons", "Males", "Females")
     for (sex in seq_along(genders)) {
       for (age in 101:191) {
         for (step in c(0,((c(24000)*c(1:7))))){
           download_from_url(url="https://www.nomisweb.co.uk"
-                            , path=sprintf("api/v01/dataset/NM_2010_1.data.csv?measures=20100&time=latest&geography=TYPE299&gender=%d&c_age=%d&RecordLimit=24000&RecordOffset=%d", sex-1,age, step ), 
+                            , path=sprintf("api/v01/dataset/NM_2010_1.data.csv?measures=20100&time=latest&geography=TYPE299&gender=%d&c_age=%d&RecordLimit=24000&RecordOffset=%d", sex-1,age, step ),
                             local="data-raw", filename=sprintf("populationstore_g%d_a%d_s%d.csv", sex-1,age, step ))
           temp_pop_table <-read.csv(sprintf("data-raw/populationstore_g%d_a%d_s%d.csv", sex-1,age, step )) %>%
-            dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE, 
-                          GEOGRAPHY_TYPE, GENDER_NAME, C_AGE_NAME, 
+            dplyr::select(DATE, GEOGRAPHY_NAME, GEOGRAPHY_CODE,
+                          GEOGRAPHY_TYPE, GENDER_NAME, C_AGE_NAME,
                           MEASURES_NAME, OBS_VALUE)
           file.remove(sprintf("data-raw/populationstore_g%d_a%d_s%d.csv", sex-1,age, step ))
           names(temp_pop_table)[8] <- unique(temp_pop_table$C_AGE_NAME)
           geography_value <- temp_pop_table[, c(2, 8)]
-          
+
           if(step==0){
             temp_population_table=geography_value
           }else{
@@ -79,11 +77,11 @@ download_source_version <- function(dataset) {
           population_table = temp_population_table
         }
         else {
-          population_table = left_join(population_table, 
+          population_table = left_join(population_table,
                                        temp_population_table, by = "GEOGRAPHY_NAME")
         }
       }
-      write.csv(population_table, paste0("data-raw/england_", genders[sex], 
+      write.csv(population_table, paste0("data-raw/england_", genders[sex],
                                          ".csv"),row.names = F)
     }
 
