@@ -11,6 +11,8 @@ read_table(filename, component)
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,
 e.g. "location/per_week/all_deaths"}
+
+\item{path}{a \code{string} specifying the directory in which you want to save the h5 file}
 }
 \description{
 read_table

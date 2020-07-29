@@ -4,7 +4,7 @@
 \alias{create_table}
 \title{create_table}
 \usage{
-create_table(filename, path, component, df, row_names, column_units)
+create_table(filename, path = ".", component, df, row_names, column_units)
 }
 \arguments{
 \item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}

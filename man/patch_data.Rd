@@ -4,14 +4,14 @@
 \alias{patch_data}
 \title{patch_data}
 \usage{
-patch_data(url, key, data)
+patch_data(url, data, key)
 }
 \arguments{
 \item{url}{url}
 
-\item{key}{key}
-
 \item{data}{data}
+
+\item{key}{key}
 }
 \description{
 patch_data

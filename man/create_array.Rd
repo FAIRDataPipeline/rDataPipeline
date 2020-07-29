@@ -6,7 +6,7 @@
 \usage{
 create_array(
   filename,
-  path,
+  path = ".",
   component,
   array,
   dimension_names,
