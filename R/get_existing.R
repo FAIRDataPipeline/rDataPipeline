@@ -13,7 +13,6 @@ get_existing <- function(table) {
     output <- output$results %>%
       dplyr::bind_rows()
   )
-  output <- output$results
 
   if(length(output) == 0)
     print("Returned no entries") else output
