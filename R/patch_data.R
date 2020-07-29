@@ -1,12 +1,14 @@
 #' patch_data
 #'
 #' @param url url
-#' @param key key
 #' @param data data
+#' @param key key
+#'
+#' @export
 #'
 patch_data <- function(url,
-                       key,
-                       data) {
+                       data,
+                       key) {
 
   h <- c(Authorization = paste("token", key))
 
