@@ -6,17 +6,14 @@
 #' @aliases SCRCdataAPI
 #' @docType package
 #'
-#' @importFrom assertthat assert_that
+#' @import assertthat
 #' @import configr
 #' @import dplyr
 #' @import hdf5r
 #' @import httr
 #' @import jsonlite
-#' @import nomisr
-#' @import readxl
 #' @import reshape2
 #' @import sf
-#' @import SPARQL
 #' @importFrom stats setNames
 #' @import tibble
 #' @import tidyr
