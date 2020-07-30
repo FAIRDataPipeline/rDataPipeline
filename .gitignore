@@ -35,5 +35,8 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-.h5
-.DS_Store
+*.csv
+*.h5
+*.txt
+*.DS_Store
+/data-raw
