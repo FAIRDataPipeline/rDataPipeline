@@ -38,6 +38,8 @@ create_array <- function(filename,
     stop("Dimension_1_names length must match nrows in array")
   if(length(dimension_names[[2]]) != ncol(array))
     stop("Dimension_2_names length must match nrows in array")
+  if(is.null(colnames(array))) stop("Array must have column names")
+  if(is.null(rownames(array))) stop("Array must have row names")
 
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
