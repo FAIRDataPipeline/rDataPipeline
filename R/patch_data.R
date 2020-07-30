@@ -4,8 +4,6 @@
 #' @param data data
 #' @param key key
 #'
-#' @export
-#'
 patch_data <- function(url,
                        data,
                        key) {
