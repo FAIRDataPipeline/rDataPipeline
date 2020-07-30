@@ -32,8 +32,8 @@ grid_intersection <- function(shapefile,
 
   # Remove cells which intersect simply because they touch the shapefile
   # - These are reduced to lines or points in the intersection
-  #is_polygon <- sapply(subdivisions$grids, function(x) any(grepl("POLYGON",class(x))))
-  #subdivisions <- subdivisions[is_polygon, , drop = FALSE]
+  is_polygon <- sapply(subdivisions$grids, function(x) any(grepl("LINE|POINT",class(x))))
+  subdivisions <- subdivisions[!is_polygon, , drop = FALSE]
   
   #Check that datazone components add up to same area as original datazone
   subdivision_area = data.frame("AREAcode"=subdivisions$AREAcode,
