@@ -2,9 +2,11 @@ library(hdf5r)
 
 context("Testing create_array()")
 
+
 filename <- "test_array.h5"
 component <- "level"
 df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
 
 test_that("incorrect file name throws error", {
   testthat::expect_error(
@@ -66,7 +68,8 @@ test_that(".h5 file is generated", {
 test_that("component name is level", {
   file.h5 <- H5File$new(filename, mode = "r")
   testthat::expect_equal(names(file.h5), component)
-  file.h5$close_all()
+
+
 })
 
 

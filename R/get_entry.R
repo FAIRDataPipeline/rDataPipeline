@@ -13,6 +13,8 @@ get_entry <- function(table, query = list()) {
 
   if(out$count == 0) {
     message("Entry doesn't exist")
+    return(NULL)
+
   } else {
     return(out$results[[1]])
   }
