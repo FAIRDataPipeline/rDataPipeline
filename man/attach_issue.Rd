@@ -4,13 +4,7 @@
 \alias{attach_issue}
 \title{attach_issue}
 \usage{
-attach_issue(
-  object_uri,
-  object_component = "testing_location/date-cumulative",
-  severity,
-  description = "Data dump caused a spike on the 15th of June",
-  key
-)
+attach_issue(data_product, object_components, severity, description, key)
 }
 \description{
 attach_issue

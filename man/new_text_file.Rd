@@ -4,7 +4,12 @@
 \alias{new_text_file}
 \title{new_text_file}
 \usage{
-new_text_file(text)
+new_text_file(text, key)
+}
+\arguments{
+\item{text}{free text}
+
+\item{key}{key}
 }
 \description{
 new_text_file
