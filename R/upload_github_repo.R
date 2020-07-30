@@ -17,7 +17,7 @@ upload_github_repo <- function(storage_root_id,
 
   repo_storeId <- new_storage_location(path = paste(repo, "repository"),
                                        hash = hash,
-                                       storage_root = storage_root_id,
+                                       storage_root_id = storage_root_id,
                                        key = key)
 
   repo_objectId <- new_object(storage_location_id = repo_storeId,

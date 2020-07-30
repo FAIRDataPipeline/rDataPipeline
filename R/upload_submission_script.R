@@ -22,7 +22,7 @@ upload_submission_script <- function(storage_root_id,
 
   script_storeId <- new_storage_location(path = script_path,
                                          hash = hash,
-                                         storage_root = storage_root_id,
+                                         storage_root_id = storage_root_id,
                                          key = key)
 
   script_objectId <- new_object(storage_location_id = script_storeId,

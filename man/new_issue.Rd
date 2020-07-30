@@ -4,12 +4,16 @@
 \alias{new_issue}
 \title{new_issue}
 \usage{
-new_issue(severity, description, key)
+new_issue(severity, description, object_issues, component_issues, key)
 }
 \arguments{
 \item{severity}{e.g.}
 
 \item{description}{e.g.}
+
+\item{object_issues}{e.g.}
+
+\item{component_issues}{e.g.}
 
 \item{key}{key}
 }

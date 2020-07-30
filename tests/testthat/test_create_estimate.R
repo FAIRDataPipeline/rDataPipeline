@@ -17,4 +17,4 @@ test_that("function behaves as it should", {
 
 
 # Remove test file
-file.remove("test_estimate.toml")
+file.remove("data-raw/test_estimate.toml")

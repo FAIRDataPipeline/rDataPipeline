@@ -7,8 +7,13 @@
 #'
 get_entry <- function(table, query = list()) {
   out <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
-            query = query) %>%
+                   query = query) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
-  out$results[[1]]
+
+  if(out$count == 0) {
+    message("Entry doesn't exist")
+  } else {
+    return(out$results[[1]])
+  }
 }
