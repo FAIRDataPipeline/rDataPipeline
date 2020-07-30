@@ -16,5 +16,5 @@ test_that("all data products contain object components", {
   output <- dps[-tmp,]
 
   # Make sure output is empty
-  assertthat::assert_that(nrow(output) == 0)
+  testthat::expect_equal(nrow(output), 0)
 })
