@@ -2,6 +2,8 @@ DEFAULT_CRS <- 27700  # EPSG code for the Ordnance Survey National Grid
 source(system.file("R/grid_intersection.R", package = "SCRCdataAPI"))
 source(system.file("R/st_area", package = "SCRCdataAPI"))
 
+context("Testing grid_intersection()")
+
 # Check inputs:
 test_that("grid_intersection() should fail if shapefile not in metres", {
   # Grid intersection takes a gridsize in km and assumes the shapefile uses a
