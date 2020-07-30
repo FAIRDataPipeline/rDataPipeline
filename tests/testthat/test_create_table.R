@@ -1,9 +1,7 @@
 library(hdf5r)
 library(SCRCdataAPI)
 
-context("Testing create_table()")
-
-# basic table -------------------------------------------------------------
+context("Testing create_table() on a basic table")
 
 filename <- "test_table.h5"
 df <- data.frame(a = 1:2, b = 3:4)
@@ -38,7 +36,9 @@ test_that("component name is level", {
 file.remove(filename)
 
 
-# multi-class table -------------------------------------------------------
+# -------------------------------------------------------------------------
+
+context("Testing create_table() on a multi-class table")
 
 filename <- "test_table.h5"
 multiclass_df <- data.frame(a = letters[1:2], b = 3:4)
