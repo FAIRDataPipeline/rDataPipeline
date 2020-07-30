@@ -12,6 +12,7 @@
 #' @import hdf5r
 #' @import httr
 #' @import jsonlite
+#' @importFrom openssl sha1
 #' @import reshape2
 #' @import sf
 #' @importFrom stats setNames

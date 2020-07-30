@@ -18,6 +18,7 @@ Imports:
     hdf5r,
     httr,
     jsonlite,
+    openssl,
     reshape2,
     sf,
     stats,
