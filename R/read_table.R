@@ -8,6 +8,7 @@
 #' @export
 #'
 read_table <- function(filename,
+                       path,
                        component) {
 
   file.h5 <- H5File$new(file.path(path, filename), mode = "r")
