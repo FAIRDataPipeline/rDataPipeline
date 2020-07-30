@@ -1,4 +1,4 @@
-library(hdf5r)
+library(SCRCdataAPI)
 
 context("Testing filestructure()")
 
@@ -8,6 +8,7 @@ context("Testing filestructure()")
 filename <- "test_array_1.h5"
 component <- "level1"
 df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:nrow(df)
 create_array(filename = filename,
              component = component,
              array = as.matrix(df),
