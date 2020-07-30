@@ -33,8 +33,6 @@ test_that("component name is level", {
   file.h5$close_all()
 })
 
-
-# Remove test file
 file.remove(filename)
 
 
@@ -43,12 +41,14 @@ test_that("function behaves as it should", {
                component = component,
                df = data.frame(a = letters[1:2], b = 3:4))
 
-  read_table(filename = filename,
-             path = ".",
-             component = component)
+  tab <- read_table(filename = filename,
+                    path = ".",
+                    component = component)
+
+  testthat::expect_equal(tab, data.frame(a = letters[1:2], b = 3:4))
 })
 
-
+file.remove(filename)
 
 
 
