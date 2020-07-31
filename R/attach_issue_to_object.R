@@ -1,12 +1,18 @@
-#' attach_issue
+#' attach_issue_to_object
+#'
+#' @param data_product e.g. "records/SARS-CoV-2/scotland/cases_and_management"
+#' @param object_components e.g. list("testing_location/date-cumulative")
+#' @param description e.g. "Data dump caused a spike on the 15th of June"
+#' @param severity e.g. 19
+#' @param key key
 #'
 #' @export
 #'
-attach_issue <- function(data_product,
-                         object_components,
-                         severity,
-                         description,
-                         key) {
+attach_issue_to_object <- function(data_product,
+                                   object_components,
+                                   description,
+                                   severity,
+                                   key) {
 
   # Does this issue already exist?
   if(check_exists("issue", list(description = description,
@@ -24,11 +30,16 @@ attach_issue <- function(data_product,
                          key = key)
   }
 
+  # What objects / components is the issue currently associated with?
+  tmp <- get_entry("issue", list(description = description))
+  current_objects <- tmp$object_issues
+  current_components <- tmp$component_issues
 
-  # Find data product object
+
+  # Find the data product object we want to attach an issue to
   objectId <- get_entry("data_product", list(name = data_product))$object
 
-  # Find object components
+  # Find any object components we want to attach an issue to
   if(missing(object_components)) {
     data <- list(object = objectId)
     componentIds <- get_url("object_component", clean_query(data))
@@ -38,21 +49,12 @@ attach_issue <- function(data_product,
       get_url("object_component", list(name = x))) %>% unname()
   }
 
-
-  # What objects / components is the issue currently associated with?
-  tmp <- get_entry("issue", list(description = description))
-  current_objects <- tmp$object_issues
-  current_components <- tmp$component_issues
-
-
-
-
+  # Add these Ids to the existing lists
   if(!missing(objects))
-    object_issues <- c(current_objects, objects)
-
+    object_issues <- c(current_objects, objectId)
 
   if(!missing(object_components))
-    component_issues <- c(current_components, object_components)
+    component_issues <- c(current_components, componentIds)
 
   # Attach issue to object component in the data registry
   patch_data(url = issueId,
