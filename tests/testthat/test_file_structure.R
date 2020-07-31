@@ -1,6 +1,4 @@
-library(SCRCdataAPI)
-
-context("Testing filestructure()")
+context("Testing file_structure()")
 
 ##################################################################
 ##            Create Test Data in test-dir directory            ##
