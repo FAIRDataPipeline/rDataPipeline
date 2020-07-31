@@ -4,8 +4,40 @@
 \alias{attach_issue}
 \title{attach_issue}
 \usage{
-attach_issue(data_product, object_components, severity, description, key)
+attach_issue(
+  external_object,
+  namespace,
+  data_product,
+  component,
+  description,
+  severity,
+  key
+)
+}
+\arguments{
+\item{external_object}{\emph{e.g.}
+"scottish coronavirus-covid-19-management-information"}
+
+\item{namespace}{\emph{e.g.} "SCRC"}
+
+\item{data_product}{\emph{e.g.} "records/SARS-CoV-2/scotland/cases_and_management"}
+
+\item{component}{\emph{e.g.} "testing_location/date-cumulative"}
+
+\item{description}{\emph{e.g.} "Data dump caused a spike on the 15th of June"}
+
+\item{severity}{\emph{e.g.} 19}
+
+\item{key}{key}
 }
 \description{
-attach_issue
+This function is used to attach an issue to either
+\itemize{
+\item an external object (in which case you must specify the
+\code{external_object} argument)
+\item a data product (in which case you must specify the \code{namespace} and
+\code{data_product} arguments), or
+\item a component within a data product (in which case you must specify the
+\code{namespace}, \code{data_product}, and \code{component} arguments)
+}
 }
