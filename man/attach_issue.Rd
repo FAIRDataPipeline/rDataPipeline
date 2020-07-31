@@ -5,16 +5,20 @@
 \title{attach_issue}
 \usage{
 attach_issue(
+  description,
+  severity,
   external_object,
   namespace,
   data_product,
   component,
-  description,
-  severity,
   key
 )
 }
 \arguments{
+\item{description}{\emph{e.g.} "Data dump caused a spike on the 15th of June"}
+
+\item{severity}{\emph{e.g.} 19}
+
 \item{external_object}{\emph{e.g.}
 "scottish coronavirus-covid-19-management-information"}
 
@@ -23,10 +27,6 @@ attach_issue(
 \item{data_product}{\emph{e.g.} "records/SARS-CoV-2/scotland/cases_and_management"}
 
 \item{component}{\emph{e.g.} "testing_location/date-cumulative"}
-
-\item{description}{\emph{e.g.} "Data dump caused a spike on the 15th of June"}
-
-\item{severity}{\emph{e.g.} 19}
 
 \item{key}{key}
 }
