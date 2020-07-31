@@ -1,7 +1,6 @@
 #' attach_issue_to_object
 #'
 #' @param data_product e.g. "records/SARS-CoV-2/scotland/cases_and_management"
-#' @param object_components e.g. list("testing_location/date-cumulative")
 #' @param description e.g. "Data dump caused a spike on the 15th of June"
 #' @param severity e.g. 19
 #' @param key key
@@ -9,7 +8,6 @@
 #' @export
 #'
 attach_issue_to_object <- function(data_product,
-                                   object_components,
                                    description,
                                    severity,
                                    key) {
