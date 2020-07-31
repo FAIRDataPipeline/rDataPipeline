@@ -1,6 +1,6 @@
 ## SCRCdataAPI
 
-![SCRCdataAPI](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/SCRCdataAPI/badge.svg)
+[![SCRCdataAPI](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/SCRCdataAPI/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
 
 Functions to generate and process data files for the SCRC data pipeline.
 
