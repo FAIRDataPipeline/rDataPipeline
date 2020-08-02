@@ -30,6 +30,22 @@ create_array(filename = filename_2,
              dimension_names = list(rowvalue = rownames(df),
                                     colvalue = colnames(df)))
 
+filename_3 <- "test_array_4.h5"
+create_array(filename_3,
+             component = component,
+             array = as.matrix(df),
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)))
+create_array(filename_3,
+             component = component_1,
+             array = as.matrix(df),
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)))
+create_array(filename_3,
+             component = component_2,
+             array = as.matrix(df),
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)))
 
 
 test_that("function behaves as it should", {
@@ -41,10 +57,11 @@ test_that("function behaves as it should", {
   # File should be h5 format
   testthat::expect_true(hdf5r::is.h5file(filename))
 
-  # file structures should be equal to Component name
+  # file structures should be equal to Component names
   testthat::expect_identical(as.data.frame(file_structure(filename)), data.frame("name" = component))
   testthat::expect_equal(as.data.frame(file_structure(filename_1)), data.frame("name" = component_1))
   testthat::expect_equal(as.data.frame(file_structure(filename_2)), data.frame("name" = component_2))
+  testthat::expect_equal(as.data.frame(file_structure(filename_3)), data.frame("name" = c(component, component_1, component_2)))
 })
 
 
@@ -52,3 +69,4 @@ test_that("function behaves as it should", {
 file.remove(filename)
 file.remove(filename_1)
 file.remove(filename_2)
+file.remove(filename_3)
