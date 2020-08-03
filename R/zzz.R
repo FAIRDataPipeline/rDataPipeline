@@ -2,7 +2,7 @@
   # Check package is up to date
   tryCatch({
     if(! is_current_version())
-      message("Your package version is out of date please update")
+      message("Warning: Your package version is out of date please update")
     else
       message("Your package is up to date")
   }, error = function(e){
