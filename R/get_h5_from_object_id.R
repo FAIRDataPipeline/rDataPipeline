@@ -1,7 +1,7 @@
 #' get_h5_from_object_id
 #'
-#' @param data_dir Data Directory
 #' @param obj_id object ID
+#' @param data_dir Data Directory
 #' @return H5 file path after downloading
 #'
 #' @export
