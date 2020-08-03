@@ -4,12 +4,12 @@
 \alias{get_h5_from_object_id}
 \title{get_h5_from_object_id}
 \usage{
-get_h5_from_object_id(data_dir, obj_id)
+get_h5_from_object_id(obj_id, data_dir = "data-raw")
 }
 \arguments{
-\item{data_dir}{Data Directory}
-
 \item{obj_id}{object ID}
+
+\item{data_dir}{Data Directory}
 }
 \value{
 H5 file path after downloading

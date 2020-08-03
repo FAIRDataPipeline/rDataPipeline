@@ -2,7 +2,9 @@
 % Please edit documentation in R/get_github_hash.R
 \name{get_github_hash}
 \alias{get_github_hash}
-\title{get_github_hash}
+\title{get_github_hash
+This function assumes git is installed and located in the
+System PATH}
 \usage{
 get_github_hash(repo)
 }
@@ -11,4 +13,6 @@ get_github_hash(repo)
 }
 \description{
 get_github_hash
+This function assumes git is installed and located in the
+System PATH
 }
