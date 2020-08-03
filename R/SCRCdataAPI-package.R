@@ -6,7 +6,7 @@
 #' @aliases SCRCdataAPI
 #' @docType package
 #'
-#' @import assertthat
+#' @rawNamespace import(assertthat, except = has_name)
 #' @import configr
 #' @import dplyr
 #' @import hdf5r
