@@ -40,3 +40,6 @@ vignettes/*.pdf
 *.txt
 *.DS_Store
 /data-raw
+
+# Token
+/token.txt

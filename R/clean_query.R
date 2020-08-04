@@ -1,6 +1,19 @@
 #' clean_query
 #'
-#' @param data data
+#' Function to return clean a query and return it without api prefix
+#'
+#' *e.g*
+#'
+#' \code{clean_query(data = list(storage_location = "https://data.scrc.uk/api/storage_location/2"))}
+#'
+#' will return:
+#'
+#' \code{$storage_location}
+#'
+#' \code{[1] "2"}
+#'
+#' @param data data typically from a query
+#' *e.g* \code{data = list(storage_location = "https://data.scrc.uk/api/storage_location/2")}
 #'
 #' @export
 #'
