@@ -9,7 +9,7 @@ Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
                   role = "ctb", comment = c(ORCID = "")),
              person("Ryan", "Field", email = "",
                   role = "ctb", comment = c(ORCID = "0000-0002-4424-9890")))
-Description: Functions to interact with the SCRC data pipeline
+Description: Functions to interact with the SCRC data pipeline.
 License: GPL-3
 Imports:
     assertthat,
@@ -24,8 +24,10 @@ Imports:
     stats,
     tibble,
     tidyr,
-    utils
+    utils,
+    crayon
 Suggests:
+    units,
     testthat
 Encoding: UTF-8
 LazyData: true

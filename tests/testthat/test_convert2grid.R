@@ -61,7 +61,7 @@ test_that("convert2grid() accurately divides age classes into grid", {
                          subdivisions = subdivisions,
                          conversion.table = subdivisions_area,
                          grid_size = "grid")
-  
+
   expected_counts <- sf::st_drop_geometry(subdivisions) %>%
     left_join(pop_data, by = "AREAcode") %>%
     group_by(grid_id) %>%
@@ -152,7 +152,7 @@ test_that("convert2grid() distributes integers broadly equally when there are ti
   subdivisions_area  = left_join(subdivisions_area, shape_areas, by="AREAcode")
   subdivisions_area$grid_area_proportion = as.numeric(subdivisions_area$subdivision_area/subdivisions_area$shape_area)
   subdivisions_area = subdivisions_area %>% select(grid_id, AREAcode, grid_area_proportion)
-  
+
   # Each cell in the shapefile has the same population size, and this is a
   # prime number, so all grid cells will have a rounding issue:
   pop_data <- data.frame(AREAcode = LETTERS[1:25],
@@ -211,7 +211,7 @@ test_that("convert2grid() distributes integers to the correct cells", {
   subdivisions_area  = left_join(subdivisions_area, complex_areas, by="AREAcode")
   subdivisions_area$grid_area_proportion = as.numeric(subdivisions_area$subdivision_area/subdivisions_area$complex_area)
   subdivisions_area = subdivisions_area %>% select(grid_id, AREAcode, grid_area_proportion)
-  
+
   # Map contains a single cell, while the grid contains 4 complete and 5
   # partial cells
   # - Expect the 4 complete cells to receive 2, 4 largest partial cells to

@@ -1,6 +1,13 @@
 #' add_parameter_from_paper
 #'
-#'
+#' @param value value
+#' @param parameter_name parameter name
+#' @param paper paper
+#' @param authors authors
+#' @param release_date release date
+#' @param journal journal
+#' @param abstract abstract
+#' @param storage_location storage location
 #'
 add_parameter_from_paper <- function(value,
                                      parameter_name,

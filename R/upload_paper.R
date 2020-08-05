@@ -27,7 +27,8 @@
 #' journal_website <- "https://www.jptcp.com/index.php/jptcp"
 #' release_date <- as.POSIXct("2020-01-01 12:00:00", format = "%Y-%m-%d %H:%M:%S")
 #' abstract <- "At the end of December 2019, the Health Commission of the"
-#' keywords <- "covid-19 and coronavirus disease and monoclonal antibodies and non-invasive mechanical ventilation and treatment"
+#' keywords <- "covid-19 and coronavirus disease and monoclonal antibodies
+#' + and non-invasive mechanical ventilation and treatment"
 #' doi <- "10.15586/jptcp.v27iSP1.691"
 #'
 upload_paper <- function(title,

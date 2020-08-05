@@ -6,6 +6,8 @@
 #' @param dat population data
 #' @param shapefile shapefile
 #' @param subdivisions subdivisions
+#' @param conversion.table conversion table
+#' @param grid_size grid size
 #'
 convert2grid <- function(dat,
                          shapefile,
@@ -14,7 +16,7 @@ convert2grid <- function(dat,
                          grid_size) {
 
   dat <- dat %>% tibble::column_to_rownames("AREAcode")
-  
+
   conversion.table <- conversion.table %>% tibble() %>% select(colnames(conversion.table)[grepl(grid_size,colnames(conversion.table))],AREAcode)%>%
     dplyr::filter(AREAcode %in% rownames(dat)) %>% rename(grid_id=paste0(grid_size,"_id"),proportion=paste0(grid_size,"_area_proportion") )
   if(grid_size!="grid1km"){

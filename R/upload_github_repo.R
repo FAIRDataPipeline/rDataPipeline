@@ -1,10 +1,9 @@
 #' upload_github_repo
 #'
 #' @param storage_root_id e.g.
-#' @param path e.g. "ScottishCovidResponse/SCRCdata"
-#' @param filename e.g.
 #' @param hash e.g.
-#' @param run_date e.g.
+#' @param version version
+#' @param repo repo
 #' @param key key
 #'
 #' @export

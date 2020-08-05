@@ -3,6 +3,7 @@
 #' @param storage_root_id e.g.
 #' @param path e.g. "ScottishCovidResponse/SCRCdata"
 #' @param hash e.g.
+#' @param text text
 #' @param run_date e.g.
 #' @param key key
 #'
