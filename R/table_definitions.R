@@ -36,9 +36,10 @@ users.readable <- c("url",
 users.queryable <- c("username")
 users.optional <- c()
 
-group.writable <- c()
-group.readable <- c()
-group.optional <- c()
+groups.writable <- c()
+groups.readable <- c()
+groups.queryable <- c()
+groups.optional <- c()
 
 issue.writable <- c("severity",
                     "description",
@@ -448,4 +449,37 @@ get_table_required <- function(table){
   if(is.null(get_table_optional(table)))
     return(get_table_writable(table))
   return(get_table_writable(table)[!is.element(get_table_writable(table), get_table_optional(table))])
+}
+
+#' is queryable
+#' Produces error \code{Unknown Table} if table does not exist
+#'
+#' @param table name of table
+#' @param query_parameter a string or vector of strings to check
+#'
+#' @return either true / false if a single string is provided or a vector or true or false if vector is provided
+#'
+#' @export
+#'
+is_queryable <- function(table, query_parameter)
+{
+  if(is.null(get_table_queryable(table)))
+    return(FALSE)
+  return(query_parameter %in% get_table_queryable(table))
+}
+
+#' check query
+#' produces error if table does not exist or if query is not a list
+#'
+#' @param table name of table
+#' @param query query to check
+#'
+#' @return boolean if the query is valid for the table
+#'
+#' @export
+#'
+check_query <-function(table, query){
+  if(!is.list(query))
+    stop("Invalid query type")
+  return(all(is_queryable(table, names(query))))
 }
