@@ -18,4 +18,3 @@ test_that("function behaves as it should", {
 
 # Remove test file
 file.remove("data-raw/test_estimate.toml")
-unlink("data-raw", recursive = TRUE)

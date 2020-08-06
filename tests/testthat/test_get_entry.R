@@ -13,8 +13,8 @@ test_that("Check Test object #32040 Exists", {
 
 test_that("Check Object has correct fields", {
   object <- get_entry("object", query = list(description=description))
-  expect_length(object, length(get_table_readable("object")))
   expect_equal(object$description, description)
+  expect_length(object, 14)
   expect_equal(object$url, paste0("https://data.scrc.uk/api/object/", object_id, "/"))
 })
 
@@ -43,4 +43,10 @@ test_that("invalid query causes and error", {
 test_that("query = \"\" produces a warning", {
   expect_warning(get_entry("object", "" ))
 })
+
+#run with key
+# test_that("object has correct number of fields", {
+#   expect_length(object, length(get_table_readable("object")))
+# })
+
 

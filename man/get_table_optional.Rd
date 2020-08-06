@@ -4,10 +4,12 @@
 \alias{get_table_optional}
 \title{Get Optional Fields}
 \usage{
-get_table_optional(table)
+get_table_optional(table, key)
 }
 \arguments{
 \item{table}{name of table}
+
+\item{key}{api key / token}
 }
 \value{
 a character vector of optional fields

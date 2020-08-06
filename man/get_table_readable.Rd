@@ -2,16 +2,18 @@
 % Please edit documentation in R/table_definitions.R
 \name{get_table_readable}
 \alias{get_table_readable}
-\title{Get Readable Field}
+\title{Get Readable Fields}
 \usage{
-get_table_readable(table)
+get_table_readable(table, key)
 }
 \arguments{
 \item{table}{name of table}
+
+\item{key}{api key / token}
 }
 \value{
 a character vector of readable fields
 }
 \description{
-Get Readable Field
+Get Readable Fields
 }

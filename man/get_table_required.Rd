@@ -4,10 +4,12 @@
 \alias{get_table_required}
 \title{Get Required Fields}
 \usage{
-get_table_required(table)
+get_table_required(table, key)
 }
 \arguments{
 \item{table}{name of table}
+
+\item{key}{api key / token}
 }
 \value{
 a character vector of required fields
