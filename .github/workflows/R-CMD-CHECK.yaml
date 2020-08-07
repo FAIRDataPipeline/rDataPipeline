@@ -40,18 +40,20 @@ jobs:
             install.packages('remotes')
             remotes::install_deps(dependencies = TRUE)
             remotes::install_cran("rcmdcheck")
+            install.packages("tinytex")
+            tinytex::install_tinytex()
+            install.packages("devtools")
         shell: Rscript {0}
 
       - name: Install SCRC Data SCRCdataAPI
         env:
             DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: |
-            install.packages("devtools")
             library(devtools)
             install_github("ScottishCovidResponse/SCRCdataAPI")
         shell: Rscript {0}
 
-        - name: check
+      - name: check
         env:
             DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
