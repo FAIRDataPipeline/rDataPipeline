@@ -27,9 +27,6 @@ jobs:
         run : |
               rm /usr/local/bin/gfortran
               brew install gdal openssl hdf5 udunits proj
-              brew cask install basictex
-              echo 'export PATH=“/Library/TeX/texbin/:$PATH”' >> /Users/runner/.bash_profile
-              eval "$(/usr/libexec/path_helper)"
         if: matrix.os == 'macos-latest'
 
       - name: Install System Requirements (Ubuntu)
@@ -37,8 +34,6 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
 
       - name: Install required R libraries
-        env:
-            DEBIAN_FRONTEND: noninteractive # Stop R asking where to download from
         run: |
             install.packages('remotes')
             remotes::install_deps(dependencies = TRUE)
@@ -47,15 +42,19 @@ jobs:
         shell: Rscript {0}
 
       - name: Install SCRC Data SCRCdataAPI
-        env:
-            DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: |
             library(devtools)
             install_github("ScottishCovidResponse/SCRCdataAPI")
         shell: Rscript {0}
 
-      - name: check
+      - name: check Debian with Documentation
         env:
             DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+        if: matrix.os == 'ubuntu-latest'
+
+        - name: check Mac OS
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
+        if: matrix.os == 'macos-latest'
