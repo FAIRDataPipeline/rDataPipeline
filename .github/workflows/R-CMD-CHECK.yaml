@@ -47,12 +47,6 @@ jobs:
             install_github("ScottishCovidResponse/SCRCdataAPI")
         shell: Rscript {0}
 
-      - name: check Debian with Documentation
+      - name: Run R-CMD-CHECK
         run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-        if: matrix.os == 'ubuntu-latest'
-
-      - name: check Mac OS
-        run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-        if: matrix.os == 'macos-latest'
