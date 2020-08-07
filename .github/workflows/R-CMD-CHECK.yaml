@@ -27,6 +27,7 @@ jobs:
         run : |
               rm /usr/local/bin/gfortran
               brew install gdal openssl hdf5 udunits proj
+              brew cask install basictex
         if: matrix.os == 'macos-latest'
 
       - name: Install System Requirements (Ubuntu)
