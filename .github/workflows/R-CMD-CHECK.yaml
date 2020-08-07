@@ -30,7 +30,7 @@ jobs:
         if: matrix.os == 'macos-latest'
 
       - name: Install System Requirements (Ubuntu)
-        run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev -y
+        run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra -y
         if: matrix.os == 'ubuntu-latest'
 
       - name: Install required R libraries
@@ -40,8 +40,6 @@ jobs:
             install.packages('remotes')
             remotes::install_deps(dependencies = TRUE)
             remotes::install_cran("rcmdcheck")
-            install.packages("tinytex")
-            tinytex::install_tinytex()
             install.packages("devtools")
         shell: Rscript {0}
 
