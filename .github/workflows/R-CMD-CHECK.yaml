@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # Check out the code
       - uses: r-lib/actions/setup-r@master # Nice fast way to setup R
-
       - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-tinytex
 
       - name: Install System Requirements (macOS)
         run : |
@@ -53,6 +53,6 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
 
       - name: check Mac OS
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "warning", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
         shell: Rscript {0}
         if: matrix.os == 'macos-latest'
