@@ -1,0 +1,58 @@
+
+name: R-CMD-CHECK # Name of the project (this is what is displayed on the badge)
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: ${{ matrix.os }} Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false # fail-fast means should it fail the other job if the one fails
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest']
+    steps:
+      - uses: actions/checkout@v2 # Check out the code
+      - uses: r-lib/actions/setup-r@master # Nice fast way to setup R
+
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Install System Requirements (macOS)
+        run : |
+              rm /usr/local/bin/gfortran
+              brew install gdal openssl hdf5 udunits proj
+        if: matrix.os == 'macos-latest'
+
+      - name: Install System Requirements (Ubuntu)
+        run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev -y
+        if: matrix.os == 'ubuntu-latest'
+
+      - name: Install required R libraries
+        env:
+            DEBIAN_FRONTEND: noninteractive # Stop R asking where to download from
+        run: |
+            install.packages('remotes')
+            remotes::install_deps(dependencies = TRUE)
+            remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Install SCRC Data SCRCdataAPI
+        env:
+            DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
+        run: |
+            install.packages("devtools")
+            library(devtools)
+            install_github("ScottishCovidResponse/SCRCdataAPI")
+        shell: Rscript {0}
+
+        - name: check
+        env:
+            DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
+        run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
+        shell: Rscript {0}
