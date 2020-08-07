@@ -51,7 +51,7 @@ jobs:
             install_github("ScottishCovidResponse/SCRCdataAPI")
         shell: Rscript {0}
 
-        - name: check
+      - name: check
         env:
             DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
         run: rcmdcheck::rcmdcheck(error_on = "warning", check_dir = "check")
