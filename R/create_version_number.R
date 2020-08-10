@@ -1,11 +1,11 @@
 #' create_version_number
 #'
-#' Creates a version number from either a date and a version
-#' or a date and major and patch
-#' or major minor patch
-#' if no parameters are supplied a default version is returned
+#' Creates a version number from either *a date and a version*
+#' **or** *a date and major and patch*
+#' **or** *major minor patch*.
+#' If no parameters are supplied a default version is returned
 #' \code{0.1.0}
-#' This function priotitises download date and version over all other parameters
+#' This function prioritizes download date and version over all other parameters
 #'
 #' @param download_date (Optional) download_date
 #' This can either be a date or datetime
@@ -29,8 +29,8 @@
 #' @param minor minor number if not using \code{date}
 #' @param patch patch number if not using \code{version}
 #'
-#' @return returns a character vector in the format of \code{YYYYMMDD.major.minor.patch}
-#' *e.g.* \code{20200101.0.1.0}
+#' @return returns a character vector in the format of \code{major.minor.patch}
+#' *e.g.* \code{0.20200101.0}
 #'
 #' @export
 #'

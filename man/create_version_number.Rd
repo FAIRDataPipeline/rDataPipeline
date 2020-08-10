@@ -40,14 +40,14 @@ or major.patch
 \item{patch}{patch number if not using \code{version}}
 }
 \value{
-returns a character vector in the format of \code{YYYYMMDD.major.minor.patch}
-\emph{e.g.} \code{20200101.0.1.0}
+returns a character vector in the format of \code{major.minor.patch}
+\emph{e.g.} \code{0.20200101.0}
 }
 \description{
-Creates a version number from either a date and a version
-or a date and major and patch
-or major minor patch
-if no parameters are supplied a default version is returned
+Creates a version number from either \emph{a date and a version}
+\strong{or} \emph{a date and major and patch}
+\strong{or} \emph{major minor patch}.
+If no parameters are supplied a default version is returned
 \code{0.1.0}
-This function priotitises download date and version over all other parameters
+This function prioritizes download date and version over all other parameters
 }
