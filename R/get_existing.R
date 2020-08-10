@@ -14,38 +14,42 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
   if(! check_table_exists(table))
     stop(paste0("Table: ", table, " does not exist\n", "For available tables use: get_tables()"))
 
+    tryCatch({
+      output <- httr::GET(file.path("http://data.scrc.uk/api", table, "")) %>%
+        httr::content(as = "text", encoding = "UTF-8") %>%
+        jsonlite::fromJSON(simplifyVector = FALSE)
 
-    output <- httr::GET(file.path("http://data.scrc.uk/api", table, "")) %>%
-      httr::content(as = "text", encoding = "UTF-8") %>%
-      jsonlite::fromJSON(simplifyVector = FALSE)
-
-    results <- output$results
-    # allow function to return more than 100 results
-    if(!limit_results)
-    {
-      # Because pagination is enabled next will only be null if there are no more pages
-      # next is a reserved word so wrap it in ``
-      # while loop to update results from all pages
-      while(!is.null(output$`next`)){
-        tmp_output <- httr::GET(file.path(output$`next`)) %>%
-          httr::content(as = "text", encoding = "UTF-8") %>%
-          jsonlite::fromJSON(simplifyVector = FALSE)
-        results <- c(results, tmp_output$results)
-        output <- tmp_output
+      results <- output$results
+      # allow function to return more than 100 results
+      if(!limit_results)
+      {
+        # Because pagination is enabled next will only be null if there are no more pages
+        # next is a reserved word so wrap it in ``
+        # while loop to update results from all pages
+        while(!is.null(output$`next`)){
+          tmp_output <- httr::GET(file.path(output$`next`)) %>%
+            httr::content(as = "text", encoding = "UTF-8") %>%
+            jsonlite::fromJSON(simplifyVector = FALSE)
+          results <- c(results, tmp_output$results)
+          output <- tmp_output
+        }
       }
-    }
 
-    output <- output$results
-    # some tables contain lists, flatten them first or bind_rows() will error
-    for(i in seq_along(results)){
-      for(ii in names(results[[i]])){
-        if(is.list(results[[i]][[ii]])){
-          if(!length(results[[i]][[ii]]))
-            results[[i]][[ii]] <- NA
-          else
-            results[[i]][[ii]] <- paste0(unlist(results[[i]][[ii]]), ",", collapse="")}
+      output <- output$results
+      # some tables contain lists, flatten them first or bind_rows() will error
+      for(i in seq_along(results)){
+        for(ii in names(results[[i]])){
+          if(is.list(results[[i]][[ii]])){
+            if(!length(results[[i]][[ii]]))
+              results[[i]][[ii]] <- NA
+            else
+              results[[i]][[ii]] <- paste0(unlist(results[[i]][[ii]]), ",", collapse="")}
+        }
       }
-    }
+    }, error = function(e){
+      stop("an api error occured, please try again")
+    })
+
     # bind the results into a dataframe
     results <- bind_rows(results)
 
