@@ -4,10 +4,20 @@
 \alias{get_existing}
 \title{get_existing}
 \usage{
-get_existing(table)
+get_existing(table, limit_results = TRUE, detail = "all")
 }
 \arguments{
 \item{table}{table}
+
+\item{limit_results}{boolean whether or not to limit
+the results default \code{TRUE}}
+
+\item{detail}{what level of detail to return
+use \code{"all"} for all details or \code{"id"} for just URL and ID's}
+}
+\value{
+returns a data.frame of entries in table
+default is limited to 100 entries
 }
 \description{
 get_existing
