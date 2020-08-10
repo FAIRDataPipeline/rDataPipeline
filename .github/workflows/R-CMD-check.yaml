@@ -1,5 +1,5 @@
 
-name: R-CMD-Check # Name of the project (this is what is displayed on the badge)
+name: R-CMD-check # Name of the project (this is what is displayed on the badge)
 
 on:
   push:
