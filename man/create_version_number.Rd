@@ -7,13 +7,13 @@
 create_version_number(
   download_date = NULL,
   version = NULL,
-  major = NULL,
+  major = 0,
   minor = "1",
-  patch = NULL
+  patch = 0
 )
 }
 \arguments{
-\item{download_date}{download_date
+\item{download_date}{(Optional) download_date
 This can either be a date or datetime
 but must include the full year
 \emph{e.g} from
@@ -29,7 +29,9 @@ and accepts date without delimiters but assumes ddmmyyyy or yyyymmdd
 \emph{e.g.} \code{20200201}}
 
 \item{version}{version number using major.minor.patch numbering
-\emph{e.g.} \code{0.1.0}}
+\emph{e.g.} \code{0.1.0}
+or major.patch
+\emph{e.g.} \code{0.0}}
 
 \item{major}{major number if not using \code{version}}
 
@@ -42,5 +44,10 @@ returns a character vector in the format of \code{YYYYMMDD.major.minor.patch}
 \emph{e.g.} \code{20200101.0.1.0}
 }
 \description{
-create_version_number
+Creates a version number from either a date and a version
+or a date and major and patch
+or major minor patch
+if no parameters are supplied a default version is returned
+\code{0.1.0}
+This function priotitises download date and version over all other parameters
 }
