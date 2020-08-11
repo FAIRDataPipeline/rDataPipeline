@@ -36,8 +36,7 @@ jobs:
       - name: Install required R libraries
         run: |
             install.packages('remotes')
-            remotes::install_version("cpp11", "0.1.0")
-            remotes::install_deps(dependencies = TRUE, build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"), upgrade = "never")
+            remotes::install_deps(dependencies = TRUE)
             remotes::install_cran("rcmdcheck")
             install.packages("devtools")
         shell: Rscript {0}
