@@ -36,6 +36,7 @@ jobs:
       - name: Install required R libraries
         run: |
             install.packages('remotes')
+            remotes::install_github("r-lib/cpp11")
             remotes::install_deps(dependencies = TRUE)
             remotes::install_cran("rcmdcheck")
             install.packages("devtools")
