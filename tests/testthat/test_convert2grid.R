@@ -1,5 +1,6 @@
 library(dplyr)
 
+seed(123)
 
 context("Testing convert2grid()")
 
