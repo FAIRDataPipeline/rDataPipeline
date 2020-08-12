@@ -11,9 +11,9 @@ on:
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.os }} Build
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
