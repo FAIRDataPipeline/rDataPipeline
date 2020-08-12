@@ -1,7 +1,7 @@
 ## SCRCdataAPI
 
-[![build](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/test-build/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
-[![coverage](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/test-coverage/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
+[![test-build](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/test-build/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
+[![test-coverage](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/tree/4162ac265c9733aed0678897310c858577bc11dc/R)
 
 Functions to generate and process data files for the SCRC data pipeline.
 
