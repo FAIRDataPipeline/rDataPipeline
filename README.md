@@ -3,6 +3,8 @@
 [![test-build](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/build/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
 [![test-coverage](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
+[![CRAN status](https://www.r-pkg.org/badges/version/ghactions)](https://cran.r-project.org/package=ghactions)
+
 
 Functions to generate and process data files for the SCRC data pipeline.
 
