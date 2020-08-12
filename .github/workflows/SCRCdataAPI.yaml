@@ -63,10 +63,10 @@ jobs:
             library(SCRCdataAPI)
         shell: Rscript {0}
 
-      - name: Run Tests
+      - name: Run Checks and Tests
         env:
             DEBIAN_FRONTEND: noninteractive
         run: |
             library(devtools)
-            devtools::test()
+            devtools::check()
         shell: Rscript {0}
