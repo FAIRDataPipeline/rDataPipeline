@@ -8,7 +8,7 @@ known_hash <- "93c693d7596ae943e79d8fad5021904c6feb4802"
 
 try({utils::download.file(url, filename)}, silent = TRUE)
 
-test_that("get_hash() returns correct has on a known file", {
+test_that("get_hash() returns correct hash on a known file", {
   # Skip if file was not downloaded
   skip_if_not(file.exists(filename), "file not downloaded")
   expect_equal(as.character(get_hash(filename)), known_hash)
