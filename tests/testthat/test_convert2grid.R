@@ -25,18 +25,20 @@ grd_size <- 1/2
 subdivisions <- testthat::expect_warning(
   SCRCdataAPI:::grid_intersection(basic_shapefile,
                                   gridsize = grd_size)$subdivisions)
-plot(subdivisions)
+# plot(subdivisions)
 
 ## HAVE TO MAKE conversion table will make separate function for this ASAP
 basic_areas <- data.frame(AREAcode = basic_shapefile$AREAcode,
                           basic_area = sf::st_area(basic_shapefile))
+
 subdivisions_area <- data.frame(grid_id = subdivisions$grid_id,
                                 AREAcode = subdivisions$AREAcode,
                                 subdivision_area = sf::st_area(subdivisions))
-subdivisions_area <- left_join(subdivisions_area, basic_areas, by = "AREAcode")
-subdivisions_area$grid_area_proportion <- as.numeric(
-  subdivisions_area$subdivision_area/subdivisions_area$basic_area)
+
 subdivisions_area <- subdivisions_area %>%
+  left_join(basic_areas, by = "AREAcode") %>%
+  mutate(grid_area_proportion = as.numeric(subdivision_area /
+                                             basic_area)) %>%
   select(grid_id, AREAcode, grid_area_proportion)
 
 #   - Test with a single data column
@@ -68,7 +70,8 @@ test_that("convert2grid() accurately divides age classes into grid", {
                          Age3 = sample(1e6, size = 16),
                          Age4 = sample(1e6, size = 16))
 
-  result <- SCRCdataAPI:::convert2grid(dat = pop_data, shapefile = basic_shapefile,
+  result <- SCRCdataAPI:::convert2grid(dat = pop_data,
+                                       shapefile = basic_shapefile,
                                        subdivisions = subdivisions,
                                        conversion.table = subdivisions_area,
                                        grid_size = "grid")
@@ -100,15 +103,17 @@ shapefile <- testthat::expect_warning(
 
 subdivisions <- testthat::expect_warning(
   SCRCdataAPI:::grid_intersection(shapefile, gridsize = 1/2))$subdivisions
+
 shape_areas <- data.frame(AREAcode = shapefile$AREAcode,
                           shape_area = sf::st_area(shapefile))
+
 subdivisions_area <- data.frame(grid_id = subdivisions$grid_id,
                                 AREAcode = subdivisions$AREAcode,
                                 subdivision_area = sf::st_area(subdivisions))
-subdivisions_area <- left_join(subdivisions_area, shape_areas, by = "AREAcode")
-subdivisions_area$grid_area_proportion <- as.numeric(
-  subdivisions_area$subdivision_area/subdivisions_area$shape_area)
+
 subdivisions_area <- subdivisions_area %>%
+  left_join(shape_areas, by = "AREAcode") %>%
+  mutate(grid_area_proportion = as.numeric(subdivision_area / shape_area)) %>%
   select(grid_id, AREAcode, grid_area_proportion)
 
 test_that("convert2grid() divides population in areas split between grid cells by area", {
@@ -170,16 +175,18 @@ test_that("convert2grid() distributes integers broadly equally when there are ti
   # Every cell in the 5 x 5 shapefile gets divided into 4:
   subdivisions <- testthat::expect_warning(
     SCRCdataAPI:::grid_intersection(shapefile, gridsize = 1/10))$subdivisions
+
   shape_areas <- data.frame(AREAcode = shapefile$AREAcode,
                             shape_area = sf::st_area(shapefile))
+
   subdivisions_area <- data.frame(grid_id = subdivisions$grid_id,
                                   AREAcode = subdivisions$AREAcode,
                                   subdivision_area = sf::st_area(subdivisions))
-  subdivisions_area <- left_join(subdivisions_area, shape_areas,
-                                 by  ="AREAcode")
-  subdivisions_area$grid_area_proportion <- as.numeric(
-    subdivisions_area$subdivision_area/subdivisions_area$shape_area)
-  subdivisions_area = subdivisions_area %>%
+
+  subdivisions_area <- subdivisions_area %>%
+    left_join(shape_areas, by = "AREAcode") %>%
+    mutate(grid_area_proportion = as.numeric(subdivision_area /
+                                               shape_area)) %>%
     select(grid_id, AREAcode, grid_area_proportion)
 
   # Each cell in the shapefile has the same population size, and this is a
@@ -237,16 +244,18 @@ test_that("convert2grid() distributes integers to the correct cells", {
   subdivisions <- testthat::expect_warning(
     SCRCdataAPI:::grid_intersection(complex_shapefile,
                                     gridsize = map_extent/5/1000))$subdivisions
+
   complex_areas <- data.frame(AREAcode = complex_shapefile$AREAcode,
                               complex_area = sf::st_area(complex_shapefile))
+
   subdivisions_area <- data.frame(grid_id = subdivisions$grid_id,
                                   AREAcode = subdivisions$AREAcode,
                                   subdivision_area = sf::st_area(subdivisions))
-  subdivisions_area <- left_join(subdivisions_area, complex_areas,
-                                 by = "AREAcode")
-  subdivisions_area$grid_area_proportion <- as.numeric(
-    subdivisions_area$subdivision_area/subdivisions_area$complex_area)
-  subdivisions_area = subdivisions_area %>%
+
+  subdivisions_area <- subdivisions_area %>%
+    left_join(complex_areas, by = "AREAcode") %>%
+    mutate(grid_area_proportion = as.numeric(subdivision_area /
+                                               complex_area)) %>%
     select(grid_id, AREAcode, grid_area_proportion)
 
   # Map contains a single cell, while the grid contains 4 complete and 5
