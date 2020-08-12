@@ -1,72 +1,74 @@
 
-name: SCRCdataAPI # Name of the project (this is what is displayed on the badge)
+name: SCRCdataAPI
 
-on: [push] # Event on which GitHub will run the CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  build:
-    name: ${{ matrix.os }} Build
+  R-CMD-check:
     runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.os }} Build
+
     strategy:
-      fail-fast: false # fail-fast means should it fail the other job if the one fails
+      fail-fast: false
       matrix:
-        os: ['ubuntu-latest', 'macos-latest']
+        config:
+          - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest, r: 'release'}
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+
     steps:
-      - uses: actions/checkout@v2 # Check out the code
-      - uses: r-lib/actions/setup-r@master # Nice fast way to setup R
+      - uses: actions/checkout@v2
 
-      - name: Install System Requirements (macOS)
-        run : |
-              rm /usr/local/bin/gfortran
-              brew install gdal openssl hdf5 udunits proj
-        if: matrix.os == 'macos-latest'
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: ${{ matrix.config.r }}
 
-      - name: Install System Requirements (Ubuntu)
-        run : sudo apt-get install libcurl4-openssl-dev libhdf5-dev libudunits2-dev libproj-dev libgdal-dev -y
-        if: matrix.os == 'ubuntu-latest'
+      - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Install required R libraries
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+        shell: Rscript {0}
+
+      - name: Check
         env:
-            DEBIAN_FRONTEND: noninteractive # Stop R asking where to download from
-        run: |
-            install.packages("assertthat")
-            install.packages("configr")
-            install.packages("dplyr")
-            install.packages("hdf5r")
-            install.packages("httr")
-            install.packages("jsonlite")
-            install.packages("nomisr")
-            install.packages("readxl")
-            install.packages("reshape2")
-            install.packages("rgdal")
-            install.packages("sf")
-            install.packages("SQPARQL")
-            install.packages("stats")
-            install.packages("testthat")
-            install.packages("tibble")
-            install.packages("tidyr")
-            install.packages("units")
-            install.packages("utils")
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
-      - name: Install SCRC Data SCRCdataAPI
-        env:
-            DEBIAN_FRONTEND: noninteractive # Might not be needed a second time, but still
-        run: |
-            install.packages("devtools")
-            library(devtools)
-            install_github("ScottishCovidResponse/SCRCdataAPI")
-        shell: Rscript {0}
-
-      - name: Test API import
-        run: |
-            library(SCRCdataAPI)
-        shell: Rscript {0}
-
-      - name: Run Checks and Tests
-        env:
-            DEBIAN_FRONTEND: noninteractive
-        run: |
-            library(devtools)
-            devtools::check()
-        shell: Rscript {0}
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@main
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          path: check
