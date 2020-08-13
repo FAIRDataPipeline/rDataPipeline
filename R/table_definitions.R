@@ -60,6 +60,7 @@ get_fields <- function(table, key, filter_fields="all"){
   if(filter_fields == "writable")
     return(writable)
   if(filter_fields == "required")
+    return(required)
   return(list(all=all, read_only=read_only, optional=optional, writable = writable))
 }
 
