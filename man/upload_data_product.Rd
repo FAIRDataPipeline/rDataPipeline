@@ -30,7 +30,7 @@ upload_data_product(
 
 \item{namespace_id}{e.g.}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_data_product

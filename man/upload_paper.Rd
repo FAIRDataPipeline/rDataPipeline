@@ -46,7 +46,7 @@ where \code{TRUE} is the primary source (default) and false is a supplement}
 
 \item{version}{(optional) a \code{string} specifying the version number}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_paper

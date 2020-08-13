@@ -13,7 +13,7 @@
 #' @import httr
 #' @import jsonlite
 #' @importFrom openssl sha1
-#' @import reshape2
+#' @importFrom reshape2 dcast
 #' @import sf
 #' @importFrom stats setNames
 #' @import tibble

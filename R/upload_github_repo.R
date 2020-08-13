@@ -1,10 +1,11 @@
 #' upload_github_repo
 #'
+#'
 #' @param storage_root_id e.g.
 #' @param hash e.g.
 #' @param version version
 #' @param repo repo
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

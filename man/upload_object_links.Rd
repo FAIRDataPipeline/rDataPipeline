@@ -6,7 +6,7 @@
 \usage{
 upload_object_links(
   run_date,
-  run_identifier,
+  description,
   code_repo_id,
   submission_script_id,
   inputs = list(),
@@ -17,7 +17,7 @@ upload_object_links(
 \arguments{
 \item{run_date}{e.g.}
 
-\item{run_identifier}{e.g.}
+\item{description}{e.g.}
 
 \item{code_repo_id}{e.g.}
 
@@ -27,7 +27,7 @@ upload_object_links(
 
 \item{outputs}{e.g.}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_object_links

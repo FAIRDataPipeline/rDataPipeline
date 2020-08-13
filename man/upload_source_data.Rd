@@ -36,7 +36,7 @@ upload_source_data(
 
 \item{version}{e.g. "20100711.0"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_source_data

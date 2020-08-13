@@ -17,7 +17,7 @@ upload_submission_script(storage_root_id, path, hash, text, run_date, key)
 
 \item{run_date}{e.g.}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_submission_script

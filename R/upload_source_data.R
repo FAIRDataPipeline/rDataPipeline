@@ -9,7 +9,7 @@
 #' @param target_path e.g. "human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"
 #' @param download_date e.g. as.POSIXct("2010-07-11 12:15:00", format = "%Y-%m-%d %H:%M:%S")
 #' @param version e.g. "20100711.0"
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

@@ -15,7 +15,7 @@
 #' @param primary_not_supplement (optional) an object of class \code{logical}
 #' where \code{TRUE} is the primary source (default) and false is a supplement
 #' @param version (optional) a \code{string} specifying the version number
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

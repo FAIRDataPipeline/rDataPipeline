@@ -1,17 +1,17 @@
 #' upload_object_links
 #'
 #' @param run_date e.g.
-#' @param run_identifier e.g.
+#' @param description e.g.
 #' @param code_repo_id e.g.
 #' @param submission_script_id e.g.
 #' @param inputs e.g.
 #' @param outputs e.g.
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'
 upload_object_links <- function(run_date,
-                                run_identifier,
+                                description,
                                 code_repo_id,
                                 submission_script_id,
                                 inputs = list(),
@@ -20,7 +20,7 @@ upload_object_links <- function(run_date,
 
   script_codeRunId <- new_coderun(
     run_date,
-    run_identifier = run_identifier,
+    description,
     code_repo_id = code_repo_id,
     submission_script_id = submission_script_id,
     inputs = inputs,

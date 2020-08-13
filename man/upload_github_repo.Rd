@@ -15,7 +15,7 @@ upload_github_repo(storage_root_id, repo, hash, version, key)
 
 \item{version}{version}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_github_repo

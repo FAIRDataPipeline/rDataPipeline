@@ -5,7 +5,7 @@
 #' @param hash e.g.
 #' @param text text
 #' @param run_date e.g.
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'
