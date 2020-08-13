@@ -42,5 +42,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
+        env: 
+          SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
         run: covr::codecov()
         shell: Rscript {0}
