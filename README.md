@@ -4,16 +4,15 @@
 [![test-coverage](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 [![CRAN status](https://www.r-pkg.org/badges/version/ghactions)](https://cran.r-project.org/package=ghactions)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi/badge)](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi)
 
 Functions to generate and process data files for the SCRC data pipeline.
 
-* [Installation](#installation)
-* [Create array](#create-array)
-* [Create table](#create-table)
-* [Create distribution](#create-distribution)
-* [Create point-estimate](#create-point-estimate)
-
+*  [Installation](#installation)
+*  [Create array](#create-array)
+*  [Create table](#create-table)
+*  [Create distribution](#create-distribution)
+*  [Create point-estimate](#create-point-estimate)
 
 ## Installation
 
@@ -29,7 +28,6 @@ and load it into R:
 ```{r}
 library(SCRCdataAPI)
 ```
-
 
 ## Create table
 
@@ -55,7 +53,6 @@ To read the data file:
 ```{r}
 read_table(filename = "test_table.h5", path = "data-raw", component = "sample1")
 ```
-
 
 ## Create array
 
@@ -97,7 +94,6 @@ In the following example, we populate "test_distribution.toml":
 # Create *.toml file
 create_distribution(filename = "test_distribution.toml", path = "data-raw", name = "latency", distribution = "gamma", parameters = list(shape = 2.0, scale = 3.0))
 ```
-
 
 ## Create point-estimate
 
