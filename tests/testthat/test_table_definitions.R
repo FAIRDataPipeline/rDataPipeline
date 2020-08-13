@@ -5,7 +5,7 @@ token <- Sys.getenv("SCRC_API_TOKEN")
 
 #get all tables
 tables <- get_tables()
-table_unknown <- "unknown"
+unknown_table <- "unknown"
 
 #use a sample of tables to prevent api from erroring
 set.seed(123)
@@ -18,6 +18,7 @@ test_that("Fields are returned by get_fields", {
     expect_true(is.character(get_table_readable(tables_sample[i], token)))
     expect_true(is.character(get_table_optional(tables_sample[i], token)))
     expect_true(is.character(get_table_required(tables_sample[i], token)))
+    expect_true(is.character(get_fields(tables_sample[i], token, "read_only")))
     #default behavior if filter fields is not recognized
     expect_false(is.character(get_fields(tables_sample[i], token, "default")))
   }
