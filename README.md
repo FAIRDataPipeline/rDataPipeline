@@ -9,11 +9,11 @@
 
 Functions to generate and process data files for the SCRC data pipeline.
 
-*  [Installation](#installation)
-*  [Create array](#create-array)
-*  [Create table](#create-table)
-*  [Create distribution](#create-distribution)
-*  [Create point-estimate](#create-point-estimate)
+  * [Installation](#installation)
+  * [Create array](#create-array)
+  * [Create table](#create-table)
+  * [Create distribution](#create-distribution)
+  * [Create point-estimate](#create-point-estimate)
 
 ## Installation
 
