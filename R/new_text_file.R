@@ -1,7 +1,10 @@
 #' new_text_file
 #'
-#' @param text free text
-#' @param key key
+#' Upload information to the `text_file` table in the data registry
+#'
+#' @param text a `string` containing a free text *i.e.* scripts that are
+#' only a few lines long and don't have a home elsewhere
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

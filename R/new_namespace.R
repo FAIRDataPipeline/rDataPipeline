@@ -1,7 +1,9 @@
 #' new_namespace
 #'
-#' @param name e.g.
-#' @param key key
+#' Upload information to the `namespace` table in the data registry
+#'
+#' @param name a `string` specifying the name of the namespace *e.g.* "SCRC"
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

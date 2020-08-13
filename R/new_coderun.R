@@ -1,18 +1,23 @@
 #' new_coderun
 #'
-#' @param run_date e.g.
-#' @param run_identifier e.g.
-#' @param code_repo_id e.g.
-#' @param model_config e.g.
-#' @param submission_script_id e.g.
-#' @param inputs e.g.
-#' @param outputs e.g.
-#' @param key key
+#' Upload information to the `coderun` table in the data registry
+#'
+#' @param run_date the date-time of the code run *e.g.* Sys.time() or
+#' "2010-07-11 12:15:00 BST"
+#' @param description (optional) a `string` containing a free text
+#' description of the `code_run` *e.g.* "Script run to upload and process
+#' scottish coronavirus-covid-19-management-information"
+#' @param code_repo_id (optional) *e.g.* "https://data.scrc.uk/api/object/154/"
+#' @param model_config (optional)
+#' @param submission_script_id *e.g.* "https://data.scrc.uk/api/object/153/"
+#' @param inputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
+#' @param outputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'
 new_coderun <- function(run_date,
-                        run_identifier,
+                        description = "",
                         code_repo_id = "",
                         model_config = "",
                         submission_script_id = "",
@@ -22,7 +27,7 @@ new_coderun <- function(run_date,
 
   post_data(table = "code_run",
             data =  list(run_date = run_date,
-                         run_identifier = run_identifier,
+                         description = description,
                          code_repo = code_repo_id,
                          model_config = model_config,
                          submission_script = submission_script_id,

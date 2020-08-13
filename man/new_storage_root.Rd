@@ -4,17 +4,21 @@
 \alias{new_storage_root}
 \title{new_storage_root}
 \usage{
-new_storage_root(name, root, accessibility, key)
+new_storage_root(name, root, accessibility = "", key)
 }
 \arguments{
-\item{name}{e.g.}
+\item{name}{a \code{string} specifying the name of the \code{storage_root}
+\emph{e.g.} "boydorr"}
 
-\item{root}{e.g.}
+\item{root}{a \code{string} specifying the URI to the root of a
+\code{storage_location}, which is then prepended to a \code{storage_location}
+\emph{e.g.} "ftp://boydorr.gla.ac.uk/scrc/"}
 
-\item{accessibility}{e.g.}
+\item{accessibility}{(optional) an \code{integer} value for the accessibility
+enum, where 0 is public (default) and 1 is private}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_storage_root
+Upload information to the \code{storage_root} table in the data registry
 }

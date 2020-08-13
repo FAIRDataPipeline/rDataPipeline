@@ -1,8 +1,12 @@
 #' new_keyword
 #'
-#' @param object_id e.g.
-#' @param keyphrase e.g.
-#' @param key key
+#' Upload information to the `keyword` table in the data registry
+#'
+#' @param object_id a `string` specifying the API URL of the
+#' associated `object` table *e.g.* "https://data.scrc.uk/api/object/31817/"
+#' @param keyphrase a `string` specifying a single keyword or keyphrase *e.g.*
+#' "covid-19" or "cardiovascular diseases"
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

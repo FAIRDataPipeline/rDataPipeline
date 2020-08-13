@@ -7,10 +7,10 @@
 new_namespace(name, key)
 }
 \arguments{
-\item{name}{e.g.}
+\item{name}{a \code{string} specifying the name of the namespace \emph{e.g.} "SCRC"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_namespace
+Upload information to the \code{namespace} table in the data registry
 }

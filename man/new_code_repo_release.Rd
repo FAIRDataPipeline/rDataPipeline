@@ -4,19 +4,24 @@
 \alias{new_code_repo_release}
 \title{new_code_repo_release}
 \usage{
-new_code_repo_release(name, version, website, object_id, key)
+new_code_repo_release(name, version, website = "", object_id, key)
 }
 \arguments{
-\item{name}{e.g.}
+\item{name}{a \code{string} specifying the name of an official release of
+code e.g. "ScottishCovidResponse/SCRCdata"}
 
-\item{version}{e.g.}
+\item{version}{a \code{string} specifying the version release
+(conforming with semantic versioning syntax) e.g. "0.1.0"}
 
-\item{website}{e.g.}
+\item{website}{(optional) a \code{string} specifying the URL of the
+website for this code release
+e.g. "https://github.com/ScottishCovidResponse/SCRCdata"}
 
-\item{object_id}{e.g.}
+\item{object_id}{a \code{string} specifying the API URL of the associated
+\code{object} table e.g. "https://data.scrc.uk/api/object/154/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_code_repo_release
+Upload information to the \code{code_repo_release} table in the data registry
 }

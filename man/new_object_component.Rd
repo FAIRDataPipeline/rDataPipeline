@@ -4,15 +4,26 @@
 \alias{new_object_component}
 \title{new_object_component}
 \usage{
-new_object_component(name, object_id, key)
+new_object_component(name, object_id, description = "", key)
 }
 \arguments{
-\item{name}{e.g.}
+\item{name}{a \code{string} specifying the name of the \code{object_component},
+unique in the context of \code{object_component} and its \code{object} reference
+\emph{e.g.} "age_group/week-persons-country-all_deaths"}
 
-\item{object_id}{e.g.}
+\item{object_id}{a \code{string} specifying the API URL of the
+associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/156/"}
 
-\item{key}{key}
+\item{description}{(optional) a \code{string} containing a free text
+description of the \code{object_component}}
+
+\item{key}{API token from data.scrc.uk
+
+Note that the \code{object_component} table contains \code{issues} is an
+additional optional field. This is not included here. Instead use
+\code{attach_issue()} and associated functionality to attach issues to
+objects and objet components.}
 }
 \description{
-new_object_component
+Upload information to the \code{object_component} table in the data registry
 }

@@ -6,7 +6,7 @@
 \usage{
 new_coderun(
   run_date,
-  run_identifier,
+  description = "",
   code_repo_id = "",
   model_config = "",
   submission_script_id = "",
@@ -16,22 +16,25 @@ new_coderun(
 )
 }
 \arguments{
-\item{run_date}{e.g.}
+\item{run_date}{the date-time of the code run \emph{e.g.} Sys.time() or
+"2010-07-11 12:15:00 BST"}
 
-\item{run_identifier}{e.g.}
+\item{description}{(optional) a \code{string} containing a free text
+description of the \code{code_run} \emph{e.g.} "Script run to upload and process
+scottish coronavirus-covid-19-management-information"}
 
-\item{code_repo_id}{e.g.}
+\item{code_repo_id}{(optional) \emph{e.g.} "https://data.scrc.uk/api/object/154/"}
 
-\item{model_config}{e.g.}
+\item{model_config}{(optional)}
 
-\item{submission_script_id}{e.g.}
+\item{submission_script_id}{\emph{e.g.} "https://data.scrc.uk/api/object/153/"}
 
-\item{inputs}{e.g.}
+\item{inputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
 
-\item{outputs}{e.g.}
+\item{outputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_coderun
+Upload information to the \code{coderun} table in the data registry
 }

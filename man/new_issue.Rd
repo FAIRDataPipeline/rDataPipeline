@@ -7,16 +7,20 @@
 new_issue(severity, description, object_issues, component_issues, key)
 }
 \arguments{
-\item{severity}{e.g.}
+\item{severity}{an \code{integer} specifying the severity of the \code{issue} \emph{e.g.} 16}
 
-\item{description}{e.g.}
+\item{description}{a \code{string} containing a free text description of the
+\code{issue} \emph{e.g.} "Data dump caused a spike on the 15th of June"}
 
-\item{object_issues}{e.g.}
+\item{object_issues}{a \code{list} of \code{object} URLs with which the \code{issue} is
+associated \emph{e.g.} list("https://data.scrc.uk/api/object/152/")}
 
-\item{component_issues}{e.g.}
+\item{component_issues}{a \code{list} of \code{object_component} URLs with which the
+\code{issue} is associated
+\emph{e.g.} list("https://data.scrc.uk/api/object_component/902/")}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_issue
+Upload information to the \code{issue} table in the data registry
 }

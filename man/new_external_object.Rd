@@ -6,38 +6,52 @@
 \usage{
 new_external_object(
   doi_or_unique_name,
-  primary_not_supplement,
+  primary_not_supplement = "",
   release_date,
   title,
-  description,
+  description = "",
   version,
   object_id,
   source_id,
-  original_store_id,
+  original_store_id = "",
   key
 )
 }
 \arguments{
-\item{doi_or_unique_name}{e.g. "scottish coronavirus-covid-19-management-information"}
+\item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
+\code{external_object}
+\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
 
-\item{primary_not_supplement}{e.g. TRUE}
+\item{primary_not_supplement}{(optional) a boolean flag to indicate
+whether the external object is the primary source (\code{TRUE}) or not (\code{FALSE})}
 
-\item{release_date}{e.g. "2010-07-11 12:15:00 BST"}
+\item{release_date}{the date-time that the \code{external_object} was
+released \emph{e.g.} Sys.time() or "2010-07-11 12:15:00 BST"}
 
-\item{title}{e.g. "scottish coronavirus-covid-19-management-information"}
+\item{title}{a \code{string} specifying the title of the \code{external_object}
+\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
 
-\item{description}{e.g. "scottish coronavirus-covid-19-management-information dataset"}
+\item{description}{(optional) a \code{string} containing a free text
+description of the \code{external_object}
+\emph{e.g.} "scottish coronavirus-covid-19-management-information dataset"}
 
-\item{version}{e.g. "20100711.0"}
+\item{version}{a \code{string} specifying the version identifier of the
+\code{external_object} (must conform to semantic versioning syntax)
+\emph{e.g.} "0.20100711.1"}
 
-\item{object_id}{e.g. "https://data.scrc.uk/api/object/12/"}
+\item{object_id}{a \code{string} specifying the API URL of the
+associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/12/"}
 
-\item{source_id}{e.g. "https://data.scrc.uk/api/source/9/"}
+\item{source_id}{a \code{string} specifying the API URL of the
+associated \code{source} table \emph{e.g.} "https://data.scrc.uk/api/source/9/"}
 
-\item{original_store_id}{e.g. "https://data.scrc.uk/api/storage_location/19/"}
+\item{original_store_id}{(optional) a \code{string} specifying the API URL of the
+associated \code{storage_location} table that references the original location
+of the \code{external_object}
+\emph{e.g.} "https://data.scrc.uk/api/storage_location/19/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_external_object
+Upload information to the \code{external_object} table in the data registry
 }
