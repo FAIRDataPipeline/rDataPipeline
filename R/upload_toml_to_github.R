@@ -8,6 +8,9 @@
 #' @export
 
 upload_toml_to_github <- function(path_to_toml, name = "SCRC", email = "scrc@glasgow.ac.uk"){
+
+  github_repo_path <- "github_repo"
+
   tryCatch({
     if(system("git --version"))
       stop("You must have git installed and in the system path for this function to work")
@@ -16,8 +19,6 @@ upload_toml_to_github <- function(path_to_toml, name = "SCRC", email = "scrc@gla
       stop("toml does not exist")
 
     toml_name <- basename(path_to_toml)
-
-    github_repo_path <- "github_repo"
 
     github_dir_path <- dirname(path_to_toml)
 
@@ -60,9 +61,9 @@ upload_toml_to_github <- function(path_to_toml, name = "SCRC", email = "scrc@gla
 
 
   }, finally = {
-    if(grepl("github_repo", getwd()))
+    if(grepl(github_repo_path, getwd()))
       setwd("../")
-    unlink("github_repo", recursive = TRUE, force = TRUE)
+    unlink(github_repo_path, recursive = TRUE, force = TRUE)
   })
 
 }
