@@ -32,6 +32,6 @@ new_coderun <- function(run_date,
                          model_config = model_config,
                          submission_script = submission_script_id,
                          inputs = inputs,
-                         outputs = inputs),
+                         outputs = outputs),
             key)
 }
