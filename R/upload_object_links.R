@@ -18,12 +18,11 @@ upload_object_links <- function(run_date,
                                 outputs = list(),
                                 key = key) {
 
-  script_codeRunId <- new_coderun(
-    run_date,
-    description,
-    code_repo_id = code_repo_id,
-    submission_script_id = submission_script_id,
-    inputs = inputs,
-    outputs = outputs,
-    key = key)
+  script_codeRunId <- new_coderun(run_date = run_date,
+                                  description = description,
+                                  code_repo_id = code_repo_id,
+                                  submission_script_id = submission_script_id,
+                                  inputs = inputs,
+                                  outputs = outputs,
+                                  key = key)
 }
