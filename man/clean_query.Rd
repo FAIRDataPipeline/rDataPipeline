@@ -7,20 +7,17 @@
 clean_query(data)
 }
 \arguments{
-\item{data}{data typically from a query
-\emph{e.g} \code{data = list(storage_location = "https://data.scrc.uk/api/storage_location/2")}}
+\item{data}{data typically from a query \emph{e.g}
+\code{data = list(storage_location = "https://data.scrc.uk/api/storage_location/2")}}
 }
 \description{
-Function to return clean a query and return it without api prefix
+Function to return clean a query and return it without an api prefix
 }
-\details{
-\emph{e.g}
+\examples{
+data <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
+clean_query(data = data)
 
-\code{clean_query(data = list(storage_location = "https://data.scrc.uk/api/storage_location/2"))}
+# Should return:
+list(storage_location = "2")
 
-will return:
-
-\code{$storage_location}
-
-\code{[1] "2"}
 }
