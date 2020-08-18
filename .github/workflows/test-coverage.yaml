@@ -20,6 +20,11 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
+      - name: Install system requirements (MacOS)
+        if: matrix.os == 'macos-latest'
+        run : |
+              brew install hdf5
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -42,7 +47,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
-        env: 
+        env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
         run: covr::codecov()
         shell: Rscript {0}
