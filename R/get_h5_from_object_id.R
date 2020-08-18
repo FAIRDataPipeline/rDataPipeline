@@ -6,7 +6,6 @@
 #'
 #' @export
 #'
-
 get_h5_from_object_id <-function(obj_id, data_dir = "data-raw"){
     if(!dir.exists(data_dir))
       stop("Data Directory does not exist")
