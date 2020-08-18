@@ -35,7 +35,6 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install system requirements (MacOS)
-        if: matrix.os == 'macOS-latest'
         run : |
               brew install hdf5
 
