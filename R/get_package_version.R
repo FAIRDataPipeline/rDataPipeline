@@ -1,16 +1,14 @@
 #' Get loaded Package Version
-#' @return Returns the current package version
 #'
-#' @export
+#' @return Returns the current package version
 #'
 get_loaded_package_version <- function(){
   return(utils::packageVersion("SCRCdataAPI"))
 }
 
 #' Get github Package Version
-#' @return Returns the current package version
 #'
-#' @export
+#' @return Returns the current package version
 #'
 get_remote_package_version <- function(){
   description <- utils::read.delim(paste0("https://raw.githubusercontent.com",
@@ -28,8 +26,6 @@ get_remote_package_version <- function(){
 #' @return Returns true if the loaded package is the same version as the github
 #' package
 #'
-#' @export
-#'
 is_current_version <- function()
 {
     if(as.numeric_version(get_loaded_package_version()) ==
@@ -42,8 +38,6 @@ is_current_version <- function()
 #' Get startup message
 #'
 #' @return returns the startup message
-#'
-#' @export
 #'
 get_startup_message <- function(){
   if(! is_current_version()){
