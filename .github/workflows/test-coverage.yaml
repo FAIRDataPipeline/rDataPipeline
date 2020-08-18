@@ -36,6 +36,7 @@ jobs:
 
       - name: Install system requirements (MacOS)
         run : |
+              rm '/usr/local/bin/gfortran'
               brew install hdf5
 
       - name: Install dependencies
