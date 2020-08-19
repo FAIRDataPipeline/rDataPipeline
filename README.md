@@ -10,9 +10,11 @@
 Functions to generate and process data files for the SCRC data pipeline.
 
 * [Installation](#installation)
+
 To create hdf5 files:
 * [Create array](#create-array)
 * [Create table](#create-table)
+
 To create toml files:
 * [Create distribution](#create-distribution)
 * [Create point-estimate](#create-point-estimate)
