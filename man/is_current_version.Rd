@@ -4,7 +4,10 @@
 \alias{is_current_version}
 \title{Check if Package is current version}
 \usage{
-is_current_version()
+is_current_version(
+  repo = "ScottishCovidResponse/SCRCdataAPI",
+  package = "SCRCdataAPI"
+)
 }
 \value{
 Returns true if the loaded package is the same version as the github

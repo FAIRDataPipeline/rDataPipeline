@@ -4,10 +4,7 @@
 \alias{get_remote_package_version}
 \title{Get github Package Version}
 \usage{
-get_remote_package_version(
-  repo = "ScottishCovidResponse/SCRCdataAPI",
-  branch = "master"
-)
+get_remote_package_version(repo = "ScottishCovidResponse/SCRCdataAPI")
 }
 \value{
 Returns the current package version
