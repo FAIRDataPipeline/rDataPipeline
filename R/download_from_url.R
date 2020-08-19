@@ -5,6 +5,8 @@
 #' @param local local
 #' @param filename filename
 #'
+#' @export
+#'
 download_from_url <- function(url,
                               path,
                               local,
