@@ -16,7 +16,7 @@ new_coderun(
 )
 }
 \arguments{
-\item{run_date}{the date-time of the code run \emph{e.g.} Sys.time() or
+\item{run_date}{the date-time of the code run \emph{e.g.} \code{Sys.time()} or
 "2010-07-11 12:15:00 BST"}
 
 \item{description}{(optional) a \code{string} containing a free text

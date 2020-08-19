@@ -7,8 +7,8 @@
 new_data_product(name, version, object_id, namespace_id, key)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the \code{data_product} \emph{e.g.}
-"records/SARS-CoV-2/scotland/human-mortality"}
+\item{name}{a \code{string} specifying the name of the \code{data_product}
+\emph{e.g.} "records/SARS-CoV-2/scotland/human-mortality"}
 
 \item{version}{a \code{string} specifying the version identifier of the
 \code{data_product} (must conform to semantic versioning syntax) \emph{e.g.} "0.1.0"}

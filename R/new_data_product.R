@@ -1,15 +1,15 @@
 #' new_data_product
 #'
-#' Upload information to the `data_product` table in the data registry
+#' Upload information to the \code{data_product} table in the data registry
 #'
-#' @param name a `string` specifying the name of the `data_product` *e.g.*
-#' "records/SARS-CoV-2/scotland/human-mortality"
-#' @param version a `string` specifying the version identifier of the
+#' @param name a \code{string} specifying the name of the \code{data_product}
+#'  *e.g.* "records/SARS-CoV-2/scotland/human-mortality"
+#' @param version a \code{string} specifying the version identifier of the
 #' `data_product` (must conform to semantic versioning syntax) *e.g.* "0.1.0"
-#' @param object_id a `string` specifying the API URL of the
-#' associated `object` table *e.g.* "https://data.scrc.uk/api/object/156/",
-#' @param namespace_id a `string` specifying the API URL of the
-#' associated `namespace` table *e.g.* "https://data.scrc.uk/api/namespace/2/"
+#' @param object_id a \code{string} specifying the API URL of the
+#' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/156/",
+#' @param namespace_id a \code{string} specifying the API URL of the
+#' associated \code{namespace} table *e.g.* "https://data.scrc.uk/api/namespace/2/"
 #' @param key API token from data.scrc.uk
 #' @export
 #'

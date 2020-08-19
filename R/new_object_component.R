@@ -1,19 +1,19 @@
 #' new_object_component
 #'
-#' Upload information to the `object_component` table in the data registry
+#' Upload information to the \code{object_component} table in the data registry
 #'
-#' @param name a `string` specifying the name of the `object_component`,
-#' unique in the context of `object_component` and its `object` reference
+#' @param name a \code{string} specifying the name of the \code{object_component},
+#' unique in the context of \code{object_component} and its \code{object} reference
 #' *e.g.* "age_group/week-persons-country-all_deaths"
-#' @param object_id a `string` specifying the API URL of the
-#' associated `object` table *e.g.* "https://data.scrc.uk/api/object/156/"
-#' @param description (optional) a `string` containing a free text
-#' description of the `object_component`
+#' @param object_id a \code{string} specifying the API URL of the
+#' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/156/"
+#' @param description (optional) a \code{string} containing a free text
+#' description of the \code{object_component}
 #' @param key API token from data.scrc.uk
 #'
-#' Note that the `object_component` table contains `issues` is an
+#' Note that the \code{object_component} table contains \code{issues} is an
 #' additional optional field. This is not included here. Instead use
-#' `attach_issue()` and associated functionality to attach issues to
+#' \code{attach_issue()} and associated functionality to attach issues to
 #' objects and objet components.
 #'
 #' @export

@@ -8,8 +8,8 @@ new_storage_location(path, hash, storage_root_id, key)
 }
 \arguments{
 \item{path}{a \code{string} specifying the path from the \code{storage_root}
-URI to the item location, which when appended to \code{storage_root} URI produces
-a complete URL
+URI to the item location, which when appended to \code{storage_root} URI
+produces a complete URL
 \emph{e.g.} "master/SCRC/human/infection/SARS-CoV-2/latent-period/0.1.0.toml"}
 
 \item{hash}{a \code{string} specifying the SHA1 hash of the file stored in

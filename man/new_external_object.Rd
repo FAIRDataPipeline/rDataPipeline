@@ -23,10 +23,11 @@ new_external_object(
 \emph{e.g.} "scottish coronavirus-covid-19-management-information"}
 
 \item{primary_not_supplement}{(optional) a boolean flag to indicate
-whether the external object is the primary source (\code{TRUE}) or not (\code{FALSE})}
+whether the external object is the primary source (\code{TRUE}) or not
+(\code{FALSE})}
 
 \item{release_date}{the date-time that the \code{external_object} was
-released \emph{e.g.} Sys.time() or "2010-07-11 12:15:00 BST"}
+released \emph{e.g.} \code{Sys.time()} or "2010-07-11 12:15:00 BST"}
 
 \item{title}{a \code{string} specifying the title of the \code{external_object}
 \emph{e.g.} "scottish coronavirus-covid-19-management-information"}
@@ -46,8 +47,8 @@ associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/12/"
 associated \code{source} table \emph{e.g.} "https://data.scrc.uk/api/source/9/"}
 
 \item{original_store_id}{(optional) a \code{string} specifying the API URL of the
-associated \code{storage_location} table that references the original location
-of the \code{external_object}
+associated \code{storage_location} table that references the original
+location of the \code{external_object}
 \emph{e.g.} "https://data.scrc.uk/api/storage_location/19/"}
 
 \item{key}{API token from data.scrc.uk}

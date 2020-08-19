@@ -1,8 +1,8 @@
 #' new_text_file
 #'
-#' Upload information to the `text_file` table in the data registry
+#' Upload information to the \code{text_file} table in the data registry
 #'
-#' @param text a `string` containing a free text *i.e.* scripts that are
+#' @param text a \code{string} containing a free text *i.e.* scripts that are
 #' only a few lines long and don't have a home elsewhere
 #' @param key API token from data.scrc.uk
 #'

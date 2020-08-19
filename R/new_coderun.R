@@ -1,11 +1,11 @@
 #' new_coderun
 #'
-#' Upload information to the `coderun` table in the data registry
+#' Upload information to the \code{coderun} table in the data registry
 #'
-#' @param run_date the date-time of the code run *e.g.* Sys.time() or
+#' @param run_date the date-time of the code run *e.g.* \code{Sys.time()} or
 #' "2010-07-11 12:15:00 BST"
-#' @param description (optional) a `string` containing a free text
-#' description of the `code_run` *e.g.* "Script run to upload and process
+#' @param description (optional) a \code{string} containing a free text
+#' description of the \code{code_run} *e.g.* "Script run to upload and process
 #' scottish coronavirus-covid-19-management-information"
 #' @param code_repo_id (optional) *e.g.* "https://data.scrc.uk/api/object/154/"
 #' @param model_config (optional)

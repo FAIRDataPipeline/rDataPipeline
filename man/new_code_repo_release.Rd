@@ -8,17 +8,17 @@ new_code_repo_release(name, version, website = "", object_id, key)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of an official release of
-code e.g. "ScottishCovidResponse/SCRCdata"}
+code \emph{e.g.} "ScottishCovidResponse/SCRCdata"}
 
 \item{version}{a \code{string} specifying the version release
-(conforming with semantic versioning syntax) e.g. "0.1.0"}
+(conforming with semantic versioning syntax) \emph{e.g.} "0.1.0"}
 
 \item{website}{(optional) a \code{string} specifying the URL of the
 website for this code release
-e.g. "https://github.com/ScottishCovidResponse/SCRCdata"}
+\emph{e.g.} "https://github.com/ScottishCovidResponse/SCRCdata"}
 
 \item{object_id}{a \code{string} specifying the API URL of the associated
-\code{object} table e.g. "https://data.scrc.uk/api/object/154/"}
+\code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/154/"}
 
 \item{key}{API token from data.scrc.uk}
 }

@@ -41,9 +41,3 @@ This function is used to attach an issue to either
 \code{namespace}, \code{data_product}, and \code{component} arguments)
 }
 }
-\examples{
-\dontrun{
-
-}
-
-}

@@ -7,8 +7,8 @@
 new_keyword(keyphrase, object_id, key)
 }
 \arguments{
-\item{keyphrase}{a \code{string} specifying a single keyword or keyphrase \emph{e.g.}
-"covid-19" or "cardiovascular diseases"}
+\item{keyphrase}{a \code{string} specifying a single keyword or keyphrase
+\emph{e.g.} "covid-19" or "cardiovascular diseases"}
 
 \item{object_id}{a \code{string} specifying the API URL of the
 associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31817/"}

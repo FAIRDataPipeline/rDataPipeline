@@ -1,8 +1,8 @@
 #' new_namespace
 #'
-#' Upload information to the `namespace` table in the data registry
+#' Upload information to the \code{namespace} table in the data registry
 #'
-#' @param name a `string` specifying the name of the namespace *e.g.* "SCRC"
+#' @param name a \code{string} specifying the name of the namespace *e.g.* "SCRC"
 #' @param key API token from data.scrc.uk
 #'
 #' @export

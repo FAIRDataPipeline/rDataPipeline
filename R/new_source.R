@@ -1,12 +1,12 @@
 #' new_source
 #'
-#' Upload information to the `source` table in the data registry
+#' Upload information to the \code{source} table in the data registry
 #'
-#' @param name a `string` specifying the name of the source
+#' @param name a \code{string} specifying the name of the source
 #' *e.g.* "Scottish Government Open Data Repository"
-#' @param abbreviation a `string` specifying the common abbreviation
+#' @param abbreviation a \code{string} specifying the common abbreviation
 #' of the source (if available) *e.g.* "Scottish Government Open Data Repository"
-#' @param website (optional) a `string` specifying the website URL
+#' @param website (optional) a \code{string} specifying the website URL
 #' associated with the data source *e.g.* "https://statistics.gov.scot/"
 #' @param key API token from data.scrc.uk
 #'
