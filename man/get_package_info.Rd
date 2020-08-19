@@ -30,7 +30,3 @@ file whether it is set up as a package or not. If the repository is set up
 as a package, checks are made to ensure remote and local versions of the
 package have the same version number.
 }
-\examples{
-get_package_info("ScottishCovidResponse/SCRCdata", "inst/SCRC/scotgov_deaths.R", "SCRCdata")
-
-}

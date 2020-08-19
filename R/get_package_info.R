@@ -19,9 +19,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' get_package_info("ScottishCovidResponse/SCRCdata", "inst/SCRC/scotgov_deaths.R", "SCRCdata")
-#'
 get_package_info <- function(repo, script_path, package) {
   # Check repository contains DESCRIPTION file
   tryCatch(
