@@ -4,7 +4,12 @@
 \alias{get_startup_message}
 \title{Get startup message}
 \usage{
-get_startup_message()
+get_startup_message(repo, package)
+}
+\arguments{
+\item{repo}{repo name}
+
+\item{package}{package name}
 }
 \value{
 returns the startup message
