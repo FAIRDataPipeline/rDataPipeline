@@ -1,9 +1,9 @@
 #' Get loaded Package Version
 #'
+#' @param package package name
+#'
 #' @return Returns the current package version
 #'
-#' @export
-#'
 get_loaded_package_version <- function(package = "SCRCdataAPI"){
-  return(utils::packageVersion(package))
+  utils::packageVersion(package)
 }
