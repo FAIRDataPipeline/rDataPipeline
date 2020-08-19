@@ -21,8 +21,10 @@ get_startup_message <- function(){
 #'
 #' @return Returns the current package version
 #'
-get_loaded_package_version <- function(){
-  return(utils::packageVersion("SCRCdataAPI"))
+#' @export
+#'
+get_loaded_package_version <- function(package = "SCRCdataAPI"){
+  return(utils::packageVersion(package))
 }
 
 #' Get github Package Version

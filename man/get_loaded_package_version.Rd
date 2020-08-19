@@ -4,7 +4,7 @@
 \alias{get_loaded_package_version}
 \title{Get loaded Package Version}
 \usage{
-get_loaded_package_version()
+get_loaded_package_version(package = "SCRCdataAPI")
 }
 \value{
 Returns the current package version
