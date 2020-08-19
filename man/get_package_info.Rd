@@ -19,7 +19,7 @@ Returns a list comprising:
 \item the github storage root name: "github"
 \item the github repository: e.g. "ScottishCovidResponse/SCRCdata"
 \item the github repository version number:
-\item the github repl hash
+\item the github repo hash
 \item the pricessing script file name
 }
 }

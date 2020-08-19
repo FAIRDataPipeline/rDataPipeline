@@ -9,6 +9,11 @@ is_current_version(
   package = "SCRCdataAPI"
 )
 }
+\arguments{
+\item{repo}{repo name}
+
+\item{package}{package name}
+}
 \value{
 Returns true if the loaded package is the same version as the github
 package

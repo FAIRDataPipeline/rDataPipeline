@@ -14,7 +14,7 @@
 #' * the github storage root name: "github"
 #' * the github repository: e.g. "ScottishCovidResponse/SCRCdata"
 #' * the github repository version number:
-#' * the github repl hash
+#' * the github repo hash
 #' * the pricessing script file name
 #'
 #' @export

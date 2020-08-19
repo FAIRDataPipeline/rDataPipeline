@@ -1,8 +1,12 @@
 #' Get github Package Version
 #'
+#' @param repo repo name
+#'
 #' @return Returns the current package version
 #'
-get_remote_package_version <- function(repo = "ScottishCovidResponse/SCRCdataAPI"){
+get_remote_package_version <- function(
+  repo = "ScottishCovidResponse/SCRCdataAPI"){
+
   description <- utils::read.delim(
     file.path("https://raw.githubusercontent.com", repo, "master",
               "DESCRIPTION"), sep = ":",

@@ -6,6 +6,9 @@
 \usage{
 get_remote_package_version(repo = "ScottishCovidResponse/SCRCdataAPI")
 }
+\arguments{
+\item{repo}{repo name}
+}
 \value{
 Returns the current package version
 }
