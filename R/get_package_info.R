@@ -15,7 +15,7 @@
 #' * the github repository: e.g. "ScottishCovidResponse/SCRCdata"
 #' * the github repository version number:
 #' * the github repo hash
-#' * the pricessing script file name
+#' * the submission script file name
 #'
 #' @export
 #'
@@ -64,5 +64,5 @@ get_package_info <- function(repo, script_path, package) {
        script_gitRepo = repo,
        repo_version = repo_version,
        github_hash = get_github_hash(repo),
-       processing_script = script_path)
+       submission_script = script_path)
 }
