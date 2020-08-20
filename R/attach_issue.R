@@ -2,7 +2,7 @@
 #'
 #' This function is used to attach an issue to either
 #' * an external object (in which case you must specify the
-#' \code{external_object} argument)
+#' \code{external_object_doi} argument)
 #' * a data product (in which case you must specify the \code{namespace} and
 #' \code{data_product} arguments), or
 #' * a component within a data product (in which case you must specify the
@@ -10,7 +10,7 @@
 #'
 #' @param description *e.g.* "Data dump caused a spike on the 15th of June"
 #' @param severity *e.g.* 19
-#' @param external_object *e.g.*
+#' @param external_object_doi *e.g.*
 #' "scottish coronavirus-covid-19-management-information"
 #' @param namespace *e.g.* "SCRC"
 #' @param data_product *e.g.* "records/SARS-CoV-2/scotland/cases_and_management"
@@ -21,7 +21,7 @@
 #'
 attach_issue <- function(description,
                          severity,
-                         external_object,
+                         external_object_doi,
                          namespace,
                          data_product,
                          component,
@@ -47,16 +47,15 @@ attach_issue <- function(description,
   tmp <- get_entry("issue", list(description = description))
 
 
+  # Attach issue to external object -----------------------------------------
   if(missing(namespace) & missing(data_product) & missing(component)) {
-
-    # Attach issue to external object -----------------------------------------
 
     # Which objects are currently associated with the issue?
     current_objects <- tmp$object_issues
 
     # Which external object do we want to associate with the issue?
     objectId <- get_entry("external_object",
-                          list(doi_or_unique_name = external_object))$object
+                          list(doi_or_unique_name = external_object_doi))$object
 
     # Add this to the current list
     object_issues <- c(current_objects, objectId)
@@ -72,7 +71,7 @@ attach_issue <- function(description,
 
 
 
-  } else if(missing(external_object) &
+  } else if(missing(external_object_doi) &
             missing(component)) {
 
     # Attach issue to data product --------------------------------------------
@@ -100,7 +99,7 @@ attach_issue <- function(description,
 
 
 
-  } else if(missing(external_object)) {
+  } else if(missing(external_object_doi)) {
 
     # Attach issue to object component ---------------------------------------
 
