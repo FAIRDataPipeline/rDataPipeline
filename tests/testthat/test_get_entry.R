@@ -18,7 +18,7 @@ test_that("Check Object has correct fields", {
   expect_equal(lapply(object, function(x) x$description) %>%
                  unlist() %>% unique(),
                description)
-  expect_length(lapply(object, length), 14)
+  expect_equal(lapply(object, length) %>% unlist() %>% unique(), 14)
 })
 
 test_that("Blank query returns an (last) object", {
