@@ -1,14 +1,15 @@
 context("Checking get entry")
 
-# Not Run
-# key <- read.table("token.txt")
-# post_data("object", data = list(description = "TEST OBJECT 001"), key)
+key <- Sys.getenv("SCRC_API_TOKEN")
+object_id <- post_data("object", data = list(description = "TEST OBJECT 001"), key)
+object_id <- unlist(clean_query(object_id))
+description <- "TEST OBJECT 001"
 
-object_id <- "32040"
-description = "TEST OBJECT 001"
-
-test_that("Check Test object #32040 Exists", {
-  expect_success(expect_equal(get_entry("object", query = list(description=description)), get_entry("object", query = list(description=description))))
+test_that("Check Test object Exists", {
+  expect_success(
+    expect_equal(get_entry("object", query = list(description=description)),
+                 get_entry("object", query = list(description=description)))
+    )
 })
 
 test_that("Check Object has correct fields", {
