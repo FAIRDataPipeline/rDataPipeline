@@ -14,9 +14,11 @@ test_that("Check Test object Exists", {
 
 test_that("Check Object has correct fields", {
   object <- get_entry("object", query = list(description=description))
-  expect_equal(object$description, description)
-  expect_length(object, 14)
-  expect_equal(object$url, paste0("https://data.scrc.uk/api/object/", object_id, "/"))
+
+  expect_equal(lapply(object, function(x) x$description) %>%
+                 unlist() %>% unique(),
+               description)
+  expect_length(lapply(object, length), 14)
 })
 
 test_that("Blank query returns an (last) object", {
