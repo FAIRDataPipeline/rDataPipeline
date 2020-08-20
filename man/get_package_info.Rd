@@ -20,7 +20,7 @@ Returns a list comprising:
 \item the github repository: e.g. "ScottishCovidResponse/SCRCdata"
 \item the github repository version number:
 \item the github repo hash
-\item the pricessing script file name
+\item the submission script file name
 }
 }
 \description{

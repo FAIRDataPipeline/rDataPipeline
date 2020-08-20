@@ -7,7 +7,7 @@
 attach_issue(
   description,
   severity,
-  external_object,
+  external_object_doi,
   namespace,
   data_product,
   component,
@@ -19,7 +19,7 @@ attach_issue(
 
 \item{severity}{\emph{e.g.} 19}
 
-\item{external_object}{\emph{e.g.}
+\item{external_object_doi}{\emph{e.g.}
 "scottish coronavirus-covid-19-management-information"}
 
 \item{namespace}{\emph{e.g.} "SCRC"}
@@ -34,7 +34,7 @@ attach_issue(
 This function is used to attach an issue to either
 \itemize{
 \item an external object (in which case you must specify the
-\code{external_object} argument)
+\code{external_object_doi} argument)
 \item a data product (in which case you must specify the \code{namespace} and
 \code{data_product} arguments), or
 \item a component within a data product (in which case you must specify the

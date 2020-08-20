@@ -20,47 +20,48 @@ upload_paper(
 )
 }
 \arguments{
-\item{title}{a \code{string} specifying the title of the paper}
+\item{title}{a \code{string} specifying the title of the paper \emph{e.g.}
+"Covid-19: A systemic disease treated with a wide-ranging approach: A case
+report"}
 
-\item{authors}{a \code{string} specifying the authors}
+\item{authors}{a \code{string} specifying the authors \emph{e.g.} "Massabeti,
+Rosanna and Cipriani, Maria Stella and Valenti, Ivana"}
 
-\item{journal}{a \code{string} specifying the full journal name}
+\item{journal}{a \code{string} specifying the full journal name \emph{e.g.}
+"Journal of Population Therapeutics and Clinical Pharmacology"}
 
 \item{journal_abbreviation}{a \code{string} specifying the journal
-abbreviation}
+abbreviation \emph{e.g.} "J Popul Ther Clin Pharmacol"}
 
-\item{journal_website}{a \code{string} specifying the journal homepage}
+\item{journal_website}{a \code{string} specifying the journal homepage \emph{e.g.}
+"https://www.jptcp.com/index.php/jptcp"}
 
 \item{release_date}{a \code{POSIXct} of format "\%Y-\%m-\%d \%H:\%M:\%S"
-specifying the release date of the paper}
+specifying the release date of the paper \emph{e.g.}
+as.POSIXct("2020-01-01 12:00:00", format = "\%Y-\%m-\%d \%H:\%M:\%S")}
 
-\item{abstract}{a \code{string} specifying the abstract}
+\item{abstract}{a \code{string} specifying the abstract \emph{e.g.} "At the end
+of December 2019, the Health Commission of the"}
 
 \item{keywords}{a \code{string} specifying keywords or keyphrases
-seperated by "and", e.g. "keyword1 and keyword2 and key phrase1 and keyword3"}
+seperated by "and", \emph{e.g.} "covid-19 and coronavirus disease and monoclonal
+antibodies
+\itemize{
+\item and non-invasive mechanical ventilation and treatment"
+}}
 
-\item{doi}{a \code{string} specifying the doi}
+\item{doi}{a \code{string} specifying the doi \emph{e.g.}
+"10.15586/jptcp.v27iSP1.691"}
 
 \item{primary_not_supplement}{(optional) an object of class \code{logical}
 where \code{TRUE} is the primary source (default) and false is a supplement}
 
-\item{version}{(optional) a \code{string} specifying the version number}
+\item{version}{(optional) a \code{string} specifying the version number;
+by default this is 1.0.0 (assuming a published paper), set to 0.1.0 for a
+preprint}
 
 \item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_paper
-}
-\examples{
-title <- "Covid-19: A systemic disease treated with a wide-ranging approach: A case report"
-authors <- "Massabeti, Rosanna and Cipriani, Maria Stella and Valenti, Ivana"
-journal <- "Journal of Population Therapeutics and Clinical Pharmacology"
-journal_abbreviation <- "J Popul Ther Clin Pharmacol"
-journal_website <- "https://www.jptcp.com/index.php/jptcp"
-release_date <- as.POSIXct("2020-01-01 12:00:00", format = "\%Y-\%m-\%d \%H:\%M:\%S")
-abstract <- "At the end of December 2019, the Health Commission of the"
-keywords <- "covid-19 and coronavirus disease and monoclonal antibodies
-+ and non-invasive mechanical ventilation and treatment"
-doi <- "10.15586/jptcp.v27iSP1.691"
-
 }
