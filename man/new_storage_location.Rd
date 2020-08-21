@@ -7,14 +7,20 @@
 new_storage_location(path, hash, storage_root_id, key)
 }
 \arguments{
-\item{path}{e.g.}
+\item{path}{a \code{string} specifying the path from the \code{storage_root}
+URI to the item location, which when appended to \code{storage_root} URI
+produces a complete URL
+\emph{e.g.} "master/SCRC/human/infection/SARS-CoV-2/latent-period/0.1.0.toml"}
 
-\item{hash}{e.g.}
+\item{hash}{a \code{string} specifying the SHA1 hash of the file stored in
+\code{storage_location} \emph{e.g.} "7c0e14caec08674d7d4e52c305cb4320babaf90f"}
 
-\item{storage_root_id}{e.g.}
+\item{storage_root_id}{a \code{string} specifying the API URL of the
+associated \code{storage_root} table
+\emph{e.g.} "https://data.scrc.uk/api/storage_root/14/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_storage_location
+Upload information to the \code{storage_location} table in the data registry
 }

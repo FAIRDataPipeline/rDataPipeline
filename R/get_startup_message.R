@@ -1,0 +1,21 @@
+#' Get startup message
+#'
+#' @param repo repo name
+#' @param package package name
+#'
+#' @return returns the startup message
+#'
+get_startup_message <- function(repo, package){
+  if(! is_current_version(repo, package)){
+    return(paste("Warning: Your package version is out of date please update\n",
+                 "Git Version: ", get_remote_package_version(repo),
+                 " Local Version: ", get_loaded_package_version(package)))}
+  else{
+    if (crayon::has_color())
+      return(crayon::green(paste("Version: ", get_loaded_package_version(package),
+                                 " Your package is up to date")))
+    else
+      return(paste("Version: ", get_loaded_package_version(package),
+                   " Your package is up to date"))
+  }
+}

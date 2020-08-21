@@ -6,14 +6,14 @@
 #' @aliases SCRCdataAPI
 #' @docType package
 #'
-#' @import assertthat
+#' @rawNamespace import(assertthat, except = has_name)
 #' @import configr
 #' @import dplyr
 #' @import hdf5r
 #' @import httr
 #' @import jsonlite
 #' @importFrom openssl sha1
-#' @import reshape2
+#' @importFrom reshape2 dcast
 #' @import sf
 #' @importFrom stats setNames
 #' @import tibble

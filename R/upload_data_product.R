@@ -1,5 +1,6 @@
 #' upload_data_product
 #'
+#'
 #' @param storage_root_id e.g.
 #' @param name e.g.
 #' @param component_name (optional) used for toml files, not hdf5
@@ -7,7 +8,7 @@
 #' @param product_path e.g.
 #' @param version e.g.
 #' @param namespace_id e.g.
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'

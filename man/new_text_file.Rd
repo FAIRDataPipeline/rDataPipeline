@@ -7,10 +7,11 @@
 new_text_file(text, key)
 }
 \arguments{
-\item{text}{free text}
+\item{text}{a \code{string} containing a free text \emph{i.e.} scripts that are
+only a few lines long and don't have a home elsewhere}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_text_file
+Upload information to the \code{text_file} table in the data registry
 }

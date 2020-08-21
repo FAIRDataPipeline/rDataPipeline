@@ -4,17 +4,20 @@
 \alias{new_source}
 \title{new_source}
 \usage{
-new_source(name, abbreviation, website, key)
+new_source(name, abbreviation, website = "", key)
 }
 \arguments{
-\item{name}{e.g. "Scottish Government Open Data Repository"}
+\item{name}{a \code{string} specifying the name of the source
+\emph{e.g.} "Scottish Government Open Data Repository"}
 
-\item{abbreviation}{e.g. "Scottish Government Open Data Repository"}
+\item{abbreviation}{a \code{string} specifying the common abbreviation
+of the source (if available) \emph{e.g.} "Scottish Government Open Data Repository"}
 
-\item{website}{e.g. "https://statistics.gov.scot/"}
+\item{website}{(optional) a \code{string} specifying the website URL
+associated with the data source \emph{e.g.} "https://statistics.gov.scot/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_source
+Upload information to the \code{source} table in the data registry
 }

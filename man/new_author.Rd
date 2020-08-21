@@ -7,14 +7,18 @@
 new_author(family_name, personal_name, object_id, key)
 }
 \arguments{
-\item{family_name}{e.g.}
+\item{family_name}{a \code{string} specifying the author's family name
+\emph{e.g.} "Mitchell"}
 
-\item{personal_name}{e.g.}
+\item{personal_name}{a \code{string} specifying the author's first name
+and / or middle name and / or any initials \emph{e.g.} "Sonia" or "Sonia N" or
+"Sonia Natalie"}
 
-\item{object_id}{e.g.}
+\item{object_id}{a \code{string} specifying the API URL of the associated
+\code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31858/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_author
+Upload information to the \code{author} table in the data registry
 }

@@ -68,7 +68,7 @@ test_that(".h5 file is generated", {
 test_that("component name is level", {
   file.h5 <- H5File$new(filename, mode = "r")
   testthat::expect_equal(names(file.h5), component)
-
+  file.h5$close_all()
 
 })
 

@@ -2,29 +2,29 @@
 #'
 #' This function is used to attach an issue to either
 #' * an external object (in which case you must specify the
-#' \code{external_object} argument)
+#' \code{external_object_doi} argument)
 #' * a data product (in which case you must specify the \code{namespace} and
 #' \code{data_product} arguments), or
 #' * a component within a data product (in which case you must specify the
 #' \code{namespace}, \code{data_product}, and \code{component} arguments)
 #'
-#' @param external_object *e.g.*
+#' @param description *e.g.* "Data dump caused a spike on the 15th of June"
+#' @param severity *e.g.* 19
+#' @param external_object_doi *e.g.*
 #' "scottish coronavirus-covid-19-management-information"
 #' @param namespace *e.g.* "SCRC"
 #' @param data_product *e.g.* "records/SARS-CoV-2/scotland/cases_and_management"
 #' @param component *e.g.* "testing_location/date-cumulative"
-#' @param description *e.g.* "Data dump caused a spike on the 15th of June"
-#' @param severity *e.g.* 19
 #' @param key key
 #'
 #' @export
 #'
-attach_issue <- function(external_object,
+attach_issue <- function(description,
+                         severity,
+                         external_object_doi,
                          namespace,
                          data_product,
                          component,
-                         description,
-                         severity,
                          key) {
 
   # Does this issue already exist?
@@ -47,25 +47,21 @@ attach_issue <- function(external_object,
   tmp <- get_entry("issue", list(description = description))
 
 
-  if(!missing(external_object)) {
-
-    # Attach issue to external object -----------------------------------------
-
-    if(!missing(namespace) | !missing(data_product) | !missing(components))
-      stop(paste("Attaching an issue to an external object does not require",
-                 "the namespace, data_product, or component arguments"))
+  # Attach issue to external object -----------------------------------------
+  if(missing(namespace) & missing(data_product) & missing(component)) {
 
     # Which objects are currently associated with the issue?
     current_objects <- tmp$object_issues
 
     # Which external object do we want to associate with the issue?
     objectId <- get_entry("external_object",
-                          list(doi_or_unique_name = external_object))$object
+                          list(doi_or_unique_name = external_object_doi))$object
 
     # Add this to the current list
     object_issues <- c(current_objects, objectId)
 
     # Attach issue to external object in the data registry
+    message("Attaching issue to external object")
     patch_data(url = issueId,
                data = list(severity = severity,
                            description = description,
@@ -75,15 +71,10 @@ attach_issue <- function(external_object,
 
 
 
-  } else if(!missing(namespace) &
-            !missing(data_product) &
+  } else if(missing(external_object_doi) &
             missing(component)) {
 
     # Attach issue to data product --------------------------------------------
-
-    if(!missing(external_object))
-      stop(paste("Attaching an issue to a data product does not require",
-                 "the component or external_object arguments"))
 
     # Which objects are currently associated with the issue?
     current_objects <- tmp$object_issues
@@ -97,7 +88,8 @@ attach_issue <- function(external_object,
     # Add this to the current list
     object_issues <- c(current_objects, objectId)
 
-    # Attach issue to external object in the data registry
+    # Attach issue to data product in the data registry
+    message("Attaching issue to data product")
     patch_data(url = issueId,
                data = list(severity = severity,
                            description = description,
@@ -107,15 +99,9 @@ attach_issue <- function(external_object,
 
 
 
-  } else if(!missing(namespace) &
-            !missing(data_product) &
-            !missing(component)) {
+  } else if(missing(external_object_doi)) {
 
-    # Attach issue to object components ---------------------------------------
-
-    if(!missing(external_object))
-      stop(paste("Attaching an issue to an object component does not require",
-                 "the external_object argument"))
+    # Attach issue to object component ---------------------------------------
 
     # Which object components are currently associated with the issue?
     current_components <- tmp$component_issues
@@ -126,18 +112,20 @@ attach_issue <- function(external_object,
     objectId <- get_entry("data_product", list(name = data_product,
                                                namespace = namespaceId))$object
     objectId <- clean_query(list(name = objectId))
-    objectComponentId <- get_entry("object_component", list(name = component,
-                                                            object = objectId))$object
+    objectComponentId <- get_url("object_component", list(name = component,
+                                                            object = objectId))
 
     # Add this to the current list
     component_issues <- c(current_components, objectComponentId)
 
-    # Attach issue to external object in the data registry
+    # Attach issue to object component in the data registry
+    message("Attaching issue to object component")
     patch_data(url = issueId,
                data = list(severity = severity,
                            description = description,
                            object_issues = tmp$object_issues,
                            component_issues = component_issues),
                key = key)
-  }
+  } else
+    stop("Please check your arguments have been inputted correctly")
 }

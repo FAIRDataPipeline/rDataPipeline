@@ -6,6 +6,9 @@
 \usage{
 paper_exists(doi)
 }
+\arguments{
+\item{doi}{doi}
+}
 \description{
 paper_exists
 }

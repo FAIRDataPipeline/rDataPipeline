@@ -1,15 +1,23 @@
 ## SCRCdataAPI
 
-![SCRCdataAPI](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/SCRCdataAPI/badge.svg)
+[![](https://img.shields.io/badge/docs-SCRCdataAPI-blue)](https://scottishcovidresponse.github.io/SCRCdataAPI/)
+[![test-build](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/build/badge.svg)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
+[![test-coverage](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e49a767b4c34f0db4b33fab95616885)](https://app.codacy.com/gh/ScottishCovidResponse/SCRCdataAPI?utm_source=github.com&utm_medium=referral&utm_content=ScottishCovidResponse/SCRCdataAPI&utm_campaign=Badge_Grade_Dashboard)
+[![CodeFactor](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi/badge)](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi)
+[![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 
 Functions to generate and process data files for the SCRC data pipeline.
 
 * [Installation](#installation)
+
+To create hdf5 files:
 * [Create array](#create-array)
 * [Create table](#create-table)
+
+To create toml files:
 * [Create distribution](#create-distribution)
 * [Create point-estimate](#create-point-estimate)
-
 
 ## Installation
 
@@ -25,7 +33,6 @@ and load it into R:
 ```{r}
 library(SCRCdataAPI)
 ```
-
 
 ## Create table
 
@@ -51,7 +58,6 @@ To read the data file:
 ```{r}
 read_table(filename = "test_table.h5", path = "data-raw", component = "sample1")
 ```
-
 
 ## Create array
 
@@ -93,7 +99,6 @@ In the following example, we populate "test_distribution.toml":
 # Create *.toml file
 create_distribution(filename = "test_distribution.toml", path = "data-raw", name = "latency", distribution = "gamma", parameters = list(shape = 2.0, scale = 3.0))
 ```
-
 
 ## Create point-estimate
 

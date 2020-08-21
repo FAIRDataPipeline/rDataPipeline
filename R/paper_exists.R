@@ -1,5 +1,7 @@
 #' paper_exists
 #'
+#' @param doi doi
+#'
 #' @export
 #'
 paper_exists <- function(doi) {

@@ -7,16 +7,20 @@
 new_data_product(name, version, object_id, namespace_id, key)
 }
 \arguments{
-\item{name}{e.g.}
+\item{name}{a \code{string} specifying the name of the \code{data_product}
+\emph{e.g.} "records/SARS-CoV-2/scotland/human-mortality"}
 
-\item{version}{e.g.}
+\item{version}{a \code{string} specifying the version identifier of the
+\code{data_product} (must conform to semantic versioning syntax) \emph{e.g.} "0.1.0"}
 
-\item{object_id}{e.g.}
+\item{object_id}{a \code{string} specifying the API URL of the
+associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/156/",}
 
-\item{namespace_id}{e.g.}
+\item{namespace_id}{a \code{string} specifying the API URL of the
+associated \code{namespace} table \emph{e.g.} "https://data.scrc.uk/api/namespace/2/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_data_product
+Upload information to the \code{data_product} table in the data registry
 }

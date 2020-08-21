@@ -10,5 +10,5 @@ get_github_hash(repo)
 \item{repo}{e.g. "ScottishCovidResponse/SCRCdata"}
 }
 \description{
-get_github_hash
+This function assumes git is installed and located in the System PATH
 }

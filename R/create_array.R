@@ -3,10 +3,11 @@
 #' Function to populate hdf5 file with array type data.
 #'
 #' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
-#' @param path a \code{string} specifying the directory in which you want to save the h5 file
+#' @param path a \code{string} specifying the directory in which you want to
+#' save the h5 file
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
-#' @param array a \code{matrix} containing the data
+#' @param array an \code{array} containing the data
 #' @param dimension_names a \code{list} where each element is a vector
 #' containing the labels associated with a particular dimension (e.g.
 #' element 1 corresponds to dimension 1, which corresponds to row names) and
@@ -31,15 +32,13 @@ create_array <- function(filename,
                          units) {
 
   if(!grepl(".h5$", filename)) stop("filename must be *.h5")
-  if(!is.array(array)) stop("array must be a matrix")
-  if(!is.vector(dimension_names[[1]])) stop("Dimension_1_names must be a vector")
-  if(!is.vector(dimension_names[[2]])) stop("Dimension_2_names must be a vector")
+  if(!is.array(array)) stop("array must be an array")
   if(length(dimension_names[[1]]) != nrow(array))
-    stop("Dimension_1_names length must match nrows in array")
+    stop("Length of Dimension_1_names must equal the number of rows in array")
   if(length(dimension_names[[2]]) != ncol(array))
-    stop("Dimension_2_names length must match nrows in array")
-  if(is.null(colnames(array))) stop("Array must have column names")
-  if(is.null(rownames(array))) stop("Array must have row names")
+    stop("Length of Dimension_2_names must equal the number of columns in array")
+  if(length(dim(array)) != length(dimension_names))
+    stop("Length of list dimension_names must equal the number of dimensions in array")
 
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)

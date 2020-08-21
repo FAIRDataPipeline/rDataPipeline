@@ -6,6 +6,8 @@
 #' @param dat population data
 #' @param shapefile shapefile
 #' @param subdivisions subdivisions
+#' @param conversion.table conversion table
+#' @param grid_size grid size
 #'
 convert2grid <- function(dat,
                          shapefile,
@@ -14,12 +16,20 @@ convert2grid <- function(dat,
                          grid_size) {
 
   dat <- dat %>% tibble::column_to_rownames("AREAcode")
-  
-  conversion.table <- conversion.table %>% tibble() %>% select(colnames(conversion.table)[grepl(grid_size,colnames(conversion.table))],AREAcode)%>%
-    dplyr::filter(AREAcode %in% rownames(dat)) %>% rename(grid_id=paste0(grid_size,"_id"),proportion=paste0(grid_size,"_area_proportion") )
-  if(grid_size!="grid1km"){
-  conversion.table=conversion.table[which(duplicated(conversion.table[c("grid_id", "AREAcode")])==FALSE),]
-}
+
+  conversion.table <- conversion.table %>% tibble() %>%
+    dplyr::select(colnames(conversion.table)[grepl(grid_size,
+                                                   colnames(conversion.table))],
+                  AREAcode) %>%
+    dplyr::filter(AREAcode %in% rownames(dat)) %>%
+    dplyr::rename(grid_id = paste0(grid_size,"_id"),
+                  proportion = paste0(grid_size,"_area_proportion"))
+
+  if(grid_size != "grid1km") {
+    ind <- which(duplicated(conversion.table[c("grid_id",
+                                               "AREAcode")]) == FALSE)
+    conversion.table <- conversion.table[ind,]
+  }
 
   # Create matrix of grid cells by shapefile containing the proportion of
   # each datazone in each grid cell with 0's
@@ -64,21 +74,22 @@ convert2grid <- function(dat,
         remainder <- sum(non_rounded_pops) - sum(rounded_pops)
 
         # Find cells to adjust
-        next.biggest <- order(abs(difference[,1]), decreasing = TRUE)[1:abs(remainder)]
+        next.biggest <- order(abs(difference[, 1]),
+                              decreasing = TRUE)[1:abs(remainder)]
 
         # Break any ties: choose randomly to avoid a systematic bias by cell order
         tied_first <- difference[, 1] %in% difference[next.biggest, 1]
 
-        if (!isTRUE(all.equal(sum(tied_first), abs(remainder)))) {
+        if(!isTRUE(all.equal(sum(tied_first), abs(remainder)))) {
           next.biggest <- sample(which(tied_first), size = round(abs(remainder)))
         }
 
         # Make adjustment
         if(remainder > 0){
-          rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] + 1
+          rounded_pops[next.biggest, 1] <- rounded_pops[next.biggest, 1] + 1
         }
         if(remainder < 0){
-          rounded_pops[next.biggest,1] <- rounded_pops[next.biggest, 1] - 1
+          rounded_pops[next.biggest, 1] <- rounded_pops[next.biggest, 1] - 1
         }
       }
 
@@ -91,9 +102,8 @@ convert2grid <- function(dat,
   }
 
   # Check age group counts
-  assertthat::assert_that(all(colSums(grid_pop) ==
-                                colSums(dat)))
+  assertthat::assert_that(all(colSums(grid_pop) == colSums(dat)))
 
-  list(grid_id = unlist(wide_new_table[,1]),
+  list(grid_id = unlist(wide_new_table[, 1]),
        grid_pop = grid_pop)
 }

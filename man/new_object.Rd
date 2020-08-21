@@ -4,13 +4,23 @@
 \alias{new_object}
 \title{new_object}
 \usage{
-new_object(storage_location_id, key)
+new_object(storage_location_id, description = "", key)
 }
 \arguments{
-\item{storage_location_id}{e.g.}
+\item{storage_location_id}{a \code{string} specifying the API URL of the
+associated \code{storage_location} table
+\emph{e.g.} "https://data.scrc.uk/api/storage_location/411/"}
 
-\item{key}{key}
+\item{description}{(optional) a \code{string} containing a free text
+description of the \code{object_component}}
+
+\item{key}{API token from data.scrc.uk
+
+Note that the \code{object} table contains \code{issues} is an
+additional optional field. This is not included here. Instead use
+\code{attach_issue()} and associated functionality to attach issues to
+objects and object components.}
 }
 \description{
-new_object
+Upload information to the \code{object} table in the data registry
 }

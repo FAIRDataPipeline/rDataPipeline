@@ -3,8 +3,9 @@
 #' @param storage_root_id e.g.
 #' @param path e.g. "ScottishCovidResponse/SCRCdata"
 #' @param hash e.g.
+#' @param text text
 #' @param run_date e.g.
-#' @param key key
+#' @param key API token from data.scrc.uk
 #'
 #' @export
 #'
@@ -15,7 +16,8 @@ upload_submission_script <- function(storage_root_id,
                                      run_date,
                                      key) {
 
-  script_textFileId <- new_text_file(text = text)
+  script_textFileId <- new_text_file(text = text,
+                                     key = key)
 
   tmp <- gsub("^.*/([0-9]+)/$", "\\1", script_textFileId)
   script_path <- paste0(tmp, "/?format=text")

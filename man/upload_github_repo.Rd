@@ -9,15 +9,13 @@ upload_github_repo(storage_root_id, repo, hash, version, key)
 \arguments{
 \item{storage_root_id}{e.g.}
 
+\item{repo}{repo}
+
 \item{hash}{e.g.}
 
-\item{key}{key}
+\item{version}{version}
 
-\item{path}{e.g. "ScottishCovidResponse/SCRCdata"}
-
-\item{filename}{e.g.}
-
-\item{run_date}{e.g.}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 upload_github_repo

@@ -12,6 +12,10 @@ convert2grid(dat, shapefile, subdivisions, conversion.table, grid_size)
 \item{shapefile}{shapefile}
 
 \item{subdivisions}{subdivisions}
+
+\item{conversion.table}{conversion table}
+
+\item{grid_size}{grid size}
 }
 \description{
 This script transforms age class population data from census geographies to

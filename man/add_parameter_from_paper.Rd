@@ -15,6 +15,23 @@ add_parameter_from_paper(
   storage_location
 )
 }
+\arguments{
+\item{value}{value}
+
+\item{parameter_name}{parameter name}
+
+\item{paper}{paper}
+
+\item{authors}{authors}
+
+\item{release_date}{release date}
+
+\item{journal}{journal}
+
+\item{abstract}{abstract}
+
+\item{storage_location}{storage location}
+}
 \description{
 add_parameter_from_paper
 }

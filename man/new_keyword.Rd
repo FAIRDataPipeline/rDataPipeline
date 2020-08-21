@@ -7,12 +7,14 @@
 new_keyword(keyphrase, object_id, key)
 }
 \arguments{
-\item{keyphrase}{e.g.}
+\item{keyphrase}{a \code{string} specifying a single keyword or keyphrase
+\emph{e.g.} "covid-19" or "cardiovascular diseases"}
 
-\item{object_id}{e.g.}
+\item{object_id}{a \code{string} specifying the API URL of the
+associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31817/"}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
-new_keyword
+Upload information to the \code{keyword} table in the data registry
 }
