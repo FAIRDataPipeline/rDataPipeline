@@ -4,17 +4,25 @@
 \alias{download_from_url}
 \title{download_from_url}
 \usage{
-download_from_url(url, path, local, filename)
+download_from_url(source_root, source_path, path, filename, unzip = FALSE)
 }
 \arguments{
-\item{url}{url}
+\item{source_root}{a \code{string} specifying the source root \emph{e.g.}
+"https://www.nrscotland.gov.uk"}
 
-\item{path}{path}
+\item{source_path}{a \code{string} specifying the source path \emph{e.g.}
+file.path("files//statistics", "population-estimates", "sape-time-series",
+"males", "sape-2018-males.xlsx")}
 
-\item{local}{local}
+\item{path}{a \code{string} specifying the local path (where to save the
+file) \emph{e.g.} "data-raw"}
 
-\item{filename}{filename}
+\item{filename}{a \code{string} specifying the filename (the name given to
+the saved file) \emph{e.g.} "0.1.0.csv"}
+
+\item{unzip}{a \code{boolean} specifying which when \code{TRUE} will
+unzip a \code{.zip} file and remove the original \code{.zip} file}
 }
 \description{
-download_from_url
+This function will download a file from a url
 }
