@@ -4,6 +4,8 @@
 #' @param convert_to c("dz", "ur", "iz", "la", "hb", "mmw", "spc")
 #' @param conversion_table conversion table
 #'
+#' @export
+#'
 convert2lower <- function(dat, convert_to, conversion_table) {
 
   # Convert datazones

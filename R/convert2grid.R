@@ -9,6 +9,8 @@
 #' @param conversion.table conversion table
 #' @param grid_size grid size
 #'
+#' @export
+#'
 convert2grid <- function(dat,
                          shapefile,
                          subdivisions,
