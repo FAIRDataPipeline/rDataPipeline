@@ -39,12 +39,19 @@ post_data <- function(table,
 
   } else if(result$status == 409) {
 
-    message(paste(table, "already exists"))
-
-    return(get_url(table, clean_query(data)))
+    tryCatch(
+      {
+        message(paste(table, "already exists"))
+        return(get_url(table, clean_query(data)))
+      },
+      error = function(err) {
+        stop("fields don't match existing entry, so no URI was returned")
+      }
+    )
 
   } else {
-    stop("Adding new data returned non-201 status code: (", result$status , ") ", tmp)
+    stop("Adding new data returned non-201 status code: (",
+         result$status , ") ", tmp)
   }
 
 }
