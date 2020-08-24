@@ -15,6 +15,10 @@
 #' @export
 #'
 get_fields <- function(table, key, filter_fields = "all"){
+
+  if(table == "users" | table == "groups")
+    stop("users and groups are protected tables")
+
   h <- c(Authorization = paste("token", key))
 
   out <- httr::VERB("OPTIONS", file.path("https://data.scrc.uk/api", table, ""),
