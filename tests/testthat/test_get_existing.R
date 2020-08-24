@@ -7,7 +7,6 @@ table_100 <- "storage_location"
 
 
 #use a sample of tables to prevent api from erroring
-set.seed(123)
 tables_sample <- tables[sample(length(tables), 3)]
 
 test_that("Expect Dataframe is returned for each table", {
