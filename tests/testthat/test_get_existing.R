@@ -7,11 +7,15 @@ table_100 <- "storage_location"
 
 
 #use a sample of tables to prevent api from erroring
-tables_sample <- tables[sample(length(tables), 3)]
+#tables_sample <- tables[sample(length(tables), 3)]
 
 test_that("Expect Dataframe is returned for each table", {
-  for(i in seq_along(tables_sample))
-    expect_true(is.data.frame(get_existing(tables_sample[i])))
+  for(i in seq_along(tables)){
+    expect_true(is.data.frame(get_existing(tables[i])))
+    # Add a delay to stop the API from erroring
+    Sys.sleep(0.1)
+  }
+
 })
 
 test_that("Check errors and messages", {
