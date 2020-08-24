@@ -7,7 +7,7 @@ token <- Sys.getenv("SCRC_API_TOKEN")
 tables <- get_tables()
 unknown_table <- "unknown"
 
-sleep_time <- 0.1
+sleep_time <- 0.5
 
 
 test_that("Fields are returned by get_fields", {
