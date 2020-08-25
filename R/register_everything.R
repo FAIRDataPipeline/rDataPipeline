@@ -6,17 +6,17 @@
 #' server (4) the submission script is being stored in the
 #' ScottishCovidResponse/SCRCdata respository
 #'
-#' @param product_name e.g.
-#' @param version_number e.g.
-#' @param doi_or_unique_name e.g.
+#' @param product_name *e.g.*
+#' @param version_number *e.g.*
+#' @param doi_or_unique_name *e.g.*
 #' @param namespace a \code{string} specifying the namespace; by default this
 #' is "SCRC"
 #' @param submission_script a \code{string} specifying the filename of the
-#' submission script located in \code{inst/namespace/} e.g. "nrs_demographics.R"
-#' @param original_source_name e.g.
-#' @param original_sourceId e.g.
-#' @param original_root e.g.
-#' @param original_path e.g.
+#' submission script located in \code{inst/namespace/} *e.g.* "nrs_demographics.R"
+#' @param original_source_name *e.g.*
+#' @param original_sourceId *e.g.*
+#' @param original_root *e.g.* "https://www.nrscotland.gov.uk"
+#' @param original_path *e.g.*
 #' @param key API token from data.scrc.uk
 #'
 #' @export
@@ -45,7 +45,7 @@ register_everything <- function(product_name,
     key = key)
 
   github_info <- get_package_info(repo = "ScottishCovidResponse/SCRCdata",
-                                  script = paste("inst/SCRC/", submission_script),
+                                  script_path = paste("inst/SCRC/", submission_script),
                                   package = "SCRCdata")
 
   # where is the source data downloaded to locally? -------------------------

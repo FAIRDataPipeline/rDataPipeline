@@ -18,25 +18,25 @@ register_everything(
 )
 }
 \arguments{
-\item{product_name}{e.g.}
+\item{product_name}{\emph{e.g.}}
 
-\item{version_number}{e.g.}
+\item{version_number}{\emph{e.g.}}
 
-\item{doi_or_unique_name}{e.g.}
+\item{doi_or_unique_name}{\emph{e.g.}}
 
 \item{namespace}{a \code{string} specifying the namespace; by default this
 is "SCRC"}
 
 \item{submission_script}{a \code{string} specifying the filename of the
-submission script located in \code{inst/namespace/} e.g. "nrs_demographics.R"}
+submission script located in \code{inst/namespace/} \emph{e.g.} "nrs_demographics.R"}
 
-\item{original_source_name}{e.g.}
+\item{original_source_name}{\emph{e.g.}}
 
-\item{original_sourceId}{e.g.}
+\item{original_sourceId}{\emph{e.g.}}
 
-\item{original_root}{e.g.}
+\item{original_root}{\emph{e.g.} "https://www.nrscotland.gov.uk"}
 
-\item{original_path}{e.g.}
+\item{original_path}{\emph{e.g.}}
 
 \item{key}{API token from data.scrc.uk}
 }
