@@ -5,8 +5,7 @@
 #' @param source_root a \code{string} specifying the source root *e.g.*
 #' "https://www.nrscotland.gov.uk"
 #' @param source_path a \code{string} specifying the source path *e.g.*
-#' file.path("files//statistics", "population-estimates", "sape-time-series",
-#' "males", "sape-2018-males.xlsx")
+#' "files/statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"
 #' @param path a \code{string} specifying the local path (where to save the
 #' file) *e.g.* "data-raw"
 #' @param filename a \code{string} specifying the filename (the name given to
