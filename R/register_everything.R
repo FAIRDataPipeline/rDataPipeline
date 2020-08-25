@@ -33,6 +33,7 @@ register_everything <- function(product_name,
                                 key) {
 
   todays_date <- Sys.time()
+  product_path <- do.call(file.path, as.list(strsplit(product_name, "/")[[1]]))
 
   # namespace ---------------------------------------------------------------
   namespaceId <- new_namespace(name = namespace,
@@ -45,11 +46,12 @@ register_everything <- function(product_name,
     key = key)
 
   github_info <- get_package_info(repo = "ScottishCovidResponse/SCRCdata",
-                                  script_path = paste("inst/SCRC/", submission_script),
+                                  script_path = paste("inst/SCRC/",
+                                                      submission_script),
                                   package = "SCRCdata")
 
   # where is the source data downloaded to locally? -------------------------
-  local_path <- file.path("data-raw", product_name)
+  local_path <- file.path("data-raw", product_path)
   source_filename <- paste0(version_number, ".csv")
 
   original_storageRootId <- new_storage_root(
@@ -58,7 +60,7 @@ register_everything <- function(product_name,
     key = key)
 
   # where is the data product saved to locally? -----------------------------
-  processed_path <- file.path("data-raw", product_name)
+  processed_path <- file.path("data-raw", product_path)
   product_filename <- paste0(version_number, ".h5")
 
   # where is the source data stored? ----------------------------------------
