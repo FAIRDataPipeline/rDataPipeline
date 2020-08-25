@@ -18,13 +18,13 @@ test_that("Existing Paper returns existing paper", {
   expect_true(is.character(upload_paper(title, authors, journal_name, journal_abr, website, release_date, abstract, keywords, doi, key = token)))
 })
 
-date <- Sys.time()
-formatted_date <- format(date, "%d%m%y%H%M%S")
+date_time <- Sys.time()
+formatted_date <- format(date_time, "%d%m%y%H%M%S")
 doi <- paste0(formatted_date, "/TEST")
-release_date <- date
+release_date <- date_time
 title <- paste0("TEST_", formatted_date)
 abstract <- paste0("Test Abstract ", formatted_date)
-journal_name <- paste0("TEST Journal ", date)
+journal_name <- paste0("TEST Journal ", date_time)
 journal_abr <- paste0("TEST_", formatted_date)
 keywords <- formatted_date
 website <- ""
@@ -45,13 +45,13 @@ test_that("Upload Paper returns ID", {
   expect_true(is.character(paper_id))
 })
 
-date <- Sys.time()
-formatted_date <- format(date, "%d%m%y%H%M%S")
+date_time <- Sys.time()
+formatted_date <- format(date_time, "%d%m%y%H%M%S")
 doi <- paste0(formatted_date, "/TEST")
-release_date <- date
+release_date <- date_time
 title <- paste0("TEST_", formatted_date)
 abstract <- paste0("Test Abstract ", formatted_date)
-journal_name <- paste0("TEST Journal ", date)
+journal_name <- paste0("TEST Journal ", date_time)
 journal_abr <- paste0("TEST_", formatted_date)
 keywords <- formatted_date
 website <- ""
