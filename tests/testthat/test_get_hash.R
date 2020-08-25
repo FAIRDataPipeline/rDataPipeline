@@ -15,9 +15,13 @@ test_that("get_hash() returns correct hash on a known file", {
   expect_equal(get_hash(filename), get_hash(filename))
 })
 
-test_that("Expect error if file does not exist", {
+test_that("an error is produced if file does not exist", {
   expect_error(get_hash("unknown_file.txt"))
 })
 
+
+test_that("returned object is class character", {
+  expect_error(class(get_hash("unknown_file.txt") == "character"))
+})
 
 file.remove(filename)
