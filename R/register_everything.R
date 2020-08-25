@@ -47,7 +47,7 @@ register_everything <- function(product_name,
 
   repo_storageRootId <- new_storage_root(
     name = github_info$repo_storageRoot,
-    root = "https://github.com",
+    root = "https://github.com/",
     key = key)
 
   # where is the source data downloaded to locally? -------------------------
