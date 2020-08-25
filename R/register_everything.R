@@ -40,15 +40,15 @@ register_everything <- function(product_name,
                                key = key)
 
   # ensure that github is in the data registry ------------------------------
+  github_info <- get_package_info(repo = "ScottishCovidResponse/SCRCdata",
+                                  script_path = paste0("inst/SCRC/",
+                                                      submission_script),
+                                  package = "SCRCdata")
+
   repo_storageRootId <- new_storage_root(
     name = github_info$repo_storageRoot,
     root = "https://github.com",
     key = key)
-
-  github_info <- get_package_info(repo = "ScottishCovidResponse/SCRCdata",
-                                  script_path = paste("inst/SCRC/",
-                                                      submission_script),
-                                  package = "SCRCdata")
 
   # where is the source data downloaded to locally? -------------------------
   local_path <- file.path("data-raw", product_path)
