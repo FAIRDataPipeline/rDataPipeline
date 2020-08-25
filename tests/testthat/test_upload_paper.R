@@ -17,3 +17,55 @@ test_that("Existing Paper returns existing paper", {
   expect_message(upload_paper(title, authors, journal_name, journal_abr, website, release_date, abstract, keywords, doi, key = token))
   expect_true(is.character(upload_paper(title, authors, journal_name, journal_abr, website, release_date, abstract, keywords, doi, key = token)))
 })
+
+date <- Sys.time()
+formatted_date <- format(date, "%d%m%y%H%M%S")
+doi <- paste0(formatted_date, "/TEST")
+release_date <- date
+title <- paste0("TEST_", formatted_date)
+abstract <- paste0("Test Abstract ", formatted_date)
+journal_name <- paste0("TEST Journal ", date)
+journal_abr <- paste0("TEST_", formatted_date)
+keywords <- formatted_date
+website <- ""
+authors <- paste0("TEST, ", formatted_date)
+
+test_that("Upload Paper returns ID", {
+  paper_id <- character(0)
+  expect_silent(paper_id <- upload_paper(title,
+                                         authors,
+                                         journal_name,
+                                         journal_abr,
+                                         website,
+                                         release_date,
+                                         abstract,
+                                         keywords,
+                                         doi,
+                                         key = token))
+  expect_true(is.character(paper_id))
+})
+
+date <- Sys.time()
+formatted_date <- format(date, "%d%m%y%H%M%S")
+doi <- paste0(formatted_date, "/TEST")
+release_date <- date
+title <- paste0("TEST_", formatted_date)
+abstract <- paste0("Test Abstract ", formatted_date)
+journal_name <- paste0("TEST Journal ", date)
+journal_abr <- paste0("TEST_", formatted_date)
+keywords <- formatted_date
+website <- ""
+authors <- paste0("TEST", formatted_date)
+
+test_that("incorrect authors returns a message", {
+  expect_message(paper_id <- upload_paper(title,
+                                         authors,
+                                         journal_name,
+                                         journal_abr,
+                                         website,
+                                         release_date,
+                                         abstract,
+                                         keywords,
+                                         doi,
+                                         key = token))
+})
