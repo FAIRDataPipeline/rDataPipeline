@@ -1,24 +1,18 @@
 context("Checking get entry")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
-object_id <- post_data("object", data = list(description = "TEST OBJECT 001"), key)
+
+formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
+UID <- paste0("TEST OBJECT ", formatted_date)
+object_id <- post_data("object", data = list(description = UID), key)
 object_id <- unlist(clean_query(object_id))
-description <- "TEST OBJECT 001"
+description <- UID
 
 test_that("Check Test object Exists", {
-  expect_success(
+  expect_silent(
     expect_equal(get_entry("object", query = list(description=description)),
                  get_entry("object", query = list(description=description)))
     )
-})
-
-test_that("Check Object has correct fields", {
-  object <- get_entry("object", query = list(description=description))
-
-  expect_equal(lapply(object, function(x) x$description) %>%
-                 unlist() %>% unique(),
-               description)
-  expect_equal(lapply(object, length) %>% unlist() %>% unique(), 14)
 })
 
 test_that("Blank query returns an (last) object", {
@@ -47,9 +41,17 @@ test_that("query = \"\" produces a warning", {
   expect_warning(get_entry("object", "" ))
 })
 
-#run with key
-# test_that("object has correct number of fields", {
-#   expect_length(object, length(get_table_readable("object")))
-# })
+test_that("multiple matches returns a list of more than one object", {
+  post_data("object", data = list(description = description), key)
+  expect_true(length(get_entry("object", list(description = description))) > 1)
+})
 
+test_that("Check Objects have correct fields", {
+  object <- get_entry("object", query = list(description=description))
+
+  expect_equal(lapply(object, function(x) x$description) %>%
+                 unlist() %>% unique(),
+               description)
+  expect_equal(lapply(object, length) %>% unlist() %>% unique(), length(get_table_readable("object", key)))
+})
 
