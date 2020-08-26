@@ -46,7 +46,7 @@ register_everything <- function(product_name,
                                   package = "SCRCdata")
 
   repo_storageRootId <- new_storage_root(
-    name = github_info$repo_storageRoot,
+    name = paste0(github_info$repo_storageRoot),
     root = "https://github.com/",
     key = key)
 
