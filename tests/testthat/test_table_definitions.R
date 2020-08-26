@@ -36,12 +36,17 @@ test_that("Fields are returned by get_fields", {
 
 test_that("Users and groups behave correctly with is_queryable()",{
   expect_false(check_query("users", list(URL = "1")))
+  Sys.sleep(sleep_time)
   expect_false(check_query("groups", list(URL = "1")))
+  Sys.sleep(sleep_time)
 })
 
 test_that("Errors occur if table does not exist", {
   expect_error(get_table_writable(unknown_table, token))
+  Sys.sleep(sleep_time)
   expect_error(get_table_readable(unknown_table, token))
+  Sys.sleep(sleep_time)
   expect_error(get_table_optional(unknown_table, token))
+  Sys.sleep(sleep_time)
   expect_error(get_table_required(unknown_table, token))
 })
