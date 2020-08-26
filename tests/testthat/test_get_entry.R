@@ -15,15 +15,6 @@ test_that("Check Test object Exists", {
     )
 })
 
-test_that("Blank query returns an (last) object", {
-  expect_success(expect_equal(get_entry("object", list()), get_entry("object", list())))
-})
-
-test_that("null query returns last object", {
-  expect_success(expect_equal(get_entry("object", list()), get_entry("object")))
-  expect_success(expect_equal(get_entry("object", list()), get_entry("object"), NULL))
-})
-
 test_that("Unknown Table causes and error", {
   expect_error(get_entry("unknown", list()))
 })
@@ -35,6 +26,7 @@ test_that("invalid query causes and error", {
   expect_error(get_entry("object", Inf))
   expect_error(get_entry("object", NaN))
   expect_error(get_entry("object", as.data.frame()))
+  expect_error(get_entry("object", NULL))
 })
 
 test_that("query = \"\" produces a warning", {
@@ -44,6 +36,10 @@ test_that("query = \"\" produces a warning", {
 test_that("multiple matches returns a list of more than one object", {
   post_data("object", data = list(description = description), key)
   expect_true(length(get_entry("object", list(description = description))) > 1)
+})
+
+test_that("Blank query returns list of objects", {
+  expect_silent(expect_true(is.list(get_entry("object", list()))))
 })
 
 test_that("Check Objects have correct fields", {
