@@ -5,7 +5,7 @@
 #' @param component component name to check for
 #'
 #'
-check_for_hdf5<-function(filename, component){
+check_for_hdf5 <- function(filename, component){
 
   #Default value for check
   check <- FALSE

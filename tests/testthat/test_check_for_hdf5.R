@@ -1,4 +1,4 @@
-context("testing check_for_hdf")
+context("testing check_for_hdf5")
 
 data_dir <- "data-raw"
 dir.create(data_dir, showWarnings = FALSE)
