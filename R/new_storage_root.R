@@ -15,7 +15,7 @@
 #'
 new_storage_root <- function(name,
                              root,
-                             accessibility = "",
+                             accessibility = 0,
                              key) {
 
   post_data(table = "storage_root",
