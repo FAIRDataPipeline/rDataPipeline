@@ -24,6 +24,12 @@ download_from_url <- function(source_root,
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
   if(missing(path)) path <- ""
 
+  # Checks
+  if(!grepl("/$", source_root))
+    stop("The source_root argument should have a trailing slash")
+  if(grepl("^/", source_path))
+    stop("The source_path argument should not have a prepending slash")
+
   # Download file
   download.file(url = file.path(source_root, source_path),
                 destfile = file.path(path, filename))
