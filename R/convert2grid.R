@@ -61,7 +61,7 @@ convert2grid <- function(dat,
                  "; datazone ", i, " of ",
                  length(dzs), "..."))
 
-      in_gridcell <-   conversion.table[which(conversion.table$AREAcode==conversion.table$AREAcode[i]),]
+      in_gridcell <-   conversion.table[which(conversion.table$AREAcode==dzs[i]),]
       true_pop <- dat[dzs[i], bins[j]]
       rounded_pops <- round(in_gridcell$proportion * true_pop)
 

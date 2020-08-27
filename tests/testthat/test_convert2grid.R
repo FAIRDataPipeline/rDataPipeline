@@ -52,12 +52,11 @@ test_that("convert2grid() accurately divides population into grid", {
                                        subdivisions = subdivisions,
                                        conversion.table = subdivisions_area,
                                        grid_size = "grid")
-
   expected_counts <- sf::st_drop_geometry(subdivisions) %>%
     left_join(pop_data, by = "AREAcode") %>%
     group_by(grid_id) %>%
     summarise(Population = sum(Population))
-
+  result$grid_pop = result$grid_pop[order(result$grid_id)]
   testthat::expect_equal(as.numeric(result$grid_pop),
                          expected_counts$Population)
 })
@@ -76,12 +75,13 @@ test_that("convert2grid() accurately divides age classes into grid", {
                                        subdivisions = subdivisions,
                                        conversion.table = subdivisions_area,
                                        grid_size = "grid")
-
+  result$grid_pop = result$grid_pop[order(result$grid_id),]
+  
   expected_counts <- sf::st_drop_geometry(subdivisions) %>%
     left_join(pop_data, by = "AREAcode") %>%
     group_by(grid_id) %>%
     summarise_at(vars(starts_with("Age")), ~ sum(.)) %>%
-    select(-grid_id) %>%
+    column_to_rownames("grid_id") %>%
     as.matrix()
 
   testthat::expect_equal(result$grid_pop, expected_counts)
@@ -129,7 +129,8 @@ test_that("convert2grid() divides population in areas split between grid cells b
                                        conversion.table = subdivisions_area,
                                        grid_size = "grid")
   expected_result <- (pop_size * 4) + (pop_size * 4 * 0.5) + (pop_size * 0.25)
-
+  result$grid_pop = result$grid_pop[order(result$grid_id),]
+  
   testthat::expect_equal(as.numeric(result$grid_pop), rep(expected_result, 4))
 })
 
@@ -277,6 +278,6 @@ test_that("convert2grid() distributes integers to the correct cells", {
 
   size_ordered_result <- result$grid_pop[cell_size_order, 1]
 
-  testthat::expect_equal(size_ordered_result, c(2,2,2,2, 1,1,1,1, 0))
+  testthat::expect_equal(as.vector(size_ordered_result), c(2,2,2,2, 1,1,1,1, 0))
 })
 
