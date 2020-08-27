@@ -9,6 +9,7 @@ upload_source_data(
   original_source_id,
   original_root_id,
   original_path,
+  primary_not_supplement = TRUE,
   local_path,
   storage_root_id,
   target_path,
@@ -25,6 +26,8 @@ upload_source_data(
 \item{original_root_id}{e.g.}
 
 \item{original_path}{e.g. query}
+
+\item{primary_not_supplement}{e.g.}
 
 \item{local_path}{e.g. "data-raw/human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"}
 

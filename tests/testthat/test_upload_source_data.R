@@ -22,29 +22,30 @@ create_table(filename = filename,
 
 if(is.null(source_id)){
   source_id <- post_data("source",
-            list(name = UID, abbreviation = formatted_date),
-            key)
+                         list(name = UID, abbreviation = formatted_date),
+                         key)
 }
 
 original_root_id <- post_data("storage_root",
-                         list(name = path, root = path),
-                         key)
+                              list(name = path, root = path),
+                              key)
 
 storage_root_id <- post_data("storage_root",
-                                list(name = UID, root = UID),
-                                key)
+                             list(name = UID, root = UID),
+                             key)
 
 test_that("upload_source_data returns id", {
   expect_true(is.list(upload_source_data(UID,
-                                              source_id,
-                                              original_root_id,
-                                              filename,
-                                              filename,
-                                              storage_root_id,
-                                              path,
-                                              format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
-                                              create_version_number(),
-                                              key)))
+                                         source_id,
+                                         original_root_id,
+                                         filename,
+                                         primary_not_supplement = T,
+                                         filename,
+                                         storage_root_id,
+                                         path,
+                                         format(Sys.time(), "%Y-%m-%d %H:%M:%S"),
+                                         create_version_number(),
+                                         key)))
 })
 
 test_that("upload_source_data errors without key", {
@@ -52,6 +53,7 @@ test_that("upload_source_data errors without key", {
                                   source_id,
                                   original_root_id,
                                   filename,
+                                  primary_not_supplement = T,
                                   filename,
                                   storage_root_id,
                                   path,
@@ -65,6 +67,7 @@ test_that("upload_source_data errors with invalid file", {
                                   source_id,
                                   original_root_id,
                                   filename,
+                                  primary_not_supplement = T,
                                   local_path = "unknown_file.h5",
                                   storage_root_id,
                                   path,

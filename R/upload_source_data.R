@@ -4,6 +4,7 @@
 #' @param original_source_id e.g. "https://data.scrc.uk/api/source/9/"
 #' @param original_root_id e.g.
 #' @param original_path e.g. query
+#' @param primary_not_supplement e.g.
 #' @param local_path e.g. "data-raw/human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"
 #' @param storage_root_id e.g. "https://data.scrc.uk/api/storage_root/9/"
 #' @param target_path e.g. "human/infection/SARS-CoV-2/scotland/cases_and_management/20100711.0.csv"
@@ -17,6 +18,7 @@ upload_source_data <- function(doi_or_unique_name,
                                original_source_id,
                                original_root_id,
                                original_path,
+                               primary_not_supplement = TRUE,
                                local_path,
                                storage_root_id,
                                target_path,
@@ -53,7 +55,7 @@ upload_source_data <- function(doi_or_unique_name,
 
   source_externalObjectId <- new_external_object(
     doi_or_unique_name = doi_or_unique_name,
-    primary_not_supplement = TRUE,
+    primary_not_supplement = primary_not_supplement,
     release_date = download_date,
     title = doi_or_unique_name,
     description = paste(doi_or_unique_name, "dataset"),
