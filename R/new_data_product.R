@@ -5,7 +5,7 @@
 #' @param name a \code{string} specifying the name of the \code{data_product}
 #'  *e.g.* "records/SARS-CoV-2/scotland/human-mortality"
 #' @param version a \code{string} specifying the version identifier of the
-#' `data_product` (must conform to semantic versioning syntax) *e.g.* "0.1.0"
+#' \code{data_product} (must conform to semantic versioning syntax) *e.g.* "0.1.0"
 #' @param object_id a \code{string} specifying the API URL of the
 #' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/156/",
 #' @param namespace_id a \code{string} specifying the API URL of the
