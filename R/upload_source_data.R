@@ -45,7 +45,9 @@ upload_source_data <- function(doi_or_unique_name,
   source_objectId <- new_object(storage_location_id = source_storageLocationId,
                                 key = key)
 
-  source_objectComponentId <- new_object_component(name = "table",
+  # Source data (e.g. *.csv) is defined as having a single component
+  # called "table"
+  source_objectComponentId <- new_object_component(name = "raw_data",
                                                    object_id = source_objectId,
                                                    key = key)
 
