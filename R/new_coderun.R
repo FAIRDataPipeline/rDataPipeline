@@ -26,7 +26,7 @@ new_coderun <- function(run_date,
                         key) {
 
   post_data(table = "code_run",
-            data =  list(run_date = run_date,
+            data = list(run_date = run_date,
                          description = description,
                          code_repo = code_repo_id,
                          model_config = model_config,

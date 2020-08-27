@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-get_h5_from_object_id <-function(obj_id, data_dir = "data-raw"){
+get_h5_from_object_id <- function(obj_id, data_dir = "data-raw"){
   # If data_dir doesn't exist, create it
   if(!dir.exists(data_dir)) dir.create(data_dir, recursive = TRUE)
 
