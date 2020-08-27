@@ -11,8 +11,7 @@ download_from_url(source_root, source_path, path, filename, unzip = FALSE)
 "https://www.nrscotland.gov.uk"}
 
 \item{source_path}{a \code{string} specifying the source path \emph{e.g.}
-file.path("files//statistics", "population-estimates", "sape-time-series",
-"males", "sape-2018-males.xlsx")}
+"files/statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"}
 
 \item{path}{a \code{string} specifying the local path (where to save the
 file) \emph{e.g.} "data-raw"}

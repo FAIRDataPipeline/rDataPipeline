@@ -4,7 +4,7 @@
 \alias{new_storage_root}
 \title{new_storage_root}
 \usage{
-new_storage_root(name, root, accessibility = "", key)
+new_storage_root(name, root, accessibility = 0, key)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{storage_root}
