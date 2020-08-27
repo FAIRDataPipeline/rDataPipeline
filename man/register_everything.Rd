@@ -14,29 +14,45 @@ register_everything(
   original_sourceId,
   original_root,
   original_path,
+  accessibility = 0,
   key
 )
 }
 \arguments{
-\item{product_name}{\emph{e.g.}}
+\item{product_name}{a \code{string} specifying the product_name (used to
+identify the data product as well as being used to generate various file
+locations)}
 
-\item{version_number}{\emph{e.g.}}
+\item{version_number}{a \code{string} specifying the version identifier of
+the \code{data_product} (must conform to semantic versioning syntax)}
 
-\item{doi_or_unique_name}{\emph{e.g.}}
+\item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
+\code{external_object} (source data)}
 
 \item{namespace}{a \code{string} specifying the namespace; by default this
 is "SCRC"}
 
 \item{submission_script}{a \code{string} specifying the filename of the
-submission script located in \code{inst/namespace/} \emph{e.g.} "nrs_demographics.R"}
+submission script located in the \code{inst/namespace/} directory of the
+SCRCdata package}
 
-\item{original_source_name}{\emph{e.g.}}
+\item{original_source_name}{a \code{string} specifying the original source
+name}
 
-\item{original_sourceId}{\emph{e.g.}}
+\item{original_sourceId}{a \code{string} specifying the API URL of the
+associated \code{source} table}
 
-\item{original_root}{\emph{e.g.} "https://www.nrscotland.gov.uk"}
+\item{original_root}{a \code{string} specifying the root of the original
+source (must have a trailing slash), which when prepended to
+\code{original_path} produces a complete URL}
 
-\item{original_path}{\emph{e.g.}}
+\item{original_path}{a \code{string} specifying the path from the
+original_root, which when appended to \code{original_root} produces a
+complete URL}
+
+\item{accessibility}{(optional) an \code{integer} value for the accessibility
+enum associated with \code{original_root}, where 0 is public (default) and
+1 is private}
 
 \item{key}{API token from data.scrc.uk}
 }
@@ -45,5 +61,43 @@ This function assumes that (1) the source data is being saved as a
 \code{csv} file, (2) the data product is being saved as an \code{h5} file,
 (3) the source data and data product are being stored on the boydorr ftp
 server (4) the submission script is being stored in the
-ScottishCovidResponse/SCRCdata respository
+ScottishCovidResponse/SCRCdata respository. Data products may be generated
+from a single or multiple original sources, see Examples below for details.
+}
+\details{
+Note that when a data product is generated from multiple original sources,
+\code{original_source_name}, \code{original_sourceId}, \code{original_root},
+and \code{original_path} are input as named lists (see Example below).
+}
+\examples{
+\dontrun{
+# A single original source
+register_everything(product_name = "geography/scotland/lookup_table",
+version_number = "0.1.0",
+doi_or_unique_name = "Scottish spatial lookup table",
+namespace = "SCRC",
+submission_script = "scotgov_dz_lookup.R",
+original_source_name = "Scottish Government",
+original_sourceId = "https://data.scrc.uk/api/source/3932/",
+original_root = "https://www.gov.scot/",
+original_path = "path/somefile.csv",
+accessibility = 0,
+key)
+
+# Multiple original sources
+register_everything(product_name = "geography/scotland/lookup_table",
+version_number = "0.1.0",
+doi_or_unique_name = "Scottish spatial lookup table",
+namespace = "SCRC",
+submission_script = "scotgov_dz_lookup.R",
+original_source_name = list(simd = "Scottish Government",
+dz = "Scottish Government Open Data Repository downloadable file"),
+original_sourceId = list(simd = "https://data.scrc.uk/api/source/3932/",
+dz = "https://data.scrc.uk/api/source/3976/"),
+original_root = list(simd = "https://www.gov.scot/", dz = "http://statistics.gov.scot/"),
+original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
+accessibility = 0,
+key)
+}
+
 }
