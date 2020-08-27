@@ -1,6 +1,6 @@
 context("testing get_loaded_package_version")
 
-test_that("get_loaded_package_version returns a character", {
+test_that("get_loaded_package_version returns a list", {
   expect_silent(get_loaded_package_version())
   expect_true(is.list(get_loaded_package_version()))
 })
