@@ -11,6 +11,8 @@ validate_post_data(table, data, key)
 \item{table}{table name as character}
 
 \item{data}{data as a named list}
+
+\item{key}{API Token as character}
 }
 \description{
 validate_post_data

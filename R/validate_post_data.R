@@ -3,6 +3,7 @@
 #'
 #' @param table table name as character
 #' @param data data as a named list
+#' @param key API Token as character
 #'
 #' @export
 #'
