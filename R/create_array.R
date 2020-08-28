@@ -43,6 +43,9 @@ create_array <- function(filename,
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
+  if(file.exists(file.path(path, filename)))
+    stop("File already exists")
+
   # Generate hdf5 structure
   file.h5 <- H5File$new(file.path(path, filename))
 
