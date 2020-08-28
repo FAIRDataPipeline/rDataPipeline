@@ -7,11 +7,11 @@
 post_data(table, data, key)
 }
 \arguments{
-\item{table}{table}
+\item{table}{table name as a character}
 
-\item{data}{data}
+\item{data}{data as a named list}
 
-\item{key}{key}
+\item{key}{API token}
 }
 \description{
 Post data to registry

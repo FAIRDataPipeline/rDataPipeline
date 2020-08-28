@@ -2,9 +2,9 @@
 #'
 #' Post data to registry
 #'
-#' @param table table
-#' @param data data
-#' @param key key
+#' @param table table name as a character
+#' @param data data as a named list
+#' @param key API token
 #'
 #' @export
 #'
