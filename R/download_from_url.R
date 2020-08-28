@@ -32,7 +32,7 @@ download_from_url <- function(source_root,
 
   # Download file
   download.file(url = paste(source_root, source_path, sep = "/"),
-                destfile = file.path(path, filename))
+                destfile = file.path(path, filename), mode = "wb")
 
   # If file is zipped, unzip it and remove *.zip file
   if(grepl(".zip$", filename) & unzip) {
