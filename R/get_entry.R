@@ -20,7 +20,7 @@ get_entry <- function(table, query = list()) {
   if(!check_query(table, query))
     stop("not a valid query for table")
 
-   out <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
+   out <- httr::GET(paste("https://data.scrc.uk/api", table, "", sep = "/"),
                    query = query) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)

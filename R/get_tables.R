@@ -7,7 +7,7 @@
 #' @export
 #'
 get_tables <- function(){
-  out <- httr::GET(file.path("https://data.scrc.uk/api", "")) %>%
+  out <- httr::GET(paste("https://data.scrc.uk/api", "", sep = "/")) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
   return(names(out))

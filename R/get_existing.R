@@ -18,7 +18,7 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
   tryCatch({
 
     # Get the first 100 results
-    output <- httr::GET(file.path("http://data.scrc.uk/api", table, "")) %>%
+    output <- httr::GET(paste("http://data.scrc.uk/api", table, "", sep = "/")) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)
     results <- output$results

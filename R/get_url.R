@@ -7,7 +7,7 @@
 #'
 get_url <- function(table, query = list()) {
 
-  tmp <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
+  tmp <- httr::GET(paste("https://data.scrc.uk/api", table, "", sep = "/"),
                    query = query) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)

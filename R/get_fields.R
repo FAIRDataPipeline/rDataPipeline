@@ -21,7 +21,7 @@ get_fields <- function(table, key, filter_fields = "all"){
 
   h <- c(Authorization = paste("token", key))
 
-  out <- httr::VERB("OPTIONS", file.path("https://data.scrc.uk/api", table, ""),
+  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "", sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)

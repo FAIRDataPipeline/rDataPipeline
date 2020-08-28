@@ -23,8 +23,8 @@ get_package_info <- function(repo, script_path, package) {
   # Check repository contains DESCRIPTION file
   tryCatch(
     {
-      readLines(file.path("https://raw.githubusercontent.com", repo, "master",
-                          "DESCRIPTION"))
+      readLines(paste("https://raw.githubusercontent.com", repo, "master",
+                          "DESCRIPTION", sep = "/"))
     }, warning = function(warn) {
       stop(paste(repo, "does not contain a DESCRIPTION file, please create one"))
     }
@@ -33,8 +33,8 @@ get_package_info <- function(repo, script_path, package) {
   # Check script exists in the repository
   tryCatch(
     {
-      readLines(file.path("https://raw.githubusercontent.com", repo, "master",
-                          script_path))
+      readLines(paste("https://raw.githubusercontent.com", repo, "master",
+                          script_path, sep = "/"))
     }, warning = function(warn) {
       stop(paste(script_path, "does not exist within", repo))
     }

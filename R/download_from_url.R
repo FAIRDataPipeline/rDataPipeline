@@ -31,7 +31,7 @@ download_from_url <- function(source_root,
     stop("The source_path argument should not have a prepending slash")
 
   # Download file
-  download.file(url = file.path(source_root, source_path),
+  download.file(url = paste(source_root, source_path, sep = "/"),
                 destfile = file.path(path, filename))
 
   # If file is zipped, unzip it and remove *.zip file
