@@ -29,6 +29,7 @@
 #' @param original_path a \code{string} specifying the path from the
 #' original_root, which when appended to \code{original_root} produces a
 #' complete URL
+#' @param source_filename
 #' @param accessibility (optional) an \code{integer} value for the accessibility
 #' enum associated with \code{original_root}, where 0 is public (default) and
 #' 1 is private
@@ -67,6 +68,8 @@
 #' dz = "https://data.scrc.uk/api/source/3976/"),
 #' original_root = list(simd = "https://www.gov.scot/", dz = "http://statistics.gov.scot/"),
 #' original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
+#' source_filename = list(simd = paste0(version_number, ".xlsx"),
+#' dz = paste0(version_number, ".csv")),
 #' accessibility = 0,
 #' key)
 #' }
@@ -80,27 +83,31 @@ register_everything <- function(product_name,
                                 original_sourceId,
                                 original_root,
                                 original_path,
+                                source_filename,
                                 accessibility = 0,
                                 key) {
 
   # If any of the original_* arguments is a list (presumably containing
   # multiple entries, do some checks...
   if(is.list(original_source_name) | is.list(original_sourceId) |
-     is.list(original_root) | is.list(original_path)) {
+     is.list(original_root) | is.list(original_path) |
+     is.list(source_filename)) {
 
     # Are they all lists?
     if(!is.list(original_source_name) | !is.list(original_sourceId) |
-       !is.list(original_root) | !is.list(original_path))
+       !is.list(original_root) | !is.list(original_path)|
+       !is.list(source_filename))
       stop(paste("If one of the arguments original_source_name,",
-                 "original_sourceId, original_root, and original_path is a",
-                 "list (implying multiple original sources), they should all",
-                 "be lists"))
+                 "original_sourceId, original_root, original_path, and",
+                 "source_filename is a list (implying multiple original",
+                 "sources), they should all be lists"))
 
     # Are they all the same length?
     number_of_elements <- c(length(original_source_name),
                             length(original_sourceId),
                             length(original_root),
-                            length(original_path))
+                            length(original_path),
+                            length(source_filename))
 
     if(length(unique(number_of_elements)) != 1)
       stop(paste("If original_source_name, original_sourceId, original_root,",
@@ -111,11 +118,13 @@ register_everything <- function(product_name,
     check1 <- all(names(original_source_name) != names(original_sourceId))
     check2 <- all(names(original_source_name) != names(original_root))
     check3 <- all(names(original_source_name) != names(original_path))
+    check4 <- all(names(original_source_name) != names(source_filename))
 
-    if(any(check1, check2, check3))
+    if(any(check1, check2, check3, check4))
       stop(paste("If original_source_name, original_sourceId, original_root,",
-                 "and original_path are lists (implying multiple original",
-                 "sources), their elements should have the same names"))
+                 "original_path, and source_filename are lists (implying",
+                 "multiple original sources), their elements should have the",
+                 "same names"))
   }
 
 
@@ -141,7 +150,6 @@ register_everything <- function(product_name,
 
   # where is the source data downloaded to locally? -------------------------
   local_path <- file.path("data-raw", product_path)
-  source_filename <- paste0(version_number, ".csv")
 
   # If original_* arguments contain multiple entries...
   if(is.list(original_source_name)) {
@@ -202,10 +210,10 @@ register_everything <- function(product_name,
         original_path = original_path[[x]], # list
         primary_not_supplement = primary[x],
         local_path = file.path(local_path, names(original_root)[x],
-                               source_filename),
+                               source_filename[[x]]),
         storage_root_id = source_storageRootId,
         target_path = paste(product_name, names(original_root)[x],
-                            source_filename, sep = "/"),
+                            source_filename[[x]], sep = "/"),
         download_date = todays_date,
         version = version_number,
         key = key)

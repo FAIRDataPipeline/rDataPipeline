@@ -14,6 +14,7 @@ register_everything(
   original_sourceId,
   original_root,
   original_path,
+  source_filename,
   accessibility = 0,
   key
 )
@@ -96,6 +97,8 @@ original_sourceId = list(simd = "https://data.scrc.uk/api/source/3932/",
 dz = "https://data.scrc.uk/api/source/3976/"),
 original_root = list(simd = "https://www.gov.scot/", dz = "http://statistics.gov.scot/"),
 original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
+source_filename = list(simd = paste0(version_number, ".xlsx"),
+dz = paste0(version_number, ".csv")),
 accessibility = 0,
 key)
 }
