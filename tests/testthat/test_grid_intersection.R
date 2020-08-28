@@ -13,7 +13,7 @@ test_that("grid_intersection() should fail if shapefile not in metres", {
   shapefile <- sf::st_sf(triangle, crs = 3418)
   shapefile$AREAcode = 1
 
-  testthat::expect_error(SCRCdataAPI:::grid_intersection(shapefile, 1),
+  testthat::expect_error(grid_intersection(shapefile, 1),
                          regexp = "Unexpected CRS")
 })
 
@@ -29,7 +29,7 @@ test_that("grid_intersection() should produce expected number of cells", {
 
   # 4 x 4 grid
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(shapefile, max_dim/4/1000))
+    grid_intersection(shapefile, max_dim/4/1000))
 
   testthat::expect_equal(length(result$subdivisions$grids), 4*4)
   testthat::expect_equal(nrow(result$grid_matrix), 4*4)
@@ -45,7 +45,7 @@ test_that("grid_intersection() should produce cells of expected size", {
   shapefile$AREAcode=1
 
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(shapefile, max_dim/4/1000))
+    grid_intersection(shapefile, max_dim/4/1000))
 
   cell_size <- sf::st_bbox(result$subdivisions$grids[[1]])
 
@@ -77,7 +77,7 @@ complex_shapefile$AREAcode=c(1,2)
 test_that("grid_intersection() result should not extend beyond shapefile bounding box", {
   bounding_box <- sf::st_bbox(complex_shapefile)
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(complex_shapefile,
+    grid_intersection(complex_shapefile,
                                     bounding_box[["xmax"]]/12/1000))
 
   testthat::expect_equal(sf::st_bbox(result$subdivisions), bounding_box)
@@ -87,7 +87,7 @@ test_that("grid_intersection() result should not extend beyond shapefile boundin
 test_that("grid_intersection() should return only parts of grid which intersect with features", {
   grid_size <- map_extent/12/1000
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(complex_shapefile, grid_size))
+    grid_intersection(complex_shapefile, grid_size))
 
   # Define the empty area of complex_shapefile by creating a larger polygon
   # with the original shapes as holes:
@@ -113,7 +113,7 @@ test_that("grid_intersection() should produce cells of expected size at edges of
   tr_shapefile$AREAcode=1
 
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(tr_shapefile, grid_size/1000))
+    grid_intersection(tr_shapefile, grid_size/1000))
 
   # Expected area of cell 1-1 (which should be a triangle since it's at the
   # left corner of the map)
@@ -129,7 +129,7 @@ test_that("grid_intersection() should not return or enumerate non-grid objects",
   # Expect all features to represent parts of the grid, otherwise, indexing,
   # etc. may be off
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(complex_shapefile,
+    grid_intersection(complex_shapefile,
                                     gridsize = map_extent/12/1000))
 
   # All shapefile objects should be of class POLYGON:
@@ -141,7 +141,7 @@ test_that("grid_intersection() should not return or enumerate non-grid objects",
 
 test_that("ids returned by grid_intersection() should match in both subdivision and grid_matrix", {
   result <- testthat::expect_warning(
-    SCRCdataAPI:::grid_intersection(complex_shapefile,
+    grid_intersection(complex_shapefile,
                                     gridsize = map_extent/12/1000))
 
   matrix_ids <- paste(result$grid_matrix[, 1], result$grid_matrix[, 2],
