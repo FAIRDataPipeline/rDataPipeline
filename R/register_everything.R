@@ -29,7 +29,7 @@
 #' @param original_path a \code{string} specifying the path from the
 #' original_root, which when appended to \code{original_root} produces a
 #' complete URL
-#' @param source_filename
+#' @param source_filename a \code{string} specifying the source filename
 #' @param accessibility (optional) an \code{integer} value for the accessibility
 #' enum associated with \code{original_root}, where 0 is public (default) and
 #' 1 is private
@@ -53,6 +53,7 @@
 #' original_sourceId = "https://data.scrc.uk/api/source/3932/",
 #' original_root = "https://www.gov.scot/",
 #' original_path = "path/somefile.csv",
+#' source_filename = "paste0(version_number, ".csv")",
 #' accessibility = 0,
 #' key)
 #'
