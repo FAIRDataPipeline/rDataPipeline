@@ -4,7 +4,7 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table, key, filter_fields = "all")
+get_fields(table, key, filter_fields = "all", type = FALSE)
 }
 \arguments{
 \item{table}{name of table}
@@ -13,6 +13,8 @@ get_fields(table, key, filter_fields = "all")
 
 \item{filter_fields}{which fields you want returned \emph{e.g.} all, none,
 readable, writable, optional}
+
+\item{type}{logical whether to include types this will return a dataframe}
 }
 \value{
 a character vector of fields or a list of fields if filter fields is

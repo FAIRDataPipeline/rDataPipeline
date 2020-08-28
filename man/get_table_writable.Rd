@@ -4,12 +4,14 @@
 \alias{get_table_writable}
 \title{Get Writable Fields}
 \usage{
-get_table_writable(table, key)
+get_table_writable(table, key, type = FALSE)
 }
 \arguments{
 \item{table}{name of table}
 
 \item{key}{api key / token}
+
+\item{type}{whether to return type of field, returns data frame}
 }
 \value{
 a character vector of writable fields

@@ -12,6 +12,8 @@ post_data <- function(table,
                       data,
                       key) {
 
+  data <- validate_post_data(table, data, key)
+
   h <- c(Authorization = paste("token", key))
 
   api_url <- file.path("https://data.scrc.uk/api", table, "")
