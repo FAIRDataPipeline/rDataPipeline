@@ -27,12 +27,13 @@ get_fields <- function(table, key){
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   # Set up data frame with column names
-    df <- data.frame(matrix(ncol = 5, nrow = 0))
-    colnames(df) <- c("field", "read_only", "required", "min_value", "max_value")
+    df <- data.frame(matrix(ncol = 6, nrow = 0))
+    colnames(df) <- c("field", "data_type", "read_only", "required", "min_value", "max_value")
 
   for(i in seq_along(out$actions$POST)){
     field <- out$actions$POST[i]
     name <- names(field)
+    data_type <- field[[1]]$type
     read_only <- FALSE
     required <- FALSE
     min_value <- NA
@@ -55,6 +56,7 @@ get_fields <- function(table, key){
     }
     df <- rbind(df,
                 list(field = name,
+                 data_type = data_type,
                  read_only = read_only,
                  required = required,
                  min_value = min_value,
