@@ -4,7 +4,7 @@
 \alias{get_table_readable}
 \title{Get Readable Fields}
 \usage{
-get_table_readable(table, key, type = FALSE)
+get_table_readable(table, key)
 }
 \arguments{
 \item{table}{name of table}

@@ -4,7 +4,7 @@
 \alias{get_table_required}
 \title{Get Required Fields}
 \usage{
-get_table_required(table, key, type = FALSE)
+get_table_required(table, key)
 }
 \arguments{
 \item{table}{name of table}

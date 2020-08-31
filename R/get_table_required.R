@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-get_table_required <- function(table, key, type = FALSE){
+get_table_required <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")
   required <- get_fields(table, key) %>%

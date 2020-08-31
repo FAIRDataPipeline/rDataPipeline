@@ -4,7 +4,7 @@
 \alias{get_table_optional}
 \title{Get Optional Fields}
 \usage{
-get_table_optional(table, key, type = FALSE)
+get_table_optional(table, key)
 }
 \arguments{
 \item{table}{name of table}

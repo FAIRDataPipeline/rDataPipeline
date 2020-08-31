@@ -6,10 +6,10 @@
 #'
 #' @export
 #'
-get_table_optional <- function(table, key, type = FALSE){
+get_table_optional <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")
   optional <- get_fields(table, key) %>%
-    filter(!read_only) %>%
-    filter(!required)
+    filter(!.data$read_only) %>%
+    filter(!.data$required)
 }

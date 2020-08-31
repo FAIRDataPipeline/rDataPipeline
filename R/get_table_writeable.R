@@ -10,6 +10,6 @@ get_table_writable <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")
   writable <- get_fields(table, key) %>%
-    filter(!read_only)
+    filter(!.data$read_only)
 
 }
