@@ -84,6 +84,7 @@ jobs:
       - name: Deploy docs 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
-          GITHUB_TOKEN: ${{ secrets.GSCRC_APITOKEN }}
-          BRANCH: mmaster The branch the action should deploy to.
-          FOLDER: budocs The folder the action should deploy.
+          GITHUB_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
+          BRANCH: master
+          FOLDER: docs
+
