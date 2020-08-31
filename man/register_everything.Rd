@@ -14,6 +14,7 @@ register_everything(
   original_sourceId,
   original_root,
   original_path,
+  source_filename,
   accessibility = 0,
   key
 )
@@ -50,6 +51,8 @@ source (must have a trailing slash), which when prepended to
 original_root, which when appended to \code{original_root} produces a
 complete URL}
 
+\item{source_filename}{a \code{string} specifying the source filename}
+
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
 1 is private}
@@ -81,6 +84,7 @@ original_source_name = "Scottish Government",
 original_sourceId = "https://data.scrc.uk/api/source/3932/",
 original_root = "https://www.gov.scot/",
 original_path = "path/somefile.csv",
+source_filename = "paste0(version_number, ".csv")",
 accessibility = 0,
 key)
 
@@ -96,6 +100,8 @@ original_sourceId = list(simd = "https://data.scrc.uk/api/source/3932/",
 dz = "https://data.scrc.uk/api/source/3976/"),
 original_root = list(simd = "https://www.gov.scot/", dz = "http://statistics.gov.scot/"),
 original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
+source_filename = list(simd = paste0(version_number, ".xlsx"),
+dz = paste0(version_number, ".csv")),
 accessibility = 0,
 key)
 }
