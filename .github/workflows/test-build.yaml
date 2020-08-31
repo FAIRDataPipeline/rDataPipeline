@@ -80,11 +80,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-      - name: Deploy docs 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        with:
-          GITHUB_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          BRANCH: master
-          FOLDER: docs
-
