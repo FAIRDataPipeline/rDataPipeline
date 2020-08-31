@@ -2,14 +2,14 @@
 #'
 #' @param table name of table
 #' @param key api key / token
-#' @param type whether to return type of field, returns data frame
 #'
-#' @return a character vector of required fields
+#' @return a dataframe of required fields and their properties
 #'
 #' @export
 #'
 get_table_required <- function(table, key, type = FALSE){
   if(! check_table_exists(table))
     stop("Unknown Table")
-  return(get_fields(table, key, "required", type))
+  required <- get_fields(table, key) %>%
+    filter(required)
 }

@@ -6,100 +6,61 @@
 #'
 #' @param table name of table
 #' @param key api key / token
-#' @param filter_fields which fields you want returned *e.g.* all, none,
-#' readable, writable, optional
-#' @param type logical whether to include types this will return a dataframe
-#'
-#' @return a character vector of fields or a list of fields if filter fields is
+#' @return a dataframe of fields and their attributes
 #' set to "none"
 #'
 #' @export
 #'
-get_fields <- function(table, key, filter_fields = "all", type = FALSE){
+get_fields <- function(table, key){
 
+  # Users and Groups are valid tables but cannot be posted to
   if(table == "users" | table == "groups")
     stop("users and groups are protected tables")
 
+  # Add token to options request header
   h <- c(Authorization = paste("token", key))
 
+  # Perform an options request
   out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "", sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  # Return for all fields
-  all <- names(out$actions$POST)
-  all.type <- character(0)
-  read_only <- character(0)
-  read_only.type <- character(0)
-  optional <- character(0)
-  optional.type <- character(0)
-  required <- character(0)
-  required.type <- character(0)
-  writable <- character(0)
-  writable.type <- character(0)
+  # Set up data frame with column names
+    df <- data.frame(matrix(ncol = 5, nrow = 0))
+    colnames(df) <- c("field", "read_only", "required", "min_value", "max_value")
+
   for(i in seq_along(out$actions$POST)){
     field <- out$actions$POST[i]
-    all.type <- c(all.type, field[[1]]$type)
+    name <- names(field)
+    read_only <- FALSE
+    required <- FALSE
+    min_value <- NA
+    max_value <- NA
+
     if(field[[1]]$read_only){
-      read_only <- c(read_only, names(field))
-      read_only.type <- c(read_only.type, field[[1]]$type)
-    }
-    else{
-      writable <- c(writable, names(field))
-      writable.type <- c(writable.type, field[[1]]$type)
+      read_only <- TRUE
     }
     if(field[[1]]$required){
-      required <- c(required, names(field))
-      required.type <- c(required.type, field[[1]]$type)
+      required <- TRUE
     }
     else{
-      optional <- c(optional, names(field))
-      optional.type <- c(optional.type, field[[1]]$type)
+      required <- FALSE
     }
+    if("min_value" %in% names(field[[1]])){
+      min_value <- field[[1]]$min_value
+    }
+    if("max_value" %in% names(field[[1]])){
+      max_value <- field[[1]]$max_value
+    }
+    df <- rbind(df,
+                list(field = name,
+                 read_only = read_only,
+                 required = required,
+                 min_value = min_value,
+                 max_value = max_value))
   }
 
-  if(type)
-  {
-    if(filter_fields == "all"){
-      df <- as.data.frame(cbind(all, all.type))
-      names(df) <- c("field", "type")
-      return(df)
-    }
-    if(filter_fields == "optional"){
-      df <- as.data.frame(cbind(optional, optional.type))
-      names(df) <- c("field", "type")
-      return(df)
-    }
-    if(filter_fields == "read_only"){
-      df <- as.data.frame(cbind(read_only, read_only.type))
-      names(df) <- c("field", "type")
-      return(df)
-    }
-    if(filter_fields == "writable"){
-      df <- as.data.frame(cbind(read_only, read_only.type))
-      names(df) <- c("field", "type")
-      return(df)
-    }
-    if(filter_fields == "required"){
-      df <- as.data.frame(cbind(required, required.type))
-      names(df) <- c("field", "type")
-      return(df)
-    }
-  }
-  else{
-    if(filter_fields == "all")
-      return(all)
-    if(filter_fields == "optional")
-      return(optional)
-    if(filter_fields == "read_only")
-      return(read_only)
-    if(filter_fields == "writable")
-      return(writable)
-    if(filter_fields == "required")
-      return(required)
-  }
-
-  return(list(all=all, read_only=read_only, optional=optional, writable = writable))
+  df
 }
 

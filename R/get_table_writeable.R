@@ -2,13 +2,14 @@
 #'
 #' @param table name of table
 #' @param key api key / token
-#' @param type whether to return type of field, returns data frame
 #' @return a character vector of writable fields
 #'
 #' @export
 #'
-get_table_writable <- function(table, key, type = FALSE){
+get_table_writable <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")
-  get_fields(table, key, "writable", type)
+  writable <- get_fields(table, key) %>%
+    filter(!read_only)
+
 }

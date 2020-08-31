@@ -9,36 +9,33 @@ unknown_table <- "unknown"
 
 sleep_time <- 0.5
 
+column_names <- c("field", "read_only", "required", "min_value", "max_value")
+
 
 test_that("Fields are returned by get_fields", {
   for(i in seq_along(tables)){
     if(tables[i] == "users" | tables[i] == "groups")
       expect_error(get_fields(tables[i], token))
     else{
-    expect_true(is.character(get_fields(tables[i], token)))
+    expect_true(is.data.frame(get_fields(tables[i], token)))
     Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_fields(tables[i], token, "all", TRUE)))
+    expect_true(all(column_names %in% names(get_fields(tables[i], token))))
     Sys.sleep(sleep_time)
-    expect_true(is.character(get_table_writable(tables[i], token)))
+    expect_true(is.data.frame(get_table_writable(tables[i], token)))
     Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_table_writable(tables[i], token, TRUE)))
+    expect_true(all(column_names %in% names(get_table_writable(tables[i], token))))
     Sys.sleep(sleep_time)
-    expect_true(is.character(get_table_readable(tables[i], token)))
+    expect_true(is.data.frame(get_table_readable(tables[i], token)))
     Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_table_readable(tables[i], token, TRUE)))
+    expect_true(all(column_names %in% names(get_table_readable(tables[i], token))))
     Sys.sleep(sleep_time)
-    expect_true(is.character(get_table_optional(tables[i], token)))
+    expect_true(is.data.frame(get_table_optional(tables[i], token)))
     Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_table_optional(tables[i], token, TRUE)))
+    expect_true(all(column_names %in% names(get_table_optional(tables[i], token))))
     Sys.sleep(sleep_time)
-    expect_true(is.character(get_table_required(tables[i], token)))
+    expect_true(is.data.frame(get_table_required(tables[i], token)))
     Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_table_required(tables[i], token, TRUE)))
-    Sys.sleep(sleep_time)
-    expect_true(is.character(get_fields(tables[i], token, "read_only")))
-    Sys.sleep(sleep_time)
-    #default behavior if filter fields is not recognized
-    expect_false(is.character(get_fields(tables[i], token, "default")))
+    expect_true(all(column_names %in% names(get_table_required(tables[i], token))))
     Sys.sleep(sleep_time)
     }
   }

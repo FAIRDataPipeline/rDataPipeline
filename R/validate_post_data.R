@@ -27,10 +27,10 @@ validate_post_data <- function(table, data, key){
   table.required <- get_table_required(table, key)
   data.field_names <- names(data)
 
-  if(!all(data.field_names %in% table.writable))
+  if(!all(data.field_names %in% table.writable$field))
     stop(paste0("Invalid field names valid names are: ", paste0(table.writable, collapse = " ")))
 
-  if(!all(table.required %in% data.field_names))
+  if(!all(table.required$field %in% data.field_names))
     stop(paste0("required fields are missing required field names are: ", paste0(table.required, collapse = " ")))
 
    data

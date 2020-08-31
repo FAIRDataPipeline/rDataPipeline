@@ -58,6 +58,6 @@ test_that("Check Objects have correct fields", {
   expect_equal(lapply(object, function(x) x$description) %>%
                  unlist() %>% unique(),
                description)
-  expect_equal(lapply(object, length) %>% unlist() %>% unique(), length(get_table_readable("object", key)))
+  expect_equal(lapply(object, length) %>% unlist() %>% unique(), length(get_table_readable("object", key)$field))
 })
 

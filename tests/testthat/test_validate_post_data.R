@@ -22,9 +22,9 @@ test_that("validate_post_date works with all tables",{
       data <- list()
       data2 <- list()
       data3 <- list()
-      table.writable <- get_table_writable(tables[i], key)
+      table.writable <- get_table_writable(tables[i], key)$field
       Sys.sleep(sleep_time)
-      table.required <- get_table_required(tables[i], key)
+      table.required <- get_table_required(tables[i], key)$field
       for(field in seq_along(table.writable))
         data[table.writable[field]] <- "test"
 

@@ -10,11 +10,9 @@ get_table_optional(table, key, type = FALSE)
 \item{table}{name of table}
 
 \item{key}{api key / token}
-
-\item{type}{whether to return type of field, returns data frame}
 }
 \value{
-a character vector of optional fields
+a dataframe of optional fieldsa and thier properties
 }
 \description{
 Get Optional Fields

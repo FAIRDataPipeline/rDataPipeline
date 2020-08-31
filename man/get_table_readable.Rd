@@ -10,11 +10,9 @@ get_table_readable(table, key, type = FALSE)
 \item{table}{name of table}
 
 \item{key}{api key / token}
-
-\item{type}{whether to return type of field, returns data frame}
 }
 \value{
-a character vector of readable fields
+a dataframe of readable fields and their propertied
 }
 \description{
 Get Readable Fields

@@ -10,11 +10,9 @@ get_table_required(table, key, type = FALSE)
 \item{table}{name of table}
 
 \item{key}{api key / token}
-
-\item{type}{whether to return type of field, returns data frame}
 }
 \value{
-a character vector of required fields
+a dataframe of required fields and their properties
 }
 \description{
 Get Required Fields
