@@ -7,6 +7,7 @@
 register_everything(
   product_name,
   version_number,
+  save_location = "data-raw",
   doi_or_unique_name,
   namespace,
   submission_script,
@@ -15,7 +16,6 @@ register_everything(
   original_root,
   original_path,
   source_filename,
-  save_location,
   accessibility = 0,
   key
 )
@@ -27,6 +27,10 @@ locations)}
 
 \item{version_number}{a \code{string} specifying the version identifier of
 the \code{data_product} (must conform to semantic versioning syntax)}
+
+\item{save_location}{(optional) a \code{string}, which when prepended to
+product_name, will specify where to download the original source to and
+where to save the processed data product to. Default is "data-raw"}
 
 \item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
 \code{external_object} (source data)}
@@ -54,11 +58,6 @@ complete URL}
 
 \item{source_filename}{a \code{string} specifying the source filename}
 
-\item{save_location}{a \code{string}, which when prepended to product_name,
-will specify where to download the original source to and where to save the
-processed data product to
-file.path(save_location)}
-
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
 1 is private}
@@ -83,6 +82,7 @@ and \code{original_path} are input as named lists (see Example below).
 # A single original source
 register_everything(product_name = "geography/scotland/lookup_table",
 version_number = "0.1.0",
+save_location = "data-raw",
 doi_or_unique_name = "Scottish spatial lookup table",
 namespace = "SCRC",
 submission_script = "scotgov_dz_lookup.R",
@@ -92,12 +92,12 @@ original_root = "https://www.gov.scot/",
 original_path = "path/somefile.csv",
 source_filename = "paste0(version_number, ".csv")",
 accessibility = 0,
-save_location = "data-raw",
 key)
 
 # Multiple original sources
 register_everything(product_name = "geography/scotland/lookup_table",
 version_number = "0.1.0",
+save_location = "data-raw",
 doi_or_unique_name = "Scottish spatial lookup table",
 namespace = "SCRC",
 submission_script = "scotgov_dz_lookup.R",
@@ -110,7 +110,6 @@ original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv
 source_filename = list(simd = paste0(version_number, ".xlsx"),
 dz = paste0(version_number, ".csv")),
 accessibility = 0,
-save_location = "data-raw",
 key)
 }
 

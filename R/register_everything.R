@@ -12,9 +12,9 @@
 #' locations)
 #' @param version_number a \code{string} specifying the version identifier of
 #' the \code{data_product} (must conform to semantic versioning syntax)
-#' @param save_location a \code{string}, which when prepended to product_name,
-#' will specify where to download the original source to and where to save the
-#' processed data product to
+#' @param save_location (optional) a \code{string}, which when prepended to
+#' product_name, will specify where to download the original source to and
+#' where to save the processed data product to. Default is "data-raw"
 #' @param doi_or_unique_name a \code{string} specifying the DOI or name of the
 #' \code{external_object} (source data)
 #' @param namespace a \code{string} specifying the namespace; by default this
@@ -82,7 +82,7 @@
 #'
 register_everything <- function(product_name,
                                 version_number,
-                                save_location,
+                                save_location = "data-raw",
                                 doi_or_unique_name,
                                 namespace,
                                 submission_script,
