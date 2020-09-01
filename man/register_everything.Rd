@@ -15,6 +15,7 @@ register_everything(
   original_root,
   original_path,
   source_filename,
+  save_location,
   accessibility = 0,
   key
 )
@@ -53,6 +54,11 @@ complete URL}
 
 \item{source_filename}{a \code{string} specifying the source filename}
 
+\item{save_location}{a \code{string}, which when prepended to product_name,
+will specify where to download the original source to and where to save the
+processed data product to
+file.path(save_location)}
+
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
 1 is private}
@@ -86,6 +92,7 @@ original_root = "https://www.gov.scot/",
 original_path = "path/somefile.csv",
 source_filename = "paste0(version_number, ".csv")",
 accessibility = 0,
+save_location = "data-raw",
 key)
 
 # Multiple original sources
@@ -103,6 +110,7 @@ original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv
 source_filename = list(simd = paste0(version_number, ".xlsx"),
 dz = paste0(version_number, ".csv")),
 accessibility = 0,
+save_location = "data-raw",
 key)
 }
 

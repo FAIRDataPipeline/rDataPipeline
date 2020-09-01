@@ -12,6 +12,9 @@
 #' locations)
 #' @param version_number a \code{string} specifying the version identifier of
 #' the \code{data_product} (must conform to semantic versioning syntax)
+#' @param save_location a \code{string}, which when prepended to product_name,
+#' will specify where to download the original source to and where to save the
+#' processed data product to
 #' @param doi_or_unique_name a \code{string} specifying the DOI or name of the
 #' \code{external_object} (source data)
 #' @param namespace a \code{string} specifying the namespace; by default this
@@ -46,6 +49,7 @@
 #' # A single original source
 #' register_everything(product_name = "geography/scotland/lookup_table",
 #' version_number = "0.1.0",
+#' save_location = "data-raw",
 #' doi_or_unique_name = "Scottish spatial lookup table",
 #' namespace = "SCRC",
 #' submission_script = "scotgov_dz_lookup.R",
@@ -60,6 +64,7 @@
 #' # Multiple original sources
 #' register_everything(product_name = "geography/scotland/lookup_table",
 #' version_number = "0.1.0",
+#' save_location = "data-raw",
 #' doi_or_unique_name = "Scottish spatial lookup table",
 #' namespace = "SCRC",
 #' submission_script = "scotgov_dz_lookup.R",
@@ -77,6 +82,7 @@
 #'
 register_everything <- function(product_name,
                                 version_number,
+                                save_location,
                                 doi_or_unique_name,
                                 namespace,
                                 submission_script,
@@ -150,7 +156,7 @@ register_everything <- function(product_name,
     key = key)
 
   # where is the source data downloaded to locally? -------------------------
-  local_path <- file.path("data-raw", product_path)
+  local_path <- file.path(save_location, product_path)
 
   # If original_* arguments contain multiple entries...
   if(is.list(original_source_name)) {
@@ -170,7 +176,7 @@ register_everything <- function(product_name,
   }
 
   # where is the data product saved to locally? -----------------------------
-  processed_path <- file.path("data-raw", product_path)
+  processed_path <- file.path(save_location, product_path)
   product_filename <- paste0(version_number, ".h5")
 
   # where is the source data stored? ----------------------------------------
@@ -222,9 +228,9 @@ register_everything <- function(product_name,
   } else {
     sourceDataURIs <- upload_source_data(
       doi_or_unique_name = doi_or_unique_name,
-      original_source_id = original_sourceId, #
-      original_root_id = original_storageRootId, #
-      original_path = original_path, #
+      original_source_id = original_sourceId,
+      original_root_id = original_storageRootId,
+      original_path = original_path,
       primary_not_supplement = TRUE,
       local_path = file.path(local_path, source_filename),
       storage_root_id = source_storageRootId,
