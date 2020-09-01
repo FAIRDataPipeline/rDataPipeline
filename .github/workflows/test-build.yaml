@@ -86,6 +86,7 @@ jobs:
         run: |
           install.packages("pkgdown")
           pkgdown::build_site()
+          pkgdown::build_home()
         shell: Rscript {0}
 
       - name: Deploy Documentation with skip ci message
@@ -96,4 +97,4 @@ jobs:
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
-          COMMIT_MESSAGE: '[skip ci]' 
+          COMMIT_MESSAGE: 'build docs [skip ci]' 
