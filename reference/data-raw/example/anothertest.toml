@@ -1,7 +1,0 @@
-[asymptomatic_period]
-type = "point-estimate"
-value = 192
-
-[latent_period]
-type = "point-estimate"
-value = 123.12
