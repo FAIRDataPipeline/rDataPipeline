@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
       </span>
     </div>
 
@@ -89,7 +89,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ScottishCovidResponse/SCRCdataAPI/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>new_external_object</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/new_external_object.R'><code>R/new_external_object.R</code></a></small>
     <div class="hidden name"><code>new_external_object.Rd</code></div>
     </div>
 
@@ -137,12 +142,13 @@
     <tr>
       <th>primary_not_supplement</th>
       <td><p>(optional) a boolean flag to indicate
-whether the external object is the primary source (<code>TRUE</code>) or not (<code>FALSE</code>)</p></td>
+whether the external object is the primary source (<code>TRUE</code>) or not
+(<code>FALSE</code>)</p></td>
     </tr>
     <tr>
       <th>release_date</th>
       <td><p>the date-time that the <code>external_object</code> was
-released <em>e.g.</em> Sys.time() or "2010-07-11 12:15:00 BST"</p></td>
+released <em>e.g.</em> <code><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time()</a></code> or "2010-07-11 12:15:00 BST"</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -174,8 +180,8 @@ associated <code>source</code> table <em>e.g.</em> "https://data.scrc.uk/api/sou
     <tr>
       <th>original_store_id</th>
       <td><p>(optional) a <code>string</code> specifying the API URL of the
-associated <code>storage_location</code> table that references the original location
-of the <code>external_object</code>
+associated <code>storage_location</code> table that references the original
+location of the <code>external_object</code>
 <em>e.g.</em> "https://data.scrc.uk/api/storage_location/19/"</p></td>
     </tr>
     <tr>

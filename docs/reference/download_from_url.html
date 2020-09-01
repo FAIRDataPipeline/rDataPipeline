@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="download_from_url — download_from_url" />
-<meta property="og:description" content="download_from_url" />
+<meta property="og:description" content="This function will download a file from a url" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
       </span>
     </div>
 
@@ -89,7 +89,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ScottishCovidResponse/SCRCdataAPI/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,34 +109,43 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>download_from_url</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/download_from_url.R'><code>R/download_from_url.R</code></a></small>
     <div class="hidden name"><code>download_from_url.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>download_from_url</p>
+    <p>This function will download a file from a url</p>
     </div>
 
-    <pre class="usage"><span class='fu'>download_from_url</span>(<span class='no'>url</span>, <span class='no'>path</span>, <span class='no'>local</span>, <span class='no'>filename</span>)</pre>
+    <pre class="usage"><span class='fu'>download_from_url</span>(<span class='no'>source_root</span>, <span class='no'>source_path</span>, <span class='no'>path</span>, <span class='no'>filename</span>, <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>url</th>
-      <td><p>url</p></td>
+      <th>source_root</th>
+      <td><p>a <code>string</code> specifying the source root <em>e.g.</em>
+"https://www.nrscotland.gov.uk"</p></td>
+    </tr>
+    <tr>
+      <th>source_path</th>
+      <td><p>a <code>string</code> specifying the source path <em>e.g.</em>
+"files/statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>path</p></td>
-    </tr>
-    <tr>
-      <th>local</th>
-      <td><p>local</p></td>
+      <td><p>a <code>string</code> specifying the local path (where to save the
+file) <em>e.g.</em> "data-raw"</p></td>
     </tr>
     <tr>
       <th>filename</th>
-      <td><p>filename</p></td>
+      <td><p>a <code>string</code> specifying the filename (the name given to
+the saved file) <em>e.g.</em> "0.1.0.csv"</p></td>
+    </tr>
+    <tr>
+      <th>unzip</th>
+      <td><p>a <code>boolean</code> specifying which when <code>TRUE</code> will
+unzip a <code>.zip</code> file and remove the original <code>.zip</code> file</p></td>
     </tr>
     </table>
 

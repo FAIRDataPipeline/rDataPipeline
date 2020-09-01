@@ -42,7 +42,7 @@
 <meta property="og:title" content="attach_issue — attach_issue" />
 <meta property="og:description" content="This function is used to attach an issue to either
 an external object (in which case you must specify the
-external_object argument)
+external_object_doi argument)
 a data product (in which case you must specify the namespace and
 data_product arguments), or
 a component within a data product (in which case you must specify the
@@ -80,7 +80,7 @@ namespace, data_product, and component arguments)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
       </span>
     </div>
 
@@ -97,7 +97,12 @@ namespace, data_product, and component arguments)
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ScottishCovidResponse/SCRCdataAPI/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -112,14 +117,14 @@ namespace, data_product, and component arguments)
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>attach_issue</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/attach_issue.R'><code>R/attach_issue.R</code></a></small>
     <div class="hidden name"><code>attach_issue.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function is used to attach an issue to either</p><ul>
 <li><p>an external object (in which case you must specify the
-<code>external_object</code> argument)</p></li>
+<code>external_object_doi</code> argument)</p></li>
 <li><p>a data product (in which case you must specify the <code>namespace</code> and
 <code>data_product</code> arguments), or</p></li>
 <li><p>a component within a data product (in which case you must specify the
@@ -131,7 +136,7 @@ namespace, data_product, and component arguments)
     <pre class="usage"><span class='fu'>attach_issue</span>(
   <span class='no'>description</span>,
   <span class='no'>severity</span>,
-  <span class='no'>external_object</span>,
+  <span class='no'>external_object_doi</span>,
   <span class='no'>namespace</span>,
   <span class='no'>data_product</span>,
   <span class='no'>component</span>,
@@ -150,7 +155,7 @@ namespace, data_product, and component arguments)
       <td><p><em>e.g.</em> 19</p></td>
     </tr>
     <tr>
-      <th>external_object</th>
+      <th>external_object_doi</th>
       <td><p><em>e.g.</em>
 "scottish coronavirus-covid-19-management-information"</p></td>
     </tr>
