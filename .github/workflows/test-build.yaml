@@ -80,3 +80,20 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+          
+      - name: Install and Build Documentation
+        if: runner.os == 'macOS'
+        run: |
+          install.packages("pkgdown")
+          pkgdown::build_site()
+        shell: Rscript {0}
+
+      - name: Deploy Documentation with skip ci message
+        if: runner.os == 'macOS'
+        uses: JamesIves/github-pages-deploy-action@3.5.9
+        with:
+          GITHUB_TOKEN: ${{ secrets.SCRCdataAPI-docs }}
+          BRANCH: master # The branch the action should deploy to.
+          FOLDER: docs # The folder the action should deploy.
+          TARGET_FOLDER: docs
+          COMMIT_MESSAGE: '[skip ci]' 
