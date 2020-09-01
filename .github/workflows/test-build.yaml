@@ -82,26 +82,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-          
-      - name: Checkout discarding previous build
-        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-        with:
-          persist-credentials: false
-          
-      - name: Install Package Down and Build Documentation
-        if: runner.os == 'macOS'
-        run: |
-          install.packages("pkgdown")
-          pkgdown::build_site()
-          pkgdown::build_home()
-        shell: Rscript {0}
-
-      - name: Deploy Documentation with skip ci message
-        if: runner.os == 'macOS'
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: master # The branch the action should deploy to.
-          FOLDER: docs # The folder the action should deploy.
-          TARGET_FOLDER: docs
-          COMMIT_MESSAGE: 'build docs [skip ci]' 
