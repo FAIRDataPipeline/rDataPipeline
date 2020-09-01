@@ -95,7 +95,7 @@ jobs:
         if: runner.os == 'macOS'
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
-          GITHUB_TOKEN: ${{ secrets.SCRCdataAPI-docs }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
