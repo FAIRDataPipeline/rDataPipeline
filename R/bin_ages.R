@@ -10,8 +10,8 @@ bin_ages <- function(dat,
 
   if(all(ageclasses == "total")) {
     output <- dat %>%
-      dplyr::mutate(total = rowSums(dplyr::select(., -AREAcode))) %>%
-      dplyr::select(AREAcode, total)
+      dplyr::mutate(total = rowSums(dplyr::select(.data, -.data$AREAcode))) %>%
+      dplyr::select(.data$AREAcode, .data$total)
 
   } else {
     # Find total number of individuals in each age class
@@ -21,8 +21,8 @@ bin_ages <- function(dat,
     for(i in seq_along(ageclasses)) {
 
       maxage <- colnames(dat)[ncol(dat)] %>%
-        gsub("AGE", "", .) %>%
-        gsub("\\+", "", .) %>%
+        gsub("AGE", "", .data) %>%
+        gsub("\\+", "", .data) %>%
         as.numeric()
       endcol <- dplyr::if_else(i == length(ageclasses), maxage,
                                (ageclasses[i + 1] - 1))

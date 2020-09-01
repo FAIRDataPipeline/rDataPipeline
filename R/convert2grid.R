@@ -22,8 +22,8 @@ convert2grid <- function(dat,
   conversion.table <- conversion.table %>% tibble() %>%
     dplyr::select(colnames(conversion.table)[grepl(grid_size,
                                                    colnames(conversion.table))],
-                  AREAcode) %>%
-    dplyr::filter(AREAcode %in% rownames(dat)) %>%
+                  .data$AREAcode) %>%
+    dplyr::filter(.data$AREAcode %in% rownames(dat)) %>%
     dplyr::rename(grid_id = paste0(grid_size,"_id"),
                   proportion = paste0(grid_size,"_area_proportion"))
 
@@ -76,7 +76,7 @@ convert2grid <- function(dat,
         non_rounded_pops <- in_gridcell$proportion * true_pop
         difference <- non_rounded_pops - rounded_pops
         remainder <- sum(non_rounded_pops) - sum(rounded_pops)
-      
+
         if(remainder > 0){
         # Find cells to adjust
         next.biggest <- order(abs(difference),
@@ -90,32 +90,32 @@ convert2grid <- function(dat,
         }
 
         # Make adjustment
-        
+
           rounded_pops[next.biggest] <- rounded_pops[next.biggest] + 1
         }
         if(remainder < 0){
-          # This is calculated differently when we need to remove "individuals" 
-          # as the individual should be taken from the grid cell with the 
-          # smallest proprotional area of the gird cells that already have 
+          # This is calculated differently when we need to remove "individuals"
+          # as the individual should be taken from the grid cell with the
+          # smallest proprotional area of the gird cells that already have
           # populations
           difference <-  (non_rounded_pops*rounded_pops) - rounded_pops
-          
+
           # Find cells to adjust
           next.biggest <- order(abs(difference),
                                 decreasing = FALSE)[which(sort(abs(difference))!=0)][1:abs(remainder)]
-          
+
           # Break any ties: choose randomly to avoid a systematic bias by cell order
           tied_first <- difference %in% difference[next.biggest]
-          
+
           if(!isTRUE(all.equal(sum(tied_first), abs(remainder)))) {
             next.biggest <- sample(which(tied_first), size = round(abs(remainder)))
           }
-          
+
           # Make adjustment
           rounded_pops[next.biggest] <- rounded_pops[next.biggest] - 1
         }
       }
-      assertthat::assert_that(all(rounded_pops>=0)) 
+      assertthat::assert_that(all(rounded_pops>=0))
       grid_pop[in_gridcell$grid_id, bins[j]] = grid_pop[in_gridcell$grid_id, bins[j]] +rounded_pops
     }
 

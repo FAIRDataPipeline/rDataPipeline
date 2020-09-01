@@ -84,7 +84,7 @@ upload_paper <- function(title,
     for(i in seq_along(authorList)) {
       # If an author has both a family and personal name create entry in the
       # data registry, otherwise generate an issue
-      if(grepl(",", authorList[[i]])) {
+      if(grepl(", [A-Za-z]+", authorList[[i]])) {
         tmp <- strsplit(authorList[[i]], ", ")[[1]]
         new_author(family_name = tmp[1],
                    personal_name = tmp[2],
