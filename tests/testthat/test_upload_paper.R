@@ -28,7 +28,9 @@ journal_name <- paste0("TEST Journal ", date_time)
 journal_abr <- paste0("TEST_", formatted_date)
 keywords <- formatted_date
 website <- ""
-authors <- paste0("TEST, ", formatted_date)
+tmp <- letters[as.numeric(strsplit(formatted_date, "")[[1]])] %>%
+  paste(collapse = "")
+authors <- paste0("TEST, ", tmp)
 
 test_that("Upload Paper returns ID", {
   paper_id <- character(0)
