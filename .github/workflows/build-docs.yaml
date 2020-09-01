@@ -16,6 +16,7 @@ jobs:
 
       - name: Install and Build
         run: |
+          install.packages("pkgdown")
           pkgdown::build_site()
         shell: Rscript {0}
 
