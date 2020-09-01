@@ -49,12 +49,18 @@ jobs:
           install.packages("pkgdown")
           pkgdown::build_site()
         shell: Rscript {0}
+        
+      - name: Commit to development branch
+        run: |
+          git checkout -b development
+          git add .
+          git commit - m '[skip ci]'
 
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: master
+          BASE_BRANCH: development
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
