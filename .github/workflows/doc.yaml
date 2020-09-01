@@ -54,7 +54,7 @@ jobs:
         run: |
           git checkout -b development
           git add .
-          git commit - m '[skip ci]'
+          git commit -m '[skip ci]'
 
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@releases/v3
