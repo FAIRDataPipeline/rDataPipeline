@@ -11,7 +11,7 @@ journal_name <- "Zoological research"
 journal_abr <- "Zool Res"
 keywords <- "tree shrews"
 website <- ""
-authors <- "Yong-Tang Zheng"
+authors <- "Zheng, Yong-Tang"
 
 test_that("Existing Paper returns existing paper", {
   expect_message(upload_paper(title, authors, journal_name, journal_abr, website, release_date, abstract, keywords, doi, key = token))
