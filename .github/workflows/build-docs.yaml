@@ -14,10 +14,12 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Build        run: |
-           pkgdown::build_site()
-        shell: Rscript {0} 
-       name: Deploy
+      - name: Install and Build
+        run: |
+          pkgdown::build_site()
+        shell: Rscript {0}
+
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.SCRCdataAPI-docs }}
