@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
       </span>
     </div>
 
@@ -89,7 +89,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ScottishCovidResponse/SCRCdataAPI/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>upload_paper</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/upload_paper.R'><code>R/upload_paper.R</code></a></small>
     <div class="hidden name"><code>upload_paper.Rd</code></div>
     </div>
 
@@ -132,42 +137,53 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>title</th>
-      <td><p>a <code>string</code> specifying the title of the paper</p></td>
+      <td><p>a <code>string</code> specifying the title of the paper <em>e.g.</em>
+"Covid-19: A systemic disease treated with a wide-ranging approach: A case
+report"</p></td>
     </tr>
     <tr>
       <th>authors</th>
-      <td><p>a <code>string</code> specifying the authors</p></td>
+      <td><p>a <code>string</code> specifying the authors <em>e.g.</em> "Massabeti,
+Rosanna and Cipriani, Maria Stella and Valenti, Ivana"</p></td>
     </tr>
     <tr>
       <th>journal</th>
-      <td><p>a <code>string</code> specifying the full journal name</p></td>
+      <td><p>a <code>string</code> specifying the full journal name <em>e.g.</em>
+"Journal of Population Therapeutics and Clinical Pharmacology"</p></td>
     </tr>
     <tr>
       <th>journal_abbreviation</th>
       <td><p>a <code>string</code> specifying the journal
-abbreviation</p></td>
+abbreviation <em>e.g.</em> "J Popul Ther Clin Pharmacol"</p></td>
     </tr>
     <tr>
       <th>journal_website</th>
-      <td><p>a <code>string</code> specifying the journal homepage</p></td>
+      <td><p>a <code>string</code> specifying the journal homepage <em>e.g.</em>
+"https://www.jptcp.com/index.php/jptcp"</p></td>
     </tr>
     <tr>
       <th>release_date</th>
       <td><p>a <code>POSIXct</code> of format "%Y-%m-%d %H:%M:%S"
-specifying the release date of the paper</p></td>
+specifying the release date of the paper <em>e.g.</em>
+as.POSIXct("2020-01-01 12:00:00", format = "%Y-%m-%d %H:%M:%S")</p></td>
     </tr>
     <tr>
       <th>abstract</th>
-      <td><p>a <code>string</code> specifying the abstract</p></td>
+      <td><p>a <code>string</code> specifying the abstract <em>e.g.</em> "At the end
+of December 2019, the Health Commission of the"</p></td>
     </tr>
     <tr>
       <th>keywords</th>
       <td><p>a <code>string</code> specifying keywords or keyphrases
-seperated by "and", e.g. "keyword1 and keyword2 and key phrase1 and keyword3"</p></td>
+seperated by "and", <em>e.g.</em> "covid-19 and coronavirus disease and monoclonal
+antibodies</p><ul>
+<li><p>and non-invasive mechanical ventilation and treatment"</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>doi</th>
-      <td><p>a <code>string</code> specifying the doi</p></td>
+      <td><p>a <code>string</code> specifying the doi <em>e.g.</em>
+"10.15586/jptcp.v27iSP1.691"</p></td>
     </tr>
     <tr>
       <th>primary_not_supplement</th>
@@ -176,7 +192,9 @@ where <code>TRUE</code> is the primary source (default) and false is a supplemen
     </tr>
     <tr>
       <th>version</th>
-      <td><p>(optional) a <code>string</code> specifying the version number</p></td>
+      <td><p>(optional) a <code>string</code> specifying the version number;
+by default this is 1.0.0 (assuming a published paper), set to 0.1.0 for a
+preprint</p></td>
     </tr>
     <tr>
       <th>key</th>
@@ -185,17 +203,6 @@ where <code>TRUE</code> is the primary source (default) and false is a supplemen
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>title</span> <span class='kw'>&lt;-</span> <span class='st'>"Covid-19: A systemic disease treated with a wide-ranging approach: A case report"</span>
-<span class='no'>authors</span> <span class='kw'>&lt;-</span> <span class='st'>"Massabeti, Rosanna and Cipriani, Maria Stella and Valenti, Ivana"</span>
-<span class='no'>journal</span> <span class='kw'>&lt;-</span> <span class='st'>"Journal of Population Therapeutics and Clinical Pharmacology"</span>
-<span class='no'>journal_abbreviation</span> <span class='kw'>&lt;-</span> <span class='st'>"J Popul Ther Clin Pharmacol"</span>
-<span class='no'>journal_website</span> <span class='kw'>&lt;-</span> <span class='st'>"https://www.jptcp.com/index.php/jptcp"</span>
-<span class='no'>release_date</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span>(<span class='st'>"2020-01-01 12:00:00"</span>, <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"%Y-%m-%d %H:%M:%S"</span>)
-<span class='no'>abstract</span> <span class='kw'>&lt;-</span> <span class='st'>"At the end of December 2019, the Health Commission of the"</span>
-<span class='no'>keywords</span> <span class='kw'>&lt;-</span> <span class='st'>"covid-19 and coronavirus disease and monoclonal antibodies
-+ and non-invasive mechanical ventilation and treatment"</span>
-<span class='no'>doi</span> <span class='kw'>&lt;-</span> <span class='st'>"10.15586/jptcp.v27iSP1.691"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

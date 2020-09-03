@@ -2,7 +2,7 @@
 #'
 #' @param table name of table
 #' @param key api key / token
-#' @return a dataframe of readable fields and their propertied
+#' @return a dataframe of readable fields and their properties
 #'
 #' @export
 #'

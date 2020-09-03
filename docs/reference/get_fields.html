@@ -6,9 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>get fields from table
-use api endpoint to produce a list of fields for a table
-requires api key — get_fields • SCRCdataAPI</title>
+<title>Get fields from table — get_fields • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -41,12 +39,8 @@ requires api key — get_fields • SCRCdataAPI</title>
 
 
 
-<meta property="og:title" content="get fields from table
-use api endpoint to produce a list of fields for a table
-requires api key — get_fields" />
-<meta property="og:description" content="get fields from table
-use api endpoint to produce a list of fields for a table
-requires api key" />
+<meta property="og:title" content="Get fields from table — get_fields" />
+<meta property="og:description" content="Use API endpoint to produce a list of fields for a table." />
 
 
 
@@ -78,7 +72,7 @@ requires api key" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
       </span>
     </div>
 
@@ -95,7 +89,12 @@ requires api key" />
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/ScottishCovidResponse/SCRCdataAPI/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -109,20 +108,16 @@ requires api key" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>get fields from table
-use api endpoint to produce a list of fields for a table
-requires api key</h1>
-    
+    <h1>Get fields from table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/get_fields.R'><code>R/get_fields.R</code></a></small>
     <div class="hidden name"><code>get_fields.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>get fields from table
-use api endpoint to produce a list of fields for a table
-requires api key</p>
+    <p>Use API endpoint to produce a list of fields for a table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_fields</span>(<span class='no'>table</span>, <span class='no'>key</span>, <span class='kw'>filter_fields</span> <span class='kw'>=</span> <span class='st'>"all"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_fields</span>(<span class='no'>table</span>, <span class='no'>key</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,16 +130,15 @@ requires api key</p>
       <th>key</th>
       <td><p>api key / token</p></td>
     </tr>
-    <tr>
-      <th>filter_fields</th>
-      <td><p>which fields you want returned
-<em>e.g.</em> all, none, readable, writable, optional</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a character vector of fields or a list of fields if filter fields is set to "none"</p>
+    <p>a dataframe of fields and their attributes
+set to "none"</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Requires API key</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

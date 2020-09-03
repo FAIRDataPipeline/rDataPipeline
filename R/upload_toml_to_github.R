@@ -38,7 +38,7 @@ upload_toml_to_github <- function(path_to_toml,
 
     if(file.exists(file.path(github_repo_path, github_toml_file_path,
                              fsep = "/")))
-      stop(paste0("A File named ", toml_name, "already exists in the repo"))
+      stop(paste0("A File named ", toml_name, " already exists in the repo"))
 
     dir.create(file.path(github_repo_path, github_dir_path, fsep = "/"),
                recursive = TRUE)

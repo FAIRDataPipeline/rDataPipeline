@@ -12,7 +12,7 @@ get_table_readable(table, key)
 \item{key}{api key / token}
 }
 \value{
-a dataframe of readable fields and their propertied
+a dataframe of readable fields and their properties
 }
 \description{
 Get Readable Fields

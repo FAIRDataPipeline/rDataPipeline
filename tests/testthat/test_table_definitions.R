@@ -9,7 +9,7 @@ unknown_table <- "unknown"
 
 sleep_time <- 0.5
 
-column_names <- c("field", "read_only", "required", "min_value", "max_value")
+column_names <- c("field", "data_type", "read_only", "required", "min_value", "max_value")
 
 
 test_that("Fields are returned by get_fields", {
