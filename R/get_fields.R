@@ -27,42 +27,33 @@ get_fields <- function(table, key){
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   # Set up data frame with column names
-    df <- data.frame(matrix(ncol = 6, nrow = 0))
-    colnames(df) <- c("field", "data_type", "read_only", "required", "min_value", "max_value")
-
-  for(i in seq_along(out$actions$POST)){
+  lapply(seq_along(out$actions$POST), function(i) {
     field <- out$actions$POST[i]
+
     name <- names(field)
     data_type <- field[[1]]$type
-    read_only <- FALSE
-    required <- FALSE
-    min_value <- NA
-    max_value <- NA
+    read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
+    required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
 
-    if(field[[1]]$read_only){
-      read_only <- TRUE
-    }
-    if(field[[1]]$required){
-      required <- TRUE
-    }
-    else{
-      required <- FALSE
-    }
-    if("min_value" %in% names(field[[1]])){
+    if("min_value" %in% names(field[[1]])) {
       min_value <- field[[1]]$min_value
+    } else {
+      min_value <- NA
     }
-    if("max_value" %in% names(field[[1]])){
-      max_value <- field[[1]]$max_value
-    }
-    df <- rbind(df,
-                list(field = name,
-                 data_type = data_type,
-                 read_only = read_only,
-                 required = required,
-                 min_value = min_value,
-                 max_value = max_value))
-  }
 
-  df
+    if("max_value" %in% names(field[[1]])) {
+      max_value <- field[[1]]$max_value
+    } else {
+      max_value <- NA
+    }
+
+    data.frame(field = name,
+               data_type = data_type,
+               read_only = read_only,
+               required = required,
+               min_value = min_value,
+               max_value = max_value)
+  }) %>% do.call(rbind.data.frame, .)
+
 }
 
