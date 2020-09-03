@@ -70,6 +70,7 @@ test_that("post_data works with all tables",{
 
           data_correct[[field]] <- dplyr::case_when(
             data_type == "field" ~ object_id,
+            data_type == "string" & field == "version" ~ "0.1.0",
             data_type == "string" ~ uid,
             data_type == "integer" ~ as.character(id),
             data_type == "url" ~ paste0("https://test.com/", uid),

@@ -123,6 +123,11 @@ validate_post_data <- function(table, data, key){
           stop(paste0("Maximum Length of string exceeded Max Length: ", max_value))
         }
       }
+      if(name == "version"){
+        if(!grepl("^.*[.].*[.].*$", value)){
+          stop(paste0(name, " must be of syntatic type version e.g. 0.1.0"))
+        }
+      }
     }
     # If the field is a date
     else if(type == "datetime")

@@ -61,6 +61,7 @@ test_that("validate_post_data works with all tables",{
 
         data_correct[[field]] <- dplyr::case_when(
           data_type == "field" ~ object_id,
+          data_type == "string" & field == "version" ~ "0.1.0",
           data_type == "string" ~ "TEST",
           data_type == "integer" ~ "0",
           data_type == "url" ~ "https://test.com",

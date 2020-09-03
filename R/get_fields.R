@@ -26,57 +26,50 @@ get_fields <- function(table, key){
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  # Set up data frame with column names
-    df <- data.frame(matrix(ncol = 8, nrow = 0))
-    colnames(df) <- c("field", "data_type", "read_only", "required", "min_value", "max_value", "choice_values", "choice_names")
-
-  for(i in seq_along(out$actions$POST)){
+  lapply(seq_along(out$actions$POST), function(i) {
     field <- out$actions$POST[i]
+
     name <- names(field)
     data_type <- field[[1]]$type
-    read_only <- FALSE
-    required <- FALSE
     min_value <- NA
     max_value <- NA
     choice_values <- NA
     choice_names <- NA
 
-    if(field[[1]]$read_only){
-      read_only <- TRUE
-    }
-    if(field[[1]]$required){
-      required <- TRUE
-    }
-    else{
-      required <- FALSE
-    }
-    if("min_value" %in% names(field[[1]])){
+    read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
+    required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
+
+
+    if("min_value" %in% names(field[[1]])) {
       min_value <- field[[1]]$min_value
+    } else {
+      min_value <- NA
     }
-    if("max_value" %in% names(field[[1]])){
+
+    if("max_value" %in% names(field[[1]])) {
       max_value <- field[[1]]$max_value
+    } else {
+      max_value <- NA
     }
+
+
     if("choices" %in% names(field[[1]])){
       if(is.list(field[[1]]$choices)){
-        choice_values <- NULL
-        choice_names <- NULL
         for(choice in seq_along(field[[1]]$choices)){
-          choice_values <- c(choice_values, field[[1]]$choices[[choice]]$value)
-          choice_names <- c(choice_names, field[[1]]$choices[[choice]]$display_name)
+          choice_values <- dplyr::if_else(is.na(choice_values), as.character(field[[1]]$choices[[choice]]$value), paste(choice_values, field[[1]]$choices[[choice]]$value, sep = ", "))
+          choice_names <- dplyr::if_else(is.na(choice_names), field[[1]]$choices[[choice]]$display_name, paste(choice_names, field[[1]]$choices[[choice]]$display_name, sep = ", "))
         }
       }
     }
-    df <- rbind(df,
-                list(field = name,
-                 data_type = data_type,
-                 read_only = read_only,
-                 required = required,
-                 min_value = min_value,
-                 max_value = max_value,
-                 choice_values = paste(choice_values, sep ="", collapse = ", "),
-                 choice_names = paste(choice_names, sep ="", collapse = ", ")))
-  }
+    data.frame(field = name,
+               data_type = data_type,
+               read_only = read_only,
+               required = required,
+               min_value = min_value,
+               max_value = max_value,
+               choice_values = choice_values,
+               choice_names = choice_names)
+  }) %>% do.call(rbind.data.frame, .)
 
-  df
 }
 
