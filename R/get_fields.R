@@ -69,7 +69,7 @@ get_fields <- function(table, key){
                max_value = max_value,
                choice_values = choice_values,
                choice_names = choice_names)
-  }) %>% do.call(rbind.data.frame, .)
+  }) %>% (function(x){do.call(rbind.data.frame, x)})
 
 }
 
