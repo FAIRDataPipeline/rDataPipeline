@@ -34,7 +34,7 @@ get_package_info <- function(repo, script_path, package) {
   tryCatch(
     {
       readLines(paste("https://raw.githubusercontent.com", repo, "master",
-                          script_path, sep = "/"))
+                          script_path, sep = "/"), warn = FALSE)
     }, warning = function(warn) {
       stop(paste(script_path, "does not exist within", repo))
     }
