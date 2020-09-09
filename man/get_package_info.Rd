@@ -7,11 +7,13 @@
 get_package_info(repo, script_path, package)
 }
 \arguments{
-\item{repo}{\emph{e.g.} "ScottishCovidResponse/SCRCdata"}
+\item{repo}{a \code{string} specifying the github username/repository}
 
-\item{script_path}{\emph{e.g.} "scotgov_deaths.R"}
+\item{script_path}{a \code{string} specifying the submission script filename
+and extension}
 
-\item{package}{(optional) \emph{e.g.} "SCRCdata"}
+\item{package}{(optional) a \code{string} specifying the name of the package
+containing the submission script}
 }
 \value{
 Returns a list comprising:
@@ -29,4 +31,13 @@ GitHub hash associated with it. The repository should contain a DESCRIPTION
 file whether it is set up as a package or not. If the repository is set up
 as a package, checks are made to ensure remote and local versions of the
 package have the same version number.
+}
+\examples{
+\donttest{
+\dontrun{
+get_package_info(repo = "ScottishCovidResponse/SCRCdata",
+script_path = "scotgov_deaths.R",
+package = "SCRCdata")
+}}
+
 }
