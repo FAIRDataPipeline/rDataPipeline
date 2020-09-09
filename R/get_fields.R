@@ -28,7 +28,7 @@ get_fields <- function(table, key){
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   # Set up data frame with column names
-  lapply(seq_along(out$actions$POST), function(i) {
+  output <- lapply(seq_along(out$actions$POST), function(i) {
     field <- out$actions$POST[i]
 
     name <- names(field)
@@ -54,5 +54,6 @@ get_fields <- function(table, key){
                required = required,
                min_value = min_value,
                max_value = max_value)
-  }) %>% do.call(rbind.data.frame, .data)
+  })
+  do.call(rbind.data.frame, output)
 }
