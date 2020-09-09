@@ -12,16 +12,13 @@
 #' locations)
 #' @param version_number a \code{string} specifying the version identifier of
 #' the \code{data_product} (must conform to semantic versioning syntax)
-#' @param save_location (optional) a \code{string}, which when prepended to
-#' product_name, will specify where to download the original source to and
-#' where to save the processed data product to. Default is "data-raw"
 #' @param doi_or_unique_name a \code{string} specifying the DOI or name of the
 #' \code{external_object} (source data)
+#' @param save_location a \code{string}, which when prepended to
+#' product_name, will specify where to download the original source to and
+#' where to save the processed data product to. Default is "data-raw"
 #' @param namespace a \code{string} specifying the namespace; by default this
 #' is "SCRC"
-#' @param submission_script a \code{string} specifying the filename of the
-#' submission script located in the \code{inst/namespace/} directory of the
-#' SCRCdata package
 #' @param original_source_name a \code{string} specifying the original source
 #' name
 #' @param original_sourceId a \code{string} specifying the API URL of the
@@ -33,6 +30,10 @@
 #' original_root, which when appended to \code{original_root} produces a
 #' complete URL
 #' @param source_filename a \code{string} specifying the source filename
+#' @param submission_script a \code{string} specifying the filename of the
+#' submission script located in the \code{inst/namespace/} directory of the
+#' SCRCdata package
+#' @param github_info a \code(list)
 #' @param accessibility (optional) an \code{integer} value for the accessibility
 #' enum associated with \code{original_root}, where 0 is public (default) and
 #' 1 is private
@@ -49,25 +50,25 @@
 #' # A single original source
 #' register_everything(product_name = "geography/scotland/lookup_table",
 #' version_number = "0.1.0",
-#' save_location = "data-raw",
 #' doi_or_unique_name = "Scottish spatial lookup table",
+#' save_location = "data-raw",
 #' namespace = "SCRC",
-#' submission_script = "scotgov_dz_lookup.R",
 #' original_source_name = "Scottish Government",
 #' original_sourceId = "https://data.scrc.uk/api/source/3932/",
 #' original_root = "https://www.gov.scot/",
 #' original_path = "path/somefile.csv",
 #' source_filename = "paste0(version_number, ".csv")",
+#' submission_script = "scotgov_dz_lookup.R",
+#' github_info = github_info,
 #' accessibility = 0,
 #' key)
 #'
 #' # Multiple original sources
 #' register_everything(product_name = "geography/scotland/lookup_table",
 #' version_number = "0.1.0",
-#' save_location = "data-raw",
 #' doi_or_unique_name = "Scottish spatial lookup table",
+#' save_location = "data-raw",
 #' namespace = "SCRC",
-#' submission_script = "scotgov_dz_lookup.R",
 #' original_source_name = list(simd = "Scottish Government",
 #' dz = "Scottish Government Open Data Repository downloadable file"),
 #' original_sourceId = list(simd = "https://data.scrc.uk/api/source/3932/",
@@ -76,26 +77,28 @@
 #' original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
 #' source_filename = list(simd = paste0(version_number, ".xlsx"),
 #' dz = paste0(version_number, ".csv")),
+#' submission_script = "scotgov_dz_lookup.R",
+#' github_info = github_info,
 #' accessibility = 0,
 #' key)
 #' }
 #'
 register_everything <- function(product_name,
                                 version_number,
-                                save_location = "data-raw",
                                 doi_or_unique_name,
+                                save_location,
                                 namespace,
-                                submission_script,
                                 original_source_name,
                                 original_sourceId,
                                 original_root,
                                 original_path,
                                 source_filename,
+                                submission_script,
+                                github_info,
                                 accessibility = 0,
                                 key) {
 
-  # If any of the original_* arguments is a list (presumably containing
-  # multiple entries, do some checks...
+  # If any of the original_* arguments is a list do some checks...
   if(is.list(original_source_name) | is.list(original_sourceId) |
      is.list(original_root) | is.list(original_path) |
      is.list(source_filename)) {
@@ -143,12 +146,6 @@ register_everything <- function(product_name,
   # namespace ---------------------------------------------------------------
   namespaceId <- new_namespace(name = namespace,
                                key = key)
-
-  # ensure that github is in the data registry ------------------------------
-  github_info <- get_package_info(repo = "ScottishCovidResponse/SCRCdata",
-                                  script_path = paste0("inst/SCRC/",
-                                                       submission_script),
-                                  package = "SCRCdata")
 
   repo_storageRootId <- new_storage_root(
     name = paste0(github_info$repo_storageRoot),
