@@ -33,7 +33,7 @@
 #' @param submission_script a \code{string} specifying the filename of the
 #' submission script located in the \code{inst/namespace/} directory of the
 #' SCRCdata package
-#' @param github_info a \code(list)
+#' @param github_info a \code{list}
 #' @param accessibility (optional) an \code{integer} value for the accessibility
 #' enum associated with \code{original_root}, where 0 is public (default) and
 #' 1 is private

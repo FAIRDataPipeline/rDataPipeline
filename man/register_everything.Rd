@@ -59,7 +59,7 @@ complete URL}
 submission script located in the \code{inst/namespace/} directory of the
 SCRCdata package}
 
-\item{github_info}{a \code(list)}
+\item{github_info}{a \code{list}}
 
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
