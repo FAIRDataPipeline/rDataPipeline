@@ -21,7 +21,8 @@ get_fields <- function(table, key){
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request
-  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "", sep = "/"),
+  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
+                                     sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
@@ -53,7 +54,5 @@ get_fields <- function(table, key){
                required = required,
                min_value = min_value,
                max_value = max_value)
-  }) %>% do.call(rbind.data.frame, .)
-
+  }) %>% do.call(rbind.data.frame, .data)
 }
-
