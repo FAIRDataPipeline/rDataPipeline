@@ -59,7 +59,8 @@ complete URL}
 submission script located in the \code{inst/namespace/} directory of the
 SCRCdata package}
 
-\item{github_info}{a \code{list}}
+\item{github_info}{a \code{list} containing named elements repo_storageRoot,
+script_gitRepo, repo_version, github_hash, and submission_script}
 
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
@@ -82,6 +83,14 @@ and \code{original_path} are input as named lists (see Example below).
 }
 \examples{
 \dontrun{
+repo <- "ScottishCovidResponse/SCRCdata"
+
+github_info <- list(repo_storageRoot = "github",
+script_gitRepo = repo,
+repo_version = "0.8.0",
+github_hash = get_github_hash(repo),
+submission_script = "inst/SCRC/scotgov_dz_lookup.R")
+
 # A single original source
 register_everything(product_name = "geography/scotland/lookup_table",
 version_number = "0.1.0",
