@@ -76,7 +76,7 @@ package have the same version number." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.5</span>
       </span>
     </div>
 
@@ -132,15 +132,17 @@ package have the same version number.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>repo</th>
-      <td><p><em>e.g.</em> "ScottishCovidResponse/SCRCdata"</p></td>
+      <td><p>a <code>string</code> specifying the github username/repository</p></td>
     </tr>
     <tr>
       <th>script_path</th>
-      <td><p><em>e.g.</em> "scotgov_deaths.R"</p></td>
+      <td><p>a <code>string</code> specifying the submission script filename
+and extension</p></td>
     </tr>
     <tr>
       <th>package</th>
-      <td><p>(optional) <em>e.g.</em> "SCRCdata"</p></td>
+      <td><p>(optional) a <code>string</code> specifying the name of the package
+containing the submission script</p></td>
     </tr>
     </table>
 
@@ -155,6 +157,15 @@ package have the same version number.</p>
 </ul>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>get_package_info</span>(repo = <span class='st'>"ScottishCovidResponse/SCRCdata"</span>,
+script_path = <span class='st'>"scotgov_deaths.R"</span>,
+package = <span class='st'>"SCRCdata"</span>)
+}<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

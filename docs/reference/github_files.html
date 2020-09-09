@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>upload_submission_script — upload_submission_script • SCRCdataAPI</title>
+<title>github_files — github_files • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="upload_submission_script — upload_submission_script" />
-<meta property="og:description" content="upload_submission_script" />
+<meta property="og:title" content="github_files — github_files" />
+<meta property="og:description" content="github_files" />
 
 
 
@@ -108,47 +108,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>upload_submission_script</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/upload_submission_script.R'><code>R/upload_submission_script.R</code></a></small>
-    <div class="hidden name"><code>upload_submission_script.Rd</code></div>
+    <h1>github_files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/github_files.R'><code>R/github_files.R</code></a></small>
+    <div class="hidden name"><code>github_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>upload_submission_script</p>
+    <p>github_files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>upload_submission_script</span>(<span class='kw'>storage_root_id</span>, <span class='kw'>path</span>, <span class='kw'>hash</span>, <span class='kw'>text</span>, <span class='kw'>run_date</span>, <span class='kw'>key</span>)</pre>
+    <pre class="usage"><span class='fu'>github_files</span>(<span class='kw'>repo</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>storage_root_id</th>
-      <td><p>e.g.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>e.g. "ScottishCovidResponse/SCRCdata"</p></td>
-    </tr>
-    <tr>
-      <th>hash</th>
-      <td><p>e.g.</p></td>
-    </tr>
-    <tr>
-      <th>text</th>
-      <td><p>text</p></td>
-    </tr>
-    <tr>
-      <th>run_date</th>
-      <td><p>e.g.</p></td>
-    </tr>
-    <tr>
-      <th>key</th>
-      <td><p>API token from data.scrc.uk</p></td>
+      <th>repo</th>
+      <td><p><em>e.g.</em></p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>filelist</span> <span class='op'>&lt;-</span> <span class='fu'>list_files_in_repo</span>(<span class='st'>"ScottishCovidResponse/SCRCdata"</span>)
+<span class='kw'>files</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>grep</a></span>(<span class='st'>"scotgov_deaths.R$"</span>, <span class='kw'>filelist</span>, value = <span class='fl'>TRUE</span>)
+}<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
