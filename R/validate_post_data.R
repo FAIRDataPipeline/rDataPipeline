@@ -5,9 +5,11 @@
 #' @param data data as a named list
 #' @param key API Token as character
 #'
+#' @param online \code{boolean} if FALSE will not check if data registry objects exist
+#'
 #' @export
 #'
-validate_post_data <- function(table, data, key){
+validate_post_data <- function(table, data, key, online = TRUE){
 
   # Validate Table Name
   if(missing(table))
@@ -89,7 +91,7 @@ validate_post_data <- function(table, data, key){
                   if(!grepl("https://data.scrc.uk/api/.+/.+", value[[i]])){
                     stop(paste0(name, " Must be an api url"))
                   }
-                  else if(!get_entity(basename(dirname(value[[i]])), as.integer(basename(value[[i]])))$url == value[[i]]){
+                  else if(online & !get_entity(basename(dirname(value[[i]])), as.integer(basename(value[[i]])))$url == value[[i]]){
                     stop(paste0(name, " must be in the data registry"))
                   }
                 }
@@ -101,7 +103,7 @@ validate_post_data <- function(table, data, key){
           if(!grepl("https://data.scrc.uk/api/.+/.+", value)){
             stop(paste0(name, " Must be an api url"))
           }
-          else if(!get_entity(basename(dirname(value)), as.integer(basename(value)))$url == value){
+          else if(online & !get_entity(basename(dirname(value)), as.integer(basename(value)))$url == value){
             stop(paste0(name, " must be in the data registry"))
           }
         }

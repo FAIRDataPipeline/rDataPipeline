@@ -5,7 +5,7 @@
 \title{validate_post_data
 Function to validate post data}
 \usage{
-validate_post_data(table, data, key)
+validate_post_data(table, data, key, online = TRUE)
 }
 \arguments{
 \item{table}{table name as character}
@@ -13,6 +13,8 @@ validate_post_data(table, data, key)
 \item{data}{data as a named list}
 
 \item{key}{API Token as character}
+
+\item{online}{\code{boolean} if FALSE will not check if data registry objects exist}
 }
 \description{
 validate_post_data
