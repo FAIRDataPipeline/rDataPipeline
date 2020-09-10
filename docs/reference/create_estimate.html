@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.5</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
     <p>Function to populate toml file with number type data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_estimate</span>(<span class='no'>filename</span>, <span class='no'>path</span>, <span class='no'>parameters</span>)</pre>
+    <pre class="usage"><span class='fu'>create_estimate</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>parameters</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,15 +139,17 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>filename</span> <span class='kw'>&lt;-</span> <span class='st'>"test.toml"</span>
-<span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='st'>"data-raw/example"</span>
-<span class='no'>parameters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>asymptomatic_period</span> <span class='kw'>=</span> <span class='fl'>192.0</span>)
-<span class='fu'>create_estimate</span>(<span class='no'>filename</span>, <span class='no'>path</span>, <span class='no'>parameters</span>)
+    <pre class="examples"><div class='input'><span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test.toml"</span>
+<span class='kw'>path</span> <span class='op'>&lt;-</span> <span class='st'>"data-raw/example"</span>
+<span class='kw'>parameters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>)
+<span class='fu'>create_estimate</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>parameters</span>)
 
-<span class='no'>filename</span> <span class='kw'>&lt;-</span> <span class='st'>"anothertest.toml"</span>
-<span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='st'>"data-raw/example"</span>
-<span class='no'>parameters</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>asymptomatic_period</span> <span class='kw'>=</span> <span class='fl'>192.0</span>, <span class='kw'>latent_period</span> <span class='kw'>=</span> <span class='fl'>123.12</span>)
-<span class='fu'>create_estimate</span>(<span class='no'>filename</span>, <span class='no'>path</span>, <span class='no'>parameters</span>)</div></pre>
+<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"anothertest.toml"</span>
+<span class='kw'>path</span> <span class='op'>&lt;-</span> <span class='st'>"data-raw/example"</span>
+<span class='kw'>parameters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>, latent_period = <span class='fl'>123.12</span>)
+<span class='fu'>create_estimate</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>parameters</span>)
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -163,7 +165,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
