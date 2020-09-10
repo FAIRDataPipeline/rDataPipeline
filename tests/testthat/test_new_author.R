@@ -9,12 +9,14 @@ test_user <- "22"
 
 object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
+UID <- paste0("Author_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
+
 family_name <- paste0("Author_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
 personal_name <- paste0("Author_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
 
 if(is.null(object_id)){
-  source_id <- post_data("object",
-                         list(name = UID, abbreviation = formatted_date),
+  object_id <- post_data("object",
+                         list(description = UID),
                          key)
 }
 

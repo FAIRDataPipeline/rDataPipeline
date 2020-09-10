@@ -5,7 +5,7 @@
 #' @param doi_or_unique_name a \code{string} specifying the DOI or name of the
 #' \code{external_object}
 #' *e.g.* "scottish coronavirus-covid-19-management-information"
-#' @param primary_not_supplement (optional) a boolean flag to indicate
+#' @param primary_not_supplement a boolean flag to indicate
 #' whether the external object is the primary source (\code{TRUE}) or not
 #' (\code{FALSE})
 #' @param release_date the date-time that the \code{external_object} was
@@ -31,7 +31,7 @@
 #' @export
 #'
 new_external_object <- function(doi_or_unique_name,
-                                primary_not_supplement = "",
+                                primary_not_supplement = TRUE,
                                 release_date,
                                 title,
                                 description = "",

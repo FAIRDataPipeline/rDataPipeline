@@ -68,7 +68,7 @@ validate_post_data <- function(table, data, key){
     choice_values <- table.writable[table.writable$field == name,]$choice_values
     choice_names <- table.writable[table.writable$field == name,]$choice_names
     # Allow empty string(cast to character as a posix date will cause an error) or null if an optional field
-    if(!name %in% table.required$field & ((is.character(value) & as.character(value) =="") | is.null(value))){
+    if(!name %in% table.required$field & isTRUE(isTRUE(is.character(value) & as.character(value) =="") | isTRUE(is.null(value) | length(value) == 0))){
       # Do nothing empty sting in an optional field will be set to null in the database
     }
     # If the type is a field expect api urls
@@ -76,12 +76,13 @@ validate_post_data <- function(table, data, key){
         # Check if plural
         if(grepl(".*?s$", name) |  grepl(".*?s_of$", name)){
           #if so expect a list
-          if(is.character(value) & as.character(value) == ""){
-            # allow empty characters for plural lists
+          if(is.list(value) & length(value) == 0)
+          {
+            # allow empty list
           }
           else if(!is.list(value)){
             stop(paste0(name, " must be a list"))
-            }
+          }
           # if a list expect a list of api objects
           else{
                 for(i in seq_along(value)){

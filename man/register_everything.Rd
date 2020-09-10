@@ -7,15 +7,16 @@
 register_everything(
   product_name,
   version_number,
-  save_location = "data-raw",
   doi_or_unique_name,
+  save_location,
   namespace,
-  submission_script,
   original_source_name,
   original_sourceId,
   original_root,
   original_path,
   source_filename,
+  submission_script,
+  github_info,
   accessibility = 0,
   key
 )
@@ -28,19 +29,15 @@ locations)}
 \item{version_number}{a \code{string} specifying the version identifier of
 the \code{data_product} (must conform to semantic versioning syntax)}
 
-\item{save_location}{(optional) a \code{string}, which when prepended to
-product_name, will specify where to download the original source to and
-where to save the processed data product to. Default is "data-raw"}
-
 \item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
 \code{external_object} (source data)}
 
+\item{save_location}{a \code{string}, which when prepended to
+product_name, will specify where to download the original source to and
+where to save the processed data product to. Default is "data-raw"}
+
 \item{namespace}{a \code{string} specifying the namespace; by default this
 is "SCRC"}
-
-\item{submission_script}{a \code{string} specifying the filename of the
-submission script located in the \code{inst/namespace/} directory of the
-SCRCdata package}
 
 \item{original_source_name}{a \code{string} specifying the original source
 name}
@@ -57,6 +54,13 @@ original_root, which when appended to \code{original_root} produces a
 complete URL}
 
 \item{source_filename}{a \code{string} specifying the source filename}
+
+\item{submission_script}{a \code{string} specifying the filename of the
+submission script located in the \code{inst/namespace/} directory of the
+SCRCdata package}
+
+\item{github_info}{a \code{list} containing named elements repo_storageRoot,
+script_gitRepo, repo_version, github_hash, and submission_script}
 
 \item{accessibility}{(optional) an \code{integer} value for the accessibility
 enum associated with \code{original_root}, where 0 is public (default) and
@@ -79,28 +83,36 @@ and \code{original_path} are input as named lists (see Example below).
 }
 \examples{
 \dontrun{
+repo <- "ScottishCovidResponse/SCRCdata"
+
+github_info <- list(repo_storageRoot = "github",
+script_gitRepo = repo,
+repo_version = "0.8.0",
+github_hash = get_github_hash(repo),
+submission_script = "inst/SCRC/scotgov_dz_lookup.R")
+
 # A single original source
 register_everything(product_name = "geography/scotland/lookup_table",
 version_number = "0.1.0",
-save_location = "data-raw",
 doi_or_unique_name = "Scottish spatial lookup table",
+save_location = "data-raw",
 namespace = "SCRC",
-submission_script = "scotgov_dz_lookup.R",
 original_source_name = "Scottish Government",
 original_sourceId = "https://data.scrc.uk/api/source/3932/",
 original_root = "https://www.gov.scot/",
 original_path = "path/somefile.csv",
 source_filename = "paste0(version_number, ".csv")",
+submission_script = "scotgov_dz_lookup.R",
+github_info = github_info,
 accessibility = 0,
 key)
 
 # Multiple original sources
 register_everything(product_name = "geography/scotland/lookup_table",
 version_number = "0.1.0",
-save_location = "data-raw",
 doi_or_unique_name = "Scottish spatial lookup table",
+save_location = "data-raw",
 namespace = "SCRC",
-submission_script = "scotgov_dz_lookup.R",
 original_source_name = list(simd = "Scottish Government",
 dz = "Scottish Government Open Data Repository downloadable file"),
 original_sourceId = list(simd = "https://data.scrc.uk/api/source/3932/",
@@ -109,6 +121,8 @@ original_root = list(simd = "https://www.gov.scot/", dz = "http://statistics.gov
 original_path = list(simd = "path/thisfile.csv", dz = "downloads/anotherfile.csv"),
 source_filename = list(simd = paste0(version_number, ".xlsx"),
 dz = paste0(version_number, ".csv")),
+submission_script = "scotgov_dz_lookup.R",
+github_info = github_info,
 accessibility = 0,
 key)
 }

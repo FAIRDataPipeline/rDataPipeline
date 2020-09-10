@@ -6,7 +6,7 @@
 \usage{
 new_external_object(
   doi_or_unique_name,
-  primary_not_supplement = "",
+  primary_not_supplement = TRUE,
   release_date,
   title,
   description = "",
@@ -22,7 +22,7 @@ new_external_object(
 \code{external_object}
 \emph{e.g.} "scottish coronavirus-covid-19-management-information"}
 
-\item{primary_not_supplement}{(optional) a boolean flag to indicate
+\item{primary_not_supplement}{a boolean flag to indicate
 whether the external object is the primary source (\code{TRUE}) or not
 (\code{FALSE})}
 

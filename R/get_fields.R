@@ -21,12 +21,15 @@ get_fields <- function(table, key){
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request
-  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "", sep = "/"),
+  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
+                                     sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
+
   lapply(seq_along(out$actions$POST), function(i) {
+
     field <- out$actions$POST[i]
 
     name <- names(field)
@@ -72,4 +75,3 @@ get_fields <- function(table, key){
   }) %>% (function(x){do.call(rbind.data.frame, x)})
 
 }
-
