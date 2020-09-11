@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: windows-latest, r: 'release'}
     steps:
       - uses: actions/checkout@v2
 
@@ -33,20 +33,6 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      - name: Cache R packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
-      - name: Install system dependencies
-        run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-          
       - name: Install r dependencies
         run: |
           install.packages(c("remotes"))
@@ -57,8 +43,7 @@ jobs:
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          RUN_TEST: ""
-          DEBIAN_FRONTEND: noninteractive
+          RUN_TEST: "TRUE"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           covr::codecov()
