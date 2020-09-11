@@ -3,6 +3,8 @@ context("Test upload_toml_to_github")
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")
 
+runtest <- Sys.getenv("RUN_TEST")
+
 sleep_time <- 0.5
 
 test_user <- "22"
@@ -22,6 +24,7 @@ create_estimate(toml_file_name,
 path_to_toml <- paste0(local_dir, "/", toml_file_name)
 
 test_that("upload_toml_to_github works as intended", {
+  skip_if(runtest == "")
   expect_message(upload_toml_to_github(path_to_toml))
 })
 
