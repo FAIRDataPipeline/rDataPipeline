@@ -10,9 +10,15 @@ name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     steps:
       - uses: actions/checkout@v2
 
@@ -40,7 +46,6 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-          sudo apt-get install gfortran
           
       - name: Install r dependencies
         run: |
@@ -54,5 +59,7 @@ jobs:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
           RUN_TEST: "TRUE"
           DEBIAN_FRONTEND: noninteractive
-        run: covr::codecov()
+        run: |
+          covr::codecov()          
+          covr::package_coverage(quiet=FALSE)
         shell: Rscript {0}
