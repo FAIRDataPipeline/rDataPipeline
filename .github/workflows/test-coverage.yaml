@@ -10,7 +10,7 @@ name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -34,20 +34,17 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install system requirements (MacOS)
-        run : |
-              rm '/usr/local/bin/gfortran'
-              brew install hdf5
-
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
-          install.packages(c("remotes"))
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("covr")
-        shell: Rscript {0}
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
+          RUN_TEST: "TRUE"
+          DEBIAN_FRONTEND: noninteractive
         run: covr::codecov()
         shell: Rscript {0}
