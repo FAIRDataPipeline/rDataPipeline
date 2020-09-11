@@ -40,6 +40,13 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+          
+      - name: Install r dependencies
+        run: |
+          install.packages(c("remotes"))
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("covr")
+        shell: Rscript {0}
 
       - name: Test coverage
         env:
