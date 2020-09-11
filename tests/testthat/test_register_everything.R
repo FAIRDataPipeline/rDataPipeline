@@ -85,3 +85,8 @@ test_that("register_everything works with single original source", {
 #                     github_info = github_info,
 #                     accessibility = 0,
 #                     key)
+
+file.remove(filepath)
+file.remove(paste0(path, "/", version, ".h5"))
+
+unlink(path, recursive = TRUE)
