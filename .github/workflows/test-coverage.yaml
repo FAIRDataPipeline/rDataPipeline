@@ -57,7 +57,7 @@ jobs:
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          RUN_TEST: "TRUE"
+          RUN_TEST: ""
           DEBIAN_FRONTEND: noninteractive
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
