@@ -41,10 +41,10 @@ jobs:
         shell: Rscript {0}
 
       - name: set credentials to basic
+        env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
           git config --global credential.authority Basic
           git config --global github.token "%GITHUB_TOKEN%"
-        env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: cmd
 
       - name: Test coverage
