@@ -41,12 +41,16 @@ jobs:
         shell: Rscript {0}
 
       - name: set credentials to basic
-        run: git config --global credential.authority Basic
+        run: | 
+          git config --global credential.authority Basic
+          git config --global github.token "%GITHUB_TOKEN%"
+        env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: cmd
 
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          RUN_TEST: ""
+          RUN_TEST: "true"
         run: |
           covr::codecov()
         shell: Rscript {0}
