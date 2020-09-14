@@ -16,7 +16,7 @@ UID_name <- paste0("external object ", datetime, test_identifier)
 abbreviation <- paste0("EO ", datetime, test_identifier)
 path <- paste0(UID_name, ".h5")
 path_uri <- paste0("https://", path)
-hash <- paste0(Sys.time(), "%d%m%y%H%M%S", test_identifier)
+hash <- sha1(UID)
 
 object_id <- post_data("object",
                          list(description = UID),

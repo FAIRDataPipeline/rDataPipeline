@@ -7,17 +7,21 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-datetime <- format(Sys.time(), "%d%m%y%H%M%S")
-UID <- paste0("register_everything_", format(Sys.time(), "%d%m%y%H%M%S_"), datetime)
+test_identifier <- sample(1:100, 1, replace=TRUE)
 
-path <- paste0(UID)
+datetime <- format(Sys.time(), "%d%m%y%H%M%S")
+
+UID <- paste0("register everything ", datetime, test_identifier)
+UID_ <- paste0("register-everything-", datetime, test_identifier)
+
+path <- paste0(UID_)
 
 # Create a CSV
-df <- data.frame(cbind(test = 1:10, text = paste0(rep("TEST_", 10), as.character(1:10))))
+df <- data.frame(cbind(UID = rep(UID, 10), test = 1:10, text = paste0(rep("TEST_", 10), as.character(1:10))))
 
 if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
-version <- create_version_number(Sys.Date())
+version <- create_version_number(Sys.Date(), patch = test_identifier)
 
 filename <- paste0(version, ".csv")
 
@@ -25,25 +29,29 @@ filepath <- paste0(path, "/", filename)
 
 write.csv(df, filepath)
 
-create_table(paste0(version, ".h5"), path, UID, df)
+create_table(paste0(version, ".h5"), path, UID_, df)
 
-submission_script <- paste0("inst/SCRC/", UID, ".R")
+submission_script <- paste0("inst/SCRC/", UID_, ".R")
 
 repo <- "ScottishCovidResponse/SCRCdata"
 
 github_info <- list(repo_storageRoot = "github",
                     script_gitRepo = repo,
-                    repo_version = "0.8.0",
+                    repo_version = version,
                     github_hash = get_github_hash(repo),
                     submission_script = submission_script)
 
-original_source_name <- paste0("source_" ,UID)
+original_source_name <- paste0("source " ,UID)
 
-original_source_id <- get_entry("source", list(updated_by = test_user))[[1]]$url
+original_path <- paste0("download/", UID_, ".csv")
+original_root <- paste0("https://", UID_, ".com")
 
-
-original_path <- paste0("download/", UID, ".csv")
-original_root <- paste0("https://", UID, ".com")
+original_source_id <- post_data("source",
+                                list(
+                                name = original_source_name,
+                                abbreviation = original_source_name,
+                                website = original_root),
+                                key)
 
 test_that("register_everything works with single original source", {
   skip_if(is.null(original_source_id))
