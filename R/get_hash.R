@@ -1,4 +1,5 @@
 #' get_hash
+#'
 #' Returns the SHA1 hash of a given file
 #'
 #' @param filename filename

@@ -7,18 +7,29 @@
 get_existing(table, limit_results = TRUE, detail = "all")
 }
 \arguments{
-\item{table}{table}
+\item{table}{an \code{string} specifying a table in the data registry}
 
-\item{limit_results}{boolean whether or not to limit
-the results default \code{TRUE}}
+\item{limit_results}{a \code{boolean} specifying whether or not to limit the
+results to 100 (default = \code{TRUE})}
 
-\item{detail}{what level of detail to return
-use \code{"all"} for all details or \code{"id"} for just URL and ID's}
+\item{detail}{what level of detail to return; use \code{"all"} for all
+details or \code{"id"} for just URL and IDs}
 }
 \value{
-returns a data.frame of entries in table
-default is limited to 100 entries
+Returns a \code{data.frame} comprising all (or the first 100) entries
+from a particular table in the data registry
 }
 \description{
-get_existing
+Returns all (or the first 100) entries from a particular table
+in the data registry
+}
+\details{
+To return a vector of all tables in the data registry, run \code{get_tables()}
+}
+\examples{
+\dontrun{
+\donttest{
+get_existing("storage_root")
+}}
+
 }

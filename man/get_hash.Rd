@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_hash.R
 \name{get_hash}
 \alias{get_hash}
-\title{get_hash
-Returns the SHA1 hash of a given file}
+\title{get_hash}
 \usage{
 get_hash(filename)
 }
@@ -11,6 +10,5 @@ get_hash(filename)
 \item{filename}{filename}
 }
 \description{
-get_hash
 Returns the SHA1 hash of a given file
 }

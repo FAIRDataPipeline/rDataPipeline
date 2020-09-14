@@ -13,16 +13,54 @@ download_from_database(
 )
 }
 \arguments{
-\item{source_root}{source_root}
+\item{source_root}{a \code{string} specifying the}
 
-\item{source_path}{source_path}
+\item{source_path}{a \code{string} specifying the}
 
-\item{filename}{filename}
+\item{filename}{a \code{string} specifying the}
 
-\item{path}{path}
+\item{path}{a \code{string} specifying the}
 
 \item{overwrite}{overwrite}
 }
 \description{
 download_from_database
+}
+\examples{
+\dontrun{
+\donttest{
+original_root <- "https://statistics.gov.scot/sparql.csv?query="
+original_path <- "PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX data: <http://statistics.gov.scot/data/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX mp: <http://statistics.gov.scot/def/measure-properties/>
+PREFIX dim: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX sdim: <http://statistics.gov.scot/def/dimension/>
+PREFIX stat: <http://statistics.data.gov.uk/def/statistical-entity#>
+SELECT ?featurecode ?featurename ?date ?measure ?variable ?count
+WHERE {
+  ?indicator qb:dataSet data:coronavirus-covid-19-management-information;
+             dim:refArea ?featurecode;
+              dim:refPeriod ?period;
+              sdim:variable ?varname;
+              qb:measureType ?type.
+{?indicator mp:count ?count.} UNION {?indicator mp:ratio ?count.}
+
+  ?featurecode <http://publishmydata.com/def/ontology/foi/displayName> ?featurename.
+  ?period rdfs:label ?date.
+  ?varname rdfs:label ?variable.
+  ?type rdfs:label ?measure.
+}"
+
+source_filename <- "1.20200716.0.csv"
+product_name <- paste("human", "infection", "SARS-CoV-2", "scotland",
+"cases_and_management", sep = "/")
+local_path <- file.path("data-raw", product_name)
+
+download_from_database(source_root = original_root,
+                       source_path = original_path,
+                       filename = source_filename,
+                       path = local_path)
+}}
+
 }

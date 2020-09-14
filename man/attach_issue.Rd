@@ -15,20 +15,22 @@ attach_issue(
 )
 }
 \arguments{
-\item{description}{\emph{e.g.} "Data dump caused a spike on the 15th of June"}
+\item{description}{a \code{string} containing a free text description of the
+issue}
 
-\item{severity}{\emph{e.g.} 19}
+\item{severity}{a \code{numeric} object specifying the severity of the issue}
 
-\item{external_object_doi}{\emph{e.g.}
-"scottish coronavirus-covid-19-management-information"}
+\item{external_object_doi}{a \code{string} specifying the external_object_doi
+(used when issue is to be attached to an external object)}
 
-\item{namespace}{\emph{e.g.} "SCRC"}
+\item{namespace}{a \code{string} specifying the namespace}
 
-\item{data_product}{\emph{e.g.} "records/SARS-CoV-2/scotland/cases_and_management"}
+\item{data_product}{a \code{string} specifying the name of the  data_product}
 
-\item{component}{\emph{e.g.} "testing_location/date-cumulative"}
+\item{component}{a \code{string} specifying the name of the object_component
+component}
 
-\item{key}{key}
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 This function is used to attach an issue to either
@@ -40,4 +42,17 @@ This function is used to attach an issue to either
 \item a component within a data product (in which case you must specify the
 \code{namespace}, \code{data_product}, and \code{component} arguments)
 }
+}
+\examples{
+\dontrun{
+\donttest{
+attach_issue(description = "Data dump caused a spike on the 15th of June",
+severity = 19,
+external_object_doi = "scottish coronavirus-covid-19-management-information",
+namespace = "SCRC",
+data_product = "records/SARS-CoV-2/scotland/cases_and_management",
+component = "testing_location/date-cumulative",
+key = key)
+}}
+
 }

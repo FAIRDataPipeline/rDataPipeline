@@ -14,3 +14,13 @@ bin_ages(dat, ageclasses)
 \description{
 bin_ages
 }
+\examples{
+\dontrun{
+\dontcheck{
+dat <- data.frame(matrix(sample(1000), nrow = 10))
+rownames(dat) <- paste0("area", 1:10)
+colnames(dat) <- 1:100
+bin_ages(dat, "total")
+}}
+
+}

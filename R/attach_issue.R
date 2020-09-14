@@ -8,16 +8,30 @@
 #' * a component within a data product (in which case you must specify the
 #' \code{namespace}, \code{data_product}, and \code{component} arguments)
 #'
-#' @param description *e.g.* "Data dump caused a spike on the 15th of June"
-#' @param severity *e.g.* 19
-#' @param external_object_doi *e.g.*
-#' "scottish coronavirus-covid-19-management-information"
-#' @param namespace *e.g.* "SCRC"
-#' @param data_product *e.g.* "records/SARS-CoV-2/scotland/cases_and_management"
-#' @param component *e.g.* "testing_location/date-cumulative"
-#' @param key key
+#' @param description a \code{string} containing a free text description of the
+#' issue
+#' @param severity a \code{numeric} object specifying the severity of the issue
+#' @param external_object_doi a \code{string} specifying the external_object_doi
+#' (used when issue is to be attached to an external object)
+#' @param namespace a \code{string} specifying the namespace
+#' @param data_product a \code{string} specifying the name of the  data_product
+#' @param component a \code{string} specifying the name of the object_component
+#' component
+#' @param key API token from data.scrc.uk
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' \donttest{
+#' attach_issue(description = "Data dump caused a spike on the 15th of June",
+#' severity = 19,
+#' external_object_doi = "scottish coronavirus-covid-19-management-information",
+#' namespace = "SCRC",
+#' data_product = "records/SARS-CoV-2/scotland/cases_and_management",
+#' component = "testing_location/date-cumulative",
+#' key = key)
+#' }}
 #'
 attach_issue <- function(description,
                          severity,
@@ -113,7 +127,7 @@ attach_issue <- function(description,
                                                namespace = namespaceId))$object
     objectId <- clean_query(list(name = objectId))
     objectComponentId <- get_url("object_component", list(name = component,
-                                                            object = objectId))
+                                                          object = objectId))
 
     # Add this to the current list
     component_issues <- c(current_components, objectComponentId)

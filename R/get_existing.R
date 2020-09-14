@@ -1,12 +1,19 @@
 #' get_existing
 #'
-#' @param table table
-#' @param limit_results boolean whether or not to limit
-#' the results default \code{TRUE}
-#' @param detail what level of detail to return
-#' use \code{"all"} for all details or \code{"id"} for just URL and ID's
-#' @return returns a data.frame of entries in table
-#' default is limited to 100 entries
+#' Returns all (or the first 100) entries from a particular table
+#' in the data registry
+#'
+#' To return a vector of all tables in the data registry, run \code{get_tables()}
+#'
+#' @param table an \code{string} specifying a table in the data registry
+#' @param limit_results a \code{boolean} specifying whether or not to limit the
+#' results to 100 (default = \code{TRUE})
+#' @param detail what level of detail to return; use \code{"all"} for all
+#' details or \code{"id"} for just URL and IDs
+#'
+#' @return Returns a \code{data.frame} comprising all (or the first 100) entries
+#' from a particular table in the data registry
+#'
 #' @export
 #'
 #' @examples
@@ -22,7 +29,6 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
                 "For available tables use: get_tables()"))
 
   tryCatch({
-
     # Get the first 100 results
     output <- httr::GET(paste("http://data.scrc.uk/api", table, "", sep = "/")) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
