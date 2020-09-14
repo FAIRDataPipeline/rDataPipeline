@@ -8,6 +8,8 @@ patch_data <- function(url,
                        data,
                        key) {
 
+  key <- validate_token(key)
+
   h <- c(Authorization = paste("token", key))
 
   result <- httr::PATCH(url,

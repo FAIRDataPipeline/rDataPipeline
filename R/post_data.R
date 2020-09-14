@@ -12,6 +12,7 @@ post_data <- function(table,
                       data,
                       key) {
 
+  key <- validate_token(key)
   data <- validate_post_data(table, data, key)
 
   h <- c(Authorization = paste("token", key))

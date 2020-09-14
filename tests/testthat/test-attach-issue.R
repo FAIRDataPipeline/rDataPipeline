@@ -11,7 +11,7 @@ test_identifier <- sample(1:100, 1, replace=TRUE)
 
 UID <- paste0("issue test ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
-external_object_id <- get_entry("external_object", list(updated_by = test_user))[[1]]$url
+external_object_id <- get_entry("external_object", list(updated_by = test_user))[[1]]$object
 
 namespace <- get_entry("namespace", list(updated_by = test_user))[[1]]$url
 
@@ -21,14 +21,14 @@ component <- get_entry("object_component", list(updated_by = test_user))[[1]]$ur
 
 severity <- "5"
 
-# test_that("attach isssue works with external_object_doi", {
-#   skip_if(is.null(external_object_id_doi))
-#   expect_message(expect_true(is.character(attach_issue(UID,
-#                                           severity,
-#                                           external_object_id,
-#                                           key = key
-#                                           ))))
-# })
+test_that("attach isssue works with external_object_doi", {
+  skip_if(is.null(external_object_id))
+  expect_message(expect_true(is.character(attach_issue(UID,
+                                          severity,
+                                          external_object_id,
+                                          key = key
+                                          ))))
+})
 
 
 
