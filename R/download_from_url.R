@@ -15,6 +15,16 @@
 #'
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' \donttest{
+#' download_from_url(source_root = "https://www.nrscotland.gov.uk/",
+#' source_path = file.path("files//statistics", "population-estimates",
+#' "sape-time-series", "males", "sape-2018-males.xlsx"),
+#' path = "data-raw",
+#' filename = "0.1.0.csv")
+#' }}
+#'
 download_from_url <- function(source_root,
                               source_path,
                               path,
