@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>create_table — create_table • SCRCdataAPI</title>
+<title>validate_token
+Function to validate user token — validate_token • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="create_table — create_table" />
-<meta property="og:description" content="Function to populate hdf5 file with array type data." />
+<meta property="og:title" content="validate_token
+Function to validate user token — validate_token" />
+<meta property="og:description" content="validate_token
+Function to validate user token" />
 
 
 
@@ -108,44 +111,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>create_table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/create_table.R'><code>R/create_table.R</code></a></small>
-    <div class="hidden name"><code>create_table.Rd</code></div>
+    <h1>validate_token
+Function to validate user token</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/validate_token.R'><code>R/validate_token.R</code></a></small>
+    <div class="hidden name"><code>validate_token.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to populate hdf5 file with array type data.</p>
+    <p>validate_token
+Function to validate user token</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_table</span>(<span class='kw'>filename</span>, path = <span class='st'>"."</span>, <span class='kw'>component</span>, <span class='kw'>df</span>, <span class='kw'>row_names</span>, <span class='kw'>column_units</span>)</pre>
+    <pre class="usage"><span class='fu'>validate_token</span>(<span class='kw'>key</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>a <code>string</code> specifying the filename, e.g. "0.1.0.h5"</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>a <code>string</code> specifying the directory in which you want to save the h5 file</p></td>
-    </tr>
-    <tr>
-      <th>component</th>
-      <td><p>a <code>string</code> specifying a location within the hdf5 file,
-e.g. "location/per_week/all_deaths"</p></td>
-    </tr>
-    <tr>
-      <th>df</th>
-      <td><p>a <code>dataframe</code> containing the data</p></td>
-    </tr>
-    <tr>
-      <th>row_names</th>
-      <td><p>(optional) a <code>vector</code> of rownames</p></td>
-    </tr>
-    <tr>
-      <th>column_units</th>
-      <td><p>(optional) a <code>vector</code> comprising column units</p></td>
+      <th>key</th>
+      <td><p>API Token as character</p></td>
     </tr>
     </table>
 
