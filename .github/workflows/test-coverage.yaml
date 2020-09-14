@@ -64,7 +64,7 @@ jobs:
           protocol=https
           host=github.com
           username=Personal Access Token
-          password="$GITHUB_TOKEN" | git credential-osxkeychain store
+          password=$GITHUB_TOKEN" | git credential-osxkeychain store
           
       - name: Test coverage
         env:
