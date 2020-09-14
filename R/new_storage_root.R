@@ -18,6 +18,8 @@ new_storage_root <- function(name,
                              accessibility = 0,
                              key) {
 
+  if(!grepl("/$", root)) stop(paste(root, "must have a trailing slash"))
+
   post_data(table = "storage_root",
             data = list(name = name,
                         root = root,
