@@ -58,7 +58,7 @@ jobs:
 
       - name: Add credentials in keychain
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           echo "\
           protocol=https
