@@ -43,7 +43,7 @@ original_source_id <- get_entry("source", list(updated_by = test_user))[[1]]$url
 
 
 original_path <- paste0("download/", UID, ".csv")
-original_root <- paste0("https://", UID, ".com")
+original_root <- paste0("https://", UID, ".com/")
 
 test_that("register_everything works with single original source", {
   skip_if(is.null(original_source_id))
