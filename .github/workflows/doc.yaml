@@ -37,7 +37,8 @@ jobs:
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
-              
+              brew install gdal
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)

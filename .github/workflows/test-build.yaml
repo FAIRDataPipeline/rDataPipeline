@@ -54,6 +54,7 @@ jobs:
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
+              brew install gdal
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
