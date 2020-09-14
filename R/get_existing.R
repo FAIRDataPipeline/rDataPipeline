@@ -9,6 +9,12 @@
 #' default is limited to 100 entries
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' \donttest{
+#' get_existing("storage_root")
+#' }}
+#'
 get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
   if(!check_table_exists(table))
