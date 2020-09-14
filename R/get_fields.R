@@ -71,7 +71,8 @@ get_fields <- function(table, key){
                min_value = min_value,
                max_value = max_value,
                choice_values = choice_values,
-               choice_names = choice_names)
+               choice_names = choice_names,
+               stringsAsFactors = FALSE)
   }) %>% (function(x){do.call(rbind.data.frame, x)})
 
 }
