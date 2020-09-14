@@ -4,10 +4,10 @@ name: build
 on:
   push:
     branches:
-      - master
+      - '*'
   pull_request:
     branches:
-      - master
+      - '*'
 
 jobs:
   R-CMD-check:
@@ -54,6 +54,7 @@ jobs:
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
+              brew install gdal
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -82,7 +83,7 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-          
+
       - name: Install and Build Documentation
         if: runner.os == 'macOS'
         run: |
@@ -99,4 +100,4 @@ jobs:
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
-          COMMIT_MESSAGE: 'build docs [skip ci]' 
+          COMMIT_MESSAGE: 'build docs [skip ci]'

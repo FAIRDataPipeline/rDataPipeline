@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - master
+      - '*'
   pull_request:
     branches:
-      - master
+      - '*'
 
 name: test-coverage
 
@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      
+
     strategy:
       fail-fast: false
       matrix:
@@ -41,9 +41,9 @@ jobs:
         shell: Rscript {0}
 
       - name: set credentials to basic
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: | 
+        run: |
           git config --global credential.authority Basic
           git config --global github.token "%GITHUB_TOKEN%"
         shell: cmd
