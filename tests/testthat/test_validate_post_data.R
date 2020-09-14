@@ -10,11 +10,17 @@ test_user <- "22"
 tables <- get_tables()
 unknown_table <- "unknown"
 
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+datetime <- format(Sys.time(), "%d%m%y%H%M%S")
+
+UID <- paste0("object ", datetime, test_identifier)
+
 object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
 if(is.null(object_id)){
   object_id <- post_data("object",
-                         list(name = UID, abbreviation = formatted_date),
+                         list(description = UID),
                          key)
 }
 
