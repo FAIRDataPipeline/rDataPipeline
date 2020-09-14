@@ -7,13 +7,17 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
+test_identifier <- sample(1:100, 1, replace=TRUE)
 
-keyphrase <- paste0("keyword_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
+keyphrase <- paste(sample(letters, 12, FALSE), collapse ="", sep = "")
+
+keyphrase <- paste0(keyphrase, format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
+
+object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
 if(is.null(object_id)){
   object_id <- post_data("object",
-                         list(description = keyphrase),
+                         list(description = paste0(keyphrase, " Test")),
                          key)
 }
 

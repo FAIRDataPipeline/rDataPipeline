@@ -7,7 +7,9 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-UID <- paste0("text_file_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+UID <- paste0("text_file ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
 test_that("new_text_file creates a new text file", {
   expect_true(is.character(new_text_file(UID,

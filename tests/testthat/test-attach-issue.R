@@ -7,14 +7,11 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-UID <- paste0("issue_test_", format(Sys.time(), "%d%m%y%H%M%S"))
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+UID <- paste0("issue test ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
 external_object_id <- get_entry("external_object", list(updated_by = test_user))[[1]]$url
-
-external_object_id_doi <- NULL
-if(!is.null(external_object_id)) {
-  external_object_id_doi <- get_entity("external_object", basename(external_object_id))$doi_or_unique_name
-}
 
 namespace <- get_entry("namespace", list(updated_by = test_user))[[1]]$url
 

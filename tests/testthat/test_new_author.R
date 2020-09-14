@@ -3,16 +3,16 @@ context("Test new_author")
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")
 
-sleep_time <- 0.5
-
 test_user <- "22"
 
 object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
-UID <- paste0("Author_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
+test_identifier <- sample(1:100, 1, replace=TRUE)
 
-family_name <- paste0("Author_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
-personal_name <- paste0("Author_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
+UID <- paste0("Author Test", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
+
+family_name <- paste(sample(letters, 7, FALSE), collapse ="", sep = "")
+personal_name <- paste(sample(letters, 6, FALSE), collapse ="", sep = "")
 
 if(is.null(object_id)){
   object_id <- post_data("object",

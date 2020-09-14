@@ -7,9 +7,14 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-name <- paste0("Code_Repo_Release_Test_", format(Sys.time(), "%d%m%y%H%M%S"))
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+name <- paste0("Code Repo Release ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 version <- create_version_number()
-website <- paste0("https://www.github.com/ScottishCovidResponce/", name)
+
+website_indentifier <- paste(sample(letters, 10, FALSE), collapse ="", sep = "")
+
+website <- paste0("https://www.", website_indentifier, ".com")
 
 object_id <- post_data("object",
                          list(description = name),

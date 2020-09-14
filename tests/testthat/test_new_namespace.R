@@ -7,7 +7,9 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-name <- paste0("namespace_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+name <- paste0("namespace ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
 test_that("new_namespace posts to registry", {
   expect_true(is.character(new_namespace(name,

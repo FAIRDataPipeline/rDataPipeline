@@ -7,10 +7,15 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-UID <- paste0("object_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
-abbreviation <- paste0("object_", format(Sys.time(), "%d%m%y%H%M%S"))
-path <- paste0(UID, ".h5")
-path_uri <- paste0("https://", path)
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+datetime <- format(Sys.time(), "%d%m%y%H%M%S")
+
+UID <- paste0("object ", datetime, test_identifier)
+abbreviation <- paste0("obj ", datetime, test_identifier)
+UID_ <- paste0("external_object_", datetime, test_identifier)
+path <- paste0(UID_, ".h5")
+path_uri <- paste0("https://", path, ".com")
 hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
 
 storage_root_id <- get_entry("storage_root", list(updated_by = test_user))[[1]]$url

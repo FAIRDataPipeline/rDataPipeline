@@ -7,8 +7,8 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-datetime <- format(Sys.time(), "%d%m%y%H%M%S")
-UID <- paste0("data_product", format(Sys.time(), "%d%m%y%H%M%S_"), datetime)
+test_identifier <- sample(1:100, 1, replace=TRUE)
+UID <- paste0("data_product ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
 object_id <- post_data("object",
                          list(description= UID),

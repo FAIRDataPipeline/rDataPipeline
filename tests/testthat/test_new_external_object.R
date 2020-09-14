@@ -7,11 +7,16 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-UID <- paste0("external_object_Test_OBJECT_", format(Sys.time(), "%d%m%y%H%M%S"))
-abbreviation <- paste0("external_object_", format(Sys.time(), "%d%m%y%H%M%S"))
-path <- paste0(UID, ".h5")
+test_identifier <- sample(1:100, 1, replace=TRUE)
+
+datetime <- format(Sys.time(), "%d%m%y%H%M%S")
+
+UID <- paste0("external object ", datetime, test_identifier)
+UID_name <- paste0("external object ", datetime, test_identifier)
+abbreviation <- paste0("EO ", datetime, test_identifier)
+path <- paste0(UID_name, ".h5")
 path_uri <- paste0("https://", path)
-hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
+hash <- paste0(Sys.time(), "%d%m%y%H%M%S", test_identifier)
 
 object_id <- post_data("object",
                          list(description = UID),
