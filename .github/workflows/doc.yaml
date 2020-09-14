@@ -17,7 +17,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@v1
-      
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -49,7 +49,7 @@ jobs:
           install.packages("pkgdown")
           pkgdown::build_site()
         shell: Rscript {0}
-        
+
       - name: Commit to development branch
         run: |
           git checkout -b development
@@ -64,4 +64,4 @@ jobs:
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
-          COMMIT_MESSAGE: 'build docs [skip ci]' 
+          COMMIT_MESSAGE: 'build docs [skip ci]'
