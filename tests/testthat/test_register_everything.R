@@ -21,7 +21,7 @@ df <- data.frame(cbind(UID = rep(UID, 10), test = 1:10, text = paste0(rep("TEST_
 
 if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
-version <- create_version_number(Sys.Date(), patch = test_identifier)
+version <- create_version_number(Sys.Date(), patch = test_identifier, major = datetime)
 
 filename <- paste0(version, ".csv")
 
@@ -33,24 +33,24 @@ create_table(paste0(version, ".h5"), path, UID_, df)
 
 submission_script <- paste0("inst/SCRC/", UID_, ".R")
 
-repo <- "ScottishCovidResponse/SCRCdata"
+repo <- paste0("ScottishCovidResponse/", UID_)
 
 github_info <- list(repo_storageRoot = "github",
                     script_gitRepo = repo,
                     repo_version = version,
-                    github_hash = get_github_hash(repo),
+                    github_hash = sha1(UID),
                     submission_script = submission_script)
 
 original_source_name <- paste0("source " ,UID)
 
 original_path <- paste0("download/", UID_, ".csv")
-original_root <- paste0("https://", UID_, ".com")
+original_root <- paste0("https://", UID_, ".com/")
+
 
 original_source_id <- post_data("source",
                                 list(
                                 name = original_source_name,
-                                abbreviation = original_source_name,
-                                website = original_root),
+                                abbreviation = original_source_name),
                                 key)
 
 test_that("register_everything works with single original source", {
