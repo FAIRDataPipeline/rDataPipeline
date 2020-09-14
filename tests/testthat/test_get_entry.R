@@ -34,9 +34,9 @@ test_that("invalid query causes and error", {
   expect_error(get_entry("object", NULL))
 })
 
-test_that("query = \"\" produces a warning", {
+test_that("query = \"\" produces an error", {
   Sys.sleep(sleep_time)
-  expect_warning(get_entry("object", "" ))
+  expect_error(get_entry("object", "" ))
 })
 
 Sys.sleep(sleep_time)
