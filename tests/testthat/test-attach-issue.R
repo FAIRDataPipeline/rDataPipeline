@@ -21,14 +21,14 @@ component <- get_entry("object_component", list(updated_by = test_user))[[1]]$ur
 
 severity <- "5"
 
-test_that("attach isssue works with external_object_doi", {
-  skip_if(is.null(external_object_id))
-  expect_message(expect_true(is.character(attach_issue(UID,
-                                          severity,
-                                          external_object_id,
-                                          key = key
-                                          ))))
-})
+# test_that("attach isssue works with external_object_doi", {
+#   skip_if(is.null(external_object_id))
+#   expect_message(expect_true(is.character(attach_issue(UID,
+#                                           severity,
+#                                           external_object_id,
+#                                           key = key
+#                                           ))))
+# })
 
 
 
