@@ -20,6 +20,8 @@ new_storage_location <- function(path,
                                  storage_root_id,
                                  key) {
 
+  if(grepl("^/", path)) stop(paste(path, "mustn't have a prepending slash"))
+
   post_data(table = "storage_location",
             data = list(path = path,
                         hash = hash,
