@@ -43,6 +43,7 @@
 #'                        source_path = original_path,
 #'                        filename = source_filename,
 #'                        path = local_path)
+#' }}
 #'
 download_from_database <- function(source_root,
                                    source_path,
