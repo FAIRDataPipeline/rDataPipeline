@@ -29,8 +29,9 @@ create_distribution <- function(filename,
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
   # Generate directory structure
-  if(!file.exists(path)) dir.create(path, recursive = TRUE)
   if(missing(path)) path <- ""
+  if(!file.exists(path)) dir.create(path, recursive = TRUE)
+
 
   # Write toml
   tmp <- sapply(seq_along(parameters), function(x)
