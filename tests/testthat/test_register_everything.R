@@ -7,7 +7,7 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-test_identifier <- sample(1:100, 1, replace=TRUE)
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
 
 datetime <- format(Sys.time(), "%d%m%y%H%M%S")
 
@@ -38,7 +38,7 @@ repo <- paste0("ScottishCovidResponse/", UID_)
 github_info <- list(repo_storageRoot = "github",
                     script_gitRepo = repo,
                     repo_version = version,
-                    github_hash = sha1(UID),
+                    github_hash = openssl::sha1(UID),
                     submission_script = submission_script)
 
 original_source_name <- paste0("source " ,UID)

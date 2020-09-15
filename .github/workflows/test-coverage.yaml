@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - master
+      - '*'
   pull_request:
     branches:
-      - master
+      - '*'
 
 name: test-coverage
 
@@ -25,7 +25,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master
-      
+
       - uses: sinoru/actions-setup-keychain@v1.0
 
       - name: Install system requirements (MacOS)
@@ -34,14 +34,14 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-              
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
-      
+
       - name: Cache R packages
         uses: actions/cache@v1
         with:
@@ -65,7 +65,7 @@ jobs:
           host=github.com
           username=Personal Access Token
           password=$GITHUB_TOKEN" | git credential-osxkeychain store
-          
+
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}

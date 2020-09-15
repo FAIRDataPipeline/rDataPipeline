@@ -11,6 +11,8 @@ upload_toml_to_github <- function(path_to_toml,
                                   name = "SCRC",
                                   email = "scrc@glasgow.ac.uk"){
 
+  working_directory <- getwd()
+
   github_repo_path <- "github_repo"
 
   tryCatch({
@@ -70,8 +72,7 @@ upload_toml_to_github <- function(path_to_toml,
 
 
   }, finally = {
-    if(grepl(github_repo_path, getwd()))
-      setwd("../")
+    setwd(working_directory)
     unlink(github_repo_path, recursive = TRUE, force = TRUE)
   })
 

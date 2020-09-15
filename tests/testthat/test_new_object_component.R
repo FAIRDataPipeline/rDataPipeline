@@ -7,7 +7,7 @@ sleep_time <- 0.5
 
 test_user <- "22"
 
-test_identifier <- sample(1:100, 1, replace=TRUE)
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
 
 UID <- paste0("object component", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 UID_1 <- paste0(UID, "1")

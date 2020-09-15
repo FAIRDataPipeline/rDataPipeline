@@ -10,7 +10,7 @@ test_user <- "22"
 tables <- get_tables()
 unknown_table <- "unknown"
 
-test_identifier <- sample(1:100, 1, replace=TRUE)
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
 
 datetime <- format(Sys.time(), "%d%m%y%H%M%S")
 
