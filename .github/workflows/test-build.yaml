@@ -79,7 +79,7 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - name: Check (all but Boydorr)
+      - name: Check (All but Boydorr)
         if: ! matrix.config.os == 'ubuntu-16.04'
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
