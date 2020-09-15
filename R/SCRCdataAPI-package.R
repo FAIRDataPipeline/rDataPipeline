@@ -19,5 +19,6 @@
 #' @import tibble
 #' @import tidyr
 #' @importFrom utils download.file read.csv unzip write.csv
+#' @import semver
 #'
 NULL

@@ -39,7 +39,7 @@ test_that("post_data works with all tables",{
       data_correct <- list()
       data_incorrect <- list()
 
-      if(nrow(table.required > 1)){
+      if(nrow(table.required)  > 1 ){
         test_that(paste0(table, " fails when no data is present"), {
           expect_error(post_data(table, data = list(), key))
         })
