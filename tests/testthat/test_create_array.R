@@ -5,6 +5,7 @@ context("Testing create_array()")
 
 filename <- "test_array.h5"
 filename_1 <- "test_array_1.h5"
+filename_2 <- "test_array_2.h5"
 filepath <- paste0("test/", filename_1)
 component <- "level"
 df <- data.frame(a = 1:2, b = 3:4)
@@ -88,6 +89,20 @@ test_that(".h5 file is generated in new directory", {
   testthat::expect_true(hdf5r::is.h5file(filepath))
 })
 
+test_that(".h5 file is generated with unit and dimension values", {
+  create_array(filename = filename_2,
+               component = component,
+               array = as.matrix(df),
+               dimension_names = list(rowvalue = rownames(df),
+                                      colvalue = colnames(df)),
+              dimension_values = list(value1 = 1,
+                                      value2 = 2),
+              dimension_units = list(unit1 = "day",
+                                     unit2 = "year"),
+              units = "days")
+  testthat::expect_true(hdf5r::is.h5file(filename_2))
+})
+
 test_that("component name is level", {
   file.h5 <- H5File$new(filename, mode = "r")
   testthat::expect_equal(names(file.h5), component)
@@ -99,5 +114,6 @@ test_that("component name is level", {
 # Remove test file
 file.remove(filename)
 file.remove(filepath)
+file.remove(filename_2)
 
 unlink("test", recursive = TRUE)
