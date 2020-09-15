@@ -6,6 +6,7 @@ context("Testing convert2grid()")
 
 boydorr <- Sys.getenv("BOYDORR")
 
+# Wrap in test_that to enable skipping of tests
 test_that("Test Convert to Grid", {
   skip_if(boydorr == "TRUE")
   # Basic map used in all tests: a square which divided into a 4x4 grid (where
