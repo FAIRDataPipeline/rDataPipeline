@@ -39,7 +39,7 @@ test_that("validate_post_data works with all tables",{
       table.writable <- get_table_writable(table, key)
       Sys.sleep(sleep_time)
       table.required <- get_table_required(table, key)
-      if(nrow(table.required > 1)){
+      if(nrow(table.required)  > 1){
         expect_error(validate_post_data(table, data = list(), key))
       }
       data_correct <- list()
