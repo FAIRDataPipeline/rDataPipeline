@@ -80,7 +80,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Check (All but Boydorr)
-        if: ! matrix.config.os == 'ubuntu-16.04'
+        if: matrix.config.os != 'ubuntu-16.04'
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
