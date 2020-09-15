@@ -40,11 +40,12 @@ test_that("create_version_number output is as expected",{
   testthat::expect_equal(create_version_number(date_4, major = "0", minor = "0"), output)
 })
 
-test_that("create_version_number validation works as expecter", {
+test_that("create_version_number validation works as expected", {
   testthat::expect_error(create_version_number("01-01-20", version_1))
   testthat::expect_error(create_version_number("20-01-01", version_1))
   testthat::expect_error(create_version_number(date, version_4))
   testthat::expect_error(create_version_number(date, version_5))
   testthat::expect_error(create_version_number("200101", version_1))
+  testthat::expect_error(create_version_number("18150101", version_1))
   testthat::expect_warning(create_version_number("01022020", version_1))
 })

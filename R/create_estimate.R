@@ -27,8 +27,8 @@ create_estimate <- function(filename,
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
   # Generate directory structure
-  if(!file.exists(path)) dir.create(path, recursive = TRUE)
-  if(missing(path)) path <- ""
+  if(missing(path)) path <- getwd()
+  else if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
   # Write toml
   tmp <- lapply(seq_along(parameters), function(i) {

@@ -13,8 +13,14 @@ test_that("function behaves as it should", {
                   path = "data-raw",
                   parameters = list(asymptomatic_period = 192.0))
   testthat::expect_true(is.toml.file("data-raw/test_estimate.toml"))
+
+  # File should be toml format
+  create_estimate(filename = "test_estimate_1.toml",
+                  parameters = list(asymptomatic_period = 192.0))
+  testthat::expect_true(is.toml.file("test_estimate_1.toml"))
 })
 
 
 # Remove test file
 file.remove("data-raw/test_estimate.toml")
+file.remove("test_estimate_1.toml")

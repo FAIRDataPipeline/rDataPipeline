@@ -39,4 +39,5 @@ test_that("invalid table name, produces and error", {
   expect_error(check_table_exists(NaN))
   expect_error(check_table_exists(list()))
   expect_error(check_table_exists(TRUE))
+  expect_error(check_table_exists())
 })
