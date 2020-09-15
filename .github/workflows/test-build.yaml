@@ -21,7 +21,7 @@ jobs:
         config:
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
-#          - {os: ubuntu-16.04, r: '3.6.3'} # Boydorr Server
+          - {os: ubuntu-16.04, r: '3.6.3'} # Boydorr Server
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
@@ -57,15 +57,18 @@ jobs:
               brew install hdf5
               brew install gdal
 
-#      - name: Install system requirements (ubuntu-16.04)
-#        if: matrix.config.os == 'ubuntu-16.04'
-#        run : |
-#              sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-#              sudo apt-get update
-#              sudo apt-get install libgdal-dev
+      - name: Install system requirements (ubuntu-16.04)
+        if: matrix.config.os == 'ubuntu-16.04'
+        run : |
+          sudo echo 'deb http://archive.ubuntu.com/ubuntu/ xenial-proposed restricted main multiverse universe' > /etc/apt/sources.list
+          sudo echo 'deb-src http://archive.ubuntu.com/ubuntu xenial main restricted universe multiverse' > /etc/apt/sources.list
+          while read -r cmd
+          do
+            eval sudo $cmd
+          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
 
       - name: Install system requirements (ubuntu-20.04)
-        if: runner.os == 'Linux'
+        if: matrix.config.os == 'ubuntu-20.04'
         run: |
           while read -r cmd
           do
