@@ -18,15 +18,18 @@ test_that("Existing Paper returns existing paper", {
   expect_true(is.character(upload_paper(title, authors, journal_name, journal_abr, website, release_date, abstract, keywords, doi, key = token)))
 })
 
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
+
+keywords <- paste(sample(letters, 12, FALSE), collapse ="", sep = "")
+
 date_time <- Sys.time()
 formatted_date <- format(date_time, "%d%m%y%H%M%S")
-doi <- paste0(formatted_date, "/TEST")
+doi <- paste0(formatted_date, test_identifier, "/TEST")
 release_date <- date_time
-title <- paste0("TEST_", formatted_date)
-abstract <- paste0("Test Abstract ", formatted_date)
-journal_name <- paste0("TEST Journal ", date_time)
-journal_abr <- paste0("TEST_", formatted_date)
-keywords <- formatted_date
+title <- paste0("TEST ", formatted_date, test_identifier)
+abstract <- paste0("Test Abstract ", formatted_date, test_identifier)
+journal_name <- paste0("TEST Journal ", date_time, test_identifier)
+journal_abr <- paste0("TEST_", formatted_date, test_identifier)
 website <- ""
 tmp <- letters[as.numeric(strsplit(formatted_date, "")[[1]])] %>%
   paste(collapse = "")
