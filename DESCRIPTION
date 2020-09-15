@@ -10,7 +10,7 @@ Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
              person("Ryan", "Field", email = "",
                   role = "ctb", comment = c(ORCID = "0000-0002-4424-9890")))
 Description: Functions to interact with the SCRC data pipeline.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Imports:
     assertthat,
     configr,

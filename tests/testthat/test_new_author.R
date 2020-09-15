@@ -7,7 +7,7 @@ test_user <- "22"
 
 object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
-test_identifier <- sample(1:100, 1, replace=TRUE)
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
 
 UID <- paste0("Author Test", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 

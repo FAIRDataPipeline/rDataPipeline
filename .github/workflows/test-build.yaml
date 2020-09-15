@@ -84,9 +84,10 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
+          R_CHECK_SYSTEM_CLOCK: 0
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-        
+
       - name: Check (Boydorr)
         if: matrix.config.os == 'ubuntu-16.04'
         env:
