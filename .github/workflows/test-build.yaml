@@ -60,8 +60,6 @@ jobs:
       - name: Install system requirements (ubuntu-16.04)
         if: matrix.config.os == 'ubuntu-16.04'
         run : |
-          sudo echo 'deb http://archive.ubuntu.com/ubuntu/ xenial-proposed restricted main multiverse universe' > /etc/apt/sources.list
-          sudo echo 'deb-src http://archive.ubuntu.com/ubuntu xenial main restricted universe multiverse' > /etc/apt/sources.list
           while read -r cmd
           do
             eval sudo $cmd
