@@ -22,6 +22,23 @@
 #'
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' \donttest{
+#' df <- data.frame(a = 1:2, b = 3:4)
+#' rownames(df) <- 1:2
+#' create_array(filename = "test_array1.h5", path = ".",
+#' component = "level/a/s/d/f/s",
+#' array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
+#' colvalue = colnames(df)))
+#'
+#' create_array(filename = "test_array2.h5", path = ".",
+#' component = "level/a/s/d/f/s",
+#' array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
+#' colvalue = colnames(df)))
+#'
+#' }}
+#'
 create_array <- function(filename,
                          path = ".",
                          component,
@@ -43,62 +60,83 @@ create_array <- function(filename,
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
-  # Generate hdf5 structure
-  file.h5 <- H5File$new(file.path(path, filename))
+  # Generate hdf5 file
+  fullname <- file.path(path, filename)
+  if(file.exists(fullname)) {
+    fid <- H5Fopen(fullname)
+    if(length(h5ls(fid)) == 0) {
+      current.structure <- ""
+    } else {
+      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
+    }
+    rhdf5::h5closeAll()
 
+  } else {
+    fid <- rhdf5::h5createFile(fullname)
+    current.structure <- ""
+  }
+
+  # Generate internal structure
   if(grepl("/", component)) {
     directory.structure <- strsplit(component, "/")[[1]]
   } else {
     directory.structure <- component
   }
 
-  levels <- length(directory.structure)
-
-  tmp.path <- ""
-  tmp.groups <- names(file.h5)
-
   for (i in seq_along(directory.structure)) {
-    if(!directory.structure[i] %in% tmp.groups)
-      file.h5$create_group(file.path(tmp.path, directory.structure[i]))
-
-    tmp.path <- file.path(tmp.path, directory.structure[i])
-    tmp.groups <- names(file.h5[[tmp.path]])
+    # This structure needs to be added
+    if(i==1) {
+      build.structure <- directory.structure[1]
+    } else {
+      build.structure <- paste0(build.structure, "/", directory.structure[i])
+    }
+    # If the structure doesn't exist make it
+    if(!build.structure %in% current.structure)
+      rhdf5::h5createGroup(fullname, build.structure)
+    # Update current structure
+    current.structure <- c(current.structure, build.structure)
   }
 
   # Attach data
-  file.h5[[file.path(component, "array")]] <- array
+  rhdf5::h5write(array, fullname, paste0(component, "/array"))
 
+  # Attach dimension titles
   dimension_titles <- names(dimension_names)
 
-  # Attach row attributes
-  file.h5[[file.path(component, "Dimension_1_title")]] <- dimension_titles[1]
-  file.h5[[file.path(component, "Dimension_1_names")]] <- dimension_names[[1]]
+  for(i in seq_along(dimension_titles)) {
+    attribute_component <- paste0(component, "/Dimension_", i, "_title")
+    rhdf5::h5write(dimension_titles[i], fullname, attribute_component)
+  }
 
-  # Attach column atttributes
-  file.h5[[file.path(component, "Dimension_2_title")]] <- dimension_titles[2]
-  file.h5[[file.path(component, "Dimension_2_names")]] <- dimension_names[[2]]
+  # Attach dimension names
+  for(j in seq_along(dimension_names)) {
+    attribute_component <- paste0(component, "/Dimension_", j, "_names")
+    rhdf5::h5write(dimension_names[[j]], fullname, attribute_component)
+  }
 
-  # Attach additional attributes
+  # Attach dimension values
   if(!missing(dimension_values)) {
     dimensions.with.values <- which(!is.na(dimension_values))
-
-    for(i in dimensions.with.values)
-      eval(parse(text = paste0("file.h5[[file.path(component, \"Dimension_", i,
-                               "_values\")]] <- dimension_values[[i]]")))
+    for(k in dimensions.with.values) {
+      value_component <- paste0(component, "/Dimension_", k, "_values")
+      rhdf5::h5write(dimension_values[[k]], fullname, value_component)
+    }
   }
 
+  # Attach dimension units
   if(!missing(dimension_units)) {
     dimensions.with.units <- which(!is.na(dimension_units))
-
-    for(i in dimensions.with.units)
-      eval(parse(text = paste0("file.h5[[file.path(component, \"Dimension_", i,
-                               "_units\")]] <- dimension_units[[i]]")))
+    for(m in dimensions.with.units) {
+      unit_component <- paste0(component, "/Dimension_", m, "_units")
+      rhdf5::h5write(dimension_units[[m]], fullname, unit_component)
+    }
   }
 
+  # Attach units
   if(!missing(units))
-    eval(parse(text = paste0("file.h5[[file.path(component, \"units\")]] <- units")))
+    rhdf5::h5write(units, fullname, "units")
 
-  file.h5$close_all()
+  rhdf5::h5closeAll()
 }
 
 
