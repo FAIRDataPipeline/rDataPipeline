@@ -26,10 +26,13 @@ Imports:
     tidyr,
     utils,
     crayon,
-    semver
+    semver,
+    rhdf5
 Suggests:
     units,
     testthat
+biocViews: 
+    rhdf5
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
