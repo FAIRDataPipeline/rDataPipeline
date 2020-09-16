@@ -11,12 +11,12 @@ read_table <- function(filename,
                        path,
                        component) {
 
-  file.h5 <- H5File$new(file.path(path, filename), mode = "r")
+  file.h5 <- rhdf5::h5read(file.path(path, filename), component)
+  object <- file.h5$array
 
-  object <- file.h5[[paste0(component, "/table")]][]
-  if(any("row_names" %in% names(file.h5[[component]])))
-    rownames(object) <- file.h5[[paste0(component, "/row_names")]][]
+  if(any("row_names" %in% names(file.h5)))
+    rownames(object) <- file.h5$row_names
 
-  file.h5$close_all()
+  rhdf5::h5closeAll()
   object
 }
