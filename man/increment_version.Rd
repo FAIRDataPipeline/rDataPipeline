@@ -16,7 +16,3 @@ Generate version number by pulling all version numbers from the data registry
 and incrementing patch by 1. Otherwise, if a version number is input, checks
 are made to determine whether version number is valid.
 }
-\examples{
-increment_version(data_product = "human/demographics/population/scotland")
-
-}

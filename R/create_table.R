@@ -25,36 +25,52 @@ create_table <- function(filename,
   # Generate directory structure
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
-  # Generate hdf5 structure
-  file.h5 <- H5File$new(file.path(path, filename))
+  # Generate hdf5 file
+  fullname <- file.path(path, filename)
+  if(file.exists(fullname)) {
+    fid <- H5Fopen(fullname)
+    if(length(h5ls(fid)) == 0) {
+      current.structure <- ""
+    } else {
+      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
+    }
+    rhdf5::h5closeAll()
 
+  } else {
+    fid <- rhdf5::h5createFile(fullname)
+    current.structure <- ""
+  }
+
+  # Generate internal structure
   if(grepl("/", component)) {
     directory.structure <- strsplit(component, "/")[[1]]
   } else {
     directory.structure <- component
   }
 
-  levels <- length(directory.structure)
-
-  tmp.path <- ""
-  tmp.groups <- names(file.h5)
-
   for (i in seq_along(directory.structure)) {
-    if(!directory.structure[i] %in% tmp.groups)
-      file.h5$create_group(file.path(tmp.path, directory.structure[i]))
-
-    tmp.path <- file.path(tmp.path, directory.structure[i])
-    tmp.groups <- names(file.h5[[tmp.path]])
+    # This structure needs to be added
+    if(i==1) {
+      build.structure <- directory.structure[1]
+    } else {
+      build.structure <- paste0(build.structure, "/", directory.structure[i])
+    }
+    # If the structure doesn't exist make it
+    if(!build.structure %in% current.structure)
+      rhdf5::h5createGroup(fullname, build.structure)
+    # Update current structure
+    current.structure <- c(current.structure, build.structure)
   }
 
   # Attach data
-  file.h5[[file.path(component, "table")]] <- df
+  rhdf5::h5write(df, fullname, paste0(component, "/array"))
 
   # Attach attributes
   if(!missing(row_names))
-    file.h5[[file.path(component, "row_names")]] <- row_names
-  if(!missing(column_units))
-    file.h5[[file.path(component, "column_units")]] <- column_units
+    rhdf5::h5write(row_names, fullname, "row_names")
 
-  file.h5$close_all()
+  if(!missing(column_units))
+    rhdf5::h5write(column_units, fullname, "column_units")
+
+  rhdf5::h5closeAll()
 }

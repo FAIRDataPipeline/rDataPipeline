@@ -44,3 +44,21 @@ a whole}
 \description{
 Function to populate hdf5 file with array type data.
 }
+\examples{
+\dontrun{
+\donttest{
+df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
+create_array(filename = "test_array1.h5", path = ".",
+component = "level/a/s/d/f/s",
+array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
+colvalue = colnames(df)))
+
+create_array(filename = "test_array2.h5", path = ".",
+component = "level/a/s/d/f/s",
+array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
+colvalue = colnames(df)))
+
+}}
+
+}

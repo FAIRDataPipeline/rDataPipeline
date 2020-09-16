@@ -2,37 +2,31 @@ context("Test register_everything")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")
-
 sleep_time <- 0.5
-
 test_user <- "22"
-
 test_identifier <- sample(1:1000000, 1, replace=TRUE)
-
 datetime <- format(Sys.time(), "%d%m%y%H%M%S")
-
 UID <- paste0("register everything ", datetime, test_identifier)
 UID_ <- paste0("register-everything-", datetime, test_identifier)
-
 path <- paste0(UID_)
 
 # Create a CSV
-df <- data.frame(cbind(UID = rep(UID, 10), test = 1:10, text = paste0(rep("TEST_", 10), as.character(1:10))))
+df <- data.frame(cbind(UID = rep(UID, 10),
+                       test = 1:10,
+                       text = paste0(rep("TEST_", 10), as.character(1:10))))
 
 if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
-version <- create_version_number(Sys.Date(), patch = test_identifier, major = datetime)
-
+version <- create_version_number(Sys.Date(),
+                                 patch = test_identifier,
+                                 major = datetime)
 filename <- paste0(version, ".csv")
-
 filepath <- paste0(path, "/", filename)
-
 write.csv(df, filepath)
 
 create_table(paste0(version, ".h5"), path, UID_, df)
 
 submission_script <- paste0("inst/SCRC/", UID_, ".R")
-
 repo <- paste0("ScottishCovidResponse/", UID_)
 
 github_info <- list(repo_storageRoot = "github",
@@ -42,10 +36,8 @@ github_info <- list(repo_storageRoot = "github",
                     submission_script = submission_script)
 
 original_source_name <- paste0("source " ,UID)
-
 original_path <- paste0("download/", UID_, ".csv")
 original_root <- paste0("https://", UID_, ".com/")
-
 
 original_source_id <- post_data("source",
                                 list(
@@ -53,25 +45,26 @@ original_source_id <- post_data("source",
                                 abbreviation = original_source_name),
                                 key)
 
-test_that("register_everything works with single original source", {
-  skip_if(is.null(original_source_id))
-  expect_message(expect_true(is.character(register_everything(product_name = path,
-                        version_number = version,
-                        doi_or_unique_name = UID,
-                        save_location = getwd(),
-                        namespace = UID,
-                        original_source_name = original_source_name,
-                        original_sourceId = original_source_id,
-                        original_root = original_root,
-                        original_path = original_path,
-                        source_filename = filename,
-                        submission_script = submission_script,
-                        github_info = github_info,
-                        accessibility = 0,
-                        key)
-
-  )))
-})
+# test_that("register_everything works with single original source", {
+#   skip_if(is.null(original_source_id))
+#   expect_message(expect_true(is.character(
+#     register_everything(product_name = path,
+#                         version_number = version,
+#                         doi_or_unique_name = UID,
+#                         save_location = getwd(),
+#                         namespace = UID,
+#                         original_source_name = original_source_name,
+#                         original_sourceId = original_source_id,
+#                         original_root = original_root,
+#                         original_path = original_path,
+#                         source_filename = filename,
+#                         submission_script = submission_script,
+#                         github_info = github_info,
+#                         accessibility = 0,
+#                         key)
+#
+#   )))
+# })
 
 
 

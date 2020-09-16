@@ -10,5 +10,5 @@ file_structure(filename)
 \item{filename}{filename}
 }
 \description{
-Look at internal file structure
+Returns the names of the items at the root of the file
 }

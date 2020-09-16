@@ -9,7 +9,7 @@
 #' @rawNamespace import(assertthat, except = has_name)
 #' @import configr
 #' @import dplyr
-#' @import hdf5r
+#' @import rhdf5
 #' @import httr
 #' @import jsonlite
 #' @importFrom openssl sha1

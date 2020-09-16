@@ -11,14 +11,14 @@ read_array <- function(filename,
                        path,
                        component) {
 
-  file.h5 <- H5File$new(file.path(path, filename), mode = "r")
-
-  object <- file.h5[[paste0(component, "/array")]][,]
+  file.h5 <- rhdf5::h5read(file.path(path, filename), component)
+  object <- file.h5$array
   if(is.vector(object)) object <- t(matrix(object))
-  object <- as.data.frame(object)
-  colnames(object) <- file.h5[[paste0(component, "/Dimension_2_names")]][]
-  rownames(object) <- file.h5[[paste0(component, "/Dimension_1_names")]][]
 
-  file.h5$close_all()
+  object <- as.data.frame(object)
+  rownames(object) <- file.h5$Dimension_1_names
+  colnames(object) <- file.h5$Dimension_2_names
+
+  rhdf5::h5closeAll()
   object
 }

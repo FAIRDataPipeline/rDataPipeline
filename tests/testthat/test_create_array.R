@@ -1,5 +1,3 @@
-library(hdf5r)
-
 context("Testing create_array()")
 
 
@@ -95,19 +93,19 @@ test_that(".h5 file is generated with unit and dimension values", {
                array = as.matrix(df),
                dimension_names = list(rowvalue = rownames(df),
                                       colvalue = colnames(df)),
-              dimension_values = list(value1 = 1,
-                                      value2 = 2),
-              dimension_units = list(unit1 = "day",
-                                     unit2 = "year"),
-              units = "days")
+               dimension_values = list(value1 = 1,
+                                       value2 = 2),
+               dimension_units = list(unit1 = "day",
+                                      unit2 = "year"),
+               units = "days")
   testthat::expect_true(hdf5r::is.h5file(filename_2))
 })
 
 test_that("component name is level", {
-  file.h5 <- H5File$new(filename, mode = "r")
-  testthat::expect_equal(names(file.h5), component)
-  file.h5$close_all()
-
+  file.h5 <- rhdf5::H5Fopen(filename)
+  tmp <- unique(gsub("/", "", h5ls(file.h5)$group)[-1])
+  testthat::expect_equal(tmp, component)
+  rhdf5::h5closeAll()
 })
 
 

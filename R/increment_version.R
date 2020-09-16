@@ -9,9 +9,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' increment_version(data_product = "human/demographics/population/scotland")
-#'
 increment_version <- function(data_product, version) {
   tmp <- get_entry("data_product", list(name = data_product))
   versions <- lapply(tmp, function(x) x$version) %>% unlist()

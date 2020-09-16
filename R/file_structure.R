@@ -1,6 +1,6 @@
 #' file_structure
 #'
-#' Look at internal file structure
+#' Returns the names of the items at the root of the file
 #'
 #' @param filename filename
 #'
@@ -8,13 +8,14 @@
 #'
 file_structure <- function(filename) {
 
-  file.h5 <- H5File$new(filename, mode = "r")
+  tmp <- rhdf5::H5Fopen(filename) %>%
+    h5ls() %>%
+    dplyr::filter(name == "array" | name == "table") %>%
+    dplyr::select(group) %>%
+    unlist() %>%
+    unname()
 
-  tmp <- file.h5$ls(recursive = TRUE) %>%
-    dplyr::filter(grepl("array$|table$", .data$name)) %>%
-    dplyr::mutate(name = gsub("/array|/table", "", .data$name)) %>%
-    dplyr::select(.data$name)
+  rhdf5::h5closeAll()
 
-  file.h5$close_all()
-  tmp
+  gsub("^/", "", tmp)
 }
