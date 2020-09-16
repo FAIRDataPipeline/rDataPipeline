@@ -8,16 +8,17 @@ get_remote_package_version <- function(
   repo = "ScottishCovidResponse/SCRCdataAPI"){
   description <- as.character(0)
   tryCatch({
-    description <- utils::read.delim(
-      file.path("https://raw.githubusercontent.com", repo, "master",
-                "DESCRIPTION"), sep = ":",
-      header = FALSE, row.names = 1)
+    url <- paste("https://raw.githubusercontent.com", repo, "master",
+                 "DESCRIPTION", sep = "/")
+    description <- readLines(url)
   }, error = function(e){
-    stop("Problem with github repository please check the package name")}, warning = function(w){}
+    stop("Problem with github repository please check the package name")},
+  warning = function(w){}
   )
 
-  if(any(row.names(description) == "Version"))
-    return(gsub(" ", "", description['Version',]))
-  else
+  if(any(grepl("Version", description))) {
+    ind <- grep("Version", description)
+    return(gsub("Version: ", "", description[ind]))
+  } else
     stop("Something went wrong")
 }
