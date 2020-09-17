@@ -38,7 +38,7 @@ read_array <- function(filename,
   }
 
   # Attach remaining list elements as attributes
-  ind <- grep("Dimension_[0-9]_names|array|table", names(file.h5))
+  ind <- grep("Dimension_[0-9]_names|array", names(file.h5))
   tmp <- file.h5[-ind]
 
   for(i in seq_along(tmp)) {
