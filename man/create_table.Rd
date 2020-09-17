@@ -23,3 +23,16 @@ e.g. "location/per_week/all_deaths"}
 \description{
 Function to populate hdf5 file with array type data.
 }
+\examples{
+df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
+filename <- "test_table.h5"
+
+create_table(filename = filename,
+             path = ".",
+             component = "level",
+             df = df,
+             row_names = rownames(df),
+             column_units = c(NA, "m^2"))
+
+}

@@ -1,14 +1,36 @@
 #' read_array
 #'
-#' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
-#' @param path a \code{string} specifying the directory in which you want to
-#' save the h5 file
+#' @param filename a \code{string} specifying the filename of the file to be
+#' read
+#' @param path a \code{string} specifying the directory of the file to be
+#' read
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #'
-#' @return Returns an array
+#' @return Returns an array with attached \code{Dimension_i_title},
+#' \code{Dimension_i_units}, \code{Dimension_i_values}, and \code{units}
+#' attributes, if available
 #'
 #' @export
+#'
+#' @examples
+#' df <- data.frame(a = 1:2, b = 3:4)
+#' rownames(df) <- 1:2
+#' array <- as.matrix(df)
+#'
+#' create_array(filename = "test_array.h5",
+#'              path = ".",
+#'              component = "level/a/s/d/f/s",
+#'              array = array,
+#'              dimension_names = list(rowvalue = rownames(df),
+#'                                     colvalue = colnames(df)),
+#'              dimension_values = list(NA, 10),
+#'              dimension_units = list(NA, "km"),
+#'              units = "s")
+#'
+#' read_array(filename = "test_array.h5",
+#'            path = ".",
+#'            component = "level/a/s/d/f/s")
 #'
 read_array <- function(filename,
                        path,

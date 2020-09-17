@@ -7,13 +7,37 @@
 read_table(filename, path, component)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
+\item{filename}{a \code{string} specifying the filename of the file to be
+read}
 
-\item{path}{a \code{string} specifying the directory in which you want to save the h5 file}
+\item{path}{a \code{string} specifying the directory of the file to be
+read}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file,
-e.g. "location/per_week/all_deaths"}
+\item{component}{a \code{string} specifying a location within the hdf5 file}
+}
+\value{
+Returns a \code{data.frame} with attached \code{column_units}
+attributes,
+if available
 }
 \description{
 read_table
+}
+\examples{
+df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
+filename <- "test_table.h5"
+
+create_table(filename = filename,
+             path = ".",
+             component = "level",
+             df = df,
+             row_names = rownames(df),
+             column_units = c(NA, "m^2"))
+
+my_table <- read_table(filename = filename,
+                       path = ".",
+                       component = "level")
+attributes(my_table)
+
 }

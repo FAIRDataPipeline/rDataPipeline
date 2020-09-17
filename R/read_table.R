@@ -1,12 +1,14 @@
 #' read_table
 #'
-#' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
-#' @param path a \code{string} specifying the directory in which you want to save the h5 file
-#' @param component a \code{string} specifying a location within the hdf5 file,
-#' e.g. "location/per_week/all_deaths"
+#' @param filename a \code{string} specifying the filename of the file to be
+#' read
+#' @param path a \code{string} specifying the directory of the file to be
+#' read
+#' @param component a \code{string} specifying a location within the hdf5 file
 #'
-#' @return Returns \code{data.frame} with attached column_units attributes, if
-#' available
+#' @return Returns a \code{data.frame} with attached \code{column_units}
+#' attributes,
+#' if available
 #'
 #' @export
 #'
