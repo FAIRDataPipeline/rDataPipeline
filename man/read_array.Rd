@@ -9,10 +9,14 @@ read_array(filename, path, component)
 \arguments{
 \item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
 
-\item{path}{a \code{string} specifying the directory in which you want to save the h5 file}
+\item{path}{a \code{string} specifying the directory in which you want to
+save the h5 file}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,
 e.g. "location/per_week/all_deaths"}
+}
+\value{
+Returns an array
 }
 \description{
 read_array
