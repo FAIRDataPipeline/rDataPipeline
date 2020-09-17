@@ -75,7 +75,7 @@ create_table <- function(filename,
   }
 
   # Attach data
-  rhdf5::h5write(df, fullname, paste0(component, "/array"))
+  rhdf5::h5write(df, fullname, paste0(component, "/table"))
 
   # Attach attributes
   if(!missing(row_names))
