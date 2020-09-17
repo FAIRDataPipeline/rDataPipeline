@@ -68,6 +68,21 @@
 #' file.remove(filename4d)
 #' }
 #'
+#' # Attach values and units
+#' filename <- "test_array_val.h5"
+#' if(!file.exists(filename)) {
+#' create_array(filename = filename,
+#'              path = ".",
+#'              component = "level/a/s/d/f/s",
+#'              array = array,
+#'              dimension_names = list(rowvalue = rownames(df),
+#'                                     colvalue = colnames(df)),
+#'              dimension_values = list(NA, 10),
+#'              dimension_units = list(NA, "km"),
+#'              units = "s")
+#' file.remove(filename)
+#' }
+#'
 create_array <- function(filename,
                          path = ".",
                          component,
@@ -162,8 +177,9 @@ create_array <- function(filename,
   }
 
   # Attach units
-  if(!missing(units))
-    rhdf5::h5write(units, fullname, "units")
+  if(!missing(units)) {
+    rhdf5::h5write(units, fullname, paste0(component, "/units"))
+  }
 
   rhdf5::h5closeAll()
 }
