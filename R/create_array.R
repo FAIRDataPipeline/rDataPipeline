@@ -28,50 +28,34 @@
 #' array <- as.matrix(df)
 #'
 #' # Create 2-dimensional array
-#' filename2d <- "test_array_2d.h5"
-#' if(!file.exists(filename2d)) {
-#' create_array(filename = filename2d,
+#' create_array(filename = "test_array_2d.h5",
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
 #'              array = array,
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df)))
-#' file.remove(filename2d)
-#' }
 #'
 #' # Create 3-dimensional array
-#' filename3d <- "test_array_3d.h5"
-#' if(!file.exists(filename3d)) {
-#' array2 <- array(c(array, array), dim = c(dim(array), 2))
-#' create_array(filename = filename3d,
+#' create_array(filename = "test_array_3d.h5",
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
-#'              array = array2,
+#'              array = array(c(array, array), dim = c(dim(array), 2)),
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df),
 #'                                     gender = paste0("male", "female")))
-#' file.remove(filename3d)
-#' }
 #'
 #' # Create 4-dimensional array
-#' filename4d <- "test_array_4d.h5"
-#' if(!file.exists(filename4d)) {
-#' array3 <- array(c(array, array, array), dim = c(dim(array), 2, 2))
-#' create_array(filename = filename4d,
+#' create_array(filename = "test_array_4d.h5",
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
-#'              array = array3,
+#'              array = array(c(array, array, array), dim = c(dim(array), 2, 2)),
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df),
 #'                                     gender = paste0("male", "female"),
 #'                                     city = paste0("glasgow", "paris")))
-#' file.remove(filename4d)
-#' }
 #'
 #' # Attach values and units
-#' filename <- "test_array_val.h5"
-#' if(!file.exists(filename)) {
-#' create_array(filename = filename,
+#' create_array(filename = "test_array_val.h5",
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
 #'              array = array,
@@ -80,8 +64,6 @@
 #'              dimension_values = list(NA, 10),
 #'              dimension_units = list(NA, "km"),
 #'              units = "s")
-#' file.remove(filename)
-#' }
 #'
 create_array <- function(filename,
                          path = ".",
