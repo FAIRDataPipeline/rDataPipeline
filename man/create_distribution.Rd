@@ -4,30 +4,55 @@
 \alias{create_distribution}
 \title{create_distribution}
 \usage{
-create_distribution(filename, path, name, distribution, parameters)
+create_distribution(filename, path, distribution)
 }
 \arguments{
 \item{filename}{a \code{string} specifying the name of the toml file, e.g.
 "0.1.0.toml"}
 
-\item{path}{a \code{string} specifying the directory in which you want to save the toml file}
+\item{path}{a \code{string} specifying the directory in which you want to
+save the toml file; this will be automatically generated if it doesn't
+already exist}
 
+\item{distribution}{a \code{list} containing 3 named elements:
+\itemize{
 \item{name}{a \code{string} specifying the name of the parameter}
-
 \item{distribution}{a \code{string} specifying the name of the distribution}
-
-\item{parameters}{a named \code{list} specifying parameter values and
-associated names (see example)}
+\item{parameters}{a \code{list} specifying parameter values and associated
+names}
+}
+If more than one distribution is required, they must be added as a list
+(see Examples)}
 }
 \description{
 Function to populate toml file with distribution type data.
 }
 \examples{
-filename <- "test.toml"
-path <- "data-raw/example"
-name <- "latency"
-distribution = "gamma"
-parameters <- list(shape = 2.0, scale = 3.0)
-create_distribution(filename, path, name, distribution, parameters)
+# Write a single distribution into a toml file
+dist <- list(name = "latency",
+             distribution = "gamma",
+             parameters = list(shape = 2.0, scale = 3.0))
+filename <- "test_single.toml"
+
+create_distribution(filename = filename,
+                    path = ".",
+                    distribution = dist)
+
+file.remove(filename)
+
+# Write multiple distributions into a toml file
+dist1 <- list(name = "latency",
+              distribution = "gamma",
+              parameters = list(shape = 2.0, scale = 3.0))
+dist2 <- list(name = "virulence",
+              distribution = "gamma",
+              parameters = list(shape = 2.0, scale = 3.0))
+filename <- "test_multi.toml"
+
+create_distribution(filename = filename,
+                    path = ".",
+                    distribution = list(dist1, dist2))
+
+file.remove(filename)
 
 }

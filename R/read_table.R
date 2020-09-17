@@ -1,5 +1,7 @@
 #' read_table
 #'
+#' Function to read table type data from hdf5 file.
+#'
 #' @param filepath a \code{string} specifying the path and filename of the file to
 #' be read
 #' @param component a \code{string} specifying a location within the hdf5 file

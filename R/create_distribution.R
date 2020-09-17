@@ -14,6 +14,8 @@
 #'  \item{parameters}{a \code{list} specifying parameter values and associated
 #'  names}
 #' }
+#' If more than one distribution is required, they must be added as a list
+#' (see Examples)
 #' @export
 #'
 #' @examples

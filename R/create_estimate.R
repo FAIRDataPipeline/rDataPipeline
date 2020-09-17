@@ -1,24 +1,35 @@
 #' create_estimate
 #'
-#' Function to populate toml file with number type data.
+#' Function to populate toml file with point-estimate type data.
 #'
 #' @param filename a \code{string} specifying the name of the toml file, e.g.
 #' "0.1.0.toml"
-#' @param path a \code{string} specifying the directory in which you want to save the toml file
-#' @param parameters a \code{list} (see example, below)
+#' @param path a \code{string} specifying the directory in which you want to
+#' save the toml file; this will be automatically generated if it doesn't
+#' already exist
+#' @param parameters a \code{list} (see Examples)
 #'
 #' @export
 #'
 #' @examples
+#' # Write a single estimate into a toml file
 #' filename <- "test.toml"
-#' path <- "data-raw/example"
-#' parameters <- list(asymptomatic_period = 192.0)
-#' create_estimate(filename, path, parameters)
 #'
+#' create_estimate(filename = filename,
+#'                 path = ".",
+#'                 parameters = list(asymptomatic_period = 192.0))
+#'
+#' file.remove(filename)
+#'
+#' # Write multiple estimates into a toml file
 #' filename <- "anothertest.toml"
-#' path <- "data-raw/example"
-#' parameters <- list(asymptomatic_period = 192.0, latent_period = 123.12)
-#' create_estimate(filename, path, parameters)
+#'
+#' create_estimate(filename = filename,
+#'                 path = ".",
+#'                 parameters = list(asymptomatic_period = 192.0,
+#'                                   latent_period = 123.12))
+#'
+#' file.remove(filename)
 #'
 create_estimate <- function(filename,
                             path,
