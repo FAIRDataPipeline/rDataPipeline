@@ -5,7 +5,27 @@
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #'
+#' @return Returns \code{data.frame} with attached column_units attributes, if
+#' available
+#'
 #' @export
+#'
+#' @examples
+#' df <- data.frame(a = 1:2, b = 3:4)
+#' rownames(df) <- 1:2
+#' filename <- "test_table.h5"
+#'
+#' create_table(filename = filename,
+#'              path = ".",
+#'              component = "level",
+#'              df = df,
+#'              row_names = rownames(df),
+#'              column_units = c(NA, "m^2"))
+#'
+#' my_table <- read_table(filename = filename,
+#'                        path = ".",
+#'                        component = "level")
+#' attributes(my_table)
 #'
 read_table <- function(filename,
                        path,
