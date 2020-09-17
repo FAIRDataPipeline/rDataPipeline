@@ -1,9 +1,7 @@
 #' read_table
 #'
-#' @param filename a \code{string} specifying the filename of the file to be
-#' read
-#' @param path a \code{string} specifying the directory of the file to be
-#' read
+#' @param filepath a \code{string} specifying the path and filename of the file to
+#' be read
 #' @param component a \code{string} specifying a location within the hdf5 file
 #'
 #' @return Returns a \code{data.frame} with attached \code{column_units}
@@ -24,16 +22,16 @@
 #'              row_names = rownames(df),
 #'              column_units = c(NA, "m^2"))
 #'
-#' my_table <- read_table(filename = filename,
-#'                        path = ".",
+#' my_table <- read_table(filepath = filename,
 #'                        component = "level")
 #' attributes(my_table)
 #'
-read_table <- function(filename,
-                       path,
+#' file.remove(filename)
+#'
+read_table <- function(filepath,
                        component) {
   # Read hdf5 file
-  file.h5 <- rhdf5::h5read(file.path(path, filename), component)
+  file.h5 <- rhdf5::h5read(filepath, component)
 
   # Extract data object
   object <- file.h5$table

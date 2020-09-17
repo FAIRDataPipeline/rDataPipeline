@@ -24,6 +24,8 @@
 #'              row_names = rownames(df),
 #'              column_units = c(NA, "m^2"))
 #'
+#' file.remove(filename)
+#'
 create_table <- function(filename,
                          path = ".",
                          component,

@@ -1,9 +1,7 @@
 #' read_array
 #'
-#' @param filename a \code{string} specifying the filename of the file to be
-#' read
-#' @param path a \code{string} specifying the directory of the file to be
-#' read
+#' @param filepath a \code{string} specifying the path and filename of the file to
+#' be read
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #'
@@ -17,8 +15,9 @@
 #' df <- data.frame(a = 1:2, b = 3:4)
 #' rownames(df) <- 1:2
 #' array <- as.matrix(df)
+#' filename <- "test_array.h5"
 #'
-#' create_array(filename = "test_array.h5",
+#' create_array(filename = filename,
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
 #'              array = array,
@@ -28,15 +27,15 @@
 #'              dimension_units = list(NA, "km"),
 #'              units = "s")
 #'
-#' read_array(filename = "test_array.h5",
-#'            path = ".",
+#' read_array(filepath = filename,
 #'            component = "level/a/s/d/f/s")
 #'
-read_array <- function(filename,
-                       path,
+#' file.remove(filename)
+#'
+read_array <- function(filepath,
                        component) {
   # Read hdf5 file
-  file.h5 <- rhdf5::h5read(file.path(path, filename), component)
+  file.h5 <- rhdf5::h5read(filepath, component)
 
   # Extract data object
   object <- file.h5$array

@@ -35,4 +35,6 @@ create_table(filename = filename,
              row_names = rownames(df),
              column_units = c(NA, "m^2"))
 
+file.remove(filename)
+
 }

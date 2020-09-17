@@ -4,14 +4,11 @@
 \alias{read_array}
 \title{read_array}
 \usage{
-read_array(filename, path, component)
+read_array(filepath, component)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the filename of the file to be
-read}
-
-\item{path}{a \code{string} specifying the directory of the file to be
-read}
+\item{filepath}{a \code{string} specifying the path and filename of the file to
+be read}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,
 e.g. "location/per_week/all_deaths"}
@@ -28,8 +25,9 @@ read_array
 df <- data.frame(a = 1:2, b = 3:4)
 rownames(df) <- 1:2
 array <- as.matrix(df)
+filename <- "test_array.h5"
 
-create_array(filename = "test_array.h5",
+create_array(filename = filename,
              path = ".",
              component = "level/a/s/d/f/s",
              array = array,
@@ -39,8 +37,9 @@ create_array(filename = "test_array.h5",
              dimension_units = list(NA, "km"),
              units = "s")
 
-read_array(filename = "test_array.h5",
-           path = ".",
+read_array(filepath = filename,
            component = "level/a/s/d/f/s")
+
+file.remove(filename)
 
 }

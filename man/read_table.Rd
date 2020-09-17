@@ -4,14 +4,11 @@
 \alias{read_table}
 \title{read_table}
 \usage{
-read_table(filename, path, component)
+read_table(filepath, component)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the filename of the file to be
-read}
-
-\item{path}{a \code{string} specifying the directory of the file to be
-read}
+\item{filepath}{a \code{string} specifying the path and filename of the file to
+be read}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file}
 }
@@ -35,9 +32,10 @@ create_table(filename = filename,
              row_names = rownames(df),
              column_units = c(NA, "m^2"))
 
-my_table <- read_table(filename = filename,
-                       path = ".",
+my_table <- read_table(filepath = filename,
                        component = "level")
 attributes(my_table)
+
+file.remove(filename)
 
 }
