@@ -10,12 +10,23 @@
 read_table <- function(filename,
                        path,
                        component) {
-
+  # Read hdf5 file
   file.h5 <- rhdf5::h5read(file.path(path, filename), component)
-  object <- file.h5$array
 
+  # Extract data object
+  object <- file.h5$table
+
+  # Attach rownames to object
   if(any("row_names" %in% names(file.h5)))
     rownames(object) <- file.h5$row_names
+
+  # Attach remaining list elements as attributes
+  ind <- grep("row_names|table", names(file.h5))
+  tmp <- file.h5[-ind]
+
+  for(i in seq_along(tmp)) {
+    attr(object, names(tmp)[i]) <- tmp[[i]]
+  }
 
   rhdf5::h5closeAll()
   object
