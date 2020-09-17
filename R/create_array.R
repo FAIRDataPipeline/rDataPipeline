@@ -34,6 +34,7 @@
 #'              array = array,
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df)))
+#' file.remove("test_array_2d.h5")
 #'
 #' # Create 3-dimensional array
 #' create_array(filename = "test_array_3d.h5",
@@ -43,6 +44,7 @@
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df),
 #'                                     gender = paste0("male", "female")))
+#' file.remove("test_array_3d.h5")
 #'
 #' # Create 4-dimensional array
 #' create_array(filename = "test_array_4d.h5",
@@ -53,8 +55,9 @@
 #'                                     colvalue = colnames(df),
 #'                                     gender = paste0("male", "female"),
 #'                                     city = paste0("glasgow", "paris")))
+#' file.remove("test_array_4d.h5")
 #'
-#' # Attach values and units
+#' # Create array with values and units
 #' create_array(filename = "test_array_val.h5",
 #'              path = ".",
 #'              component = "level/a/s/d/f/s",
@@ -64,6 +67,7 @@
 #'              dimension_values = list(NA, 10),
 #'              dimension_units = list(NA, "km"),
 #'              units = "s")
+#' file.remove("test_array_val.h5")
 #'
 create_array <- function(filename,
                          path = ".",
