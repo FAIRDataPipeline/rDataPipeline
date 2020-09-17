@@ -12,6 +12,18 @@
 #'
 #' @export
 #'
+#' @examples
+#' df <- data.frame(a = 1:2, b = 3:4)
+#' rownames(df) <- 1:2
+#' filename <- "test_table.h5"
+#'
+#' create_table(filename = filename,
+#'              path = ".",
+#'              component = "level",
+#'              df = df,
+#'              row_names = rownames(df),
+#'              column_units = c(NA, "m^2"))
+#'
 create_table <- function(filename,
                          path = ".",
                          component,
@@ -67,10 +79,10 @@ create_table <- function(filename,
 
   # Attach attributes
   if(!missing(row_names))
-    rhdf5::h5write(row_names, fullname, "row_names")
+    rhdf5::h5write(row_names, fullname, paste0(component, "/row_names"))
 
   if(!missing(column_units))
-    rhdf5::h5write(column_units, fullname, "column_units")
+    rhdf5::h5write(column_units, fullname, paste0(component, "/column_units"))
 
   rhdf5::h5closeAll()
 }
