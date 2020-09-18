@@ -4,16 +4,38 @@
 \alias{read_table}
 \title{read_table}
 \usage{
-read_table(filename, path, component)
+read_table(filepath, component)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
+\item{filepath}{a \code{string} specifying the path and filename of the file to
+be read}
 
-\item{path}{a \code{string} specifying the directory in which you want to save the h5 file}
-
-\item{component}{a \code{string} specifying a location within the hdf5 file,
-e.g. "location/per_week/all_deaths"}
+\item{component}{a \code{string} specifying a location within the hdf5 file}
+}
+\value{
+Returns a \code{data.frame} with attached \code{column_units}
+attributes,
+if available
 }
 \description{
-read_table
+Function to read table type data from hdf5 file.
+}
+\examples{
+df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
+filename <- "test_table.h5"
+
+create_table(filename = filename,
+             path = ".",
+             component = "level",
+             df = df,
+             row_names = rownames(df),
+             column_units = c(NA, "m^2"))
+
+my_table <- read_table(filepath = filename,
+                       component = "level")
+attributes(my_table)
+
+file.remove(filename)
+
 }

@@ -4,12 +4,37 @@
 \alias{read_estimate}
 \title{read_estimate}
 \usage{
-read_estimate(filename)
+read_estimate(filepath)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the name of the toml file, e.g.
-"0.1.0.toml"}
+\item{filepath}{a \code{string} specifying the path and filename of the
+file to be read}
 }
 \description{
-read_estimate
+Function to read point-estimate type data from toml file.
+}
+\examples{
+# Write a single estimate into a toml file
+filename <- "test.toml"
+
+create_estimate(filename = filename,
+                path = ".",
+                parameters = list(asymptomatic_period = 192.0))
+
+read_estimate(filepath = filename)
+
+file.remove(filename)
+
+# Write multiple estimates into a toml file
+filename <- "anothertest.toml"
+
+create_estimate(filename = filename,
+                path = ".",
+                parameters = list(asymptomatic_period = 192.0,
+                                  latent_period = 123.12))
+
+read_estimate(filepath = filename)
+
+file.remove(filename)
+
 }

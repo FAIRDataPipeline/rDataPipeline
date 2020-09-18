@@ -56,17 +56,13 @@ test_that("an h5 file is generated", {
   testthat::expect_true(hdf5r::is.h5file(filename))
 })
 
-# test_that("file structures are equal to Component names", {
-#   testthat::expect_identical(as.data.frame(file_structure(filename)),
-#                              data.frame("name" = component, stringsAsFactors = FALSE))
-#   testthat::expect_equal(as.data.frame(file_structure(filename_1)),
-#                          data.frame("name" = component_1, stringsAsFactors = FALSE))
-#   testthat::expect_equal(as.data.frame(file_structure(filename_2)),
-#                          data.frame("name" = component_2, stringsAsFactors = FALSE))
-#   testthat::expect_equal(as.data.frame(file_structure(filename_3)),
-#                          data.frame("name" = c(component, component_1,
-#                                                component_2), stringsAsFactors = FALSE))
-# })
+test_that("file structures are equal to Component names", {
+  testthat::expect_identical(file_structure(filename), component)
+  testthat::expect_equal(file_structure(filename_1), component_1)
+  testthat::expect_equal(file_structure(filename_2), component_2)
+  testthat::expect_equal(file_structure(filename_3),
+                         c(component, component_1, component_2))
+})
 
 
 # Remove test file

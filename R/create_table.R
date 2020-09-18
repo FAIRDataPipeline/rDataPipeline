@@ -3,7 +3,9 @@
 #' Function to populate hdf5 file with array type data.
 #'
 #' @param filename a \code{string} specifying the filename, e.g. "0.1.0.h5"
-#' @param path a \code{string} specifying the directory in which you want to save the h5 file
+#' @param path a \code{string} specifying the directory in which you want to
+#' save the h5 file; this will be automatically generated if it doesn't
+#' already exist
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' e.g. "location/per_week/all_deaths"
 #' @param df a \code{dataframe} containing the data
@@ -11,6 +13,20 @@
 #' @param column_units (optional) a \code{vector} comprising column units
 #'
 #' @export
+#'
+#' @examples
+#' df <- data.frame(a = 1:2, b = 3:4)
+#' rownames(df) <- 1:2
+#' filename <- "test_table.h5"
+#'
+#' create_table(filename = filename,
+#'              path = ".",
+#'              component = "level",
+#'              df = df,
+#'              row_names = rownames(df),
+#'              column_units = c(NA, "m^2"))
+#'
+#' file.remove(filename)
 #'
 create_table <- function(filename,
                          path = ".",
@@ -63,14 +79,14 @@ create_table <- function(filename,
   }
 
   # Attach data
-  rhdf5::h5write(df, fullname, paste0(component, "/array"))
+  rhdf5::h5write(df, fullname, paste0(component, "/table"))
 
   # Attach attributes
   if(!missing(row_names))
-    rhdf5::h5write(row_names, fullname, "row_names")
+    rhdf5::h5write(row_names, fullname, paste0(component, "/row_names"))
 
   if(!missing(column_units))
-    rhdf5::h5write(column_units, fullname, "column_units")
+    rhdf5::h5write(column_units, fullname, paste0(component, "/column_units"))
 
   rhdf5::h5closeAll()
 }

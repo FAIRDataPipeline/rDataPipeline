@@ -4,12 +4,45 @@
 \alias{read_distribution}
 \title{read_distribution}
 \usage{
-read_distribution(filename)
+read_distribution(filepath)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the name of the toml file, e.g.
-"0.1.0.toml"}
+\item{filepath}{a \code{string} specifying the path and filename of the file
+to be read}
 }
 \description{
-read_distribution
+Function to read disdtribution type data from toml file.
+}
+\examples{
+# Write a single distribution into a toml file
+dist <- list(name = "latency",
+             distribution = "gamma",
+             parameters = list(shape = 2.0, scale = 3.0))
+filename <- "test_single.toml"
+
+create_distribution(filename = filename,
+                    path = ".",
+                    distribution = dist)
+
+read_distribution(filepath = filename)
+
+file.remove(filename)
+
+# Write multiple distributions into a toml file
+dist1 <- list(name = "latency",
+              distribution = "gamma",
+              parameters = list(shape = 2.0, scale = 3.0))
+dist2 <- list(name = "virulence",
+              distribution = "gamma",
+              parameters = list(shape = 2.0, scale = 3.0))
+filename <- "test_multi.toml"
+
+create_distribution(filename = filename,
+                    path = ".",
+                    distribution = list(dist1, dist2))
+
+read_distribution(filepath = filename)
+
+file.remove(filename)
+
 }

@@ -45,26 +45,26 @@ original_source_id <- post_data("source",
                                 abbreviation = original_source_name),
                                 key)
 
-# test_that("register_everything works with single original source", {
-#   skip_if(is.null(original_source_id))
-#   expect_message(expect_true(is.character(
-#     register_everything(product_name = path,
-#                         version_number = version,
-#                         doi_or_unique_name = UID,
-#                         save_location = getwd(),
-#                         namespace = UID,
-#                         original_source_name = original_source_name,
-#                         original_sourceId = original_source_id,
-#                         original_root = original_root,
-#                         original_path = original_path,
-#                         source_filename = filename,
-#                         submission_script = submission_script,
-#                         github_info = github_info,
-#                         accessibility = 0,
-#                         key)
-#
-#   )))
-# })
+test_that("register_everything works with single original source", {
+  skip_if(is.null(original_source_id))
+  expect_message(expect_true(is.character(
+    register_everything(product_name = path,
+                        version_number = version,
+                        doi_or_unique_name = UID,
+                        save_location = getwd(),
+                        namespace = UID,
+                        original_source_name = original_source_name,
+                        original_sourceId = original_source_id,
+                        original_root = original_root,
+                        original_path = original_path,
+                        source_filename = filename,
+                        submission_script = submission_script,
+                        github_info = github_info,
+                        accessibility = 0,
+                        key)
+
+  )))
+})
 
 
 

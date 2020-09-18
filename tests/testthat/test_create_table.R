@@ -41,25 +41,24 @@ file.remove(filename)
 
 # -------------------------------------------------------------------------
 
-# context("Testing create_table() on a multi-class table")
-#
-# filename <- "test_table.h5"
-# multiclass_df <- data.frame(a = letters[1:2], b = 3:4)
-# component <- "level"
-#
-# test_that("function behaves as it should with multiple classes", {
-#   create_table(filename = filename,
-#                component = component,
-#                df = multiclass_df)
-#
-#   tab <- read_table(filename = filename,
-#                     path = ".",
-#                     component = component)
-#
-#   testthat::expect_equal(tab, multiclass_df)
-# })
-#
-# file.remove(filename)
+context("Testing create_table() on a multi-class table")
+
+filename <- "test_table.h5"
+multiclass_df <- data.frame(a = letters[1:2], b = 3:4, stringsAsFactors = FALSE)
+component <- "level"
+
+test_that("function behaves as it should with multiple classes", {
+  create_table(filename = filename,
+               component = component,
+               df = multiclass_df)
+
+  tab <- read_table(filepath = filename,
+                    component = component)
+
+  testthat::expect_equal(tab, multiclass_df)
+})
+
+file.remove(filename)
 
 test_that("directory is created when supplying path",{
     create_table(filename = filename_2,

@@ -4,16 +4,42 @@
 \alias{read_array}
 \title{read_array}
 \usage{
-read_array(filename, path, component)
+read_array(filepath, component)
 }
 \arguments{
-\item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
-
-\item{path}{a \code{string} specifying the directory in which you want to save the h5 file}
+\item{filepath}{a \code{string} specifying the path and filename of the file to
+be read}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,
 e.g. "location/per_week/all_deaths"}
 }
+\value{
+Returns an array with attached \code{Dimension_i_title},
+\code{Dimension_i_units}, \code{Dimension_i_values}, and \code{units}
+attributes, if available
+}
 \description{
-read_array
+Function to read array type data from hdf5 file.
+}
+\examples{
+df <- data.frame(a = 1:2, b = 3:4)
+rownames(df) <- 1:2
+array <- as.matrix(df)
+filename <- "test_array.h5"
+
+create_array(filename = filename,
+             path = ".",
+             component = "level/a/s/d/f/s",
+             array = array,
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)),
+             dimension_values = list(NA, 10),
+             dimension_units = list(NA, "km"),
+             units = "s")
+
+read_array(filepath = filename,
+           component = "level/a/s/d/f/s")
+
+file.remove(filename)
+
 }

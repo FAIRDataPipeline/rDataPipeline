@@ -19,7 +19,8 @@ create_array(
 \item{filename}{a \code{string} specifying the filename, e.g. "0.1.0.h5"}
 
 \item{path}{a \code{string} specifying the directory in which you want to
-save the h5 file}
+save the h5 file; this will be automatically generated if it doesn't
+already exist}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,
 e.g. "location/per_week/all_deaths"}
@@ -45,20 +46,50 @@ a whole}
 Function to populate hdf5 file with array type data.
 }
 \examples{
-\dontrun{
-\donttest{
 df <- data.frame(a = 1:2, b = 3:4)
 rownames(df) <- 1:2
-create_array(filename = "test_array1.h5", path = ".",
-component = "level/a/s/d/f/s",
-array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
-colvalue = colnames(df)))
+array <- as.matrix(df)
 
-create_array(filename = "test_array2.h5", path = ".",
-component = "level/a/s/d/f/s",
-array = as.matrix(df), dimension_names = list(rowvalue = rownames(df),
-colvalue = colnames(df)))
+# Create 2-dimensional array
+create_array(filename = "test_array_2d.h5",
+             path = ".",
+             component = "level/a/s/d/f/s",
+             array = array,
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)))
+file.remove("test_array_2d.h5")
 
-}}
+# Create 3-dimensional array
+create_array(filename = "test_array_3d.h5",
+             path = ".",
+             component = "level/a/s/d/f/s",
+             array = array(c(array, array), dim = c(dim(array), 2)),
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df),
+                                    gender = paste0("male", "female")))
+file.remove("test_array_3d.h5")
+
+# Create 4-dimensional array
+create_array(filename = "test_array_4d.h5",
+             path = ".",
+             component = "level/a/s/d/f/s",
+             array = array(c(array, array, array), dim = c(dim(array), 2, 2)),
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df),
+                                    gender = paste0("male", "female"),
+                                    city = paste0("glasgow", "paris")))
+file.remove("test_array_4d.h5")
+
+# Create array with values and units
+create_array(filename = "test_array_val.h5",
+             path = ".",
+             component = "level/a/s/d/f/s",
+             array = array,
+             dimension_names = list(rowvalue = rownames(df),
+                                    colvalue = colnames(df)),
+             dimension_values = list(NA, 10),
+             dimension_units = list(NA, "km"),
+             units = "s")
+file.remove("test_array_val.h5")
 
 }

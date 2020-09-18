@@ -38,8 +38,8 @@ upload_data_product <- function(storage_root_id,
     stop("Why is your data product not a toml or an h5 file?")
   }
 
-  product_objectComponentId <- lapply(seq_len(nrow(components)), function(i) {
-    new_object_component(name = components$name[i],
+  product_objectComponentId <- lapply(seq_along(components), function(i) {
+    new_object_component(name = components[i],
                          object_id = product_objectId,
                          key = key)
   })

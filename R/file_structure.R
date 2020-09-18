@@ -10,8 +10,8 @@ file_structure <- function(filename) {
 
   tmp <- rhdf5::H5Fopen(filename) %>%
     h5ls() %>%
-    dplyr::filter(name == "array" | name == "table") %>%
-    dplyr::select(group) %>%
+    dplyr::filter(.data$name == "array" | .data$name == "table") %>%
+    dplyr::select(.data$group) %>%
     unlist() %>%
     unname()
 
