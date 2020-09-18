@@ -11,7 +11,7 @@ read_distribution(filepath)
 to be read}
 }
 \description{
-read_distribution
+Function to read disdtribution type data from toml file.
 }
 \examples{
 # Write a single distribution into a toml file

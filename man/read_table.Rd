@@ -18,7 +18,7 @@ attributes,
 if available
 }
 \description{
-read_table
+Function to read table type data from hdf5 file.
 }
 \examples{
 df <- data.frame(a = 1:2, b = 3:4)

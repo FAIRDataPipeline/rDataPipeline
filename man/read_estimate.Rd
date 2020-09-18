@@ -11,7 +11,7 @@ read_estimate(filepath)
 file to be read}
 }
 \description{
-read_estimate
+Function to read point-estimate type data from toml file.
 }
 \examples{
 # Write a single estimate into a toml file

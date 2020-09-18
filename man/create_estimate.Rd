@@ -17,7 +17,7 @@ already exist}
 \item{parameters}{a \code{list} (see Examples)}
 }
 \description{
-Function to populate toml file with number type data.
+Function to populate toml file with point-estimate type data.
 }
 \examples{
 # Write a single estimate into a toml file

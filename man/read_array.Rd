@@ -19,7 +19,7 @@ Returns an array with attached \code{Dimension_i_title},
 attributes, if available
 }
 \description{
-read_array
+Function to read array type data from hdf5 file.
 }
 \examples{
 df <- data.frame(a = 1:2, b = 3:4)

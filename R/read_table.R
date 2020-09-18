@@ -51,5 +51,6 @@ read_table <- function(filepath,
   }
 
   rhdf5::h5closeAll()
+  object <- data.frame(lapply(object, type.convert, as.is = TRUE))
   object
 }

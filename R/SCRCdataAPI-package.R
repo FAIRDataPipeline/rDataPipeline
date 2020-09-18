@@ -18,7 +18,7 @@
 #' @importFrom stats setNames
 #' @import tibble
 #' @import tidyr
-#' @importFrom utils download.file read.csv unzip write.csv
+#' @importFrom utils download.file read.csv unzip write.csv type.convert
 #' @import semver
 #'
 NULL
