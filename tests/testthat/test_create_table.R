@@ -55,7 +55,7 @@ test_that("function behaves as it should with multiple classes", {
   tab <- read_table(filepath = filename,
                     component = component)
 
-  testthat::expect_equal(tab, multiclass_df)
+  testthat::expect_equivalent(tab, multiclass_df)
 })
 
 file.remove(filename)
