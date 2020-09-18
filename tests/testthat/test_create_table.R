@@ -44,7 +44,7 @@ file.remove(filename)
 context("Testing create_table() on a multi-class table")
 
 filename <- "test_table.h5"
-multiclass_df <- data.frame(a = letters[1:2], b = 3:4)
+multiclass_df <- data.frame(a = letters[1:2], b = 3:4, stringsAsFactors = FALSE)
 component <- "level"
 
 test_that("function behaves as it should with multiple classes", {
@@ -55,7 +55,7 @@ test_that("function behaves as it should with multiple classes", {
   tab <- read_table(filepath = filename,
                     component = component)
 
-  testthat::expect_equivalent(tab, multiclass_df)
+  testthat::expect_equal(tab, multiclass_df)
 })
 
 file.remove(filename)
