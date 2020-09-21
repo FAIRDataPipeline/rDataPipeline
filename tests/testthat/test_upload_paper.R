@@ -31,9 +31,9 @@ abstract <- paste0("Test Abstract ", formatted_date, test_identifier)
 journal_name <- paste0("TEST Journal ", date_time, test_identifier)
 journal_abr <- paste0("TEST_", formatted_date, test_identifier)
 website <- ""
-tmp <- letters[as.numeric(strsplit(formatted_date, "")[[1]])] %>%
-  paste(collapse = "")
-authors <- paste0("TEST, ", tmp)
+personal_name <- paste(sample(letters, 6, FALSE), collapse ="", sep = "")
+family_name <- paste(sample(letters, 7, FALSE), collapse ="", sep = "")
+authors <- paste(family_name, personal_name, sep = ", ")
 
 test_that("Upload Paper returns ID", {
   paper_id <- character(0)
