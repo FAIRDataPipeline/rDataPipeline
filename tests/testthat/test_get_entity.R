@@ -2,7 +2,13 @@ context("testing get entity")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
 
-entity_id <- basename(post_data("object", list(description = Sys.time()), key))
+formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
+
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
+
+UID <- paste0("Object Test ", formatted_date, test_identifier)
+
+entity_id <- basename(post_data("object", list(description = UID), key))
 
 sleep_time <- 0.5
 

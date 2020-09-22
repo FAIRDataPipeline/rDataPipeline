@@ -6,11 +6,13 @@ test_user <- "22"
 
 formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
 
-UID <- paste0("TEST_", formatted_date)
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
+
+UID <- paste0("source-test-", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
 
 source_id <- get_entry("source", list(updated_by = test_user))[[1]]$url
 
-path = paste0("https://", UID)
+path = paste0("https://", UID, ".com")
 
 filename <- paste0("test_table_", UID, ".h5")
 df <- data.frame(a = 1:2, b = 3:4)
