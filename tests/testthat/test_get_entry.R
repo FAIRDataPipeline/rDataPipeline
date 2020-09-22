@@ -5,7 +5,11 @@ key <- Sys.getenv("SCRC_API_TOKEN")
 sleep_time <- 0.5
 
 formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
-UID <- paste0("TEST OBJECT ", formatted_date)
+
+test_identifier <- sample(1:1000000, 1, replace=TRUE)
+
+UID <- paste0("Object Test ", formatted_date, test_identifier)
+
 object_id <- post_data("object", data = list(description = UID), key)
 object_id <- unlist(clean_query(object_id))
 description <- UID
