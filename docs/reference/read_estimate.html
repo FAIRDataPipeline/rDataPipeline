@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="read_estimate — read_estimate" />
-<meta property="og:description" content="read_estimate" />
+<meta property="og:description" content="Function to read point-estimate type data from toml file." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.3</span>
       </span>
     </div>
 
@@ -114,22 +114,56 @@
     </div>
 
     <div class="ref-description">
-    <p>read_estimate</p>
+    <p>Function to read point-estimate type data from toml file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_estimate</span>(<span class='kw'>filename</span>)</pre>
+    <pre class="usage"><span class='fu'>read_estimate</span>(<span class='kw'>filepath</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>a <code>string</code> specifying the name of the toml file, e.g.
-"0.1.0.toml"</p></td>
+      <th>filepath</th>
+      <td><p>a <code>string</code> specifying the path and filename of the
+file to be read</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Write a single estimate into a toml file</span>
+<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test.toml"</span>
+
+<span class='fu'><a href='create_estimate.html'>create_estimate</a></span>(filename = <span class='kw'>filename</span>,
+                path = <span class='st'>"."</span>,
+                parameters = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>))
+
+<span class='fu'>read_estimate</span>(filepath = <span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; List of 1
+#&gt;  $ asymptomatic_period:List of 2
+#&gt;   ..$ type : chr "point-estimate"
+#&gt;   ..$ value: int 192</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Write multiple estimates into a toml file</span>
+<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"anothertest.toml"</span>
+
+<span class='fu'><a href='create_estimate.html'>create_estimate</a></span>(filename = <span class='kw'>filename</span>,
+                path = <span class='st'>"."</span>,
+                parameters = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>,
+                                  latent_period = <span class='fl'>123.12</span>))
+
+<span class='fu'>read_estimate</span>(filepath = <span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; List of 2
+#&gt;  $ asymptomatic_period:List of 2
+#&gt;   ..$ type : chr "point-estimate"
+#&gt;   ..$ value: int 192
+#&gt;  $ latent_period      :List of 2
+#&gt;   ..$ type : chr "point-estimate"
+#&gt;   ..$ value: num 123</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="read_array — read_array" />
-<meta property="og:description" content="read_array" />
+<meta property="og:description" content="Function to read array type data from hdf5 file." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.3</span>
       </span>
     </div>
 
@@ -114,21 +114,18 @@
     </div>
 
     <div class="ref-description">
-    <p>read_array</p>
+    <p>Function to read array type data from hdf5 file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_array</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>component</span>)</pre>
+    <pre class="usage"><span class='fu'>read_array</span>(<span class='kw'>filepath</span>, <span class='kw'>component</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>a <code>string</code> specifying the filename, e.g. "0.1.0.h5"</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>a <code>string</code> specifying the directory in which you want to save the h5 file</p></td>
+      <th>filepath</th>
+      <td><p>a <code>string</code> specifying the path and filename of the file to
+be read</p></td>
     </tr>
     <tr>
       <th>component</th>
@@ -137,7 +134,46 @@ e.g. "location/per_week/all_deaths"</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns an array with attached <code>Dimension_i_title</code>,
+<code>Dimension_i_units</code>, <code>Dimension_i_values</code>, and <code>units</code>
+attributes, if available</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b = <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>) <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
+<span class='kw'>array</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='kw'>df</span>)
+<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test_array.h5"</span>
+
+<span class='fu'><a href='create_array.html'>create_array</a></span>(filename = <span class='kw'>filename</span>,
+             path = <span class='st'>"."</span>,
+             component = <span class='st'>"level/a/s/d/f/s"</span>,
+             array = <span class='kw'>array</span>,
+             dimension_names = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(rowvalue = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>),
+                                    colvalue = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>df</span>)),
+             dimension_values = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>NA</span>, <span class='fl'>10</span>),
+             dimension_units = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>NA</span>, <span class='st'>"km"</span>),
+             units = <span class='st'>"s"</span>)
+
+<span class='fu'>read_array</span>(filepath = <span class='kw'>filename</span>,
+           component = <span class='st'>"level/a/s/d/f/s"</span>)
+</div><div class='output co'>#&gt;   a b
+#&gt; 1 1 3
+#&gt; 2 2 4
+#&gt; attr(,"Dimension_1_title")
+#&gt; [1] "rowvalue"
+#&gt; attr(,"Dimension_2_title")
+#&gt; [1] "colvalue"
+#&gt; attr(,"Dimension_2_units")
+#&gt; [1] "km"
+#&gt; attr(,"Dimension_2_values")
+#&gt; [1] 10
+#&gt; attr(,"units")
+#&gt; [1] "s"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

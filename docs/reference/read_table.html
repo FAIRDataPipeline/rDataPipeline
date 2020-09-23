@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="read_table — read_table" />
-<meta property="og:description" content="read_table" />
+<meta property="og:description" content="Function to read table type data from hdf5 file." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.3</span>
       </span>
     </div>
 
@@ -114,30 +114,58 @@
     </div>
 
     <div class="ref-description">
-    <p>read_table</p>
+    <p>Function to read table type data from hdf5 file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_table</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>component</span>)</pre>
+    <pre class="usage"><span class='fu'>read_table</span>(<span class='kw'>filepath</span>, <span class='kw'>component</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>filename</th>
-      <td><p>a <code>string</code> specifying the filename, e.g. "0.1.0.h5"</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>a <code>string</code> specifying the directory in which you want to save the h5 file</p></td>
+      <th>filepath</th>
+      <td><p>a <code>string</code> specifying the path and filename of the file to
+be read</p></td>
     </tr>
     <tr>
       <th>component</th>
-      <td><p>a <code>string</code> specifying a location within the hdf5 file,
-e.g. "location/per_week/all_deaths"</p></td>
+      <td><p>a <code>string</code> specifying a location within the hdf5 file</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns a <code>data.frame</code> with attached <code>column_units</code>
+attributes,
+if available</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b = <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>) <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
+<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test_table.h5"</span>
+
+<span class='fu'><a href='create_table.html'>create_table</a></span>(filename = <span class='kw'>filename</span>,
+             path = <span class='st'>"."</span>,
+             component = <span class='st'>"level"</span>,
+             df = <span class='kw'>df</span>,
+             row_names = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>),
+             column_units = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"m^2"</span>))
+
+<span class='kw'>my_table</span> <span class='op'>&lt;-</span> <span class='fu'>read_table</span>(filepath = <span class='kw'>filename</span>,
+                       component = <span class='st'>"level"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='kw'>my_table</span>)
+</div><div class='output co'>#&gt; $names
+#&gt; [1] "a" "b"
+#&gt; 
+#&gt; $class
+#&gt; [1] "data.frame"
+#&gt; 
+#&gt; $row.names
+#&gt; [1] 1 2
+#&gt; </div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
