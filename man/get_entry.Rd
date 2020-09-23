@@ -9,8 +9,8 @@ get_entry(table, query = list())
 \arguments{
 \item{table}{table must exist}
 
-\item{query}{query a \code{list} of fields and values to query
-if no query is provided it will return the last entry}
+\item{query}{a \code{list} of fields and values to query if no query
+is provided it will return the last entry}
 }
 \description{
 get_entry
