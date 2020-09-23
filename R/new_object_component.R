@@ -2,11 +2,11 @@
 #'
 #' Upload information to the \code{object_component} table in the data registry
 #'
-#' @param name a \code{string} specifying the name of the \code{object_component},
-#' unique in the context of \code{object_component} and its \code{object} reference
-#' *e.g.* "age_group/week-persons-country-all_deaths"
+#' @param name a \code{string} specifying the name of the
+#' \code{object_component}, unique in the context of \code{object_component}
+#' and its \code{object} reference
 #' @param object_id a \code{string} specifying the API URL of the
-#' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/156/"
+#' associated \code{object} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object_component}
 #' @param key API token from data.scrc.uk
@@ -17,6 +17,15 @@
 #' objects and objet components.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' \donttest{
+#' new_object_component(name = "age_group/week-persons-country-all_deaths",
+#'                      object_id = "https://data.scrc.uk/api/object/156/",
+#'                      description = "A very useful component",
+#'                      key = key)
+#' }}
 #'
 new_object_component <- function(name,
                                  object_id,

@@ -7,12 +7,12 @@
 new_object_component(name, object_id, description = "", key)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the \code{object_component},
-unique in the context of \code{object_component} and its \code{object} reference
-\emph{e.g.} "age_group/week-persons-country-all_deaths"}
+\item{name}{a \code{string} specifying the name of the
+\code{object_component}, unique in the context of \code{object_component}
+and its \code{object} reference}
 
 \item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/156/"}
+associated \code{object} table}
 
 \item{description}{(optional) a \code{string} containing a free text
 description of the \code{object_component}}
@@ -26,4 +26,14 @@ objects and objet components.}
 }
 \description{
 Upload information to the \code{object_component} table in the data registry
+}
+\examples{
+\dontrun{
+\donttest{
+new_object_component(name = "age_group/week-persons-country-all_deaths",
+                     object_id = "https://data.scrc.uk/api/object/156/",
+                     description = "A very useful component",
+                     key = key)
+}}
+
 }

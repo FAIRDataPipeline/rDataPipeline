@@ -7,21 +7,30 @@
 new_issue(severity, description, object_issues, component_issues, key)
 }
 \arguments{
-\item{severity}{an \code{integer} specifying the severity of the \code{issue}
-\emph{e.g.} 16}
+\item{severity}{an \code{integer} specifying the severity of the \code{issue}}
 
 \item{description}{a \code{string} containing a free text description of the
-\code{issue} \emph{e.g.} "Data dump caused a spike on the 15th of June"}
+\code{issue}}
 
 \item{object_issues}{a \code{list} of \code{object} URLs with which the
-\code{issue} is associated \emph{e.g.} list("https://data.scrc.uk/api/object/152/")}
+\code{issue} is associated; this can be an empty list}
 
 \item{component_issues}{a \code{list} of \code{object_component} URLs with
-which the \code{issue} is associated
-\emph{e.g.} list("https://data.scrc.uk/api/object_component/902/")}
+which the \code{issue} is associated; this can be an empty list}
 
 \item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{issue} table in the data registry
+}
+\examples{
+\dontrun{
+\donttest{
+new_issue(severity = 16,
+          description = "Data dump caused a spike on the 15th of June",
+          object_issues = list("https://data.scrc.uk/api/object/152/"),
+          component_issues = list("https://data.scrc.uk/api/object_component/902/"),
+          key = key)
+}}
+
 }
