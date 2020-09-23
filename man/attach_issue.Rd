@@ -11,24 +11,32 @@ attach_issue(
   namespace,
   data_product,
   component,
+  version,
   key
 )
 }
 \arguments{
-\item{description}{\emph{e.g.} "Data dump caused a spike on the 15th of June"}
+\item{description}{a \code{string} containing a free text description of the
+\code{issue}}
 
-\item{severity}{\emph{e.g.} 19}
+\item{severity}{an \code{integer} specifying the severity of the \code{issue}}
 
-\item{external_object_doi}{\emph{e.g.}
-"scottish coronavirus-covid-19-management-information"}
+\item{external_object_doi}{a \code{string} specifying the DOI or name of the
+\code{external_object}}
 
-\item{namespace}{\emph{e.g.} "SCRC"}
+\item{namespace}{a \code{string} specifying the name of the namespace}
 
-\item{data_product}{\emph{e.g.} "records/SARS-CoV-2/scotland/cases_and_management"}
+\item{data_product}{a \code{string} specifying the name of the
+\code{data_product}}
 
-\item{component}{\emph{e.g.} "testing_location/date-cumulative"}
+\item{component}{a \code{string} specifying the name of the
+\code{object_component}, unique in the context of \code{object_component}
+and its \code{object} reference}
 
-\item{key}{key}
+\item{version}{a \code{string} specifying the version number of the
+data_product or external_object}
+
+\item{key}{API token from data.scrc.uk}
 }
 \description{
 This function is used to attach an issue to either
@@ -40,4 +48,33 @@ This function is used to attach an issue to either
 \item a component within a data product (in which case you must specify the
 \code{namespace}, \code{data_product}, and \code{component} arguments)
 }
+}
+\examples{
+\dontrun{
+\donttest{
+# Attach issue to an external object
+attach_issue(description = "Some issue affecting an external object",
+             severity = 10,
+             external_object_doi = "Scottish spatial lookup table - dz",
+             version = "0.1.0",
+             key = key)
+
+# Attach issue to object
+attach_issue(description = "An object issue",
+             severity = 10,
+             namespace = "SCRC",
+             data_product = "records/SARS-CoV-2/scotland/cases-and-management/carehomes",
+             version = "0.20200916.0",
+             key = key)
+
+# Attach issue to object component
+attach_issue(description = "issue",
+             severity = 10,
+             namespace = "SCRC",
+             data_product = "records/SARS-CoV-2/scotland/cases-and-management/carehomes",
+             component = "date-country-response_rate",
+             version = "0.20200916.0",
+             key = key)
+}}
+
 }

@@ -1,8 +1,8 @@
 #' get_entry
 #'
 #' @param table table must exist
-#' @param query query a \code{list} of fields and values to query
-#' if no query is provided it will return the last entry
+#' @param query a \code{list} of fields and values to query if no query
+#' is provided it will return the last entry
 #'
 #' @export
 #'
