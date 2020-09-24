@@ -2,25 +2,16 @@
 #'
 #' @param shapefile shapefile
 #' @param gridsize gridsize
-#' @param grid_shp gridshape
 #'
 #' @export
 #'
 grid_intersection <- function(shapefile,
-                              gridsize,
-                              grid_shp = NA) {
-
-  # Don't know if you need both grid_shp and grids_shp but this line is to stop
-  # the note on r cmd CHECK
-  grids_shp <- NA
-
-
-  # Check units of shapefile: assuming metres below
+                              gridsize) {
+ # Check units of shapefile: assuming metres below
   sh_unit <- sf::st_crs(shapefile, parameters = TRUE)$units_gdal
   assertthat::assert_that(sh_unit == "metre",
                           msg = "Unexpected CRS: shapefile distances should be in metres")
-  if(is.na(grid_shp)==TRUE){
-    # Generate grid over bounding box of datazone shapefile
+     # Generate grid over bounding box of datazone shapefile
     n <- gridsize*1000  # Assume gridsize given in km
     grids <- sf::st_make_grid(sf::st_as_sfc(sf::st_bbox(shapefile)),
                               cellsize = c(n, n))
@@ -38,17 +29,7 @@ grid_intersection <- function(shapefile,
 
     assertthat::assert_that(max(grid_matrix$x) == num_columns)
     assertthat::assert_that(max(grid_matrix$y) == num_rows)
-  }else if(any(grepl("sf", class(grids_shp))==TRUE)){
-    # Check units of shapefile: assuming metres below
-    sh_unit <- sf::st_crs(grids_shp, parameters = TRUE)$units_gdal
-    assertthat::assert_that(sh_unit == "metre",
-                            msg = "Unexpected CRS: shapefile distances should be in metres")
-    grids <- grids_shp
-  }else{
-    stop("grids_shp must be either not present or an simple features object")
-  }
-
-  subdivisions <- sf::st_intersection(grids, shapefile)
+   subdivisions <- sf::st_intersection(grids, shapefile)
 
   # Remove cells which intersect simply because they touch the shapefile
   # - These are reduced to lines or points in the intersection
