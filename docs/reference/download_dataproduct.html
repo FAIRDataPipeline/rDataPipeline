@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get loaded Package Version — get_loaded_package_version • SCRCdataAPI</title>
+<title>download_dataproduct — download_dataproduct • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get loaded Package Version — get_loaded_package_version" />
-<meta property="og:description" content="Get loaded Package Version" />
+<meta property="og:title" content="download_dataproduct — download_dataproduct" />
+<meta property="og:description" content="download_dataproduct" />
 
 
 
@@ -108,30 +108,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get loaded Package Version</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/get_loaded_package_version.R'><code>R/get_loaded_package_version.R</code></a></small>
-    <div class="hidden name"><code>get_loaded_package_version.Rd</code></div>
+    <h1>download_dataproduct</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/download_dataproduct.R'><code>R/download_dataproduct.R</code></a></small>
+    <div class="hidden name"><code>download_dataproduct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get loaded Package Version</p>
+    <p>download_dataproduct</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_loaded_package_version</span>(package = <span class='st'>"SCRCdataAPI"</span>)</pre>
+    <pre class="usage"><span class='fu'>download_dataproduct</span>(<span class='kw'>name</span>, <span class='kw'>data_dir</span>, <span class='kw'>version</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>package</th>
-      <td><p>package name</p></td>
+      <th>name</th>
+      <td><p>a <code>string</code> specifying the name of the data product</p></td>
+    </tr>
+    <tr>
+      <th>data_dir</th>
+      <td><p>a <code>string</code> specifying the download directory</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>(optional) a <code>string</code> specifying the version number of
+the data product; if version is not specified, the most recent version will
+be downloaded</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns the current package version</p>
+    <p>Returns list comprising two elements</p><ul>
+<li><p>"downloaded_to"Where the file was downloaded to</p></li>
+<li><p>"components"Components contained within the file</p></li>
+</ul>
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
