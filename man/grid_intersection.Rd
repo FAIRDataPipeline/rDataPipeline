@@ -4,12 +4,14 @@
 \alias{grid_intersection}
 \title{grid_intersection}
 \usage{
-grid_intersection(shapefile, gridsize)
+grid_intersection(shapefile, gridsize, grid_shp = NA)
 }
 \arguments{
 \item{shapefile}{shapefile}
 
 \item{gridsize}{gridsize}
+
+\item{grid_shp}{gridshape}
 }
 \description{
 grid_intersection

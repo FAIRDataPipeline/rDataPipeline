@@ -15,7 +15,6 @@ Imports:
     assertthat,
     configr,
     dplyr,
-    hdf5r,
     httr,
     jsonlite,
     openssl,
