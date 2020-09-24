@@ -23,4 +23,4 @@ and load it into R:
 library(SCRCdataAPI)
 ```
 
-Click on the **docs badge** for more info on how to use this package.
+For more information, please visit https://scottishcovidresponse.github.io
