@@ -4,7 +4,7 @@
 \alias{new_author}
 \title{new_author}
 \usage{
-new_author(family_name, personal_name, object_id, key)
+new_author(family_name, personal_name, object_id, key, ...)
 }
 \arguments{
 \item{family_name}{a \code{string} specifying the author's family name

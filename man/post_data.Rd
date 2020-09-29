@@ -4,7 +4,7 @@
 \alias{post_data}
 \title{post_data}
 \usage{
-post_data(table, data, key)
+post_data(table, data, key, ...)
 }
 \arguments{
 \item{table}{table name as a character}
@@ -12,6 +12,8 @@ post_data(table, data, key)
 \item{data}{data as a named list}
 
 \item{key}{API token}
+
+\item{...}{internal parameters}
 }
 \description{
 Post data to registry
