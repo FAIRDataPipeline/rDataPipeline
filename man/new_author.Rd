@@ -18,6 +18,8 @@ and / or middle name and / or any initials \emph{e.g.} "Sonia" or "Sonia N" or
 \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31858/"}
 
 \item{key}{API token from data.scrc.uk}
+
+\item{...}{internal parameters}
 }
 \description{
 Upload information to the \code{author} table in the data registry

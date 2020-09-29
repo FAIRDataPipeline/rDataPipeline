@@ -10,6 +10,7 @@
 #' @param object_id a \code{string} specifying the API URL of the associated
 #' `object` table *e.g.* "https://data.scrc.uk/api/object/31858/"
 #' @param key API token from data.scrc.uk
+#' @param ... internal parameters
 #'
 #' @export
 #'

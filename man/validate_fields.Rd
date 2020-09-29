@@ -15,6 +15,17 @@ validate_fields(table, data, key, online = TRUE)
 
 \item{online}{\code{boolean} if FALSE will not check if data registry objects exist}
 }
+\value{
+Returns
+}
 \description{
-Function to validate post data
+Function to validate fields in post data
+}
+\examples{
+\dontrun{
+\donttest{
+validate_fields("author", list(object = 123, family_name = "Smith",
+                               personal_name = "S"), key)
+}}
+
 }
