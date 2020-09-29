@@ -1,4 +1,4 @@
-context("checking validate_post_data")
+context("checking validate_fields")
 
 sleep_time <- 0.5
 
@@ -25,22 +25,22 @@ if(is.null(object_id)){
 }
 
 test_that("incorrect tables produce and error", {
-  expect_error(validate_post_data(unknown_table, data = list(), key))
-  expect_error(validate_post_data(NULL, data = list(), key))
+  expect_error(validate_fields(unknown_table, data = list(), key))
+  expect_error(validate_fields(NULL, data = list(), key))
 })
 
-test_that("validate_post_data works with all tables",{
+test_that("validate_fields works with all tables",{
   for(i in seq_along(tables)){
     table <- tables[i]
-    if(table == "users" | table == "groups")
-      expect_error(validate_post_data(tables[i], data = list("username = test"), key))
-    else{
+    if(table == "users" | table == "groups") {
+      expect_error(validate_fields(tables[i], data = list("username = test"), key))
+    } else{
       Sys.sleep(sleep_time)
       table.writable <- get_table_writable(table, key)
       Sys.sleep(sleep_time)
       table.required <- get_table_required(table, key)
       if(nrow(table.required)  > 1){
-        expect_error(validate_post_data(table, data = list(), key))
+        expect_error(validate_fields(table, data = list(), key))
       }
       data_correct <- list()
       data_correct_2 <- list()
@@ -75,7 +75,8 @@ test_that("validate_post_data works with all tables",{
           data_type == "datetime" ~ as.character(Sys.time()),
           data_type == "boolean" ~ "TRUE"
         )
-        if(data_type == "field" & (grepl(".*?s$", field) |  grepl(".*?s_of$", field))){
+        if(data_type == "field" & (grepl(".*?s$", field) |
+                                   grepl(".*?s_of$", field))){
           data_correct[[field]] <- list(object_id)
         }
 
@@ -129,23 +130,22 @@ test_that("validate_post_data works with all tables",{
         }
 
       }
-      expect_true(is.list(validate_post_data(table, data_correct, key)))
+      expect_true(is.list(validate_fields(table, data_correct, key)))
       Sys.sleep(sleep_time)
-      expect_true(is.list(validate_post_data(table, data_correct_2, key)))
+      expect_true(is.list(validate_fields(table, data_correct_2, key)))
       Sys.sleep(sleep_time)
-      expect_true(is.list(validate_post_data(table, data_correct_3, key)))
+      expect_true(is.list(validate_fields(table, data_correct_3, key)))
       Sys.sleep(sleep_time)
-      expect_true(is.list(validate_post_data(table, data_correct_4, key)))
+      expect_true(is.list(validate_fields(table, data_correct_4, key)))
       Sys.sleep(sleep_time)
 
-      expect_error(validate_post_data(table, data_incorrect, key))
+      expect_error(validate_fields(table, data_incorrect, key))
       Sys.sleep(sleep_time)
-      expect_error(validate_post_data(table, data_incorrect_2, key))
+      expect_error(validate_fields(table, data_incorrect_2, key))
       Sys.sleep(sleep_time)
-      expect_error(validate_post_data(table, data_incorrect_3, key))
+      expect_error(validate_fields(table, data_incorrect_3, key))
       Sys.sleep(sleep_time)
-      expect_error(validate_post_data(table, data_incorrect_4, key))
-
+      expect_error(validate_fields(table, data_incorrect_4, key))
 
     }}
 })
