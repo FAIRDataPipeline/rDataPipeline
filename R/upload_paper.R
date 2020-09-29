@@ -54,7 +54,6 @@ upload_paper <- function(title,
                    list(doi_or_unique_name = paste0("doi://", doi))))
 
   } else {
-
     # If journal exists in the data registry return sourceId, otherwise
     # add entry
     if(check_exists("source", list(name = journal))) {
@@ -82,10 +81,13 @@ upload_paper <- function(title,
 
     issue <- FALSE
     for(i in seq_along(authorList)) {
+
+
       # If an author has both a family and personal name create entry in the
       # data registry, otherwise generate an issue
       if(grepl(", [A-Za-z]+", authorList[[i]])) {
         tmp <- strsplit(authorList[[i]], ", ")[[1]]
+        if(any(tmp == "")) tmp <- tmp[-which(tmp == "")]
         new_author(family_name = tmp[1],
                    personal_name = tmp[2],
                    object_id = objectId,
