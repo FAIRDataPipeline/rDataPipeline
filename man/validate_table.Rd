@@ -10,8 +10,6 @@ validate_table(table, key)
 \item{table}{table name as character}
 
 \item{key}{API Token as character}
-
-\item{online}{\code{boolean} if FALSE will not check if data registry objects exist}
 }
 \description{
 Function to validate table name

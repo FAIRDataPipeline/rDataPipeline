@@ -5,8 +5,6 @@
 #' @param table table name as character
 #' @param key API Token as character
 #'
-#' @param online \code{boolean} if FALSE will not check if data registry objects exist
-#'
 #' @export
 #'
 validate_table <- function(table, key) {
