@@ -89,7 +89,8 @@ upload_paper <- function(title,
         new_author(family_name = tmp[1],
                    personal_name = tmp[2],
                    object_id = objectId,
-                   key = key)
+                   key = key,
+                   skip_table_validation = TRUE)
       } else
         issue <- TRUE
     }

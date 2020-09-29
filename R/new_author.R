@@ -16,11 +16,11 @@
 new_author <- function(family_name,
                        personal_name,
                        object_id,
-                       key) {
+                       key, ...) {
 
   post_data(table = "author",
             data =  list(family_name = family_name,
                          personal_name = personal_name,
                          object = object_id),
-            key)
+            key, ...)
 }
