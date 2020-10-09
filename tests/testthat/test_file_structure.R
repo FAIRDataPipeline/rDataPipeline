@@ -53,7 +53,7 @@ test_that("an error is thrown if file does not exist", {
 })
 
 test_that("an h5 file is generated", {
-  testthat::expect_true(hdf5r::is.h5file(filename))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
 })
 
 test_that("file structures are equal to Component names", {

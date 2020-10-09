@@ -10,17 +10,18 @@
 #' @param object_id a \code{string} specifying the API URL of the associated
 #' `object` table *e.g.* "https://data.scrc.uk/api/object/31858/"
 #' @param key API token from data.scrc.uk
+#' @param ... internal parameters
 #'
 #' @export
 #'
 new_author <- function(family_name,
                        personal_name,
                        object_id,
-                       key) {
+                       key, ...) {
 
   post_data(table = "author",
             data =  list(family_name = family_name,
                          personal_name = personal_name,
                          object = object_id),
-            key)
+            key, ...)
 }

@@ -17,10 +17,12 @@
 #' \dontrun{
 #' \donttest{
 #' # Automatically download the latest version
-#' download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing", "data-raw")
+#' download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
+#'  "data-raw")
 #'
 #' # Download specified version
-#' download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing", "data-raw", "0.20200920.0")
+#' download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
+#'  "data-raw", "0.20200920.0")
 #'
 #' # Download only version
 #' download_dataproduct("geography/scotland/lookup_table", "data-raw")

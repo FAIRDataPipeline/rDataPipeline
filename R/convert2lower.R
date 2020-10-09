@@ -10,7 +10,8 @@ convert2lower <- function(dat, convert_to, conversion_table) {
 
   # Convert datazones
   regex <- paste0("AREA|", toupper(convert_to))
-  columns <- colnames(conversion_table) %>% .data$.[grepl(regex, .data$.)]
+  columns <- colnames(conversion_table)
+  columns <- columns[grepl(regex, columns)]
   target.code <- paste0(toupper(convert_to), "code")
   target.name <- paste0(toupper(convert_to), "name")
 
@@ -20,9 +21,9 @@ convert2lower <- function(dat, convert_to, conversion_table) {
 
   output <- dat %>%
     dplyr::full_join(subset.table, by = "AREAcode") %>%
-    dplyr::select(-dplyr::contains(columns %>% .data$.[-grep(target.code, .data$.)])) %>%
-    dplyr::group_by_at(vars(dplyr::contains(target.code))) %>%
-    dplyr::summarise_all(~sum(.data$.)) %>%
+    dplyr::select(-dplyr::contains(columns), target.code) 
+  output <- dplyr::group_by_at(output,vars(dplyr::contains(target.code))) %>%
+    dplyr::summarise_all(~sum(.)) %>%
     dplyr::arrange_at(vars(dplyr::contains(target.code)))
 
   reference <- subset.table %>%

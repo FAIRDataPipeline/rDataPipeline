@@ -5,16 +5,26 @@
 #' @param table table name as a character
 #' @param data data as a named list
 #' @param key API token
+#' @param ... internal parameters
 #'
 #' @export
 #'
-post_data <- function(table,
-                      data,
-                      key) {
+post_data <- function(table, data, key, ...) {
 
   key <- validate_token(key)
-  data <- validate_post_data(table, data, key)
 
+  # If the skip_table_validation argument has been input, skip validate_table()
+  dots <- list(...)
+  if(any(names(dots) %in% "skip_table_validation"))
+    skip_table_validation <- dots[["skip_table_validation"]] else
+      skip_table_validation <- FALSE
+  if(!skip_table_validation)
+    table <- validate_table(table, key)
+
+  # Validate fields
+  data <- validate_fields(table, data, key)
+
+  # data <- validate_post_data(table, data, key)
   h <- c(Authorization = paste("token", key))
 
   api_url <- file.path("https://data.scrc.uk/api", table, "")

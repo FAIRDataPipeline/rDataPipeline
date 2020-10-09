@@ -74,7 +74,7 @@ test_that(".h5 file is generated", {
                array = as.matrix(df),
                dimension_names = list(rowvalue = rownames(df),
                                       colvalue = colnames(df)))
-  testthat::expect_true(hdf5r::is.h5file(filename))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
 })
 
 test_that(".h5 file is generated in new directory", {
@@ -84,7 +84,7 @@ test_that(".h5 file is generated in new directory", {
                array = as.matrix(df),
                dimension_names = list(rowvalue = rownames(df),
                                       colvalue = colnames(df)))
-  testthat::expect_true(hdf5r::is.h5file(filepath))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filepath)))
 })
 
 test_that(".h5 file is generated with unit and dimension values", {
@@ -98,7 +98,7 @@ test_that(".h5 file is generated with unit and dimension values", {
                dimension_units = list(unit1 = "day",
                                       unit2 = "year"),
                units = "days")
-  testthat::expect_true(hdf5r::is.h5file(filename_2))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filename_2)))
 })
 
 test_that("component name is level", {

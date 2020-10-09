@@ -26,7 +26,7 @@ test_that(".h5 file is generated", {
   create_table(filename = filename,
                component = component,
                df = df)
-  testthat::expect_true(hdf5r::is.h5file(filename))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
 })
 
 test_that("component name is level", {
@@ -65,7 +65,7 @@ test_that("directory is created when supplying path",{
                  path = "data-raw",
                  component = component_2,
                  df = df)
-    testthat::expect_true(hdf5r::is.h5file(filepath))
+    testthat::expect_true(is.data.frame(rhdf5::h5ls(filepath)))
 })
 
 file.remove(filepath)
@@ -76,7 +76,7 @@ test_that("create tables works with rownames and units",{
                column_units = c("days", "months"),
                component = component,
                df = df)
-  testthat::expect_true(hdf5r::is.h5file(filename_3))
+  testthat::expect_true(is.data.frame(rhdf5::h5ls(filename_3)))
 })
 
 file.remove(filename_3)

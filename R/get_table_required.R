@@ -10,6 +10,7 @@
 get_table_required <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")
-  required <- get_fields(table, key) %>%
+
+  get_fields(table, key) %>%
     filter(.data$required)
 }
