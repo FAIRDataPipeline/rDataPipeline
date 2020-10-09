@@ -11,5 +11,11 @@ get_github_hash <- function(repo) {
 
   tmp <- system(paste0("git ls-remote -h https://github.com/", repo, ".git"),
          intern = TRUE)
+
+  if(length(tmp) > 1) {
+    ind <- which(grepl("master", tmp))
+    tmp <- tmp[ind]
+  }
+
   gsub("\trefs/heads/master", "", tmp)
 }
