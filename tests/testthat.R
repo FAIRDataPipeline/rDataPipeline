@@ -1,5 +1,5 @@
 library(testthat)
 library(SCRCdataAPI)
 
-test_check("SCRCdataAPI")
+testthat::test_check("SCRCdataAPI")
 
