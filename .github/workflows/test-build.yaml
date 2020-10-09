@@ -11,14 +11,15 @@ on:
 
 jobs:
   R-CMD-check:
-    # Use a matrix to define what os's to run on
+    # Use a matrix to define what operating systems to run on
     runs-on: ${{ matrix.config.os }}
-    # name the job dynamically based on os and r version
+    # Name the job dynamically based on OS and R version
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
-      # Define os's
+
+      # Define operating systems
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
@@ -27,6 +28,7 @@ jobs:
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
+
     # Checkout repo
       - uses: actions/checkout@v2
         with:
@@ -35,15 +37,18 @@ jobs:
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
+
       # Pandoc is not needed but here
       - uses: r-lib/actions/setup-pandoc@master
-      # save the package dependencies so they can be cached
+
+      # Save the package dependencies so they can be cached
       - name: Query dependencies
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+
       # Cache the packages if not on windows
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -52,6 +57,7 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
       # Install macOS requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -59,7 +65,8 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-      # Install system_requirements on ubutu 16.04 (Boydorr)
+
+      # Install system_requirements on ubuntu 16.04 (Boydorr)
       - name: Install system requirements (ubuntu-16.04)
         if: matrix.config.os == 'ubuntu-16.04'
         run : |
@@ -67,7 +74,8 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
-      # Install system requirements on ubunto 20.04
+
+      # Install system requirements on ubuntu 20.04
       - name: Install system requirements (ubuntu-20.04)
         if: matrix.config.os == 'ubuntu-20.04'
         run: |
@@ -75,12 +83,14 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+
       # Install r package dependencies
       - name: Install Dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+
       # Run cmd check on all but Boydorr (convert to grid test will fail on Boydorr)
       - name: Check (All but Boydorr)
         if: matrix.config.os != 'ubuntu-16.04'
@@ -90,7 +100,8 @@ jobs:
           R_CHECK_SYSTEM_CLOCK: 0
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-      # run cmd check on Boydorr usinging BOYDORR: "TRUE" to skip convert to grid test
+
+      # Run cmd check on Boydorr usinging BOYDORR: "TRUE" to skip convert to grid test
       - name: Check (Boydorr)
         if: matrix.config.os == 'ubuntu-16.04'
         env:
@@ -99,6 +110,7 @@ jobs:
           BOYDORR: "TRUE"
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+
       # If anything fails upload results to artifacts
       - name: Upload check results
         if: failure()

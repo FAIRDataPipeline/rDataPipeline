@@ -32,6 +32,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
       # setup keychain needed to cache github token for upload_toml_to_github test
       - uses: sinoru/actions-setup-keychain@v1.0
+
       # install MacOS requirements
       - name: Install system requirements (MacOS)
         if: runner.os == 'macOS'
@@ -39,6 +40,7 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
+
       # store r dependencies so they can be cached
       - name: Query dependencies
         run: |
@@ -46,6 +48,7 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+
       # Cache dependencies
       - name: Cache R packages
         uses: actions/cache@v1
@@ -53,6 +56,7 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
       # install r dependencies
       - name: Install r dependencies
         run: |
@@ -60,6 +64,7 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
         shell: Rscript {0}
+
       # add github Personal Access Token to keychain
       # needed for upload_toml_to_github test
       # echos to git credential-osxkeychain
@@ -73,6 +78,7 @@ jobs:
           host=github.com
           username=Personal Access Token
           password=$GITHUB_TOKEN" | git credential-osxkeychain store
+
       # Run code coverage with RUN_TEST to enable upload_toml_to_github test
       - name: Test coverage
         env:
