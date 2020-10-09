@@ -9,6 +9,8 @@ datetime <- format(Sys.time(), "%d%m%y%H%M%S")
 UID <- paste0("register everything ", datetime, test_identifier)
 UID_ <- paste0("register-everything-", datetime, test_identifier)
 path <- paste0(UID_)
+patch <- sample(0:9, 1)
+major <- sample(0:9, 1)
 
 # Create a CSV
 df <- data.frame(cbind(UID = rep(UID, 10),
@@ -18,8 +20,8 @@ df <- data.frame(cbind(UID = rep(UID, 10),
 if(!file.exists(path)) dir.create(path, recursive = TRUE)
 
 version <- create_version_number(Sys.Date(),
-                                 patch = test_identifier,
-                                 major = datetime)
+                                 patch = patch,
+                                 major = major)
 filename <- paste0(version, ".csv")
 filepath <- paste0(path, "/", filename)
 write.csv(df, filepath)
