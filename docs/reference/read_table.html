@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.9</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
     <p>Function to read table type data from hdf5 file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_table</span>(<span class='kw'>filepath</span>, <span class='kw'>component</span>)</pre>
+    <pre class="usage"><span class='fu'>read_table</span><span class='op'>(</span><span class='va'>filepath</span>, <span class='va'>component</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,20 +140,20 @@ attributes,
 if available</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(a = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b = <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>) <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
-<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test_table.h5"</span>
+    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>
+<span class='va'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test_table.h5"</span>
 
-<span class='fu'><a href='create_table.html'>create_table</a></span>(filename = <span class='kw'>filename</span>,
-             path = <span class='st'>"."</span>,
-             component = <span class='st'>"level"</span>,
-             df = <span class='kw'>df</span>,
-             row_names = <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='kw'>df</span>),
-             column_units = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"m^2"</span>))
+<span class='fu'><a href='create_table.html'>create_table</a></span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>filename</span>,
+             path <span class='op'>=</span> <span class='st'>"."</span>,
+             component <span class='op'>=</span> <span class='st'>"level"</span>,
+             df <span class='op'>=</span> <span class='va'>df</span>,
+             row_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
+             column_units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"m^2"</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='kw'>my_table</span> <span class='op'>&lt;-</span> <span class='fu'>read_table</span>(filepath = <span class='kw'>filename</span>,
-                       component = <span class='st'>"level"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span>(<span class='kw'>my_table</span>)
+<span class='va'>my_table</span> <span class='op'>&lt;-</span> <span class='fu'>read_table</span><span class='op'>(</span>filepath <span class='op'>=</span> <span class='va'>filename</span>,
+                       component <span class='op'>=</span> <span class='st'>"level"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/attributes.html'>attributes</a></span><span class='op'>(</span><span class='va'>my_table</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $names
 #&gt; [1] "a" "b"
 #&gt; 
@@ -163,7 +163,7 @@ if available</p>
 #&gt; $row.names
 #&gt; [1] 1 2
 #&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>

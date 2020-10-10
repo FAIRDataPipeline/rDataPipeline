@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.9</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
     <p>Upload information to the <code>author</code> table in the data registry</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_author</span>(<span class='kw'>family_name</span>, <span class='kw'>personal_name</span>, <span class='kw'>object_id</span>, <span class='kw'>key</span>)</pre>
+    <pre class="usage"><span class='fu'>new_author</span><span class='op'>(</span><span class='va'>family_name</span>, <span class='va'>personal_name</span>, <span class='va'>object_id</span>, <span class='va'>key</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +141,10 @@ and / or middle name and / or any initials <em>e.g.</em> "Sonia" or "Sonia N" or
     <tr>
       <th>key</th>
       <td><p>API token from data.scrc.uk</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>internal parameters</p></td>
     </tr>
     </table>
 

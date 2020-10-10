@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.10.9</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
     <p>Function to populate toml file with point-estimate type data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_estimate</span>(<span class='kw'>filename</span>, <span class='kw'>path</span>, <span class='kw'>parameters</span>)</pre>
+    <pre class="usage"><span class='fu'>create_estimate</span><span class='op'>(</span><span class='va'>filename</span>, <span class='va'>path</span>, <span class='va'>parameters</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,23 +142,23 @@ already exist</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Write a single estimate into a toml file</span>
-<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test.toml"</span>
+<span class='va'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"test.toml"</span>
 
-<span class='fu'>create_estimate</span>(filename = <span class='kw'>filename</span>,
-                path = <span class='st'>"."</span>,
-                parameters = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>))
+<span class='fu'>create_estimate</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>filename</span>,
+                path <span class='op'>=</span> <span class='st'>"."</span>,
+                parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>asymptomatic_period <span class='op'>=</span> <span class='fl'>192.0</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Write multiple estimates into a toml file</span>
-<span class='kw'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"anothertest.toml"</span>
+<span class='va'>filename</span> <span class='op'>&lt;-</span> <span class='st'>"anothertest.toml"</span>
 
-<span class='fu'>create_estimate</span>(filename = <span class='kw'>filename</span>,
-                path = <span class='st'>"."</span>,
-                parameters = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(asymptomatic_period = <span class='fl'>192.0</span>,
-                                  latent_period = <span class='fl'>123.12</span>))
+<span class='fu'>create_estimate</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='va'>filename</span>,
+                path <span class='op'>=</span> <span class='st'>"."</span>,
+                parameters <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>asymptomatic_period <span class='op'>=</span> <span class='fl'>192.0</span>,
+                                  latent_period <span class='op'>=</span> <span class='fl'>123.12</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span>(<span class='kw'>filename</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.remove</a></span><span class='op'>(</span><span class='va'>filename</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>
