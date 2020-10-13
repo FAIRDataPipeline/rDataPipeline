@@ -16,7 +16,7 @@ object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
 if(is.null(object_id)){
   source_id <- post_data("object",
-                         list(name = UID, abbreviation = formatted_date),
+                         list(description = UID),
                          key)
 }
 
