@@ -5,17 +5,25 @@
 #' Requires API key
 #'
 #' @param table name of table
-#' @param key api key / token
+#' @param key (optional) api key / token
+#' @param live whether or not to get the field definitions direct from the API
 #' @return a dataframe of fields and their attributes
 #' set to "none"
 #'
 #' @export
 #'
-get_fields <- function(table, key){
+get_fields <- function(table, key, live = FALSE){
 
   # Users and Groups are valid tables but cannot be posted to
   if(table == "users" | table == "groups")
     stop("users and groups are protected tables")
+
+  fields.file <- system.file("validation", paste0(table, ".rds"), package = "SCRCdataAPI")
+  if(fields.file == "" | live)
+  {
+
+    if(missing(key))
+      stop("Key is required for this operation")
 
   # Add token to options request header
   h <- c(Authorization = paste("token", key))
@@ -74,5 +82,9 @@ get_fields <- function(table, key){
                choice_names = choice_names,
                stringsAsFactors = FALSE)
   }) %>% (function(x){do.call(rbind.data.frame, x)})
+  } else {
+    readRDS(fields.file)
+  }
+
 
 }

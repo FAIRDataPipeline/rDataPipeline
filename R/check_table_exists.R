@@ -11,7 +11,15 @@ check_table_exists <- function(table){
     stop("Table is a required paramater")
   if(!is.character(table))
     stop("Table must be a string")
-  if(! table %in% get_tables())
+  tables <- NULL
+  tables.file <- system.file("validation", "tables.rds", package = "SCRCdataAPI")
+  if(tables.file == ""){
+    tables <- get_tables()
+  } else {
+    tables <- readRDS(tables.file)
+  }
+
+  if(! table %in% tables)
     return(FALSE)
   return(TRUE)
 }

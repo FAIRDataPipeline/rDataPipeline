@@ -4,7 +4,10 @@
 \alias{get_tables}
 \title{Get tables from registry}
 \usage{
-get_tables()
+get_tables(live = FALSE)
+}
+\arguments{
+\item{live}{whether or not to get the tables directly from the API}
 }
 \value{
 a character vector of tables

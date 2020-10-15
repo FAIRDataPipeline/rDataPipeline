@@ -4,12 +4,14 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table, key)
+get_fields(table, key, live = FALSE)
 }
 \arguments{
 \item{table}{name of table}
 
-\item{key}{api key / token}
+\item{key}{(optional) api key / token}
+
+\item{live}{whether or not to get the field definitions direct from the API}
 }
 \value{
 a dataframe of fields and their attributes
