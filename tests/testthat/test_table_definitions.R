@@ -18,28 +18,31 @@ test_that("Fields are returned by get_fields", {
       expect_error(get_fields(tables[i], token))
     else{
     expect_true(is.data.frame(get_fields(tables[i], token)))
-    Sys.sleep(sleep_time)
     expect_true(all(column_names %in% names(get_fields(tables[i], token))))
-    Sys.sleep(sleep_time)
     expect_true(is.data.frame(get_table_writable(tables[i], token)))
-    Sys.sleep(sleep_time)
     expect_true(all(column_names %in% names(get_table_writable(tables[i], token))))
-    Sys.sleep(sleep_time)
-    expect_true(is.data.frame(get_table_readable(tables[i], token)))
-    Sys.sleep(sleep_time)
     expect_true(all(column_names %in% names(get_table_readable(tables[i], token))))
-    Sys.sleep(sleep_time)
     expect_true(is.data.frame(get_table_optional(tables[i], token)))
-    Sys.sleep(sleep_time)
     expect_true(all(column_names %in% names(get_table_optional(tables[i], token))))
-    Sys.sleep(sleep_time)
     expect_true(is.data.frame(get_table_required(tables[i], token)))
-    Sys.sleep(sleep_time)
     expect_true(all(column_names %in% names(get_table_required(tables[i], token))))
-    Sys.sleep(sleep_time)
     }
   }
 })
+
+test_that("Fields are returned by get_fields", {
+  for(i in seq_along(tables)){
+    if(tables[i] == "users" | tables[i] == "groups")
+      expect_error(get_fields(tables[i], token, TRUE))
+    else{
+      expect_true(is.data.frame(get_fields(tables[i], token, TRUE)))
+      Sys.sleep(sleep_time)
+      expect_true(all(column_names %in% names(get_fields(tables[i], token, TRUE))))
+      Sys.sleep(sleep_time)
+    }
+  }
+})
+
 
 test_that("Users and groups behave correctly with is_queryable()",{
   expect_false(check_query("users", list(URL = "1")))
