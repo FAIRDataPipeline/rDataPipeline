@@ -11,6 +11,7 @@ on:
 
 jobs:
   R-CMD-check:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     # Use a matrix to define what operating systems to run on
     runs-on: ${{ matrix.config.os }}
     # Name the job dynamically based on OS and R version

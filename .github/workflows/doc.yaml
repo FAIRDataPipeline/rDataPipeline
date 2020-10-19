@@ -11,6 +11,7 @@ on:
 
 jobs:
   build-and-deploy:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: macOS-latest
     steps:
       - name: Checkout
@@ -41,7 +42,7 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-              brew install harfbuzz 
+              brew install harfbuzz
               brew install fribidi
       # Install R dependencies
       - name: Install dependencies

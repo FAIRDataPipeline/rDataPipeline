@@ -10,7 +10,8 @@ on:
 name: test-coverage
 
 jobs:
-  test-coverage:
+  test-coverage
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     # use matrix to define os and r version
     runs-on: ${{ matrix.config.os }}
     # use GITHUB_TOKEN as enviromental version for all steps
