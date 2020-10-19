@@ -65,7 +65,7 @@ jobs:
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           BASE_BRANCH: development
           BRANCH: master # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
