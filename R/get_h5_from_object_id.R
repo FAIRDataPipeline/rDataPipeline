@@ -2,7 +2,12 @@
 #'
 #' @param obj_id object ID
 #' @param data_dir Data Directory
-#' @return H5 file path after downloading
+#'
+#' @return Returns list comprising two elements
+#' \itemize{
+#' \item{downloaded_to}{absolute path of H5 file after downloading}
+#' \item{components}{H5 file components}
+#' }
 #'
 #' @export
 #'
@@ -39,7 +44,7 @@ get_h5_from_object_id <- function(obj_id, data_dir = "data-raw"){
       tmp$name
     })
 
-    return(list(downloaded_to = file.path(dest_path),
+    return(list(downloaded_to = normalizePath(dest_path),
                 components = unlist(components)))
 
   } else {

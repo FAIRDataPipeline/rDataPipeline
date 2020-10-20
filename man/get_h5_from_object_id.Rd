@@ -12,7 +12,11 @@ get_h5_from_object_id(obj_id, data_dir = "data-raw")
 \item{data_dir}{Data Directory}
 }
 \value{
-H5 file path after downloading
+Returns list comprising two elements
+\itemize{
+\item{downloaded_to}{absolute path of H5 file after downloading}
+\item{components}{H5 file components}
+}
 }
 \description{
 get_h5_from_object_id
