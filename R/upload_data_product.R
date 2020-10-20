@@ -31,7 +31,7 @@ upload_data_product <- function(storage_root_id,
                                  key = key)
 
   if(grepl(".h5$", processed_path)) {
-    components <- file_structure(processed_path)
+    components <- get_components(processed_path)
   } else if(grepl(".toml$", processed_path)) {
     components <- data.frame(name = component_name)
   } else {
