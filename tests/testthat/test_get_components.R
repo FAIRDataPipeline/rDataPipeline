@@ -1,4 +1,4 @@
-context("Testing file_structure()")
+context("Testing get_components()")
 
 ##################################################################
 ##            Create Test Data in test-dir directory            ##
@@ -49,7 +49,7 @@ create_array(filename_3,
 
 
 test_that("an error is thrown if file does not exist", {
-  testthat::expect_error(file_structure("unknown_file.h5"))
+  testthat::expect_error(get_components("unknown_file.h5"))
 })
 
 test_that("an h5 file is generated", {
@@ -57,10 +57,10 @@ test_that("an h5 file is generated", {
 })
 
 test_that("file structures are equal to Component names", {
-  testthat::expect_identical(file_structure(filename), component)
-  testthat::expect_equal(file_structure(filename_1), component_1)
-  testthat::expect_equal(file_structure(filename_2), component_2)
-  testthat::expect_equal(file_structure(filename_3),
+  testthat::expect_identical(get_components(filename), component)
+  testthat::expect_equal(get_components(filename_1), component_1)
+  testthat::expect_equal(get_components(filename_2), component_2)
+  testthat::expect_equal(get_components(filename_3),
                          c(component, component_1, component_2))
 })
 

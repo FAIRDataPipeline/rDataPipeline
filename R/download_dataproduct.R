@@ -10,12 +10,11 @@
 #'
 #' @return Returns list comprising two elements
 #' \itemize{
-#'  \item{"downloaded_to"}{Where the file was downloaded to}
-#'  \item{"components"}{Components contained within the file}
+#'  \item{"downloaded_to"}{absolute path of H5 file after downloading}
+#'  \item{"components"}{H5 file components}
 #' }
 #' @examples
 #' \dontrun{
-#' \donttest{
 #' # Automatically download the latest version
 #' download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
 #'  "data-raw")
@@ -26,7 +25,7 @@
 #'
 #' # Download only version
 #' download_dataproduct("geography/scotland/lookup_table", "data-raw")
-#' }}
+#' }
 #'
 download_dataproduct <- function(name, data_dir, version) {
   entries <- get_entry("data_product", list(name = name))

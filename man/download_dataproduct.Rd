@@ -18,8 +18,8 @@ be downloaded}
 \value{
 Returns list comprising two elements
 \itemize{
-\item{"downloaded_to"}{Where the file was downloaded to}
-\item{"components"}{Components contained within the file}
+\item{"downloaded_to"}{absolute path of H5 file after downloading}
+\item{"components"}{H5 file components}
 }
 }
 \description{
@@ -27,7 +27,6 @@ download_dataproduct
 }
 \examples{
 \dontrun{
-\donttest{
 # Automatically download the latest version
 download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
  "data-raw")
@@ -38,6 +37,6 @@ download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
 
 # Download only version
 download_dataproduct("geography/scotland/lookup_table", "data-raw")
-}}
+}
 
 }

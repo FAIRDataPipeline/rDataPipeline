@@ -1,4 +1,4 @@
-#' file_structure
+#' get_components
 #'
 #' Returns the names of the items at the root of the file
 #'
@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-file_structure <- function(filename) {
+get_components <- function(filename) {
 
   tmp <- rhdf5::H5Fopen(filename) %>%
     h5ls() %>%
