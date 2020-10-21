@@ -17,7 +17,7 @@
 #'
 #' create_estimate(filename = filename,
 #'                 path = ".",
-#'                 parameters = list(asymptomatic_period = 192.0))
+#'                 parameters = list(asymptomatic-period = 192.0))
 #'
 #' file.remove(filename)
 #'
@@ -26,8 +26,8 @@
 #'
 #' create_estimate(filename = filename,
 #'                 path = ".",
-#'                 parameters = list(asymptomatic_period = 192.0,
-#'                                   latent_period = 123.12))
+#'                 parameters = list(asymptomatic-period = 192.0,
+#'                                   standard-deviation = 10.2))
 #'
 #' file.remove(filename)
 #'
