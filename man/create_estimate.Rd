@@ -25,7 +25,7 @@ filename <- "test.toml"
 
 create_estimate(filename = filename,
                 path = ".",
-                parameters = list(asymptomatic_period = 192.0))
+                parameters = list(`asymptomatic-period`` = 192.0))
 
 file.remove(filename)
 
@@ -34,8 +34,8 @@ filename <- "anothertest.toml"
 
 create_estimate(filename = filename,
                 path = ".",
-                parameters = list(asymptomatic_period = 192.0,
-                                  standard_deviation = 10.2))
+                parameters = list(`asymptomatic-period`` = 192.0,
+                                  `standard-deviation`` = 10.2))
 
 file.remove(filename)
 

@@ -29,7 +29,7 @@ Function to populate toml file with distribution type data.
 }
 \examples{
 # Write a single distribution into a toml file
-dist <- list(name = "latency",
+dist <- list(name = "latency-period",
              distribution = "gamma",
              parameters = list(shape = 2.0, scale = 3.0))
 filename <- "test_single.toml"
@@ -41,7 +41,7 @@ create_distribution(filename = filename,
 file.remove(filename)
 
 # Write multiple distributions into a toml file
-dist1 <- list(name = "latency",
+dist1 <- list(name = "latency-period",
               distribution = "gamma",
               parameters = list(shape = 2.0, scale = 3.0))
 dist2 <- list(name = "virulence",

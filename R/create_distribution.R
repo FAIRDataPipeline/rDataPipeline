@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' # Write a single distribution into a toml file
-#' dist <- list(name = "latency",
+#' dist <- list(name = "latency-period",
 #'              distribution = "gamma",
 #'              parameters = list(shape = 2.0, scale = 3.0))
 #' filename <- "test_single.toml"
@@ -32,7 +32,7 @@
 #' file.remove(filename)
 #'
 #' # Write multiple distributions into a toml file
-#' dist1 <- list(name = "latency",
+#' dist1 <- list(name = "latency-period",
 #'               distribution = "gamma",
 #'               parameters = list(shape = 2.0, scale = 3.0))
 #' dist2 <- list(name = "virulence",
