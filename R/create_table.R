@@ -21,7 +21,7 @@
 #'
 #' create_table(filename = filename,
 #'              path = ".",
-#'              component = "level",
+#'              component = "component_name",
 #'              df = df,
 #'              row_names = rownames(df),
 #'              column_units = c(NA, "m^2"))

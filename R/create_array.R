@@ -31,7 +31,7 @@
 #' # Create 2-dimensional array
 #' create_array(filename = "test_array_2d.h5",
 #'              path = ".",
-#'              component = "level/a/s/d/f/s",
+#'              component = "row/column-c1-c2-c3",
 #'              array = array,
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df)))
@@ -40,7 +40,7 @@
 #' # Create 3-dimensional array
 #' create_array(filename = "test_array_3d.h5",
 #'              path = ".",
-#'              component = "level/a/s/d/f/s",
+#'              component = "row/column/level-c1",
 #'              array = array(c(array, array), dim = c(dim(array), 2)),
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df),
@@ -50,7 +50,7 @@
 #' # Create 4-dimensional array
 #' create_array(filename = "test_array_4d.h5",
 #'              path = ".",
-#'              component = "level/a/s/d/f/s",
+#'              component = "dim1/dim2/dim3/dim4-c1-c2",
 #'              array = array(c(array, array, array), dim = c(dim(array), 2, 2)),
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df),
@@ -61,7 +61,7 @@
 #' # Create array with values and units
 #' create_array(filename = "test_array_val.h5",
 #'              path = ".",
-#'              component = "level/a/s/d/f/s",
+#'              component = "row/column-c1-c2",
 #'              array = array,
 #'              dimension_names = list(rowvalue = rownames(df),
 #'                                     colvalue = colnames(df)),
