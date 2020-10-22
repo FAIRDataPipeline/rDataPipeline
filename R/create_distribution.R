@@ -37,7 +37,7 @@
 #'                                 path = data_product_name,
 #'                                 distribution = dist)
 #'
-#' file.remove(filename)
+#' file.remove(file.path(data_product_name, filename))
 #'
 #' # Write multiple distributions into a toml file
 #' dist1 <- list(name = "latency-period1",
@@ -51,7 +51,7 @@
 #'                                path = data_product_name,
 #'                                distribution = list(dist1, dist2))
 #'
-#' file.remove(filename)
+#' file.remove(file.path(data_product_name, filename))
 #'
 #' # Write a single distribution with point-estimates into a toml file
 #' dist <- list(name = "latency-period",
@@ -64,31 +64,31 @@
 #'                                path = data_product_name,
 #'                                distribution = list(dist, estimate1, estimate2))
 #'
-#' file.remove(filename)
+#' file.remove(file.path(data_product_name, filename))
 #'
 create_distribution <- function(filename,
                                 path,
                                 distribution) {
-  # Check file name
+  # Check filename is a toml
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
+  # If path is missing, use working directory
+  if(missing(path)) path <- getwd()
+
   # If file already exists, stop
-  if(!file.exists(file.path(path, filename)))
+  if(file.exists(file.path(path, filename)))
     stop("File already exists at this location")
 
-  # Generate directory structure
-  if(missing(path)) {
-    path <- getwd()
-  } else if(!file.exists(path)) {
+  # If path doesn't exist, generate directory structure
+  if(!file.exists(path))
     dir.create(path, recursive = TRUE)
-  }
 
   # If only a single distribution was input, put it (a list) in a list so that
   # the following code works
   if(!is.null(names(distribution)))
     distribution <- list(distribution)
 
-  # Write toml
+  # Prepare to write toml
   write_this <- lapply(seq_along(distribution), function(i) {
     this_distribution <- distribution[[i]]
 
@@ -109,5 +109,6 @@ create_distribution <- function(filename,
     out
   })
 
+  # Write toml
   cat(paste(write_this, collapse = "\n"), file = file.path(path, filename))
 }

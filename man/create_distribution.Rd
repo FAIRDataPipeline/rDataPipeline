@@ -46,7 +46,7 @@ create_distribution(filename = filename,
                                 path = data_product_name,
                                 distribution = dist)
 
-file.remove(filename)
+file.remove(file.path(data_product_name, filename))
 
 # Write multiple distributions into a toml file
 dist1 <- list(name = "latency-period1",
@@ -60,7 +60,7 @@ create_distribution(filename = filename,
                                path = data_product_name,
                                distribution = list(dist1, dist2))
 
-file.remove(filename)
+file.remove(file.path(data_product_name, filename))
 
 # Write a single distribution with point-estimates into a toml file
 dist <- list(name = "latency-period",
@@ -73,6 +73,6 @@ create_distribution(filename = filename,
                                path = data_product_name,
                                distribution = list(dist, estimate1, estimate2))
 
-file.remove(filename)
+file.remove(file.path(data_product_name, filename))
 
 }

@@ -32,7 +32,7 @@ create_estimate(filename = filename,
                 path = data_product_name,
                 parameters = list(`asymptomatic-period` = 192.0))
 
-file.remove(filename)
+file.remove(file.path(data_product_name, filename))
 
 # Write multiple estimates into a toml file
 create_estimate(filename = filename,
@@ -40,6 +40,6 @@ create_estimate(filename = filename,
                 parameters = list(`asymptomatic-period-1` = 192.0,
                                   `asymptomatic-period-2` = 190.2))
 
-file.remove(filename)
+file.remove(file.path(data_product_name, filename))
 
 }

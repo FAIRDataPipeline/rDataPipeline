@@ -24,7 +24,7 @@
 #'                 path = data_product_name,
 #'                 parameters = list(`asymptomatic-period` = 192.0))
 #'
-#' file.remove(filename)
+#' file.remove(file.path(data_product_name, filename))
 #'
 #' # Write multiple estimates into a toml file
 #' create_estimate(filename = filename,
@@ -32,24 +32,24 @@
 #'                 parameters = list(`asymptomatic-period-1` = 192.0,
 #'                                   `asymptomatic-period-2` = 190.2))
 #'
-#' file.remove(filename)
+#' file.remove(file.path(data_product_name, filename))
 #'
 create_estimate <- function(filename,
                             path,
                             parameters) {
-  # Check file name
+  # Check filename is a toml
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 
-  # If file already exists, stop
-  if(!file.exists(file.path(path, filename)))
+  # If path is missing, use working directory
+  if(missing(path)) path <- getwd()
+
+  # If file exists, stop
+  if(file.exists(file.path(path, filename)))
     stop("File already exists at this location")
 
-  # Generate directory structure
-  if(missing(path)) {
-    path <- getwd()
-  } else if(!file.exists(path)) {
+  # If path doesn't exist, generate directory structure
+  if(!file.exists(path))
     dir.create(path, recursive = TRUE)
-  }
 
   # Write toml
   tmp <- lapply(seq_along(parameters), function(i) {
