@@ -19,9 +19,11 @@ download_from_database(
 
 \item{path}{a \code{string} specifying where the file will be saved}
 
-\item{filename}{filename}
+\item{filename}{a \code{string} specifying the filename (the name given to
+the saved file)}
 
-\item{overwrite}{overwrite}
+\item{overwrite}{a \code{boolean} specifying whether or not the file should
+be overwritten if it already exists}
 }
 \description{
 download_from_database

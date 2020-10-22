@@ -3,8 +3,10 @@
 #' @param source_root a \code{string} specifying the source root
 #' @param source_path a \code{string} specifying the source path
 #' @param path a \code{string} specifying where the file will be saved
-#' @param filename filename
-#' @param overwrite overwrite
+#' @param filename a \code{string} specifying the filename (the name given to
+#' the saved file)
+#' @param overwrite a \code{boolean} specifying whether or not the file should
+#' be overwritten if it already exists
 #'
 #' @export
 #'
