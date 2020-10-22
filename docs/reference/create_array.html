@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.10</span>
       </span>
     </div>
 
@@ -184,7 +184,7 @@ a whole</p></td>
 <span class='co'># Create 2-dimensional array</span>
 <span class='fu'>create_array</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"test_array_2d.h5"</span>,
              path <span class='op'>=</span> <span class='st'>"."</span>,
-             component <span class='op'>=</span> <span class='st'>"level/a/s/d/f/s"</span>,
+             component <span class='op'>=</span> <span class='st'>"row/column-c1-c2-c3"</span>,
              array <span class='op'>=</span> <span class='va'>array</span>,
              dimension_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rowvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
                                     colvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
@@ -193,7 +193,7 @@ a whole</p></td>
 <span class='co'># Create 3-dimensional array</span>
 <span class='fu'>create_array</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"test_array_3d.h5"</span>,
              path <span class='op'>=</span> <span class='st'>"."</span>,
-             component <span class='op'>=</span> <span class='st'>"level/a/s/d/f/s"</span>,
+             component <span class='op'>=</span> <span class='st'>"row/column/level-c1"</span>,
              array <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>array</span>, <span class='va'>array</span><span class='op'>)</span>, dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>array</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
              dimension_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rowvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
                                     colvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
@@ -203,7 +203,7 @@ a whole</p></td>
 <span class='co'># Create 4-dimensional array</span>
 <span class='fu'>create_array</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"test_array_4d.h5"</span>,
              path <span class='op'>=</span> <span class='st'>"."</span>,
-             component <span class='op'>=</span> <span class='st'>"level/a/s/d/f/s"</span>,
+             component <span class='op'>=</span> <span class='st'>"dim1/dim2/dim3/dim4-c1-c2"</span>,
              array <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>array</span>, <span class='va'>array</span>, <span class='va'>array</span><span class='op'>)</span>, dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>array</span><span class='op'>)</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
              dimension_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rowvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
                                     colvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
@@ -214,7 +214,7 @@ a whole</p></td>
 <span class='co'># Create array with values and units</span>
 <span class='fu'>create_array</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"test_array_val.h5"</span>,
              path <span class='op'>=</span> <span class='st'>"."</span>,
-             component <span class='op'>=</span> <span class='st'>"level/a/s/d/f/s"</span>,
+             component <span class='op'>=</span> <span class='st'>"row/column-c1-c2"</span>,
              array <span class='op'>=</span> <span class='va'>array</span>,
              dimension_names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>rowvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>,
                                     colvalue <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>,
