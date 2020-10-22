@@ -1,4 +1,4 @@
-context("Testing key validation")
+context("Testing validate_token()")
 
 correct_key <- Sys.getenv("SCRC_API_TOKEN")
 

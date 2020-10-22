@@ -1,4 +1,4 @@
-context("test get_tables")
+context("Testing get_tables()")
 
 sleep_time <- 0.5
 

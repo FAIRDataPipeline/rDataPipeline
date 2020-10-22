@@ -1,4 +1,4 @@
-context("testing get entity")
+context("Testing get_entity()")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
 

@@ -1,4 +1,4 @@
-context("checking post_data")
+context("Testing post_data()")
 
 sleep_time <- 0.5
 

@@ -1,4 +1,4 @@
-context("Test new_data_product")
+context("Testing new_data_product()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

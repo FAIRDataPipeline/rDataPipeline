@@ -1,4 +1,4 @@
-context("checking patch_data")
+context("Testing patch_data()")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
 

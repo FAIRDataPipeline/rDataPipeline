@@ -1,4 +1,4 @@
-context("Test table definitions and validation methods")
+context("Testing table_definitions() and validation methods")
 
 # get the token
 token <- Sys.getenv("SCRC_API_TOKEN")
