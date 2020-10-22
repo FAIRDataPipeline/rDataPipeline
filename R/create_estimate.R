@@ -1,9 +1,13 @@
 #' create_estimate
 #'
-#' Function to populate toml file with point-estimate type data.
+#' Function to populate toml file with point-estimate type data, *e.g.*
+#' \itemize{
+#' \item{Generate a single toml file containing a single point-estimate component}
+#' \item{Generate a single toml file containing multiple point-estimate components}
+#' }
+#' If a file already exists at the specified location, an error will be returned.
 #'
-#' @param filename a \code{string} specifying the name of the toml file, e.g.
-#' "0.1.0.toml"
+#' @param filename a \code{string} specifying the name of the toml file
 #' @param path a \code{string} specifying the directory in which you want to
 #' save the toml file; this will be automatically generated if it doesn't
 #' already exist
@@ -12,22 +16,21 @@
 #' @export
 #'
 #' @examples
-#' # Write a single estimate into a toml file
-#' filename <- "test.toml"
+#' filename <- "0.1.0.toml"
+#' data_product_name <- "some/descriptive/name/asymptomatic-period"
 #'
+#' # Write a single estimate into a toml file
 #' create_estimate(filename = filename,
-#'                 path = ".",
+#'                 path = data_product_name,
 #'                 parameters = list(`asymptomatic-period` = 192.0))
 #'
 #' file.remove(filename)
 #'
 #' # Write multiple estimates into a toml file
-#' filename <- "anothertest.toml"
-#'
 #' create_estimate(filename = filename,
-#'                 path = ".",
-#'                 parameters = list(`asymptomatic-period` = 192.0,
-#'                                   `standard-deviation` = 10.2))
+#'                 path = data_product_name,
+#'                 parameters = list(`asymptomatic-period-1` = 192.0,
+#'                                   `asymptomatic-period-2` = 190.2))
 #'
 #' file.remove(filename)
 #'
@@ -36,6 +39,10 @@ create_estimate <- function(filename,
                             parameters) {
   # Check file name
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
+
+  # If file already exists, stop
+  if(!file.exists(file.path(path, filename)))
+    stop("File already exists at this location")
 
   # Generate directory structure
   if(missing(path)) {

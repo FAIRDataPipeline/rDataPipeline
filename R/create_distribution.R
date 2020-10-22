@@ -7,6 +7,7 @@
 #' \item{Generate a single toml file containing a single distribution component
 #' and associated point-estimate components}
 #' }
+#' If a file already exists at the specified location, an error will be returned.
 #'
 #' @param filename a \code{string} specifying the name of the toml file
 #' @param path a \code{string} specifying the directory in which you want to
@@ -70,6 +71,10 @@ create_distribution <- function(filename,
                                 distribution) {
   # Check file name
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
+
+  # If file already exists, stop
+  if(!file.exists(file.path(path, filename)))
+    stop("File already exists at this location")
 
   # Generate directory structure
   if(missing(path)) {

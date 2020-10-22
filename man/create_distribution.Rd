@@ -31,6 +31,7 @@ Function to populate toml file with distribution type data, \emph{e.g.}
 \item{Generate a single toml file containing a single distribution component
 and associated point-estimate components}
 }
+If a file already exists at the specified location, an error will be returned.
 }
 \examples{
 filename <- "0.1.0.toml"
