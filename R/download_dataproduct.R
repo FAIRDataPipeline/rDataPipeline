@@ -13,6 +13,7 @@
 #'  \item{"downloaded_to"}{absolute path of H5 file after downloading}
 #'  \item{"components"}{H5 file components}
 #' }
+#'
 #' @examples
 #' \dontrun{
 #' # Automatically download the latest version

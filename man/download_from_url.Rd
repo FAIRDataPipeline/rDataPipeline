@@ -7,21 +7,32 @@
 download_from_url(source_root, source_path, path, filename, unzip = FALSE)
 }
 \arguments{
-\item{source_root}{a \code{string} specifying the source root \emph{e.g.}
-"https://www.nrscotland.gov.uk"}
+\item{source_root}{a \code{string} specifying the source root}
 
-\item{source_path}{a \code{string} specifying the source path \emph{e.g.}
-"files/statistics/population-estimates/sape-time-series/males/sape-2018-males.xlsx"}
+\item{source_path}{a \code{string} specifying the source path}
 
-\item{path}{a \code{string} specifying the local path (where to save the
-file) \emph{e.g.} "data-raw"}
+\item{path}{a \code{string} specifying where the file will be saved}
 
 \item{filename}{a \code{string} specifying the filename (the name given to
-the saved file) \emph{e.g.} "0.1.0.csv"}
+the saved file)}
 
 \item{unzip}{a \code{boolean} specifying which when \code{TRUE} will
 unzip a \code{.zip} file and remove the original \code{.zip} file}
 }
 \description{
 This function will download a file from a url
+}
+\examples{
+\dontrun{
+
+# Download the file
+download_from_url(source_root = "http://statistics.gov.scot/",
+                  source_path = "downloads/file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5\%2FDatazone2011Lookup.csv",
+                  path = "geography/scotland/lookup_table",
+                  filename = "0.1.0.csv")
+
+# Delete the file
+file.remove("geography/scotland/lookup_table/0.1.0.csv")
+}
+
 }
