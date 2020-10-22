@@ -1,4 +1,4 @@
-context("Test new_storage_location")
+context("Testing new_storage_location()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

@@ -1,4 +1,4 @@
-context("Test new_coderun")
+context("Testing new_coderun()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

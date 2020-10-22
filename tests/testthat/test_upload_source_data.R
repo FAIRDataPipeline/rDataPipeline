@@ -1,4 +1,4 @@
-context("Testing upload_source_data")
+context("Testing upload_source_data()")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
 

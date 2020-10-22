@@ -1,4 +1,4 @@
-context("Testing clean_query")
+context("Testing clean_query()")
 
 query_1 <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
 query_2 <- list(storage_location = "2")

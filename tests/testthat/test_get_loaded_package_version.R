@@ -1,4 +1,4 @@
-context("testing get_loaded_package_version")
+context("Testing get_loaded_package_version()")
 
 test_that("get_loaded_package_version returns a list", {
   expect_silent(get_loaded_package_version())

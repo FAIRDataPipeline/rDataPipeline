@@ -1,4 +1,4 @@
-context("test table_exists")
+context("Testing table_exists()")
 
 sleep_time <- 0.5
 

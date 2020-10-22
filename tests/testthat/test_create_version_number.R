@@ -1,4 +1,4 @@
-context("Testing create_version_number")
+context("Testing create_version_number()")
 
 date <- Sys.Date()
 datetime <- Sys.time()

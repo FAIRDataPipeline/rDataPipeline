@@ -1,4 +1,4 @@
-context("Test new_object_component")
+context("Testing new_object_component()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

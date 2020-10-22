@@ -1,4 +1,4 @@
-context("Test new_author")
+context("Testing new_author()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

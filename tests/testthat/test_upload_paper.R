@@ -1,4 +1,4 @@
-context("Testing upload_paper")
+context("Testing upload_paper()")
 
 # get the token
 token <- Sys.getenv("SCRC_API_TOKEN")

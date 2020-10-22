@@ -1,4 +1,4 @@
-context("Test upload_toml_to_github")
+context("Test upload_toml_to_github()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

@@ -1,4 +1,4 @@
-context("Testing paper_exists")
+context("Testing paper_exists()")
 
 paper_id <- "10.1001/jama.2020.12248"
 

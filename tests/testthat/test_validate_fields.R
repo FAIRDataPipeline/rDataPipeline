@@ -1,4 +1,4 @@
-context("checking validate_fields")
+context("Testing validate_fields()")
 
 sleep_time <- 0.5
 

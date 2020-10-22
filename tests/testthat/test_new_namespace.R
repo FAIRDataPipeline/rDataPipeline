@@ -1,4 +1,4 @@
-context("Test new_namespace")
+context("Testing new_namespace()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

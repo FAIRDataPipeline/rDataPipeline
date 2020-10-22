@@ -1,4 +1,4 @@
-context("Checking get entry")
+context("Testing get_entry()")
 
 key <- Sys.getenv("SCRC_API_TOKEN")
 

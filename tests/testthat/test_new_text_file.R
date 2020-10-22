@@ -1,4 +1,4 @@
-context("Test new_text_file")
+context("Testing new_text_file()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

@@ -1,4 +1,4 @@
-context("Test new_code_repo_release")
+context("Testing new_code_repo_release()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")

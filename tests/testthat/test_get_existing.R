@@ -1,4 +1,4 @@
-context("Test get_existing()")
+context("Testing get_existing()")
 
 #get all tables
 tables <- get_tables()

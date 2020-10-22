@@ -1,4 +1,4 @@
-context("testing get_remote_package_version")
+context("Testing get_remote_package_version()")
 
 test_that("get_remote_package_version returns a character", {
   expect_silent(get_remote_package_version())

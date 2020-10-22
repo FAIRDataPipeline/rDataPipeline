@@ -1,4 +1,4 @@
-context("Test register_everything")
+context("Testing register_everything()")
 
 # get the token
 key <- Sys.getenv("SCRC_API_TOKEN")
