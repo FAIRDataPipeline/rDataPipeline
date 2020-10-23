@@ -16,6 +16,9 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     # Name the job dynamically based on OS and R version
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    # use GITHUB_TOKEN as enviromental version for all steps
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
       fail-fast: false
@@ -29,18 +32,18 @@ jobs:
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
-
-    # Checkout repo
+      # Checkout repo
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
-    # Setup R using r version in matrix
+      # Setup R using r version in matrix
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-
-      # Pandoc is not needed but here
+      # setup pandoc
       - uses: r-lib/actions/setup-pandoc@master
+      # setup keychain needed to cache github token for upload_toml_to_github test
+      - uses: sinoru/actions-setup-keychain@v1.0
 
       # Save the package dependencies so they can be cached
       - name: Query dependencies
@@ -119,3 +122,36 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      # Coverage ------------------------
+
+      # Install R dependencies
+      - name: Install r dependencies
+        run: |
+          install.packages(c("remotes"))
+          remotes::install_cran("covr")
+        shell: Rscript {0}
+
+      # Add github Personal Access Token to keychain
+      # needed for upload_toml_to_github test
+      # echos to git credential-osxkeychain
+      # this emulate stdin() line by line
+      - name: Add credentials in keychain
+        env:
+          GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
+        run: |
+          echo "\
+          protocol=https
+          host=github.com
+          username=Personal Access Token
+          password=$GITHUB_TOKEN" | git credential-osxkeychain store
+
+      # Run code coverage with RUN_TEST to enable upload_toml_to_github test
+      - name: Test coverage
+        env:
+          SCRC_API_TOKEN: ${{ secrets.SCRC_API_PAT }}
+          RUN_TEST: "TRUE"
+        run: |
+          covr::codecov()
+        shell: Rscript {0}
+
