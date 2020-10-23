@@ -34,20 +34,19 @@ get_h5_from_object_id <- function(obj_id, data_dir = "data-raw"){
 
   # If file already exists at this location, return a message. Otherwise,
   # download the file and return it's location and a list of components
-  if(!file.exists(dest_path)) {
-    download.file(url, dest_path, mode = "wb")
-
-    components <- lapply(obj$components, function(x) {
-      tmp <- httr::GET(x) %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
-        jsonlite::fromJSON(simplifyVector = FALSE)
-      tmp$name
-    })
-
-    return(list(downloaded_to = normalizePath(dest_path),
-                components = unlist(components)))
-
-  } else {
+  if(file.exists(dest_path)) {
     message("File already exists at this location")
+  } else {
+    download.file(url, dest_path, mode = "wb")
   }
+
+  components <- lapply(obj$components, function(x) {
+    tmp <- httr::GET(x) %>%
+      httr::content(as = "text", encoding = "UTF-8") %>%
+      jsonlite::fromJSON(simplifyVector = FALSE)
+    tmp$name
+  })
+
+  return(list(downloaded_to = normalizePath(dest_path),
+              components = unlist(components)))
 }
