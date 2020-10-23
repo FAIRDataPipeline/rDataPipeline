@@ -5,6 +5,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 validate_token <- function(key){
   if(missing(key))
     stop("API Token (key) must be supplied")

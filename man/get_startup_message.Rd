@@ -17,3 +17,4 @@ returns the startup message
 \description{
 Get startup message
 }
+\keyword{internal}

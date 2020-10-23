@@ -7,6 +7,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 get_table_required <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")

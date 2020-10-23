@@ -18,3 +18,4 @@ true or false if vector is provided
 \description{
 Produces error \code{Unknown Table} if table does not exist
 }
+\keyword{internal}

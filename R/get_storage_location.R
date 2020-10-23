@@ -6,7 +6,6 @@
 #'
 #' @export
 #'
-
 get_storage_location <- function(location_id){
   get_entity("storage_location", location_id)
 }

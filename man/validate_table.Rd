@@ -14,3 +14,4 @@ validate_table(table, key)
 \description{
 Function to validate table name
 }
+\keyword{internal}

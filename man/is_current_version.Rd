@@ -21,3 +21,4 @@ package
 \description{
 Check if Package is current version
 }
+\keyword{internal}

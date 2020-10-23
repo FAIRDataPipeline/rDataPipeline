@@ -15,3 +15,4 @@ a character vector of queryable fields
 \description{
 Get Queryable Fields
 }
+\keyword{internal}

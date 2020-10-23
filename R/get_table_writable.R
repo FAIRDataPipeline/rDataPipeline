@@ -6,6 +6,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 get_table_writable <- function(table, key){
   if(! check_table_exists(table))
     stop("Unknown Table")

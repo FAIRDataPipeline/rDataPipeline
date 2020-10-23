@@ -6,6 +6,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 get_tables <- function(live = FALSE){
   tables.file = system.file("validation", "tables.rds", package = "SCRCdataAPI")
   if(tables.file == "" | live)

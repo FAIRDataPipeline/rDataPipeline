@@ -17,3 +17,4 @@ a dataframe of readable fields and their properties
 \description{
 Get Readable Fields
 }
+\keyword{internal}

@@ -14,3 +14,4 @@ validate_token(key)
 validate_token
 Function to validate user token
 }
+\keyword{internal}

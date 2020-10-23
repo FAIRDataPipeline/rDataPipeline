@@ -15,3 +15,4 @@ a character vector of tables
 \description{
 Use api endpoint to produce a list of tables
 }
+\keyword{internal}
