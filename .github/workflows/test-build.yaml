@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - '*'
-  pull_request:
-    branches:
-      - master
+#  pull_request:
+#    branches:
+#      - master
 
 jobs:
   R-CMD-check:
@@ -129,8 +129,8 @@ jobs:
     name: test coverage
     # R-CMD-check must complete successfully before test-coverage begins
     needs: R-CMD-check
-    # If the commit message isn't [skip ci]
-    if: "${{ github.event.pull_request.merged == true }}"
+    # Only when master is pushed
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     # Use matrix to define OS and R version
     runs-on: ${{ matrix.config.os }}
     # Use the default GITHUB_TOKEN as an enviromental version for all steps
@@ -216,7 +216,8 @@ jobs:
     name: Build and deploy docs
     # R-CMD-check must complete successfully before build-and-deploy-docs begins
     needs: R-CMD-check
-    if: "${{ github.event.pull_request.merged == true }}"
+    # Only when master is pushed
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: macOS-latest
     steps:
       - name: Checkout
