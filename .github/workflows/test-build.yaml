@@ -123,11 +123,11 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-# Coverage -------------------------------------------------------------
+# Coverage ------------------------------------------------------------------
 
   test-coverage:
 # If the commit message isn't [skip ci]
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    if: "${{ !contains(github.event.commits[0].message, '[skip ci]') && github.event.pull_request.merged == true }}"
 # Use matrix to define OS and R version
     runs-on: ${{ matrix.config.os }}
 # Use the default GITHUB_TOKEN as an enviromental version for all steps
@@ -207,3 +207,67 @@ jobs:
           covr::codecov()
         shell: Rscript {0}
 
+# Build and deploy DOCS -----------------------------------------------------
+
+  build-and-deploy:
+    if: "${{ !contains(github.event.commits[0].message, '[skip ci]') && github.event.pull_request.merged == true }}"
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+# Run setup-r to setup r
+      - uses: r-lib/actions/setup-r@master
+# Setup pandoc needed to build docs
+      - uses: r-lib/actions/setup-pandoc@v1
+# Save dependencies so they can be cached
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+# Cache dependencies
+      - name: Cache R packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+# Install Mac OS requirements
+      - name: Install system requirements (MacOS)
+        run : |
+              rm '/usr/local/bin/gfortran'
+              brew install hdf5
+              brew install gdal
+              brew install harfbuzz
+              brew install fribidi
+# Install R dependencies
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_local()
+        shell: Rscript {0}
+# Build documentation with pkgdown
+      - name: Build Docs
+        run: |
+          install.packages("pkgdown")
+          pkgdown::build_site()
+        shell: Rscript {0}
+# Create a development branch and commit to it
+      - name: Commit to development branch
+        run: |
+          git checkout -b development
+          git add .
+          git commit -m '[skip ci]'
+# Deploy the docs using JamesIves/github-pages-deploy-action
+      - name: Deploy Docs
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          BASE_BRANCH: development
+          BRANCH: master # The branch the action should deploy to.
+          FOLDER: docs # The folder the action should deploy.
+          TARGET_FOLDER: docs
+          COMMIT_MESSAGE: 'build docs [skip ci]'
