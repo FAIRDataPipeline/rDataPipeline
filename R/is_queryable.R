@@ -10,8 +10,9 @@
 #'
 #' @export
 #'
-is_queryable <- function(table, query_parameter)
-{
+#' @keywords internal
+#'
+is_queryable <- function(table, query_parameter) {
   if(table == "users" | table == "groups")
     return(FALSE) # only queryable with token
   if(is.null(get_table_queryable(table)))

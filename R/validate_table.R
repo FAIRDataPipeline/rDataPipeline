@@ -7,6 +7,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 validate_table <- function(table, key) {
   if(missing(table)) stop("table is required")
   if(table == "users" | table == "groups")

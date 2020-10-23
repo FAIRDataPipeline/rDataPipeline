@@ -16,8 +16,8 @@ the results default \code{TRUE}}
 use \code{"all"} for all details or \code{"id"} for just URL and ID's}
 }
 \value{
-returns a data.frame of entries in table
-default is limited to 100 entries
+returns a data.frame of entries in table default is limited to 100
+entries
 }
 \description{
 get_existing

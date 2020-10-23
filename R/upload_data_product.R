@@ -1,6 +1,5 @@
 #' upload_data_product
 #'
-#'
 #' @param storage_root_id e.g.
 #' @param name e.g.
 #' @param component_name (optional) used for toml files, not hdf5

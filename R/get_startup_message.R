@@ -5,6 +5,8 @@
 #'
 #' @return returns the startup message
 #'
+#' @keywords internal
+#'
 get_startup_message <- function(repo, package){
   if(!is_current_version(repo, package)){
     return(paste("Warning: Your package version is out of date please update\n",

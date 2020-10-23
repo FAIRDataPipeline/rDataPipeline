@@ -5,6 +5,7 @@
 #' @param repo e.g. "ScottishCovidResponse/SCRCdata"
 #'
 #' @export
+#'
 get_github_hash <- function(repo) {
   if(system("git --version"))
     stop("git must be installed and located in the system path for this function to work")

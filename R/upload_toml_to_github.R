@@ -6,7 +6,7 @@
 #' @param email (optional) the email you want to be associated with the git commit
 #'
 #' @export
-
+#'
 upload_toml_to_github <- function(path_to_toml,
                                   name = "SCRC",
                                   email = "scrc@glasgow.ac.uk"){

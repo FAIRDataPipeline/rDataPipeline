@@ -1,4 +1,7 @@
-# Private Functions to generate validation cache (inst/validation)
+#' Private Functions to generate validation cache (inst/validation)
+#'
+#' @keywords internal
+#'
 update_validation <- function(key){
   try({
     if(missing(key))

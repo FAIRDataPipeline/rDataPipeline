@@ -5,8 +5,10 @@
 #' the results default \code{TRUE}
 #' @param detail what level of detail to return
 #' use \code{"all"} for all details or \code{"id"} for just URL and ID's
-#' @return returns a data.frame of entries in table
-#' default is limited to 100 entries
+#'
+#' @return returns a data.frame of entries in table default is limited to 100
+#' entries
+#'
 #' @export
 #'
 get_existing <- function(table, limit_results = TRUE, detail = "all") {

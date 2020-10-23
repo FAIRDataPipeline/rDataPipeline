@@ -11,6 +11,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 #' @examples
 #' \dontrun{
 #' \donttest{

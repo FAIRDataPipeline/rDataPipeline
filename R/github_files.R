@@ -2,6 +2,8 @@
 #'
 #' @param repo *e.g.*
 #'
+#' @keywords internal
+#'
 #' @examples
 #' \donttest{
 #' \dontrun{

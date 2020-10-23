@@ -20,3 +20,4 @@ files <- grep("scotgov_deaths.R$", filelist, value = TRUE)
 }}
 
 }
+\keyword{internal}

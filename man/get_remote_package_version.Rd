@@ -15,3 +15,4 @@ Returns the current package version
 \description{
 Get github Package Version
 }
+\keyword{internal}

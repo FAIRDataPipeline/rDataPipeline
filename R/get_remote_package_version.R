@@ -4,6 +4,8 @@
 #'
 #' @return Returns the current package version
 #'
+#' @keywords internal
+#'
 get_remote_package_version <- function(
   repo = "ScottishCovidResponse/SCRCdataAPI"){
   description <- as.character(0)
