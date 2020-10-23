@@ -11,16 +11,17 @@ on:
 
 jobs:
   R-CMD-check:
+# If the commit message isn't [skip ci]
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    # Use a matrix to define what operating systems to run on
+# Use a matrix to define what operating systems to run on
     runs-on: ${{ matrix.config.os }}
-    # Name the job dynamically based on OS and R version
+# Name the job dynamically based on OS and R version
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
 
-      # Define operating systems
+# Define operating systems
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
@@ -29,20 +30,18 @@ jobs:
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
-
-    # Checkout repo
+# Checkout repo
       - uses: actions/checkout@v2
         with:
           persist-credentials: false
-    # Setup R using r version in matrix
+# Setup R using r version in matrix
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
-
-      # Pandoc is not needed but here
+# Pandoc is not needed but here
       - uses: r-lib/actions/setup-pandoc@master
 
-      # Save the package dependencies so they can be cached
+# Save the package dependencies so they can be cached
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -50,7 +49,7 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      # Cache the packages if not on windows
+# Cache the packages if not on windows
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v1
@@ -59,7 +58,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      # Install macOS requirements on macOS
+# Install macOS requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
@@ -67,7 +66,7 @@ jobs:
               brew install hdf5
               brew install gdal
 
-      # Install system_requirements on ubuntu 16.04 (Boydorr)
+# Install system_requirements on ubuntu 16.04 (Boydorr)
       - name: Install system requirements (ubuntu-16.04)
         if: matrix.config.os == 'ubuntu-16.04'
         run : |
@@ -76,7 +75,7 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
 
-      # Install system requirements on ubuntu 20.04
+# Install system requirements on ubuntu 20.04
       - name: Install system requirements (ubuntu-20.04)
         if: matrix.config.os == 'ubuntu-20.04'
         run: |
@@ -85,14 +84,16 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
-      # Install r package dependencies
+# Install R package dependencies
       - name: Install Dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      # Run cmd check on all but Boydorr (convert to grid test will fail on Boydorr)
+# Run CMD check on all but Boydorr (convert2grid test will fail on Boydorr)
+# Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
+# registry
       - name: Check (All but Boydorr)
         if: matrix.config.os != 'ubuntu-16.04'
         env:
@@ -102,7 +103,9 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
-      # Run cmd check on Boydorr usinging BOYDORR: "TRUE" to skip convert to grid test
+# Run CMD check on Boydorr usinging BOYDORR: "TRUE" to skip convert2grid test
+# Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
+# registry
       - name: Check (Boydorr)
         if: matrix.config.os == 'ubuntu-16.04'
         env:
@@ -112,7 +115,7 @@ jobs:
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
-      # If anything fails upload results to artifacts
+# If anything fails upload results to artifacts
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
@@ -120,31 +123,34 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
+# Coverage -------------------------------------------------------------
+
   test-coverage:
+# If the commit message isn't [skip ci]
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    # use matrix to define os and r version
+# Use matrix to define OS and R version
     runs-on: ${{ matrix.config.os }}
-    # use GITHUB_TOKEN as enviromental version for all steps
+# Use the default GITHUB_TOKEN as an enviromental version for all steps
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
       fail-fast: false
-      # set to run on macOS-latest and r release
+# Set to run on macOS-latest and r release
       matrix:
         config:
           - {os: macOS-latest, r: 'release'}
     steps:
-      # checkout
+# Checkout
       - uses: actions/checkout@v2
-      # Setup r
+# Setup R
       - uses: r-lib/actions/setup-r@master
-      # setup pandoc
+# Setup pandoc
       - uses: r-lib/actions/setup-pandoc@master
-      # setup keychain needed to cache github token for upload_toml_to_github test
+# Setup keychain needed to cache github token for upload_toml_to_github test
       - uses: sinoru/actions-setup-keychain@v1.0
 
-      # install MacOS requirements
+# Install MacOS requirements
       - name: Install system requirements (MacOS)
         if: runner.os == 'macOS'
         run : |
@@ -160,7 +166,7 @@ jobs:
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
-      # Cache dependencies
+# Cache dependencies
       - name: Cache R packages
         uses: actions/cache@v1
         with:
@@ -168,7 +174,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      # Install r dependencies
+# Install r dependencies
       - name: Install R dependencies
         run: |
           install.packages(c("remotes"))
@@ -176,13 +182,13 @@ jobs:
           remotes::install_cran("covr")
         shell: Rscript {0}
 
-      # add github Personal Access Token to keychain
-      # needed for upload_toml_to_github test
-      # echos to git credential-osxkeychain
-      # this emulate stdin() line by line
+# Add github Personal Access Token to keychain:
+# * Needed for upload_toml_to_github test
+# * Echoes to git credential-osxkeychain
+# * This emulate stdin() line by line
       - name: Add credentials in keychain
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
         run: |
           echo "\
           protocol=https
@@ -190,7 +196,9 @@ jobs:
           username=Personal Access Token
           password=$GITHUB_TOKEN" | git credential-osxkeychain store
 
-      # Run code coverage with RUN_TEST to enable upload_toml_to_github test
+# Run code coverage with RUN_TEST to enable upload_toml_to_github test
+# Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
+# registry
       - name: Test coverage
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
