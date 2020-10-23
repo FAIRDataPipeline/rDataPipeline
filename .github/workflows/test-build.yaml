@@ -127,6 +127,7 @@ jobs:
 
       # Install R dependencies
       - name: Install r dependencies
+        if: runner.os == 'macOS'
         run: |
           install.packages(c("remotes"))
           remotes::install_cran("covr")
@@ -137,6 +138,7 @@ jobs:
       # echos to git credential-osxkeychain
       # this emulate stdin() line by line
       - name: Add credentials in keychain
+        if: runner.os == 'macOS'
         env:
           GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
         run: |
@@ -148,6 +150,7 @@ jobs:
 
       # Run code coverage with RUN_TEST to enable upload_toml_to_github test
       - name: Test coverage
+        if: runner.os == 'macOS'
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_PAT }}
           RUN_TEST: "TRUE"
