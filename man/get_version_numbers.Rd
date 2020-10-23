@@ -4,10 +4,10 @@
 \alias{get_version_numbers}
 \title{get_version_numbers}
 \usage{
-get_version_numbers(name)
+get_version_numbers(data_product)
 }
 \arguments{
-\item{a}{\code{string} specifying the name of the data product}
+\item{data_product}{\code{string} specifying the name of the data product}
 }
 \value{
 
