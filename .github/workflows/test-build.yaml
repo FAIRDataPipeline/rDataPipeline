@@ -125,60 +125,15 @@ jobs:
 
 # Coverage ------------------------------------------------------------------
 
-  test-coverage:
-    name: test coverage
-    # R-CMD-check must complete successfully before test-coverage begins
-    needs: R-CMD-check
-    # Only when master is pushed
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    # Use matrix to define OS and R version
-    runs-on: ${{ matrix.config.os }}
-    # Use the default GITHUB_TOKEN as an enviromental version for all steps
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-    strategy:
-      fail-fast: false
-      # Set to run on macOS-latest and r release
-      matrix:
-        config:
-          - {os: macOS-latest, r: 'release'}
-    steps:
-      # Checkout
-      - uses: actions/checkout@v2
-      # Setup R
-      - uses: r-lib/actions/setup-r@master
-      # Setup pandoc
-      - uses: r-lib/actions/setup-pandoc@master
-      # Setup keychain needed to cache github token for upload_toml_to_github test
-      - uses: sinoru/actions-setup-keychain@v1.0
-
-      # Install MacOS requirements
-      - name: Install system requirements (MacOS)
-        if: runner.os == 'macOS'
-        run : |
-              rm '/usr/local/bin/gfortran'
-              brew install hdf5
-              brew install gdal
-
-      # store r dependencies so they can be cached
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
-
-      # Cache dependencies
-      - name: Cache R packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
-      # Install r dependencies
-      - name: Install R dependencies
+      - name: test coverage
+        # Only when master is pushed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        # Use the default GITHUB_TOKEN as an enviromental version for all steps
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        # Setup keychain needed to cache github token for upload_toml_to_github test
+        uses: sinoru/actions-setup-keychain@v1.0
+        # Install r dependencies
         run: |
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
@@ -190,6 +145,7 @@ jobs:
       # * Echoes to git credential-osxkeychain
       # * This emulate stdin() line by line
       - name: Add credentials in keychain
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         env:
           GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
         run: |
@@ -203,6 +159,7 @@ jobs:
       # Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
       # registry
       - name: Test coverage
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
           RUN_TEST: "TRUE"
