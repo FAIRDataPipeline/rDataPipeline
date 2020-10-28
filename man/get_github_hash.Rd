@@ -7,8 +7,14 @@
 get_github_hash(repo)
 }
 \arguments{
-\item{repo}{e.g. "ScottishCovidResponse/SCRCdata"}
+\item{repo}{a \code{string} specifying the github username/repository}
 }
 \description{
-This function assumes git is installed and located in the System PATH
+Get the hash of the latest commit in the master branch of a particular
+repository. This function assumes git is installed and located in the
+System PATH.
+}
+\examples{
+get_github_hash("ScottishCovidResponse/SCRCdata")
+
 }

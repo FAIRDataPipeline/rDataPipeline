@@ -1,15 +1,14 @@
 #' github_files
 #'
-#' @param repo *e.g.*
+#' @param repo a \code{string} specifying the github username/repository
 #'
 #' @keywords internal
 #'
 #' @examples
-#' \donttest{
 #' \dontrun{
-#' filelist <- list_files_in_repo("ScottishCovidResponse/SCRCdata")
+#' filelist <- github_files("ScottishCovidResponse/SCRCdata")
 #' files <- grep("scotgov_deaths.R$", filelist, value = TRUE)
-#' }}
+#' }
 #'
 github_files <- function(repo) {
   req <- httr::GET(paste("https://api.github.com/repos", repo,

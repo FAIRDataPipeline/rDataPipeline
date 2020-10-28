@@ -1,10 +1,10 @@
-#' validate_token
+#' Validate Token
+#'
 #' Function to validate user token
 #'
 #' @param key API Token as character
 #'
 #' @export
-#'
 #' @keywords internal
 #'
 validate_token <- function(key){

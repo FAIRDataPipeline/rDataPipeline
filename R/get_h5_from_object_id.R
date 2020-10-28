@@ -1,14 +1,14 @@
 #' get_h5_from_object_id
 #'
-#' @param obj_id object ID
-#' @param data_dir Data Directory
+#' @param obj_id an \code{integer} specifying the id of an entry
+#' @param data_dir a \code{string} specifying the directory in which the file
+#' should be saved
 #'
-#' @return Returns list comprising two elements
+#' @return Returns a \code{list} comprising two elements
 #' \itemize{
 #' \item{downloaded_to}{absolute path of H5 file after downloading}
 #' \item{components}{H5 file components}
 #' }
-#'
 #' @export
 #'
 get_h5_from_object_id <- function(obj_id, data_dir = "data-raw"){

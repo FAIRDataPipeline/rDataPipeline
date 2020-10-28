@@ -2,20 +2,24 @@
 % Please edit documentation in R/check_query.R
 \name{check_query}
 \alias{check_query}
-\title{check_query
-produces error if table does not exist or if query is not a list}
+\title{check_query}
 \usage{
 check_query(table, query)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{query}{query to check}
+\item{query}{a \code{list} containing a valid query for the table, \emph{e.g.}
+\code{list(field = value)}}
 }
 \value{
-boolean if the query is valid for the table
+Returns boolean if the query is valid for the table
 }
 \description{
-check_query
-produces error if table does not exist or if query is not a list
+Produces an error if table does not exist or if query is not a list
 }
+\examples{
+check_query("storage_root", list(name = "github"))
+
+}
+\keyword{internal}

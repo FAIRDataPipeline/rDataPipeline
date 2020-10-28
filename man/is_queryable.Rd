@@ -7,15 +7,26 @@
 is_queryable(table, query_parameter)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{query_parameter}{a string or vector of strings to check}
+\item{query_parameter}{a \code{string} or \code{vector} of field names}
 }
 \value{
-either true / false if a single string is provided or a vector or
-true or false if vector is provided
+Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
+isn't
 }
 \description{
-Produces error \code{Unknown Table} if table does not exist
+Check whether fields are queryable
+}
+\examples{
+# Is "name" a queryable field in the "storage_root" table?
+is_queryable("storage_root", "name")
+
+# Are "not_a_field" and "name" queryable fields in the "storage_root" table?
+is_queryable("storage_root", c("not_a_field", "name"))
+
+# Is "name" a queryable field in the "not_a_table" table?
+is_queryable("users", "name")
+
 }
 \keyword{internal}

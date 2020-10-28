@@ -4,13 +4,15 @@
 #'
 #' @return boolean if a table exists
 #'
+#' @keywords internal
+#'
 #' @export
 #'
 check_table_exists <- function(table){
   if(missing(table))
-    stop("Table is a required paramater")
+    stop("table is a required paramater")
   if(!is.character(table))
-    stop("Table must be a string")
+    stop("table must be a string")
   tables <- NULL
   tables.file <- system.file("validation", "tables.rds", package = "SCRCdataAPI")
   if(tables.file == ""){

@@ -7,10 +7,23 @@
 check_exists(table, query)
 }
 \arguments{
-\item{table}{table name e.g.}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{query}{query valid for table}
+\item{query}{a \code{list} containing a valid query for the table, \emph{e.g.}
+\code{list(field = value)}}
+}
+\value{
+Returns \code{TRUE} if the entry exists and \code{FALSE} if it
+doesn't
 }
 \description{
-check_exists
+Check whether an entry already exists in a table (in the data registry)
+}
+\examples{
+# Check whether "github" is in the storage_root table
+check_exists("storage_root", list(name = "github"))
+
+# Check whether "not_a_root" is in the storage_root table
+check_exists("storage_root", list(name = "not_a_root"))
+
 }

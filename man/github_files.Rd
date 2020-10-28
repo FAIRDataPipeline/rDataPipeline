@@ -7,17 +7,16 @@
 github_files(repo)
 }
 \arguments{
-\item{repo}{\emph{e.g.}}
+\item{repo}{a \code{string} specifying the github username/repository}
 }
 \description{
 github_files
 }
 \examples{
-\donttest{
 \dontrun{
-filelist <- list_files_in_repo("ScottishCovidResponse/SCRCdata")
+filelist <- github_files("ScottishCovidResponse/SCRCdata")
 files <- grep("scotgov_deaths.R$", filelist, value = TRUE)
-}}
+}
 
 }
 \keyword{internal}

@@ -1,16 +1,17 @@
 #' Get fields from table
 #'
-#' Use API endpoint to produce a list of fields for a table.
+#' Use API endpoint to produce a list of fields for a table. Requires API key.
 #'
-#' Requires API key
+#' @param table a \code{string} specifying the name of the table
+#' @param key (optional) API token from data.scrc.uk
+#' @param live a \code{boolean} specifying whether or not to get the field
+#' definitions directly from the API
 #'
-#' @param table name of table
-#' @param key (optional) api key / token
-#' @param live whether or not to get the field definitions direct from the API
-#' @return a dataframe of fields and their attributes
-#' set to "none"
-#'
+#' @return Returns a \code{data.frame} of fields and their attributes set to
+#' "none"
 #' @export
+#'
+#' @keywords internal
 #'
 get_fields <- function(table, key, live = FALSE){
 
@@ -18,7 +19,8 @@ get_fields <- function(table, key, live = FALSE){
   if(table == "users" | table == "groups")
     stop("users and groups are protected tables")
 
-  fields.file <- system.file("validation", paste0(table, ".rds"), package = "SCRCdataAPI")
+  fields.file <- system.file("validation", paste0(table, ".rds"),
+                             package = "SCRCdataAPI")
   if(fields.file == "" | live)
   {
 
@@ -35,7 +37,6 @@ get_fields <- function(table, key, live = FALSE){
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-
   lapply(seq_along(out$actions$POST), function(i) {
 
     field <- out$actions$POST[i]
@@ -50,7 +51,6 @@ get_fields <- function(table, key, live = FALSE){
     read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
     required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
 
-
     if("min_value" %in% names(field[[1]])) {
       min_value <- field[[1]]$min_value
     } else {
@@ -63,12 +63,19 @@ get_fields <- function(table, key, live = FALSE){
       max_value <- NA
     }
 
-
     if("choices" %in% names(field[[1]])){
       if(is.list(field[[1]]$choices)){
         for(choice in seq_along(field[[1]]$choices)){
-          choice_values <- dplyr::if_else(is.na(choice_values), as.character(field[[1]]$choices[[choice]]$value), paste(choice_values, field[[1]]$choices[[choice]]$value, sep = ", "))
-          choice_names <- dplyr::if_else(is.na(choice_names), field[[1]]$choices[[choice]]$display_name, paste(choice_names, field[[1]]$choices[[choice]]$display_name, sep = ", "))
+          choice_values <- dplyr::if_else(
+            condition = is.na(choice_values),
+            true = as.character(field[[1]]$choices[[choice]]$value),
+            false = paste(choice_values, field[[1]]$choices[[choice]]$value,
+                          sep = ", "))
+          choice_names <- dplyr::if_else(
+            condition = is.na(choice_names),
+            true = field[[1]]$choices[[choice]]$display_name,
+            false = paste(choice_names, field[[1]]$choices[[choice]]$display_name,
+                          sep = ", "))
         }
       }
     }
@@ -85,6 +92,4 @@ get_fields <- function(table, key, live = FALSE){
   } else {
     readRDS(fields.file)
   }
-
-
 }

@@ -7,10 +7,14 @@
 get_entity(table, entity_id)
 }
 \arguments{
-\item{table}{table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{entity_id}{entity ID}
+\item{entity_id}{an \code{integer} specifying the id of an entry}
 }
 \description{
 get_entity
+}
+\examples{
+get_entity("storage_root", 11)
+
 }

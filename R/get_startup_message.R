@@ -1,11 +1,15 @@
 #' Get startup message
 #'
-#' @param repo repo name
-#' @param package package name
+#' @param repo a \code{string} specifying the github username/repository
+#' @param package a \code{string} specifying the package name
 #'
 #' @return returns the startup message
-#'
 #' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' get_startup_message("ScottishCovidResponse/SCRCdata", "SCRCdata")
+#' }
 #'
 get_startup_message <- function(repo, package){
   if(!is_current_version(repo, package)){

@@ -8,9 +8,7 @@
 #' @param online \code{boolean} if FALSE will not check if data registry objects exist
 #'
 #' @return Returns
-#'
 #' @export
-#'
 #' @keywords internal
 #'
 #' @examples

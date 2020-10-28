@@ -7,12 +7,12 @@
 get_table_optional(table, key)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{key}{api key / token}
+\item{key}{API token from data.scrc.uk}
 }
 \value{
-a dataframe of optional fieldsa and thier properties
+Returns a \code{data.frame} of optional fields and thier properties
 }
 \description{
 Get Optional Fields

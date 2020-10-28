@@ -9,9 +9,6 @@ get_version_numbers(data_product)
 \arguments{
 \item{data_product}{\code{string} specifying the name of the data product}
 }
-\value{
-
-}
 \description{
 get_version_numbers
 }

@@ -12,11 +12,14 @@ entity_id <- basename(post_data("object", list(description = UID), key))
 
 sleep_time <- 0.5
 
-test_that("entity returns as list",{
+test_that("entity returns as a named list",{
   Sys.sleep(sleep_time)
   expect_silent(get_entity("object", entity_id))
   Sys.sleep(sleep_time)
   expect_true(is.list(get_entity("object", entity_id)))
+  Sys.sleep(sleep_time)
+  expect_true(all(c("url", "last_updated") %in%
+                    names(get_entity("object", entity_id))))
 })
 
 test_that("invalid table produces and error",{

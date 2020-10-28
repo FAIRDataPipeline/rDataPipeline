@@ -2,16 +2,24 @@
 % Please edit documentation in R/get_storage_location.R
 \name{get_storage_location}
 \alias{get_storage_location}
-\title{get_storage_location}
+\title{Get Storage Location}
 \usage{
 get_storage_location(location_id)
 }
 \arguments{
-\item{location_id}{Location ID}
+\item{location_id}{an \code{integer} specifying the id of an entry in the
+storage_location table}
 }
 \value{
-a list of fields from a location_id or null if there was an error
+Returns a \code{list} of fields associated with the specified entry
 }
 \description{
-get_storage_location
+Get storage location entry
 }
+\examples{
+\dontrun{
+get_storage_location(10404)
+}
+
+}
+\keyword{internal}

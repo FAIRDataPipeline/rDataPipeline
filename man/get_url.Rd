@@ -7,10 +7,15 @@
 get_url(table, query = list())
 }
 \arguments{
-\item{table}{table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{query}{query}
+\item{query}{a \code{list} containing a valid query for the table, \emph{e.g.}
+\code{list(field = value)}}
 }
 \description{
 get_url
+}
+\examples{
+get_url("storage_root")
+
 }

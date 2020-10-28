@@ -1,17 +1,27 @@
 #' check_query
-#' produces error if table does not exist or if query is not a list
 #'
-#' @param table name of table
-#' @param query query to check
+#' Produces an error if table does not exist or if query is not a list
 #'
-#' @return boolean if the query is valid for the table
+#' @param table a \code{string} specifying the name of the table
+#' @param query a \code{list} containing a valid query for the table, *e.g.*
+#' \code{list(field = value)}
+#'
+#' @return Returns boolean if the query is valid for the table
 #'
 #' @export
 #'
-check_query <-function(table, query){
+#' @keywords internal
+#'
+#' @examples
+#' check_query("storage_root", list(name = "github"))
+#'
+check_query <- function(table, query){
   if(!is.list(query))
-    stop("Invalid query type")
+    stop("query should be a list")
+
+  # An empty list is valid
   if(length(query) == 0)
     return(TRUE)
-  return(all(is_queryable(table, names(query))))
+
+  all(is_queryable(table, names(query)))
 }

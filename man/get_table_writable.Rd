@@ -7,12 +7,12 @@
 get_table_writable(table, key)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 
 \item{key}{api key / token}
 }
 \value{
-a character vector of writable fields
+Returns a character vector of writable fields
 }
 \description{
 Get Writable Fields

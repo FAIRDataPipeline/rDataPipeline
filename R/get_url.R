@@ -1,9 +1,13 @@
 #' get_url
 #'
-#' @param table table
-#' @param query query
+#' @param table a \code{string} specifying the name of the table
+#' @param query a \code{list} containing a valid query for the table, *e.g.*
+#' \code{list(field = value)}
 #'
 #' @export
+#'
+#' @examples
+#' get_url("storage_root")
 #'
 get_url <- function(table, query = list()) {
 

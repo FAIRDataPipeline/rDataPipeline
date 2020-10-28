@@ -1,4 +1,4 @@
-#' validate_table
+#' Validate Table
 #'
 #' Function to validate table name
 #'
@@ -6,7 +6,6 @@
 #' @param key API Token as character
 #'
 #' @export
-#'
 #' @keywords internal
 #'
 validate_table <- function(table, key) {

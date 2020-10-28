@@ -1,11 +1,10 @@
 #' Get Writable Fields
 #'
-#' @param table name of table
+#' @param table a \code{string} specifying the name of the table
 #' @param key api key / token
-#' @return a character vector of writable fields
 #'
+#' @return Returns a character vector of writable fields
 #' @export
-#'
 #' @keywords internal
 #'
 get_table_writable <- function(table, key){

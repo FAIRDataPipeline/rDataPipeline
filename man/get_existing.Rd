@@ -7,18 +7,26 @@
 get_existing(table, limit_results = TRUE, detail = "all")
 }
 \arguments{
-\item{table}{table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{limit_results}{boolean whether or not to limit
-the results default \code{TRUE}}
+\item{limit_results}{a \code{boolean} specifying whether or not to limit
+the results, default is \code{TRUE}}
 
-\item{detail}{what level of detail to return
-use \code{"all"} for all details or \code{"id"} for just URL and ID's}
+\item{detail}{a \code{string} specifying what level of detail to return;
+options are \code{"all"} for all details or \code{"id"} for just URL and IDs}
 }
 \value{
-returns a data.frame of entries in table default is limited to 100
-entries
+Returns a \code{data.frame} of entries in table, default is limited
+to 100 entries
 }
 \description{
-get_existing
+Get entries (from the data registry) in a particular table
+}
+\examples{
+# Get all entries in storage_root
+get_existing("storage_root", limit_results = FALSE)
+
+# Get 100 newest entries in data_product
+get_existing("data_product")
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_package_info.R
 \name{get_package_info}
 \alias{get_package_info}
-\title{get_package_info}
+\title{Get Package Info}
 \usage{
 get_package_info(repo, script_path, package)
 }

@@ -36,11 +36,7 @@ test_that("invalid query causes and error", {
   expect_error(get_entry("object", NaN))
   expect_error(get_entry("object", as.data.frame()))
   expect_error(get_entry("object", NULL))
-})
-
-test_that("query = \"\" produces a warning", {
-  Sys.sleep(sleep_time)
-  expect_warning(get_entry("object", "" ))
+  expect_error(get_entry("object", "" ))
 })
 
 Sys.sleep(sleep_time)
@@ -51,11 +47,6 @@ test_that("multiple matches returns a list of more than one object", {
 })
 
 Sys.sleep(sleep_time)
-test_that("Blank query returns list of objects", {
-  expect_silent(expect_true(is.list(get_entry("object", list()))))
-})
-Sys.sleep(sleep_time)
-
 test_that("Check Objects have correct fields", {
   object <- get_entry("object", query = list(description=description))
 
