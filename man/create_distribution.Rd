@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_distribution.R
 \name{create_distribution}
 \alias{create_distribution}
-\title{create_distribution}
+\title{Create Distribution-Type TOML File}
 \usage{
 create_distribution(filename, path, distribution)
 }

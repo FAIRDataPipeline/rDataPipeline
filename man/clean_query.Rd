@@ -2,23 +2,20 @@
 % Please edit documentation in R/clean_query.R
 \name{clean_query}
 \alias{clean_query}
-\title{clean_query}
+\title{Clean Query}
 \usage{
 clean_query(data)
 }
 \arguments{
-\item{data}{data typically from a query \emph{e.g}
-\code{data = list(storage_location = "https://data.scrc.uk/api/storage_location/2")}}
+\item{data}{a \code{list} containing a valid query for the table, \emph{e.g.}
+\code{list(field = value)}}
 }
 \description{
-Function to return clean a query and return it without an api prefix
+Function to clean a query and return it without an api prefix
 }
 \examples{
 data <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
 clean_query(data = data)
-
-# Should return:
-list(storage_location = "2")
 
 }
 \keyword{internal}

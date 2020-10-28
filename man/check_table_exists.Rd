@@ -2,17 +2,17 @@
 % Please edit documentation in R/check_table_exists.R
 \name{check_table_exists}
 \alias{check_table_exists}
-\title{check table exists}
+\title{Check Table Exists}
 \usage{
 check_table_exists(table)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 }
 \value{
-boolean if a table exists
+Return \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 }
 \description{
-check table exists
+Check Table Exists
 }
 \keyword{internal}

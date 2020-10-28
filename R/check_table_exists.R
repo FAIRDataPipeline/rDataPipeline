@@ -1,12 +1,10 @@
-#' check table exists
+#' Check Table Exists
 #'
-#' @param table name of table
+#' @param table a \code{string} specifying the name of the table
 #'
-#' @return boolean if a table exists
-#'
-#' @keywords internal
-#'
+#' @return Return \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 #' @export
+#' @keywords internal
 #'
 check_table_exists <- function(table){
   if(missing(table))

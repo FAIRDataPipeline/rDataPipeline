@@ -21,16 +21,16 @@
 #' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
 #'
 #' # Automatically download the latest version
-#' download_dataproduct(name = data_product,
-#'                      data_dir = "data-raw")
+#' download_data_product(name = data_product,
+#'                       data_dir = "data-raw")
 #'
 #' # Download specified version
-#' download_dataproduct(name = data_product,
-#'                      data_dir = "data-raw",
-#'                      version = "0.20200920.0")
+#' download_data_product(name = data_product,
+#'                       data_dir = "data-raw",
+#'                       version = "0.20200920.0")
 #' }
 #'
-download_dataproduct <- function(name, data_dir, version) {
+download_data_product <- function(name, data_dir, version) {
   # List all version numbers in the data registry
   entries <- get_entry("data_product", list(name = name))
 
