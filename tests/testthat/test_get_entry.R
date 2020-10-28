@@ -36,11 +36,7 @@ test_that("invalid query causes and error", {
   expect_error(get_entry("object", NaN))
   expect_error(get_entry("object", as.data.frame()))
   expect_error(get_entry("object", NULL))
-})
-
-test_that("query = \"\" produces a warning", {
-  Sys.sleep(sleep_time)
-  expect_warning(get_entry("object", "" ))
+  expect_error(get_entry("object", "" ))
 })
 
 Sys.sleep(sleep_time)
