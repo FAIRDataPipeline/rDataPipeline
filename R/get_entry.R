@@ -1,16 +1,26 @@
 #' get_entry
 #'
-#' @param table table must exist
-#' @param query a \code{list} of fields and values to query if no query
-#' is provided it will return the last entry
+#' @param table a \code{string} specifying the name of the table
+#' @param query a \code{list} of fields and values to query if no query is
+#' provided it will return the latest entry
 #'
 #' @export
 #'
-#' @examples
-#' get_entry("storage_root", list(name = "github"))
+#' @return Returns a \code{list}
 #'
-get_entry <- function(table, query = list()) {
-  # An empty string is an invalid query
+#' @examples
+#' # Get list of entries
+#' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#' get_entry("data_product", list(name = data_product))
+#'
+#' # Get latest entry
+#' get_entry("data_product")
+#'
+get_entry <- function(table, query) {
+  # Can't get an empty entry
+  if(is.list(query) && length(query) == 0)
+    stop("a query must be defined")
+  # An empty string is not a valid query
   if(is.character(query) && query == "") stop("not a valid query")
   # Check whether table is valid
   if(!check_table_exists(table)) stop(paste("table doesn't exist"))
