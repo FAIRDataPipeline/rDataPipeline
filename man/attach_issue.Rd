@@ -2,7 +2,7 @@
 % Please edit documentation in R/attach_issue.R
 \name{attach_issue}
 \alias{attach_issue}
-\title{attach_issue}
+\title{Attach Issue to Object}
 \usage{
 attach_issue(
   description,
@@ -39,36 +39,36 @@ data_product or external_object}
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-This function is used to attach an issue to either
+This function is used to attach an issue to an object:
 \itemize{
-\item an external object (in which case you must specify the
-\code{external_object_doi} argument)
-\item a data product (in which case you must specify the \code{namespace} and
-\code{data_product} arguments), or
-\item a component within a data product (in which case you must specify the
-\code{namespace}, \code{data_product}, and \code{component} arguments)
+\item{an external object} - {specify the \code{external_object_doi} argument}
+\item{a data product} - {specify the \code{namespace} and
+\code{data_product} argument}
+\item{a component within a data product} - {specify the \code{namespace},
+\code{data_product}, and \code{component} argument}
 }
+See examples.
 }
 \examples{
 \dontrun{
 \donttest{
 # Attach issue to an external object
-attach_issue(description = "Some issue affecting an external object",
+attach_issue(description = "An issue affecting an external object",
              severity = 10,
              external_object_doi = "Scottish spatial lookup table - dz",
              version = "0.1.0",
              key = key)
 
-# Attach issue to object
-attach_issue(description = "An object issue",
+# Attach issue to a data product
+attach_issue(description = "An issue affecting a data product",
              severity = 10,
              namespace = "SCRC",
              data_product = "records/SARS-CoV-2/scotland/cases-and-management/carehomes",
              version = "0.20200916.0",
              key = key)
 
-# Attach issue to object component
-attach_issue(description = "issue",
+# Attach issue to a component within a data product
+attach_issue(description = "An issue affecting a component within a data product",
              severity = 10,
              namespace = "SCRC",
              data_product = "records/SARS-CoV-2/scotland/cases-and-management/carehomes",

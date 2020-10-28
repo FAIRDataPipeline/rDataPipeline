@@ -1,38 +1,37 @@
-#' Download Data Product
+#' Download External Object
 #'
-#' Download data product from the Boydorr server.
+#' Download external object from the Boydorr server.
 #'
-#' @param name a \code{string} specifying the name of the data product
+#' @param name a \code{string} specifying the name of the external object
 #' @param data_dir a \code{string} specifying the download directory
 #' @param version (optional) a \code{string} specifying the version number of
-#' the data product; if version is not specified, the most recent version will
-#' be downloaded
-#'
-#' @export
+#' the external object; if version is not specified, the most recent version
+#' will be downloaded
 #'
 #' @return Returns list comprising two elements
 #' \itemize{
 #'  \item{"downloaded_to"}{absolute path of H5 file after downloading}
 #'  \item{"components"}{H5 file components}
 #' }
+#' @export
 #'
 #' @examples
 #' \dontrun{
-#' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
+#' external_object <- "scottish coronavirus-covid-19-management-information"
 #'
 #' # Automatically download the latest version
-#' download_dataproduct(name = data_product,
-#'                      data_dir = "data-raw")
+#' download_external_object(name = external_object,
+#'                          data_dir = "data-raw")
 #'
 #' # Download specified version
-#' download_dataproduct(name = data_product,
-#'                      data_dir = "data-raw",
-#'                      version = "0.20200920.0")
+#' download_external_object(name = external_object,
+#'                          data_dir = "data-raw",
+#'                          version = "0.20200920.0")
 #' }
 #'
-download_dataproduct <- function(name, data_dir, version) {
+download_external_object <- function(name, data_dir, version) {
   # List all version numbers in the data registry
-  entries <- get_entry("data_product", list(name = name))
+  entries <- get_entry("external_object", list(doi_or_unique_name = name))
 
   if(!is.null(entries)) {
     version_numbers <- lapply(entries, function(x) x$version) %>%

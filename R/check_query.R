@@ -1,4 +1,4 @@
-#' check_query
+#' Check if Query is Valid
 #'
 #' Produces an error if table does not exist or if query is not a list
 #'
