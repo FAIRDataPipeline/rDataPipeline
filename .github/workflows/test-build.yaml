@@ -55,13 +55,14 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      # Install macOS requirements on macOS
+      # Install system_requirements requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
+        shell: bash
 
       # Install system_requirements on ubuntu 16.04 (Boydorr)
       - name: Install system requirements (ubuntu-16.04)
@@ -71,6 +72,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
+        shell: bash
 
       # Install system requirements on ubuntu 20.04
       - name: Install system requirements (ubuntu-20.04)
@@ -80,6 +82,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+        shell: bash
 
       # Install R package dependencies
       - name: Install Dependencies
@@ -121,8 +124,9 @@ jobs:
           path: check
 
 # Coverage ------------------------------------------------------------------
+# Located within the macOS-latest (release) job
 
-      - name: test coverage
+      - name: Test coverage (setup)
         # Only when master is pushed
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         # Use the default GITHUB_TOKEN as an enviromental version for all steps
@@ -155,72 +159,47 @@ jobs:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
           RUN_TEST: "TRUE"
         run: |
-          install.packages(c("remotes"))
-          remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("covr")
           covr::codecov()
         shell: Rscript {0}
 
 # Build and deploy DOCS -----------------------------------------------------
+# Located within the macOS-latest (release) job
 
-  build-and-deploy-docs:
-    name: Build and deploy docs
-    # R-CMD-check must complete successfully before build-and-deploy-docs begins
-    needs: R-CMD-check
-    # Only when master is pushed
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    runs-on: macOS-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.1
-        with:
-          persist-credentials: false
-      # Run setup-r to setup r
-      - uses: r-lib/actions/setup-r@master
-      # Setup pandoc needed to build docs
-      - uses: r-lib/actions/setup-pandoc@v1
-      # Save dependencies so they can be cached
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
-      # Cache dependencies
-      - name: Cache R packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+      - name: Build and deploy docs (setup)
+        # Only when master is pushed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        # Setup pandoc needed to build docs
+        uses: r-lib/actions/setup-pandoc@v1
+
       # Install Mac OS requirements
-      - name: Install system requirements (MacOS)
+      - name: Build and deploy docs (system requirements)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         run : |
-              rm '/usr/local/bin/gfortran'
-              brew install hdf5
-              brew install gdal
               brew install harfbuzz
               brew install fribidi
-      # Install R dependencies
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_local()
-        shell: Rscript {0}
+        shell: bash
+
       # Build documentation with pkgdown
       - name: Build Docs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         run: |
           install.packages("pkgdown")
           pkgdown::build_site()
         shell: Rscript {0}
+
       # Create a development branch and commit to it
       - name: Commit to development branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         run: |
           git checkout -b development
           git add .
           git commit -m '[skip ci]'
+        shell: bash
+
       # Deploy the docs using JamesIves/github-pages-deploy-action
       - name: Deploy Docs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
