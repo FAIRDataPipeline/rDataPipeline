@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_dataproduct.R
 \name{download_dataproduct}
 \alias{download_dataproduct}
-\title{download_dataproduct}
+\title{Download Data Product}
 \usage{
 download_dataproduct(name, data_dir, version)
 }
@@ -23,7 +23,7 @@ Returns list comprising two elements
 }
 }
 \description{
-download_dataproduct
+Download data product from the Boydorr server.
 }
 \examples{
 \dontrun{

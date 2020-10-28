@@ -12,8 +12,8 @@ download_external_object(name, data_dir, version)
 \item{data_dir}{a \code{string} specifying the download directory}
 
 \item{version}{(optional) a \code{string} specifying the version number of
-the data product; if version is not specified, the most recent version will
-be downloaded}
+the external object; if version is not specified, the most recent version
+will be downloaded}
 }
 \value{
 Returns list comprising two elements
@@ -23,11 +23,11 @@ Returns list comprising two elements
 }
 }
 \description{
-Download External Object
+Download external object from the Boydorr server.
 }
 \examples{
 \dontrun{
-external_object <- "Scottish spatial lookup table - dz"
+external_object <- "scottish coronavirus-covid-19-management-information"
 
 # Automatically download the latest version
 download_external_object(name = external_object,

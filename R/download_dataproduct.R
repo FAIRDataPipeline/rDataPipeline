@@ -1,4 +1,6 @@
-#' download_dataproduct
+#' Download Data Product
+#'
+#' Download data product from the Boydorr server.
 #'
 #' @param name a \code{string} specifying the name of the data product
 #' @param data_dir a \code{string} specifying the download directory

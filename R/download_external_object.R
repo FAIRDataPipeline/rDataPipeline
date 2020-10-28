@@ -1,22 +1,23 @@
 #' Download External Object
 #'
+#' Download external object from the Boydorr server.
+#'
 #' @param name a \code{string} specifying the name of the external object
 #' @param data_dir a \code{string} specifying the download directory
 #' @param version (optional) a \code{string} specifying the version number of
-#' the data product; if version is not specified, the most recent version will
-#' be downloaded
-#'
-#' @export
+#' the external object; if version is not specified, the most recent version
+#' will be downloaded
 #'
 #' @return Returns list comprising two elements
 #' \itemize{
 #'  \item{"downloaded_to"}{absolute path of H5 file after downloading}
 #'  \item{"components"}{H5 file components}
 #' }
+#' @export
 #'
 #' @examples
 #' \dontrun{
-#' external_object <- "Scottish spatial lookup table - dz"
+#' external_object <- "scottish coronavirus-covid-19-management-information"
 #'
 #' # Automatically download the latest version
 #' download_external_object(name = external_object,
