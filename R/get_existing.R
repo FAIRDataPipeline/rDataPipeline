@@ -1,15 +1,24 @@
 #' get_existing
 #'
-#' @param table table
-#' @param limit_results boolean whether or not to limit
-#' the results default \code{TRUE}
-#' @param detail what level of detail to return
-#' use \code{"all"} for all details or \code{"id"} for just URL and ID's
+#' Get entries (from the data registry) in a particular table
 #'
-#' @return returns a data.frame of entries in table default is limited to 100
-#' entries
+#' @param table a \code{string} specifying the name of the table
+#' @param limit_results a \code{boolean} specifying whether or not to limit
+#' the results, default is \code{TRUE}
+#' @param detail a \code{string} specifying what level of detail to return;
+#' options are \code{"all"} for all details or \code{"id"} for just URL and IDs
+#'
+#' @return Returns a \code{data.frame} of entries in table, default is limited
+#' to 100 entries
 #'
 #' @export
+#'
+#' @examples
+#' # Get all entries in storage_root
+#' get_existing("storage_root", limit_results = FALSE)
+#'
+#' # Get 100 newest entries in data_product
+#' get_existing("data_product")
 #'
 get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
@@ -19,7 +28,7 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
   tryCatch({
 
-    # Get the first 100 results
+    # Get the 100 newest results
     output <- httr::GET(paste("http://data.scrc.uk/api", table, "", sep = "/")) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)
@@ -27,9 +36,9 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
     if(!limit_results) {
       # Get the remaining results by using a while loop to update results
-      # from all pages. Because pagination is enabled next will only be null
-      # if there are no more pages. Note that next is a reserved word so
-      # wrap it in ``.
+      # from all pages - because pagination is enabled, the next will only be
+      # null if there are no more pages (note that next is a reserved word so
+      # it must be wrapped in backticks)
       while(!is.null(output$`next`)){
         tmp_output <- httr::GET(file.path(output$`next`)) %>%
           httr::content(as = "text", encoding = "UTF-8") %>%
@@ -39,7 +48,7 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
       }
     }
 
-    # some tables contain lists, flatten them first or bind_rows() will error
+    # Some tables contain lists, flatten them first or bind_rows() will error
     for(i in seq_along(results)){
       for(ii in names(results[[i]])){
         if(is.list(results[[i]][[ii]])){
