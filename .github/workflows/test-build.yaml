@@ -55,13 +55,14 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      # Install macOS requirements on macOS
+      # Install system_requirements requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
+        shell: bash
 
       # Install system_requirements on ubuntu 16.04 (Boydorr)
       - name: Install system requirements (ubuntu-16.04)
@@ -71,6 +72,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
+        shell: bash
 
       # Install system requirements on ubuntu 20.04
       - name: Install system requirements (ubuntu-20.04)
@@ -80,6 +82,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
+        shell: bash
 
       # Install R package dependencies
       - name: Install Dependencies
@@ -121,6 +124,7 @@ jobs:
           path: check
 
 # Coverage ------------------------------------------------------------------
+# Located within the macOS-latest (release) job
 
       - name: Test coverage (setup)
         # Only when master is pushed
@@ -162,6 +166,7 @@ jobs:
         shell: Rscript {0}
 
 # Build and deploy DOCS -----------------------------------------------------
+# Located within the macOS-latest (release) job
 
       - name: Build and deploy docs (setup)
         # Only when master is pushed
@@ -175,6 +180,7 @@ jobs:
         run : |
               brew install harfbuzz
               brew install fribidi
+        shell: bash
 
       # Build documentation with pkgdown
       - name: Build Docs
@@ -191,6 +197,7 @@ jobs:
           git checkout -b development
           git add .
           git commit -m '[skip ci]'
+        shell: bash
 
       # Deploy the docs using JamesIves/github-pages-deploy-action
       - name: Deploy Docs
