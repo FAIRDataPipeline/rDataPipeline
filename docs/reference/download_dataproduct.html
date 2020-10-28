@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>download_dataproduct — download_dataproduct • SCRCdataAPI</title>
+<title>Download Data Product — download_dataproduct • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="download_dataproduct — download_dataproduct" />
-<meta property="og:description" content="download_dataproduct" />
+<meta property="og:title" content="Download Data Product — download_dataproduct" />
+<meta property="og:description" content="Download data product from the Boydorr server." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.5</span>
       </span>
     </div>
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>download_dataproduct</h1>
+    <h1>Download Data Product</h1>
     <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/download_dataproduct.R'><code>R/download_dataproduct.R</code></a></small>
     <div class="hidden name"><code>download_dataproduct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>download_dataproduct</p>
+    <p>Download data product from the Boydorr server.</p>
     </div>
 
     <pre class="usage"><span class='fu'>download_dataproduct</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>data_dir</span>, <span class='va'>version</span><span class='op'>)</span></pre>
@@ -148,16 +148,16 @@ be downloaded</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>data_product</span> <span class='op'>&lt;-</span> <span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/testing"</span>
+
 <span class='co'># Automatically download the latest version</span>
-<span class='fu'>download_dataproduct</span><span class='op'>(</span><span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/testing"</span>,
- <span class='st'>"data-raw"</span><span class='op'>)</span>
+<span class='fu'>download_dataproduct</span><span class='op'>(</span>name <span class='op'>=</span> <span class='va'>data_product</span>,
+                     data_dir <span class='op'>=</span> <span class='st'>"data-raw"</span><span class='op'>)</span>
 
 <span class='co'># Download specified version</span>
-<span class='fu'>download_dataproduct</span><span class='op'>(</span><span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/testing"</span>,
- <span class='st'>"data-raw"</span>, <span class='st'>"0.20200920.0"</span><span class='op'>)</span>
-
-<span class='co'># Download only version</span>
-<span class='fu'>download_dataproduct</span><span class='op'>(</span><span class='st'>"geography/scotland/lookup_table"</span>, <span class='st'>"data-raw"</span><span class='op'>)</span>
+<span class='fu'>download_dataproduct</span><span class='op'>(</span>name <span class='op'>=</span> <span class='va'>data_product</span>,
+                     data_dir <span class='op'>=</span> <span class='st'>"data-raw"</span>,
+                     version <span class='op'>=</span> <span class='st'>"0.20200920.0"</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>
