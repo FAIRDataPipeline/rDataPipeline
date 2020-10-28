@@ -12,6 +12,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 get_fields <- function(table, key, live = FALSE){
 
   # Users and Groups are valid tables but cannot be posted to
