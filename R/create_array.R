@@ -1,4 +1,4 @@
-#' create_array
+#' Create Array
 #'
 #' Function to populate hdf5 file with array type data.
 #'
