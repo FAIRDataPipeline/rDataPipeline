@@ -1,10 +1,14 @@
 #' get_storage_location
 #'
-#' @param location_id Location ID
+#' Get storage location entry
 #'
-#' @return a list of fields from a location_id or null if there was an error
+#' @param location_id an \code{integer} specifying the id of an entry in the
+#' storage_location table
 #'
-#' @export
+#' @return Returns a \code{list} of fields associated with the specified entry
+#'
+#' @examples
+#' get_storage_location(10404)
 #'
 get_storage_location <- function(location_id){
   get_entity("storage_location", location_id)

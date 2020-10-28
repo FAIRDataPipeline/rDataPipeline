@@ -15,3 +15,7 @@ is provided it will return the last entry}
 \description{
 get_entry
 }
+\examples{
+get_entry("storage_root", list(name = "github"))
+
+}

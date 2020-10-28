@@ -23,3 +23,4 @@ Use API endpoint to produce a list of fields for a table.
 \details{
 Requires API key
 }
+\keyword{internal}

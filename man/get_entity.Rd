@@ -14,3 +14,7 @@ get_entity(table, entity_id)
 \description{
 get_entity
 }
+\examples{
+get_entity("storage_root", 11)
+
+}

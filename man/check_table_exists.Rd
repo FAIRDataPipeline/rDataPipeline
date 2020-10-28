@@ -15,3 +15,4 @@ boolean if a table exists
 \description{
 check table exists
 }
+\keyword{internal}

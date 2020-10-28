@@ -22,3 +22,4 @@ Produces an error if table does not exist or if query is not a list
 check_query("storage_root", list(name = "github"))
 
 }
+\keyword{internal}
