@@ -9,7 +9,9 @@
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' get_storage_location(10404)
+#' }
 #'
 get_storage_location <- function(location_id){
   get_entity("storage_location", location_id)

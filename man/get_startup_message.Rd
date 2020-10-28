@@ -18,7 +18,9 @@ returns the startup message
 Get startup message
 }
 \examples{
+\dontrun{
 get_startup_message("ScottishCovidResponse/SCRCdata", "SCRCdata")
+}
 
 }
 \keyword{internal}

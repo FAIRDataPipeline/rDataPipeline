@@ -23,8 +23,8 @@ unzip a \code{.zip} file and remove the original \code{.zip} file}
 This function will download a file from a url
 }
 \examples{
+\donttest{
 \dontrun{
-
 # Download the file
 download_from_url(source_root = "http://statistics.gov.scot/",
                   source_path = "downloads/file?id=5a9bf61e-7571-45e8-a307-7c1218d5f6b5\%2FDatazone2011Lookup.csv",
@@ -33,6 +33,6 @@ download_from_url(source_root = "http://statistics.gov.scot/",
 
 # Delete the file
 file.remove("geography/scotland/lookup_table/0.1.0.csv")
-}
+}}
 
 }

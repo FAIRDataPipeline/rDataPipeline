@@ -42,7 +42,7 @@ bin_ages <- function(dat,
       columns <- paste0("AGE", ageclasses[i]:endcol)
 
       if("AGE90+" %in% colnames(dat))
-        dat <- dplyr::rename(dat, AGE90 = `AGE90+`)
+        dat <- dplyr::rename(dat, AGE90 = .data$`AGE90+`)
 
       output[,i] <- dat %>%
         dplyr::select(dplyr::one_of(columns)) %>%

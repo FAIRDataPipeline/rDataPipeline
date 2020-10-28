@@ -7,7 +7,9 @@
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' get_startup_message("ScottishCovidResponse/SCRCdata", "SCRCdata")
+#' }
 #'
 get_startup_message <- function(repo, package){
   if(!is_current_version(repo, package)){

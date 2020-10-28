@@ -16,7 +16,9 @@ Returns the current package version
 Get Remote (GitHub) Package Version
 }
 \examples{
+\dontrun{
 get_remote_package_version("ScottishCovidResponse/SCRCdataAPI")
+}
 
 }
 \keyword{internal}

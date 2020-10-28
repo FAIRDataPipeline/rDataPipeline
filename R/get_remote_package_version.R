@@ -6,7 +6,9 @@
 #' @keywords internal
 #'
 #' @examples
+#' \dontrun{
 #' get_remote_package_version("ScottishCovidResponse/SCRCdataAPI")
+#' }
 #'
 get_remote_package_version <- function(
   repo = "ScottishCovidResponse/SCRCdataAPI"){
