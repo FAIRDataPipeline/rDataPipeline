@@ -1,9 +1,10 @@
-#' get_components
+#' Get H5 File Components
 #'
 #' Returns the names of the items at the root of the file
 #'
-#' @param filename filename
+#' @param filename a \code{string} specifying a filename
 #'
+#' @return Returns the names of the items at the root of the file
 #' @export
 #'
 get_components <- function(filename) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_estimate.R
 \name{create_estimate}
 \alias{create_estimate}
-\title{create_estimate}
+\title{Create Estimate-Type TOML File}
 \usage{
 create_estimate(filename, path, parameters)
 }

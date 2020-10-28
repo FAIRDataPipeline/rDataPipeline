@@ -2,12 +2,15 @@
 % Please edit documentation in R/get_components.R
 \name{get_components}
 \alias{get_components}
-\title{get_components}
+\title{Get H5 File Components}
 \usage{
 get_components(filename)
 }
 \arguments{
-\item{filename}{filename}
+\item{filename}{a \code{string} specifying a filename}
+}
+\value{
+Returns the names of the items at the root of the file
 }
 \description{
 Returns the names of the items at the root of the file
