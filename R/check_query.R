@@ -10,14 +10,18 @@
 #'
 #' @export
 #'
-check_query <-function(table, query){
+#' @keywords internal
 #'
 #' @examples
 #' check_query("storage_root", list(name = "github"))
 #'
+check_query <- function(table, query){
   if(!is.list(query))
-    stop("Invalid query type")
+    stop("query should be a list")
+
+  # An empty list is valid
   if(length(query) == 0)
     return(TRUE)
-  return(all(is_queryable(table, names(query))))
+
+  all(is_queryable(table, names(query)))
 }
