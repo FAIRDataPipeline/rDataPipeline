@@ -23,7 +23,4 @@ get_entry
 data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
 get_entry("data_product", list(name = data_product))
 
-# Get latest entry
-get_entry("data_product")
-
 }
