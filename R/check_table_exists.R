@@ -4,6 +4,8 @@
 #'
 #' @return boolean if a table exists
 #'
+#' @keywords internal
+#'
 #' @export
 #'
 check_table_exists <- function(table){

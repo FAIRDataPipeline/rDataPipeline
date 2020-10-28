@@ -7,6 +7,8 @@
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 #' @examples
 #' data <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
 #' clean_query(data = data)
