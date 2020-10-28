@@ -2,8 +2,7 @@
 % Please edit documentation in R/validate_token.R
 \name{validate_token}
 \alias{validate_token}
-\title{validate_token
-Function to validate user token}
+\title{Validate Token}
 \usage{
 validate_token(key)
 }
@@ -11,7 +10,6 @@ validate_token(key)
 \item{key}{API Token as character}
 }
 \description{
-validate_token
 Function to validate user token
 }
 \keyword{internal}

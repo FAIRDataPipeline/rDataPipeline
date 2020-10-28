@@ -7,20 +7,18 @@
 get_fields(table, key, live = FALSE)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{key}{(optional) api key / token}
+\item{key}{(optional) API token from data.scrc.uk}
 
-\item{live}{whether or not to get the field definitions direct from the API}
+\item{live}{a \code{boolean} specifying whether or not to get the field
+definitions directly from the API}
 }
 \value{
-a dataframe of fields and their attributes
-set to "none"
+Returns a \code{data.frame} of fields and their attributes set to
+"none"
 }
 \description{
-Use API endpoint to produce a list of fields for a table.
-}
-\details{
-Requires API key
+Use API endpoint to produce a list of fields for a table. Requires API key.
 }
 \keyword{internal}

@@ -1,4 +1,4 @@
-#' get_package_info
+#' Get Package Info
 #'
 #' Function to retrieve the current version of a GitHub repository and the
 #' GitHub hash associated with it. The repository should contain a DESCRIPTION
@@ -18,7 +18,6 @@
 #' * the github repository version number:
 #' * the github repo hash
 #' * the submission script file name
-#'
 #' @export
 #'
 #' @examples

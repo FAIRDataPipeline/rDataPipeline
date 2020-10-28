@@ -1,12 +1,11 @@
 #' get_entry
 #'
 #' @param table a \code{string} specifying the name of the table
-#' @param query a \code{list} of fields and values to query if no query is
-#' provided it will return the latest entry
+#' @param query a \code{list} containing a valid query for the table, *e.g.*
+#' \code{list(field = value)}
 #'
+#' @return Returns a \code{list} of fields present in the specified entry
 #' @export
-#'
-#' @return Returns a \code{list}
 #'
 #' @examples
 #' # Get list of entries

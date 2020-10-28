@@ -4,18 +4,26 @@
 \alias{get_entry}
 \title{get_entry}
 \usage{
-get_entry(table, query = list())
+get_entry(table, query)
 }
 \arguments{
-\item{table}{table must exist}
+\item{table}{a \code{string} specifying the name of the table}
 
-\item{query}{a \code{list} of fields and values to query if no query
-is provided it will return the last entry}
+\item{query}{a \code{list} containing a valid query for the table, \emph{e.g.}
+\code{list(field = value)}}
+}
+\value{
+Returns a \code{list} of fields present in the specified entry
 }
 \description{
 get_entry
 }
 \examples{
-get_entry("storage_root", list(name = "github"))
+# Get list of entries
+data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+get_entry("data_product", list(name = data_product))
+
+# Get latest entry
+get_entry("data_product")
 
 }

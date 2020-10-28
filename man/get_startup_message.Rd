@@ -7,14 +7,18 @@
 get_startup_message(repo, package)
 }
 \arguments{
-\item{repo}{repo name}
+\item{repo}{a \code{string} specifying the github username/repository}
 
-\item{package}{package name}
+\item{package}{a \code{string} specifying the package name}
 }
 \value{
 returns the startup message
 }
 \description{
 Get startup message
+}
+\examples{
+get_startup_message("ScottishCovidResponse/SCRCdata", "SCRCdata")
+
 }
 \keyword{internal}

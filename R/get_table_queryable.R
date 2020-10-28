@@ -3,9 +3,7 @@
 #' @param table a \code{string} specifying the name of the table
 #'
 #' @return Returns a character vector of queryable fields
-#'
 #' @export
-#'
 #' @keywords internal
 #'
 #' @examples

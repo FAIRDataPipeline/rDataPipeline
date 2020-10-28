@@ -3,7 +3,6 @@
 #' @param data_product \code{string} specifying the name of the data product
 #'
 #' @return
-#'
 #' @export
 #'
 get_version_numbers <- function(data_product) {

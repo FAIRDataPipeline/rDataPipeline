@@ -10,7 +10,6 @@
 #'
 #' @return Returns a \code{data.frame} of entries in table, default is limited
 #' to 100 entries
-#'
 #' @export
 #'
 #' @examples

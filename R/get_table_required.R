@@ -4,9 +4,7 @@
 #' @param key api key / token
 #'
 #' @return a dataframe of required fields and their properties
-#'
 #' @export
-#'
 #' @keywords internal
 #'
 get_table_required <- function(table, key){

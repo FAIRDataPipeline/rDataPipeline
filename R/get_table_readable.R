@@ -2,10 +2,9 @@
 #'
 #' @param table name of table
 #' @param key api key / token
+#'
 #' @return a dataframe of readable fields and their properties
-#'
 #' @export
-#'
 #' @keywords internal
 #'
 get_table_readable <- function(table, key){

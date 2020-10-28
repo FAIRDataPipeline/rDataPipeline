@@ -1,7 +1,7 @@
 #' get_entity
 #'
-#' @param table table
-#' @param entity_id entity ID
+#' @param table a \code{string} specifying the name of the table
+#' @param entity_id an \code{integer} specifying the id of an entry
 #'
 #' @export
 #'

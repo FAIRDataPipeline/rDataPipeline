@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_storage_location.R
 \name{get_storage_location}
 \alias{get_storage_location}
-\title{get_storage_location}
+\title{Get Storage Location}
 \usage{
 get_storage_location(location_id)
 }
@@ -20,3 +20,4 @@ Get storage location entry
 get_storage_location(10404)
 
 }
+\keyword{internal}

@@ -7,7 +7,7 @@
 get_loaded_package_version(package = "SCRCdataAPI")
 }
 \arguments{
-\item{package}{package name}
+\item{package}{a \code{string} specifying the package name}
 }
 \value{
 Returns the current package version

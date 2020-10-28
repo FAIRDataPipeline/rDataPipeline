@@ -1,10 +1,12 @@
-#' Get github Package Version
+#' Get Remote (GitHub) Package Version
 #'
-#' @param repo repo name
+#' @param repo a \code{string} specifying the github username/repository
 #'
 #' @return Returns the current package version
-#'
 #' @keywords internal
+#'
+#' @examples
+#' get_remote_package_version("ScottishCovidResponse/SCRCdataAPI")
 #'
 get_remote_package_version <- function(
   repo = "ScottishCovidResponse/SCRCdataAPI"){

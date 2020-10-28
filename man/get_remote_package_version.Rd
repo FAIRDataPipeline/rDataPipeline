@@ -2,17 +2,21 @@
 % Please edit documentation in R/get_remote_package_version.R
 \name{get_remote_package_version}
 \alias{get_remote_package_version}
-\title{Get github Package Version}
+\title{Get Remote (GitHub) Package Version}
 \usage{
 get_remote_package_version(repo = "ScottishCovidResponse/SCRCdataAPI")
 }
 \arguments{
-\item{repo}{repo name}
+\item{repo}{a \code{string} specifying the github username/repository}
 }
 \value{
 Returns the current package version
 }
 \description{
-Get github Package Version
+Get Remote (GitHub) Package Version
+}
+\examples{
+get_remote_package_version("ScottishCovidResponse/SCRCdataAPI")
+
 }
 \keyword{internal}
