@@ -5,6 +5,9 @@
 #'
 #' @export
 #'
+#' @examples
+#' get_entity("storage_root", 11)
+#'
 get_entity <- function(table, entity_id) {
   if(!check_table_exists(table))
     stop(paste0("table does not exist"))

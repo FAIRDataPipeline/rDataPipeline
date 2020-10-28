@@ -7,12 +7,16 @@
 get_table_queryable(table)
 }
 \arguments{
-\item{table}{name of table}
+\item{table}{a \code{string} specifying the name of the table}
 }
 \value{
-a character vector of queryable fields
+Returns a character vector of queryable fields
 }
 \description{
 Get Queryable Fields
+}
+\examples{
+get_table_queryable("data_product")
+
 }
 \keyword{internal}

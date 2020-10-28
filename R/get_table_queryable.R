@@ -1,8 +1,8 @@
 #' Get Queryable Fields
 #'
-#' @param table name of table
+#' @param table a \code{string} specifying the name of the table
 #'
-#' @return a character vector of queryable fields
+#' @return Returns a character vector of queryable fields
 #'
 #' @export
 #'

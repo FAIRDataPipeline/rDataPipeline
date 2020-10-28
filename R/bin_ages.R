@@ -1,9 +1,20 @@
 #' bin_ages
 #'
-#' @param dat dat
-#' @param ageclasses ageclasses
+#' Function used to bin ages in a \code{data.frame}
+#'
+#' @param dat a \code{data.frame} containing population counts (see Examples
+#' below)
+#' @param ageclasses a \code{data.frame} containing age class boundaries
 #'
 #' @export
+#'
+#' @examples
+#' # NRS example
+#' df <- matrix(sample(273), ncol = 91)
+#' colnames(df) <- paste0("AGE", 0:90)
+#' colnames(df)[91] <- "AGE90+"
+#' bin_ages(df, c(0, 10, 50, 80))
+#' bin_ages(df, "total")
 #'
 bin_ages <- function(dat,
                      ageclasses) {
