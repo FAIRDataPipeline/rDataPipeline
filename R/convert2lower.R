@@ -1,4 +1,4 @@
-#' convert2lower
+#' Convert census geographies to lower resolution
 #'
 #' @param dat data
 #' @param convert_to c("dz", "ur", "iz", "la", "hb", "mmw", "spc")
@@ -21,7 +21,7 @@ convert2lower <- function(dat, convert_to, conversion_table) {
 
   output <- dat %>%
     dplyr::full_join(subset.table, by = "AREAcode") %>%
-    dplyr::select(-dplyr::contains(columns), target.code) 
+    dplyr::select(-dplyr::contains(columns), target.code)
   output <- dplyr::group_by_at(output,vars(dplyr::contains(target.code))) %>%
     dplyr::summarise_all(~sum(.)) %>%
     dplyr::arrange_at(vars(dplyr::contains(target.code)))

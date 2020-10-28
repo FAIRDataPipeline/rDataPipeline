@@ -1,4 +1,4 @@
-#' new_data_product
+#' Post to data_product table
 #'
 #' Upload information to the \code{data_product} table in the data registry
 #'

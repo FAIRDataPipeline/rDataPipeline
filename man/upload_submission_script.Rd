@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_submission_script.R
 \name{upload_submission_script}
 \alias{upload_submission_script}
-\title{upload_submission_script}
+\title{Upload submission_script metadata to the data registry}
 \usage{
 upload_submission_script(storage_root_id, path, hash, text, run_date, key)
 }
@@ -20,5 +20,5 @@ upload_submission_script(storage_root_id, path, hash, text, run_date, key)
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-upload_submission_script
+Upload submission_script metadata to the data registry
 }

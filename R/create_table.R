@@ -1,4 +1,4 @@
-#' Create Table-Type H5 File
+#' Create table-type H5 file
 #'
 #' Function to populate hdf5 file with array type data.
 #'

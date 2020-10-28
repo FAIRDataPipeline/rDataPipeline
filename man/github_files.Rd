@@ -2,7 +2,7 @@
 % Please edit documentation in R/github_files.R
 \name{github_files}
 \alias{github_files}
-\title{github_files}
+\title{List files in GitHub repository}
 \usage{
 github_files(repo)
 }
@@ -10,7 +10,7 @@ github_files(repo)
 \item{repo}{a \code{string} specifying the github username/repository}
 }
 \description{
-github_files
+List files in GitHub repository
 }
 \examples{
 \dontrun{

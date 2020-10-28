@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_from_database.R
 \name{download_from_database}
 \alias{download_from_database}
-\title{download_from_database}
+\title{Download source file from database}
 \usage{
 download_from_database(
   source_root,
@@ -26,7 +26,7 @@ the saved file)}
 be overwritten if it already exists}
 }
 \description{
-download_from_database
+Download source file from database
 }
 \examples{
 \dontrun{

@@ -1,4 +1,4 @@
-#' patch_data
+#' Patch entry in data registry
 #'
 #' @param url url
 #' @param data data

@@ -1,4 +1,4 @@
-#' read_distribution
+#' Read distribution from TOML file
 #'
 #' Function to read disdtribution type data from toml file.
 #'

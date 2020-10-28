@@ -2,7 +2,7 @@
 % Please edit documentation in R/patch_data.R
 \name{patch_data}
 \alias{patch_data}
-\title{patch_data}
+\title{Patch entry in data registry}
 \usage{
 patch_data(url, data, key)
 }
@@ -14,6 +14,6 @@ patch_data(url, data, key)
 \item{key}{key}
 }
 \description{
-patch_data
+Patch entry in data registry
 }
 \keyword{internal}

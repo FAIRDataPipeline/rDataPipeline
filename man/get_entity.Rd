@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_entity.R
 \name{get_entity}
 \alias{get_entity}
-\title{get_entity}
+\title{Get entity}
 \usage{
 get_entity(table, entity_id)
 }
@@ -12,7 +12,7 @@ get_entity(table, entity_id)
 \item{entity_id}{an \code{integer} specifying the id of an entry}
 }
 \description{
-get_entity
+Get entity
 }
 \examples{
 get_entity("storage_root", 11)

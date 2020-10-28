@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert2lower.R
 \name{convert2lower}
 \alias{convert2lower}
-\title{convert2lower}
+\title{Convert census geographies to lower resolution}
 \usage{
 convert2lower(dat, convert_to, conversion_table)
 }
@@ -14,5 +14,5 @@ convert2lower(dat, convert_to, conversion_table)
 \item{conversion_table}{conversion table}
 }
 \description{
-convert2lower
+Convert census geographies to lower resolution
 }

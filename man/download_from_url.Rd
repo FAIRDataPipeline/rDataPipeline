@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_from_url.R
 \name{download_from_url}
 \alias{download_from_url}
-\title{download_from_url}
+\title{Download source file from URL}
 \usage{
 download_from_url(source_root, source_path, path, filename, unzip = FALSE)
 }

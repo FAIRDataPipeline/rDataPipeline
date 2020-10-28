@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_paper.R
 \name{upload_paper}
 \alias{upload_paper}
-\title{upload_paper}
+\title{Upload paper metadata to the data registry}
 \usage{
 upload_paper(
   title,
@@ -63,5 +63,5 @@ preprint}
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-upload_paper
+Upload paper metadata to the data registry
 }

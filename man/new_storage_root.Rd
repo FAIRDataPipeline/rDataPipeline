@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_storage_root.R
 \name{new_storage_root}
 \alias{new_storage_root}
-\title{new_storage_root}
+\title{Post to storage_root table}
 \usage{
 new_storage_root(name, root, accessibility = 0, key)
 }

@@ -1,4 +1,4 @@
-#' read_table
+#' Read component from table-type H5 file
 #'
 #' Function to read table type data from hdf5 file.
 #'

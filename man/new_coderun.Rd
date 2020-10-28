@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_coderun.R
 \name{new_coderun}
 \alias{new_coderun}
-\title{new_coderun}
+\title{Post to code_run table}
 \usage{
 new_coderun(
   run_date,

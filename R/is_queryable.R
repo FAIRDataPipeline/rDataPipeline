@@ -1,4 +1,4 @@
-#' is_queryable
+#' Check whether fields are queryable
 #'
 #' Check whether fields are queryable
 #'

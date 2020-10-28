@@ -1,4 +1,4 @@
-#' Get Queryable Fields
+#' Get queryable fields
 #'
 #' @param table a \code{string} specifying the name of the table
 #'

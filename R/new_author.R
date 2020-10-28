@@ -1,4 +1,4 @@
-#' new_author
+#' Post to author table
 #'
 #' Upload information to the \code{author} table in the data registry
 #'

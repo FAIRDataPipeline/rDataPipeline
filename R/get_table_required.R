@@ -1,4 +1,4 @@
-#' Get Required Fields
+#' Get required fields
 #'
 #' @param table name of table
 #' @param key api key / token

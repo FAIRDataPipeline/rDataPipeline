@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_external_object.R
 \name{download_external_object}
 \alias{download_external_object}
-\title{Download External Object}
+\title{Download external object}
 \usage{
 download_external_object(name, data_dir, version)
 }

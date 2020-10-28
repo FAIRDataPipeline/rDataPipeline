@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_object_component.R
 \name{new_object_component}
 \alias{new_object_component}
-\title{new_object_component}
+\title{Post to object_component table}
 \usage{
 new_object_component(name, object_id, description = "", key)
 }

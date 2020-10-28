@@ -1,4 +1,4 @@
-#' Create Distribution-Type TOML File
+#' Create distribution-type TOML file
 #'
 #' Function to populate toml file with distribution type data, *e.g.*
 #' \itemize{

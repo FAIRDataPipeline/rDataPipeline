@@ -2,7 +2,7 @@
 % Please edit documentation in R/increment_version.R
 \name{increment_version}
 \alias{increment_version}
-\title{increment_version}
+\title{Increment version number}
 \usage{
 increment_version(data_product, version)
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/upload_toml_to_github.R
 \name{upload_toml_to_github}
 \alias{upload_toml_to_github}
-\title{upload_toml_to_github
-Experimental}
+\title{Upload TOML file to GitHub}
 \usage{
 upload_toml_to_github(
   path_to_toml,
@@ -19,6 +18,5 @@ upload_toml_to_github(
 \item{email}{(optional) the email you want to be associated with the git commit}
 }
 \description{
-upload_toml_to_github
 Experimental
 }

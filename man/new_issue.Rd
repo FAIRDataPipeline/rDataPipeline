@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_issue.R
 \name{new_issue}
 \alias{new_issue}
-\title{new_issue}
+\title{Post to issue table}
 \usage{
 new_issue(severity, description, object_issues, component_issues, key)
 }

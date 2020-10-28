@@ -1,4 +1,4 @@
-#' Get Remote (GitHub) Package Version
+#' Get remote (GitHub) package version
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'

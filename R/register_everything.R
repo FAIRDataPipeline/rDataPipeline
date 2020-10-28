@@ -1,4 +1,4 @@
-#' register_everything
+#' Upload everything associated with a data product to the data registry
 #'
 #' This function assumes that (1) the source data is being saved as a
 #' \code{csv} file, (2) the data product is being saved as an \code{h5} file,

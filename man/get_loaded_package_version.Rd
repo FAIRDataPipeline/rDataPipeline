@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_loaded_package_version.R
 \name{get_loaded_package_version}
 \alias{get_loaded_package_version}
-\title{Get loaded Package Version}
+\title{Get loaded package version}
 \usage{
 get_loaded_package_version(package = "SCRCdataAPI")
 }
@@ -13,6 +13,6 @@ get_loaded_package_version(package = "SCRCdataAPI")
 Returns the current package version
 }
 \description{
-Get loaded Package Version
+Get loaded package version
 }
 \keyword{internal}

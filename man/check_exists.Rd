@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_exists.R
 \name{check_exists}
 \alias{check_exists}
-\title{Check if Entry Exists}
+\title{Check if entry exists}
 \usage{
 check_exists(table, query)
 }

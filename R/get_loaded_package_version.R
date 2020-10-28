@@ -1,4 +1,4 @@
-#' Get loaded Package Version
+#' Get loaded package version
 #'
 #' @param package a \code{string} specifying the package name
 #'

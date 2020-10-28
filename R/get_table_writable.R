@@ -1,4 +1,4 @@
-#' Get Writable Fields
+#' Get writable fields
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param key api key / token

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_table_optional.R
 \name{get_table_optional}
 \alias{get_table_optional}
-\title{Get Optional Fields}
+\title{Get optional fields}
 \usage{
 get_table_optional(table, key)
 }
@@ -15,6 +15,6 @@ get_table_optional(table, key)
 Returns a \code{data.frame} of optional fields and thier properties
 }
 \description{
-Get Optional Fields
+Get optional fields
 }
 \keyword{internal}

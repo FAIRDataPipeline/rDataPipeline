@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate_fields.R
 \name{validate_fields}
 \alias{validate_fields}
-\title{validate_fields}
+\title{Validate fields}
 \usage{
 validate_fields(table, data, key, online = TRUE)
 }

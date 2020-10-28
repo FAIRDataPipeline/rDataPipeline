@@ -1,4 +1,4 @@
-#' Get Package Info
+#' Get GitHub package info
 #'
 #' Function to retrieve the current version of a GitHub repository and the
 #' GitHub hash associated with it. The repository should contain a DESCRIPTION

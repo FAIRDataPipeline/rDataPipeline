@@ -1,4 +1,4 @@
-#' new_storage_root
+#' Post to storage_root table
 #'
 #' Upload information to the \code{storage_root} table in the data registry
 #'

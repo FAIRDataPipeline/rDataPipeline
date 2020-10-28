@@ -1,4 +1,4 @@
-#' upload_data_product
+#' Upload data_product metadata to the data registry
 #'
 #' @param storage_root_id e.g.
 #' @param name e.g.

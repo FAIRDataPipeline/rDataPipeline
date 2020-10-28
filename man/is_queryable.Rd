@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_queryable.R
 \name{is_queryable}
 \alias{is_queryable}
-\title{is_queryable}
+\title{Check whether fields are queryable}
 \usage{
 is_queryable(table, query_parameter)
 }

@@ -1,4 +1,4 @@
-#' new_source
+#' Post to source table
 #'
 #' Upload information to the \code{source} table in the data registry
 #'

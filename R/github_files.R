@@ -1,4 +1,4 @@
-#' github_files
+#' List files in GitHub repository
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'

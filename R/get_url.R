@@ -1,4 +1,4 @@
-#' get_url
+#' Get URL
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing a valid query for the table, *e.g.*

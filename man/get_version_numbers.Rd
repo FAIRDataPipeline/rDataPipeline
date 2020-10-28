@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_version_numbers.R
 \name{get_version_numbers}
 \alias{get_version_numbers}
-\title{get_version_numbers}
+\title{Get version numbers}
 \usage{
 get_version_numbers(data_product)
 }
@@ -10,5 +10,5 @@ get_version_numbers(data_product)
 \item{data_product}{\code{string} specifying the name of the data product}
 }
 \description{
-get_version_numbers
+Get version numbers
 }

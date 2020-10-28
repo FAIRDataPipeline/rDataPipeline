@@ -1,4 +1,4 @@
-#' Get Storage Location
+#' Get storage location from id
 #'
 #' Get storage location entry
 #'

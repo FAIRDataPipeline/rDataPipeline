@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_remote_package_version.R
 \name{get_remote_package_version}
 \alias{get_remote_package_version}
-\title{Get Remote (GitHub) Package Version}
+\title{Get remote (GitHub) package version}
 \usage{
 get_remote_package_version(repo = "ScottishCovidResponse/SCRCdataAPI")
 }
@@ -13,7 +13,7 @@ get_remote_package_version(repo = "ScottishCovidResponse/SCRCdataAPI")
 Returns the current package version
 }
 \description{
-Get Remote (GitHub) Package Version
+Get remote (GitHub) package version
 }
 \examples{
 \dontrun{

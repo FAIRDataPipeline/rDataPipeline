@@ -1,4 +1,4 @@
-#' get_existing
+#' Get existing entries
 #'
 #' Get entries (from the data registry) in a particular table
 #'

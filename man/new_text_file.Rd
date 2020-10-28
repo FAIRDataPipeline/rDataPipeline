@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_text_file.R
 \name{new_text_file}
 \alias{new_text_file}
-\title{new_text_file}
+\title{Post to text_file table}
 \usage{
 new_text_file(text, key)
 }

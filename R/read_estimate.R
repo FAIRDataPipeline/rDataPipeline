@@ -1,4 +1,4 @@
-#' read_estimate
+#' Read estimate from TOML file
 #'
 #' Function to read point-estimate type data from toml file.
 #'

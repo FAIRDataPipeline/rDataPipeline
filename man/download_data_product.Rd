@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_data_product.R
 \name{download_data_product}
 \alias{download_data_product}
-\title{Download Data Product}
+\title{Download data product}
 \usage{
 download_data_product(name, data_dir, version)
 }

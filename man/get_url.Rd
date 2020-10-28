@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_url.R
 \name{get_url}
 \alias{get_url}
-\title{get_url}
+\title{Get URL}
 \usage{
 get_url(table, query = list())
 }
@@ -13,7 +13,7 @@ get_url(table, query = list())
 \code{list(field = value)}}
 }
 \description{
-get_url
+Get URL
 }
 \examples{
 get_url("storage_root")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_existing.R
 \name{get_existing}
 \alias{get_existing}
-\title{get_existing}
+\title{Get existing entries}
 \usage{
 get_existing(table, limit_results = TRUE, detail = "all")
 }

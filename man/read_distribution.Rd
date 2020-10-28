@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_distribution.R
 \name{read_distribution}
 \alias{read_distribution}
-\title{read_distribution}
+\title{Read distribution from TOML file}
 \usage{
 read_distribution(filepath)
 }

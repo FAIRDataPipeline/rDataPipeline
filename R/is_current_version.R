@@ -1,4 +1,4 @@
-#' Check if Package is current version
+#' Check if package is current version
 #'
 #' @param repo repo name
 #' @param package package name

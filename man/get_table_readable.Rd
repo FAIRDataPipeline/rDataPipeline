@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_table_readable.R
 \name{get_table_readable}
 \alias{get_table_readable}
-\title{Get Readable Fields}
+\title{Get readable fields}
 \usage{
 get_table_readable(table, key)
 }
@@ -15,6 +15,6 @@ get_table_readable(table, key)
 a dataframe of readable fields and their properties
 }
 \description{
-Get Readable Fields
+Get readable fields
 }
 \keyword{internal}

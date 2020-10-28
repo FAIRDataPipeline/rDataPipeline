@@ -1,4 +1,4 @@
-#' Download External Object
+#' Download external object
 #'
 #' Download external object from the Boydorr server.
 #'

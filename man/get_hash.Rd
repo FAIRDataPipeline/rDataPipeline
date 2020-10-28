@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_hash.R
 \name{get_hash}
 \alias{get_hash}
-\title{get_hash}
+\title{Calculate hash from file}
 \usage{
 get_hash(filename)
 }

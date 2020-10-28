@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_table.R
 \name{create_table}
 \alias{create_table}
-\title{Create Table-Type H5 File}
+\title{Create table-type H5 file}
 \usage{
 create_table(filename, path = ".", component, df, row_names, column_units)
 }

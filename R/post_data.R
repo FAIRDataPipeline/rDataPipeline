@@ -1,4 +1,4 @@
-#' post_data
+#' Post entry to data registry
 #'
 #' Post data to registry
 #'

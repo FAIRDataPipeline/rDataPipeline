@@ -2,7 +2,7 @@
 % Please edit documentation in R/post_data.R
 \name{post_data}
 \alias{post_data}
-\title{post_data}
+\title{Post entry to data registry}
 \usage{
 post_data(table, data, key, ...)
 }

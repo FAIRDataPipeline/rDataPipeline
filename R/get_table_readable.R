@@ -1,4 +1,4 @@
-#' Get Readable Fields
+#' Get readable fields
 #'
 #' @param table name of table
 #' @param key api key / token

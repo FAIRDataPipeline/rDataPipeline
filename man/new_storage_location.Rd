@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_storage_location.R
 \name{new_storage_location}
 \alias{new_storage_location}
-\title{new_storage_location}
+\title{Post to storage_location table}
 \usage{
 new_storage_location(path, hash, storage_root_id, key)
 }

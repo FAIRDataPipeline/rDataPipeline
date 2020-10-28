@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_version_number.R
 \name{create_version_number}
 \alias{create_version_number}
-\title{create_version_number}
+\title{Create version number}
 \usage{
 create_version_number(
   download_date = NULL,
