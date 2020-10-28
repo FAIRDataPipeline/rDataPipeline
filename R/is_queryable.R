@@ -25,7 +25,9 @@
 is_queryable <- function(table, query_parameter) {
   if(table == "users" | table == "groups")
     return(FALSE) # only queryable with token
-  if(is.null(get_table_queryable(table)))
-    return(FALSE)
-  return(query_parameter %in% get_table_queryable(table))
+
+  if(!check_table_exists(table))
+    stop("table doesn't exist")
+
+  query_parameter %in% get_table_queryable(table)
 }
