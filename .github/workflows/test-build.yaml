@@ -1,6 +1,3 @@
-# Build the package on macOS-latest, windows-latest, Windows with r 3.6 and Ubuntu 20.04
-name: SCRCdataAPI workflow
-# run on push or pull_request on any branch
 on:
   push:
     branches:
