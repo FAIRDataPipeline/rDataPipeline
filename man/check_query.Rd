@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_query.R
 \name{check_query}
 \alias{check_query}
-\title{Check if Query is Valid}
+\title{Check if query is valid}
 \usage{
 check_query(table, query)
 }

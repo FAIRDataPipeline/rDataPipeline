@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_code_repo_release.R
 \name{new_code_repo_release}
 \alias{new_code_repo_release}
-\title{new_code_repo_release}
+\title{Post to code_repo_release table}
 \usage{
 new_code_repo_release(name, version, website = "", object_id, key)
 }

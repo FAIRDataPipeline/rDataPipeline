@@ -1,4 +1,4 @@
-#' increment_version
+#' Increment version number
 #'
 #' Generate version number by pulling all version numbers from the data registry
 #' and incrementing patch by 1. Otherwise, if a version number is input, checks

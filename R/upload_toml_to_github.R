@@ -1,4 +1,5 @@
-#' upload_toml_to_github
+#' Upload TOML file to GitHub
+#'
 #' Experimental
 #'
 #' @param path_to_toml path to the toml file you wish to add to the data repository

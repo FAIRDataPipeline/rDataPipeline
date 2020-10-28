@@ -1,4 +1,4 @@
-#' get_version_numbers
+#' Get version numbers
 #'
 #' @param data_product \code{string} specifying the name of the data product
 #'

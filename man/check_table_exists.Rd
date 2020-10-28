@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_table_exists.R
 \name{check_table_exists}
 \alias{check_table_exists}
-\title{Check Table Exists}
+\title{Check if table exists}
 \usage{
 check_table_exists(table)
 }
@@ -13,6 +13,6 @@ check_table_exists(table)
 Return \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 }
 \description{
-Check Table Exists
+Check if table exists
 }
 \keyword{internal}

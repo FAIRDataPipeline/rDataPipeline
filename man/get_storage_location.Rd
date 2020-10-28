@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_storage_location.R
 \name{get_storage_location}
 \alias{get_storage_location}
-\title{Get Storage Location}
+\title{Get storage location from id}
 \usage{
 get_storage_location(location_id)
 }

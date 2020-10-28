@@ -1,4 +1,4 @@
-#' Download Data Product
+#' Download data product
 #'
 #' Download data product from the Boydorr server.
 #'

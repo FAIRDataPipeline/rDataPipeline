@@ -1,4 +1,4 @@
-#' download_from_database
+#' Download source file from database
 #'
 #' @param source_root a \code{string} specifying the source root
 #' @param source_path a \code{string} specifying the source path

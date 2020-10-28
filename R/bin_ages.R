@@ -1,4 +1,4 @@
-#' Bin Ages
+#' Bin ages
 #'
 #' Function used to bin ages in a \code{data.frame}
 #'

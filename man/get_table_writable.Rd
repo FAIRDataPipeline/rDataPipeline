@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_table_writable.R
 \name{get_table_writable}
 \alias{get_table_writable}
-\title{Get Writable Fields}
+\title{Get writable fields}
 \usage{
 get_table_writable(table, key)
 }
@@ -15,6 +15,6 @@ get_table_writable(table, key)
 Returns a character vector of writable fields
 }
 \description{
-Get Writable Fields
+Get writable fields
 }
 \keyword{internal}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_entry.R
 \name{get_entry}
 \alias{get_entry}
-\title{get_entry}
+\title{Get entry}
 \usage{
 get_entry(table, query)
 }
@@ -16,7 +16,7 @@ get_entry(table, query)
 Returns a \code{list} of fields present in the specified entry
 }
 \description{
-get_entry
+Get entry
 }
 \examples{
 # Get list of entries

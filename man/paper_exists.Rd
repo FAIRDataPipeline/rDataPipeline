@@ -2,7 +2,7 @@
 % Please edit documentation in R/paper_exists.R
 \name{paper_exists}
 \alias{paper_exists}
-\title{paper_exists}
+\title{Check whether paper exists}
 \usage{
 paper_exists(doi)
 }
@@ -10,5 +10,5 @@ paper_exists(doi)
 \item{doi}{doi}
 }
 \description{
-paper_exists
+Check whether paper is in the data registry
 }

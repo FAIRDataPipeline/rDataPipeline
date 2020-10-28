@@ -1,4 +1,4 @@
-#' create_version_number
+#' Create version number
 #'
 #' Creates a version number from either *a date and a version*
 #' **or** *a date and major and patch*

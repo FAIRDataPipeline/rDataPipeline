@@ -1,4 +1,4 @@
-#' upload_source_data
+#' Upload source_data metadata to the data registry
 #'
 #' @param doi_or_unique_name e.g. "scottish deaths-involving-coronavirus-covid-19"
 #' @param original_source_id e.g. "https://data.scrc.uk/api/source/9/"

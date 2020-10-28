@@ -1,4 +1,4 @@
-#' get_hash
+#' Calculate hash from file
 #'
 #' Returns the SHA1 hash of a given file
 #'

@@ -1,4 +1,4 @@
-#' upload_submission_script
+#' Upload submission_script metadata to the data registry
 #'
 #' @param storage_root_id e.g.
 #' @param path e.g. "ScottishCovidResponse/SCRCdata"

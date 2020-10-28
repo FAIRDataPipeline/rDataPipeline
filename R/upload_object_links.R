@@ -1,4 +1,4 @@
-#' upload_object_links
+#' Upload object_links metadata to the data registry
 #'
 #' @param run_date e.g.
 #' @param description e.g.

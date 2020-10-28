@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_source_data.R
 \name{upload_source_data}
 \alias{upload_source_data}
-\title{upload_source_data}
+\title{Upload source_data metadata to the data registry}
 \usage{
 upload_source_data(
   doi_or_unique_name,
@@ -42,5 +42,5 @@ upload_source_data(
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-upload_source_data
+Upload source_data metadata to the data registry
 }

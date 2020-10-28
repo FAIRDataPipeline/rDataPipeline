@@ -1,4 +1,4 @@
-#' download_from_url
+#' Download source file from URL
 #'
 #' This function will download a file from a url
 #'

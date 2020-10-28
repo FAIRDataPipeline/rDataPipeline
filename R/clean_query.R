@@ -1,4 +1,4 @@
-#' Clean Query
+#' Clean query
 #'
 #' Function to clean a query and return it without an api prefix
 #'

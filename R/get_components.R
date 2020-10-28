@@ -1,4 +1,4 @@
-#' Get H5 File Components
+#' Get H5 file components
 #'
 #' Returns the names of the items at the root of the file
 #'

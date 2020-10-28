@@ -1,4 +1,4 @@
-#' Validate Token
+#' Validate token
 #'
 #' Function to validate user token
 #'

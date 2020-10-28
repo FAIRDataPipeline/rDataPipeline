@@ -2,7 +2,7 @@
 % Please edit documentation in R/convert2grid.R
 \name{convert2grid}
 \alias{convert2grid}
-\title{convert2grid}
+\title{Convert census geographies to grid based system}
 \usage{
 convert2grid(dat, shapefile, subdivisions, conversion.table, grid_size)
 }

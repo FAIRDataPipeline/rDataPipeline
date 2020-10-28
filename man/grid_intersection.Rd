@@ -2,7 +2,7 @@
 % Please edit documentation in R/grid_intersection.R
 \name{grid_intersection}
 \alias{grid_intersection}
-\title{grid_intersection}
+\title{Grid intersection}
 \usage{
 grid_intersection(shapefile, gridsize)
 }
@@ -12,5 +12,5 @@ grid_intersection(shapefile, gridsize)
 \item{gridsize}{gridsize}
 }
 \description{
-grid_intersection
+Grid intersection
 }

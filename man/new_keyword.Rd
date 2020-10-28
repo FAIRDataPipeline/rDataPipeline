@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_keyword.R
 \name{new_keyword}
 \alias{new_keyword}
-\title{new_keyword}
+\title{Post to keyword table}
 \usage{
 new_keyword(keyphrase, object_id, key)
 }

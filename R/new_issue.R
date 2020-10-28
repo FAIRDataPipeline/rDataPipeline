@@ -1,4 +1,4 @@
-#' new_issue
+#' Post to issue table
 #'
 #' Upload information to the \code{issue} table in the data registry
 #'

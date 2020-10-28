@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate_token.R
 \name{validate_token}
 \alias{validate_token}
-\title{Validate Token}
+\title{Validate token}
 \usage{
 validate_token(key)
 }

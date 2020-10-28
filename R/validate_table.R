@@ -1,4 +1,4 @@
-#' Validate Table
+#' Validate table
 #'
 #' Function to validate table name
 #'

@@ -1,4 +1,4 @@
-#' Get Optional Fields
+#' Get optional fields
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param key API token from data.scrc.uk

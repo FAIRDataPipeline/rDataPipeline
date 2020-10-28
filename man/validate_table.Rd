@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate_table.R
 \name{validate_table}
 \alias{validate_table}
-\title{Validate Table}
+\title{Validate table}
 \usage{
 validate_table(table, key)
 }

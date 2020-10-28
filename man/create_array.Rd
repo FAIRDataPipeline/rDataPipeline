@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_array.R
 \name{create_array}
 \alias{create_array}
-\title{Create Array-Type H5 File}
+\title{Create array-type H5 file}
 \usage{
 create_array(
   filename,

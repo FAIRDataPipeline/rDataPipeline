@@ -2,7 +2,7 @@
 % Please edit documentation in R/bin_ages.R
 \name{bin_ages}
 \alias{bin_ages}
-\title{Bin Ages}
+\title{Bin ages}
 \usage{
 bin_ages(dat, ageclasses)
 }

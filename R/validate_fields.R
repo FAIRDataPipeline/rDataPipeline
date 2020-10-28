@@ -1,4 +1,4 @@
-#' validate_fields
+#' Validate fields
 #'
 #' Function to validate fields in post data
 #'

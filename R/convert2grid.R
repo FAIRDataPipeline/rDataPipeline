@@ -1,4 +1,4 @@
-#' convert2grid
+#' Convert census geographies to grid based system
 #'
 #' This script transforms age class population data from census geographies to
 #' a grid based system.

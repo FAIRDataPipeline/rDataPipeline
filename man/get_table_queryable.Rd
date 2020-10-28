@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_table_queryable.R
 \name{get_table_queryable}
 \alias{get_table_queryable}
-\title{Get Queryable Fields}
+\title{Get queryable fields}
 \usage{
 get_table_queryable(table)
 }
@@ -13,7 +13,7 @@ get_table_queryable(table)
 Returns a character vector of queryable fields
 }
 \description{
-Get Queryable Fields
+Get queryable fields
 }
 \examples{
 get_table_queryable("data_product")

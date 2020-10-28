@@ -1,4 +1,4 @@
-#' grid_intersection
+#' Grid intersection
 #'
 #' @param shapefile shapefile
 #' @param gridsize gridsize

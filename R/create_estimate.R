@@ -1,4 +1,4 @@
-#' Create Estimate-Type TOML File
+#' Create estimate-type TOML file
 #'
 #' Function to populate toml file with point-estimate type data, *e.g.*
 #' \itemize{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_query.R
 \name{clean_query}
 \alias{clean_query}
-\title{Clean Query}
+\title{Clean query}
 \usage{
 clean_query(data)
 }

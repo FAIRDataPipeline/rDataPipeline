@@ -1,4 +1,4 @@
-#' Check Table Exists
+#' Check if table exists
 #'
 #' @param table a \code{string} specifying the name of the table
 #'

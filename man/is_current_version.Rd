@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_current_version.R
 \name{is_current_version}
 \alias{is_current_version}
-\title{Check if Package is current version}
+\title{Check if package is current version}
 \usage{
 is_current_version(
   repo = "ScottishCovidResponse/SCRCdataAPI",
@@ -19,6 +19,6 @@ Returns true if the loaded package is the same version as the github
 package
 }
 \description{
-Check if Package is current version
+Check if package is current version
 }
 \keyword{internal}

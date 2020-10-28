@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_components.R
 \name{get_components}
 \alias{get_components}
-\title{Get H5 File Components}
+\title{Get H5 file components}
 \usage{
 get_components(filename)
 }
