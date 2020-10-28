@@ -2,7 +2,7 @@
 % Please edit documentation in R/attach_issue.R
 \name{attach_issue}
 \alias{attach_issue}
-\title{attach_issue}
+\title{Attach Issue to Object}
 \usage{
 attach_issue(
   description,

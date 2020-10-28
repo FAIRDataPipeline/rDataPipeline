@@ -1,4 +1,4 @@
-#' attach_issue
+#' Attach Issue to Object
 #'
 #' This function is used to attach an issue to an object:
 #' \itemize{

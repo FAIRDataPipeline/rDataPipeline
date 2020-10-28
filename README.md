@@ -10,17 +10,10 @@ Functions to generate and process data files for the SCRC data pipeline.
 
 ## Installation
 
-Note to Linux users: installing devtools may require libcurl4-openssl-dev, libhdf5-dev libudunits2-dev, and libgdal-dev.
-
+In R:
 ```{r}
 library(devtools)
 install_github("ScottishCovidResponse/SCRCdataAPI")
-```
-
-and load it into R:
-
-```{r}
-library(SCRCdataAPI)
 ```
 
 For more information, please visit https://scottishcovidresponse.github.io
