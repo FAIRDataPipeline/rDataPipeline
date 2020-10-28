@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -117,23 +117,192 @@
     <p>get_entry</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_entry</span><span class='op'>(</span><span class='va'>table</span>, query <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_entry</span><span class='op'>(</span><span class='va'>table</span>, <span class='va'>query</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>table must exist</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>query</th>
-      <td><p>a <code>list</code> of fields and values to query if no query
-is provided it will return the last entry</p></td>
+      <td><p>a <code>list</code> containing a valid query for the table, <em>e.g.</em>
+<code><a href='https://rdrr.io/r/base/list.html'>list(field = value)</a></code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns a <code>list</code> of fields present in the specified entry</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Get list of entries</span>
+<span class='va'>data_product</span> <span class='op'>&lt;-</span> <span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/ambulance"</span>
+<span class='fu'>get_entry</span><span class='op'>(</span><span class='st'>"data_product"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='va'>data_product</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]
+#&gt; [[1]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2285/"
+#&gt; 
+#&gt; [[1]]$last_updated
+#&gt; [1] "2020-10-28T14:30:23.285702Z"
+#&gt; 
+#&gt; [[1]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[1]]$version
+#&gt; [1] "0.1.6"
+#&gt; 
+#&gt; [[1]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[1]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/68407/"
+#&gt; 
+#&gt; [[1]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[2]]
+#&gt; [[2]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2233/"
+#&gt; 
+#&gt; [[2]]$last_updated
+#&gt; [1] "2020-10-27T14:30:09.305228Z"
+#&gt; 
+#&gt; [[2]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[2]]$version
+#&gt; [1] "0.1.5"
+#&gt; 
+#&gt; [[2]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[2]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/67982/"
+#&gt; 
+#&gt; [[2]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[3]]
+#&gt; [[3]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2225/"
+#&gt; 
+#&gt; [[3]]$last_updated
+#&gt; [1] "2020-10-26T14:30:30.461496Z"
+#&gt; 
+#&gt; [[3]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[3]]$version
+#&gt; [1] "0.1.4"
+#&gt; 
+#&gt; [[3]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[3]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/67972/"
+#&gt; 
+#&gt; [[3]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[4]]
+#&gt; [[4]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2199/"
+#&gt; 
+#&gt; [[4]]$last_updated
+#&gt; [1] "2020-10-25T14:30:08.639983Z"
+#&gt; 
+#&gt; [[4]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[4]]$version
+#&gt; [1] "0.1.3"
+#&gt; 
+#&gt; [[4]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[4]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/67800/"
+#&gt; 
+#&gt; [[4]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[5]]
+#&gt; [[5]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2191/"
+#&gt; 
+#&gt; [[5]]$last_updated
+#&gt; [1] "2020-10-24T13:30:20.829398Z"
+#&gt; 
+#&gt; [[5]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[5]]$version
+#&gt; [1] "0.1.2"
+#&gt; 
+#&gt; [[5]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[5]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/67790/"
+#&gt; 
+#&gt; [[5]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[6]]
+#&gt; [[6]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/2096/"
+#&gt; 
+#&gt; [[6]]$last_updated
+#&gt; [1] "2020-10-23T16:13:03.052122Z"
+#&gt; 
+#&gt; [[6]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[6]]$version
+#&gt; [1] "0.1.1"
+#&gt; 
+#&gt; [[6]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[6]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/66997/"
+#&gt; 
+#&gt; [[6]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; 
+#&gt; [[7]]
+#&gt; [[7]]$url
+#&gt; [1] "https://data.scrc.uk/api/data_product/347/"
+#&gt; 
+#&gt; [[7]]$last_updated
+#&gt; [1] "2020-09-08T16:18:46.423762Z"
+#&gt; 
+#&gt; [[7]]$name
+#&gt; [1] "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
+#&gt; 
+#&gt; [[7]]$version
+#&gt; [1] "0.1.0"
+#&gt; 
+#&gt; [[7]]$updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; [[7]]$object
+#&gt; [1] "https://data.scrc.uk/api/object/45430/"
+#&gt; 
+#&gt; [[7]]$namespace
+#&gt; [1] "https://data.scrc.uk/api/namespace/2/"
+#&gt; 
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

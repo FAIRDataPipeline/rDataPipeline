@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -124,15 +124,319 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>table</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>query</th>
-      <td><p>query</p></td>
+      <td><p>a <code>list</code> containing a valid query for the table, <em>e.g.</em>
+<code><a href='https://rdrr.io/r/base/list.html'>list(field = value)</a></code></p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>get_url</span><span class='op'>(</span><span class='st'>"storage_root"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3714/"
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3713/"
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3712/"
+#&gt; 
+#&gt; [[4]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3711/"
+#&gt; 
+#&gt; [[5]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3710/"
+#&gt; 
+#&gt; [[6]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3709/"
+#&gt; 
+#&gt; [[7]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3708/"
+#&gt; 
+#&gt; [[8]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3707/"
+#&gt; 
+#&gt; [[9]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3706/"
+#&gt; 
+#&gt; [[10]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3705/"
+#&gt; 
+#&gt; [[11]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3704/"
+#&gt; 
+#&gt; [[12]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3703/"
+#&gt; 
+#&gt; [[13]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3702/"
+#&gt; 
+#&gt; [[14]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3701/"
+#&gt; 
+#&gt; [[15]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3700/"
+#&gt; 
+#&gt; [[16]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3699/"
+#&gt; 
+#&gt; [[17]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3698/"
+#&gt; 
+#&gt; [[18]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3697/"
+#&gt; 
+#&gt; [[19]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3696/"
+#&gt; 
+#&gt; [[20]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3695/"
+#&gt; 
+#&gt; [[21]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3694/"
+#&gt; 
+#&gt; [[22]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3693/"
+#&gt; 
+#&gt; [[23]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3692/"
+#&gt; 
+#&gt; [[24]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3691/"
+#&gt; 
+#&gt; [[25]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3690/"
+#&gt; 
+#&gt; [[26]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3689/"
+#&gt; 
+#&gt; [[27]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3688/"
+#&gt; 
+#&gt; [[28]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3687/"
+#&gt; 
+#&gt; [[29]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3686/"
+#&gt; 
+#&gt; [[30]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3685/"
+#&gt; 
+#&gt; [[31]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3684/"
+#&gt; 
+#&gt; [[32]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3683/"
+#&gt; 
+#&gt; [[33]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3682/"
+#&gt; 
+#&gt; [[34]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3681/"
+#&gt; 
+#&gt; [[35]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3680/"
+#&gt; 
+#&gt; [[36]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3679/"
+#&gt; 
+#&gt; [[37]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3678/"
+#&gt; 
+#&gt; [[38]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3677/"
+#&gt; 
+#&gt; [[39]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3676/"
+#&gt; 
+#&gt; [[40]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3675/"
+#&gt; 
+#&gt; [[41]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3674/"
+#&gt; 
+#&gt; [[42]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3673/"
+#&gt; 
+#&gt; [[43]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3672/"
+#&gt; 
+#&gt; [[44]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3671/"
+#&gt; 
+#&gt; [[45]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3670/"
+#&gt; 
+#&gt; [[46]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3669/"
+#&gt; 
+#&gt; [[47]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3668/"
+#&gt; 
+#&gt; [[48]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3667/"
+#&gt; 
+#&gt; [[49]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3666/"
+#&gt; 
+#&gt; [[50]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3665/"
+#&gt; 
+#&gt; [[51]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3664/"
+#&gt; 
+#&gt; [[52]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3663/"
+#&gt; 
+#&gt; [[53]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3662/"
+#&gt; 
+#&gt; [[54]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3661/"
+#&gt; 
+#&gt; [[55]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3660/"
+#&gt; 
+#&gt; [[56]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3659/"
+#&gt; 
+#&gt; [[57]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3658/"
+#&gt; 
+#&gt; [[58]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3657/"
+#&gt; 
+#&gt; [[59]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3656/"
+#&gt; 
+#&gt; [[60]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3655/"
+#&gt; 
+#&gt; [[61]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3654/"
+#&gt; 
+#&gt; [[62]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3653/"
+#&gt; 
+#&gt; [[63]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3652/"
+#&gt; 
+#&gt; [[64]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3651/"
+#&gt; 
+#&gt; [[65]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3650/"
+#&gt; 
+#&gt; [[66]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3649/"
+#&gt; 
+#&gt; [[67]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3648/"
+#&gt; 
+#&gt; [[68]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3647/"
+#&gt; 
+#&gt; [[69]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3646/"
+#&gt; 
+#&gt; [[70]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3645/"
+#&gt; 
+#&gt; [[71]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3644/"
+#&gt; 
+#&gt; [[72]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3643/"
+#&gt; 
+#&gt; [[73]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3642/"
+#&gt; 
+#&gt; [[74]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3641/"
+#&gt; 
+#&gt; [[75]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3640/"
+#&gt; 
+#&gt; [[76]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3639/"
+#&gt; 
+#&gt; [[77]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3638/"
+#&gt; 
+#&gt; [[78]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3637/"
+#&gt; 
+#&gt; [[79]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3636/"
+#&gt; 
+#&gt; [[80]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/3635/"
+#&gt; 
+#&gt; [[81]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/2968/"
+#&gt; 
+#&gt; [[82]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/2967/"
+#&gt; 
+#&gt; [[83]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/2966/"
+#&gt; 
+#&gt; [[84]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/870/"
+#&gt; 
+#&gt; [[85]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/465/"
+#&gt; 
+#&gt; [[86]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/463/"
+#&gt; 
+#&gt; [[87]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/410/"
+#&gt; 
+#&gt; [[88]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/408/"
+#&gt; 
+#&gt; [[89]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/406/"
+#&gt; 
+#&gt; [[90]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/405/"
+#&gt; 
+#&gt; [[91]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/373/"
+#&gt; 
+#&gt; [[92]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/372/"
+#&gt; 
+#&gt; [[93]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/299/"
+#&gt; 
+#&gt; [[94]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/298/"
+#&gt; 
+#&gt; [[95]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/203/"
+#&gt; 
+#&gt; [[96]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/56/"
+#&gt; 
+#&gt; [[97]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/15/"
+#&gt; 
+#&gt; [[98]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/14/"
+#&gt; 
+#&gt; [[99]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/11/"
+#&gt; 
+#&gt; [[100]]
+#&gt; [1] "https://data.scrc.uk/api/storage_root/10/"
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -124,15 +124,176 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>table</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>entity_id</th>
-      <td><p>entity ID</p></td>
+      <td><p>an <code>integer</code> specifying the id of an entry</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>get_entity</span><span class='op'>(</span><span class='st'>"storage_root"</span>, <span class='fl'>11</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $url
+#&gt; [1] "https://data.scrc.uk/api/storage_root/11/"
+#&gt; 
+#&gt; $last_updated
+#&gt; [1] "2020-08-26T14:31:49.883166Z"
+#&gt; 
+#&gt; $name
+#&gt; [1] "github"
+#&gt; 
+#&gt; $root
+#&gt; [1] "https://github.com/"
+#&gt; 
+#&gt; $accessibility
+#&gt; [1] 0
+#&gt; 
+#&gt; $updated_by
+#&gt; [1] "https://data.scrc.uk/api/users/3/"
+#&gt; 
+#&gt; $locations
+#&gt; $locations[[1]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/269/"
+#&gt; 
+#&gt; $locations[[2]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/675/"
+#&gt; 
+#&gt; $locations[[3]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/703/"
+#&gt; 
+#&gt; $locations[[4]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/692/"
+#&gt; 
+#&gt; $locations[[5]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/754/"
+#&gt; 
+#&gt; $locations[[6]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10667/"
+#&gt; 
+#&gt; $locations[[7]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10512/"
+#&gt; 
+#&gt; $locations[[8]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10434/"
+#&gt; 
+#&gt; $locations[[9]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10566/"
+#&gt; 
+#&gt; $locations[[10]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10592/"
+#&gt; 
+#&gt; $locations[[11]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10644/"
+#&gt; 
+#&gt; $locations[[12]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1632/"
+#&gt; 
+#&gt; $locations[[13]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1004/"
+#&gt; 
+#&gt; $locations[[14]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10462/"
+#&gt; 
+#&gt; $locations[[15]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10542/"
+#&gt; 
+#&gt; $locations[[16]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10568/"
+#&gt; 
+#&gt; $locations[[17]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/5237/"
+#&gt; 
+#&gt; $locations[[18]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/6888/"
+#&gt; 
+#&gt; $locations[[19]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10673/"
+#&gt; 
+#&gt; $locations[[20]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/7461/"
+#&gt; 
+#&gt; $locations[[21]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10411/"
+#&gt; 
+#&gt; $locations[[22]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10492/"
+#&gt; 
+#&gt; $locations[[23]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10622/"
+#&gt; 
+#&gt; $locations[[24]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1229/"
+#&gt; 
+#&gt; $locations[[25]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1622/"
+#&gt; 
+#&gt; $locations[[26]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1505/"
+#&gt; 
+#&gt; $locations[[27]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/1603/"
+#&gt; 
+#&gt; $locations[[28]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10444/"
+#&gt; 
+#&gt; $locations[[29]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10525/"
+#&gt; 
+#&gt; $locations[[30]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/8051/"
+#&gt; 
+#&gt; $locations[[31]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/9826/"
+#&gt; 
+#&gt; $locations[[32]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10605/"
+#&gt; 
+#&gt; $locations[[33]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10421/"
+#&gt; 
+#&gt; $locations[[34]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10475/"
+#&gt; 
+#&gt; $locations[[35]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10502/"
+#&gt; 
+#&gt; $locations[[36]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10658/"
+#&gt; 
+#&gt; $locations[[37]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10684/"
+#&gt; 
+#&gt; $locations[[38]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10530/"
+#&gt; 
+#&gt; $locations[[39]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10582/"
+#&gt; 
+#&gt; $locations[[40]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10452/"
+#&gt; 
+#&gt; $locations[[41]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10558/"
+#&gt; 
+#&gt; $locations[[42]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10610/"
+#&gt; 
+#&gt; $locations[[43]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/5812/"
+#&gt; 
+#&gt; $locations[[44]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/8060/"
+#&gt; 
+#&gt; $locations[[45]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/10482/"
+#&gt; 
+#&gt; $locations[[46]]
+#&gt; [1] "https://data.scrc.uk/api/storage_location/3935/"
+#&gt; 
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

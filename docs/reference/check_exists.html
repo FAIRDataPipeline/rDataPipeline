@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="check_exists — check_exists" />
-<meta property="og:description" content="check_exists" />
+<meta property="og:description" content="Check whether an entry already exists in a table (in the data registry)" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class="ref-description">
-    <p>check_exists</p>
+    <p>Check whether an entry already exists in a table (in the data registry)</p>
     </div>
 
     <pre class="usage"><span class='fu'>check_exists</span><span class='op'>(</span><span class='va'>table</span>, <span class='va'>query</span><span class='op'>)</span></pre>
@@ -124,15 +124,28 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>table name e.g.</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>query</th>
-      <td><p>query valid for table</p></td>
+      <td><p>a <code>list</code> containing a valid query for the table, <em>e.g.</em>
+<code><a href='https://rdrr.io/r/base/list.html'>list(field = value)</a></code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns <code>TRUE</code> if the entry exists and <code>FALSE</code> if it
+doesn't</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Check whether "github" is in the storage_root table</span>
+<span class='fu'>check_exists</span><span class='op'>(</span><span class='st'>"storage_root"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"github"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Check whether "not_a_root" is in the storage_root table</span>
+<span class='fu'>check_exists</span><span class='op'>(</span><span class='st'>"storage_root"</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"not_a_root"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

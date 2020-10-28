@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="bin_ages — bin_ages" />
-<meta property="og:description" content="bin_ages" />
+<meta property="og:description" content="Function used to bin ages in a data.frame" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class="ref-description">
-    <p>bin_ages</p>
+    <p>Function used to bin ages in a <code>data.frame</code></p>
     </div>
 
     <pre class="usage"><span class='fu'>bin_ages</span><span class='op'>(</span><span class='va'>dat</span>, <span class='va'>ageclasses</span><span class='op'>)</span></pre>
@@ -124,15 +124,31 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>dat</p></td>
+      <td><p>a <code>data.frame</code> containing population counts (see Examples
+below)</p></td>
     </tr>
     <tr>
       <th>ageclasses</th>
-      <td><p>ageclasses</p></td>
+      <td><p>a <code>data.frame</code> containing age class boundaries</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># NRS example</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>273</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>91</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"AGE"</span>, <span class='fl'>0</span><span class='op'>:</span><span class='fl'>90</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>91</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"AGE90+"</span>
+<span class='fu'>bin_ages</span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>50</span>, <span class='fl'>80</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      AGE0-9 AGE10-49 AGE50-79 AGE80+
+#&gt; [1,]   1806     6035     3998   1320
+#&gt; [2,]    957     4739     4563   1664
+#&gt; [3,]   1115     4763     4647   1794</div><div class='input'><span class='fu'>bin_ages</span><span class='op'>(</span><span class='va'>df</span>, <span class='st'>"total"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   total
+#&gt; 1 13159
+#&gt; 2 11923
+#&gt; 3 12319</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

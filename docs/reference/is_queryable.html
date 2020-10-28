@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="is_queryable — is_queryable" />
-<meta property="og:description" content="Produces error Unknown Table if table does not exist" />
+<meta property="og:description" content="Check whether fields are queryable" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Produces error <code>Unknown Table</code> if table does not exist</p>
+    <p>Check whether fields are queryable</p>
     </div>
 
     <pre class="usage"><span class='fu'>is_queryable</span><span class='op'>(</span><span class='va'>table</span>, <span class='va'>query_parameter</span><span class='op'>)</span></pre>
@@ -124,19 +124,30 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>name of table</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>query_parameter</th>
-      <td><p>a string or vector of strings to check</p></td>
+      <td><p>a <code>string</code> or <code>vector</code> of field names</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>either true / false if a single string is provided or a vector or
-true or false if vector is provided</p>
+    <p>Returns <code>TRUE</code> if the entry is queryable and <code>FALSE</code> if it
+isn't</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Is "name" a queryable field in the "storage_root" table?</span>
+<span class='fu'>is_queryable</span><span class='op'>(</span><span class='st'>"storage_root"</span>, <span class='st'>"name"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='co'># Are "not_a_field" and "name" queryable fields in the "storage_root" table?</span>
+<span class='fu'>is_queryable</span><span class='op'>(</span><span class='st'>"storage_root"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"not_a_field"</span>, <span class='st'>"name"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE  TRUE</div><div class='input'>
+<span class='co'># Is "name" a queryable field in the "not_a_table" table?</span>
+<span class='fu'>is_queryable</span><span class='op'>(</span><span class='st'>"users"</span>, <span class='st'>"name"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

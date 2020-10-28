@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Get fields from table — get_fields" />
-<meta property="og:description" content="Use API endpoint to produce a list of fields for a table." />
+<meta property="og:description" content="Use API endpoint to produce a list of fields for a table. Requires API key." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.12.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.13.2</span>
       </span>
     </div>
 
@@ -114,7 +114,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Use API endpoint to produce a list of fields for a table.</p>
+    <p>Use API endpoint to produce a list of fields for a table. Requires API key.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_fields</span><span class='op'>(</span><span class='va'>table</span>, <span class='va'>key</span>, live <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
@@ -124,25 +124,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table</th>
-      <td><p>name of table</p></td>
+      <td><p>a <code>string</code> specifying the name of the table</p></td>
     </tr>
     <tr>
       <th>key</th>
-      <td><p>(optional) api key / token</p></td>
+      <td><p>(optional) API token from data.scrc.uk</p></td>
     </tr>
     <tr>
       <th>live</th>
-      <td><p>whether or not to get the field definitions direct from the API</p></td>
+      <td><p>a <code>boolean</code> specifying whether or not to get the field
+definitions directly from the API</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a dataframe of fields and their attributes
-set to "none"</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Requires API key</p>
+    <p>Returns a <code>data.frame</code> of fields and their attributes set to
+"none"</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
