@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_h5_from_object_id.R
 \name{get_h5_from_object_id}
 \alias{get_h5_from_object_id}
-\title{get_h5_from_object_id}
+\title{Download h5 file}
 \usage{
 get_h5_from_object_id(obj_id, data_dir = "data-raw")
 }
@@ -20,5 +20,6 @@ Returns a \code{list} comprising two elements
 }
 }
 \description{
-get_h5_from_object_id
+Download h5 file
 }
+\keyword{internal}

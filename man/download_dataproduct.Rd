@@ -27,16 +27,16 @@ download_dataproduct
 }
 \examples{
 \dontrun{
+data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
+
 # Automatically download the latest version
-download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
- "data-raw")
+download_dataproduct(name = data_product,
+                     data_dir = "data-raw")
 
 # Download specified version
-download_dataproduct("records/SARS-CoV-2/scotland/cases-and-management/testing",
- "data-raw", "0.20200920.0")
-
-# Download only version
-download_dataproduct("geography/scotland/lookup_table", "data-raw")
+download_dataproduct(name = data_product,
+                     data_dir = "data-raw",
+                     version = "0.20200920.0")
 }
 
 }

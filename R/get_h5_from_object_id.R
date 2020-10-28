@@ -1,4 +1,4 @@
-#' get_h5_from_object_id
+#' Download h5 file
 #'
 #' @param obj_id an \code{integer} specifying the id of an entry
 #' @param data_dir a \code{string} specifying the directory in which the file
@@ -10,6 +10,7 @@
 #' \item{components}{H5 file components}
 #' }
 #' @export
+#' @keywords internal
 #'
 get_h5_from_object_id <- function(obj_id, data_dir = "data-raw"){
   # If data_dir doesn't exist, create it
