@@ -16,4 +16,4 @@ library(devtools)
 install_github("ScottishCovidResponse/SCRCdataAPI")
 ```
 
-For more information, please visit https://scottishcovidresponse.github.io
+For more information, please visit the [SCRC docs website](https://scottishcovidresponse.github.io/docs/data_pipeline/R/)
