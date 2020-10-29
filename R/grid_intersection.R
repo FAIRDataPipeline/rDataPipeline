@@ -4,6 +4,7 @@
 #' @param gridsize gridsize
 #'
 #' @export
+#' @keywords internal
 #'
 grid_intersection <- function(shapefile,
                               gridsize) {

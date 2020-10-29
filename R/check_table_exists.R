@@ -1,8 +1,10 @@
 #' Check if table exists
 #'
+#' Check if table exists in the data registry
+#'
 #' @param table a \code{string} specifying the name of the table
 #'
-#' @return Return \code{TRUE} if a table exists, \code{FALSE} if it doesn't
+#' @return Returns \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 #' @export
 #' @keywords internal
 #'
