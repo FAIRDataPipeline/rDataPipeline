@@ -40,13 +40,8 @@
 
 
 <meta property="og:title" content="Attach issue to object — attach_issue" />
-<meta property="og:description" content="This function is used to attach an issue to an object:
-an external object - specify the external_object_doi argument
-a data product - specify the namespace and
-data_product argument
-a component within a data product - specify the namespace,
-data_product, and component argument
-See examples." />
+<meta property="og:description" content="This function is used to attach an issue to an object, which may be an
+external object, a data product, or a component within a data product." />
 
 
 
@@ -78,7 +73,7 @@ See examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.16.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.17.0</span>
       </span>
     </div>
 
@@ -120,25 +115,11 @@ See examples." />
     </div>
 
     <div class="ref-description">
-    <p>This function is used to attach an issue to an object:</p><ul>
-<li><p>an external object - specify the <code>external_object_doi</code> argument</p></li>
-<li><p>a data product - specify the <code>namespace</code> and
-<code>data_product</code> argument</p></li>
-<li><p>a component within a data product - specify the <code>namespace</code>,
-<code>data_product</code>, and <code>component</code> argument</p></li>
-</ul><p>See examples.</p>
+    <p>This function is used to attach an issue to an object, which may be an
+external object, a data product, or a component within a data product.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>attach_issue</span><span class='op'>(</span>
-  <span class='va'>description</span>,
-  <span class='va'>severity</span>,
-  <span class='va'>external_object_doi</span>,
-  <span class='va'>namespace</span>,
-  <span class='va'>data_product</span>,
-  <span class='va'>component</span>,
-  <span class='va'>version</span>,
-  <span class='va'>key</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>attach_issue</span><span class='op'>(</span><span class='va'>description</span>, <span class='va'>severity</span>, <span class='va'>object</span>, <span class='va'>key</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,29 +134,9 @@ See examples." />
       <td><p>an <code>integer</code> specifying the severity of the <code>issue</code></p></td>
     </tr>
     <tr>
-      <th>external_object_doi</th>
-      <td><p>a <code>string</code> specifying the DOI or name of the
-<code>external_object</code></p></td>
-    </tr>
-    <tr>
-      <th>namespace</th>
-      <td><p>a <code>string</code> specifying the name of the namespace</p></td>
-    </tr>
-    <tr>
-      <th>data_product</th>
-      <td><p>a <code>string</code> specifying the name of the
-<code>data_product</code></p></td>
-    </tr>
-    <tr>
-      <th>component</th>
-      <td><p>a <code>string</code> specifying the name of the
-<code>object_component</code>, unique in the context of <code>object_component</code>
-and its <code>object</code> reference</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>a <code>string</code> specifying the version number of the
-data_product or external_object</p></td>
+      <th>object</th>
+      <td><p>a <code>list</code> comprising various elements depending on what
+kind of object has an issue; see Details</p></td>
     </tr>
     <tr>
       <th>key</th>
@@ -183,9 +144,57 @@ data_product or external_object</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The object argument should contain different elements depending on
+what kind of object has an issue:</p><ul>
+<li><p>an external object - <code><a href='https://rdrr.io/r/base/list.html'>list(external_object_doi = "string",
+version = "string")</a></code></p></li>
+<li><p>a data product - <code><a href='https://rdrr.io/r/base/list.html'>list(data_product = "string",
+namespace = "string", version = "string")</a></code></p></li>
+<li><p>a component within a data product - <code><a href='https://rdrr.io/r/base/list.html'>list(data_product = "string",
+namespace = "string", component = "string", version = "string")</a></code></p></li>
+</ul><p>where <code>external_object_doi</code> is a <code>string</code> specifying the DOI or
+name of the <code>external_object</code>, <code>namespace</code> is a <code>string</code>
+specifying the name of the namespace, <code>data_product</code> is a <code>string</code>
+specifying the name of the <code>data_product</code>, <code>component</code> a
+<code>string</code> specifying the name of the <code>object_component</code>, unique in
+the context of <code>object_component</code> and its <code>object</code> reference, and
+<code>version</code> is a <code>string</code> specifying the version number of the
+<code>data_product</code> or <code>external_object</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Attach issue to an external object</span>
+<span class='va'>object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>external_object_doi <span class='op'>=</span> <span class='st'>"Scottish spatial lookup table - dz"</span>,
+               version <span class='op'>=</span> <span class='st'>"0.1.0"</span><span class='op'>)</span>
+<span class='fu'>attach_issue</span><span class='op'>(</span>description <span class='op'>=</span> <span class='st'>"An issue affecting an external object"</span>,
+             severity <span class='op'>=</span> <span class='fl'>10</span>,
+             object <span class='op'>=</span> <span class='va'>object</span>,
+             key <span class='op'>=</span> <span class='va'>key</span><span class='op'>)</span>
+
+
+<span class='co'># Attach issue to a data product</span>
+<span class='va'>object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>data_product <span class='op'>=</span> <span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/carehomes"</span>,
+               namespace <span class='op'>=</span> <span class='st'>"SCRC"</span>,
+               version <span class='op'>=</span> <span class='st'>"0.20200916.0"</span><span class='op'>)</span>
+<span class='fu'>attach_issue</span><span class='op'>(</span>description <span class='op'>=</span> <span class='st'>"An issue affecting a data product"</span>,
+             severity <span class='op'>=</span> <span class='fl'>10</span>,
+             object <span class='op'>=</span> <span class='va'>object</span>,
+             key <span class='op'>=</span> <span class='va'>key</span><span class='op'>)</span>
+
+<span class='co'># Attach issue to a component within a data product</span>
+<span class='va'>object</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>data_product <span class='op'>=</span> <span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/carehomes"</span>,
+               namespace <span class='op'>=</span> <span class='st'>"SCRC"</span>,
+               component <span class='op'>=</span> <span class='st'>"date-country-response_rate"</span>,
+               version <span class='op'>=</span> <span class='st'>"0.20200916.0"</span><span class='op'>)</span>
+<span class='fu'>attach_issue</span><span class='op'>(</span>description <span class='op'>=</span> <span class='st'>"An issue affecting a component within a data product"</span>,
+             severity <span class='op'>=</span> <span class='fl'>10</span>,
+             object <span class='op'>=</span> <span class='va'>object</span>,
+             key <span class='op'>=</span> <span class='va'>key</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
