@@ -4,7 +4,7 @@
 \alias{download_external_object}
 \title{Download external object}
 \usage{
-download_external_object(name, data_dir, version)
+download_external_object(name, data_dir, version, unzip = FALSE)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the external object}
@@ -14,6 +14,9 @@ download_external_object(name, data_dir, version)
 \item{version}{(optional) a \code{string} specifying the version number of
 the external object; if version is not specified, the most recent version
 will be downloaded}
+
+\item{unzip}{a \code{boolean} specifying which when \code{TRUE} will
+unzip a \code{.zip} file and remove the original \code{.zip} file}
 }
 \value{
 Returns list comprising two elements
