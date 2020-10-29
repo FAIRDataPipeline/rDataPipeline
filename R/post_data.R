@@ -8,6 +8,7 @@
 #' @param ... internal parameters
 #'
 #' @export
+#' @keywords internal
 #'
 post_data <- function(table, data, key, ...) {
 

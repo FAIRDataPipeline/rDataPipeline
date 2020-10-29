@@ -4,6 +4,7 @@
 #' @param entity_id an \code{integer} specifying the id of an entry
 #'
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' get_entity("storage_root", 11)
