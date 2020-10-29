@@ -18,3 +18,4 @@ Get entity
 get_entity("storage_root", 11)
 
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ post_data(table, data, key, ...)
 \description{
 Post data to registry
 }
+\keyword{internal}

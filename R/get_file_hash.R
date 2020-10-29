@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-get_hash <- function(filename) {
+get_file_hash <- function(filename) {
   if(!file.exists(filename))
     stop(paste0("File ", filename, " does not exist"))
   file(filename) %>%

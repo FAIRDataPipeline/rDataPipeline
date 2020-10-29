@@ -28,7 +28,7 @@ upload_source_data <- function(doi_or_unique_name,
 
   # upload original-source metadata to registry ------------------------------
 
-  hash <- get_hash(local_path)
+  hash <- get_file_hash(local_path)
 
   original_storeId <- new_storage_location(
     path = original_path,
