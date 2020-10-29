@@ -41,10 +41,10 @@ download_from_url <- function(source_root,
   if(!grepl("/$", source_root))
     stop("The source_root argument should have a trailing slash")
   if(grepl("^/", source_path))
-    stop("The source_path argument should not have a prepending slash")
+    stop("The source_path argument should not have a leading slash")
 
   # Download file
-  download.file(url = paste(source_root, source_path, sep = "/"),
+  download.file(url = paste0(source_root, source_path),
                 destfile = file.path(path, filename), mode = "wb")
 
   # If file is zipped, unzip it and remove *.zip file
