@@ -10,9 +10,9 @@ check_table_exists(table)
 \item{table}{a \code{string} specifying the name of the table}
 }
 \value{
-Return \code{TRUE} if a table exists, \code{FALSE} if it doesn't
+Returns \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 }
 \description{
-Check if table exists
+Check if table exists in the data registry
 }
 \keyword{internal}

@@ -22,7 +22,7 @@ upload_data_product <- function(storage_root_id,
 
   product_storeId <- new_storage_location(
     path = product_path,
-    hash = get_hash(processed_path),
+    hash = get_file_hash(processed_path),
     storage_root_id = storage_root_id,
     key = key)
 

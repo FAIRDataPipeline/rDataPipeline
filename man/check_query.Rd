@@ -13,13 +13,16 @@ check_query(table, query)
 \code{list(field = value)}}
 }
 \value{
-Returns boolean if the query is valid for the table
+Returns \code{TRUE} if the query is valid for the table, \code{FALSE}
+if it isn't
 }
 \description{
-Produces an error if table does not exist or if query is not a list
+Check if query is valid
 }
 \examples{
 check_query("storage_root", list(name = "github"))
+check_query("storage_root", list(not_a_field = "github"))
+check_query("not_a_table", list(not_a_field = "github"))
 
 }
 \keyword{internal}

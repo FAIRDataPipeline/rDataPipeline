@@ -12,10 +12,18 @@ get_url(table, query = list())
 \item{query}{a \code{list} containing a valid query for the table, \emph{e.g.}
 \code{list(field = value)}}
 }
+\value{
+Returns a string or list of strings specifying the URL or URLs of
+entries in a table
+}
 \description{
-Get URL
+Retrieve URLs for particular entries or all entries in a table
 }
 \examples{
-get_url("storage_root")
+# Retrieve URLs for all entries in a table
+get_url(table = "storage_root")
+
+# Retrieve the URL of a particular entry in a table
+get_url(table = "storage_root", list(name = "github"))
 
 }

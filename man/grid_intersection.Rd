@@ -14,3 +14,4 @@ grid_intersection(shapefile, gridsize)
 \description{
 Grid intersection
 }
+\keyword{internal}

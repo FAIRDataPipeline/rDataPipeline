@@ -2,7 +2,7 @@ library(dplyr)
 
 set.seed(123)
 
-context("Testing convert2grid()")
+context("Testing convert_to_grid()")
 
 boydorr <- Sys.getenv("BOYDORR")
 
@@ -48,15 +48,15 @@ test_that("Test Convert to Grid", {
     dplyr::select(grid_id, AREAcode, grid_area_proportion)
 
   # - Test with a single data column
-  test_that("convert2grid() accurately divides population into grid", {
+  test_that("convert_to_grid() accurately divides population into grid", {
     pop_data <- data.frame(AREAcode = LETTERS[1:16],
                            Population = sample(1e6, size = 16))
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = basic_shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = basic_shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
     expected_counts <- sf::st_drop_geometry(subdivisions) %>%
       dplyr::left_join(pop_data, by = "AREAcode") %>%
       dplyr::group_by(grid_id) %>%
@@ -68,18 +68,18 @@ test_that("Test Convert to Grid", {
 
 
   #   - Test with a multiple data columns (age classes)
-  test_that("convert2grid() accurately divides age classes into grid", {
+  test_that("convert_to_grid() accurately divides age classes into grid", {
     pop_data <- data.frame(AREAcode = LETTERS[1:16],
                            Age1 = sample(1e6, size = 16),
                            Age2 = sample(1e6, size = 16),
                            Age3 = sample(1e6, size = 16),
                            Age4 = sample(1e6, size = 16))
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = basic_shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = basic_shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
     result$grid_pop = result$grid_pop[order(result$grid_id),]
 
     expected_counts <- sf::st_drop_geometry(subdivisions) %>%
@@ -122,17 +122,17 @@ test_that("Test Convert to Grid", {
     dplyr::mutate(grid_area_proportion = as.numeric(subdivision_area / shape_area)) %>%
     dplyr::select(grid_id, AREAcode, grid_area_proportion)
 
-  test_that("convert2grid() divides population in areas split between grid cells by area", {
+  test_that("convert_to_grid() divides population in areas split between grid cells by area", {
     # Will always yield integers, making it easier to anticipate result
     pop_size <- 1e6
     pop_data <- data.frame(AREAcode = LETTERS[1:25],
                            Population = pop_size)
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
     expected_result <- (pop_size * 4) + (pop_size * 4 * 0.5) + (pop_size * 0.25)
     result$grid_pop = result$grid_pop[order(result$grid_id),]
 
@@ -140,39 +140,39 @@ test_that("Test Convert to Grid", {
   })
 
 
-  test_that("convert2grid() returns only integers", {
+  test_that("convert_to_grid() returns only integers", {
     # Not divisible by 4, so would yield non-integer numbers unless this is
-    # handled by convert2grid
+    # handled by convert_to_grid
     pop_size <- c(3, 5, 6, 7, 9, 10, 11, 13, 14)
     pop_data <- data.frame(AREAcode = LETTERS[1:25],
                            Population = 3)#sample(pop_size, size = 25, replace = TRUE))
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
     testthat::expect_true(all(result$grid_pop %% 1 == 0))
   })
 
 
-  test_that("convert2grid() maintains population size when correcting for non-integer results", {
+  test_that("convert_to_grid() maintains population size when correcting for non-integer results", {
     # Not divisible by 4, so would yield non-integer numbers unless this is
-    # handled by convert2grid
+    # handled by convert_to_grid
     pop_size <- c(3, 5, 6, 7, 9)
     pop_data <- data.frame(AREAcode = LETTERS[1:25],
                            Population = pop_size)
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
     testthat::expect_equal(sum(result$grid_pop), sum(pop_data$Population))
   })
 
 
-  test_that("convert2grid() distributes integers broadly equally when there are ties", {
+  test_that("convert_to_grid() distributes integers broadly equally when there are ties", {
     # When several cells cover the same proportion of the map and the underlying
     # areas have the same population size, they should receive the same number of
     # individuals - this may not be possible while maintaining integers, but
@@ -206,11 +206,11 @@ test_that("Test Convert to Grid", {
     rank_correlation <- vector()
 
     for (i in 1:10) {
-      result <- convert2grid(dat = pop_data,
-                             shapefile = shapefile,
-                             subdivisions = subdivisions,
-                             conversion.table = subdivisions_area,
-                             grid_size = "grid")
+      result <- convert_to_grid(dat = pop_data,
+                                shapefile = shapefile,
+                                subdivisions = subdivisions,
+                                conversion.table = subdivisions_area,
+                                grid_size = "grid")
       tolerance <- c(tolerance,
                      max(result$grid_pop) - min(result$grid_pop))
       rank_correlation <- c(rank_correlation,
@@ -231,7 +231,7 @@ test_that("Test Convert to Grid", {
   })
 
 
-  test_that("convert2grid() distributes integers to the correct cells", {
+  test_that("convert_to_grid() distributes integers to the correct cells", {
     # When correcting for non-integer cell counts, the cells closest to an
     # integer should be adjusted
     # - Create a shapefile which is larger than the geometry it contains
@@ -274,11 +274,11 @@ test_that("Test Convert to Grid", {
     pop_data <- data.frame(AREAcode = LETTERS[1:2],
                            Population1 = c(2*4 + 1*4, 0))
 
-    result <- convert2grid(dat = pop_data,
-                           shapefile = complex_shapefile,
-                           subdivisions = subdivisions,
-                           conversion.table = subdivisions_area,
-                           grid_size = "grid")
+    result <- convert_to_grid(dat = pop_data,
+                              shapefile = complex_shapefile,
+                              subdivisions = subdivisions,
+                              conversion.table = subdivisions_area,
+                              grid_size = "grid")
 
     cell_size_order <- sf::st_area(subdivisions) %>%
       order(decreasing = TRUE)

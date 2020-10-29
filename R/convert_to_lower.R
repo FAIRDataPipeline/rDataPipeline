@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-convert2lower <- function(dat, convert_to, conversion_table) {
+convert_to_lower <- function(dat, convert_to, conversion_table) {
 
   # Convert datazones
   regex <- paste0("AREA|", toupper(convert_to))
