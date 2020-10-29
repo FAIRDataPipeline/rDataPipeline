@@ -7,6 +7,8 @@
 #' @param version (optional) a \code{string} specifying the version number of
 #' the external object; if version is not specified, the most recent version
 #' will be downloaded
+#' @param unzip a \code{boolean} specifying which when \code{TRUE} will
+#' unzip a \code{.zip} file and remove the original \code{.zip} file
 #'
 #' @return Returns list comprising two elements
 #' \itemize{
@@ -32,7 +34,10 @@
 #'                          version = "0.20200920.0")
 #' }
 #'
-download_external_object <- function(name, data_dir, version) {
+download_external_object <- function(name,
+                                     data_dir,
+                                     version,
+                                     unzip = FALSE) {
   # List all version numbers in the data registry
   entries <- get_entry("external_object", list(doi_or_unique_name = name))
 
@@ -53,6 +58,15 @@ download_external_object <- function(name, data_dir, version) {
     object_id <- gsub("/", "", object_id)
 
     # Download file
-    return(get_h5_from_object_id(as.numeric(object_id), data_dir))
+    out <- get_h5_from_object_id(as.numeric(object_id), data_dir)
+
+    # If file is zipped, unzip it and remove *.zip file
+    if(grepl(".zip$", out$downloaded_to) & unzip) {
+      exdir <-  gsub(".zip$", "", out$downloaded_to)
+      unzip(out$downloaded_to, exdir = exdir)
+      file.remove(out$downloaded_to)
+    }
+
+    return(out)
   }
 }
