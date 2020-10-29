@@ -13,6 +13,8 @@
 #' *e.g.* "https://data.scrc.uk/api/storage_root/14/"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_storage_location <- function(path,

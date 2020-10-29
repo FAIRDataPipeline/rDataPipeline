@@ -14,6 +14,8 @@
 #' @param outputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_coderun <- function(run_date,

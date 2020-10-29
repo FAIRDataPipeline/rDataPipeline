@@ -20,3 +20,13 @@ upload_github_repo(storage_root_id, repo, hash, version, key)
 \description{
 Upload github_repo metadata to the data registry
 }
+\seealso{
+Other upload functions: 
+\code{\link{upload_data_product}()},
+\code{\link{upload_object_links}()},
+\code{\link{upload_paper}()},
+\code{\link{upload_source_data}()},
+\code{\link{upload_submission_script}()},
+\code{\link{upload_toml_to_github}()}
+}
+\concept{upload functions}

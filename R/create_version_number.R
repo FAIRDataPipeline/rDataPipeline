@@ -32,6 +32,8 @@
 #' @return returns a character vector in the format of \code{major.minor.patch}
 #' *e.g.* \code{0.20200101.0}
 #'
+#' @family create functions
+#'
 #' @export
 #'
 create_version_number <- function(download_date = NULL,

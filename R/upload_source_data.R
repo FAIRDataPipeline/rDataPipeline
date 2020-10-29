@@ -12,6 +12,8 @@
 #' @param version e.g. "20100711.0"
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_source_data <- function(doi_or_unique_name,

@@ -10,6 +10,8 @@
 #' @param unzip a \code{boolean} specifying which when \code{TRUE} will
 #' unzip a \code{.zip} file and remove the original \code{.zip} file
 #'
+#' @family download functions
+#'
 #' @export
 #'
 #' @examples

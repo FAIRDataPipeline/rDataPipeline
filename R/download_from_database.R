@@ -8,6 +8,8 @@
 #' @param overwrite a \code{boolean} specifying whether or not the file should
 #' be overwritten if it already exists
 #'
+#' @family download functions
+#'
 #' @export
 #'
 #' @examples

@@ -12,6 +12,8 @@
 #' @param key API token from data.scrc.uk
 #' @param ... internal parameters
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_author <- function(family_name,

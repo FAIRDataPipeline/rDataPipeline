@@ -13,6 +13,8 @@
 #' `object` table *e.g.* "https://data.scrc.uk/api/object/154/"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_code_repo_release <- function(name,

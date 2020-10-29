@@ -5,6 +5,9 @@
 #' \code{list(field = value)}
 #'
 #' @return Returns a \code{list} of fields present in the specified entry
+#'
+#' @family get functions
+#'
 #' @export
 #'
 #' @examples

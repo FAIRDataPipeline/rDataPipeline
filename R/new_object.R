@@ -14,6 +14,8 @@
 #' \code{attach_issue()} and associated functionality to attach issues to
 #' objects and object components.
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_object <- function(storage_location_id,

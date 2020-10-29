@@ -6,6 +6,8 @@
 #' @param repo repo
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_github_repo <- function(storage_root_id,

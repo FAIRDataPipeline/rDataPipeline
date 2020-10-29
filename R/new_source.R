@@ -10,6 +10,8 @@
 #' associated with the data source *e.g.* "https://statistics.gov.scot/"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_source <- function(name,

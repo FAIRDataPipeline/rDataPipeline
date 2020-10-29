@@ -4,6 +4,8 @@
 #'
 #' @param filename a \code{string} specifying a filename
 #'
+#' @family get functions
+#'
 #' @export
 #'
 get_file_hash <- function(filename) {

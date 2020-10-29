@@ -5,6 +5,8 @@
 #' @param name a \code{string} specifying the name of the namespace *e.g.* "SCRC"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_namespace <- function(name,

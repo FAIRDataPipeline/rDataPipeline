@@ -6,6 +6,8 @@
 #' only a few lines long and don't have a home elsewhere
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_text_file <- function(text, key) {

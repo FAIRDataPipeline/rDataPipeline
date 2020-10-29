@@ -6,6 +6,8 @@
 #' @param name (optional) the name you want to be associated with the git commit
 #' @param email (optional) the email you want to be associated with the git commit
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_toml_to_github <- function(path_to_toml,

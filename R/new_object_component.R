@@ -16,6 +16,8 @@
 #' \code{attach_issue()} and associated functionality to attach issues to
 #' objects and objet components.
 #'
+#' @family new functions
+#'
 #' @export
 #'
 #' @examples

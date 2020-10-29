@@ -7,6 +7,8 @@
 #' @param run_date e.g.
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_submission_script <- function(storage_root_id,

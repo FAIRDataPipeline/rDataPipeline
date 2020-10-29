@@ -24,3 +24,20 @@ associated \code{namespace} table \emph{e.g.} "https://data.scrc.uk/api/namespac
 \description{
 Upload information to the \code{data_product} table in the data registry
 }
+\seealso{
+Other new functions: 
+\code{\link{new_author}()},
+\code{\link{new_code_repo_release}()},
+\code{\link{new_coderun}()},
+\code{\link{new_external_object}()},
+\code{\link{new_issue}()},
+\code{\link{new_keyword}()},
+\code{\link{new_namespace}()},
+\code{\link{new_object_component}()},
+\code{\link{new_object}()},
+\code{\link{new_source}()},
+\code{\link{new_storage_location}()},
+\code{\link{new_storage_root}()},
+\code{\link{new_text_file}()}
+}
+\concept{new functions}

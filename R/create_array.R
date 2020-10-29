@@ -21,6 +21,8 @@
 #' @param units (optional) a \code{string} specifying the units of the data as
 #' a whole
 #'
+#' @family create functions
+#'
 #' @export
 #'
 #' @examples

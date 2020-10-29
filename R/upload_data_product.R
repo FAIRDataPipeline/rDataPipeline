@@ -9,6 +9,8 @@
 #' @param namespace_id e.g.
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_data_product <- function(storage_root_id,

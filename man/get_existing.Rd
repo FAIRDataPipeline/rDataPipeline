@@ -30,3 +30,12 @@ get_existing("storage_root", limit_results = FALSE)
 get_existing("data_product")
 
 }
+\seealso{
+Other get functions: 
+\code{\link{get_components}()},
+\code{\link{get_entry}()},
+\code{\link{get_file_hash}()},
+\code{\link{get_github_hash}()},
+\code{\link{get_package_info}()}
+}
+\concept{get functions}

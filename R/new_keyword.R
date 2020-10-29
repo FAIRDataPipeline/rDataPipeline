@@ -8,6 +8,8 @@
 #' *e.g.* "covid-19" or "cardiovascular diseases"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_keyword <- function(keyphrase,

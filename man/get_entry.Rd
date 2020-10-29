@@ -24,3 +24,12 @@ data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
 get_entry("data_product", list(name = data_product))
 
 }
+\seealso{
+Other get functions: 
+\code{\link{get_components}()},
+\code{\link{get_existing}()},
+\code{\link{get_file_hash}()},
+\code{\link{get_github_hash}()},
+\code{\link{get_package_info}()}
+}
+\concept{get functions}

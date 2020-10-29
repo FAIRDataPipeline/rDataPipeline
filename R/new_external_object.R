@@ -28,6 +28,8 @@
 #' *e.g.* "https://data.scrc.uk/api/storage_location/19/"
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_external_object <- function(doi_or_unique_name,

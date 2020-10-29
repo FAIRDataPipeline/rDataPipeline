@@ -6,6 +6,8 @@
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'
+#' @family get functions
+#'
 #' @export
 #'
 #' @examples

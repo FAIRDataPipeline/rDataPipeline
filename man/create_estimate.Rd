@@ -43,3 +43,11 @@ create_estimate(filename = filename,
 file.remove(file.path(data_product_name, filename))
 
 }
+\seealso{
+Other create functions: 
+\code{\link{create_array}()},
+\code{\link{create_distribution}()},
+\code{\link{create_table}()},
+\code{\link{create_version_number}()}
+}
+\concept{create functions}

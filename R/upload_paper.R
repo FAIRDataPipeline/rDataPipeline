@@ -29,6 +29,8 @@
 #' preprint
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_paper <- function(title,

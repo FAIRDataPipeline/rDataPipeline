@@ -22,7 +22,11 @@
 #' }
 #' If more than one distribution is required, they must be added as a list
 #' (see Examples)
+#'
+#' @family create functions
+#'
 #' @export
+#'
 #'
 #' @examples
 #' filename <- "0.1.0.toml"
