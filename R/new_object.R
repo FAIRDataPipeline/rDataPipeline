@@ -9,7 +9,7 @@
 #' description of the \code{object_component}
 #' @param key API token from data.scrc.uk
 #'
-#' Note that the \code{object} table contains \code{issues} is an
+#' Note that the \code{object} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
 #' \code{attach_issue()} and associated functionality to attach issues to
 #' objects and object components.
