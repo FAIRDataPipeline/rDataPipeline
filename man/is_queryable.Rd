@@ -19,14 +19,9 @@ isn't
 Check whether fields are queryable
 }
 \examples{
-# Is "name" a queryable field in the "storage_root" table?
 is_queryable("storage_root", "name")
-
-# Are "not_a_field" and "name" queryable fields in the "storage_root" table?
 is_queryable("storage_root", c("not_a_field", "name"))
-
-# Is "name" a queryable field in the "not_a_table" table?
-is_queryable("users", "name")
+is_queryable("not_a_table", "name")
 
 }
 \keyword{internal}
