@@ -25,7 +25,7 @@ severity <- "5"
 #   skip_if(is.null(external_object_id))
 #   expect_message(expect_true(is.character(attach_issue(UID,
 #                                           severity,
-#                                           external_object_id,
+#                                           list(external_object_id),
 #                                           key = key
 #                                           ))))
 # })

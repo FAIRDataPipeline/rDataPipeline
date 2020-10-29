@@ -11,6 +11,9 @@
 #' @param namespace_id a \code{string} specifying the API URL of the
 #' associated \code{namespace} table *e.g.* "https://data.scrc.uk/api/namespace/2/"
 #' @param key API token from data.scrc.uk
+#'
+#' @family new functions
+#'
 #' @export
 #'
 new_data_product <- function(name,

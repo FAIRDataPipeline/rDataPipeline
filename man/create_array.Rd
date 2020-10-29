@@ -93,3 +93,11 @@ create_array(filename = "test_array_val.h5",
 file.remove("test_array_val.h5")
 
 }
+\seealso{
+Other create functions: 
+\code{\link{create_distribution}()},
+\code{\link{create_estimate}()},
+\code{\link{create_table}()},
+\code{\link{create_version_number}()}
+}
+\concept{create functions}

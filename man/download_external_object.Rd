@@ -40,3 +40,10 @@ download_external_object(name = external_object,
 }
 
 }
+\seealso{
+Other download functions: 
+\code{\link{download_data_product}()},
+\code{\link{download_from_database}()},
+\code{\link{download_from_url}()}
+}
+\concept{download functions}

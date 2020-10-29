@@ -76,3 +76,10 @@ file.remove("records/SARS-CoV-2/scotland/human-mortality/0.1.0.csv")
 }
 
 }
+\seealso{
+Other download functions: 
+\code{\link{download_data_product}()},
+\code{\link{download_external_object}()},
+\code{\link{download_from_url}()}
+}
+\concept{download functions}

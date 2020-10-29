@@ -19,7 +19,7 @@ description of the \code{object_component}}
 
 \item{key}{API token from data.scrc.uk
 
-Note that the \code{object_component} table contains \code{issues} is an
+Note that the \code{object_component} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use
 \code{attach_issue()} and associated functionality to attach issues to
 objects and objet components.}
@@ -37,3 +37,20 @@ new_object_component(name = "age_group/week-persons-country-all_deaths",
 }}
 
 }
+\seealso{
+Other new functions: 
+\code{\link{new_author}()},
+\code{\link{new_code_repo_release}()},
+\code{\link{new_coderun}()},
+\code{\link{new_data_product}()},
+\code{\link{new_external_object}()},
+\code{\link{new_issue}()},
+\code{\link{new_keyword}()},
+\code{\link{new_namespace}()},
+\code{\link{new_object}()},
+\code{\link{new_source}()},
+\code{\link{new_storage_location}()},
+\code{\link{new_storage_root}()},
+\code{\link{new_text_file}()}
+}
+\concept{new functions}

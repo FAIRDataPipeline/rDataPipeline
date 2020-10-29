@@ -11,6 +11,8 @@
 #' which the \code{issue} is associated; this can be an empty list
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 #' @examples

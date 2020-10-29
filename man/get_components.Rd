@@ -15,3 +15,12 @@ Returns the names of the items at the root of the file
 \description{
 Returns the names of the items at the root of the file
 }
+\seealso{
+Other get functions: 
+\code{\link{get_entry}()},
+\code{\link{get_existing}()},
+\code{\link{get_file_hash}()},
+\code{\link{get_github_hash}()},
+\code{\link{get_package_info}()}
+}
+\concept{get functions}

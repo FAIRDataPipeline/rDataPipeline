@@ -8,6 +8,8 @@
 #' the data product; if version is not specified, the most recent version will
 #' be downloaded
 #'
+#' @family download functions
+#'
 #' @export
 #'
 #' @return Returns list comprising two elements

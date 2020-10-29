@@ -13,6 +13,8 @@
 #' already exist
 #' @param parameters a \code{list} (see Examples)
 #'
+#' @family create functions
+#'
 #' @export
 #'
 #' @examples

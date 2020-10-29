@@ -18,6 +18,9 @@
 #' * the github repository version number:
 #' * the github repo hash
 #' * the submission script file name
+#'
+#' @family get functions
+#'
 #' @export
 #'
 #' @examples

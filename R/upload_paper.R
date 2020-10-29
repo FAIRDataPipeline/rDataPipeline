@@ -29,6 +29,8 @@
 #' preprint
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_paper <- function(title,
@@ -136,13 +138,11 @@ upload_paper <- function(title,
       msg <- "One or more authors have not been attached to this paper"
       attach_issue(description = msg,
                    severity = 5,
-                   external_object_doi = paste0("doi://", doi),
-                   version = version,
+                   object = list(external_object_doi = paste0("doi://", doi),
+                                 version = version),
                    key = key)
     }
 
     return(externalObjectId)
-
   }
-
 }

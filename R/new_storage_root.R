@@ -11,6 +11,8 @@
 #' enum, where 0 is public (default) and 1 is private
 #' @param key API token from data.scrc.uk
 #'
+#' @family new functions
+#'
 #' @export
 #'
 new_storage_root <- function(name,

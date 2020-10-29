@@ -12,6 +12,8 @@
 #' @param row_names (optional) a \code{vector} of rownames
 #' @param column_units (optional) a \code{vector} comprising column units
 #'
+#' @family create functions
+#'
 #' @export
 #'
 #' @examples

@@ -8,6 +8,8 @@
 #' @param outputs e.g.
 #' @param key API token from data.scrc.uk
 #'
+#' @family upload functions
+#'
 #' @export
 #'
 upload_object_links <- function(run_date,
