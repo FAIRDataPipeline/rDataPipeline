@@ -58,7 +58,7 @@ download_external_object <- function(name,
     object_id <- gsub("/", "", object_id)
 
     # Download file
-    out <- get_h5_from_object_id(as.numeric(object_id), data_dir)
+    out <- get_data_from_object_id(as.numeric(object_id), data_dir)
 
     # If file is zipped, unzip it and remove *.zip file
     if(grepl(".zip$", out$downloaded_to) & unzip) {
