@@ -1,4 +1,4 @@
-#' Upload paper metadata to the data registry
+#' Post paper metadata to the data registry
 #'
 #' @param title a \code{string} specifying the title of the paper *e.g.*
 #' "Covid-19: A systemic disease treated with a wide-ranging approach: A case

@@ -1,4 +1,4 @@
-#' Post to code_run table
+#' Post entry to code_run table
 #'
 #' Upload information to the \code{coderun} table in the data registry
 #'

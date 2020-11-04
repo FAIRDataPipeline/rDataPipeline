@@ -1,4 +1,4 @@
-#' Post to external_object table
+#' Post entry to external_object table
 #'
 #' Upload information to the \code{external_object} table in the data registry
 #'

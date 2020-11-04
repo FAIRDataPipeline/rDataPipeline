@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_data_product.R
 \name{new_data_product}
 \alias{new_data_product}
-\title{Post to data_product table}
+\title{Post entry to data_product table}
 \usage{
 new_data_product(name, version, object_id, namespace_id, key)
 }

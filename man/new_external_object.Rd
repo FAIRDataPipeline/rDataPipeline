@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_external_object.R
 \name{new_external_object}
 \alias{new_external_object}
-\title{Post to external_object table}
+\title{Post entry to external_object table}
 \usage{
 new_external_object(
   doi_or_unique_name,

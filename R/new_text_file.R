@@ -1,4 +1,4 @@
-#' Post to text_file table
+#' Post entry to text_file table
 #'
 #' Upload information to the \code{text_file} table in the data registry
 #'

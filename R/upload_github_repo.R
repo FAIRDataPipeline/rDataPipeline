@@ -1,4 +1,4 @@
-#' Upload github_repo metadata to the data registry
+#' Post github_repo metadata to the data registry
 #'
 #' @param storage_root_id e.g.
 #' @param hash e.g.

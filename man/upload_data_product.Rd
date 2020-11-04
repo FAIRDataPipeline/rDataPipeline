@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_data_product.R
 \name{upload_data_product}
 \alias{upload_data_product}
-\title{Upload data_product metadata to the data registry}
+\title{Post data_product metadata to the data registry}
 \usage{
 upload_data_product(
   storage_root_id,
@@ -33,7 +33,7 @@ upload_data_product(
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-Upload data_product metadata to the data registry
+Post data_product metadata to the data registry
 }
 \seealso{
 Other upload functions: 
