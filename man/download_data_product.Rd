@@ -27,6 +27,7 @@ Download data product from the Boydorr server.
 }
 \examples{
 \dontrun{
+# Download H5 file
 data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
 
 # Automatically download the latest version
@@ -37,6 +38,13 @@ download_data_product(name = data_product,
 download_data_product(name = data_product,
                       data_dir = "data-raw",
                       version = "0.20200920.0")
+
+# Download TOML file
+data_product <- "human/infection/SARS-CoV-2/asymptomatic-period"
+
+# Automatically download the latest version
+download_data_product(name = data_product,
+                      data_dir = "data-raw")
 }
 
 }
