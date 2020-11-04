@@ -1,4 +1,4 @@
-#' Get existing entries
+#' Return all entries posted to a table in the data registry
 #'
 #' Get entries (from the data registry) in a particular table
 #'

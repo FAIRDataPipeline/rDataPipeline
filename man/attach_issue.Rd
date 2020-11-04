@@ -2,7 +2,7 @@
 % Please edit documentation in R/attach_issue.R
 \name{attach_issue}
 \alias{attach_issue}
-\title{Attach issue to object}
+\title{Attach an issue to an object in the data registry}
 \usage{
 attach_issue(description, severity, object, key)
 }
