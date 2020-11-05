@@ -7,8 +7,6 @@ sonia <- 3
 storage_root <- get_entry("storage_root", list(root = root))[[1]]
 storage_root_id <- basename(storage_root$url)
 
-#storage_location <- storage_root$locations[[1]]
-
 storage_locations <- get_entry("storage_location", list(updated_by = sonia,
                                                        storage_root = storage_root_id))
 
