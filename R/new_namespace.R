@@ -1,4 +1,4 @@
-#' Post to namespace table
+#' Post entry to namespace table
 #'
 #' Upload information to the \code{namespace} table in the data registry
 #'

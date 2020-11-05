@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_namespace.R
 \name{new_namespace}
 \alias{new_namespace}
-\title{Post to namespace table}
+\title{Post entry to namespace table}
 \usage{
 new_namespace(name, key)
 }

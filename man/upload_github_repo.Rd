@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_github_repo.R
 \name{upload_github_repo}
 \alias{upload_github_repo}
-\title{Upload github_repo metadata to the data registry}
+\title{Post github_repo metadata to the data registry}
 \usage{
 upload_github_repo(storage_root_id, repo, hash, version, key)
 }
@@ -18,7 +18,7 @@ upload_github_repo(storage_root_id, repo, hash, version, key)
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-Upload github_repo metadata to the data registry
+Post github_repo metadata to the data registry
 }
 \seealso{
 Other upload functions: 

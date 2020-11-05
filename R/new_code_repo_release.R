@@ -1,4 +1,4 @@
-#' Post to code_repo_release table
+#' Post entry to code_repo_release table
 #'
 #' Upload information to the \code{code_repo_release} table in the data registry
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_author.R
 \name{new_author}
 \alias{new_author}
-\title{Post to author table}
+\title{Post entry to author table}
 \usage{
 new_author(family_name, personal_name, object_id, key, ...)
 }

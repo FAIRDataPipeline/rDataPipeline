@@ -2,7 +2,7 @@
 % Please edit documentation in R/register_everything.R
 \name{register_everything}
 \alias{register_everything}
-\title{Upload everything associated with a data product to the data registry}
+\title{Post everything associated with a data product to the data registry}
 \usage{
 register_everything(
   product_name,

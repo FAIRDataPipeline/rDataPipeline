@@ -1,4 +1,4 @@
-#' Post to issue table
+#' Post entry to issue table
 #'
 #' Upload information to the \code{issue} table in the data registry
 #'

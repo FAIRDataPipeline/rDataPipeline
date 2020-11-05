@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_entry.R
 \name{get_entry}
 \alias{get_entry}
-\title{Get entry}
+\title{Return all fields associated with a table entry in the data registry}
 \usage{
 get_entry(table, query)
 }
@@ -16,7 +16,7 @@ get_entry(table, query)
 Returns a \code{list} of fields present in the specified entry
 }
 \description{
-Get entry
+Return all fields associated with a table entry in the data registry
 }
 \examples{
 # Get list of entries

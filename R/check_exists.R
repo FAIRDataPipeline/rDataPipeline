@@ -1,4 +1,4 @@
-#' Check if entry exists
+#' Check if entry exists in the data registry
 #'
 #' Check whether an entry already exists in a table (in the data registry)
 #'

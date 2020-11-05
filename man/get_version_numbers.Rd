@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_version_numbers.R
 \name{get_version_numbers}
 \alias{get_version_numbers}
-\title{Get version numbers}
+\title{Get data product version numbers}
 \usage{
 get_version_numbers(data_product)
 }
@@ -10,5 +10,10 @@ get_version_numbers(data_product)
 \item{data_product}{\code{string} specifying the name of the data product}
 }
 \description{
-Get version numbers
+Get all version numbers of a data product listed in the data registry
+}
+\examples{
+data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
+get_version_numbers(data_product)
+
 }
