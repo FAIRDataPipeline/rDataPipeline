@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get version numbers — get_version_numbers • SCRCdataAPI</title>
+<title>Get data product version numbers — get_version_numbers • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get version numbers — get_version_numbers" />
-<meta property="og:description" content="Get version numbers" />
+<meta property="og:title" content="Get data product version numbers — get_version_numbers" />
+<meta property="og:description" content="Get all version numbers of a data product listed in the data registry" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SCRCdataAPI</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.17.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.17.6</span>
       </span>
     </div>
 
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get version numbers</h1>
+    <h1>Get data product version numbers</h1>
     <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/get_version_numbers.R'><code>R/get_version_numbers.R</code></a></small>
     <div class="hidden name"><code>get_version_numbers.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get version numbers</p>
+    <p>Get all version numbers of a data product listed in the data registry</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_version_numbers</span><span class='op'>(</span><span class='va'>data_product</span><span class='op'>)</span></pre>
@@ -129,6 +129,18 @@
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>data_product</span> <span class='op'>&lt;-</span> <span class='st'>"records/SARS-CoV-2/scotland/cases-and-management/testing"</span>
+<span class='fu'>get_version_numbers</span><span class='op'>(</span><span class='va'>data_product</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "0.20201105.0" "0.20201104.0" "0.20201103.0" "0.20201102.0" "0.20201101.0"
+#&gt;  [6] "0.20201031.0" "0.20201030.0" "0.20201029.0" "0.20201028.0" "0.20201027.0"
+#&gt; [11] "0.20201026.0" "0.20201025.0" "0.20201024.0" "0.20201023.0" "0.20201019.0"
+#&gt; [16] "0.20201018.0" "0.20201017.0" "0.20201016.0" "0.20201015.0" "0.20201014.0"
+#&gt; [21] "0.20201013.0" "0.20201012.0" "0.20201011.0" "0.20201010.0" "0.20201009.0"
+#&gt; [26] "0.20200923.0" "0.20200922.0" "0.20200921.0" "0.20200920.0" "0.20200919.0"
+#&gt; [31] "0.20200916.0" "0.20200915.0" "0.20200914.0" "0.20200910.0" "0.20200909.0"
+#&gt; [36] "0.20200908.0"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

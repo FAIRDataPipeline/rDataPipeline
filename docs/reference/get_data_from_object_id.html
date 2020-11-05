@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Post entry to external_object table — new_external_object • SCRCdataAPI</title>
+<title>Download TOML/H5 file — get_data_from_object_id • SCRCdataAPI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Post entry to external_object table — new_external_object" />
-<meta property="og:description" content="Upload information to the external_object table in the data registry" />
+<meta property="og:title" content="Download TOML/H5 file — get_data_from_object_id" />
+<meta property="og:description" content="Download TOML/H5 file" />
 
 
 
@@ -108,104 +108,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Post entry to external_object table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/new_external_object.R'><code>R/new_external_object.R</code></a></small>
-    <div class="hidden name"><code>new_external_object.Rd</code></div>
+    <h1>Download TOML/H5 file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ScottishCovidResponse/SCRCdataAPI/blob/master/R/get_data_from_object_id.R'><code>R/get_data_from_object_id.R</code></a></small>
+    <div class="hidden name"><code>get_data_from_object_id.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Upload information to the <code>external_object</code> table in the data registry</p>
+    <p>Download TOML/H5 file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_external_object</span><span class='op'>(</span>
-  <span class='va'>doi_or_unique_name</span>,
-  primary_not_supplement <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>release_date</span>,
-  <span class='va'>title</span>,
-  description <span class='op'>=</span> <span class='st'>""</span>,
-  <span class='va'>version</span>,
-  <span class='va'>object_id</span>,
-  <span class='va'>source_id</span>,
-  original_store_id <span class='op'>=</span> <span class='st'>""</span>,
-  <span class='va'>key</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_data_from_object_id</span><span class='op'>(</span><span class='va'>obj_id</span>, data_dir <span class='op'>=</span> <span class='st'>"data-raw"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>doi_or_unique_name</th>
-      <td><p>a <code>string</code> specifying the DOI or name of the
-<code>external_object</code>
-<em>e.g.</em> "scottish coronavirus-covid-19-management-information"</p></td>
+      <th>obj_id</th>
+      <td><p>an <code>integer</code> specifying the id of an entry</p></td>
     </tr>
     <tr>
-      <th>primary_not_supplement</th>
-      <td><p>a boolean flag to indicate
-whether the external object is the primary source (<code>TRUE</code>) or not
-(<code>FALSE</code>)</p></td>
-    </tr>
-    <tr>
-      <th>release_date</th>
-      <td><p>the date-time that the <code>external_object</code> was
-released <em>e.g.</em> <code><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time()</a></code> or "2010-07-11 12:15:00 BST"</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>a <code>string</code> specifying the title of the <code>external_object</code>
-<em>e.g.</em> "scottish coronavirus-covid-19-management-information"</p></td>
-    </tr>
-    <tr>
-      <th>description</th>
-      <td><p>(optional) a <code>string</code> containing a free text
-description of the <code>external_object</code>
-<em>e.g.</em> "scottish coronavirus-covid-19-management-information dataset"</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>a <code>string</code> specifying the version identifier of the
-<code>external_object</code> (must conform to semantic versioning syntax)
-<em>e.g.</em> "0.20100711.1"</p></td>
-    </tr>
-    <tr>
-      <th>object_id</th>
-      <td><p>a <code>string</code> specifying the API URL of the
-associated <code>object</code> table <em>e.g.</em> "https://data.scrc.uk/api/object/12/"</p></td>
-    </tr>
-    <tr>
-      <th>source_id</th>
-      <td><p>a <code>string</code> specifying the API URL of the
-associated <code>source</code> table <em>e.g.</em> "https://data.scrc.uk/api/source/9/"</p></td>
-    </tr>
-    <tr>
-      <th>original_store_id</th>
-      <td><p>(optional) a <code>string</code> specifying the API URL of the
-associated <code>storage_location</code> table that references the original
-location of the <code>external_object</code>
-<em>e.g.</em> "https://data.scrc.uk/api/storage_location/19/"</p></td>
-    </tr>
-    <tr>
-      <th>key</th>
-      <td><p>API token from data.scrc.uk</p></td>
+      <th>data_dir</th>
+      <td><p>a <code>string</code> specifying the directory in which the file
+should be saved</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>Other new functions: 
-<code><a href='new_author.html'>new_author</a>()</code>,
-<code><a href='new_code_repo_release.html'>new_code_repo_release</a>()</code>,
-<code><a href='new_coderun.html'>new_coderun</a>()</code>,
-<code><a href='new_data_product.html'>new_data_product</a>()</code>,
-<code><a href='new_issue.html'>new_issue</a>()</code>,
-<code><a href='new_keyword.html'>new_keyword</a>()</code>,
-<code><a href='new_namespace.html'>new_namespace</a>()</code>,
-<code><a href='new_object_component.html'>new_object_component</a>()</code>,
-<code><a href='new_object.html'>new_object</a>()</code>,
-<code><a href='new_source.html'>new_source</a>()</code>,
-<code><a href='new_storage_location.html'>new_storage_location</a>()</code>,
-<code><a href='new_storage_root.html'>new_storage_root</a>()</code>,
-<code><a href='new_text_file.html'>new_text_file</a>()</code></p></div>
+    <p>Returns a <code>list</code> comprising two elements</p><ul>
+<li><p>downloaded_toabsolute path of TOML/H5 file after downloading</p></li>
+<li><p>componentsTOML/H5 file components</p></li>
+</ul>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
