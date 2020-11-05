@@ -1,4 +1,4 @@
-#' Post to object_component table
+#' Post entry to object_component table
 #'
 #' Upload information to the \code{object_component} table in the data registry
 #'

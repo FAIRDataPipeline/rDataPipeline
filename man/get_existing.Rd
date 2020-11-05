@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_existing.R
 \name{get_existing}
 \alias{get_existing}
-\title{Get existing entries}
+\title{Return all entries posted to a table in the data registry}
 \usage{
 get_existing(table, limit_results = TRUE, detail = "all")
 }

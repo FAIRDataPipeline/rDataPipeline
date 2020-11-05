@@ -1,4 +1,4 @@
-#' Post to keyword table
+#' Post entry to keyword table
 #'
 #' Upload information to the \code{keyword} table in the data registry
 #'

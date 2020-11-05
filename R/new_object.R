@@ -1,4 +1,4 @@
-#' Post to object table
+#' Post entry to object table
 #'
 #' Upload information to the \code{object} table in the data registry
 #'

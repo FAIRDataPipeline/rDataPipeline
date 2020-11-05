@@ -1,4 +1,4 @@
-#' Post to source table
+#' Post entry to source table
 #'
 #' Upload information to the \code{source} table in the data registry
 #'

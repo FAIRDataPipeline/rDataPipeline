@@ -1,4 +1,4 @@
-#' Attach issue to object
+#' Attach an issue to an object in the data registry
 #'
 #' This function is used to attach an issue to an object, which may be an
 #' external object, a data product, or a component within a data product.

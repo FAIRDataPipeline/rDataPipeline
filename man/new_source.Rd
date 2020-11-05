@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_source.R
 \name{new_source}
 \alias{new_source}
-\title{Post to source table}
+\title{Post entry to source table}
 \usage{
 new_source(name, abbreviation, website = "", key)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/new_object.R
 \name{new_object}
 \alias{new_object}
-\title{Post to object table}
+\title{Post entry to object table}
 \usage{
 new_object(storage_location_id, description = "", key)
 }

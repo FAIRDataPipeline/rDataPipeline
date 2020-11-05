@@ -2,7 +2,7 @@
 % Please edit documentation in R/upload_object_links.R
 \name{upload_object_links}
 \alias{upload_object_links}
-\title{Upload object_links metadata to the data registry}
+\title{Post object_links metadata to the data registry}
 \usage{
 upload_object_links(
   run_date,
@@ -30,7 +30,7 @@ upload_object_links(
 \item{key}{API token from data.scrc.uk}
 }
 \description{
-Upload object_links metadata to the data registry
+Post object_links metadata to the data registry
 }
 \seealso{
 Other upload functions: 

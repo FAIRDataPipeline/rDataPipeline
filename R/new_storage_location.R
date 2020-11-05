@@ -1,4 +1,4 @@
-#' Post to storage_location table
+#' Post entry to storage_location table
 #'
 #' Upload information to the \code{storage_location} table in the data registry
 #'
