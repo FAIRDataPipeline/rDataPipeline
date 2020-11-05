@@ -35,5 +35,10 @@ test_that("get_data_from_object_id correctly downloads .H5",{
   expect_true(file.exists(downloaded_object$downloaded_to))
 })
 
+test_that("get_data_from_object_id errors correctly",{
+  expect_message(get_data_from_object_id(object_id, data_dir = "data-raw"))
+  expect_error(get_data_from_object_id("X1681"))
+})
+
 unlink(data_dir, recursive = TRUE)
 
