@@ -170,7 +170,7 @@ attach_issue <- function(description,
   patch_data(url = issueId,
              data = list(severity = severity,
                          description = description,
-                         object_issues = current_objects,
+                         object_issues = object_issues,
                          component_issues = component_issues),
              key = key)
 }
