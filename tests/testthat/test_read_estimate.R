@@ -18,7 +18,8 @@ test_estimate_name <- "test_estimate_1.toml"
 test_estimate_path <- paste0(path, "/", test_estimate_name)
 parameters = list(asymptomatic_period = 192.0)
 
-create_estimate(filename = test_estimate_path,
+create_estimate(filename = test_estimate_name,
+                path = path,
                 parameters = parameters)
 
 comp_estimate <- list()
