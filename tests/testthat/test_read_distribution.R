@@ -11,9 +11,9 @@ name <- "latency"
 distribution <- "gamma"
 parameters <- list(shape = 2.0, scale = 3.0)
 
-dist <- list(name = "latency",
-             distribution = "gamma",
-             parameters = list(shape = 2.0, scale = 3.0))
+dist <- list(name = name,
+             distribution = distribution,
+             parameters = parameters)
 
 create_distribution(filename = filename,
                     path = path,
