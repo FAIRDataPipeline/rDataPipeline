@@ -43,6 +43,8 @@ download_from_database(source_root = original_root,
                        filename = "0.1.0.csv",
                        path = "records/SARS-CoV-2/scotland/human-mortality")
 expect_true(file.exists("records/SARS-CoV-2/scotland/human-mortality/0.1.0.csv"))
+df <- read.csv("records/SARS-CoV-2/scotland/human-mortality/0.1.0.csv")
+expect_true(is.data.frame(df))
 
 })
 
