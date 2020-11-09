@@ -34,8 +34,9 @@ download_from_url <- function(source_root,
                               filename,
                               unzip = FALSE) {
   # Generate directory structure
+  if(missing(path)) path <- getwd()
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
-  if(missing(path)) path <- ""
+
 
   # Checks
   if(!grepl("/$", source_root))

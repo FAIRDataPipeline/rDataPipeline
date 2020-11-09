@@ -3,9 +3,9 @@
 #' @keywords internal
 #'
 update_validation <- function(key){
+  if(missing(key))
+    stop("key is required")
   try({
-    if(missing(key))
-      stop("key is required")
     # Save Tables
     tables <- get_tables(TRUE)
     if(!is.null(tables))
