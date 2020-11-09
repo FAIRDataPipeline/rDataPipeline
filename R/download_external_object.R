@@ -46,7 +46,10 @@ download_external_object <- function(name,
       unlist()
 
     # If version hasn't been input, get the latest version from the data registry
-    if(missing(version)) version <- max(version_numbers)
+    if(missing(version)){
+      version <- max(as.numeric_version(version_numbers))
+      version <- as.character(version)
+    }
 
     # Find the version
     ind <- which(version_numbers == version)
