@@ -4,13 +4,12 @@
 #'
 #' @param table table name as a character
 #' @param data data as a named list
-#' @param local local or remote registry
 #' @param ... internal parameters
 #'
 #' @export
 #' @keywords internal
 #'
-post_data <- function(table, data, local, ...) {
+post_data <- function(table, data, ...) {
 
   key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
 
@@ -25,10 +24,9 @@ post_data <- function(table, data, local, ...) {
   # Validate fields
   data <- validate_fields(table, data, key)
 
-  # data <- validate_post_data(table, data, key)
   h <- c(Authorization = paste("token", key))
 
-  api_url <- file.path("https://data.scrc.uk/api", table, "")
+  api_url <- file.path("http://localhost:8000/api", table, "")
 
   # Check there is a trailing slash (windows issue with file.path())
   api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url,
