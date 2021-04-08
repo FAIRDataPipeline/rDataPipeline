@@ -27,7 +27,6 @@
 #' @param version (optional) a \code{string} specifying the version number;
 #' by default this is 1.0.0 (assuming a published paper), set to 0.1.0 for a
 #' preprint
-#' @param key API token from data.scrc.uk
 #'
 #' @family upload functions
 #'
@@ -43,8 +42,7 @@ upload_paper <- function(title,
                          keywords,
                          doi,
                          primary_not_supplement = TRUE,
-                         version = "1.0.0",
-                         key) {
+                         version = "1.0.0") {
 
   # If paper exists in the data registry return it's URI, otherwise create it
   if(check_exists("external_object",
@@ -64,15 +62,13 @@ upload_paper <- function(title,
     } else {
       sourceId <- new_source(name = journal,
                              abbreviation = journal_abbreviation,
-                             website = journal_website,
-                             key = key)
+                             website = journal_website)
     }
 
 
     # Add paper metadata ------------------------------------------------------
 
-    objectId <- new_object(storage_location_id = "",
-                           key = key)
+    objectId <- new_object(storage_location_id = "")
 
     # Authors
     if(grepl("and", authors)) {
@@ -93,7 +89,6 @@ upload_paper <- function(title,
         new_author(family_name = tmp[1],
                    personal_name = tmp[2],
                    object_id = objectId,
-                   key = key,
                    skip_table_validation = TRUE)
       } else
         issue <- TRUE
@@ -116,8 +111,7 @@ upload_paper <- function(title,
           tmp <- gsub("\\]", "", tmp)
 
         new_keyword(keyphrase = tmp,
-                    object_id = objectId,
-                    key = key)
+                    object_id = objectId)
       }
     }
 
@@ -131,16 +125,14 @@ upload_paper <- function(title,
       version = version,
       object_id = objectId,
       source_id = sourceId, # journal
-      original_store_id = "", # pdf website
-      key = key)
+      original_store_id = "") # pdf website
 
     if(issue) {
       msg <- "One or more authors have not been attached to this paper"
       attach_issue(description = msg,
                    severity = 5,
                    object = list(external_object_doi = paste0("doi://", doi),
-                                 version = version),
-                   key = key)
+                                 version = version))
     }
 
     return(externalObjectId)

@@ -4,7 +4,6 @@
 #' @param hash e.g.
 #' @param version version
 #' @param repo repo
-#' @param key API token from data.scrc.uk
 #'
 #' @family upload functions
 #'
@@ -13,23 +12,19 @@
 upload_github_repo <- function(storage_root_id,
                                repo,
                                hash,
-                               version,
-                               key) {
+                               version) {
 
   repo_storeId <- new_storage_location(path = paste(repo, "repository"),
                                        hash = hash,
-                                       storage_root_id = storage_root_id,
-                                       key = key)
+                                       storage_root_id = storage_root_id)
 
-  repo_objectId <- new_object(storage_location_id = repo_storeId,
-                              key = key)
+  repo_objectId <- new_object(storage_location_id = repo_storeId)
 
   repo_codeRepoReleaseId <- new_code_repo_release(
     name = repo,
     version = version,
     website = paste0("https://github.com/", repo),
-    object_id = repo_objectId,
-    key = key)
+    object_id = repo_objectId)
 
   list(repo_storeId = repo_storeId,
        repo_objectId = repo_objectId,
