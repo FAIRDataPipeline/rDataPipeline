@@ -10,7 +10,6 @@
 #' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/156/",
 #' @param namespace_id a \code{string} specifying the API URL of the
 #' associated \code{namespace} table *e.g.* "https://data.scrc.uk/api/namespace/2/"
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -19,13 +18,11 @@
 new_data_product <- function(name,
                              version,
                              object_id,
-                             namespace_id,
-                             key) {
+                             namespace_id) {
 
   post_data(table = "data_product",
             data =  list(name = name,
                          version = version,
                          object = object_id,
-                         namespace = namespace_id),
-            key)
+                         namespace = namespace_id))
 }

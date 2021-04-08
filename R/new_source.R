@@ -8,7 +8,6 @@
 #' of the source (if available) *e.g.* "Scottish Government Open Data Repository"
 #' @param website (optional) a \code{string} specifying the website URL
 #' associated with the data source *e.g.* "https://statistics.gov.scot/"
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -16,12 +15,10 @@
 #'
 new_source <- function(name,
                        abbreviation,
-                       website = "",
-                       key) {
+                       website = "") {
 
   post_data(table = "source",
             data =  list(name = name,
                          abbreviation = abbreviation,
-                         website = website),
-            key)
+                         website = website))
 }

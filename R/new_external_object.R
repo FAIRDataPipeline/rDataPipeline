@@ -26,7 +26,6 @@
 #' associated \code{storage_location} table that references the original
 #' location of the \code{external_object}
 #' *e.g.* "https://data.scrc.uk/api/storage_location/19/"
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -40,8 +39,7 @@ new_external_object <- function(doi_or_unique_name,
                                 version,
                                 object_id,
                                 source_id,
-                                original_store_id = "",
-                                key) {
+                                original_store_id = "") {
 
   post_data(table = "external_object",
             data = list(doi_or_unique_name = doi_or_unique_name,
@@ -52,6 +50,5 @@ new_external_object <- function(doi_or_unique_name,
                         version = version,
                         object = object_id,
                         source = source_id,
-                        original_store = original_store_id),
-            key)
+                        original_store = original_store_id))
 }

@@ -4,15 +4,15 @@
 #'
 #' @param table table name as a character
 #' @param data data as a named list
-#' @param key API token
+#' @param local local or remote registry
 #' @param ... internal parameters
 #'
 #' @export
 #' @keywords internal
 #'
-post_data <- function(table, data, key, ...) {
+post_data <- function(table, data, local, ...) {
 
-  key <- validate_token(key)
+  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
 
   # If the skip_table_validation argument has been input, skip validate_table()
   dots <- list(...)

@@ -4,16 +4,14 @@
 #'
 #' @param text a \code{string} containing a free text *i.e.* scripts that are
 #' only a few lines long and don't have a home elsewhere
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
 #' @export
 #'
-new_text_file <- function(text, key) {
+new_text_file <- function(text) {
 
   post_data(
     table = "text_file",
-    data =  list(text = text),
-    key)
+    data =  list(text = text))
 }

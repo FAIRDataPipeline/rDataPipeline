@@ -7,7 +7,6 @@
 #' *e.g.* "https://data.scrc.uk/api/storage_location/411/"
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object_component}
-#' @param key API token from data.scrc.uk
 #'
 #' Note that the \code{object} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
@@ -19,11 +18,9 @@
 #' @export
 #'
 new_object <- function(storage_location_id,
-                       description = "",
-                       key) {
+                       description = "") {
 
   post_data(table = "object",
             data = list(description = description,
-                        storage_location = storage_location_id),
-            key)
+                        storage_location = storage_location_id))
 }

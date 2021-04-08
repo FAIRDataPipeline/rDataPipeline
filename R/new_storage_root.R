@@ -9,7 +9,6 @@
 #' *e.g.* "ftp://boydorr.gla.ac.uk/scrc/"
 #' @param accessibility (optional) an \code{integer} value for the accessibility
 #' enum, where 0 is public (default) and 1 is private
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -18,11 +17,11 @@
 new_storage_root <- function(name,
                              root,
                              accessibility = 0,
+                             local,
                              key) {
 
   post_data(table = "storage_root",
             data = list(name = name,
                         root = root,
-                        accessibility = accessibility),
-            key)
+                        accessibility = accessibility))
 }

@@ -9,7 +9,6 @@
 #' associated \code{object} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object_component}
-#' @param key API token from data.scrc.uk
 #'
 #' Note that the \code{object_component} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
@@ -31,13 +30,11 @@
 #'
 new_object_component <- function(name,
                                  object_id,
-                                 description = "",
-                                 key) {
+                                 description = "") {
 
   post_data(table = "object_component",
             data = list(name = name,
                         object = object_id,
-                        description = description),
-            key)
+                        description = description))
 
 }

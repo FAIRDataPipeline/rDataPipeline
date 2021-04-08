@@ -11,7 +11,6 @@
 #' @param storage_root_id a \code{string} specifying the API URL of the
 #' associated \code{storage_root} table
 #' *e.g.* "https://data.scrc.uk/api/storage_root/14/"
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -19,12 +18,10 @@
 #'
 new_storage_location <- function(path,
                                  hash,
-                                 storage_root_id,
-                                 key) {
+                                 storage_root_id) {
 
   post_data(table = "storage_location",
             data = list(path = path,
                         hash = hash,
-                        storage_root = storage_root_id),
-            key)
+                        storage_root = storage_root_id))
 }

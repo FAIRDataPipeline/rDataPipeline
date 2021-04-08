@@ -6,18 +6,15 @@
 #' associated \code{object} table *e.g.* "https://data.scrc.uk/api/object/31817/"
 #' @param keyphrase a \code{string} specifying a single keyword or keyphrase
 #' *e.g.* "covid-19" or "cardiovascular diseases"
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
 #' @export
 #'
 new_keyword <- function(keyphrase,
-                        object_id,
-                        key) {
+                        object_id) {
 
   post_data(table = "keyword",
             data =  list(keyphrase = keyphrase,
-                         object = object_id),
-            key)
+                         object = object_id))
 }

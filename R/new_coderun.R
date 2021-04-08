@@ -12,7 +12,6 @@
 #' @param submission_script_id *e.g.* "https://data.scrc.uk/api/object/153/"
 #' @param inputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
 #' @param outputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -24,8 +23,7 @@ new_coderun <- function(run_date,
                         model_config = "",
                         submission_script_id = "",
                         inputs = list(),
-                        outputs = list(),
-                        key) {
+                        outputs = list()) {
 
   post_data(table = "code_run",
             data = list(run_date = run_date,
@@ -34,6 +32,5 @@ new_coderun <- function(run_date,
                          model_config = model_config,
                          submission_script = submission_script_id,
                          inputs = inputs,
-                         outputs = outputs),
-            key)
+                         outputs = outputs))
 }

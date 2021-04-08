@@ -9,7 +9,6 @@
 #' \code{issue} is associated; this can be an empty list
 #' @param component_issues a \code{list} of \code{object_component} URLs with
 #' which the \code{issue} is associated; this can be an empty list
-#' @param key API token from data.scrc.uk
 #'
 #' @family new functions
 #'
@@ -28,13 +27,11 @@
 new_issue <- function(severity,
                       description,
                       object_issues,
-                      component_issues,
-                      key) {
+                      component_issues) {
 
   post_data(table = "issue",
             data =  list(severity = severity,
                          description = description,
                          object_issues = object_issues,
-                         component_issues = component_issues),
-            key)
+                         component_issues = component_issues))
 }
