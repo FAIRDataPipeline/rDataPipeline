@@ -11,7 +11,7 @@ get_tables <- function(live = FALSE){
   tables.file = system.file("validation", "tables.rds", package = "SCRCdataAPI")
   if(tables.file == "" | live)
   {
-    out <- httr::GET(paste("https://data.scrc.uk/api", "", sep = "/")) %>%
+    out <- httr::GET(paste("http://localhost:8000/api", "", sep = "/")) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
     return(names(out))
