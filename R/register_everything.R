@@ -170,15 +170,13 @@ register_everything <- function(product_name,
       seq_along(original_source_name), function(x) {
         new_storage_root(name = original_source_name[[x]],
                          root = original_root[[x]],
-                         accessibility = accessibility,
-                         key = key)
+                         accessibility = accessibility)
       })
   } else {
     original_storageRootId <- new_storage_root(
       name = original_source_name,
       root = original_root,
-      accessibility = accessibility,
-      key = key)
+      accessibility = accessibility)
   }
 
   # where is the data product saved to locally? -----------------------------
