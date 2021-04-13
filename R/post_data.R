@@ -42,7 +42,7 @@ post_data <- function(table, data, ...) {
   table_name <- gsub("_", " ", table)
 
   if(result$status == 404)
-    stop("Adding new data returned non-201 status code: (404) table does not exist")
+    usethis::ui_stop(paste(usethis::ui_value(table_name), "does not exist"))
 
   tmp <- result %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
