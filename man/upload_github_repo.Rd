@@ -4,7 +4,7 @@
 \alias{upload_github_repo}
 \title{Post github_repo metadata to the data registry}
 \usage{
-upload_github_repo(storage_root_id, repo, hash, version, key)
+upload_github_repo(storage_root_id, repo, hash, version)
 }
 \arguments{
 \item{storage_root_id}{e.g.}
@@ -14,8 +14,6 @@ upload_github_repo(storage_root_id, repo, hash, version, key)
 \item{hash}{e.g.}
 
 \item{version}{version}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Post github_repo metadata to the data registry

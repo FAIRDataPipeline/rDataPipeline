@@ -10,8 +10,7 @@ upload_object_links(
   code_repo_id,
   submission_script_id,
   inputs = list(),
-  outputs = list(),
-  key = key
+  outputs = list()
 )
 }
 \arguments{
@@ -26,8 +25,6 @@ upload_object_links(
 \item{inputs}{e.g.}
 
 \item{outputs}{e.g.}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Post object_links metadata to the data registry

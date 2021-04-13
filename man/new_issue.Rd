@@ -4,7 +4,7 @@
 \alias{new_issue}
 \title{Post entry to issue table}
 \usage{
-new_issue(severity, description, object_issues, component_issues, key)
+new_issue(severity, description, object_issues, component_issues)
 }
 \arguments{
 \item{severity}{an \code{integer} specifying the severity of the \code{issue}}
@@ -17,8 +17,6 @@ new_issue(severity, description, object_issues, component_issues, key)
 
 \item{component_issues}{a \code{list} of \code{object_component} URLs with
 which the \code{issue} is associated; this can be an empty list}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{issue} table in the data registry

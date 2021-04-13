@@ -13,8 +13,7 @@ new_external_object(
   version,
   object_id,
   source_id,
-  original_store_id = "",
-  key
+  original_store_id = ""
 )
 }
 \arguments{
@@ -50,8 +49,6 @@ associated \code{source} table \emph{e.g.} "https://data.scrc.uk/api/source/9/"}
 associated \code{storage_location} table that references the original
 location of the \code{external_object}
 \emph{e.g.} "https://data.scrc.uk/api/storage_location/19/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{external_object} table in the data registry

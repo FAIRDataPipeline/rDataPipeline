@@ -4,13 +4,11 @@
 \alias{new_text_file}
 \title{Post entry to text_file table}
 \usage{
-new_text_file(text, key)
+new_text_file(text)
 }
 \arguments{
 \item{text}{a \code{string} containing a free text \emph{i.e.} scripts that are
 only a few lines long and don't have a home elsewhere}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{text_file} table in the data registry

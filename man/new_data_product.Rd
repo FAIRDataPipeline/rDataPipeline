@@ -4,7 +4,7 @@
 \alias{new_data_product}
 \title{Post entry to data_product table}
 \usage{
-new_data_product(name, version, object_id, namespace_id, key)
+new_data_product(name, version, object_id, namespace_id)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{data_product}
@@ -18,8 +18,6 @@ associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/156/
 
 \item{namespace_id}{a \code{string} specifying the API URL of the
 associated \code{namespace} table \emph{e.g.} "https://data.scrc.uk/api/namespace/2/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{data_product} table in the data registry

@@ -2,13 +2,12 @@
 % Please edit documentation in R/get_storage_location.R
 \name{get_storage_location}
 \alias{get_storage_location}
-\title{Get storage location from id}
+\title{Get storage location from url}
 \usage{
-get_storage_location(location_id)
+get_storage_location(location)
 }
 \arguments{
-\item{location_id}{an \code{integer} specifying the id of an entry in the
-storage_location table}
+\item{location}{the url of an entry in the storage_location table}
 }
 \value{
 Returns a \code{list} of fields associated with the specified entry

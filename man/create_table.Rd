@@ -42,7 +42,6 @@ file.remove(filename)
 }
 \seealso{
 Other create functions: 
-\code{\link{create_array}()},
 \code{\link{create_distribution}()},
 \code{\link{create_estimate}()},
 \code{\link{create_version_number}()}

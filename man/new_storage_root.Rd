@@ -4,7 +4,7 @@
 \alias{new_storage_root}
 \title{Post entry to storage_root table}
 \usage{
-new_storage_root(name, root, accessibility = 0, key)
+new_storage_root(name, root, accessibility)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{storage_root}
@@ -14,10 +14,8 @@ new_storage_root(name, root, accessibility = 0, key)
 \code{storage_location}, which is then prepended to a \code{storage_location}
 \emph{e.g.} "ftp://boydorr.gla.ac.uk/scrc/"}
 
-\item{accessibility}{(optional) an \code{integer} value for the accessibility
-enum, where 0 is public (default) and 1 is private}
-
-\item{key}{API token from data.scrc.uk}
+\item{accessibility}{an \code{integer} value for the accessibility enum,
+where 0 is public and 1 is private}
 }
 \description{
 Upload information to the \code{storage_root} table in the data registry

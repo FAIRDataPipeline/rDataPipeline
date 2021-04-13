@@ -4,7 +4,7 @@
 \alias{new_storage_location}
 \title{Post entry to storage_location table}
 \usage{
-new_storage_location(path, hash, storage_root_id, key)
+new_storage_location(path, hash, storage_root_id)
 }
 \arguments{
 \item{path}{a \code{string} specifying the path from the \code{storage_root}
@@ -18,8 +18,6 @@ produces a complete URL
 \item{storage_root_id}{a \code{string} specifying the API URL of the
 associated \code{storage_root} table
 \emph{e.g.} "https://data.scrc.uk/api/storage_root/14/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{storage_location} table in the data registry

@@ -11,8 +11,7 @@ new_coderun(
   model_config = "",
   submission_script_id = "",
   inputs = list(),
-  outputs = list(),
-  key
+  outputs = list()
 )
 }
 \arguments{
@@ -32,8 +31,6 @@ scottish coronavirus-covid-19-management-information"}
 \item{inputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
 
 \item{outputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{coderun} table in the data registry

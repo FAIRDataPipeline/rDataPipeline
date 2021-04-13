@@ -4,7 +4,7 @@
 \alias{new_code_repo_release}
 \title{Post entry to code_repo_release table}
 \usage{
-new_code_repo_release(name, version, website = "", object_id, key)
+new_code_repo_release(name, version, website = "", object_id)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of an official release of
@@ -19,8 +19,6 @@ website for this code release
 
 \item{object_id}{a \code{string} specifying the API URL of the associated
 \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/154/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{code_repo_release} table in the data registry

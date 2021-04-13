@@ -4,7 +4,7 @@
 \alias{new_object_component}
 \title{Post entry to object_component table}
 \usage{
-new_object_component(name, object_id, description = "", key)
+new_object_component(name, object_id, description = "")
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the
@@ -15,9 +15,7 @@ and its \code{object} reference}
 associated \code{object} table}
 
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{object_component}}
-
-\item{key}{API token from data.scrc.uk
+description of the \code{object_component}
 
 Note that the \code{object_component} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use

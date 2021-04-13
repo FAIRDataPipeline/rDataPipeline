@@ -15,8 +15,7 @@ upload_paper(
   keywords,
   doi,
   primary_not_supplement = TRUE,
-  version = "1.0.0",
-  key
+  version = "1.0.0"
 )
 }
 \arguments{
@@ -59,8 +58,6 @@ where \code{TRUE} is the primary source (default) and false is a supplement}
 \item{version}{(optional) a \code{string} specifying the version number;
 by default this is 1.0.0 (assuming a published paper), set to 0.1.0 for a
 preprint}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Post paper metadata to the data registry

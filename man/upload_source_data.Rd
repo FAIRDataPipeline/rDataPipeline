@@ -14,8 +14,7 @@ upload_source_data(
   storage_root_id,
   target_path,
   download_date,
-  version,
-  key
+  version
 )
 }
 \arguments{
@@ -38,8 +37,6 @@ upload_source_data(
 \item{download_date}{e.g. as.POSIXct("2010-07-11 12:15:00", format = "\%Y-\%m-\%d \%H:\%M:\%S")}
 
 \item{version}{e.g. "20100711.0"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Post source_data metadata to the data registry

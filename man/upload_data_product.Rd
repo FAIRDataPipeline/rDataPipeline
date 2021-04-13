@@ -11,8 +11,7 @@ upload_data_product(
   processed_path,
   product_path,
   version,
-  namespace_id,
-  key
+  namespace_id
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ upload_data_product(
 \item{version}{e.g.}
 
 \item{namespace_id}{e.g.}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Post data_product metadata to the data registry

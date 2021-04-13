@@ -4,7 +4,7 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(family_name, personal_name, object_id, key, ...)
+new_author(family_name, personal_name, object_id, ...)
 }
 \arguments{
 \item{family_name}{a \code{string} specifying the author's family name
@@ -16,8 +16,6 @@ and / or middle name and / or any initials \emph{e.g.} "Sonia" or "Sonia N" or
 
 \item{object_id}{a \code{string} specifying the API URL of the associated
 \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31858/"}
-
-\item{key}{API token from data.scrc.uk}
 
 \item{...}{internal parameters}
 }

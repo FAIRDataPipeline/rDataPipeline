@@ -4,7 +4,7 @@
 \alias{new_source}
 \title{Post entry to source table}
 \usage{
-new_source(name, abbreviation, website = "", key)
+new_source(name, abbreviation, website = "")
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the source
@@ -15,8 +15,6 @@ of the source (if available) \emph{e.g.} "Scottish Government Open Data Reposito
 
 \item{website}{(optional) a \code{string} specifying the website URL
 associated with the data source \emph{e.g.} "https://statistics.gov.scot/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{source} table in the data registry

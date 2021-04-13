@@ -4,7 +4,7 @@
 \alias{new_keyword}
 \title{Post entry to keyword table}
 \usage{
-new_keyword(keyphrase, object_id, key)
+new_keyword(keyphrase, object_id)
 }
 \arguments{
 \item{keyphrase}{a \code{string} specifying a single keyword or keyphrase
@@ -12,8 +12,6 @@ new_keyword(keyphrase, object_id, key)
 
 \item{object_id}{a \code{string} specifying the API URL of the
 associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31817/"}
-
-\item{key}{API token from data.scrc.uk}
 }
 \description{
 Upload information to the \code{keyword} table in the data registry
