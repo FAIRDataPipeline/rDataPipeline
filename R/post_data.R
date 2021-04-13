@@ -39,6 +39,8 @@ post_data <- function(table, data, ...) {
                        httr::content_type('application/json'),
                        httr::add_headers(.headers = h))
 
+  table_name <- gsub("_", " ", table)
+
   if(result$status == 404)
     stop("Adding new data returned non-201 status code: (404) table does not exist")
 
@@ -47,13 +49,16 @@ post_data <- function(table, data, ...) {
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   if(result$status == 201) {
+    usethis::ui_done(paste("Added", usethis::ui_value(data$name), "to",
+                           usethis::ui_value(table_name)))
     return(tmp$url)
 
   } else if(result$status == 409) {
 
     tryCatch(
       {
-        message(paste(table, "already exists"))
+        usethis::ui_done(paste("Added", usethis::ui_value(data$name), "to",
+                               usethis::ui_value(table_name)))
         return(get_url(table, clean_query(data)))
       },
       error = function(err) {
