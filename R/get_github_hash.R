@@ -14,16 +14,10 @@
 #' get_github_hash("ScottishCovidResponse/SCRCdata")
 #'
 get_github_hash <- function(repo) {
-  if(system("git --version"))
+  if(!grepl("version", system("git --version", intern = TRUE)))
     stop("git must be installed and located in the system path for this function to work")
 
-  tmp <- system(paste0("git ls-remote -h https://github.com/", repo, ".git"),
-         intern = TRUE)
+  tmp <- system(paste("git ls-remote -h", repo), intern = TRUE)
 
-  if(length(tmp) > 1) {
-    ind <- which(grepl("master", tmp))
-    tmp <- tmp[ind]
-  }
-
-  gsub("\trefs/heads/master", "", tmp)
+  strsplit(tmp, "\\\\|[^[:print:]]")[[1]][1]
 }
