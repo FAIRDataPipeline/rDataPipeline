@@ -82,10 +82,8 @@ validate_fields <- function(table, data, key, online = TRUE){
     if(name_missing & (char_value | null_value)){
       # Do nothing. Empty string in an optional field will be set to NULL in
       # the database
-    }
-
-    # If the type is a field, expect api urls ---------------------------------
-    else if(type == "field"){
+    } else if(type == "field"){
+      # If the type is a field, expect api urls ---------------------------------
       # Check if the field is plural
       if(grepl(".*?s$", name) |  grepl(".*?s_of$", name)){
         # if so expect a list
@@ -97,7 +95,7 @@ validate_fields <- function(table, data, key, online = TRUE){
         } else{
           # if a list expect a list of api objects
           for(i in seq_along(value)){
-            if(!grepl("https://data.scrc.uk/api/.+/.+", value[[i]])){
+            if(!grepl("http://localhost:8000/api/.+/.+", value[[i]])){
               stop(paste0(name, " Must be an api url"))
             } else if(online & !get_entity(
               basename(dirname(value[[i]])),
@@ -109,7 +107,7 @@ validate_fields <- function(table, data, key, online = TRUE){
       }
       # If the field isn't plural expect a character of an api url
       else if(is.character(value)){
-        if(!grepl("https://data.scrc.uk/api/.+/.+", value)){
+        if(!grepl("http://localhost:8000/api/.+/.+", value)){
           stop(paste0(name, " Must be an api url"))
         }
         else if(online & !get_entity(basename(dirname(value)),
