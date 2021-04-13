@@ -7,8 +7,8 @@
 #' @param root a \code{string} specifying the URI to the root of a
 #' `storage_location`, which is then prepended to a \code{storage_location}
 #' *e.g.* "ftp://boydorr.gla.ac.uk/scrc/"
-#' @param accessibility (optional) an \code{integer} value for the accessibility
-#' enum, where 0 is public (default) and 1 is private
+#' @param accessibility an \code{integer} value for the accessibility enum,
+#' where 0 is public and 1 is private
 #'
 #' @family new functions
 #'
