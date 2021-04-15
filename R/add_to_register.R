@@ -1,5 +1,7 @@
 #' add_to_register
 #'
+#' Register externally sourced data to the pipeline.
+#'
 #' @param handle list
 #' @param alias string
 #'
@@ -38,26 +40,14 @@ add_to_register <- function(handle, alias) {
                            usethis::ui_value("object:")))
 
   # Register this entry
-  index <- which(entries == "raw-mortality-data")
+  index <- which(entries == alias)
   register_this <- register[[index]]
 
   if ("external_object" %in% names(register_this)) {
     externalobject_id <- register_external_object(register_this,
                                                   datastore = datastore,
                                                   namespace = namespace)
-    existing_inputs <- handle$inputs
-    handle$inputs <- c(existing_inputs,
-                       setNames(externalobject_id, alias))
 
-    # } else if ("data_product" %in% names(register_this)) {
-    #   register_data_product(register_this,
-    #                         datastore = datastore,
-    #                         namespace = namespace)
-    # } else if ("object" %in% names(register_this)) {
-    #   register_object(register_this,
-    #                   datastore = datastore,
-    #                   namespace = namespace)
+    handle$input(alias, externalobject_id)
   }
-
-  invisible(handle)
 }
