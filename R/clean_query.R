@@ -15,20 +15,16 @@
 clean_query <- function(data) {
 
   data_tmp <- lapply(data, function(x) {
-    # There was a problem with ifelse() convering dates into numeric so filter
-    # these out and use if_else()
-    if(any(class(x) %in% c("POSIXct", "Date", "numeric"))) {
-      output <- x
+    if(grepl("^http://localhost:8000/api/.*([0-9]+$|[0-9]+/$)", x)) {
+      output <- basename(x)
     } else {
-      output <- dplyr::if_else(
-        grepl("^https://data.scrc.uk/api/.*([0-9]+$|[0-9]+/$)", x),
-        basename(x), x)
+      output <- x
     }
     output
   })
 
   if(any(data_tmp == ""))
-    data_tmp[which(data_tmp == "")] <- list(NULL)
+    data_tmp[which(data_tmp == "")] <- NULL
 
   data_tmp
 }
