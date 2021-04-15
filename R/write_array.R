@@ -34,27 +34,115 @@ write_array <- function(array,
   # Extract metadata from config.yaml
   datastore <- handle$yaml$run_metadata$default_data_store
   namespace <- handle$yaml$run_metadata$default_output_namespace
-  dataproduct <- handle$yaml$write[[1]]$data_product
 
-  # Find / set save location
-  existing_outputs <- handle$outputs
-  if (dataproduct %in% names(existing_outputs)) {
-    save_to <- unname(existing_outputs[dataproduct])
+  # Extract / set save location
+  if (data_product %in% names(handle$outputs)) {
+    path <- unname(handle$outputs$dataproducts[[data_product]]$path)
   } else {
     filename <- paste0(openssl::sha1(as.character(Sys.time())), ".h5")
-    save_to <- file.path(datastore, namespace, dataproduct, filename)
-    handle$outputs[dataproduct] <- save_to
+    path <- file.path(paste0(datastore, namespace), data_product, filename)
   }
 
-  # Write component to hdf5 file
-  create_array(array,
-               save_to,
-               data_product,
-               component,
-               dimension_names,
-               dimension_values,
-               dimension_units,
-               units)
+  # Checks ------------------------------------------------------------------
 
-  invisible(handle)
+  if(!grepl(".h5$", path)) stop("filename must be *.h5")
+  if(!is.array(array)) stop("array must be an array")
+
+  dimensions <- setdiff(dim(array), 1)
+  for (i in length(dimensions))
+    if(length(dimension_names[[i]]) != dim(array)[i])
+      stop(paste0("Length of Dimension_", i,
+                  "_names must equal the number of rows in array"))
+
+  if(length(dimensions) != length(dimension_names))
+    stop("Length of list dimension_names must equal the number of dimensions in array")
+
+  # Save file ---------------------------------------------------------------
+
+  # Generate directory structure
+  directory <- dirname(path)
+  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+
+  # Generate hdf5 file
+  if(file.exists(path)) {
+    fid <- H5Fopen(path)
+    if(length(h5ls(fid)) == 0) {
+      current.structure <- ""
+    } else {
+      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
+    }
+    rhdf5::h5closeAll()
+
+  } else {
+    fid <- rhdf5::h5createFile(path)
+    current.structure <- ""
+  }
+
+  # Generate internal structure
+  if(grepl("/", component)) {
+    directory.structure <- strsplit(component, "/")[[1]]
+  } else {
+    directory.structure <- component
+  }
+
+  for (i in seq_along(directory.structure)) {
+    # This structure needs to be added
+    if(i==1) {
+      build.structure <- directory.structure[1]
+    } else {
+      build.structure <- paste0(build.structure, "/", directory.structure[i])
+    }
+    # If the structure doesn't exist make it
+    if(!build.structure %in% current.structure)
+      rhdf5::h5createGroup(path, build.structure)
+    # Update current structure
+    current.structure <- c(current.structure, build.structure)
+  }
+
+  # Attach data
+  rhdf5::h5write(array, path, paste0(component, "/array"))
+
+  # Attach dimension titles
+  dimension_titles <- names(dimension_names)
+
+  for(i in seq_along(dimension_titles)) {
+    attribute_component <- paste0(component, "/Dimension_", i, "_title")
+    rhdf5::h5write(dimension_titles[i], path, attribute_component)
+  }
+
+  # Attach dimension names
+  for(j in seq_along(dimension_names)) {
+    attribute_component <- paste0(component, "/Dimension_", j, "_names")
+    rhdf5::h5write(dimension_names[[j]], path, attribute_component)
+  }
+
+  # Attach dimension values
+  if(!missing(dimension_values)) {
+    dimensions.with.values <- which(!is.na(dimension_values))
+    for(k in dimensions.with.values) {
+      value_component <- paste0(component, "/Dimension_", k, "_values")
+      rhdf5::h5write(dimension_values[[k]], path, value_component)
+    }
+  }
+
+  # Attach dimension units
+  if(!missing(dimension_units)) {
+    dimensions.with.units <- which(!is.na(dimension_units))
+    for(m in dimensions.with.units) {
+      unit_component <- paste0(component, "/Dimension_", m, "_units")
+      rhdf5::h5write(dimension_units[[m]], path, unit_component)
+    }
+  }
+
+  # Attach units
+  if(!missing(units)) {
+    rhdf5::h5write(units, path, paste0(component, "/units"))
+  }
+
+  rhdf5::h5closeAll()
+
+  usethis::ui_done(paste("Added component:", usethis::ui_value(component), "\n",
+                         "to data product:", usethis::ui_value(data_product)))
+
+  handle$write_dataproduct(data_product, path, component)
 }
