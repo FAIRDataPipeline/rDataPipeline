@@ -4,12 +4,10 @@
 \alias{fdp_run}
 \title{fdp_run}
 \usage{
-fdp_run(yaml, time)
+fdp_run(path = "config.yaml")
 }
 \arguments{
-\item{yaml}{config.yaml}
-
-\item{time}{time}
+\item{path}{string}
 }
 \description{
 fdp_run

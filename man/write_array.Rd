@@ -42,4 +42,8 @@ a whole}
 \description{
 Function to populate hdf5 file with array type data.
 }
+\seealso{
+Other write functions: 
+\code{\link{write_table}()}
+}
 \concept{write functions}

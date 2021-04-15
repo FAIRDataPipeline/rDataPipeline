@@ -8,6 +8,7 @@ upload_data_product(
   storage_root_id,
   name,
   component_name,
+  description,
   processed_path,
   product_path,
   version,
@@ -20,6 +21,9 @@ upload_data_product(
 \item{name}{e.g.}
 
 \item{component_name}{(optional) used for toml files, not hdf5}
+
+\item{description}{(optional) a \code{string} containing a free text
+description of the \code{object}}
 
 \item{processed_path}{e.g.}
 

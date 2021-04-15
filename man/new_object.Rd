@@ -4,15 +4,16 @@
 \alias{new_object}
 \title{Post entry to object table}
 \usage{
-new_object(storage_location_id, description = "")
+new_object(storage_location_id, description = "", issues)
 }
 \arguments{
 \item{storage_location_id}{a \code{string} specifying the API URL of the
-associated \code{storage_location} table
-\emph{e.g.} "https://data.scrc.uk/api/storage_location/411/"}
+associated \code{storage_location} table}
 
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{object_component}
+description of the \code{object}}
+
+\item{issues}{a \code{list} of Issues URLs to associate with this Object
 
 Note that the \code{object} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use

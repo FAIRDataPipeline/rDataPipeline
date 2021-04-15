@@ -11,7 +11,7 @@ register_external_object <- function(register_this,
   # Download data -----------------------------------------------------------
 
   # Local data store location
-  local_path <- file.path(datastore, namespace, register_this$product_name)
+  local_path <- file.path(paste0(datastore, namespace), register_this$product_name)
   tmp_filename <- paste(openssl::sha1(as.character(Sys.time())),
                         register_this$file_type, sep = ".")
 
@@ -95,5 +95,8 @@ register_external_object <- function(register_this,
 
   stop_server()
 
-  invisible(externalobject_id)
+  usethis::ui_done(paste("Add", usethis::ui_value(register_this$external_object),
+                         "as", ui_field("external_object"), "in local registry"))
+
+  invisible(datastore_component_id)
 }

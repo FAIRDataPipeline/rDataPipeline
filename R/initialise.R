@@ -9,12 +9,43 @@
 #' @export
 #'
 initialise <- function(path = ".") {
-  # Read yaml
-  yaml <- yaml::read_yaml(file.path(path, "config.yaml"))
+
+  # Read config.yaml --------------------------------------------------------
+
+  config_path <- Sys.getenv("wconfig")
+
+  if (config_path == "")
+    usethis::ui_stop(paste("Working", usethis::ui_value("config.yaml"),
+                           "does not exist, please run `fdp pull` and try again"))
+
+  yaml <- yaml::read_yaml(config_path)
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
+  datastore_root <- yaml$run_metadata$default_data_store
+  localstore <- run_metadata$default_data_store
 
-  # Get latest commit sha
+  usethis::ui_done(paste("Read", usethis::ui_value("config.yaml")))
+
+  # Record config.yaml location in data registry ----------------------------
+
+  run_server()
+
+  config_storageroot_id <- new_storage_root(name = "localstore",
+                                            root = datastore_root,
+                                            accessibility = 0)
+
+  hash <- get_file_hash(config_path)
+  config_location_id <- new_storage_location(path = config_path,
+                                             hash = hash,
+                                             storage_root_id = config_storageroot_id)
+  config_object_id <- new_object(storage_location_id = config_location_id,
+                                 description = "Local datastore")
+
+  usethis::ui_done(paste("Record", usethis::ui_value("config.yaml"),
+                         "in local registry"))
+
+  # Get latest commit sha ---------------------------------------------------
+
   if ("local_repo" %in% names(run_metadata)) {
     check_local_repo(run_metadata$local_repo)
     sha <- git2r::sha(git2r::last_commit(run_metadata$local_repo))
@@ -22,7 +53,10 @@ initialise <- function(path = ".") {
     sha <- get_github_hash(run_metadata$remote_repo)
   }
 
-  # Get GitHub username/repository
+  usethis::ui_done(paste("Check local repository status"))
+
+  # Get GitHub username/repository ------------------------------------------
+
   if ("remote_repo" %in% names(run_metadata)) {
     repo_name <- gsub("https://github.com/", remote_repo)
 
@@ -32,9 +66,10 @@ initialise <- function(path = ".") {
       gsub(".git$", "", .)
   }
 
-  run_server()
+  usethis::ui_done(paste("Find remote repository"))
 
-  # Submission script location
+  # Record analysis / processing script location in data registry -----------
+
   repo_storageroot_id <- new_storage_root(name = "github",
                                           root = "https://github.com/",
                                           accessibility = 0)
@@ -42,50 +77,40 @@ initialise <- function(path = ".") {
                                            hash = sha,
                                            storage_root_id = repo_storageroot_id)
 
-  repo_object_id <- new_object(storage_location_id = repo_location_id)
+  repo_object_id <- new_object(storage_location_id = repo_location_id,
+                               description = "Analysis / processing script location")
 
-  # TODO: what about code repo version?
+  usethis::ui_done(paste("Record", usethis::ui_value("analysis / processing script"),
+                         "location in local registry"))
 
-  # Save submission script to data store
-  time <- format(Sys.time(), "%Y%m%d-%H%M%S")
-  submission_script_path <- store_script(yaml, time)
-  datastore_root <- yaml$run_metadata$default_data_store
+  # Save submission script to data store ------------------------------------
+
+  filename <- gsub("yaml", "sh", basename(config_path))
+  path <- file.path(paste0(localstore, "scripts"), filename)
+  submission_script_path <- store_script(run_metadata$script, path)
+
+  usethis::ui_done(paste("Save", usethis::ui_value("submission script"),
+                         "in local data store"))
+
+  # Record submission script location in data registry ----------------------
+
   script_storageroot_id <- new_storage_root(name = "localstore",
                                             root = datastore_root,
                                             accessibility = 0)
-  hash <- get_file_hash(paste0(datastore_root, submission_script_path))
+
+  hash <- get_file_hash(submission_script_path)
   script_location_id <- new_storage_location(path = submission_script_path,
                                              hash = hash,
                                              storage_root_id = script_storageroot_id)
-  script_object_id <- new_object(storage_location_id = script_location_id)
+  script_object_id <- new_object(storage_location_id = script_location_id,
+                                 description = "Submission script location")
 
-  # `fdp run`:
-  # - read config.yaml and generate a working-config.yaml with specific
-  #   version numbers and no aliases
-  # - save working-config.yaml in local data store
-  # - save path to working-config.yaml in global environment in $wconfig
-  fdp_run(yaml, time)
-  config_path <- Sys.getenv("wconfig")
-
-  config_storageroot_id <- new_storage_root(name = "localstore",
-                                            root = datastore_root,
-                                            accessibility = 0)
-  hash <- get_file_hash(paste0(datastore_root, config_path))
-  config_location_id <- new_storage_location(path = config_path,
-                                             hash = hash,
-                                             storage_root_id = config_storageroot_id)
-  config_object_id <- new_object(storage_location_id = config_location_id)
-
-  coderun_id <- new_coderun(run_date = Sys.time(),
-                            description = yaml$run_metadata$description,
-                            # code_repo_id = "",
-                            model_config = config_object_id,
-                            submission_script_id = script_object_id,
-                            inputs = list(),
-                            outputs = list())
+  usethis::ui_done(paste("Record", usethis::ui_value("submission script"),
+                         "in local registry"))
 
   stop_server()
 
-  invisible(list(yaml = yaml,
-                 coderun = coderun_id))
+  fdp$new(yaml = yaml,
+          model_config = config_object_id,
+          submission_script = script_object_id)
 }

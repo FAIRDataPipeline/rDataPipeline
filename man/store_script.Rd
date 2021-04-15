@@ -4,12 +4,12 @@
 \alias{store_script}
 \title{store_script}
 \usage{
-store_script(yaml, time)
+store_script(script, path)
 }
 \arguments{
-\item{yaml}{config.yaml}
+\item{script}{string}
 
-\item{time}{time}
+\item{path}{filename}
 }
 \description{
 store_script

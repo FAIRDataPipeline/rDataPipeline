@@ -32,43 +32,50 @@ post_data <- function(table, data, ...) {
   api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url,
                     paste(api_url, "/", sep = ""))
 
-  result <- httr::POST(api_url,
-                       body = jsonlite::toJSON(data, pretty = T,
-                                               auto_unbox = T,
-                                               force = T),
-                       httr::content_type('application/json'),
-                       httr::add_headers(.headers = h))
+  # Sometimes an error is returned from the local registry:
+  #   "Error in curl::curl_fetch_memory(url, handle = handle) :
+  #    Failed to connect to localhost port 8000: Connection refused"
+  # Repeating the action works eventually...
+  continue <- TRUE
+  while (continue) {
+    tryCatch({ # Try retrieving entry
+      result <- httr::POST(api_url,
+                           body = jsonlite::toJSON(data, pretty = T,
+                                                   auto_unbox = T,
+                                                   force = T),
+                           httr::content_type('application/json'),
+                           httr::add_headers(.headers = h))
+      continue <- FALSE
+    },
+    error = function(e) {
+    })
+  }
 
-  table_name <- gsub("_", " ", table)
-
+  # Status 404: Not found (table doesn't exist)
   if(result$status == 404)
-    usethis::ui_stop(paste(usethis::ui_value(table_name), "does not exist"))
+    usethis::ui_stop(paste(usethis::ui_field(gsub("_", " ", table)),
+                           "does not exist"))
 
   tmp <- result %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
+  # Status 201: created
   if(result$status == 201) {
-    usethis::ui_done(paste("Added", usethis::ui_value(data$name), "to",
-                           usethis::ui_value(table_name)))
     return(tmp$url)
 
+    # Status 409: Conflict (entry already exists)
   } else if(result$status == 409) {
 
-    tryCatch(
-      {
-        usethis::ui_done(paste("Added", usethis::ui_value(data$name), "to",
-                               usethis::ui_value(table_name)))
-        return(get_url(table, clean_query(data)))
-      },
+    tryCatch({
+      return(get_url(table, clean_query(data))) },
       error = function(err) {
-        stop("fields don't match existing entry, so no URI was returned")
-      }
-    )
+        usethis::ui_stop("Conflict with existing entry")
+      })
 
+    # Status non-201 (something went wrong)
   } else {
-    stop("Adding new data returned non-201 status code: (",
-         result$status , ") ", tmp)
+    usethis::ui_stop(tmp)
   }
 
 }

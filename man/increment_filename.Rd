@@ -4,13 +4,11 @@
 \alias{increment_filename}
 \title{increment_filename}
 \usage{
-increment_filename(scriptdir, filename)
+increment_filename(path)
 }
 \arguments{
-\item{scriptdir}{directory}
-
-\item{filename}{file name}
+\item{path}{path}
 }
 \description{
-Searches scriptdir for duplicate files and increments filename.
+Searches directory for duplicate files and increments filename.
 }

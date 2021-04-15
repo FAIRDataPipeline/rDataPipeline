@@ -12,5 +12,5 @@ add_to_register(handle, alias)
 \item{alias}{string}
 }
 \description{
-add_to_register
+Register externally sourced data to the pipeline.
 }
