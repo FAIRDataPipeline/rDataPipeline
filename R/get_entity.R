@@ -11,18 +11,15 @@ get_entity <- function(url) {
   #    Failed to connect to localhost port 8000: Connection refused"
   # Repeating the action works eventually...
   continue <- TRUE
-  i <- 1
   while (continue) {
-    # Try retrieving entry
-    tryCatch({
+    tryCatch({ # Try retrieving entry
       output <- httr::GET(url) %>%
         httr::content(as = "text", encoding = "UTF-8") %>%
         jsonlite::fromJSON(simplifyVector = FALSE)
       continue <- FALSE
     },
     error = function(e) {
-    },
-    finally = {})
+    })
   }
   output
 }
