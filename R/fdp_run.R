@@ -1,11 +1,12 @@
 #' fdp_run
 #'
-#' @param yaml config.yaml
-#' @param time time
+#' @param path string
 #'
 #' @export
 #'
-fdp_run <- function(yaml, time) {
+fdp_run <- function(path = "config.yaml") {
+  yaml <- yaml::read_yaml(path)
+
   # If local data store doesn't exist, create it
   localstore <- yaml$run_metadata$default_data_store
   if (grepl("/$", localstore))
@@ -17,12 +18,13 @@ fdp_run <- function(yaml, time) {
     dir.create(configdir)
 
   # Write .sh file (increment file name if it exists - why would it though?)
-  filename <- paste0(time, ".yaml")
-  filename <- increment_filename(configdir, filename)
+  filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".yaml")
+  filepath <- file.path(configdir, filename)
+  filepath <- increment_filename(filepath)
 
   # Save working config.yaml in data store
-  yaml::write_yaml(yaml, file = file.path(configdir, filename))
+  yaml::write_yaml(yaml, file = filepath)
 
   # Save path in global environment
-  Sys.setenv(wconfig = file.path("config", filename))
+  Sys.setenv(wconfig = filepath)
 }
