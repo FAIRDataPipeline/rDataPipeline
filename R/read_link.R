@@ -7,7 +7,7 @@
 #'
 read_link <- function(handle, alias) {
   # Get entries
-  url <- unname(handle$inputs[alias])
+  url <- unname(handle$inputs[[alias]])
   run_server()
   external_object <- get_entity(url)
   object <- get_entity(external_object$object)
