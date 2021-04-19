@@ -60,11 +60,13 @@ initialise <- function(path = ".") {
   if ("remote_repo" %in% names(run_metadata)) {
     repo_name <- gsub("https://github.com/", remote_repo)
 
-  } else {
+  } else if ("local_repo" %in% names(run_metadata)){
     repo_name <- git2r::remote_url(run_metadata$local_repo) %>%
       gsub("https://github.com/", "", .) %>%
       gsub(".git$", "", .)
-  }
+
+  } else
+    stop("No repo?")
 
   usethis::ui_done(paste("Find remote repository"))
 
