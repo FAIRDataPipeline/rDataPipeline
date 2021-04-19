@@ -95,8 +95,9 @@ register_external_object <- function(register_this,
 
   stop_server()
 
-  usethis::ui_done(paste("Add", usethis::ui_value(register_this$external_object),
-                         "as", ui_field("external_object"), "in local registry"))
+  usethis::ui_done(
+    paste("Add", usethis::ui_value(register_this$external_object),
+          "as", usethis::ui_field("external_object"), "in local registry"))
 
   invisible(datastore_component_id)
 }
