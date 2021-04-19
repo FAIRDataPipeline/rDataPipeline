@@ -25,7 +25,9 @@ Imports:
     utils,
     crayon,
     semver,
-    rhdf5
+    rhdf5,
+    yaml,
+    R6
 Suggests:
     units,
     testthat
