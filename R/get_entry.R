@@ -26,7 +26,7 @@ get_entry <- function(table, query) {
   # Check whether query is valid (for table)
   if(!check_query(table, query)) stop("not a valid query for table")
 
-  out <- httr::GET(paste("http://localhost:8000/api", table, "", sep = "/"),
+  out <- httr::GET(paste("http://localhost:8000/api/", table, "", sep = "/"),
                    query = query) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
