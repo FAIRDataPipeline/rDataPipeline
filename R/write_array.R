@@ -39,7 +39,7 @@ write_array <- function(array,
   if (data_product %in% names(handle$outputs)) {
     path <- unname(handle$outputs$dataproducts[[data_product]]$path)
   } else {
-    filename <- paste0(openssl::sha1(as.character(Sys.time())), ".h5")
+    filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
     path <- file.path(paste0(datastore, namespace), data_product, filename)
   }
 
