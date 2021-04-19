@@ -24,6 +24,14 @@ finalise <- function(handle) {
       path <- handle$outputs$dataproducts[[i]]$path
       storage_location <- gsub(datastore, "", path)
 
+      # Rename file
+      hash <- get_file_hash(path)
+      tmp_filename <- basename(path)
+      extension <- strsplit(tmp_filename, split = "\\.")[[1]][2]
+      new_filename <- paste(hash, extension, sep = ".")
+      new_path <- gsub(tmp_filename, new_filename, path)
+      file.rename(path, new_path)
+
       # Read description from config.yaml
       writes <- handle$yaml$write
       index <- which(unlist(lapply(writes, function(x)
@@ -38,7 +46,7 @@ finalise <- function(handle) {
         storage_root_id = datastore_root_id,
         name = dataproduct,
         description = description,
-        processed_path = path,
+        processed_path = new_path,
         product_path = storage_location,
         version = this_version,
         namespace_id = namespace_id)
@@ -70,5 +78,4 @@ finalise <- function(handle) {
                          "in local registry"))
 
   stop_server()
-
 }
