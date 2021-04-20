@@ -4,11 +4,9 @@
 #' and creates new submission_script in local registry and if necessary creates
 #' a new code_repo entry in local registry.
 #'
-#' @param path Path to config.yaml file (optional)
-#'
 #' @export
 #'
-initialise <- function(path = ".") {
+initialise <- function() {
 
   # Read config.yaml --------------------------------------------------------
 
