@@ -16,5 +16,5 @@ read_link <- function(handle, alias) {
   stop_server()
 
   # Return storage location
-  invisible(file.path(storage_root$root, storage_location$path))
+  invisible(paste0(storage_root$root, storage_location$path))
 }
