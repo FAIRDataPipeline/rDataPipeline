@@ -2,16 +2,13 @@
 #'
 #' @param url url
 #' @param data data
-#' @param key key
 #'
 #' @keywords internal
 #'
 patch_data <- function(url,
-                       data,
-                       key) {
+                       data) {
 
-  key <- validate_token(key)
-
+  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
   h <- c(Authorization = paste("token", key))
 
   result <- httr::PATCH(url,
