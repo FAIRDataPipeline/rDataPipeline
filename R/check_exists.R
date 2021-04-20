@@ -21,7 +21,7 @@
 check_exists <- function(table,
                          query) {
 
-    output <- httr::GET(file.path("https://data.scrc.uk/api", table, ""),
+    output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
                         query = query)
 
     if(any(names(output) == "status_code")){
