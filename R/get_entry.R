@@ -21,12 +21,8 @@ get_entry <- function(table, query) {
     stop("a query must be defined")
   # An empty string is not a valid query
   if(is.character(query) && query == "") stop("not a valid query")
-  # Check whether table is valid
-  if(!check_table_exists(table)) stop(paste("table doesn't exist"))
-  # Check whether query is valid (for table)
-  if(!check_query(table, query)) stop("not a valid query for table")
 
-  out <- httr::GET(paste("http://localhost:8000/api/", table, "", sep = "/"),
+  out <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
                    query = query) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
