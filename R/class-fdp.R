@@ -34,6 +34,9 @@ fdp <- R6::R6Class("fdp", list(
     self$yaml <- yaml
     self$model_config <- model_config
     self$submission_script <- submission_script
+    self$outputs <- data.frame(data_product = character(),
+                               path = character(),
+                               component = character())
     invisible(self)
   },
 
@@ -61,14 +64,53 @@ fdp <- R6::R6Class("fdp", list(
   #' @param component text
   #'
   write_dataproduct = function(data_product, path, component) {
-    if (data_product %in% names(self$outputs) &&
-        self$outputs[[data_product]]$path != path)
-      stop("Conflicting entries")
 
-    existing <- self$outputs$dataproducts[[data_product]]$components
-    updated <- c(existing, component)
-    self$outputs$dataproducts[[data_product]] <- list(path = path,
-                                                      components = updated)
+    # self$outputs$dataproducts
+
+    # if (data_product %in% names(self$outputs) &&
+    #     self$outputs[[data_product]]$path != path)
+    #   stop("Conflicting entries")
+
+    existing <- self$outputs
+    new <- data.frame(dataproduct = data_product,
+                      path = path,
+                      component = component,
+                      component_id = NA,
+                      dataproduct_id = NA)
+    self$outputs <- rbind.data.frame(existing, new)
+
+    invisible(self)
+  },
+
+  #' @description
+  #' Add outputs field
+  #' @param data_product text
+  #' @param component text
+  #' @param component_id text
+  #'
+  write_component_id = function(data_product, component, component_id) {
+
+    index <- which(self$outputs$dataproduct == data_product &
+                     self$outputs$component == component)
+
+    if (length(index) != 0)
+      self$outputs$component_id[index] <- component_id
+
+    invisible(self)
+  },
+
+  #' @description
+  #' Add outputs field
+  #' @param data_product text
+  #' @param data_product_id text
+  #'
+  write_dataproduct_id = function(data_product, data_product_id) {
+
+    index <- which(self$outputs$dataproduct == data_product)
+
+    if (length(index) != 0)
+      self$outputs$dataproduct_id[index] <- data_product_id
+
     invisible(self)
   }
 ))
