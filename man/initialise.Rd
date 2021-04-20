@@ -4,10 +4,7 @@
 \alias{initialise}
 \title{initialise}
 \usage{
-initialise(path = ".")
-}
-\arguments{
-\item{path}{Path to config.yaml file (optional)}
+initialise()
 }
 \description{
 Reads in config.yaml file and generates new entry in code_run and returns id

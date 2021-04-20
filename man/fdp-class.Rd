@@ -33,6 +33,8 @@ Contained for class \code{fdp}.
 \item \href{#method-new}{\code{fdp$new()}}
 \item \href{#method-input}{\code{fdp$input()}}
 \item \href{#method-write_dataproduct}{\code{fdp$write_dataproduct()}}
+\item \href{#method-write_component_id}{\code{fdp$write_component_id()}}
+\item \href{#method-write_dataproduct_id}{\code{fdp$write_dataproduct_id()}}
 \item \href{#method-clone}{\code{fdp$clone()}}
 }
 }
@@ -96,6 +98,46 @@ Add outputs field
 \item{\code{path}}{text}
 
 \item{\code{component}}{text}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_component_id"></a>}}
+\if{latex}{\out{\hypertarget{method-write_component_id}{}}}
+\subsection{Method \code{write_component_id()}}{
+Add outputs field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_component_id(data_product, component, component_id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data_product}}{text}
+
+\item{\code{component}}{text}
+
+\item{\code{component_id}}{text}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-write_dataproduct_id"></a>}}
+\if{latex}{\out{\hypertarget{method-write_dataproduct_id}{}}}
+\subsection{Method \code{write_dataproduct_id()}}{
+Add outputs field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_id(data_product, data_product_id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data_product}}{text}
+
+\item{\code{data_product_id}}{text}
 }
 \if{html}{\out{</div>}}
 }

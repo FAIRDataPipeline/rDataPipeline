@@ -22,7 +22,6 @@ Upload submission_script metadata to the data registry
 }
 \seealso{
 Other upload functions: 
-\code{\link{upload_data_product}()},
 \code{\link{upload_github_repo}()},
 \code{\link{upload_object_links}()},
 \code{\link{upload_paper}()},

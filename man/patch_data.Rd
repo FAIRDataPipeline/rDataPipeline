@@ -4,14 +4,12 @@
 \alias{patch_data}
 \title{Patch entry in data registry}
 \usage{
-patch_data(url, data, key)
+patch_data(url, data)
 }
 \arguments{
 \item{url}{url}
 
 \item{data}{data}
-
-\item{key}{key}
 }
 \description{
 Patch entry in data registry
