@@ -36,8 +36,14 @@ write_array <- function(array,
   namespace <- handle$yaml$run_metadata$default_output_namespace
 
   # Extract / set save location
-  if (data_product %in% names(handle$outputs)) {
-    path <- unname(handle$outputs$dataproducts[[data_product]]$path)
+  if (data_product %in% handle$outputs$dataproduct) {
+    path <- handle$outputs %>%
+      dplyr::filter(dataproduct == data_product) %>%
+      dplyr::select(path) %>%
+      unique() %>%
+      unlist() %>%
+      unname()
+
   } else {
     filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
     path <- file.path(paste0(datastore, namespace), data_product, filename)
