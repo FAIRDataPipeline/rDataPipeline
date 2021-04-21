@@ -12,7 +12,7 @@ post_data <- function(table, data) {
 
   key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
   h <- c(Authorization = paste("token", key))
-  api_url <- paste0("http://localhost:8000/api", table, sep = "/")
+  api_url <- paste0("http://localhost:8000/api/", table)
 
   # Check there is a trailing slash (windows issue with file.path())
   api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url,
