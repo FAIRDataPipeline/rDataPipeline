@@ -16,22 +16,25 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Get all entries in storage_root
 #' get_existing("storage_root", limit_results = FALSE)
 #'
 #' # Get 100 newest entries in data_product
 #' get_existing("data_product")
+#' }
 #'
 get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
-  if(!check_table_exists(table))
-    stop(paste0("Table: ", table, " does not exist\n",
-                "For available tables use: get_tables()"))
+  # if(!check_table_exists(table))
+  #   stop(paste0("Table: ", table, " does not exist\n",
+  #               "For available tables use: get_tables()"))
 
   tryCatch({
 
     # Get the 100 newest results
-    output <- httr::GET(paste("http://data.scrc.uk/api", table, "", sep = "/")) %>%
+    output <- httr::GET(paste("http://localhost:8000/api", table, "",
+                              sep = "/")) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)
     results <- output$results

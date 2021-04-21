@@ -11,11 +11,13 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Retrieve URLs for all entries in a table
 #' get_url(table = "storage_root")
 #'
 #' # Retrieve the URL of a particular entry in a table
 #' get_url(table = "storage_root", list(name = "github"))
+#' }
 #'
 get_url <- function(table, query = list()) {
 

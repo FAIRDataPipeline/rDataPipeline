@@ -8,7 +8,7 @@
 #' @keywords internal
 #'
 get_table_readable <- function(table, key){
-  if(! check_table_exists(table))
-    stop("Unknown Table")
+  # if(! check_table_exists(table))
+  #   stop("Unknown Table")
   readable <- get_fields(table, key)
 }

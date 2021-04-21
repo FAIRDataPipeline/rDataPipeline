@@ -1,5 +1,12 @@
 #' issue_with_component
 #'
+#' @param issue issue
+#' @param severity severity
+#' @param data_product data_product
+#' @param namespace namespace
+#' @param component component
+#' @param version version
+#'
 issue_with_component <- function(issue,
                                  severity,
                                  data_product,

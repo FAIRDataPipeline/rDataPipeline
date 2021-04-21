@@ -20,22 +20,3 @@ if available
 \description{
 Function to read table type data from hdf5 file.
 }
-\examples{
-df <- data.frame(a = 1:2, b = 3:4)
-rownames(df) <- 1:2
-filename <- "test_table.h5"
-
-create_table(filename = filename,
-             path = ".",
-             component = "level",
-             df = df,
-             row_names = rownames(df),
-             column_units = c(NA, "m^2"))
-
-my_table <- read_table(filepath = filename,
-                       component = "level")
-attributes(my_table)
-
-file.remove(filename)
-
-}

@@ -18,10 +18,4 @@ isn't
 \description{
 Check whether fields are queryable
 }
-\examples{
-is_queryable("storage_root", "name")
-is_queryable("storage_root", c("not_a_field", "name"))
-is_queryable("not_a_table", "name")
-
-}
 \keyword{internal}

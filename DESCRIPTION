@@ -27,7 +27,9 @@ Imports:
     semver,
     rhdf5,
     yaml,
-    R6
+    R6,
+    git2r,
+    usethis
 Suggests:
     units,
     testthat

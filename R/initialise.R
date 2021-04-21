@@ -56,7 +56,7 @@ initialise <- function() {
   # Get GitHub username/repository ------------------------------------------
 
   if ("remote_repo" %in% names(run_metadata)) {
-    repo_name <- gsub("https://github.com/", remote_repo)
+    repo_name <- gsub("https://github.com/", run_metadata$remote_repo)
 
   } else if ("local_repo" %in% names(run_metadata)){
     repo_name <- git2r::remote_url(run_metadata$local_repo) %>%

@@ -2,7 +2,7 @@
 #'
 #' @param register_this metadata
 #' @param datastore default local data storage location
-#' @param namespace
+#' @param namespace namespace
 #'
 register_external_object <- function(register_this,
                                      datastore,
@@ -68,8 +68,7 @@ register_external_object <- function(register_this,
 
   # Add local data store location to the data registry
   datastore_location_id <- new_storage_location(
-    path = file.path(namespace, register_this$product_name,
-                     new_filename),
+    path = file.path(namespace, register_this$product_name, new_filename),
     hash = hash,
     storage_root_id = datastore_root_id)
 

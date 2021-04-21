@@ -11,9 +11,11 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Get list of entries
 #' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
 #' get_entry("data_product", list(name = data_product))
+#' }
 #'
 get_entry <- function(table, query) {
   # Can't get an empty entry

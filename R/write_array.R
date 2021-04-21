@@ -38,8 +38,8 @@ write_array <- function(array,
   # Extract / set save location
   if (data_product %in% handle$outputs$dataproduct) {
     path <- handle$outputs %>%
-      dplyr::filter(dataproduct == data_product) %>%
-      dplyr::select(path) %>%
+      dplyr::filter(.data$dataproduct == data_product) %>%
+      dplyr::select(.data$path) %>%
       unique() %>%
       unlist() %>%
       unname()

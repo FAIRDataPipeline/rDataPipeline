@@ -13,7 +13,9 @@ get_version_numbers(data_product)
 Get all version numbers of a data product listed in the data registry
 }
 \examples{
+\dontrun{
 data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
 get_version_numbers(data_product)
+}
 
 }

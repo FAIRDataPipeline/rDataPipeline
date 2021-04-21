@@ -6,6 +6,15 @@
 \usage{
 issue_with_externalobject(description, severity, external_object_doi, version)
 }
+\arguments{
+\item{description}{description}
+
+\item{severity}{severity}
+
+\item{external_object_doi}{external_object_doi}
+
+\item{version}{version}
+}
 \description{
 issue_with_externalobject
 }

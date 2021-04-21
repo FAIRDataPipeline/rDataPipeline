@@ -16,10 +16,10 @@ get_data_from_object_id <- function(obj_id, data_dir = "data-raw"){
   # If data_dir doesn't exist, create it
   if(!dir.exists(data_dir)) dir.create(data_dir, recursive = TRUE)
 
-  obj <- get_entity("object", obj_id)
+  obj <- get_entity(obj_id)
   if(is.null(obj)) stop("Object does not exist")
 
-  storage_location <- get_storage_location(basename(obj$storage_location))
+  storage_location <- get_storage_location(obj$storage_location)
   if(is.null(storage_location))
     stop("There was a problem with the storage location")
 

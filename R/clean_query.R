@@ -8,10 +8,6 @@
 #' @export
 #' @keywords internal
 #'
-#' @examples
-#' data <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
-#' clean_query(data = data)
-#'
 clean_query <- function(data) {
 
   data_tmp <- lapply(data, function(x) {

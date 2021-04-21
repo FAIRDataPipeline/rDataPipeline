@@ -13,9 +13,4 @@ clean_query(data)
 \description{
 Function to clean a query and return it without an api prefix
 }
-\examples{
-data <- list(storage_location = "https://data.scrc.uk/api/storage_location/2")
-clean_query(data = data)
-
-}
 \keyword{internal}

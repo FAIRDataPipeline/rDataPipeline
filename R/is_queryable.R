@@ -10,19 +10,14 @@
 #' @export
 #' @keywords internal
 #'
-#' @examples
-#' is_queryable("storage_root", "name")
-#' is_queryable("storage_root", c("not_a_field", "name"))
-#' is_queryable("not_a_table", "name")
-#'
 is_queryable <- function(table, query_parameter) {
   if(table == "users" | table == "groups")
     return(FALSE) # only queryable with token
 
-  if(!check_table_exists(table)) {
-    message("table doesn't exist")
-    return(FALSE)
-  }
+  # if(!check_table_exists(table)) {
+  #   message("table doesn't exist")
+  #   return(FALSE)
+  # }
 
   query_parameter %in% get_table_queryable(table)
 }

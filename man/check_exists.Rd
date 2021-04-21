@@ -20,10 +20,12 @@ doesn't
 Check whether an entry already exists in a table (in the data registry)
 }
 \examples{
+\dontrun{
 # Check whether "github" is in the storage_root table
 check_exists("storage_root", list(name = "github"))
 
 # Check whether "not_a_root" is in the storage_root table
 check_exists("storage_root", list(name = "not_a_root"))
+}
 
 }

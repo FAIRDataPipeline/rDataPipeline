@@ -12,4 +12,10 @@ get_entity(url)
 \description{
 Get entity from url
 }
+\examples{
+\dontrun{
+get_entity("http://localhost:8000/api/data_product/50/")
+}
+
+}
 \keyword{internal}

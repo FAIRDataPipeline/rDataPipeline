@@ -1,5 +1,11 @@
 #' issue_with_dataproduct
 #'
+#' @param issue issue
+#' @param severity severity
+#' @param data_product data_product
+#' @param namespace namespace
+#' @param version version
+#'
 issue_with_dataproduct <- function(issue,
                                    severity,
                                    data_product,

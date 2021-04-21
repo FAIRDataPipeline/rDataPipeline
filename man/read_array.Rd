@@ -21,25 +21,3 @@ attributes, if available
 \description{
 Function to read array type data from hdf5 file.
 }
-\examples{
-df <- data.frame(a = 1:2, b = 3:4)
-rownames(df) <- 1:2
-array <- as.matrix(df)
-filename <- "test_array.h5"
-
-create_array(filename = filename,
-             path = ".",
-             component = "level/a/s/d/f/s",
-             array = array,
-             dimension_names = list(rowvalue = rownames(df),
-                                    colvalue = colnames(df)),
-             dimension_values = list(NA, 10),
-             dimension_units = list(NA, "km"),
-             units = "s")
-
-read_array(filepath = filename,
-           component = "level/a/s/d/f/s")
-
-file.remove(filename)
-
-}

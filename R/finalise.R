@@ -23,8 +23,8 @@ finalise <- function(handle) {
     for (i in seq_along(data_products)) {
       data_product <- data_products[i]
       path <- handle$outputs %>%
-        dplyr::filter(dataproduct == data_product) %>%
-        dplyr::select(path) %>%
+        dplyr::filter(.data$dataproduct == data_product) %>%
+        dplyr::select(.data$path) %>%
         unique() %>%
         unlist() %>%
         unname()
@@ -63,7 +63,8 @@ finalise <- function(handle) {
       if(grepl(".h5$", new_path)) {
         components <- get_components(new_path)
       } else if(grepl(".toml$", new_path)) {
-        components <- data.frame(name = component_name)
+        # components <- data.frame(name = component_name)
+        stop("not written yet")
       } else {
         stop("Why is your data product not a toml or an h5 file?")
       }

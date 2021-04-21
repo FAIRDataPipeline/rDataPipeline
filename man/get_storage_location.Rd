@@ -17,7 +17,7 @@ Get storage location entry
 }
 \examples{
 \dontrun{
-get_storage_location(10404)
+get_storage_location("http://localhost:8000/api/storage_location/258/")
 }
 
 }

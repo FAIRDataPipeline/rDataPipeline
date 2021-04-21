@@ -5,6 +5,11 @@
 #' @export
 #' @keywords internal
 #'
+#' @examples
+#' \dontrun{
+#' get_entity("http://localhost:8000/api/data_product/50/")
+#' }
+#'
 get_entity <- function(url) {
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :

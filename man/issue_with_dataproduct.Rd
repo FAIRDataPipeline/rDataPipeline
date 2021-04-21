@@ -6,6 +6,17 @@
 \usage{
 issue_with_dataproduct(issue, severity, data_product, namespace, version)
 }
+\arguments{
+\item{issue}{issue}
+
+\item{severity}{severity}
+
+\item{data_product}{data_product}
+
+\item{namespace}{namespace}
+
+\item{version}{version}
+}
 \description{
 issue_with_dataproduct
 }

@@ -4,14 +4,12 @@
 \alias{post_data}
 \title{Post entry to data registry}
 \usage{
-post_data(table, data, ...)
+post_data(table, data)
 }
 \arguments{
 \item{table}{table name as a character}
 
 \item{data}{data as a named list}
-
-\item{...}{internal parameters}
 }
 \description{
 Post data to registry

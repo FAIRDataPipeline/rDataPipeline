@@ -11,7 +11,7 @@ register_data_product(register_this, datastore, namespace)
 
 \item{datastore}{default local data storage location}
 
-\item{namespace}{}
+\item{namespace}{namespace}
 }
 \description{
 register_data_product

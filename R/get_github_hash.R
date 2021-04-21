@@ -11,7 +11,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_github_hash("ScottishCovidResponse/SCRCdata")
+#' }
 #'
 get_github_hash <- function(repo) {
   if(!grepl("version", system("git --version", intern = TRUE)))

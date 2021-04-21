@@ -9,9 +9,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_storage_location(10404)
+#' get_storage_location("http://localhost:8000/api/storage_location/258/")
 #' }
 #'
 get_storage_location <- function(location){
-  get_entity("storage_location", basename(location))
+  tmp <- get_entity(location)
+  paste0(tmp$storage_root, tmp$path)
 }

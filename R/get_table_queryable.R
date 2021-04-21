@@ -6,9 +6,6 @@
 #' @export
 #' @keywords internal
 #'
-#' @examples
-#' get_table_queryable("data_product")
-#'
 get_table_queryable <- function(table) {
   out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
                                      sep = "/")) %>%

@@ -22,10 +22,6 @@ Experimental
 }
 \seealso{
 Other upload functions: 
-\code{\link{upload_github_repo}()},
-\code{\link{upload_object_links}()},
-\code{\link{upload_paper}()},
-\code{\link{upload_source_data}()},
-\code{\link{upload_submission_script}()}
+\code{\link{upload_github_repo}()}
 }
 \concept{upload functions}
