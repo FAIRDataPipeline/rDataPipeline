@@ -33,6 +33,5 @@ issue_with_externalobject <- function(description,
              data = list(severity = severity,
                          description = description,
                          object_issues = object_issues,
-                         component_issues = component_issues),
-             key = key)
+                         component_issues = component_issues))
 }

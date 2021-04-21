@@ -44,6 +44,8 @@ finalise <- function(handle) {
       writes <- handle$yaml$write
       index_dp <- which(unlist(lapply(writes, function(x)
         data_product == x$data_product)))
+      if (length(index_dp) == 0)
+        stop("Data product not present in config.yaml")
       this_version <- writes[[index_dp]]$version
       description <- writes[[index_dp]]$description
 
@@ -73,6 +75,12 @@ finalise <- function(handle) {
 
       for (j in seq_along(components)) {
 
+        this_dataproduct <- writes[[index_dp]]
+        index_ct <- which(components[j] == names(this_dataproduct$components))
+        if (length(index_ct) == 0)
+          stop("Component not present in config.yaml")
+        this_component <- this_dataproduct$components[[index_ct]]
+
         component_id <- new_object_component(name = components[j],
                                              object_id = object_id)
 
@@ -80,10 +88,6 @@ finalise <- function(handle) {
         handle$write_component_id(data_product, components[j], component_id)
 
         # Attach issues to component -----------------------------------------
-
-        this_dataproduct <- writes[[index_dp]]
-        index_ct <- which(components[j] == names(this_dataproduct$components))
-        this_component <- this_dataproduct$components[[index_ct]]
 
         if (any("issues" %in% names(this_component))) {
           issue <- writes[[index_dp]]$issues

@@ -4,9 +4,10 @@
 #' and creates new submission_script in local registry and if necessary creates
 #' a new code_repo entry in local registry.
 #'
+#' @param skip don't bother checking whether the repo is clean
 #' @export
 #'
-initialise <- function() {
+initialise <- function(skip) {
 
   # Read config.yaml --------------------------------------------------------
 
@@ -45,7 +46,8 @@ initialise <- function() {
   # Get latest commit sha ---------------------------------------------------
 
   if ("local_repo" %in% names(run_metadata)) {
-    check_local_repo(run_metadata$local_repo)
+    if (!skip)
+      check_local_repo(run_metadata$local_repo)
     sha <- git2r::sha(git2r::last_commit(run_metadata$local_repo))
   } else {
     sha <- get_github_hash(run_metadata$remote_repo)
