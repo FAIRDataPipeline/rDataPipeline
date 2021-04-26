@@ -4,12 +4,10 @@
 \alias{add_to_register}
 \title{add_to_register}
 \usage{
-add_to_register(handle, alias)
+add_to_register(yaml)
 }
 \arguments{
-\item{handle}{list}
-
-\item{alias}{string}
+\item{yaml}{list}
 }
 \description{
 Register externally sourced data to the pipeline.

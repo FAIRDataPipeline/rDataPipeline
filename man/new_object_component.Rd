@@ -25,16 +25,6 @@ objects and objet components.}
 \description{
 Upload information to the \code{object_component} table in the data registry
 }
-\examples{
-\dontrun{
-\donttest{
-new_object_component(name = "age_group/week-persons-country-all_deaths",
-                     object_id = "https://data.scrc.uk/api/object/156/",
-                     description = "A very useful component",
-                     key = key)
-}}
-
-}
 \seealso{
 Other new functions: 
 \code{\link{new_author}()},

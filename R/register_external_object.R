@@ -8,27 +8,6 @@ register_external_object <- function(register_this,
                                      datastore,
                                      namespace) {
 
-  # Download data -----------------------------------------------------------
-
-  # Local data store location
-  local_path <- file.path(paste0(datastore, namespace), register_this$product_name)
-  tmp_filename <- paste(openssl::sha1(as.character(Sys.time())),
-                        register_this$file_type, sep = ".")
-
-  if (grepl("SELECT", register_this$path) &
-      grepl("WHERE", register_this$path)) {
-    download_from_database(source_root = register_this$root,
-                           source_path = register_this$path,
-                           path = local_path,
-                           filename = tmp_filename)
-  }
-
-  # Rename data file
-  hash <- get_file_hash(file.path(local_path, tmp_filename))
-  new_filename <- paste(hash, register_this$file_type, sep = ".")
-  file.rename(file.path(local_path, tmp_filename),
-              file.path(local_path, new_filename))
-
   # Original source ---------------------------------------------------------
 
   run_server()
@@ -57,6 +36,8 @@ register_external_object <- function(register_this,
     path = register_this$path,
     hash = hash,
     storage_root_id = source_root_id)
+
+  usethis::ui_done("Record original source location in data registry")
 
   # Local store -------------------------------------------------------------
 

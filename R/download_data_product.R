@@ -18,53 +18,46 @@
 #'  \item{"components"}{H5 file components}
 #' }
 #'
-#' @examples
-#' \dontrun{
-#' # Download H5 file
-#' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
-#'
-#' # Automatically download the latest version
-#' download_data_product(name = data_product,
-#'                       data_dir = "data-raw")
-#'
-#' # Download specified version
-#' download_data_product(name = data_product,
-#'                       data_dir = "data-raw",
-#'                       version = "0.20200920.0")
-#'
-#' # Download TOML file
-#' data_product <- "human/infection/SARS-CoV-2/asymptomatic-period"
-#'
-#' # Automatically download the latest version
-#' download_data_product(name = data_product,
-#'                       data_dir = "data-raw")
-#' }
-#'
-download_data_product <- function(name, data_dir, version) {
-  # List all version numbers in the data registry
-  entries <- get_entry("data_product", list(name = name))
+download_data_product <- function(data_product, version, namespace, data_dir) {
 
-  if(!is.null(entries)) {
-    version_numbers <- lapply(entries, function(x) x$version) %>%
-      unlist()
+  run_server()
 
-    # If version hasn't been input, get the latest version from the data registry
-    if(missing(version)){
-      version <- max(as.numeric_version(version_numbers))
-      version <- as.character(version)
-    }
+  # Where is the file -------------------------------------------------------
 
+  namespace_id <- get_entry("namespace", list(name = namespace))[[1]]$url %>%
+    clean_query() %>%
+    unlist()
 
-    # Find the version
-    ind <- which(version_numbers == version)
-    this_entry <- entries[[ind]]
+  entry <- get_entry("data_product", list(name = data_product,
+                                          version = version,
+                                          namespace = namespace_id))
 
-    # Get its object id
-    object_id <- this_entry$object
-    object_id <- gsub("https://data.scrc.uk/api/object/", "", object_id)
-    object_id <- gsub("/", "", object_id)
+  assertthat::assert_that(length(entry) == 1)
+  assertthat::assert_that(!is.null(entry))
 
-    # Download file
-    return(get_data_from_object_id(as.numeric(object_id), data_dir))
+  object_url <- entry[[1]]$object
+  object <- get_entity(object_url)
+  storage_location <- get_storage_location(object$storage_location)
+
+  stop_server()
+
+  # Where should we save it -------------------------------------------------
+
+  # If data_dir doesn't exist, create it
+  if(!dir.exists(data_dir)) dir.create(data_dir, recursive = TRUE)
+
+  dest_path <- file.path(data_dir, basename(storage_location$path))
+
+  # If file already exists at this location, return a message. Otherwise,
+  # download the file and return it's location and a list of components
+  if(file.exists(dest_path)) {
+    message("File already exists at this location")
+  } else {
+    download.file(url, dest_path, mode = "wb")
   }
+
+  # Return ------------------------------------------------------------------
+
+  list(downloaded_to = normalizePath(dest_path),
+       components = get_components(storage_location))
 }

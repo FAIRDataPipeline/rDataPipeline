@@ -19,15 +19,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' \donttest{
-#' new_object_component(name = "age_group/week-persons-country-all_deaths",
-#'                      object_id = "https://data.scrc.uk/api/object/156/",
-#'                      description = "A very useful component",
-#'                      key = key)
-#' }}
-#'
 new_object_component <- function(name,
                                  object_id,
                                  description = "") {

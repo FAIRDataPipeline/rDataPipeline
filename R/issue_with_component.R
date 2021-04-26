@@ -21,14 +21,14 @@ issue_with_component <- function(issue,
 
   # Which object component do we want to associate with the issue?
   namespaceId <- get_url("namespace", list(name = namespace))
-  namespaceId <- clean_query(list(name = namespaceId))
+  namespaceId <- extract_id(namespaceId)
   entries <- get_entry("data_product", list(name = data_product,
                                             version = version,
                                             namespace = namespaceId))
   objectId <- lapply(entries, function(x) x$object) %>% unlist() %>% unique()
   assertthat::assert_that(length(objectId) == 1)
 
-  objectId <- clean_query(list(name = objectId))
+  objectId <- extract_id(objectId)
   objectComponentId <- get_url("object_component", list(name = component,
                                                         object = objectId))
 

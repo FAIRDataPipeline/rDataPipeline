@@ -37,6 +37,8 @@ post_data <- function(table, data) {
     })
   }
 
+  data <- clean_query(data)
+
   # Status 404: Not found (table doesn't exist)
   if(result$status == 404)
     usethis::ui_stop(paste(usethis::ui_field(gsub("_", " ", table)),
@@ -50,14 +52,25 @@ post_data <- function(table, data) {
   if(result$status == 201) {
     return(tmp$url)
 
-    # Status 409: Conflict (entry already exists)
-  } else if(result$status == 409) {
+    # Status 400: Conflict (entry already exists)
+  } else if(result$status == 400) {
 
     tryCatch({
-      return(get_url(table, clean_query(data))) },
-      error = function(err) {
-        usethis::ui_stop("Conflict with existing entry")
-      })
+      return(get_url(table, data))
+    },
+    error = function(err) {
+      usethis::ui_stop("Conflict with existing entry")
+    })
+
+    # Status 409
+  } else if(result$status == 409) {
+
+    # tryCatch({
+    return(get_url(table, data))
+    # },
+    # error = function(err) {
+    #   usethis::ui_stop("Conflict with existing entry")
+    # })
 
     # Status non-201 (something went wrong)
   } else {

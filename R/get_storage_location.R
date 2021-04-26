@@ -14,5 +14,7 @@
 #'
 get_storage_location <- function(location){
   tmp <- get_entity(location)
-  paste0(tmp$storage_root, tmp$path)
+  path <- tmp$path
+  root <- get_entity(tmp$storage_root)$root
+  paste0(root, path)
 }

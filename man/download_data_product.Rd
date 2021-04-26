@@ -4,16 +4,16 @@
 \alias{download_data_product}
 \title{Download data product}
 \usage{
-download_data_product(name, data_dir, version)
+download_data_product(data_product, version, namespace, data_dir)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the data product}
-
-\item{data_dir}{a \code{string} specifying the download directory}
-
 \item{version}{(optional) a \code{string} specifying the version number of
 the data product; if version is not specified, the most recent version will
 be downloaded}
+
+\item{data_dir}{a \code{string} specifying the download directory}
+
+\item{name}{a \code{string} specifying the name of the data product}
 }
 \value{
 Returns list comprising two elements
@@ -24,29 +24,6 @@ Returns list comprising two elements
 }
 \description{
 Download data product from the Boydorr server.
-}
-\examples{
-\dontrun{
-# Download H5 file
-data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
-
-# Automatically download the latest version
-download_data_product(name = data_product,
-                      data_dir = "data-raw")
-
-# Download specified version
-download_data_product(name = data_product,
-                      data_dir = "data-raw",
-                      version = "0.20200920.0")
-
-# Download TOML file
-data_product <- "human/infection/SARS-CoV-2/asymptomatic-period"
-
-# Automatically download the latest version
-download_data_product(name = data_product,
-                      data_dir = "data-raw")
-}
-
 }
 \seealso{
 Other download functions: 

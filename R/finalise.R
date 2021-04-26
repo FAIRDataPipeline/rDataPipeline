@@ -21,6 +21,7 @@ finalise <- function(handle) {
     data_products <- unique(handle$outputs$dataproduct)
 
     for (i in seq_along(data_products)) {
+
       data_product <- data_products[i]
       path <- handle$outputs %>%
         dplyr::filter(.data$dataproduct == data_product) %>%
@@ -29,6 +30,30 @@ finalise <- function(handle) {
         unlist() %>%
         unname()
       storage_location <- gsub(datastore, "", path)
+
+      writes <- handle$yaml$write
+      index_dp <- which(unlist(lapply(writes, function(x)
+        data_product == x$data_product)))
+      if (length(index_dp) == 0)
+        stop("Data product not present in config.yaml")
+
+      # Compare components in data product to those in config.yaml file ------
+
+      if(grepl(".h5$", path)) {
+        components <- get_components(path)
+      } else if(grepl(".toml$", path)) {
+        # components <- data.frame(name = component_name)
+        stop("Not written yet")
+      } else {
+        stop("Why is your data product not a toml or an h5 file?")
+      }
+
+      components_in_yaml <- names(writes[[index_dp]]$components)
+      mismatched <- components_in_yaml[!which(components_in_yaml %in% components)]
+
+      if (length(mismatched) != 0)
+        usethis::ui_stop(paste("Mismatched components in config.yaml:",
+                               usethis::ui_value(mismatched)))
 
       # Rename file ---------------------------------------------------------
 
@@ -39,13 +64,8 @@ finalise <- function(handle) {
       new_path <- gsub(tmp_filename, new_filename, path)
       file.rename(path, new_path)
 
-      # Read description from config.yaml ------------------------------------
+      # Read version and description from config.yaml ------------------------
 
-      writes <- handle$yaml$write
-      index_dp <- which(unlist(lapply(writes, function(x)
-        data_product == x$data_product)))
-      if (length(index_dp) == 0)
-        stop("Data product not present in config.yaml")
       this_version <- writes[[index_dp]]$version
       description <- writes[[index_dp]]$description
 
@@ -62,14 +82,13 @@ finalise <- function(handle) {
       object_id <- new_object(storage_location_id = storage_location_id,
                               description = description)
 
-      if(grepl(".h5$", new_path)) {
-        components <- get_components(new_path)
-      } else if(grepl(".toml$", new_path)) {
-        # components <- data.frame(name = component_name)
-        stop("not written yet")
-      } else {
-        stop("Why is your data product not a toml or an h5 file?")
-      }
+      # Add data product to data registry ------------------------------------
+
+      product_dataProductId <- new_data_product(name = data_product,
+                                                version = this_version,
+                                                object_id = object_id,
+                                                namespace_id = namespace_id)
+      handle$write_dataproduct_id(data_product, product_dataProductId)
 
       # Record components in data registry -----------------------------------
 
@@ -90,25 +109,17 @@ finalise <- function(handle) {
         # Attach issues to component -----------------------------------------
 
         if (any("issues" %in% names(this_component))) {
-          issue <- writes[[index_dp]]$issues
-          severity <- writes[[index_dp]]$severity
+          issue <- this_component$issues
+          severity <- this_component$severity
 
-          issue_with_component(issue,
-                               severity,
-                               data_product,
-                               namespace,
-                               this_component,
-                               this_version)
+          issue_with_component(issue = issue,
+                               severity = severity,
+                               data_product = data_product,
+                               namespace = namespace,
+                               component = components[j],
+                               version = this_version)
         }
       }
-
-      # Add data product to data registry ------------------------------------
-
-      product_dataProductId <- new_data_product(name = data_product,
-                                                version = this_version,
-                                                object_id = object_id,
-                                                namespace_id = namespace_id)
-      handle$write_dataproduct_id(data_product, product_dataProductId)
 
       # Attach issues to data product ----------------------------------------
 
