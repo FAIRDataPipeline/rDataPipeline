@@ -28,7 +28,7 @@ get_url <- function(table, query = list()) {
   continue <- TRUE
   while (continue) {
     tryCatch({ # Try retrieving entry
-      tmp <- httr::GET(paste("http://localhost:8000/api", table, "", sep = "/"),
+      tmp <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
                        query = query) %>%
         httr::content(as = "text", encoding = "UTF-8") %>%
         jsonlite::fromJSON(simplifyVector = FALSE)
