@@ -7,9 +7,11 @@
 read_link(handle, alias)
 }
 \arguments{
-\item{handle}{list}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
-\item{alias}{string}
+\item{alias}{a \code{string} representing an external object in the
+config.yaml file}
 }
 \description{
 read_link

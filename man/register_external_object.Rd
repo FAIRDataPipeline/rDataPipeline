@@ -4,7 +4,7 @@
 \alias{register_external_object}
 \title{register_external_object}
 \usage{
-register_external_object(register_this, datastore, namespace)
+register_external_object(register_this, datastore, namespace, filename)
 }
 \arguments{
 \item{register_this}{metadata}
@@ -12,6 +12,8 @@ register_external_object(register_this, datastore, namespace)
 \item{datastore}{default local data storage location}
 
 \item{namespace}{namespace}
+
+\item{filename}{filename}
 }
 \description{
 register_external_object

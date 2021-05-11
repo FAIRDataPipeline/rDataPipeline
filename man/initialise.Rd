@@ -4,10 +4,7 @@
 \alias{initialise}
 \title{initialise}
 \usage{
-initialise(skip)
-}
-\arguments{
-\item{skip}{don't bother checking whether the repo is clean}
+initialise()
 }
 \description{
 Reads in config.yaml file and generates new entry in code_run and returns id

@@ -6,6 +6,11 @@
 \usage{
 check_issue(description, severity)
 }
+\arguments{
+\item{description}{issue description}
+
+\item{severity}{issue severity}
+}
 \description{
 check_issue
 }

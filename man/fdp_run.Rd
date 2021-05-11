@@ -4,10 +4,12 @@
 \alias{fdp_run}
 \title{fdp_run}
 \usage{
-fdp_run(path = "config.yaml")
+fdp_run(path = "config.yaml", skip = FALSE)
 }
 \arguments{
 \item{path}{string}
+
+\item{skip}{don't bother checking whether the repo is clean}
 }
 \description{
 fdp_run

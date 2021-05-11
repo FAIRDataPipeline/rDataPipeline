@@ -26,11 +26,11 @@ scottish coronavirus-covid-19-management-information"}
 
 \item{model_config}{(optional)}
 
-\item{submission_script_id}{\emph{e.g.} "https://data.scrc.uk/api/object/153/"}
+\item{submission_script_id}{object URI}
 
-\item{inputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
+\item{inputs}{a \code{list} of input component URIs}
 
-\item{outputs}{\emph{e.g.} list("https://data.scrc.uk/api/object_component/875/")}
+\item{outputs}{a \code{list} of output component URIs}
 }
 \description{
 Upload information to the \code{coderun} table in the data registry

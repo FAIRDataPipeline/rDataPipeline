@@ -6,6 +6,7 @@
 #' @param handle list
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the hdf5 file
+#' @param description a \code{string} describing the data product component
 #' @param dimension_names a \code{list} where each element is a vector
 #' containing the labels associated with a particular dimension (e.g.
 #' element 1 corresponds to dimension 1, which corresponds to row names) and
@@ -26,19 +27,27 @@ write_array <- function(array,
                         handle,
                         data_product,
                         component,
+                        description,
                         dimension_names,
                         dimension_values,
                         dimension_units,
                         units) {
+
+  if (data_product %in% handle$outputs$data_product &
+      component %in% handle$outputs$component) {
+    usethis::ui_done("Component already recorded")
+    invisible(handle$output_index(data_product, component, version))
+  }
 
   # Extract metadata from config.yaml
   datastore <- handle$yaml$run_metadata$default_data_store
   namespace <- handle$yaml$run_metadata$default_output_namespace
 
   # Extract / set save location
-  if (data_product %in% handle$outputs$dataproduct) {
+  if (data_product %in% handle$outputs$data_product) {
+    dp. <- data_product
     path <- handle$outputs %>%
-      dplyr::filter(.data$dataproduct == data_product) %>%
+      dplyr::filter(.data$data_product == dp.) %>%
       dplyr::select(.data$path) %>%
       unique() %>%
       unlist() %>%
@@ -150,5 +159,13 @@ write_array <- function(array,
   usethis::ui_done(paste("Added component:", usethis::ui_value(component), "\n",
                          "to data product:", usethis::ui_value(data_product)))
 
-  handle$write_dataproduct(data_product, path, component)
+  version <- get_version(handle, data_product, namespace)
+
+  handle$write_dataproduct(data_product,
+                           path,
+                           component,
+                           description,
+                           version)
+
+  invisible(handle$output_index(data_product, component, version))
 }

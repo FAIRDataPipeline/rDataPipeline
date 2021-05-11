@@ -37,8 +37,6 @@ post_data <- function(table, data) {
     })
   }
 
-  data <- clean_query(data)
-
   # Status 404: Not found (table doesn't exist)
   if(result$status == 404)
     usethis::ui_stop(paste(usethis::ui_field(gsub("_", " ", table)),
@@ -56,6 +54,7 @@ post_data <- function(table, data) {
   } else if(result$status == 400) {
 
     tryCatch({
+      data <- clean_query(data)
       return(get_url(table, data))
     },
     error = function(err) {
@@ -66,6 +65,7 @@ post_data <- function(table, data) {
   } else if(result$status == 409) {
 
     # tryCatch({
+    data <- clean_query(data)
     return(get_url(table, data))
     # },
     # error = function(err) {

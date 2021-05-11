@@ -1,11 +1,15 @@
 #' check_issue
 #'
+#' @param description issue description
+#' @param severity issue severity
+#'
 check_issue <- function(description,
                         severity) {
 
   # Does this issue already exist?
   if(check_exists("issue", list(description = description,
                                 severity = severity))) {
+
     issueId <- get_url("issue", list(description = description,
                                      severity = severity))
     message("issue already exists")

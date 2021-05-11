@@ -20,13 +20,16 @@ fdp <- R6::R6Class("fdp", list(
   outputs = NULL,
 
   #' @description
-  #' Create a new fdp object.
+  #' Create a new fdp object
   #' @param yaml text
   #' @param model_config text
   #' @param submission_script text
   #' @return A new `fdp` object.
   #'
-  initialize = function(yaml, model_config, submission_script) {
+  initialize = function(yaml,
+                        model_config,
+                        submission_script) {
+
     stopifnot(is.list(yaml))
     stopifnot(is.character(model_config), length(model_config) == 1)
     stopifnot(is.character(submission_script), length(submission_script) == 1)
@@ -34,26 +37,80 @@ fdp <- R6::R6Class("fdp", list(
     self$yaml <- yaml
     self$model_config <- model_config
     self$submission_script <- submission_script
-    self$outputs <- data.frame(data_product = character(),
-                               path = character(),
-                               component = character())
+
     invisible(self)
   },
 
-  # print = function(...) {
-  #   cat("Person: \n")
-  #   cat("  Name: ", self$model_config, "\n", sep = "")
-  #   cat("  Age:  ", self$submission_script, "\n", sep = "")
-  #   invisible(self)
-  # },
+  #' @description
+  #' Print function
+  #'
+  print = function(...) {
+    cat(" yaml:", !is.null(self$yaml))
+    cat("\n", "model_config:", !is.null(self$model_config))
+    cat("\n", "submission_script:", !is.null(self$submission_script))
+
+    if (!is.null(self$inputs)) {
+      cat("\n\n", "inputs:", "\n")
+      self$inputs %>% dplyr::select(-path, -alias) %>%
+        print()
+    }
+
+    if (!is.null(self$outputs)) {
+      cat("\n\n", "outputs:", "\n")
+      self$outputs %>% dplyr::select(-component_id, -dataproduct_id) %>%
+        print()
+    }
+
+    invisible(self)
+  },
 
   #' @description
-  #' Add inputs field.
+  #' Add inputs field
   #' @param alias text
-  #' @param externalobject_id text
+  #' @param type text
+  #' @param doi_or_unique_name text
+  #' @param title text
+  #' @param version text
+  #' @param path text
+  #' @param object_id text
   #'
-  input = function(alias, externalobject_id) {
-    self$inputs[[alias]] <- externalobject_id
+  input = function(alias,
+                   type,
+                   doi_or_unique_name,
+                   title,
+                   version,
+                   path,
+                   object_id) {
+
+    index <- get_index(self)
+
+    if (is.null(self$inputs)) {
+      existing <- data.frame(index = numeric(),
+                             alias = character(),
+                             type = character(),
+                             doi_or_unique_name = character(),
+                             title = character(),
+                             version = character(),
+                             path = character(),
+                             object_id = character(),
+                             issue = character(),
+                             severity = character())
+    } else {
+      existing <- self$inputs
+    }
+
+    new <- data.frame(index = index,
+                      alias = alias,
+                      type = type,
+                      doi_or_unique_name = doi_or_unique_name,
+                      title = title,
+                      version = version,
+                      path = path,
+                      object_id = object_id,
+                      issue = NA,
+                      severity = NA)
+    self$inputs <- rbind.data.frame(existing, new)
+
     invisible(self)
   },
 
@@ -62,22 +119,94 @@ fdp <- R6::R6Class("fdp", list(
   #' @param data_product text
   #' @param path text
   #' @param component text
+  #' @param description text
+  #' @param version text
   #'
-  write_dataproduct = function(data_product, path, component) {
+  write_dataproduct = function(data_product,
+                               path,
+                               component,
+                               description,
+                               version) {
 
-    # self$outputs$dataproducts
+    index <- get_index(self)
 
-    # if (data_product %in% names(self$outputs) &&
-    #     self$outputs[[data_product]]$path != path)
-    #   stop("Conflicting entries")
+    if (is.null(self$outputs)) {
+      existing <- data.frame(index = numeric(),
+                             data_product = character(),
+                             path = character(),
+                             component = character(),
+                             description = character(),
+                             version = character(),
+                             component_id = character(),
+                             dataproduct_id = character(),
+                             issue = character(),
+                             severity = character())
+    } else {
+      existing <- self$outputs
+    }
 
-    existing <- self$outputs
-    new <- data.frame(dataproduct = data_product,
+    new <- data.frame(index = index,
+                      data_product = data_product,
                       path = path,
                       component = component,
+                      description = description,
+                      version = version,
                       component_id = NA,
-                      dataproduct_id = NA)
+                      dataproduct_id = NA,
+                      issue = NA,
+                      severity = NA)
     self$outputs <- rbind.data.frame(existing, new)
+
+    invisible(self)
+  },
+
+  #' @description
+  #' Return index
+  #' @param data_product text
+  #' @param component text
+  #' @param version text
+  #'
+  output_index = function(data_product,
+                          component,
+                          version) {
+    dp. <- data_product
+    cp. <- component
+    v. <- version
+    self$outputs %>% dplyr::filter(.data$data_product == dp.,
+                                   .data$component == cp.,
+                                   .data$version == v.) %>%
+      select(index) %>% unlist() %>% unname()
+  },
+
+  #' @description
+  #' Add issues field
+  #' @param component text
+  #' @param data_product text
+  #' @param version text
+  #' @param issue text
+  #' @param severity text
+  #'
+  raise_issue_component = function(component,
+                                   data_product,
+                                   version,
+                                   issue,
+                                   severity) {
+
+    if (component %in% self$outputs$component &
+        version %in% self$outputs$version) {
+      index <- which(self$outputs$component %in% component &
+                       self$outputs$version %in% version)
+      self$outputs$issue[index] <- issue
+      self$outputs$severity[index] <- severity
+    }
+
+    if (component %in% self$inputs$component &
+        version %in% self$inputs$version) {
+      index <- which(self$inputs$component %in% component &
+                       self$inputs$version %in% version)
+      self$inputs$issue[index] <- issue
+      self$inputs$severity[index] <- severity
+    }
 
     invisible(self)
   },
@@ -88,13 +217,14 @@ fdp <- R6::R6Class("fdp", list(
   #' @param component text
   #' @param component_id text
   #'
-  write_component_id = function(data_product, component, component_id) {
+  write_component_id = function(data_product,
+                                component,
+                                component_id) {
 
-    index <- which(self$outputs$dataproduct == data_product &
+    index <- which(self$outputs$data_product == data_product &
                      self$outputs$component == component)
 
-    if (length(index) != 0)
-      self$outputs$component_id[index] <- component_id
+    self$outputs$component_id[index] <- component_id
 
     invisible(self)
   },
@@ -104,7 +234,8 @@ fdp <- R6::R6Class("fdp", list(
   #' @param data_product text
   #' @param data_product_id text
   #'
-  write_dataproduct_id = function(data_product, data_product_id) {
+  write_dataproduct_id = function(data_product,
+                                  data_product_id) {
 
     index <- which(self$outputs$dataproduct == data_product)
 

@@ -1,16 +1,17 @@
 #' fdp_run
 #'
 #' @param path string
+#' @param skip don't bother checking whether the repo is clean
 #'
 #' @export
 #'
-fdp_run <- function(path = "config.yaml") {
+fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    usethis::ui_done("Read config.yaml")
+    usethis::ui_done(paste("Read", usethis::ui_value("config.yaml")))
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
@@ -19,29 +20,38 @@ fdp_run <- function(path = "config.yaml") {
   if (grepl("/$", localstore))
     localstore <- gsub("/$", "", localstore)
 
-  # Re-write config.yaml ----------------------------------------------------
+  run_metadata <- yaml$run_metadata
+  if (any("read" %in% names(yaml))) read <- yaml$read else read <- list()
+  if (any("write" %in% names(yaml))) write <- yaml$write else write <- list()
+
+  # Generate working config.yaml --------------------------------------------
 
   # Check for presence of `register` key
   if (any("register" %in% names(yaml))) {
 
     register <- yaml$register
 
-    # If names(register) is null, then a single entry has been added that is
-    # not in a list, so put it in a list
+    # If names(register) is not null, then a single entry has been added that
+    # is not in a list, so put it in a list
     if (!all(is.null(names(register))))
       register <- list(register)
 
-    # Find entry to register
+    # Find `register:` entries. Then, since fdp pull has already registered
+    # these entries, re-list them under `read:` in the working config.yaml file
     types <- c("external_object", "data_product", "object")
-    entries <- lapply(register, function(x)
-      lapply(types, function(y) x[[y]]) %>% unlist())
-
-
-
-
-
-
-
+    for (x in register) {
+      for (y in types) {
+        entry <- x[[y]]
+        if (!is.null(entry)) {
+          index <- length(read) + 1
+          read[[index]] <- list()
+          read[[index]][y] <- entry
+          read[[index]]$doi_or_unique_name <- x$unique_name
+          read[[index]]$title <- x$title
+          read[[index]]$version <- x$version
+        }
+      }
+    }
   }
 
   # Save working config.yaml in data store ----------------------------------
@@ -49,12 +59,17 @@ fdp_run <- function(path = "config.yaml") {
   # If coderun directory doesn't exist, create it
   configdir <- file.path(localstore, "coderun",
                          format(Sys.time(), "%Y%m%d-%H%M%S"))
-  if (!file.exists(configdir))
-    dir.create(configdir)
+  dir.create(configdir, recursive = TRUE)
 
   config_path <- file.path(configdir, "config.yaml")
-  yaml::write_yaml(yaml, file = config_path)
-  usethis::ui_done("Save working config.yaml in data store")
+
+  # Generate working config.yaml file
+  working_yaml <- list(run_metadata = run_metadata,
+                       read = read,
+                       write = write)
+  yaml::write_yaml(working_yaml, file = config_path)
+  usethis::ui_done(paste("Save working", usethis::ui_value("config.yaml"),
+                         "in data store"))
 
   # Record config.yaml location in data registry ----------------------------
 
@@ -76,19 +91,11 @@ fdp_run <- function(path = "config.yaml") {
   usethis::ui_done(paste("Record", usethis::ui_value("config.yaml"),
                          "in local registry"))
 
-  stop_server()
-
-  # Save FDP_CONFIG_DIR in global environment ------------------------------
-
-  Sys.setenv(FDP_CONFIG_DIR = configdir)
-
-  usethis::ui_done("Save working config.yaml path in global environment")
-
   # Save submission script to data store ------------------------------------
 
   submission_script_path <- gsub("config.yaml", "script.sh", config_path)
   cat(yaml$run_metadata$script, file = submission_script_path)
-  usethis::ui_done(paste("Save", usethis::ui_value("submission script"),
+  usethis::ui_done(paste("Save", usethis::ui_value("script.sh"),
                          "in local data store"))
 
   # Record submission script location in data registry ----------------------
@@ -104,10 +111,15 @@ fdp_run <- function(path = "config.yaml") {
   script_object_id <- new_object(storage_location_id = script_location_id,
                                  description = "Submission script location")
 
-  usethis::ui_done(paste("Record", usethis::ui_value("submission script"),
+  usethis::ui_done(paste("Record", usethis::ui_value("script.sh"),
                          "in local registry"))
 
-  stop_server()
+  # Save FDP_CONFIG_DIR in global environment ------------------------------
+
+  Sys.setenv(FDP_CONFIG_DIR = configdir)
+
+  usethis::ui_done(paste("Save working", usethis::ui_value("config.yaml"),
+                         "path in global environment"))
 
   # Get latest commit sha ---------------------------------------------------
 
@@ -128,8 +140,8 @@ fdp_run <- function(path = "config.yaml") {
 
   else
     repo_name <- git2r::remote_url(yaml$run_metadata$local_repo) %>%
-    gsub("https://github.com/", "", .) %>%
-    gsub(".git$", "", .)
+    gsub("https://github.com/", "", .data) %>%
+    gsub(".git$", "", .data)
 
 
   usethis::ui_done(paste("Find remote repository"))
@@ -146,7 +158,9 @@ fdp_run <- function(path = "config.yaml") {
   repo_object_id <- new_object(storage_location_id = repo_location_id,
                                description = "Analysis / processing script location")
 
-  usethis::ui_done(paste("Record", usethis::ui_value("analysis / processing script"),
+  stop_server()
+
+  usethis::ui_done(paste("Record", usethis::ui_value("script.sh"),
                          "location in local registry"))
 
 }

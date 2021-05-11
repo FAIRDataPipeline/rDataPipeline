@@ -3,10 +3,14 @@
 #' @param register_this metadata
 #' @param datastore default local data storage location
 #' @param namespace namespace
+#' @param filename filename
 #'
 register_external_object <- function(register_this,
                                      datastore,
-                                     namespace) {
+                                     namespace,
+                                     filename) {
+
+  hash <- strsplit(filename, "\\.")[[1]][1]
 
   # Original source ---------------------------------------------------------
 
@@ -37,7 +41,9 @@ register_external_object <- function(register_this,
     hash = hash,
     storage_root_id = source_root_id)
 
-  usethis::ui_done("Record original source location in data registry")
+  usethis::ui_done(
+    paste("Add", usethis::ui_value(register_this$external_object),
+          "source to local registry"))
 
   # Local store -------------------------------------------------------------
 
@@ -49,7 +55,7 @@ register_external_object <- function(register_this,
 
   # Add local data store location to the data registry
   datastore_location_id <- new_storage_location(
-    path = file.path(namespace, register_this$product_name, new_filename),
+    path = file.path(namespace, register_this$product_name, filename),
     hash = hash,
     storage_root_id = datastore_root_id)
 

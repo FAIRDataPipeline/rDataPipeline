@@ -5,26 +5,32 @@
 \title{issue_with_component}
 \usage{
 issue_with_component(
-  issue,
-  severity,
-  data_product,
-  namespace,
+  component_id,
+  handle,
   component,
-  version
+  data_product,
+  version,
+  issue,
+  severity
 )
 }
 \arguments{
-\item{issue}{issue}
+\item{component_id}{component_id}
 
-\item{severity}{severity}
-
-\item{data_product}{data_product}
-
-\item{namespace}{namespace}
+\item{handle}{handle}
 
 \item{component}{component}
 
+\item{data_product}{data_product}
+
 \item{version}{version}
+
+\item{issue}{issue}
+
+\item{severity}{severity}
+}
+\value{
+
 }
 \description{
 issue_with_component

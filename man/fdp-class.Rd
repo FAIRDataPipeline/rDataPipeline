@@ -31,8 +31,11 @@ Contained for class \code{fdp}.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{fdp$new()}}
+\item \href{#method-print}{\code{fdp$print()}}
 \item \href{#method-input}{\code{fdp$input()}}
 \item \href{#method-write_dataproduct}{\code{fdp$write_dataproduct()}}
+\item \href{#method-output_index}{\code{fdp$output_index()}}
+\item \href{#method-raise_issue_component}{\code{fdp$raise_issue_component()}}
 \item \href{#method-write_component_id}{\code{fdp$write_component_id()}}
 \item \href{#method-write_dataproduct_id}{\code{fdp$write_dataproduct_id()}}
 \item \href{#method-clone}{\code{fdp$clone()}}
@@ -42,7 +45,7 @@ Contained for class \code{fdp}.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new fdp object.
+Create a new fdp object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script)}\if{html}{\out{</div>}}
 }
@@ -63,12 +66,22 @@ A new \code{fdp} object.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+Print function
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$print(...)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-input"></a>}}
 \if{latex}{\out{\hypertarget{method-input}{}}}
 \subsection{Method \code{input()}}{
-Add inputs field.
+Add inputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$input(alias, externalobject_id)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$input(alias, type, doi_or_unique_name, title, version, path, object_id)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -76,7 +89,17 @@ Add inputs field.
 \describe{
 \item{\code{alias}}{text}
 
-\item{\code{externalobject_id}}{text}
+\item{\code{type}}{text}
+
+\item{\code{doi_or_unique_name}}{text}
+
+\item{\code{title}}{text}
+
+\item{\code{version}}{text}
+
+\item{\code{path}}{text}
+
+\item{\code{object_id}}{text}
 }
 \if{html}{\out{</div>}}
 }
@@ -87,7 +110,7 @@ Add inputs field.
 \subsection{Method \code{write_dataproduct()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct(data_product, path, component)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct(data_product, path, component, description, version)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -98,6 +121,56 @@ Add outputs field
 \item{\code{path}}{text}
 
 \item{\code{component}}{text}
+
+\item{\code{description}}{text}
+
+\item{\code{version}}{text}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-output_index"></a>}}
+\if{latex}{\out{\hypertarget{method-output_index}{}}}
+\subsection{Method \code{output_index()}}{
+Return index
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data_product}}{text}
+
+\item{\code{component}}{text}
+
+\item{\code{version}}{text}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-raise_issue_component"></a>}}
+\if{latex}{\out{\hypertarget{method-raise_issue_component}{}}}
+\subsection{Method \code{raise_issue_component()}}{
+Add issues field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue_component(component, data_product, version, issue, severity)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{component}}{text}
+
+\item{\code{data_product}}{text}
+
+\item{\code{version}}{text}
+
+\item{\code{issue}}{text}
+
+\item{\code{severity}}{text}
 }
 \if{html}{\out{</div>}}
 }

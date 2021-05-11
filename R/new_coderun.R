@@ -9,9 +9,9 @@
 #' scottish coronavirus-covid-19-management-information"
 #' @param code_repo_id (optional) *e.g.* "https://data.scrc.uk/api/object/154/"
 #' @param model_config (optional)
-#' @param submission_script_id *e.g.* "https://data.scrc.uk/api/object/153/"
-#' @param inputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
-#' @param outputs *e.g.* list("https://data.scrc.uk/api/object_component/875/")
+#' @param submission_script_id object URI
+#' @param inputs a \code{list} of input component URIs
+#' @param outputs a \code{list} of output component URIs
 #'
 #' @family new functions
 #'

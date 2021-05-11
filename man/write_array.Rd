@@ -9,6 +9,7 @@ write_array(
   handle,
   data_product,
   component,
+  description,
   dimension_names,
   dimension_values,
   dimension_units,
@@ -23,6 +24,8 @@ write_array(
 \item{data_product}{a \code{string} specifying the name of the data product}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file}
+
+\item{description}{a \code{string} describing the data product component}
 
 \item{dimension_names}{a \code{list} where each element is a vector
 containing the labels associated with a particular dimension (e.g.
