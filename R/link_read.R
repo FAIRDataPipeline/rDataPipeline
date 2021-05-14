@@ -1,4 +1,4 @@
-#' read_link
+#' link_read
 #'
 #' @param handle an object of class \code{fdp, R6} containing metadata required
 #' by the Data Pipeline API
@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-read_link <- function(handle, alias) {
+link_read <- function(handle, alias) {
 
   # If the alias is already recorded in the handle, return the path
   if (alias %in% handle$inputs$alias) {
