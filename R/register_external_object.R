@@ -47,37 +47,57 @@ register_external_object <- function(register_this,
 
   # Local store -------------------------------------------------------------
 
-  # Add local data store root to the data registry
-  datastore_root_id <- new_storage_root(
-    name = "localstore",
-    root = datastore,
-    accessibility = 0) # TODO
+  # Does the downloaded entry already exist?
+  file_path <- file.path(namespace, register_this$product_name, filename)
+  download_exists <- get_entry("storage_location", list(path = file_path,
+                                                        hash = hash))
 
-  # Add local data store location to the data registry
-  datastore_location_id <- new_storage_location(
-    path = file.path(namespace, register_this$product_name, filename),
-    hash = hash,
-    storage_root_id = datastore_root_id)
+  if (is.null(download_exists)) {
+    # Add local data store root to the data registry
+    datastore_root_id <- new_storage_root(
+      name = "localstore",
+      root = datastore,
+      accessibility = 0) # TODO
 
-  datastore_object_id <- new_object(storage_location_id = datastore_location_id)
+    # Add local data store location to the data registry
+    datastore_location_id <- new_storage_location(
+      path = file_path,
+      hash = hash,
+      storage_root_id = datastore_root_id)
 
-  # Source data (e.g. *.csv) is defined as having a single component
-  # called "raw_data"
-  datastore_component_id <- new_object_component(name = "raw_data",
-                                                 object_id = datastore_object_id)
+    datastore_object_id <- new_object(
+      storage_location_id = datastore_location_id)
+
+    # Source data (e.g. *.csv) is defined as having a single component
+    # called "raw_data"
+    datastore_component_id <- new_object_component(
+      name = "raw_data",
+      object_id = datastore_object_id)
+  }
 
   # Register external object ------------------------------------------------
 
-  externalobject_id <- new_external_object(
-    doi_or_unique_name = register_this$unique_name,
-    primary_not_supplement = register_this$primary,
-    release_date = register_this$release_date,
-    title = register_this$title,
-    description = register_this$description,
-    version = register_this$version,
-    object_id = datastore_object_id,
-    source_id = source_id,
-    original_store_id = source_location_id)
+  version <- register_this$version
+  if (names(version) == "DATETIME" & is.null(version$DATETIME))
+    version <- paste0("0.", gsub("-", "", Sys.Date()), ".0")
+
+  external_exists <- get_entry("external_object",
+                               list(doi_or_unique_name = register_this$unique_name,
+                                    title = register_this$title,
+                                    version = version))
+
+  if (is.null(external_exists)) {
+    externalobject_id <- new_external_object(
+      doi_or_unique_name = register_this$unique_name,
+      primary_not_supplement = register_this$primary,
+      release_date = register_this$release_date,
+      title = register_this$title,
+      description = register_this$description,
+      version = version,
+      object_id = datastore_object_id,
+      source_id = source_id,
+      original_store_id = source_location_id)
+  }
 
   stop_server()
 

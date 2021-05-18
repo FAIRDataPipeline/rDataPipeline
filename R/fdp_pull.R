@@ -43,16 +43,6 @@ fdp_pull <- function(path = "config.yaml") {
     entries <- lapply(register, function(x)
       lapply(types, function(y) x[[y]]) %>% unlist())
 
-    # If entries[[1]] is null, then register doesn't contain one of
-    # `external_object`, `data_product`, or `object`
-    if(is.null(entries[[1]]))
-      usethis::ui_stop(paste("Missing section in config.yaml file,",
-                             usethis::ui_value("register:"),
-                             "must contain one of",
-                             usethis::ui_value("external_object:"),
-                             usethis::ui_value("data_product:"), "or",
-                             usethis::ui_value("object:")))
-
     # Download raw data to data store and register in data registry
     for (i in seq_along(register)) {
 
