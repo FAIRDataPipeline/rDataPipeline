@@ -77,27 +77,29 @@ register_external_object <- function(register_this,
 
   # Register external object ------------------------------------------------
 
-  version <- register_this$version
-  if (names(version) == "DATETIME" & is.null(version$DATETIME))
-    version <- paste0("0.", gsub("-", "", Sys.Date()), ".0")
-
-  external_exists <- get_entry("external_object",
-                               list(doi_or_unique_name = register_this$unique_name,
-                                    title = register_this$title,
-                                    version = version))
-
-  if (is.null(external_exists)) {
-    externalobject_id <- new_external_object(
-      doi_or_unique_name = register_this$unique_name,
-      primary_not_supplement = register_this$primary,
-      release_date = register_this$release_date,
-      title = register_this$title,
-      description = register_this$description,
-      version = version,
-      object_id = datastore_object_id,
-      source_id = source_id,
-      original_store_id = source_location_id)
+  # Get release_date
+  release_date <- register_this$release_date
+  if ("DATETIME" %in% names(release_date) & is.null(release_date$DATETIME)) {
+    release_date <- Sys.time()
   }
+
+  # Get version
+  version <- register_this$version
+  if (grepl("\\{DATETIME\\}", version)) {
+    datetime <- gsub("-", "", Sys.Date())
+    version <- gsub("\\{DATETIME\\}", datetime, version)
+  }
+
+  externalobject_id <- new_external_object(
+    doi_or_unique_name = register_this$unique_name,
+    primary_not_supplement = register_this$primary,
+    release_date = release_date,
+    title = register_this$title,
+    description = register_this$description,
+    version = version,
+    object_id = datastore_object_id,
+    source_id = source_id,
+    original_store_id = source_location_id)
 
   stop_server()
 
