@@ -48,7 +48,21 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
           read[[index]][y] <- entry
           read[[index]]$doi_or_unique_name <- x$unique_name
           read[[index]]$title <- x$title
-          read[[index]]$version <- x$version
+
+          # YUCK!
+          if (grepl("\\{DATETIME\\}", x$version)) {
+            run_server()
+            existing <- get_entry("external_object",
+                                  list(doi_or_unique_name = x$unique_name,
+                                       title = x$title))
+            stop_server()
+            version <- lapply(existing, function(z) z$version) %>%
+              unlist() %>% max()
+          } else {
+            version <- x$version
+          }
+
+          read[[index]]$version <- version
         }
       }
     }
