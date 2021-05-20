@@ -8,7 +8,7 @@ fdp_pull <- function(path = "config.yaml") {
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    usethis::ui_done("Read config.yaml")
+    usethis::ui_info(paste("Reading", usethis::ui_value("config.yaml")))
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
@@ -72,7 +72,7 @@ fdp_pull <- function(path = "config.yaml") {
                   file.path(local_path, new_filename))
 
       usethis::ui_done(
-        paste("Download", usethis::ui_value(register_this$external_object),
+        paste("Downloading", usethis::ui_value(register_this$external_object),
               "to local data store"))
 
       # Update local data registry

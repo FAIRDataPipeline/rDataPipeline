@@ -11,7 +11,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    usethis::ui_done(paste("Read", usethis::ui_value("config.yaml")))
+    usethis::ui_info(paste("Reading", usethis::ui_value("config.yaml")))
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
@@ -82,8 +82,8 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
                        read = read,
                        write = write)
   yaml::write_yaml(working_yaml, file = config_path)
-  usethis::ui_done(paste("Save working", usethis::ui_value("config.yaml"),
-                         "in data store"))
+  usethis::ui_done(paste("Writing working", usethis::ui_value("config.yaml"),
+                         "to data store"))
 
   # Record config.yaml location in data registry ----------------------------
 
@@ -102,15 +102,16 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   config_object_id <- new_object(storage_location_id = config_location_id,
                                  description = "Local datastore")
 
-  usethis::ui_done(paste("Record", usethis::ui_value("config.yaml"),
-                         "in local registry"))
+  usethis::ui_done(paste("Writing", usethis::ui_value("config.yaml"),
+                         usethis::ui_field("storage_location"),
+                         "to local registry"))
 
   # Save submission script to data store ------------------------------------
 
   submission_script_path <- gsub("config.yaml", "script.sh", config_path)
   cat(yaml$run_metadata$script, file = submission_script_path)
-  usethis::ui_done(paste("Save", usethis::ui_value("script.sh"),
-                         "in local data store"))
+  usethis::ui_done(paste("Writing", usethis::ui_value("script.sh"),
+                         "to local data store"))
 
   # Record submission script location in data registry ----------------------
 
@@ -125,15 +126,16 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   script_object_id <- new_object(storage_location_id = script_location_id,
                                  description = "Submission script location")
 
-  usethis::ui_done(paste("Record", usethis::ui_value("script.sh"),
-                         "in local registry"))
+  usethis::ui_done(paste("Writing", usethis::ui_value("script.sh"),
+                         usethis::ui_field("storage_location"),
+                         "to local registry"))
 
   # Save FDP_CONFIG_DIR in global environment ------------------------------
 
   Sys.setenv(FDP_CONFIG_DIR = configdir)
 
-  usethis::ui_done(paste("Save working", usethis::ui_value("config.yaml"),
-                         "path in global environment"))
+  usethis::ui_done(paste("Writing working", usethis::ui_value("config.yaml"),
+                         "path to global environment"))
 
   # Get latest commit sha ---------------------------------------------------
 
@@ -145,7 +147,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   # Get hash of latest commit
   sha <- git2r::sha(git2r::last_commit(yaml$run_metadata$local_repo))
 
-  usethis::ui_done(paste("Check local repository status"))
+  usethis::ui_info(paste("Checking local repository status"))
 
   # Get GitHub username/repository ------------------------------------------
 
@@ -158,7 +160,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     gsub(".git$", "", .data)
 
 
-  usethis::ui_done(paste("Find remote repository"))
+  usethis::ui_info(paste("Locating remote repository"))
 
   # Record analysis / processing script location in data registry -----------
 
@@ -174,7 +176,8 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   stop_server()
 
-  usethis::ui_done(paste("Record", usethis::ui_value("script.sh"),
-                         "location in local registry"))
+  usethis::ui_done(paste("Writing processing script",
+                         usethis::ui_field("storage_location"),
+                         "to local registry"))
 
 }
