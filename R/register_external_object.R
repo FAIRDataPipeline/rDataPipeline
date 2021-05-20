@@ -90,16 +90,25 @@ register_external_object <- function(register_this,
     version <- gsub("\\{DATETIME\\}", datetime, version)
   }
 
-  externalobject_id <- new_external_object(
-    doi_or_unique_name = register_this$unique_name,
-    primary_not_supplement = register_this$primary,
-    release_date = release_date,
-    title = register_this$title,
-    description = register_this$description,
-    version = version,
-    object_id = datastore_object_id,
-    source_id = source_id,
-    original_store_id = source_location_id)
+  check_exists <- get_entry("external_object",
+                            list(doi_or_unique_name = register_this$unique_name,
+                                 title = register_this$title,
+                                 version = version))
+
+  if (is.null(check_exists)) {
+    externalobject_id <- new_external_object(
+      doi_or_unique_name = register_this$unique_name,
+      primary_not_supplement = register_this$primary,
+      release_date = release_date,
+      title = register_this$title,
+      description = register_this$description,
+      version = version,
+      object_id = datastore_object_id,
+      source_id = source_id,
+      original_store_id = source_location_id)
+  } else {
+    externalobject_id <- check_exists[[1]]$url
+  }
 
   stop_server()
 
