@@ -10,6 +10,8 @@ initialise <- function() {
 
   # Read working config.yaml ------------------------------------------------
 
+  usethis::ui_info("Initialising handle")
+
   config_path <- Sys.getenv("FDP_CONFIG_DIR")
 
   if (config_path == "")
@@ -22,7 +24,7 @@ initialise <- function() {
   datastore_root <- yaml$run_metadata$default_data_store
   localstore <- run_metadata$default_data_store
 
-  usethis::ui_done(paste("Read", usethis::ui_value("config.yaml")))
+  usethis::ui_info(paste("Reading working", usethis::ui_value("config.yaml")))
 
   run_server()
 
@@ -47,6 +49,8 @@ initialise <- function() {
   script_object_id <- script_object_id[[1]]$url
 
   stop_server()
+
+  usethis::ui_info(paste("Locating", usethis::ui_value("script.sh")))
 
   # Write to handle
   fdp$new(yaml = yaml,

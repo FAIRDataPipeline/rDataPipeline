@@ -4,14 +4,14 @@
 \alias{register_data_product}
 \title{register_data_product}
 \usage{
-register_data_product(register_this, datastore, namespace)
+register_data_product(this_metadata, handle, datastore)
 }
 \arguments{
-\item{register_this}{metadata}
+\item{this_metadata}{text}
 
-\item{datastore}{default local data storage location}
+\item{handle}{text}
 
-\item{namespace}{namespace}
+\item{datastore}{text}
 }
 \description{
 register_data_product

@@ -36,47 +36,75 @@ finalise <- function(handle) {
 
       # Rename file
 
-      hash <- get_file_hash(path)
-      tmp_filename <- basename(path)
-      extension <- strsplit(tmp_filename, split = "\\.")[[1]][2]
-      new_filename <- paste(hash, extension, sep = ".")
-      new_path <- gsub(tmp_filename, new_filename, path)
-      file.rename(path, new_path)
+      if (file.exists(path)) {
+        hash <- get_file_hash(path)
+        tmp_filename <- basename(path)
+        extension <- strsplit(tmp_filename, split = "\\.")[[1]][2]
+        new_filename <- paste(hash, extension, sep = ".")
+        new_path <- gsub(tmp_filename, new_filename, path)
+        file.rename(path, new_path)
 
-      # Read version and description from config.yaml
+      } else {
+
+        hash <- unique(this_metadata$hash)
+        if (is.na(hash))
+          usethis::ui_stop("Something is wrong")
+
+      }
+
+      # Read description from config.yaml
 
       index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
         dp == x$data_product)))
       if (length(index_dp) == 0)
         stop("Data product not present in config.yaml")
 
-      this_version <- handle$yaml$write[[index_dp]]$version
       description <- handle$yaml$write[[index_dp]]$description
 
       namespace <- handle$yaml$run_metadata$default_output_namespace
       namespace_id <- new_namespace(name = namespace)
 
+      # Read version from handle
+
+      version <- unique(this_metadata$version)
+
+      if (grepl("\\{DATETIME\\}", version)) {
+        datetime <- gsub("-", "", Sys.Date())
+        version <- gsub("\\{DATETIME\\}", datetime, version)
+      }
+
       # Record file location in data registry
 
       storage_location <- gsub(datastore, "", path)
 
-      storage_location_id <- new_storage_location(
-        path = storage_location,
-        hash = hash,
-        storage_root_id = datastore_root_id)
+      dp_exists <- get_entry("data_product", list(name = dp,
+                                                  version = version))
 
-      object_id <- new_object(storage_location_id = storage_location_id,
-                              description = description)
+      if (is.null(dp_exists)) {
+        storage_location_id <- new_storage_location(
+          path = storage_location,
+          hash = hash,
+          storage_root_id = datastore_root_id)
 
-      # Add data product to data registry
+        object_id <- new_object(storage_location_id = storage_location_id,
+                                description = description)
 
-      product_dataProductId <- new_data_product(name = dp,
-                                                version = this_version,
-                                                object_id = object_id,
-                                                namespace_id = namespace_id)
+        # Add data product to data registry
+        product_dataProductId <- new_data_product(name = dp,
+                                                  version = version,
+                                                  object_id = object_id,
+                                                  namespace_id = namespace_id)
+
+        usethis::ui_done(paste("Writing", usethis::ui_value(dp),
+                               "to local registry"))
+
+      } else {
+        assertthat::assert_that(length(dp_exists) == 1)
+        product_dataProductId <- dp_exists[[1]]$url
+      }
 
       # Update handle
-      handle$write_dataproduct_id(dp, product_dataProductId)
+      handle$write_dataproduct_id(dp, product_dataProductId, version, hash)
 
       # Record components in data registry
 
@@ -95,6 +123,10 @@ finalise <- function(handle) {
                                   component = components[j],
                                   component_id = component_id)
 
+        usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                               usethis::ui_field("component"),
+                               "to local registry"))
+
         # Attach issues to component
 
         if (!is.na(this_metadata$issue[j])) {
@@ -106,7 +138,11 @@ finalise <- function(handle) {
                                    data_product = dp,
                                    namespace = namespace,
                                    component = components[j],
-                                   version = this_version)
+                                   version = version)
+
+          usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                                 usethis::ui_field("issue"),
+                                 "to local registry"))
         }
       }
 
@@ -145,8 +181,8 @@ finalise <- function(handle) {
                             inputs = as.list(handle$inputs$object_id),
                             outputs = as.list(handle$outputs$component_id))
 
-  usethis::ui_done(paste("Record", usethis::ui_value("code run"),
-                         "in local registry"))
+  usethis::ui_done(paste("Writing", usethis::ui_value("code run"),
+                         "to local registry"))
 
   stop_server()
 }

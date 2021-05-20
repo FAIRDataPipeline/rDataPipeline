@@ -135,17 +135,17 @@ Add outputs field
 \subsection{Method \code{output_index()}}{
 Return index
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(this_data_product, this_component, this_version)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{text}
+\item{\code{this_data_product}}{text}
 
-\item{\code{component}}{text}
+\item{\code{this_component}}{text}
 
-\item{\code{version}}{text}
+\item{\code{this_version}}{text}
 }
 \if{html}{\out{</div>}}
 }
@@ -202,7 +202,7 @@ Add outputs field
 \subsection{Method \code{write_dataproduct_id()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_id(data_product, data_product_id)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_id(data_product, data_product_id, version, hash)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -211,6 +211,10 @@ Add outputs field
 \item{\code{data_product}}{text}
 
 \item{\code{data_product_id}}{text}
+
+\item{\code{version}}{text}
+
+\item{\code{hash}}{text}
 }
 \if{html}{\out{</div>}}
 }

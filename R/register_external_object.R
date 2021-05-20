@@ -42,8 +42,8 @@ register_external_object <- function(register_this,
     storage_root_id = source_root_id)
 
   usethis::ui_done(
-    paste("Add", usethis::ui_value(register_this$external_object),
-          "source to local registry"))
+    paste("Writing", usethis::ui_value(register_this$external_object),
+          "download", usethis::ui_field("source"),"to local registry"))
 
   # Local store -------------------------------------------------------------
 
@@ -90,12 +90,12 @@ register_external_object <- function(register_this,
     version <- gsub("\\{DATETIME\\}", datetime, version)
   }
 
-  check_exists <- get_entry("external_object",
+  external_exists <- get_entry("external_object",
                             list(doi_or_unique_name = register_this$unique_name,
                                  title = register_this$title,
                                  version = version))
 
-  if (is.null(check_exists)) {
+  if (is.null(external_exists)) {
     externalobject_id <- new_external_object(
       doi_or_unique_name = register_this$unique_name,
       primary_not_supplement = register_this$primary,
@@ -107,14 +107,14 @@ register_external_object <- function(register_this,
       source_id = source_id,
       original_store_id = source_location_id)
   } else {
-    externalobject_id <- check_exists[[1]]$url
+    externalobject_id <- external_exists[[1]]$url
   }
 
   stop_server()
 
   usethis::ui_done(
-    paste("Add", usethis::ui_value(register_this$external_object),
-          "as", usethis::ui_field("external_object"), "in local registry"))
+    paste("Writing", usethis::ui_value(register_this$external_object),
+          "as", usethis::ui_field("external_object"), "to local registry"))
 
   invisible(datastore_component_id)
 }

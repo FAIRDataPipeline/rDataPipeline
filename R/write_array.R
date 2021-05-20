@@ -156,8 +156,14 @@ write_array <- function(array,
 
   rhdf5::h5closeAll()
 
-  usethis::ui_done(paste("Added component:", usethis::ui_value(component), "\n",
+  usethis::ui_done(paste("Writing component:",
+                         usethis::ui_value(component), "\n",
                          "to data product:", usethis::ui_value(data_product)))
+
+  index <- lapply(handle$yaml$write, function(x)
+    data_product == x$data_product) %>%
+    unlist() %>% which()
+  this_dp <- handle$yaml$write[[index]]
 
   version <- get_version(handle, data_product, namespace)
 

@@ -13,11 +13,8 @@ get_version <- function(handle, data_product, namespace) {
     unlist() %>% which()
   this_dp <- handle$yaml$write[[index]]
 
-  if("version" %in% names(this_dp)) {
-    if (this_dp$version == "{DATETIME}")
-      return(paste0("0.", gsub("-", "", Sys.Date()), ".0"))
-    else
-      return(this_dp$version)
+  if ("version" %in% names(this_dp)) {
+    return(this_dp$version)
 
   } else {
     #  run_server()

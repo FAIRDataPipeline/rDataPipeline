@@ -28,8 +28,9 @@ link_read <- function(handle, alias) {
   # Get object location from local registry
   run_server()
 
+  doi <- this_read$doi_or_unique_name
   external_object <- get_entry("external_object",
-                               list(doi_or_unique_name = this_read$doi_or_unique_name,
+                               list(doi_or_unique_name = doi,
                                     title = this_read$title,
                                     version = this_read$version))
   assertthat::assert_that(length(external_object) == 1)
@@ -40,6 +41,10 @@ link_read <- function(handle, alias) {
   storage_root <- get_entity(storage_location$storage_root)
 
   stop_server()
+
+  usethis::ui_info(paste0("Locating ", usethis::ui_value(doi), ": ",
+                          usethis::ui_value(this_read$title), ", version ",
+                          usethis::ui_value(this_read$version)))
 
   # Store metadata in handle
   handle$input(alias = alias,

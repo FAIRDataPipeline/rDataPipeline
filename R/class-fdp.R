@@ -137,6 +137,7 @@ fdp <- R6::R6Class("fdp", list(
                              component = character(),
                              description = character(),
                              version = character(),
+                             hash = character(),
                              component_id = character(),
                              dataproduct_id = character(),
                              issue = character(),
@@ -151,6 +152,7 @@ fdp <- R6::R6Class("fdp", list(
                       component = component,
                       description = description,
                       version = version,
+                      hash = NA,
                       component_id = NA,
                       dataproduct_id = NA,
                       issue = NA,
@@ -162,19 +164,17 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Return index
-  #' @param data_product text
-  #' @param component text
-  #' @param version text
+  #' @param this_data_product text
+  #' @param this_component text
+  #' @param this_version text
   #'
-  output_index = function(data_product,
-                          component,
-                          version) {
-    dp. <- data_product
-    cp. <- component
-    v. <- version
-    self$outputs %>% dplyr::filter(.data$data_product == dp.,
-                                   .data$component == cp.,
-                                   .data$version == v.) %>%
+  output_index = function(this_data_product,
+                          this_component,
+                          this_version) {
+
+    self$outputs %>% dplyr::filter(.data$data_product == this_data_product,
+                                   .data$component == this_component,
+                                   .data$version == this_version) %>%
       select(index) %>% unlist() %>% unname()
   },
 
@@ -233,14 +233,21 @@ fdp <- R6::R6Class("fdp", list(
   #' Add outputs field
   #' @param data_product text
   #' @param data_product_id text
+  #' @param version text
+  #' @param hash text
   #'
   write_dataproduct_id = function(data_product,
-                                  data_product_id) {
+                                  data_product_id,
+                                  version,
+                                  hash) {
 
-    index <- which(self$outputs$dataproduct == data_product)
+    index <- which(self$outputs$data_product == data_product)
 
-    if (length(index) != 0)
+    if (length(index) != 0) {
       self$outputs$dataproduct_id[index] <- data_product_id
+      self$outputs$version[index] <- version
+      self$outputs$hash[index] <- hash
+    }
 
     invisible(self)
   }
