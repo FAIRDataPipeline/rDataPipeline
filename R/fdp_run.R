@@ -150,11 +150,11 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   if ("remote_repo" %in% names(yaml$run_metadata))
     repo_name <- gsub("https://github.com/", yaml$run_metadata$remote_repo)
 
-  else
-    repo_name <- git2r::remote_url(yaml$run_metadata$local_repo) %>%
-    gsub("https://github.com/", "", .data) %>%
-    gsub(".git$", "", .data)
-
+  else {
+    repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
+    repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
+    repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
+  }
 
   usethis::ui_info(paste("Locating remote repository"))
 
