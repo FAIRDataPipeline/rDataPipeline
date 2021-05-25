@@ -51,13 +51,9 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
           # YUCK!
           if (grepl("\\{DATETIME\\}", x$version)) {
-            run_server()
-            existing <- get_entry("external_object",
-                                  list(doi_or_unique_name = x$unique_name,
-                                       title = x$title))
-            stop_server()
-            version <- lapply(existing, function(z) z$version) %>%
-              unlist() %>% max()
+            datetime <- gsub("-", "", Sys.Date())
+            version <- gsub("\\{DATETIME\\}", datetime, x$version)
+
           } else {
             version <- x$version
           }
