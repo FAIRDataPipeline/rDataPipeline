@@ -60,8 +60,11 @@ register_external_object <- function(register_this,
                                     hash = hash,
                                     storage_root = extract_id(
                                       datastore_root_id)))
-  assertthat::assert_that(length(download_exists) == 1)
-  download_exists <- download_exists[[1]]
+
+  # TODO: Note that if the external object already exists in the registry,
+  # I'm referencing the original object. This means that the config.yaml
+  # might not contain the correct version number or release date needed by
+  # FDP run to read the data. The Python implementation might not do this.
 
   if (is.null(download_exists)) {
     # Add local data store location to the data registry
