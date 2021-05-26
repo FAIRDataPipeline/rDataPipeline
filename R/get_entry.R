@@ -45,7 +45,6 @@ get_entry <- function(table, query) {
   }
 
   if(output$count == 0) {
-    message("Entry doesn't exist")
     return(NULL)
 
   } else {
