@@ -47,18 +47,23 @@ register_external_object <- function(register_this,
 
   # Local store -------------------------------------------------------------
 
+  # Add local data store root to the data registry
+  datastore_root_id <- new_storage_root(
+    name = "localstore",
+    root = datastore,
+    accessibility = 0) # TODO
+
   # Does the downloaded entry already exist?
   file_path <- file.path(namespace, register_this$product_name, filename)
-  download_exists <- get_entry("storage_location", list(path = file_path,
-                                                        hash = hash))
+  download_exists <- get_entry("storage_location",
+                               list(path = file_path,
+                                    hash = hash,
+                                    storage_root = extract_id(
+                                      datastore_root_id)))
+  assertthat::assert_that(length(download_exists) == 1)
+  download_exists <- download_exists[[1]]
 
   if (is.null(download_exists)) {
-    # Add local data store root to the data registry
-    datastore_root_id <- new_storage_root(
-      name = "localstore",
-      root = datastore,
-      accessibility = 0) # TODO
-
     # Add local data store location to the data registry
     datastore_location_id <- new_storage_location(
       path = file_path,
@@ -73,48 +78,55 @@ register_external_object <- function(register_this,
     datastore_component_id <- new_object_component(
       name = "raw_data",
       object_id = datastore_object_id)
-  }
 
-  # Register external object ------------------------------------------------
+    # Register external object ------------------------------------------------
 
-  # Get release_date
-  release_date <- register_this$release_date
-  if ("DATETIME" %in% names(release_date) & is.null(release_date$DATETIME)) {
-    release_date <- Sys.time()
-  }
+    # Get release_date
+    release_date <- register_this$release_date
+    if ("DATETIME" %in% names(release_date) & is.null(release_date$DATETIME)) {
+      release_date <- Sys.time()
+    }
 
-  # Get version
-  version <- register_this$version
-  if (grepl("\\{DATETIME\\}", version)) {
-    datetime <- gsub("-", "", Sys.Date())
-    version <- gsub("\\{DATETIME\\}", datetime, version)
-  }
+    # Get version
+    version <- register_this$version
+    if (grepl("\\{DATETIME\\}", version)) {
+      datetime <- gsub("-", "", Sys.Date())
+      version <- gsub("\\{DATETIME\\}", datetime, version)
+    }
 
-  external_exists <- get_entry("external_object",
-                            list(doi_or_unique_name = register_this$unique_name,
-                                 title = register_this$title,
-                                 version = version))
+    external_exists <- get_entry("external_object",
+                                 list(doi_or_unique_name = register_this$unique_name,
+                                      title = register_this$title,
+                                      version = version))
 
-  if (is.null(external_exists)) {
-    externalobject_id <- new_external_object(
-      doi_or_unique_name = register_this$unique_name,
-      primary_not_supplement = register_this$primary,
-      release_date = release_date,
-      title = register_this$title,
-      description = register_this$description,
-      version = version,
-      object_id = datastore_object_id,
-      source_id = source_id,
-      original_store_id = source_location_id)
+    if (is.null(external_exists)) {
+      externalobject_id <- new_external_object(
+        doi_or_unique_name = register_this$unique_name,
+        primary_not_supplement = register_this$primary,
+        release_date = release_date,
+        title = register_this$title,
+        description = register_this$description,
+        version = version,
+        object_id = datastore_object_id,
+        source_id = source_id,
+        original_store_id = source_location_id)
+    } else {
+      externalobject_id <- external_exists[[1]]$url
+    }
+
+    stop_server()
+
+    usethis::ui_done(
+      paste("Writing", usethis::ui_value(register_this$external_object),
+            "as", usethis::ui_field("external_object"), "to local registry"))
+
   } else {
-    externalobject_id <- external_exists[[1]]$url
+    datastore_object_id <- get_entry("object",
+                                     list(storage_location = extract_id(
+                                         download_exists$url)))
+    assertthat::assert_that(length(datastore_object_id) == 1)
+    datastore_component_id <- datastore_object_id[[1]]$components[[1]]
   }
-
-  stop_server()
-
-  usethis::ui_done(
-    paste("Writing", usethis::ui_value(register_this$external_object),
-          "as", usethis::ui_field("external_object"), "to local registry"))
 
   invisible(datastore_component_id)
 }
