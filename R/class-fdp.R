@@ -18,6 +18,7 @@ fdp <- R6::R6Class("fdp", list(
   submission_script = NULL,
   inputs = NULL,
   outputs = NULL,
+  issues = NULL,
 
   #' @description
   #' Create a new fdp object
@@ -92,9 +93,7 @@ fdp <- R6::R6Class("fdp", list(
                              title = character(),
                              version = character(),
                              path = character(),
-                             object_id = character(),
-                             issue = character(),
-                             severity = character())
+                             object_id = character())
     } else {
       existing <- self$inputs
     }
@@ -106,9 +105,7 @@ fdp <- R6::R6Class("fdp", list(
                       title = title,
                       version = version,
                       path = path,
-                      object_id = object_id,
-                      issue = NA,
-                      severity = NA)
+                      object_id = object_id)
     self$inputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -139,9 +136,7 @@ fdp <- R6::R6Class("fdp", list(
                              version = character(),
                              hash = character(),
                              component_id = character(),
-                             dataproduct_id = character(),
-                             issue = character(),
-                             severity = character())
+                             dataproduct_id = character())
     } else {
       existing <- self$outputs
     }
@@ -154,9 +149,7 @@ fdp <- R6::R6Class("fdp", list(
                       version = version,
                       hash = NA,
                       component_id = NA,
-                      dataproduct_id = NA,
-                      issue = NA,
-                      severity = NA)
+                      dataproduct_id = NA)
     self$outputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -180,33 +173,82 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Add issues field
+  #' @param component_id text
   #' @param component text
   #' @param data_product text
   #' @param version text
+  #' @param namespace text
   #' @param issue text
   #' @param severity text
   #'
-  raise_issue_component = function(component,
+  raise_issue_component = function(component_id,
+                                   component,
                                    data_product,
                                    version,
+                                   namespace,
                                    issue,
                                    severity) {
 
-    if (component %in% self$outputs$component &
-        version %in% self$outputs$version) {
-      index <- which(self$outputs$component %in% component &
-                       self$outputs$version %in% version)
-      self$outputs$issue[index] <- issue
-      self$outputs$severity[index] <- severity
+    if (is.null(self$issues)) {
+      existing <- data.frame(id = numeric(),
+                             component = character(),
+                             data_product = character(),
+                             version = character(),
+                             namespace = character(),
+                             issue = character(),
+                             severity = numeric())
+    } else {
+      existing <- self$issues
     }
 
-    if (component %in% self$inputs$component &
-        version %in% self$inputs$version) {
-      index <- which(self$inputs$component %in% component &
-                       self$inputs$version %in% version)
-      self$inputs$issue[index] <- issue
-      self$inputs$severity[index] <- severity
+    new <- data.frame(id = component_id,
+                      component = component,
+                      data_product = data_product,
+                      version = version,
+                      namespace = namespace,
+                      issue = issue,
+                      severity = severity)
+    self$issues <- rbind.data.frame(existing, new)
+
+    invisible(self)
+  },
+
+  #' @description
+  #' Add issues field
+  #' @param data_product_id text
+  #' @param data_product text
+  #' @param version text
+  #' @param namespace text
+  #' @param issue text
+  #' @param severity text
+  #'
+  raise_issue_dataproduct = function(data_product_id,
+                                     data_product,
+                                     version,
+                                     namespace,
+                                     issue,
+                                     severity) {
+
+    if (is.null(self$issues)) {
+      existing <- data.frame(id = numeric(),
+                             component = character(),
+                             data_product = character(),
+                             version = character(),
+                             namespace = character(),
+                             issue = character(),
+                             severity = numeric())
+    } else {
+      existing <- self$issues
     }
+
+    new <- data.frame(id = data_product_id,
+                      component = NA,
+                      data_product = data_product,
+                      version = version,
+                      namespace = namespace,
+                      issue = issue,
+                      severity = severity)
+    self$issues <- rbind.data.frame(existing, new)
 
     invisible(self)
   },
