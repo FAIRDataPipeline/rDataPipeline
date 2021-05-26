@@ -32,9 +32,6 @@ issue_with_component(
 
 \item{severity}{severity}
 }
-\value{
-
-}
 \description{
 issue_with_component
 }

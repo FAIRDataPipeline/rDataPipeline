@@ -6,6 +6,9 @@
 \usage{
 fdp_pull(path = "config.yaml")
 }
+\arguments{
+\item{path}{path}
+}
 \description{
 fdp_pull
 }

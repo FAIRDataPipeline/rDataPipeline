@@ -1,5 +1,7 @@
 #' fdp_pull
 #'
+#' @param path path
+#'
 #' @export
 #'
 fdp_pull <- function(path = "config.yaml") {

@@ -9,8 +9,6 @@
 #' @param issue issue
 #' @param severity severity
 #'
-#' @return
-#'
 issue_with_component <- function(component_id,
                                  handle,
                                  component,

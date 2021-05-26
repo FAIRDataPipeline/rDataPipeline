@@ -17,10 +17,15 @@ issue_with_dataproduct(
 \item{data_product_id}{\code{numeric} value returned from
 \code{create_array()}, referencing an input / output in the handle}
 
-\item{severity}{}
-}
-\value{
+\item{handle}{handle}
 
+\item{data_product}{data_product}
+
+\item{version}{version}
+
+\item{issue}{issue}
+
+\item{severity}{severity}
 }
 \description{
 Function to attach an issue to data product in handle. To be written to the

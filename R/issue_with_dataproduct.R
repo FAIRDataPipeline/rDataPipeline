@@ -8,13 +8,11 @@
 #'
 #' @param data_product_id \code{numeric} value returned from
 #' \code{create_array()}, referencing an input / output in the handle
-#' @param handle
-#' @param data_product
-#' @param version
-#' @param issue
-#' @param severity
-#'
-#' @return
+#' @param handle handle
+#' @param data_product data_product
+#' @param version version
+#' @param issue issue
+#' @param severity severity
 #'
 issue_with_dataproduct <- function(data_product_id,
                                    handle,

@@ -7,13 +7,15 @@
 download_data_product(data_product, version, namespace, data_dir)
 }
 \arguments{
+\item{data_product}{a \code{string} specifying the name of the data product}
+
 \item{version}{(optional) a \code{string} specifying the version number of
 the data product; if version is not specified, the most recent version will
 be downloaded}
 
-\item{data_dir}{a \code{string} specifying the download directory}
+\item{namespace}{namespace}
 
-\item{name}{a \code{string} specifying the name of the data product}
+\item{data_dir}{a \code{string} specifying the download directory}
 }
 \value{
 Returns list comprising two elements

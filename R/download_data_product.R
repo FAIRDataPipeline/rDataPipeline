@@ -2,11 +2,12 @@
 #'
 #' Download data product from the Boydorr server.
 #'
-#' @param name a \code{string} specifying the name of the data product
-#' @param data_dir a \code{string} specifying the download directory
+#' @param data_product a \code{string} specifying the name of the data product
 #' @param version (optional) a \code{string} specifying the version number of
 #' the data product; if version is not specified, the most recent version will
 #' be downloaded
+#' @param namespace namespace
+#' @param data_dir a \code{string} specifying the download directory
 #'
 #' @family download functions
 #'
