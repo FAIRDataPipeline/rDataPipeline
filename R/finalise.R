@@ -122,40 +122,40 @@ finalise <- function(handle) {
                                usethis::ui_field("component"),
                                "to local registry"))
 
-        # Attach issues to component
-
-        if (!is.na(this_metadata$issue[j])) {
-          issue <- this_metadata$issue[j]
-          severity <- this_metadata$severity[j]
-
-          register_issue_component(issue = issue,
-                                   severity = severity,
-                                   data_product = dp,
-                                   namespace = namespace,
-                                   component = components[j],
-                                   version = version)
-
-          usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
-                                 usethis::ui_field("issue"),
-                                 "to local registry"))
-        }
       }
 
-      # Attach issues to data product
-
-      # if (any("issues" %in% names(writes[[index_dp]]))) {
-      #   issue <- writes[[index_dp]]$issues
-      #   severity <- writes[[index_dp]]$severity
-      #
-      #   issue_with_dataproduct(issue,
-      #                          severity,
-      #                          dp,
-      #                          namespace,
-      #                          this_version)
-      # }
     }
   }
 
+  # Attach issues to components ---------------------------------------------
+
+  component_issues <- handle$issues %>%
+    dplyr::filter(!is.na(component))
+
+  for (k in seq_len(nrow(component_issues))) {
+
+    this_issue <- component_issues[k, ]
+    register_issue_component(handle, this_issue)
+
+    usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                           usethis::ui_field("issue"),
+                           "to local registry"))
+  }
+
+
+
+  # Attach issues to data product
+
+  # if (any("issues" %in% names(writes[[index_dp]]))) {
+  #   issue <- writes[[index_dp]]$issues
+  #   severity <- writes[[index_dp]]$severity
+  #
+  #   issue_with_dataproduct(issue,
+  #                          severity,
+  #                          dp,
+  #                          namespace,
+  #                          this_version)
+  # }
 
   # link objects together
 
