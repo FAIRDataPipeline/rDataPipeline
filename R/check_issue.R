@@ -12,7 +12,6 @@ check_issue <- function(description,
 
     issueId <- get_url("issue", list(description = description,
                                      severity = severity))
-    message("issue already exists")
 
   } else {
     # If not, create a new issue
