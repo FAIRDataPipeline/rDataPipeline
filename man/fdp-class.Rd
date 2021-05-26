@@ -36,6 +36,7 @@ Contained for class \code{fdp}.
 \item \href{#method-write_dataproduct}{\code{fdp$write_dataproduct()}}
 \item \href{#method-output_index}{\code{fdp$output_index()}}
 \item \href{#method-raise_issue_component}{\code{fdp$raise_issue_component()}}
+\item \href{#method-raise_issue_dataproduct}{\code{fdp$raise_issue_dataproduct()}}
 \item \href{#method-write_component_id}{\code{fdp$write_component_id()}}
 \item \href{#method-write_dataproduct_id}{\code{fdp$write_dataproduct_id()}}
 \item \href{#method-clone}{\code{fdp$clone()}}
@@ -156,17 +157,63 @@ Return index
 \subsection{Method \code{raise_issue_component()}}{
 Add issues field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue_component(component, data_product, version, issue, severity)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue_component(
+  component_id,
+  component,
+  data_product,
+  version,
+  namespace,
+  issue,
+  severity
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{component_id}}{text}
+
 \item{\code{component}}{text}
 
 \item{\code{data_product}}{text}
 
 \item{\code{version}}{text}
+
+\item{\code{namespace}}{text}
+
+\item{\code{issue}}{text}
+
+\item{\code{severity}}{text}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-raise_issue_dataproduct"></a>}}
+\if{latex}{\out{\hypertarget{method-raise_issue_dataproduct}{}}}
+\subsection{Method \code{raise_issue_dataproduct()}}{
+Add issues field
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue_dataproduct(
+  data_product_id,
+  data_product,
+  version,
+  namespace,
+  issue,
+  severity
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{data_product_id}}{text}
+
+\item{\code{data_product}}{text}
+
+\item{\code{version}}{text}
+
+\item{\code{namespace}}{text}
 
 \item{\code{issue}}{text}
 

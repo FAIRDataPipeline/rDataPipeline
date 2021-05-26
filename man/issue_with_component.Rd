@@ -10,6 +10,7 @@ issue_with_component(
   component,
   data_product,
   version,
+  namespace,
   issue,
   severity
 )
@@ -24,6 +25,8 @@ issue_with_component(
 \item{data_product}{data_product}
 
 \item{version}{version}
+
+\item{namespace}{namespace}
 
 \item{issue}{issue}
 

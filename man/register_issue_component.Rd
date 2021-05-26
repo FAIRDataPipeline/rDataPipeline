@@ -4,27 +4,12 @@
 \alias{register_issue_component}
 \title{register_issue_component}
 \usage{
-register_issue_component(
-  issue,
-  severity,
-  data_product,
-  namespace,
-  component,
-  version
-)
+register_issue_component(handle, this_issue)
 }
 \arguments{
-\item{issue}{issue}
+\item{handle}{handle}
 
-\item{severity}{severity}
-
-\item{data_product}{data_product}
-
-\item{namespace}{namespace}
-
-\item{component}{component}
-
-\item{version}{version}
+\item{this_issue}{this_issue}
 }
 \description{
 register_issue_component
