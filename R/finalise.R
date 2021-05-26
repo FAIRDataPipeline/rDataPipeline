@@ -45,20 +45,15 @@ finalise <- function(handle) {
         file.rename(path, new_path)
 
       } else {
-
         hash <- unique(this_metadata$hash)
         if (is.na(hash))
           usethis::ui_stop("Something is wrong")
-
       }
 
       # Read description from config.yaml
 
       index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
         dp == x$data_product)))
-      if (length(index_dp) == 0)
-        stop("Data product not present in config.yaml")
-
       description <- handle$yaml$write[[index_dp]]$description
 
       namespace <- handle$yaml$run_metadata$default_output_namespace
@@ -106,14 +101,14 @@ finalise <- function(handle) {
       # Update handle
       handle$write_dataproduct_id(dp, product_dataProductId, this_version, hash)
 
-      # Record components in data registry
+      # Record components in data registry --------------------------------------
 
       components <- this_metadata$component
 
       for (j in seq_along(components)) {
 
         index_ct <- which(components[j] %in% this_metadata$component)
-        this_component <- this_metadata$components[[index_ct]]
+        this_component <- this_metadata$component[[index_ct]]
 
         component_id <- new_object_component(name = components[j],
                                              object_id = object_id)
