@@ -66,11 +66,11 @@ finalise <- function(handle) {
 
       # Read version from handle
 
-      version <- unique(this_metadata$version)
+      this_version <- unique(this_metadata$version)
 
-      if (grepl("\\{DATETIME\\}", version)) {
+      if (grepl("\\{DATETIME\\}", this_version)) {
         datetime <- gsub("-", "", Sys.Date())
-        version <- gsub("\\{DATETIME\\}", datetime, version)
+        this_version <- gsub("\\{DATETIME\\}", datetime, this_version)
       }
 
       # Record file location in data registry
@@ -78,7 +78,7 @@ finalise <- function(handle) {
       storage_location <- gsub(datastore, "", path)
 
       dp_exists <- get_entry("data_product", list(name = dp,
-                                                  version = version))
+                                                  version = this_version))
 
       if (is.null(dp_exists)) {
         storage_location_id <- new_storage_location(
@@ -91,7 +91,7 @@ finalise <- function(handle) {
 
         # Add data product to data registry
         product_dataProductId <- new_data_product(name = dp,
-                                                  version = version,
+                                                  version = this_version,
                                                   object_id = object_id,
                                                   namespace_id = namespace_id)
 
@@ -104,7 +104,7 @@ finalise <- function(handle) {
       }
 
       # Update handle
-      handle$write_dataproduct_id(dp, product_dataProductId, version, hash)
+      handle$write_dataproduct_id(dp, product_dataProductId, this_version, hash)
 
       # Record components in data registry
 
