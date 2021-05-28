@@ -4,7 +4,6 @@
 #'
 #' @name fdp-class
 #' @rdname fdp-class
-#' @exportClass fdp
 #'
 fdp <- R6::R6Class("fdp", list(
   #' @field yaml text
@@ -44,6 +43,8 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Print function
+  #'
+  #' @export
   #'
   print = function(...) {
     cat(" yaml:", !is.null(self$yaml))
