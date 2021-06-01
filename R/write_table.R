@@ -94,5 +94,18 @@ write_table <- function(df,
   usethis::ui_done(paste("Added component:", usethis::ui_value(component), "\n",
                          "to data product:", usethis::ui_value(data_product)))
 
-  handle$write_dataproduct(data_product, path, component)
+  index <- lapply(handle$yaml$write, function(x)
+    data_product == x$data_product) %>%
+    unlist() %>% which()
+  this_dp <- handle$yaml$write[[index]]
+
+  version <- this_dp$version
+
+  handle$write_dataproduct(data_product,
+                           path,
+                           component,
+                           description,
+                           version)
+
+  invisible(handle$output_index(data_product, component, version))
 }

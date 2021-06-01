@@ -165,7 +165,7 @@ write_array <- function(array,
     unlist() %>% which()
   this_dp <- handle$yaml$write[[index]]
 
-  version <- get_version(handle, data_product, namespace)
+  version <- this_dp$version
 
   handle$write_dataproduct(data_product,
                            path,
