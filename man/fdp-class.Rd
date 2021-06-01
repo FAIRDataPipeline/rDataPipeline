@@ -15,15 +15,15 @@ Contained for class \code{fdp}.
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{yaml}}{text}
+\item{\code{yaml}}{working config.yaml contents}
 
-\item{\code{model_config}}{text}
+\item{\code{model_config}}{object URI associated with config.yaml storage location}
 
-\item{\code{submission_script}}{text}
+\item{\code{submission_script}}{object URI associated with submission script storage}
 
-\item{\code{inputs}}{text}
+\item{\code{inputs}}{metadata associated with code run inputs}
 
-\item{\code{outputs}}{text}
+\item{\code{outputs}}{metadata associated with code run outputs}
 }
 \if{html}{\out{</div>}}
 }
@@ -54,11 +54,11 @@ Create a new fdp object
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{yaml}}{text}
+\item{\code{yaml}}{working config.yaml contents}
 
-\item{\code{model_config}}{text}
+\item{\code{model_config}}{object URI associated with config.yaml storage location}
 
-\item{\code{submission_script}}{text}
+\item{\code{submission_script}}{object URI associated with submission script storage location}
 }
 \if{html}{\out{</div>}}
 }
@@ -92,9 +92,9 @@ Add inputs field
 
 \item{\code{type}}{text}
 
-\item{\code{doi_or_unique_name}}{text}
+\item{\code{doi_or_unique_name}}{external object field}
 
-\item{\code{title}}{text}
+\item{\code{title}}{external object field}
 
 \item{\code{version}}{text}
 

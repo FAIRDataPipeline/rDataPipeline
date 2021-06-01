@@ -6,11 +6,11 @@
 #' @rdname fdp-class
 #'
 fdp <- R6::R6Class("fdp", list(
-  #' @field yaml text
-  #' @field model_config text
-  #' @field submission_script text
-  #' @field inputs text
-  #' @field outputs text
+  #' @field yaml working config.yaml contents
+  #' @field model_config object URI associated with config.yaml storage location
+  #' @field submission_script object URI associated with submission script storage
+  #' @field inputs metadata associated with code run inputs
+  #' @field outputs metadata associated with code run outputs
   #'
   yaml = NULL,
   model_config = NULL,
@@ -21,9 +21,9 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Create a new fdp object
-  #' @param yaml text
-  #' @param model_config text
-  #' @param submission_script text
+  #' @param yaml working config.yaml contents
+  #' @param model_config object URI associated with config.yaml storage location
+  #' @param submission_script object URI associated with submission script storage location
   #' @return A new `fdp` object.
   #'
   initialize = function(yaml,
@@ -70,8 +70,8 @@ fdp <- R6::R6Class("fdp", list(
   #' Add inputs field
   #' @param alias text
   #' @param type text
-  #' @param doi_or_unique_name text
-  #' @param title text
+  #' @param doi_or_unique_name external object field
+  #' @param title external object field
   #' @param version text
   #' @param path text
   #' @param object_id text
