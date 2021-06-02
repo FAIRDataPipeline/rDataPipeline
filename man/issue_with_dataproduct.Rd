@@ -5,16 +5,17 @@
 \title{issue_with_dataproduct}
 \usage{
 issue_with_dataproduct(
-  data_product_id,
+  index,
   handle,
   data_product,
   version,
+  namespace,
   issue,
   severity
 )
 }
 \arguments{
-\item{data_product_id}{\code{numeric} value returned from
+\item{index}{\code{numeric} value returned from
 \code{create_array()}, referencing an input / output in the handle}
 
 \item{handle}{handle}
@@ -22,6 +23,8 @@ issue_with_dataproduct(
 \item{data_product}{data_product}
 
 \item{version}{version}
+
+\item{namespace}{namespace}
 
 \item{issue}{issue}
 

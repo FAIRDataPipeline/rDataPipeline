@@ -5,7 +5,7 @@
 \title{issue_with_component}
 \usage{
 issue_with_component(
-  component_id,
+  index,
   handle,
   component,
   data_product,
@@ -16,7 +16,7 @@ issue_with_component(
 )
 }
 \arguments{
-\item{component_id}{component_id}
+\item{index}{component_id}
 
 \item{handle}{handle}
 

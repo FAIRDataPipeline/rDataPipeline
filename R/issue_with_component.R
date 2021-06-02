@@ -1,6 +1,6 @@
 #' issue_with_component
 #'
-#' @param component_id component_id
+#' @param index component_id
 #' @param handle handle
 #' @param component component
 #' @param data_product data_product
@@ -9,7 +9,7 @@
 #' @param issue issue
 #' @param severity severity
 #'
-issue_with_component <- function(component_id,
+issue_with_component <- function(index,
                                  handle,
                                  component,
                                  data_product,
@@ -18,12 +18,12 @@ issue_with_component <- function(component_id,
                                  issue,
                                  severity) {
 
-  if (missing(component_id)) {
-    component_id <- NA
+  if (missing(index)) {
+    index <- NA
 
   } else {
-    index_inputs <- which(handle$inputs$index %in% component_id)
-    index_outputs <- which(handle$outputs$index %in% component_id)
+    index_inputs <- which(handle$inputs$index %in% index)
+    index_outputs <- which(handle$outputs$index %in% index)
 
     if (length(index_inputs) != 0) {
       tmp <- handle$inputs[index_inputs,]
@@ -44,13 +44,13 @@ issue_with_component <- function(component_id,
     version <- tmp$version
   }
 
-  handle$raise_issue_component(component_id = component_id,
-                               component = component,
-                               data_product = data_product,
-                               version = version,
-                               namespace = namespace,
-                               issue = issue,
-                               severity = severity)
+  handle$raise_issue(index = index,
+                     component = component,
+                     data_product = data_product,
+                     version = version,
+                     namespace = namespace,
+                     issue = issue,
+                     severity = severity)
 
   usethis::ui_done("Recording issue in handle")
 }

@@ -135,7 +135,7 @@ finalise <- function(handle) {
   for (k in seq_len(nrow(component_issues))) {
 
     this_issue <- component_issues[k, ]
-    register_issue_component(handle, this_issue)
+    register_issue_dataproduct(handle, this_issue)
 
     usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
                            usethis::ui_field("issue"),
@@ -146,16 +146,18 @@ finalise <- function(handle) {
 
   # Attach issues to data product
 
-  # if (any("issues" %in% names(writes[[index_dp]]))) {
-  #   issue <- writes[[index_dp]]$issues
-  #   severity <- writes[[index_dp]]$severity
-  #
-  #   issue_with_dataproduct(issue,
-  #                          severity,
-  #                          dp,
-  #                          namespace,
-  #                          this_version)
-  # }
+  dataproduct_issues <- handle$issues %>%
+    dplyr::filter(is.na(component))
+
+  for (k in seq_len(nrow(dataproduct_issues))) {
+
+    this_issue <- dataproduct_issues[k, ]
+    register_issue_dataproduct(handle, this_issue)
+
+    usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                           usethis::ui_field("issue"),
+                           "to local registry"))
+  }
 
   # link objects together
 
