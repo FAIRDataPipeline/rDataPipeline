@@ -48,12 +48,26 @@ initialise <- function() {
   assertthat::assert_that(length(script_object_id) == 1)
   script_object_id <- script_object_id[[1]]$url
 
-  stop_server()
-
   usethis::ui_info(paste("Locating", usethis::ui_value("script.sh")))
+
+  # record the code run in the data registry --------------------------------
+
+  coderun_id <- new_coderun(run_date = Sys.time(),
+                            description = yaml$run_metadata$description,
+                            # code_repo_id = "",
+                            model_config = config_object_id,
+                            submission_script_id = script_object_id,
+                            inputs = list(),
+                            outputs = list())
+
+  usethis::ui_done(paste("Writing", usethis::ui_value("code run"),
+                         "to local registry"))
+
+  stop_server()
 
   # Write to handle
   fdp$new(yaml = yaml,
           model_config = config_object_id,
-          submission_script = script_object_id)
+          submission_script = script_object_id,
+          code_run = coderun_id)
 }

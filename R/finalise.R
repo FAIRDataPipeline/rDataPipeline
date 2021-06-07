@@ -165,16 +165,19 @@ finalise <- function(handle) {
 
   # record the code run in the data registry --------------------------------
 
-  coderun_id <- new_coderun(run_date = Sys.time(),
-                            description = handle$yaml$run_metadata$description,
-                            # code_repo_id = "",
-                            model_config = handle$model_config,
-                            submission_script_id = handle$submission_script,
-                            inputs = as.list(handle$inputs$object_id),
-                            outputs = as.list(handle$outputs$component_id))
+  patch_data(url = handle$code_run,
+             data = list(inputs = as.list(handle$inputs$object_id),
+                         outputs = as.list(handle$outputs$component_id)))
 
-  usethis::ui_done(paste("Writing", usethis::ui_value("code run"),
-                         "to local registry"))
+  # coderun_id <- new_coderun(run_date = Sys.time(),
+  #                           description = handle$yaml$run_metadata$description,
+  #                           # code_repo_id = "",
+  #                           model_config = handle$model_config,
+  #                           submission_script_id = handle$submission_script,
+  #                           inputs = as.list(handle$inputs$object_id),
+  #                           outputs = as.list(handle$outputs$component_id))
+
+
 
   stop_server()
 }
