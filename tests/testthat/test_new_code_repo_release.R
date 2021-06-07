@@ -1,8 +1,5 @@
 context("Testing new_code_repo_release()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
-
 sleep_time <- 0.5
 
 test_user <- "22"
@@ -16,12 +13,15 @@ website_indentifier <- paste(sample(letters, 10, FALSE), collapse ="", sep = "")
 
 website <- paste0("https://www.", website_indentifier, ".com")
 
+run_server()
+
 object_id <- post_data("object",
-                         list(description = name),
-                         key)
+                         list(description = name))
 test_that("New code repo release returns a character",{
-  expect_true(is.character(new_code_repo_release(name, version, website, object_id, key)))
+  expect_true(is.character(new_code_repo_release(name, version, website, object_id)))
 })
+
+stop_server()
 
 # test_that("code_repo_release produces a message if the code_repo_release already exists", {
 #   expect_message(expect_true(is.character(new_code_repo_release(name, version, website, object_id, key))))

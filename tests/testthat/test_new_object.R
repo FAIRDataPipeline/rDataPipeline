@@ -1,8 +1,5 @@
 context("Testing new_object()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
-
 sleep_time <- 0.5
 
 test_user <- "22"
@@ -18,43 +15,41 @@ path <- paste0(UID_, ".h5")
 path_uri <- paste0("https://", path, ".com")
 hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
 
+run_server()
+
 storage_root_id <- get_entry("storage_root", list(updated_by = test_user))[[1]]$url
 
 
 if(is.null(storage_root_id)){
   storage_root_id <- post_data("storage_root",
                                list(name = UID,
-                                    root = path_uri),
-                               key)
+                                    root = path_uri))
 }
 
 store_id <- post_data("storage_location",
-                                 list(path = path,
-                                      hash = hash,
-                                      storage_root = storage_root_id),
-                                 key)
+                      list(path = path,
+                           hash = hash,
+                           storage_root = storage_root_id))
 
 
 test_that("new_object creates a new object", {
   expect_true(is.character(new_object("",
-                                      description = UID,
-                                      key)))
+                                      description = UID)))
 })
 
 test_that("new_object creates a new object", {
   expect_true(is.character(new_object(store_id,
-                                      description = UID,
-                                      key)))
+                                      description = UID)))
 })
 
 test_that("new_object creates a new object", {
   expect_true(is.character(new_object("",
-                                      description = "",
-                                      key)))
+                                      description = "")))
 })
 
-test_that("new_object produces a message when object exists", {
-  expect_message(expect_true(is.character(new_object(store_id,
-                                      description = UID,
-                                      key))))
+test_that("new_object returns URI when the object exists", {
+  expect_true(is.character(new_object(store_id,
+                                      description = UID)))
 })
+
+stop_server()

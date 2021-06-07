@@ -1,9 +1,8 @@
 context("Testing new_author()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
-
 test_user <- "22"
+
+run_server()
 
 object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
 
@@ -16,14 +15,14 @@ personal_name <- paste(sample(letters, 6, FALSE), collapse ="", sep = "")
 
 if(is.null(object_id)){
   object_id <- post_data("object",
-                         list(description = UID),
-                         key)
+                         list(description = UID))
 }
 
 test_that("New Author returns a character vector", {
-  expect_true(is.character(new_author(family_name, personal_name, object_id, key)))
+  expect_true(is.character(new_author(family_name, personal_name, object_id)))
 })
 
+stop_server()
 
 ######################################################################
 ##  New Author Does not check if an author exists prior to posting  ##
