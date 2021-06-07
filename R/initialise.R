@@ -15,7 +15,7 @@ initialise <- function() {
   config_path <- Sys.getenv("FDP_CONFIG_DIR")
 
   if (config_path == "")
-    usethis::ui_stop(paste("Working", usethis::ui_value("config.yaml"),
+    usethis::ui_stop(paste("Working", usethis::ui_path("config.yaml"),
                            "does not exist, please run `fdp run` and try again"))
 
   yaml <- yaml::read_yaml(file.path(config_path, "config.yaml"))
@@ -24,7 +24,7 @@ initialise <- function() {
   datastore_root <- yaml$run_metadata$default_data_store
   localstore <- run_metadata$default_data_store
 
-  usethis::ui_info(paste("Reading working", usethis::ui_value("config.yaml")))
+  usethis::ui_info(paste("Reading working", usethis::ui_path("config.yaml")))
 
   run_server()
 
@@ -48,7 +48,7 @@ initialise <- function() {
   assertthat::assert_that(length(script_object_id) == 1)
   script_object_id <- script_object_id[[1]]$url
 
-  usethis::ui_info(paste("Locating", usethis::ui_value("script.sh")))
+  usethis::ui_info(paste("Locating", usethis::ui_path("script.sh")))
 
   # record the code run in the data registry --------------------------------
 
@@ -60,7 +60,7 @@ initialise <- function() {
                             inputs = list(),
                             outputs = list())
 
-  usethis::ui_done(paste("Writing", usethis::ui_value("code run"),
+  usethis::ui_done(paste("Writing", usethis::ui_path("code run"),
                          "to local registry"))
 
   stop_server()

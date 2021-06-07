@@ -42,9 +42,8 @@ link_read <- function(handle, alias) {
 
   stop_server()
 
-  usethis::ui_info(paste0("Locating ", usethis::ui_value(doi), ": ",
-                          usethis::ui_value(this_read$title), ", version ",
-                          usethis::ui_value(this_read$version)))
+  usethis::ui_info(paste0("Locating ",
+                          usethis::ui_value(this_read$title)))
 
   # Store metadata in handle
   handle$input(alias = alias,
