@@ -1,6 +1,6 @@
 #' finalise
 #'
-#' @param handle list
+#' @param handle \code{fdp} object
 #'
 finalise <- function(handle) {
 
@@ -122,37 +122,47 @@ finalise <- function(handle) {
     }
   }
 
-  # Attach issues to components ---------------------------------------------
 
-  component_issues <- handle$issues %>%
-    dplyr::filter(!is.na(component))
+  issues <- handle$issues
 
-  for (k in seq_len(nrow(component_issues))) {
+  if (!is.null(issues)) {
 
-    this_issue <- component_issues[k, ]
-    register_issue_dataproduct(handle, this_issue)
+    # Attach issues to components ---------------------------------------------
 
-    usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
-                           usethis::ui_field("issue"),
-                           "to local registry"))
+    component_issues <- handle$issues %>%
+      dplyr::filter(!is.na(component))
+
+    if (nrow(component_issues) != 0) {
+      for (k in seq_len(nrow(component_issues))) {
+
+        this_issue <- component_issues[k, ]
+        register_issue_dataproduct(handle, this_issue)
+
+        usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
+    # Attach issues to data product
+
+    dataproduct_issues <- handle$issues %>%
+      dplyr::filter(is.na(component))
+
+    if (nrow(dataproduct_issues) != 0) {
+      for (k in seq_len(nrow(dataproduct_issues))) {
+
+        this_issue <- dataproduct_issues[k, ]
+        register_issue_dataproduct(handle, this_issue)
+
+        usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
   }
 
-
-
-  # Attach issues to data product
-
-  dataproduct_issues <- handle$issues %>%
-    dplyr::filter(is.na(component))
-
-  for (k in seq_len(nrow(dataproduct_issues))) {
-
-    this_issue <- dataproduct_issues[k, ]
-    register_issue_dataproduct(handle, this_issue)
-
-    usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
-                           usethis::ui_field("issue"),
-                           "to local registry"))
-  }
 
   # link objects together
 
