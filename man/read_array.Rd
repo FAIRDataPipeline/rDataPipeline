@@ -4,14 +4,14 @@
 \alias{read_array}
 \title{Read component from array-type H5 file}
 \usage{
-read_array(filepath, component)
+read_array(handle, data_product, component)
 }
 \arguments{
-\item{filepath}{a \code{string} specifying the path and filename of the file to
-be read}
+\item{handle}{\code{fdp} object}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file,
-e.g. "location/per_week/all_deaths"}
+\item{data_product}{a \code{string} specifying a data product}
+
+\item{component}{a \code{string} specifying a data product component}
 }
 \value{
 Returns an array with attached \code{Dimension_i_title},

@@ -4,7 +4,7 @@
 \alias{download_from_url}
 \title{Download source file from URL}
 \usage{
-download_from_url(source_root, source_path, path, filename, unzip = FALSE)
+download_from_url(source_root, source_path, path, filename)
 }
 \arguments{
 \item{source_root}{a \code{string} specifying the source root}
@@ -15,9 +15,6 @@ download_from_url(source_root, source_path, path, filename, unzip = FALSE)
 
 \item{filename}{a \code{string} specifying the filename (the name given to
 the saved file)}
-
-\item{unzip}{a \code{boolean} specifying which when \code{TRUE} will
-unzip a \code{.zip} file and remove the original \code{.zip} file}
 }
 \description{
 This function will download a file from a url

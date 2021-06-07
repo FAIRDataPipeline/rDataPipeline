@@ -4,18 +4,18 @@
 \alias{read_table}
 \title{Read component from table-type H5 file}
 \usage{
-read_table(filepath, component)
+read_table(handle, data_product, component)
 }
 \arguments{
-\item{filepath}{a \code{string} specifying the path and filename of the file to
-be read}
+\item{handle}{\code{fdp} object}
 
-\item{component}{a \code{string} specifying a location within the hdf5 file}
+\item{data_product}{a \code{string} specifying a data product}
+
+\item{component}{a \code{string} specifying a data product component}
 }
 \value{
 Returns a \code{data.frame} with attached \code{column_units}
-attributes,
-if available
+attributes, if available
 }
 \description{
 Function to read table type data from hdf5 file.

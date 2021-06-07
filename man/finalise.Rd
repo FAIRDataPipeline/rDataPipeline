@@ -7,7 +7,7 @@
 finalise(handle)
 }
 \arguments{
-\item{handle}{list}
+\item{handle}{\code{fdp} object}
 }
 \description{
 finalise

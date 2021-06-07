@@ -47,7 +47,7 @@ Contained for class \code{fdp}.
 \subsection{Method \code{new()}}{
 Create a new fdp object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script, code_run)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -58,6 +58,8 @@ Create a new fdp object
 \item{\code{model_config}}{object URI associated with config.yaml storage location}
 
 \item{\code{submission_script}}{object URI associated with submission script storage location}
+
+\item{\code{code_run}}{object URI associated with code run}
 }
 \if{html}{\out{</div>}}
 }
@@ -160,6 +162,7 @@ Add issues field
   index,
   component,
   data_product,
+  external_object,
   version,
   namespace,
   issue,
@@ -175,6 +178,8 @@ Add issues field
 \item{\code{component}}{text}
 
 \item{\code{data_product}}{text}
+
+\item{\code{external_object}}{text}
 
 \item{\code{version}}{text}
 

@@ -18,17 +18,18 @@ issue_with_dataproduct(
 \item{index}{\code{numeric} value returned from
 \code{create_array()}, referencing an input / output in the handle}
 
-\item{handle}{handle}
+\item{handle}{\code{fdp} object}
 
-\item{data_product}{data_product}
+\item{data_product}{a \code{string} specifying the name of the data product}
 
-\item{version}{version}
+\item{version}{a \code{string} specifying the version of the data product}
 
-\item{namespace}{namespace}
+\item{namespace}{a \code{string} specifying the namespace containing the
+data product}
 
-\item{issue}{issue}
+\item{issue}{a \code{string} describing the issue}
 
-\item{severity}{severity}
+\item{severity}{a \code{numeric} value specifying the severity of the issue}
 }
 \description{
 Function to attach an issue to data product in handle. To be written to the
