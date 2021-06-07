@@ -21,29 +21,12 @@
 #'
 get_url <- function(table, query = list()) {
 
-  # Sometimes an error is returned from the local registry:
-  #   "Error in curl::curl_fetch_memory(url, handle = handle) :
-  #    Failed to connect to localhost port 8000: Connection refused"
-  # Repeating the action works eventually...
-  continue <- TRUE
-  while (continue) {
-    tryCatch({ # Try retrieving entry
-      tmp <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
-                       query = query) %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
-        jsonlite::fromJSON(simplifyVector = FALSE)
-      continue <- FALSE
-    },
-    error = function(e) {
-    })
-  }
-
-  tmp <- tmp$results
+  tmp <- get_entry(table, query)
 
   if(length(tmp) == 1) {
     return(tmp[[1]]$url)
   } else if(length(tmp) == 0) {
-    stop("No objects were returned")
+    message("No objects were returned")
   } else {
     return(lapply(tmp, function(x) x$url))
   }
