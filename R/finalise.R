@@ -63,11 +63,6 @@ finalise <- function(handle) {
 
       this_version <- unique(this_metadata$version)
 
-      if (grepl("\\{DATETIME\\}", this_version)) {
-        datetime <- gsub("-", "", Sys.Date())
-        this_version <- gsub("\\{DATETIME\\}", datetime, this_version)
-      }
-
       # Record file location in data registry
 
       storage_location <- gsub(datastore, "", path)
