@@ -22,7 +22,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   run_metadata <- yaml$run_metadata
   if (any("read" %in% names(yaml))) read <- yaml$read else read <- list()
-  if (any("write" %in% names(yaml))) write <- yaml$write else write <- list()
 
   # Generate working config.yaml --------------------------------------------
 
@@ -62,6 +61,30 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
         }
       }
     }
+  }
+
+  if (any("write" %in% names(yaml))) {
+
+    write <- yaml$write
+
+    # If names(write) is not null, then a single entry has been added that
+    # is not in a list, so put it in a list
+    if (!all(is.null(names(write))))
+      write <- list(write)
+
+    for (i in seq_along(write)) {
+      this_write <- write[[i]]
+      if ("version" %in% names(this_write)) {
+        if (grepl("\\{DATETIME\\}", this_write$version)) {
+          datetime <- gsub("-", "", Sys.Date())
+          version <- gsub("\\{DATETIME\\}", datetime, x$version)
+        }
+        write[[i]]$version <- version
+      }
+    }
+
+  } else {
+    write <- list()
   }
 
   # Save working config.yaml in data store ----------------------------------
