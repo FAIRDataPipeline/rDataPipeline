@@ -7,8 +7,6 @@
 #' @param path a \code{string} specifying where the file will be saved
 #' @param filename a \code{string} specifying the filename (the name given to
 #' the saved file)
-#' @param unzip a \code{boolean} specifying which when \code{TRUE} will
-#' unzip a \code{.zip} file and remove the original \code{.zip} file
 #'
 #' @family download functions
 #'
@@ -31,12 +29,10 @@
 download_from_url <- function(source_root,
                               source_path,
                               path,
-                              filename,
-                              unzip = FALSE) {
+                              filename) {
   # Generate directory structure
   if(missing(path)) path <- getwd()
   if(!file.exists(path)) dir.create(path, recursive = TRUE)
-
 
   # Checks
   if(!grepl("/$", source_root))
@@ -47,11 +43,4 @@ download_from_url <- function(source_root,
   # Download file
   download.file(url = paste0(source_root, source_path),
                 destfile = file.path(path, filename), mode = "wb")
-
-  # If file is zipped, unzip it and remove *.zip file
-  if(grepl(".zip$", filename) & unzip) {
-    unzip(file.path(path, filename), exdir = path)
-    file.remove(file.path(path, filename))
-  }
-
 }
