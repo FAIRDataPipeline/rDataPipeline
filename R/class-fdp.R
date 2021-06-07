@@ -9,12 +9,14 @@ fdp <- R6::R6Class("fdp", list(
   #' @field yaml working config.yaml contents
   #' @field model_config object URI associated with config.yaml storage location
   #' @field submission_script object URI associated with submission script storage
+  #' @fielf code_run object URI associated with code run
   #' @field inputs metadata associated with code run inputs
   #' @field outputs metadata associated with code run outputs
   #'
   yaml = NULL,
   model_config = NULL,
   submission_script = NULL,
+  code_run = NULL,
   inputs = NULL,
   outputs = NULL,
   issues = NULL,
@@ -24,19 +26,23 @@ fdp <- R6::R6Class("fdp", list(
   #' @param yaml working config.yaml contents
   #' @param model_config object URI associated with config.yaml storage location
   #' @param submission_script object URI associated with submission script storage location
+  #' @param code_run object URI associated with code run
   #' @return A new `fdp` object.
   #'
   initialize = function(yaml,
                         model_config,
-                        submission_script) {
+                        submission_script,
+                        code_run) {
 
     stopifnot(is.list(yaml))
     stopifnot(is.character(model_config), length(model_config) == 1)
     stopifnot(is.character(submission_script), length(submission_script) == 1)
+    stopifnot(is.character(code_run), length(code_run) == 1)
 
     self$yaml <- yaml
     self$model_config <- model_config
     self$submission_script <- submission_script
+    self$code_run <- code_run
 
     invisible(self)
   },
@@ -50,6 +56,7 @@ fdp <- R6::R6Class("fdp", list(
     cat(" yaml:", !is.null(self$yaml))
     cat("\n", "model_config:", !is.null(self$model_config))
     cat("\n", "submission_script:", !is.null(self$submission_script))
+    cat("\n", "code_run:", !is.null(self$code_run))
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "inputs:", "\n")
