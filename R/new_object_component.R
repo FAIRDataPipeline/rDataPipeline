@@ -27,5 +27,4 @@ new_object_component <- function(name,
             data = list(name = name,
                         object = object_id,
                         description = description))
-
 }

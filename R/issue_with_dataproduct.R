@@ -8,12 +8,13 @@
 #'
 #' @param index \code{numeric} value returned from
 #' \code{create_array()}, referencing an input / output in the handle
-#' @param handle handle
-#' @param data_product data_product
-#' @param version version
-#' @param namespace namespace
-#' @param issue issue
-#' @param severity severity
+#' @param handle \code{fdp} object
+#' @param data_product a \code{string} specifying the name of the data product
+#' @param version a \code{string} specifying the version of the data product
+#' @param namespace a \code{string} specifying the namespace containing the
+#' data product
+#' @param issue a \code{string} describing the issue
+#' @param severity a \code{numeric} value specifying the severity of the issue
 #'
 issue_with_dataproduct <- function(index,
                                    handle,
