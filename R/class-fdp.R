@@ -184,6 +184,7 @@ fdp <- R6::R6Class("fdp", list(
   #' @param index text
   #' @param component text
   #' @param data_product text
+  #' @param external_object text
   #' @param version text
   #' @param namespace text
   #' @param issue text
@@ -192,6 +193,7 @@ fdp <- R6::R6Class("fdp", list(
   raise_issue = function(index,
                          component,
                          data_product,
+                         external_object,
                          version,
                          namespace,
                          issue,
@@ -201,6 +203,7 @@ fdp <- R6::R6Class("fdp", list(
       existing <- data.frame(index = numeric(),
                              component = character(),
                              data_product = character(),
+                             external_object = character(),
                              version = character(),
                              namespace = character(),
                              issue = character(),
@@ -212,6 +215,7 @@ fdp <- R6::R6Class("fdp", list(
     new <- data.frame(index = index,
                       component = component,
                       data_product = data_product,
+                      external_object = external_object,
                       version = version,
                       namespace = namespace,
                       issue = issue,
