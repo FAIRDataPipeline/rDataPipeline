@@ -109,7 +109,8 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   run_server()
 
   datastore_root <- yaml$run_metadata$default_data_store
-  config_storageroot_id <- new_storage_root(name = "localstore",
+  datastore_name <- paste("local datastore:", datastore_root)
+  config_storageroot_id <- new_storage_root(name = datastore_name,
                                             root = datastore_root,
                                             accessibility = 0)
 
@@ -134,9 +135,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Record submission script location in data registry ----------------------
 
-  script_storageroot_id <- new_storage_root(name = "localstore",
-                                            root = datastore_root,
-                                            accessibility = 0)
+  script_storageroot_id <- config_storageroot_id
 
   hash <- get_file_hash(submission_script_path)
   script_location_id <- new_storage_location(path = submission_script_path,
