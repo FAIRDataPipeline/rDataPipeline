@@ -74,7 +74,7 @@ register_external_object <- function(register_this,
 
   # Get release_date
   release_date <- register_this$release_date
-  if ("DATETIME" %in% names(release_date) & is.null(release_date$DATETIME)) {
+  if ("DATETIME" %in% names(release_date)) {
     release_date <- Sys.time()
   }
 
