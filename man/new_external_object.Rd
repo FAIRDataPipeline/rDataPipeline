@@ -11,15 +11,14 @@ new_external_object(
   title,
   description = "",
   version,
-  object_id,
-  source_id,
-  original_store_id = ""
+  object_uri,
+  source_uri,
+  original_store_uri = ""
 )
 }
 \arguments{
 \item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
-\code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
+\code{external_object}}
 
 \item{primary_not_supplement}{a boolean flag to indicate
 whether the external object is the primary source (\code{TRUE}) or not
@@ -28,27 +27,23 @@ whether the external object is the primary source (\code{TRUE}) or not
 \item{release_date}{the date-time that the \code{external_object} was
 released \emph{e.g.} \code{Sys.time()} or "2010-07-11 12:15:00 BST"}
 
-\item{title}{a \code{string} specifying the title of the \code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
+\item{title}{a \code{string} specifying the title of the \code{external_object}}
 
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information dataset"}
+description of the \code{external_object}}
 
 \item{version}{a \code{string} specifying the version identifier of the
-\code{external_object} (must conform to semantic versioning syntax)
-\emph{e.g.} "0.20100711.1"}
+\code{external_object} (must conform to semantic versioning syntax)}
 
-\item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/12/"}
+\item{object_uri}{a \code{string} specifying the URI of an entry in the
+\code{object} table}
 
-\item{source_id}{a \code{string} specifying the API URL of the
-associated \code{source} table \emph{e.g.} "https://data.scrc.uk/api/source/9/"}
+\item{source_uri}{a \code{string} specifying the URI of an entry in the
+\code{source} table}
 
-\item{original_store_id}{(optional) a \code{string} specifying the API URL of the
-associated \code{storage_location} table that references the original
-location of the \code{external_object}
-\emph{e.g.} "https://data.scrc.uk/api/storage_location/19/"}
+\item{original_store_uri}{(optional) a \code{string} specifying the URI of a
+an entry in the \code{storage_location} table that references the original
+location of an \code{external_object}}
 }
 \description{
 Upload information to the \code{external_object} table in the data registry

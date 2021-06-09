@@ -60,10 +60,10 @@ fdp <- R6::R6Class("fdp", list(
     contains_coderun <- !is.null(self$code_run)
 
     cat("Contains:\n")
-    if (contains_yaml) cat("- Config file")
-    if (contains_config) cat("- Config file URI")
-    if (contains_script) cat("- Submission script URI")
-    if (contains_coderun) cat("- Code run URI")
+    if (contains_yaml) cat("- Config file\n")
+    if (contains_config) cat("- Config file URI\n")
+    if (contains_script) cat("- Submission script URI\n")
+    if (contains_coderun) cat("- Code run URI\n")
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "Inputs:", "\n")
@@ -153,8 +153,8 @@ fdp <- R6::R6Class("fdp", list(
                              description = character(),
                              version = character(),
                              hash = character(),
-                             component_id = character(),
-                             dataproduct_id = character())
+                             component_uri = character(),
+                             dataproduct_uri = character())
     } else {
       existing <- self$outputs
     }
@@ -166,8 +166,8 @@ fdp <- R6::R6Class("fdp", list(
                       description = description,
                       version = version,
                       hash = NA,
-                      component_id = NA,
-                      dataproduct_id = NA)
+                      component_uri = NA,
+                      dataproduct_uri = NA)
     self$outputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -239,16 +239,16 @@ fdp <- R6::R6Class("fdp", list(
   #' Add outputs field
   #' @param data_product text
   #' @param component text
-  #' @param component_id text
+  #' @param component_uri text
   #'
-  write_component_id = function(data_product,
-                                component,
-                                component_id) {
+  write_component_uri = function(data_product,
+                                 component,
+                                 component_uri) {
 
     index <- which(self$outputs$data_product == data_product &
                      self$outputs$component == component)
 
-    self$outputs$component_id[index] <- component_id
+    self$outputs$component_uri[index] <- component_uri
 
     invisible(self)
   },
@@ -256,19 +256,19 @@ fdp <- R6::R6Class("fdp", list(
   #' @description
   #' Add outputs field
   #' @param data_product text
-  #' @param data_product_id text
+  #' @param data_product_uri text
   #' @param version text
   #' @param hash text
   #'
-  write_dataproduct_id = function(data_product,
-                                  data_product_id,
-                                  version,
-                                  hash) {
+  write_dataproduct_uri = function(data_product,
+                                   data_product_uri,
+                                   version,
+                                   hash) {
 
     index <- which(self$outputs$data_product == data_product)
 
     if (length(index) != 0) {
-      self$outputs$dataproduct_id[index] <- data_product_id
+      self$outputs$dataproduct_uri[index] <- data_product_uri
       self$outputs$version[index] <- version
       self$outputs$hash[index] <- hash
     }

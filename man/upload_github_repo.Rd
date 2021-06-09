@@ -18,8 +18,4 @@ upload_github_repo(storage_root_id, repo, hash, version)
 \description{
 Post github_repo metadata to the data registry
 }
-\seealso{
-Other upload functions: 
-\code{\link{upload_toml_to_github}()}
-}
 \concept{upload functions}

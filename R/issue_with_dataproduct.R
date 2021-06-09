@@ -16,6 +16,8 @@
 #' @param issue a \code{string} describing the issue
 #' @param severity a \code{numeric} value specifying the severity of the issue
 #'
+#' @export
+#'
 issue_with_dataproduct <- function(index,
                                    handle,
                                    data_product,

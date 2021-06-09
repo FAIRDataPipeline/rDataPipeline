@@ -7,9 +7,9 @@
 new_coderun(
   run_date,
   description = "",
-  code_repo_id = "",
-  model_config = "",
-  submission_script_id = "",
+  code_repo_uri = "",
+  model_config_uri = "",
+  submission_script_uri = "",
   inputs = list(),
   outputs = list()
 )
@@ -22,11 +22,13 @@ new_coderun(
 description of the \code{code_run} \emph{e.g.} "Script run to upload and process
 scottish coronavirus-covid-19-management-information"}
 
-\item{code_repo_id}{(optional) \emph{e.g.} "https://data.scrc.uk/api/object/154/"}
+\item{code_repo_uri}{(optional)}
 
-\item{model_config}{(optional)}
+\item{model_config_uri}{(optional) a \code{string} specifying the URI of an
+\code{object} associated with the working config file}
 
-\item{submission_script_id}{object URI}
+\item{submission_script_uri}{a \code{string} specifying the URI of an
+\code{object} associated with the submission script file}
 
 \item{inputs}{a \code{list} of input component URIs}
 

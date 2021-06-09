@@ -7,9 +7,11 @@
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{code_run} *e.g.* "Script run to upload and process
 #' scottish coronavirus-covid-19-management-information"
-#' @param code_repo_id (optional) *e.g.* "https://data.scrc.uk/api/object/154/"
-#' @param model_config (optional)
-#' @param submission_script_id object URI
+#' @param code_repo_uri (optional)
+#' @param model_config_uri (optional) a \code{string} specifying the URI of an
+#' \code{object} associated with the working config file
+#' @param submission_script_uri a \code{string} specifying the URI of an
+#' \code{object} associated with the submission script file
 #' @param inputs a \code{list} of input component URIs
 #' @param outputs a \code{list} of output component URIs
 #'
@@ -19,18 +21,18 @@
 #'
 new_coderun <- function(run_date,
                         description = "",
-                        code_repo_id = "",
-                        model_config = "",
-                        submission_script_id = "",
+                        code_repo_uri = "",
+                        model_config_uri = "",
+                        submission_script_uri = "",
                         inputs = list(),
                         outputs = list()) {
 
   post_data(table = "code_run",
             data = list(run_date = run_date,
-                         description = description,
-                         code_repo = code_repo_id,
-                         model_config = model_config,
-                         submission_script = submission_script_id,
-                         inputs = inputs,
-                         outputs = outputs))
+                        description = description,
+                        code_repo = code_repo_uri,
+                        model_config = model_config_uri,
+                        submission_script = submission_script_uri,
+                        inputs = inputs,
+                        outputs = outputs))
 }

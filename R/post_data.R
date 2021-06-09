@@ -37,20 +37,20 @@ post_data <- function(table, data) {
     })
   }
 
-  # Status 404: Not found (table doesn't exist)
+  # Status 404: Not Found (table doesn't exist)
   if(result$status == 404)
     usethis::ui_stop(paste(usethis::ui_field(gsub("_", " ", table)),
                            "does not exist"))
 
-  tmp <- result %>%
+  detail <- result %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  # Status 201: created
+  # Status 201: Created
   if(result$status == 201) {
-    return(tmp$url)
+    return(detail$url)
 
-    # Status 400: Conflict (entry already exists)
+    # Status 400: Bad Request (error in field)
   } else if(result$status == 400) {
 
     # tryCatch({
@@ -58,16 +58,25 @@ post_data <- function(table, data) {
     #   return(get_url(table, data))
     # },
     # error = function(err) {
-    return(tmp)
+    stop(detail)
     # })
 
-    # Status 409
+    # Status 409: Conflict (entry already exists)
   } else if(result$status == 409) {
-    return(tmp$detail)
+
+    tryCatch({
+      output <- get_entry(table, clean_query(data))
+      if (is.null(output)) stop(detail)
+      assertthat::assert_that(length(output) == 1)
+      return(output[[1]]$url)
+    },
+    error = function(err) {
+      stop(detail)
+    })
 
     # Status non-201 (something went wrong)
   } else {
-    usethis::ui_stop(tmp)
+    stop(detail)
   }
 
 }

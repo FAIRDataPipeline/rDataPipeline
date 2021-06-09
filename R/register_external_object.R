@@ -18,7 +18,7 @@ register_external_object <- function(register_this,
   run_server()
 
   # Add the website to the data registry (e.g. home page of the database)
-  source_id <- new_source(
+  source_uri <- new_source(
     name = register_this$source_name,
     abbreviation = register_this$source_abbreviation,
     website = register_this$source_website)
@@ -31,16 +31,16 @@ register_external_object <- function(register_this,
   } else
     usethis::ui_oops("Unknown accessibility value")
 
-  source_root_id <- new_storage_root(
+  source_root_uri <- new_storage_root(
     name = register_this$root_name,
     root = register_this$root,
     accessibility = accessibility)
 
   # Add source location to the data registry
-  source_location_id <- new_storage_location(
+  source_location_uri <- new_storage_location(
     path = register_this$path,
     hash = hash,
-    storage_root_id = source_root_id)
+    storage_root_uri = source_root_uri)
 
   usethis::ui_done(
     paste("Writing", usethis::ui_value(register_this$external_object),
@@ -48,28 +48,29 @@ register_external_object <- function(register_this,
 
   # Local store -------------------------------------------------------------
 
-  # Add local data store root to the data registry
-  datastore_root_id <- new_storage_root(
-    name = "localstore",
-    root = datastore,
-    accessibility = 0) # TODO
-
+  # Does this file already exist?
   file_path <- file.path(namespace, register_this$product_name, filename)
 
+  # Add local data store root to the data registry
+  datastore_name <- paste("local datastore:", datastore)
+  datastore_root_uri <- new_storage_root(name = datastore_name,
+                                         root = datastore,
+                                         accessibility = 0) # TODO
+
   # Add local data store location to the data registry
-  datastore_location_id <- new_storage_location(
+  datastore_location_uri <- new_storage_location(
     path = file_path,
     hash = hash,
-    storage_root_id = datastore_root_id)
+    storage_root_uri = datastore_root_uri)
 
-  datastore_object_id <- new_object(
-    storage_location_id = datastore_location_id)
+  datastore_object_uri <- new_object(
+    storage_location_uri = datastore_location_uri)
 
   # Source data (e.g. *.csv) is defined as having a single component
   # called "raw_data"
-  datastore_component_id <- new_object_component(
+  datastore_component_uri <- new_object_component(
     name = "raw_data",
-    object_id = datastore_object_id)
+    object_uri = datastore_object_uri)
 
   # Register external object ------------------------------------------------
 
@@ -86,16 +87,16 @@ register_external_object <- function(register_this,
     version <- gsub("\\{DATETIME\\}", datetime, version)
   }
 
-  externalobject_id <- new_external_object(
+  externalobject_uri <- new_external_object(
     doi_or_unique_name = register_this$unique_name,
     primary_not_supplement = register_this$primary,
     release_date = release_date,
     title = register_this$title,
     description = register_this$description,
     version = version,
-    object_id = datastore_object_id,
-    source_id = source_id,
-    original_store_id = source_location_id)
+    object_uri = datastore_object_uri,
+    source_uri = source_uri,
+    original_store_uri = source_location_uri)
 
   stop_server()
 
@@ -103,5 +104,5 @@ register_external_object <- function(register_this,
     paste("Writing", usethis::ui_value(register_this$external_object),
           "as", usethis::ui_field("external_object"), "to local registry"))
 
-  invisible(datastore_component_id)
+  invisible(datastore_component_uri)
 }

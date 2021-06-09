@@ -2,8 +2,8 @@
 #'
 #' Upload information to the \code{object} table in the data registry
 #'
-#' @param storage_location_id a \code{string} specifying the API URL of the
-#' associated \code{storage_location} table
+#' @param storage_location_uri a \code{string} specifying the URI of an entry
+#' in the \code{storage_location} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object}
 #' @param issues a \code{list} of Issues URLs to associate with this Object
@@ -17,17 +17,17 @@
 #'
 #' @export
 #'
-new_object <- function(storage_location_id,
+new_object <- function(storage_location_uri,
                        description = "",
                        issues) {
   if (missing(issues)) {
     post_data(table = "object",
               data = list(description = description,
-                          storage_location = storage_location_id))
+                          storage_location = storage_location_uri))
   } else {
     post_data(table = "object",
               data = list(description = description,
-                          storage_location = storage_location_id,
+                          storage_location = storage_location_uri,
                           issues = issues))
   }
 }

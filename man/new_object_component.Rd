@@ -4,15 +4,15 @@
 \alias{new_object_component}
 \title{Post entry to object_component table}
 \usage{
-new_object_component(name, object_id, description = "")
+new_object_component(name, object_uri, description = "")
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the
 \code{object_component}, unique in the context of \code{object_component}
 and its \code{object} reference}
 
-\item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table}
+\item{object_uri}{a \code{string} specifying the URI of an entry in the
+\code{object} table}
 
 \item{description}{(optional) a \code{string} containing a free text
 description of the \code{object_component}
@@ -20,7 +20,7 @@ description of the \code{object_component}
 Note that the \code{object_component} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use
 \code{attach_issue()} and associated functionality to attach issues to
-objects and objet components.}
+objects and object components.}
 }
 \description{
 Upload information to the \code{object_component} table in the data registry

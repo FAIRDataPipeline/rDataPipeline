@@ -4,11 +4,11 @@
 \alias{new_object}
 \title{Post entry to object table}
 \usage{
-new_object(storage_location_id, description = "", issues)
+new_object(storage_location_uri, description = "", issues)
 }
 \arguments{
-\item{storage_location_id}{a \code{string} specifying the API URL of the
-associated \code{storage_location} table}
+\item{storage_location_uri}{a \code{string} specifying the URI of an entry
+in the \code{storage_location} table}
 
 \item{description}{(optional) a \code{string} containing a free text
 description of the \code{object}}

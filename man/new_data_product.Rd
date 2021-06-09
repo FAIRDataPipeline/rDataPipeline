@@ -4,20 +4,19 @@
 \alias{new_data_product}
 \title{Post entry to data_product table}
 \usage{
-new_data_product(name, version, object_id, namespace_id)
+new_data_product(name, version, object_uri, namespace_uri)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the \code{data_product}
-\emph{e.g.} "records/SARS-CoV-2/scotland/human-mortality"}
+\item{name}{a \code{string} specifying the name of the \code{data_product}}
 
 \item{version}{a \code{string} specifying the version identifier of the
-\code{data_product} (must conform to semantic versioning syntax) \emph{e.g.} "0.1.0"}
+\code{data_product} (must conform to semantic versioning syntax)}
 
-\item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/156/",}
+\item{object_uri}{a \code{string} specifying the URI of the entry in the
+\code{object} table}
 
-\item{namespace_id}{a \code{string} specifying the API URL of the
-associated \code{namespace} table \emph{e.g.} "https://data.scrc.uk/api/namespace/2/"}
+\item{namespace_uri}{a \code{string} specifying the URI of the entry in the
+\code{namespace} table}
 }
 \description{
 Upload information to the \code{data_product} table in the data registry

@@ -30,27 +30,27 @@ register_issue_dataproduct <- function(handle, this_issue) {
   current_components <- tmp$current_components
 
   # Which object component do we want to associate with the issue?
-  namespaceUrl <- get_url("namespace", list(name = this_issue$namespace))
-  namespaceId <- extract_id(namespaceUrl)
+  namespace_uri <- get_url("namespace", list(name = this_issue$namespace))
+  namespace_id <- extract_id(namespace_uri)
   dataProduct <- get_entry("data_product", list(name = this_issue$data_product,
                                             version = issue_version,
-                                            namespace = namespaceId))
+                                            namespace = namespace_id))
   assertthat::assert_that(length(dataProduct) == 1)
-  objectUrl <- dataProduct[[1]]$object
-  objectId <- extract_id(objectUrl)
+  object_uri <- dataProduct[[1]]$object
+  object_id <- extract_id(object_uri)
 
   if (!is.na(this_issue$component)) {
-    objectComponentId <- get_url("object_component",
+    component_id <- get_url("object_component",
                                  list(name = this_issue$component,
-                                      object = objectId))
+                                      object = object_id))
     # Add this to the current list
-    component_issues <- c(current_components, objectComponentId)
+    component_issues <- c(current_components, component_id)
     object_issues <- current_objects
 
   } else {
     # Add this to the current list
     component_issues <- current_components
-    object_issues <- c(current_objects, objectUrl)
+    object_issues <- c(current_objects, object_uri)
   }
 
   # Upload issue to the data registry ---------------------------------------

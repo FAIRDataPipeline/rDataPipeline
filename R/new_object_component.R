@@ -5,26 +5,26 @@
 #' @param name a \code{string} specifying the name of the
 #' \code{object_component}, unique in the context of \code{object_component}
 #' and its \code{object} reference
-#' @param object_id a \code{string} specifying the API URL of the
-#' associated \code{object} table
+#' @param object_uri a \code{string} specifying the URI of an entry in the
+#' \code{object} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object_component}
 #'
 #' Note that the \code{object_component} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
 #' \code{attach_issue()} and associated functionality to attach issues to
-#' objects and objet components.
+#' objects and object components.
 #'
 #' @family new functions
 #'
 #' @export
 #'
 new_object_component <- function(name,
-                                 object_id,
+                                 object_uri,
                                  description = "") {
 
   post_data(table = "object_component",
             data = list(name = name,
-                        object = object_id,
+                        object = object_uri,
                         description = description))
 }

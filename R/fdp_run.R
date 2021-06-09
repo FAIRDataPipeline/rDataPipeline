@@ -10,7 +10,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   # Save names in data store
   config_file <- "config.yaml"
 
-
   # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
@@ -119,12 +118,13 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
                                             accessibility = 0)
 
   config_hash <- get_file_hash(config_path)
-  config_location_id <- new_storage_location(
+  config_location_uri <- new_storage_location(
     path = config_path,
     hash = config_hash,
-    storage_root_id = config_storageroot_id)
-  config_object_id <- new_object(
-    storage_location_id = config_location_id,
+    storage_root_uri = config_storageroot_id)
+
+  config_object_uri <- new_object(
+    storage_location_uri = config_location_uri,
     description = "Working config.yaml file location in local datastore")
 
   cli::cli_alert_success("Writing {.file {config_file}} to local registry")
@@ -141,12 +141,13 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   script_storageroot_id <- config_storageroot_id
 
   script_hash <- get_file_hash(submission_script_path)
-  script_location_id <- new_storage_location(
+  script_location_uri <- new_storage_location(
     path = submission_script_path,
     hash = script_hash,
-    storage_root_id = script_storageroot_id)
-  script_object_id <- new_object(
-    storage_location_id = script_location_id,
+    storage_root_uri = script_storageroot_id)
+
+  script_object_uri <- new_object(
+    storage_location_uri = script_location_uri,
     description = "Submission script location in local datastore")
 
   cli::cli_alert_success("Writing {.file {script_file}} to local registry")
@@ -154,7 +155,9 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   # Save FDP_CONFIG_DIR in global environment ------------------------------
 
   Sys.setenv(FDP_CONFIG_DIR = configdir)
-  cli::cli_alert_success("Writing FDP_CONFIG_DIR to global environment")
+  variable_name <- "FDP_CONFIG_DIR"
+  cli::cli_alert_success(
+    "Writing {.value {variable_name}} to global environment")
 
   # Get latest commit sha ---------------------------------------------------
 
@@ -183,15 +186,15 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Record analysis / processing script location in data registry -----------
 
-  repo_storageroot_id <- new_storage_root(name = "github",
+  repo_storageroot_uri <- new_storage_root(name = "github",
                                           root = "https://github.com/",
                                           accessibility = 0)
-  repo_location_id <- new_storage_location(path = repo_name,
+  repo_location_uri <- new_storage_location(path = repo_name,
                                            hash = sha,
-                                           storage_root_id = repo_storageroot_id)
+                                           storage_root_uri = repo_storageroot_uri)
 
-  repo_object_id <- new_object(
-    storage_location_id = repo_location_id,
+  repo_object_uri <- new_object(
+    storage_location_uri = repo_location_uri,
     description = "Analysis / processing script location")
 
   cli::cli_alert_success("Writing processing script to local registry")

@@ -10,15 +10,15 @@ initialise <- function() {
 
   # Read working config.yaml ------------------------------------------------
 
-  config_path <- Sys.getenv("FDP_CONFIG_DIR")
+  directory <- Sys.getenv("FDP_CONFIG_DIR")
   config_file <- "config.yaml"
   script_file <- "script.sh"
 
-  if (config_path == "")
+  if (directory == "")
     cli::cli_alert_danger(
       "{.file {config_file}} is missing from data store, please try again")
 
-  yaml <- yaml::read_yaml(file.path(config_path, "config.yaml"))
+  yaml <- yaml::read_yaml(file.path(directory, "config.yaml"))
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
   datastore_root <- yaml$run_metadata$default_data_store
@@ -28,39 +28,47 @@ initialise <- function() {
 
   run_server()
 
-  # Get working config.yaml object id
-  full_path <- file.path(config_path, "config.yaml")
-  config_location_id <- get_entry("storage_location", list(path = full_path))
-  assertthat::assert_that(length(config_location_id) == 1)
-  config_location_id <- clean_query(config_location_id[[1]]$url)
-  config_object_id <- get_entry("object",
-                                list(storage_location = config_location_id))
-  assertthat::assert_that(length(config_object_id) == 1)
-  config_object_id <- config_object_id[[1]]$url
+  # Get working config.yaml object uri --------------------------------------
+
+  config_path <- file.path(directory, "config.yaml")
+
+  config_location_uri <- get_entry("storage_location",
+                                   list(path = config_path))
+  assertthat::assert_that(length(config_location_uri) == 1)
+  config_location_id <- extract_id(config_location_uri[[1]]$url)
+
+  config_object_uri <- get_entry("object",
+                                 list(storage_location = config_location_id))
+  assertthat::assert_that(length(config_object_uri) == 1)
+  config_object_uri <- config_object_uri[[1]]$url
 
   cli::cli_alert_info(
     "Reading {.file {config_file}} metadata from local registry")
 
-  # Get script object id
-  full_path <- file.path(config_path, "script.sh")
-  script_location_id <- get_entry("storage_location", list(path = full_path))
-  assertthat::assert_that(length(script_location_id) == 1)
-  script_location_id <- clean_query(script_location_id[[1]]$url)
-  script_object_id <- get_entry("object",
+  # Get script object uri ---------------------------------------------------
+
+  script_path <- file.path(directory, "script.sh")
+
+  script_location_uri <- get_entry("storage_location",
+                                  list(path = script_path))
+  assertthat::assert_that(length(script_location_uri) == 1)
+  script_location_id <- extract_id(script_location_uri[[1]]$url)
+
+  script_object_uri <- get_entry("object",
                                 list(storage_location = script_location_id))
-  assertthat::assert_that(length(script_object_id) == 1)
-  script_object_id <- script_object_id[[1]]$url
+  assertthat::assert_that(length(script_object_uri) == 1)
+  script_object_uri <- script_object_uri[[1]]$url
 
   cli::cli_alert_info(
     "Reading {.file {script_file}} metadata from local registry")
 
   # record the code run in the data registry --------------------------------
 
-  coderun_id <- new_coderun(run_date = Sys.time(),
+  coderun_uri <- new_coderun(run_date = Sys.time(),
                             description = yaml$run_metadata$description,
                             # code_repo_id = "",
-                            model_config = config_object_id,
-                            submission_script_id = script_object_id,
+                            model_config_uri = config_object_uri,
+                            submission_script_uri = script_object_uri,
                             inputs = list(),
                             outputs = list())
 
@@ -71,7 +79,7 @@ initialise <- function() {
 
   # Write to handle
   fdp$new(yaml = yaml,
-          model_config = config_object_id,
-          submission_script = script_object_id,
-          code_run = coderun_id)
+          model_config = config_object_uri,
+          submission_script = script_object_uri,
+          code_run = coderun_uri)
 }

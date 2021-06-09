@@ -50,6 +50,13 @@ fdp_pull <- function(path = "config.yaml") {
 
       register_this <- register[[i]]
 
+      # Check that release_date is in the correct format
+
+      release_date <- register_this$release_date
+      # if (is.na(lubridate::ymd_hm(release_date)))
+      #   usethis::ui_stop(paste(usethis::ui_field("release_date"), "has wrong format "))
+
+
       # Local data store location
       local_path <- file.path(paste0(datastore, namespace),
                               register_this$product_name)
@@ -84,7 +91,7 @@ fdp_pull <- function(path = "config.yaml") {
 
       if ("external_object" %in% names(register_this)) {
 
-        externalobject_id <- register_external_object(
+        externalobject_uri <- register_external_object(
           register_this = register_this,
           datastore = datastore,
           namespace = namespace,
