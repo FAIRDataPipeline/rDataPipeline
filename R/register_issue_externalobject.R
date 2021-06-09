@@ -6,9 +6,9 @@
 #' @param version version
 #'
 register_issue_externalobject <- function(description,
-                                      severity,
-                                      external_object_doi,
-                                      version) {
+                                          severity,
+                                          external_object_doi,
+                                          version) {
 
   tmp <- check_issue(description, severity)
   issueId <- tmp$issueId

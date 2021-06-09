@@ -35,7 +35,7 @@ write_array <- function(array,
 
   if (data_product %in% handle$outputs$data_product &
       component %in% handle$outputs$component) {
-    usethis::ui_done("Component already recorded")
+    cli::cli_alert_info("Component already recorded in handle")
     invisible(handle$output_index(data_product, component, version))
   }
 
@@ -156,9 +156,8 @@ write_array <- function(array,
 
   rhdf5::h5closeAll()
 
-  usethis::ui_done(paste("Writing component:",
-                         usethis::ui_value(component), "\n",
-                         "to data product:", usethis::ui_value(data_product)))
+  cli::cli_alert_success(
+    "Writing {.value {component}} to {.value {data_product}}")
 
   index <- lapply(handle$yaml$write, function(x)
     data_product == x$data_product) %>%

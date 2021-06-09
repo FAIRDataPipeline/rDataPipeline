@@ -1,9 +1,10 @@
 #' register_external_object
 #'
 #' @param register_this metadata
-#' @param datastore default local data storage location
-#' @param namespace namespace
-#' @param filename filename
+#' @param datastore a \code{string} specifying the default local data storage
+#' location
+#' @param namespace a \code{string} specifying the name of the namespace
+#' @param filename a \code{string} specifying the filename
 #'
 register_external_object <- function(register_this,
                                      datastore,

@@ -2,7 +2,7 @@
 #'
 #' Upload information to the \code{namespace} table in the data registry
 #'
-#' @param name a \code{string} specifying the name of the namespace *e.g.* "SCRC"
+#' @param name a \code{string} specifying the name of the namespace
 #'
 #' @family new functions
 #'
