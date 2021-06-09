@@ -64,7 +64,10 @@ fdp_pull <- function(path = "config.yaml") {
                                path = local_path,
                                filename = tmp_filename)
       } else {
-        stop("Code not written")
+        download_from_url(source_root = register_this$root,
+                          source_path = register_this$path,
+                          path = local_path,
+                          filename = tmp_filename)
       }
 
       # Rename data file
