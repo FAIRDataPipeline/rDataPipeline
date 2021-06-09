@@ -12,6 +12,7 @@ Description: Functions to interact with the SCRC data pipeline.
 License: GPL-3 + file LICENSE
 Imports:
     assertthat,
+    cli,
     configr,
     dplyr,
     httr,
