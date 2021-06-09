@@ -53,21 +53,31 @@ fdp <- R6::R6Class("fdp", list(
   #' @export
   #'
   print = function(...) {
-    cat(" yaml:", !is.null(self$yaml))
-    cat("\n", "model_config:", !is.null(self$model_config))
-    cat("\n", "submission_script:", !is.null(self$submission_script))
-    cat("\n", "code_run:", !is.null(self$code_run))
+
+    contains_yaml <- !is.null(self$yaml)
+    contains_config <- !is.null(self$model_config)
+    contains_script <- !is.null(self$submission_script)
+    contains_coderun <- !is.null(self$code_run)
+
+    cat("Contains:\n")
+    if (contains_yaml) cat("- Config file")
+    if (contains_config) cat("- Config file URI")
+    if (contains_script) cat("- Submission script URI")
+    if (contains_coderun) cat("- Code run URI")
 
     if (!is.null(self$inputs)) {
-      cat("\n\n", "inputs:", "\n")
-      self$inputs %>% dplyr::select(-path, -alias) %>%
+      cat("\n\n", "Inputs:", "\n")
+      self$inputs %>% dplyr::select(alias) %>%
         print()
     }
 
     if (!is.null(self$outputs)) {
       cat("\n\n", "outputs:", "\n")
-      self$outputs %>% dplyr::select(-component_id, -dataproduct_id) %>%
-        print()
+      lapply(seq_len(nrow(self$outputs)), function(x) {
+        tmp <- self$outputs[x,] %>%
+          dplyr::select(index, component, data_product, version)
+        cat(tmp$component, "\n")
+      })
     }
 
     invisible(self)
