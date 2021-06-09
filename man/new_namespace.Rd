@@ -7,7 +7,7 @@
 new_namespace(name)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the namespace \emph{e.g.} "SCRC"}
+\item{name}{a \code{string} specifying the name of the namespace}
 }
 \description{
 Upload information to the \code{namespace} table in the data registry
