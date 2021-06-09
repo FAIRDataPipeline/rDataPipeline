@@ -1,13 +1,14 @@
-#' SCRCdataAPI
+#' rFDP
 #'
-#' Functions to generate and process hd5f files
+#' FAIR Data Pipeline API
 #'
-#' @name SCRCdataAPI-package
-#' @aliases SCRCdataAPI
+#' @name rFDP-package
+#' @aliases rFDP
 #' @docType package
 #'
 #' @rawNamespace import(assertthat, except = has_name)
 #' @import configr
+#' @import cli
 #' @import dplyr
 #' @importFrom git2r sha last_commit remote_url
 #' @import rhdf5
