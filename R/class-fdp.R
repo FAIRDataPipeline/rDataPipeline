@@ -9,7 +9,7 @@ fdp <- R6::R6Class("fdp", list(
   #' @field yaml working config.yaml contents
   #' @field model_config object URI associated with config.yaml storage location
   #' @field submission_script object URI associated with submission script storage
-  #' @fielf code_run object URI associated with code run
+  #' @field code_run object URI associated with code run
   #' @field inputs metadata associated with code run inputs
   #' @field outputs metadata associated with code run outputs
   #'
