@@ -10,13 +10,13 @@ initialise <- function() {
 
   # Read working config.yaml ------------------------------------------------
 
-  usethis::ui_info("Initialising handle")
-
   config_path <- Sys.getenv("FDP_CONFIG_DIR")
+  config_file <- "config.yaml"
+  script_file <- "script.sh"
 
   if (config_path == "")
-    usethis::ui_stop(paste("Working", usethis::ui_path("config.yaml"),
-                           "does not exist, please run `fdp run` and try again"))
+    cli::cli_alert_danger(
+      "{.file {config_file}} is missing from data store, please try again")
 
   yaml <- yaml::read_yaml(file.path(config_path, "config.yaml"))
   contents <- names(yaml)
@@ -24,7 +24,7 @@ initialise <- function() {
   datastore_root <- yaml$run_metadata$default_data_store
   localstore <- run_metadata$default_data_store
 
-  usethis::ui_info(paste("Reading working", usethis::ui_path("config.yaml")))
+  cli::cli_alert_info("Reading {.file {config_file}} from data store")
 
   run_server()
 
@@ -38,6 +38,9 @@ initialise <- function() {
   assertthat::assert_that(length(config_object_id) == 1)
   config_object_id <- config_object_id[[1]]$url
 
+  cli::cli_alert_info(
+    "Reading {.file {config_file}} metadata from local registry")
+
   # Get script object id
   full_path <- file.path(config_path, "script.sh")
   script_location_id <- get_entry("storage_location", list(path = full_path))
@@ -48,7 +51,8 @@ initialise <- function() {
   assertthat::assert_that(length(script_object_id) == 1)
   script_object_id <- script_object_id[[1]]$url
 
-  usethis::ui_info(paste("Locating", usethis::ui_path("script.sh")))
+  cli::cli_alert_info(
+    "Reading {.file {script_file}} metadata from local registry")
 
   # record the code run in the data registry --------------------------------
 
@@ -60,8 +64,8 @@ initialise <- function() {
                             inputs = list(),
                             outputs = list())
 
-  usethis::ui_done(paste("Writing", usethis::ui_path("code run"),
-                         "to local registry"))
+  field <- "code_run"
+  cli::cli_alert_success("Writing new {.field {field}} to local registry")
 
   stop_server()
 
