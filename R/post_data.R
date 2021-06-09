@@ -53,24 +53,17 @@ post_data <- function(table, data) {
     # Status 400: Conflict (entry already exists)
   } else if(result$status == 400) {
 
-    tryCatch({
-      data <- clean_query(data)
-      return(get_url(table, data))
-    },
-    error = function(err) {
-      usethis::ui_stop("Conflict with existing entry")
-    })
+    # tryCatch({
+    #   data <- clean_query(data)
+    #   return(get_url(table, data))
+    # },
+    # error = function(err) {
+    return(tmp)
+    # })
 
     # Status 409
   } else if(result$status == 409) {
-
-    # tryCatch({
-    data <- clean_query(data)
-    return(get_url(table, data))
-    # },
-    # error = function(err) {
-    #   usethis::ui_stop("Conflict with existing entry")
-    # })
+    return(tmp$detail)
 
     # Status non-201 (something went wrong)
   } else {
