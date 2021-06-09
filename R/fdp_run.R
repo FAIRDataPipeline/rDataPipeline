@@ -78,8 +78,8 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
         if (grepl("\\{DATETIME\\}", this_write$version)) {
           datetime <- gsub("-", "", Sys.Date())
           version <- gsub("\\{DATETIME\\}", datetime, x$version)
+          write[[i]]$version <- version
         }
-        write[[i]]$version <- version
       }
     }
 
