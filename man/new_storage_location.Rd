@@ -4,7 +4,7 @@
 \alias{new_storage_location}
 \title{Post entry to storage_location table}
 \usage{
-new_storage_location(path, hash, storage_root_uri)
+new_storage_location(path, hash, storage_root_url)
 }
 \arguments{
 \item{path}{a \code{string} specifying the path from the \code{storage_root}
@@ -14,7 +14,7 @@ produces a complete URL}
 \item{hash}{a \code{string} specifying the SHA1 hash of a file stored in
 \code{storage_location}}
 
-\item{storage_root_uri}{a \code{string} specifying the URI of an entry in
+\item{storage_root_url}{a \code{string} specifying the URL of an entry in
 the \code{storage_root} table}
 }
 \description{
@@ -24,16 +24,19 @@ Upload information to the \code{storage_location} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

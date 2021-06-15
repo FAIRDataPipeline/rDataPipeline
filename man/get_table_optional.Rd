@@ -4,12 +4,10 @@
 \alias{get_table_optional}
 \title{Get optional fields}
 \usage{
-get_table_optional(table, key)
+get_table_optional(table)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
-
-\item{key}{API token from data.scrc.uk}
 }
 \value{
 Returns a \code{data.frame} of optional fields and thier properties

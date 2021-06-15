@@ -4,7 +4,7 @@
 \alias{new_data_product}
 \title{Post entry to data_product table}
 \usage{
-new_data_product(name, version, object_uri, namespace_uri)
+new_data_product(name, version, object_url, namespace_url)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{data_product}}
@@ -12,10 +12,10 @@ new_data_product(name, version, object_uri, namespace_uri)
 \item{version}{a \code{string} specifying the version identifier of the
 \code{data_product} (must conform to semantic versioning syntax)}
 
-\item{object_uri}{a \code{string} specifying the URI of the entry in the
+\item{object_url}{a \code{string} specifying the URL of the entry in the
 \code{object} table}
 
-\item{namespace_uri}{a \code{string} specifying the URI of the entry in the
+\item{namespace_url}{a \code{string} specifying the URL of the entry in the
 \code{namespace} table}
 }
 \description{
@@ -25,16 +25,19 @@ Upload information to the \code{data_product} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

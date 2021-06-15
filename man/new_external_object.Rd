@@ -9,18 +9,16 @@ new_external_object(
   primary_not_supplement = TRUE,
   release_date,
   title,
-  description = "",
-  version,
-  object_uri,
-  source_uri,
-  original_store_uri = ""
+  description,
+  object_url,
+  original_store_url
 )
 }
 \arguments{
 \item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
 \code{external_object}}
 
-\item{primary_not_supplement}{a boolean flag to indicate
+\item{primary_not_supplement}{(optional) a boolean flag to indicate
 whether the external object is the primary source (\code{TRUE}) or not
 (\code{FALSE})}
 
@@ -32,16 +30,10 @@ released \emph{e.g.} \code{Sys.time()} or "2010-07-11 12:15:00 BST"}
 \item{description}{(optional) a \code{string} containing a free text
 description of the \code{external_object}}
 
-\item{version}{a \code{string} specifying the version identifier of the
-\code{external_object} (must conform to semantic versioning syntax)}
-
-\item{object_uri}{a \code{string} specifying the URI of an entry in the
+\item{object_url}{a \code{string} specifying the URL of an entry in the
 \code{object} table}
 
-\item{source_uri}{a \code{string} specifying the URI of an entry in the
-\code{source} table}
-
-\item{original_store_uri}{(optional) a \code{string} specifying the URI of a
+\item{original_store_url}{(optional) a \code{string} specifying the URL of a
 an entry in the \code{storage_location} table that references the original
 location of an \code{external_object}}
 }
@@ -52,16 +44,19 @@ Upload information to the \code{external_object} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

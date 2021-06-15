@@ -4,10 +4,16 @@
 \alias{new_namespace}
 \title{Post entry to namespace table}
 \usage{
-new_namespace(name)
+new_namespace(name, full_name, website)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the namespace}
+
+\item{full_name}{(optional) a \code{string} specifying the full name of the
+namespace}
+
+\item{website}{(optional) a \code{string} specifying the website URL
+associated with the namespace}
 }
 \description{
 Upload information to the \code{namespace} table in the data registry
@@ -16,16 +22,19 @@ Upload information to the \code{namespace} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

@@ -4,12 +4,12 @@
 \alias{is_queryable}
 \title{Check whether fields are queryable}
 \usage{
-is_queryable(table, query_parameter)
+is_queryable(table, query)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
 
-\item{query_parameter}{a \code{string} or \code{vector} of field names}
+\item{query}{a \code{string} or \code{vector} of field names}
 }
 \value{
 Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it

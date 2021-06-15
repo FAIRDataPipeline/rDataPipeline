@@ -4,18 +4,31 @@
 \alias{new_object_component}
 \title{Post entry to object_component table}
 \usage{
-new_object_component(name, object_uri, description = "")
+new_object_component(
+  object_url,
+  name,
+  description,
+  whole_object = FALSE,
+  issues_urls = list()
+)
 }
 \arguments{
+\item{object_url}{a \code{string} specifying the URL of an existing
+\code{object}}
+
 \item{name}{a \code{string} specifying the name of the
 \code{object_component}, unique in the context of \code{object_component}
 and its \code{object} reference}
 
-\item{object_uri}{a \code{string} specifying the URI of an entry in the
-\code{object} table}
-
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{object_component}
+description of the \code{object_component}}
+
+\item{whole_object}{a \code{boolean} flag specifying whether or not this
+\code{object_component} refers to the whole object or not - default is
+\code{FALSE}}
+
+\item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to associate
+with this \code{object}
 
 Note that the \code{object_component} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use
@@ -29,16 +42,19 @@ Upload information to the \code{object_component} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

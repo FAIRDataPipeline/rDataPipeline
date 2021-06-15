@@ -85,13 +85,13 @@ Print function
 \subsection{Method \code{input()}}{
 Add inputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$input(alias, type, doi_or_unique_name, title, version, path, object_id)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$input(name, type, doi_or_unique_name, title, version, path, object_id)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{alias}}{text}
+\item{\code{name}}{text}
 
 \item{\code{type}}{text}
 

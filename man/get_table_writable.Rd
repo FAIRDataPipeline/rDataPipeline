@@ -4,12 +4,10 @@
 \alias{get_table_writable}
 \title{Get writable fields}
 \usage{
-get_table_writable(table, key)
+get_table_writable(table)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
-
-\item{key}{api key / token}
 }
 \value{
 Returns a character vector of writable fields

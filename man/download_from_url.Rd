@@ -37,7 +37,6 @@ file.remove("geography/scotland/lookup_table/0.1.0.csv")
 \seealso{
 Other download functions: 
 \code{\link{download_data_product}()},
-\code{\link{download_external_object}()},
 \code{\link{download_from_database}()}
 }
 \concept{download functions}

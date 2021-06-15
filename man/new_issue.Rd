@@ -21,31 +21,23 @@ which the \code{issue} is associated; this can be an empty list}
 \description{
 Upload information to the \code{issue} table in the data registry
 }
-\examples{
-\dontrun{
-\donttest{
-new_issue(severity = 16,
-          description = "Data dump caused a spike on the 15th of June",
-          object_issues = list("https://data.scrc.uk/api/object/152/"),
-          component_issues = list("https://data.scrc.uk/api/object_component/902/"),
-          key = key)
-}}
-
-}
 \seealso{
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

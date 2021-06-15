@@ -4,13 +4,13 @@
 \alias{link_read}
 \title{link_read}
 \usage{
-link_read(handle, alias)
+link_read(handle, name)
 }
 \arguments{
 \item{handle}{an object of class \code{fdp, R6} containing metadata required
 by the Data Pipeline API}
 
-\item{alias}{a \code{string} representing an external object in the
+\item{name}{a \code{string} representing an external object in the
 config.yaml file}
 }
 \description{

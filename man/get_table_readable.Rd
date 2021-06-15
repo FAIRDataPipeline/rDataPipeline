@@ -4,12 +4,10 @@
 \alias{get_table_readable}
 \title{Get readable fields}
 \usage{
-get_table_readable(table, key)
+get_table_readable(table)
 }
 \arguments{
 \item{table}{name of table}
-
-\item{key}{api key / token}
 }
 \value{
 a dataframe of readable fields and their properties

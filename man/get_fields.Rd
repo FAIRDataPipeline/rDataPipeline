@@ -4,12 +4,10 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table, key, live = FALSE)
+get_fields(table, live = FALSE)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
-
-\item{key}{(optional) API token from data.scrc.uk}
 
 \item{live}{a \code{boolean} specifying whether or not to get the field
 definitions directly from the API}

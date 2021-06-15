@@ -18,9 +18,6 @@ object}
 
 \item{severity}{a \code{numeric} value specifying the severity of the issue}
 }
-\value{
-
-}
 \description{
 issue_with_externalobject
 }

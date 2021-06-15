@@ -4,7 +4,15 @@
 \alias{write_table}
 \title{Create table-type H5 file}
 \usage{
-write_table(df, handle, data_product, component, row_names, column_units)
+write_table(
+  df,
+  handle,
+  data_product,
+  component,
+  description,
+  row_names,
+  column_units
+)
 }
 \arguments{
 \item{df}{an \code{dataframe} containing the data}
@@ -14,6 +22,8 @@ write_table(df, handle, data_product, component, row_names, column_units)
 \item{data_product}{a \code{string} specifying the name of the data product}
 
 \item{component}{a \code{string} specifying a location within the hdf5 file,}
+
+\item{description}{a \code{string} describing the data product component}
 
 \item{row_names}{(optional) a \code{vector} of rownames}
 
