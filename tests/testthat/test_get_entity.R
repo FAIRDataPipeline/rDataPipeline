@@ -1,14 +1,11 @@
 context("Testing get_entity()")
 
-formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
-
-test_identifier <- sample(1:1000000, 1, replace=TRUE)
-
-UID <- paste0("Object Test ", formatted_date, test_identifier)
+description <- paste0("test_get_entity_",
+                      openssl::sha1(x = as.character(Sys.time())))
 
 run_server()
 
-entity_uri <- post_data("object", list(description = UID))
+entity_uri <- post_data("object", list(description = description))
 
 sleep_time <- 0.5
 

@@ -20,7 +20,6 @@ test_that("function behaves as it should", {
   testthat::expect_true(is.toml.file("test_estimate_1.toml"))
 })
 
-
 # Remove test file
 file.remove("data-raw/test_estimate.toml")
 file.remove("test_estimate_1.toml")

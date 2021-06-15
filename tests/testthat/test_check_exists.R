@@ -20,8 +20,13 @@ test_that("object does not exists returns false", {
   testthat::expect_false(check_exists("object", "description=unknown00001"))
 })
 
-stop_server()
+description <- paste0("test_check_exists_",
+                      openssl::sha1(x = as.character(Sys.time())))
 
-# test_that("object exists returns true", {
-#   testthat::expect_true(check_exists("data_product", "name=population_parameters"))
-# })
+new_object(description = description)
+
+test_that("object exists returns true", {
+  testthat::expect_true(check_exists("object", list(description = description)))
+})
+
+stop_server()
