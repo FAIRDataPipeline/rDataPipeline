@@ -67,7 +67,7 @@ fdp <- R6::R6Class("fdp", list(
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "Inputs:", "\n")
-      self$inputs %>% dplyr::select(alias) %>%
+      self$inputs %>% dplyr::select(name) %>%
         print()
     }
 
@@ -85,7 +85,7 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Add inputs field
-  #' @param alias text
+  #' @param name text
   #' @param type text
   #' @param doi_or_unique_name external object field
   #' @param title external object field
@@ -93,7 +93,7 @@ fdp <- R6::R6Class("fdp", list(
   #' @param path text
   #' @param object_id text
   #'
-  input = function(alias,
+  input = function(name,
                    type,
                    doi_or_unique_name,
                    title,
@@ -105,7 +105,7 @@ fdp <- R6::R6Class("fdp", list(
 
     if (is.null(self$inputs)) {
       existing <- data.frame(index = numeric(),
-                             alias = character(),
+                             name = character(),
                              type = character(),
                              doi_or_unique_name = character(),
                              title = character(),
@@ -117,7 +117,7 @@ fdp <- R6::R6Class("fdp", list(
     }
 
     new <- data.frame(index = index,
-                      alias = alias,
+                      name = name,
                       type = type,
                       doi_or_unique_name = doi_or_unique_name,
                       title = title,
