@@ -6,6 +6,7 @@
 #' @param handle list
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the hdf5 file,
+#' @param description a \code{string} describing the data product component
 #' @param row_names (optional) a \code{vector} of rownames
 #' @param column_units (optional) a \code{vector} comprising column units
 #'
@@ -17,6 +18,7 @@ write_table <- function(df,
                         handle,
                         data_product,
                         component,
+                        description,
                         row_names,
                         column_units) {
 
