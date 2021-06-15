@@ -2,32 +2,34 @@
 #'
 #' Upload information to the \code{object} table in the data registry
 #'
-#' @param storage_location_uri a \code{string} specifying the URI of an entry
-#' in the \code{storage_location} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object}
-#' @param issues a \code{list} of Issues URLs to associate with this Object
-#'
-#' Note that the \code{object} table contains \code{issues} as an
-#' additional optional field. This is not included here. Instead use
-#' \code{attach_issue()} and associated functionality to attach issues to
-#' objects and object components.
+#' @param storage_location_url (optional) a \code{string} specifying the URL
+#' of an entry in the \code{storage_location} table
+#' @param issues_urls (optional) a \code{list} of \code{issues} URLs to associate
+#' with this \code{object}
+#' @param authors_urls (optional) a \code{list} of \code{author} URLs to associate
+#' with this \code{object}
 #'
 #' @family new functions
 #'
 #' @export
 #'
-new_object <- function(storage_location_uri,
-                       description = "",
-                       issues) {
-  if (missing(issues)) {
-    post_data(table = "object",
-              data = list(description = description,
-                          storage_location = storage_location_uri))
-  } else {
-    post_data(table = "object",
-              data = list(description = description,
-                          storage_location = storage_location_uri,
-                          issues = issues))
-  }
+new_object <- function(description,
+                       storage_location_url,
+                       issues_urls = list(),
+                       authors_urls = list()) {
+
+  data <- list(issues = issues_urls,
+               authors = authors_urls)
+
+  if (!missing(description))
+    data$description <- description
+
+  if (!missing(storage_location_url))
+    data$storage_location <- storage_location_url
+
+  post_data(table = "object",
+            data = data)
+  # }
 }

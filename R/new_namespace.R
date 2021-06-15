@@ -3,13 +3,27 @@
 #' Upload information to the \code{namespace} table in the data registry
 #'
 #' @param name a \code{string} specifying the name of the namespace
+#' @param full_name (optional) a \code{string} specifying the full name of the
+#' namespace
+#' @param website (optional) a \code{string} specifying the website URL
+#' associated with the namespace
 #'
 #' @family new functions
 #'
 #' @export
 #'
-new_namespace <- function(name) {
+new_namespace <- function(name,
+                          full_name,
+                          website) {
+
+  data <- list(name = name)
+
+  if (!missing(full_name))
+    data$full_name <- full_name
+
+  if (!missing(website))
+    data$website <- website
 
   post_data(table = "namespace",
-            data =  list(name = name))
+            data = data)
 }
