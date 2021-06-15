@@ -18,9 +18,9 @@ register_external_object <- function(register_this,
   run_server()
 
   # Add the website to the data registry (e.g. home page of the database)
-  source_uri <- new_source(
-    name = register_this$source_name,
-    abbreviation = register_this$source_abbreviation,
+  source_url <- new_namespace(
+    name = register_this$source_abbreviation,
+    full_name = register_this$source_name,
     website = register_this$source_website)
 
   # Add source root to the data registry (e.g. an endpoint)
@@ -31,46 +31,47 @@ register_external_object <- function(register_this,
   } else
     usethis::ui_oops("Unknown accessibility value")
 
-  source_root_uri <- new_storage_root(
+  source_root_url <- new_storage_root(
     name = register_this$root_name,
     root = register_this$root,
     accessibility = accessibility)
 
   # Add source location to the data registry
-  source_location_uri <- new_storage_location(
+  source_location_url <- new_storage_location(
     path = register_this$path,
     hash = hash,
-    storage_root_uri = source_root_uri)
+    storage_root_url = source_root_url)
 
   usethis::ui_done(
     paste("Writing", usethis::ui_value(register_this$external_object),
-          "download", usethis::ui_field("source"),"to local registry"))
+          "download source to local registry"))
 
   # Local store -------------------------------------------------------------
+
+  # Add local data store root to the data registry
+  datastore_name <- paste("local datastore:", datastore)
+  datastore_root_url <- new_storage_root(name = datastore_name,
+                                         root = datastore,
+                                         accessibility = 0) # TODO
 
   # Does this file already exist?
   file_path <- file.path(namespace, register_this$product_name, filename)
 
-  # Add local data store root to the data registry
-  datastore_name <- paste("local datastore:", datastore)
-  datastore_root_uri <- new_storage_root(name = datastore_name,
-                                         root = datastore,
-                                         accessibility = 0) # TODO
-
   # Add local data store location to the data registry
-  datastore_location_uri <- new_storage_location(
+  datastore_location_url <- new_storage_location(
     path = file_path,
     hash = hash,
-    storage_root_uri = datastore_root_uri)
+    storage_root_url = datastore_root_url)
 
-  datastore_object_uri <- new_object(
-    storage_location_uri = datastore_location_uri)
+  datastore_object_url <- new_object(
+    storage_location_url = datastore_location_url)
 
   # Source data (e.g. *.csv) is defined as having a single component
   # called "raw_data"
-  datastore_component_uri <- new_object_component(
+  datastore_component_url <- new_object_component(
+    object_url = datastore_object_url,
     name = "raw_data",
-    object_uri = datastore_object_uri)
+    whole_object = TRUE)
 
   # Register external object ------------------------------------------------
 
@@ -87,16 +88,21 @@ register_external_object <- function(register_this,
     version <- gsub("\\{DATETIME\\}", datetime, version)
   }
 
-  externalobject_uri <- new_external_object(
+  externalobject_url <- new_external_object(
     doi_or_unique_name = register_this$unique_name,
     primary_not_supplement = register_this$primary,
     release_date = release_date,
     title = register_this$title,
     description = register_this$description,
-    version = version,
-    object_uri = datastore_object_uri,
-    source_uri = source_uri,
-    original_store_uri = source_location_uri)
+    object_url = datastore_object_url,
+    original_store_url = source_location_url)
+
+  namespace_url <- new_namespace(name = namespace)
+
+  dataproduct_url <- new_data_product(name = register_this$external_object,
+                                      version = version,
+                                      object_url = datastore_object_url,
+                                      namespace_url)
 
   stop_server()
 
@@ -104,5 +110,5 @@ register_external_object <- function(register_this,
     paste("Writing", usethis::ui_value(register_this$external_object),
           "as", usethis::ui_field("external_object"), "to local registry"))
 
-  invisible(datastore_component_uri)
+  invisible(datastore_component_url)
 }
