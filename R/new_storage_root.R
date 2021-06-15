@@ -17,6 +17,8 @@
 new_storage_root <- function(name,
                              root,
                              accessibility) {
+  if (!grepl("\\/$", root))
+    root <- paste0(root, "/")
 
   post_data(table = "storage_root",
             data = list(name = name,
