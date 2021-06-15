@@ -2,27 +2,29 @@
 #'
 #' @param handle an object of class \code{fdp, R6} containing metadata required
 #' by the Data Pipeline API
-#' @param alias a \code{string} representing an external object in the
+#' @param name a \code{string} representing an external object in the
 #' config.yaml file
 #'
 #' @export
 #'
-link_read <- function(handle, alias) {
+link_read <- function(handle, name) {
 
-  # If the alias is already recorded in the handle, return the path
-  if (alias %in% handle$inputs$alias) {
-    output <- handle$inputs %>% dplyr::filter(.data$alias == alias) %>%
-      dplyr::select(.data$path) %>%
-      unlist() %>%
-      unname()
+  if (!is.null(handle$inputs)) {
+    # If the name is already recorded in the handle, return the path
+    if (name %in% handle$inputs$name) {
+      output <- handle$inputs %>% dplyr::filter(.data$name == name) %>%
+        dplyr::select(.data$path) %>%
+        unlist() %>%
+        unname()
 
-    return(invisible(output))
+      return(invisible(output))
+    }
   }
 
   # Get object metadata from working config.yaml
   read <- handle$yaml$read
   index <- lapply(read, function(x)
-    alias == x$external_object) %>% unlist() %>% which()
+    name == x$external_object) %>% unlist() %>% which()
   this_read <- read[[index]]
 
   # Get object location from local registry
@@ -32,7 +34,7 @@ link_read <- function(handle, alias) {
   external_object <- get_entry("external_object",
                                list(doi_or_unique_name = doi,
                                     title = this_read$title,
-                                    version = this_read$version))
+                                    version = this_read$version)) # data product
   assertthat::assert_that(length(external_object) == 1)
   external_object <- external_object[[1]]
 
@@ -46,7 +48,7 @@ link_read <- function(handle, alias) {
                           usethis::ui_value(this_read$title)))
 
   # Store metadata in handle
-  handle$input(alias = alias,
+  handle$input(name = name,
                type = "external_object",
                doi_or_unique_name = this_read$doi_or_unique_name,
                title = this_read$title,
