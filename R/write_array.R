@@ -35,14 +35,14 @@ write_array <- function(array,
 
   # If component is already in handle, return its index ---------------------
 
-  if (data_product %in% handle$outputs$data_product &
-      component %in% handle$outputs$component) {
-
-    cli::cli_alert_info("Component already recorded in handle")
-    version <- handle$outputs %>%
-      invisible(handle$output_index(data_product, component, version))
-
-  } else {
+  # if (data_product %in% handle$outputs$data_product &
+  #     component %in% handle$outputs$component) {
+  #
+  #   cli::cli_alert_info("Component already recorded in handle")
+  #   version <- handle$outputs %>%
+  #     invisible(handle$output_index(data_product, component, version))
+  #
+  # } else {
 
     # Extract metadata from config.yaml
     datastore <- handle$yaml$run_metadata$default_data_store
@@ -192,6 +192,6 @@ write_array <- function(array,
                              version)
 
     invisible(handle$output_index(data_product, component, version))
-  }
+  # }
 
 }
