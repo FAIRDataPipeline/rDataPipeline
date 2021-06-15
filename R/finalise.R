@@ -12,7 +12,7 @@ finalise <- function(handle) {
 
   datastore <- handle$yaml$run_metadata$default_data_store
   datastore_name <- paste("local datastore:", datastore)
-  datastore_root_uri <- new_storage_root(
+  datastore_root_url <- new_storage_root(
     name = datastore_name,
     root = datastore,
     accessibility = 0) # TODO
@@ -58,7 +58,7 @@ finalise <- function(handle) {
       description <- handle$yaml$write[[index_dp]]$description
 
       namespace <- handle$yaml$run_metadata$default_output_namespace
-      namespace_uri <- new_namespace(name = namespace)
+      namespace_url <- new_namespace(name = namespace)
 
       # Read version from handle
 
@@ -72,30 +72,30 @@ finalise <- function(handle) {
                                                   version = this_version))
 
       if (is.null(dp_exists)) {
-        storage_location_uri <- new_storage_location(
+        storage_location_url <- new_storage_location(
           path = storage_location,
           hash = hash,
-          storage_root_uri = datastore_root_uri)
+          storage_root_url = datastore_root_url)
 
-        object_uri <- new_object(storage_location_uri = storage_location_uri,
-                                description = description)
+        object_url <- new_object(storage_location_url = storage_location_url,
+                                 description = description)
 
         # Add data product to data registry
-        dataproduct_uri <- new_data_product(name = dp,
-                                                  version = this_version,
-                                                  object_uri = object_uri,
-                                                  namespace_uri = namespace_uri)
+        dataproduct_url <- new_data_product(name = dp,
+                                            version = this_version,
+                                            object_url = object_url,
+                                            namespace_url = namespace_url)
 
         usethis::ui_done(paste("Writing", usethis::ui_value(dp),
                                "to local registry"))
 
       } else {
         assertthat::assert_that(length(dp_exists) == 1)
-        dataproduct_uri <- dp_exists[[1]]$url
+        dataproduct_url <- dp_exists[[1]]$url
       }
 
       # Update handle
-      handle$write_dataproduct_uri(dp, dataproduct_uri, this_version, hash)
+      handle$write_dataproduct_url(dp, dataproduct_url, this_version, hash)
 
       # Record components in data registry --------------------------------------
 
@@ -106,13 +106,13 @@ finalise <- function(handle) {
         index_ct <- which(components[j] %in% this_metadata$component)
         this_component <- this_metadata$component[[index_ct]]
 
-        component_uri <- new_object_component(name = components[j],
-                                             object_uri = object_uri)
+        component_url <- new_object_component(name = components[j],
+                                              object_url = object_url)
 
         # Update handle
-        handle$write_component_uri(data_product = dp,
-                                  component = components[j],
-                                  component_uri = component_uri)
+        handle$write_component_url(data_product = dp,
+                                   component = components[j],
+                                   component_url = component_url)
 
         usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
                                usethis::ui_field("component"),
@@ -166,7 +166,7 @@ finalise <- function(handle) {
 
   # link objects together
 
-  # githubRepoURIs <- upload_github_repo(
+  # githubRepourls <- upload_github_repo(
   #  storage_root_id = repo_storageRootId,
   #  repo = github_info$script_gitRepo,
   #  hash = github_info$github_hash,
@@ -176,16 +176,16 @@ finalise <- function(handle) {
   # record the code run in the data registry --------------------------------
 
   patch_data(url = handle$code_run,
-             data = list(inputs = as.list(handle$inputs$object_uri),
-                         outputs = as.list(handle$outputs$component_uri)))
+             data = list(inputs = as.list(handle$inputs$object_url),
+                         outputs = as.list(handle$outputs$component_url)))
 
-  # coderun_id <- new_coderun(run_date = Sys.time(),
+  # coderun_id <- new_code_run(run_date = Sys.time(),
   #                           description = handle$yaml$run_metadata$description,
   #                           # code_repo_id = "",
   #                           model_config = handle$model_config,
   #                           submission_script_id = handle$submission_script,
-  #                           inputs = as.list(handle$inputs$object_uri),
-  #                           outputs = as.list(handle$outputs$component_uri))
+  #                           inputs_urls = as.list(handle$inputs$object_url),
+  #                           outputs_urls = as.list(handle$outputs$component_url))
 
 
 
