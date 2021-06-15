@@ -23,7 +23,11 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   if (grepl("/$", localstore))
     localstore <- gsub("/$", "", localstore)
 
+  # # Convert to absolute path and replace in working config.yaml
+  # localstore <- normalizePath(dir(pattern = localstore, full.names = TRUE))
   run_metadata <- yaml$run_metadata
+  # run_metadata$default_data_store <- localstore
+
   if (any("read" %in% names(yaml))) read <- yaml$read else read <- list()
 
   # Generate working config.yaml --------------------------------------------
