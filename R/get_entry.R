@@ -22,10 +22,10 @@
 #'
 get_entry <- function(table, query) {
   # Can't get an empty entry
-  if(is.list(query) && length(query) == 0)
+  if (is.list(query) && length(query) == 0)
     stop("a query must be defined")
-  # An empty string is not a valid query
-  if(is.character(query) && query == "") stop("not a valid query")
+
+  if (!is_queryable(table, names(query))) stop("Not a valid query")
 
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :
@@ -44,7 +44,7 @@ get_entry <- function(table, query) {
     })
   }
 
-  if(output$count == 0) {
+  if (output$count == 0) {
     return(NULL)
 
   } else {
