@@ -11,11 +11,16 @@
 clean_query <- function(data) {
 
   data_tmp <- lapply(data, function(x) {
-    if (grepl("^http://localhost:8000/api/.*([0-9]+$|[0-9]+/$)", x)) {
+    if (!is.character(x)) {
+      output <- x
+
+    } else if (grepl("^http://localhost:8000/api/.*([0-9]+$|[0-9]+/$)", x)) {
       output <- basename(x)
+
     } else {
       output <- x
     }
+
     output
   })
 
