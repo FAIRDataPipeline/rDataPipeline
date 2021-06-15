@@ -7,7 +7,7 @@
 #' @keywords internal
 #'
 get_table_queryable <- function(table) {
-  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
+  out <- httr::VERB("OPTIONS", paste("http://localhost:8000/api", table, "",
                                      sep = "/")) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
