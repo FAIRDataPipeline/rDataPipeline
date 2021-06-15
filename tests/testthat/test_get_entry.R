@@ -6,13 +6,12 @@ formatted_date <- format(Sys.time(), "%d%m%y%H%M%S")
 
 test_identifier <- sample(1:1000000, 1, replace=TRUE)
 
-UID <- paste0("Object Test ", formatted_date, test_identifier)
+description <- paste0("Object Test ", formatted_date, test_identifier)
 
 run_server()
 
-object_id <- post_data("object", data = list(description = UID))
-object_id <- unlist(clean_query(object_id))
-description <- UID
+object_uri <- post_data("object", data = list(description = description))
+object_id <- extract_id(object_uri)
 Sys.sleep(sleep_time)
 
 run_server()

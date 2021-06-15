@@ -39,7 +39,7 @@ test_that("Patch data errors with invalid data",{
 })
 
 test_that("Patch Data returns a list on success and that fields match",{
-  expect_message(SCRCdataAPI:::patch_data(issue_id, data))
+  expect_message(patch_data(issue_id, data))
   issue_obj_ids <- list(object_issues = get_entity(issue_id)$object_issues)
   data$object_issues <- as.list(sort(unlist(data$object_issues), decreasing = TRUE))
   expect_equal(issue_obj_ids, data)

@@ -1,32 +1,21 @@
 context("Testing new_keyword()")
 
-sleep_time <- 0.5
-
-test_user <- "22"
-
-test_identifier <- sample(1:1000000, 1, replace=TRUE)
-
-keyphrase <- paste(sample(letters, 12, FALSE), collapse ="", sep = "")
-
-keyphrase <- paste0(keyphrase, format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
+keyphrase <- paste0("test_new_keyword_",
+                    openssl::sha1(x = as.character(Sys.time())))
 
 run_server()
 
-object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
+object_url <- post_data("object",
+                        list(description = paste0(keyphrase, " Test")))
 
-if(is.null(object_id)){
-  object_id <- post_data("object",
-                         list(description = paste0(keyphrase, " Test")))
-}
-
-test_that("new_keyword works as intended", {
-  expect_true(is.character(new_keyword(keyphrase,
-                                       object_id)))
+test_that("new entry in keyword returns API URL", {
+  expect_true(grepl("keyword", new_keyword(object_url = object_url,
+                                           keyphrase = keyphrase)))
 })
 
-test_that("new_keyword returns URI if the keyword exists", {
-  expect_true(is.character(new_keyword(keyphrase,
-                                       object_id)))
+test_that("existing entry in keyword returns API URL", {
+  expect_true(grepl("keyword", new_keyword(object_url = object_url,
+                                           keyphrase = keyphrase)))
 })
 
 stop_server()
