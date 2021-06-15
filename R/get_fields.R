@@ -3,7 +3,6 @@
 #' Use API endpoint to produce a list of fields for a table. Requires API key.
 #'
 #' @param table a \code{string} specifying the name of the table
-#' @param key (optional) API token from data.scrc.uk
 #' @param live a \code{boolean} specifying whether or not to get the field
 #' definitions directly from the API
 #'
@@ -12,16 +11,17 @@
 #' @export
 #' @keywords internal
 #'
-get_fields <- function(table, key, live = FALSE){
+get_fields <- function(table, live = FALSE){
+
+  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
 
   # Users and Groups are valid tables but cannot be posted to
   if(table == "users" | table == "groups")
     stop("users and groups are protected tables")
 
   fields.file <- system.file("validation", paste0(table, ".rds"),
-                             package = "SCRCdataAPI")
-  if(fields.file == "" | live)
-  {
+                             package = "rFDP")
+  if(fields.file == "" | live) {
 
     if(missing(key))
       stop("Key is required for this operation")
@@ -30,7 +30,7 @@ get_fields <- function(table, key, live = FALSE){
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request
-  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
+  out <- httr::VERB("OPTIONS", paste("http://localhost:8000/api", table, "",
                                      sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
