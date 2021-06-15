@@ -14,16 +14,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' \donttest{
-#' new_issue(severity = 16,
-#'           description = "Data dump caused a spike on the 15th of June",
-#'           object_issues = list("https://data.scrc.uk/api/object/152/"),
-#'           component_issues = list("https://data.scrc.uk/api/object_component/902/"),
-#'           key = key)
-#' }}
-#'
 new_issue <- function(severity,
                       description,
                       object_issues,
