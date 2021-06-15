@@ -91,7 +91,7 @@ fdp_pull <- function(path = "config.yaml") {
 
       if ("external_object" %in% names(register_this)) {
 
-        externalobject_uri <- register_external_object(
+        externalobject_url <- register_external_object(
           register_this = register_this,
           datastore = datastore,
           namespace = namespace,
