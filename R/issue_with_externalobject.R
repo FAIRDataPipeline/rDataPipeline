@@ -7,8 +7,6 @@
 #' @param issue a \code{string} describing the issue
 #' @param severity a \code{numeric} value specifying the severity of the issue
 #'
-#' @return
-#'
 issue_with_externalobject <- function(handle,
                                       external_object,
                                       version,
