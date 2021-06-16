@@ -23,12 +23,8 @@
 check_exists <- function(table,
                          query) {
 
-  run_server()
-
   output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
                       query = query)
-
-  stop_server()
 
   if(any(names(output) == "status_code")){
     if(output$status_code == 404)
