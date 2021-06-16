@@ -25,7 +25,7 @@ get_entry <- function(table, query) {
   if (is.list(query) && length(query) == 0)
     stop("a query must be defined")
 
-  if (!is_queryable(table, names(query))) stop("Not a valid query")
+  is_queryable(table, query)
 
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :
