@@ -15,7 +15,7 @@ post_data <- function(table, data) {
   api_url <- paste0("http://localhost:8000/api/", table)
 
   # Check there is a trailing slash (windows issue with file.path())
-  api_url <- ifelse(substring(api_url, nchar(api_url)) == "/", api_url,
+  api_url <- dplyr::if_else(substring(api_url, nchar(api_url)) == "/", api_url,
                     paste(api_url, "/", sep = ""))
 
   # Sometimes an error is returned from the local registry:
