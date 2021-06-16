@@ -59,7 +59,7 @@ fdp_pull <- function(path = "config.yaml") {
 
       # Local data store location
       local_path <- file.path(paste0(datastore, namespace),
-                              register_this$product_name)
+                              register_this$external_object)
       tmp_filename <- paste(openssl::sha1(as.character(Sys.time())),
                             register_this$file_type, sep = ".")
 
