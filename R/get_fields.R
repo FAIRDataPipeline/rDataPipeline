@@ -13,20 +13,12 @@
 #'
 get_fields <- function(table, live = FALSE){
 
-  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
-
   # Users and Groups are valid tables but cannot be posted to
-  if(table == "users" | table == "groups")
+  if (table == "users" | table == "groups")
     stop("users and groups are protected tables")
 
-  fields.file <- system.file("validation", paste0(table, ".rds"),
-                             package = "rFDP")
-  if(fields.file == "" | live) {
-
-    if(missing(key))
-      stop("Key is required for this operation")
-
   # Add token to options request header
+  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request
@@ -88,7 +80,5 @@ get_fields <- function(table, live = FALSE){
                choice_names = choice_names,
                stringsAsFactors = FALSE)
   }) %>% (function(x){do.call(rbind.data.frame, x)})
-  } else {
-    readRDS(fields.file)
-  }
+
 }
