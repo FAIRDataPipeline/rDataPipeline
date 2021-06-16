@@ -9,7 +9,7 @@ is_queryable(table, query)
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
 
-\item{query}{a \code{string} or \code{vector} of field names}
+\item{query}{a \code{list} containing the query}
 }
 \value{
 Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it

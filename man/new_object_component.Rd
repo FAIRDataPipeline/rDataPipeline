@@ -9,7 +9,7 @@ new_object_component(
   name,
   description,
   whole_object = FALSE,
-  issues_urls = list()
+  issues_urls
 )
 }
 \arguments{
