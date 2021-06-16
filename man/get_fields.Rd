@@ -4,13 +4,10 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table, live = FALSE)
+get_fields(table)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
-
-\item{live}{a \code{boolean} specifying whether or not to get the field
-definitions directly from the API}
 }
 \value{
 Returns a \code{data.frame} of fields and their attributes set to

@@ -3,15 +3,13 @@
 #' Use API endpoint to produce a list of fields for a table. Requires API key.
 #'
 #' @param table a \code{string} specifying the name of the table
-#' @param live a \code{boolean} specifying whether or not to get the field
-#' definitions directly from the API
 #'
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
 #' @export
 #' @keywords internal
 #'
-get_fields <- function(table, live = FALSE){
+get_fields <- function(table){
 
   # Users and Groups are valid tables but cannot be posted to
   if (table == "users" | table == "groups")
