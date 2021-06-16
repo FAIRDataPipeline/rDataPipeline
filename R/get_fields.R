@@ -32,24 +32,24 @@ get_fields <- function(table){
 
     name <- names(field)
     data_type <- field[[1]]$type
-    min_value <- NA
-    max_value <- NA
+    min_length <- NA
+    max_length <- NA
     choice_values <- NA
     choice_names <- NA
 
     read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
     required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
 
-    if("min_value" %in% names(field[[1]])) {
-      min_value <- field[[1]]$min_value
+    if("min_length" %in% names(field[[1]])) {
+      min_length <- field[[1]]$min_length
     } else {
-      min_value <- NA
+      min_length <- NA
     }
 
-    if("max_value" %in% names(field[[1]])) {
-      max_value <- field[[1]]$max_value
+    if("max_length" %in% names(field[[1]])) {
+      max_length <- field[[1]]$max_length
     } else {
-      max_value <- NA
+      max_length <- NA
     }
 
     if("choices" %in% names(field[[1]])){
@@ -72,8 +72,8 @@ get_fields <- function(table){
                data_type = data_type,
                read_only = read_only,
                required = required,
-               min_value = min_value,
-               max_value = max_value,
+               min_length = min_length,
+               max_length = max_length,
                choice_values = choice_values,
                choice_names = choice_names,
                stringsAsFactors = FALSE)
