@@ -33,12 +33,20 @@ read_array <- function(handle,
   this_read <- read[[index]]
   version <- this_read$version
 
+  if (any(names(this_read) == "namespace")) {
+    namespace <- this_read$namespace
+  } else {
+    namespace <- handle$yaml$run_metadata$default_input_namespace
+  }
+
   run_server()
+
+  namespace_url <- get_entry("namespace", list(name = namespace))
 
   this_entry <- get_entry("data_product",
                           list(name = data_product,
-                               version = this_read$version,
-                               namespace = this_read$namespace))[[1]]
+                               version = version,
+                               namespace = namespace_url))[[1]]
 
   this_object <- get_entity(this_entry$object)
   this_location <- get_entity(this_object$storage_location)
