@@ -28,15 +28,17 @@ new_object_component <- function(object_url,
                                  name,
                                  description,
                                  whole_object = FALSE,
-                                 issues_urls = list()) {
+                                 issues_urls) {
 
   data <- list(object = object_url,
                name = name,
-               whole_object = whole_object,
-               issues = issues_urls)
+               whole_object = whole_object)
 
   if (!missing(description))
     data$description <- description
+
+  if (!missing(issues_urls))
+    data$issues <- issues_urls
 
   post_data(table = "object_component",
             data = data)
