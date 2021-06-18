@@ -10,7 +10,7 @@
 #'
 post_data <- function(table, data) {
 
-  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
+  key <- get_token()
   h <- c(Authorization = paste("token", key))
   api_url <- paste0("http://localhost:8000/api/", table)
 

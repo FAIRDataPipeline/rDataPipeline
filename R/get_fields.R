@@ -16,7 +16,7 @@ get_fields <- function(table){
     stop("users and groups are protected tables")
 
   # Add token to options request header
-  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
+  key <- get_token()
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request

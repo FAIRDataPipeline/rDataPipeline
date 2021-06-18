@@ -11,6 +11,10 @@
 #' }
 #'
 get_entity <- function(url) {
+
+  key <- get_token()
+  h <- c(Authorization = paste("token", key))
+
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :
   #    Failed to connect to localhost port 8000: Connection refused"

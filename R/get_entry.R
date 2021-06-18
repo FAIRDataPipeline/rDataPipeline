@@ -21,6 +21,10 @@
 #' }
 #'
 get_entry <- function(table, query) {
+
+  key <- get_token()
+  h <- c(Authorization = paste("token", key))
+
   # Can't get an empty entry
   if (is.list(query) && length(query) == 0)
     stop("a query must be defined")
