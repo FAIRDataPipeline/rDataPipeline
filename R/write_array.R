@@ -33,7 +33,9 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
-  # If component is already in handle, return its index ---------------------
+  if (!data_product %in% handle$outputs$data_product)
+    usethis::ui_stop(paste(usethis::ui_field(data_product),
+                           "not listed in config.yaml"))
 
   # if (data_product %in% handle$outputs$data_product &
   #     component %in% handle$outputs$component) {
