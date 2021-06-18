@@ -33,7 +33,9 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
-  if (!data_product %in% handle$outputs$data_product)
+ listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
+
+  if (!data_product %in% listed)
     usethis::ui_stop(paste(usethis::ui_field(data_product),
                            "not listed in config.yaml"))
 
