@@ -22,7 +22,8 @@ get_entity <- function(url) {
   continue <- TRUE
   while (continue) {
     tryCatch({ # Try retrieving entry
-      output <- httr::GET(url) %>%
+      output <- httr::GET(url,
+                          httr::add_headers(.headers = h)) %>%
         httr::content(as = "text", encoding = "UTF-8") %>%
         jsonlite::fromJSON(simplifyVector = FALSE)
       continue <- FALSE

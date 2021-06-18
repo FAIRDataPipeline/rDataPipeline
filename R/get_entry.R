@@ -21,22 +21,11 @@ get_entry <- function(table, query) {
 
   is_queryable(table, query)
 
-  # Sometimes an error is returned from the local registry:
-  #   "Error in curl::curl_fetch_memory(url, handle = handle) :
-  #    Failed to connect to localhost port 8000: Connection refused"
-  # Repeating the action works eventually...
-  continue <- TRUE
-  while (continue) {
-    tryCatch({ # Try retrieving entry
-      output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
-                          query = query) %>%
-        httr::content(as = "text", encoding = "UTF-8") %>%
-        jsonlite::fromJSON(simplifyVector = FALSE)
-      continue <- FALSE
-    },
-    error = function(e) {
-    })
-  }
+  output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
+                      query = query,
+                      httr::add_headers(.headers = h)) %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON(simplifyVector = FALSE)
 
   if (output$count == 0) {
     return(NULL)
