@@ -239,16 +239,16 @@ fdp <- R6::R6Class("fdp", list(
   #' Add outputs field
   #' @param data_product text
   #' @param component text
-  #' @param component_uri text
+  #' @param component_url text
   #'
-  write_component_uri = function(data_product,
+  write_component_url = function(data_product,
                                  component,
-                                 component_uri) {
+                                 component_url) {
 
     index <- which(self$outputs$data_product == data_product &
                      self$outputs$component == component)
 
-    self$outputs$component_uri[index] <- component_uri
+    self$outputs$component_url[index] <- component_url
 
     invisible(self)
   },
@@ -256,19 +256,19 @@ fdp <- R6::R6Class("fdp", list(
   #' @description
   #' Add outputs field
   #' @param data_product text
-  #' @param data_product_uri text
+  #' @param data_product_url text
   #' @param version text
   #' @param hash text
   #'
-  write_dataproduct_uri = function(data_product,
-                                   data_product_uri,
+  write_dataproduct_url = function(data_product,
+                                   data_product_url,
                                    version,
                                    hash) {
 
     index <- which(self$outputs$data_product == data_product)
 
     if (length(index) != 0) {
-      self$outputs$dataproduct_uri[index] <- data_product_uri
+      self$outputs$dataproduct_uri[index] <- data_product_url
       self$outputs$version[index] <- version
       self$outputs$hash[index] <- hash
     }
