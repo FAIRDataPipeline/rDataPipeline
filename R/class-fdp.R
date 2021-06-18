@@ -274,7 +274,7 @@ fdp <- R6::R6Class("fdp", list(
       # Re-write path
       oldfilename <- unique(self$outputs$path[index])
       newfilename <- gsub(paste0(basename(oldfilename), "$"),
-                          paste0(hash, ".h5$"), oldfilename)
+                          paste0(hash, ".h5"), oldfilename)
       self$outputs$path[index] <- newfilename
     }
 
