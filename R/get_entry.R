@@ -10,16 +10,6 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' # Get list of entries
-#' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
-#' get_entry("storage_location",
-#' list(path = "/Users/SoniaM/datastore/config/20210422-115831.yaml",
-#' hash = "e3caf6a4674bde77e6bd3cbc85b6a867adf7397b",
-#' storage_root = "7"))
-#' }
-#'
 get_entry <- function(table, query) {
 
   key <- get_token()
