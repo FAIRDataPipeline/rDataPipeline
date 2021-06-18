@@ -38,8 +38,8 @@ Contained for class \code{fdp}.
 \item \href{#method-write_dataproduct}{\code{fdp$write_dataproduct()}}
 \item \href{#method-output_index}{\code{fdp$output_index()}}
 \item \href{#method-raise_issue}{\code{fdp$raise_issue()}}
-\item \href{#method-write_component_uri}{\code{fdp$write_component_uri()}}
-\item \href{#method-write_dataproduct_uri}{\code{fdp$write_dataproduct_uri()}}
+\item \href{#method-write_component_url}{\code{fdp$write_component_url()}}
+\item \href{#method-write_dataproduct_url}{\code{fdp$write_dataproduct_url()}}
 \item \href{#method-clone}{\code{fdp$clone()}}
 }
 }
@@ -195,12 +195,12 @@ Add issues field
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_component_uri"></a>}}
-\if{latex}{\out{\hypertarget{method-write_component_uri}{}}}
-\subsection{Method \code{write_component_uri()}}{
+\if{html}{\out{<a id="method-write_component_url"></a>}}
+\if{latex}{\out{\hypertarget{method-write_component_url}{}}}
+\subsection{Method \code{write_component_url()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_component_uri(data_product, component, component_uri)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_component_url(data_product, component, component_url)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -210,18 +210,18 @@ Add outputs field
 
 \item{\code{component}}{text}
 
-\item{\code{component_uri}}{text}
+\item{\code{component_url}}{text}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_dataproduct_uri"></a>}}
-\if{latex}{\out{\hypertarget{method-write_dataproduct_uri}{}}}
-\subsection{Method \code{write_dataproduct_uri()}}{
+\if{html}{\out{<a id="method-write_dataproduct_url"></a>}}
+\if{latex}{\out{\hypertarget{method-write_dataproduct_url}{}}}
+\subsection{Method \code{write_dataproduct_url()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_uri(data_product, data_product_uri, version, hash)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_url(data_product, data_product_url, version, hash)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -229,7 +229,7 @@ Add outputs field
 \describe{
 \item{\code{data_product}}{text}
 
-\item{\code{data_product_uri}}{text}
+\item{\code{data_product_url}}{text}
 
 \item{\code{version}}{text}
 
