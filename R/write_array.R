@@ -33,169 +33,166 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
- listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
+  listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
 
   if (!data_product %in% listed)
     usethis::ui_stop(paste(usethis::ui_field(data_product),
                            "not listed in config.yaml"))
 
   # if (data_product %in% handle$outputs$data_product &
-  #     component %in% handle$outputs$component) {
+  #     component %in% handle$outputs$component)
   #
   #   cli::cli_alert_info("Component already recorded in handle")
   #   version <- handle$outputs %>%
   #     invisible(handle$output_index(data_product, component, version))
-  #
-  # } else {
 
-    # Extract metadata from config.yaml
-    datastore <- handle$yaml$run_metadata$default_data_store
-    namespace <- handle$yaml$run_metadata$default_output_namespace
 
-    # Extract / set save location
-    if (data_product %in% handle$outputs$data_product) {
-      dp. <- data_product
-      path <- handle$outputs %>%
-        dplyr::filter(.data$data_product == dp.) %>%
-        dplyr::select(.data$path) %>%
-        unique() %>%
-        unlist() %>%
-        unname()
+  # Extract metadata from config.yaml
+  datastore <- handle$yaml$run_metadata$default_data_store
+  namespace <- handle$yaml$run_metadata$default_output_namespace
 
-    } else {
-      filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
-      path <- file.path(paste0(datastore, namespace), data_product, filename)
-    }
+  # Extract / set save location
+  if (data_product %in% handle$outputs$data_product) {
+    dp. <- data_product
+    path <- handle$outputs %>%
+      dplyr::filter(.data$data_product == dp.) %>%
+      dplyr::select(.data$path) %>%
+      unique() %>%
+      unlist() %>%
+      unname()
 
-    # Checks ------------------------------------------------------------------
+  } else {
+    filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
+    path <- file.path(paste0(datastore, namespace), data_product, filename)
+  }
 
-    if (!is.array(array))
-      stop("`array` must be an array")
+  # Checks ------------------------------------------------------------------
 
-    if (!missing(dimension_names)) {
+  if (!is.array(array))
+    stop("`array` must be an array")
 
-      # Check dimensions class
-      if (!all(unlist(lapply(dimension_names, is.vector))))
-        usethis::ui_stop("Elements of dimension_names must be vectors")
+  if (!missing(dimension_names)) {
 
-      # Check number of dimensions
-      if (length(dim(array)) != length(dimension_names))
-        usethis::ui_stop("Length of dimension_names does not equal number of dimensions in array")
+    # Check dimensions class
+    if (!all(unlist(lapply(dimension_names, is.vector))))
+      usethis::ui_stop("Elements of dimension_names must be vectors")
 
-      # Check length of elements in each dimension
-      if (any(unname(unlist(lapply(dimension_names, length))) != dim(array)))
-        usethis::ui_stop("Number of elements in dimension_names does not equal number of dimensions in array")
-    }
+    # Check number of dimensions
+    if (length(dim(array)) != length(dimension_names))
+      usethis::ui_stop("Length of dimension_names does not equal number of dimensions in array")
 
-    # Write hdf5 file ---------------------------------------------------------
+    # Check length of elements in each dimension
+    if (any(unname(unlist(lapply(dimension_names, length))) != dim(array)))
+      usethis::ui_stop("Number of elements in dimension_names does not equal number of dimensions in array")
+  }
 
-    # Generate directory structure
-    directory <- dirname(path)
-    if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+  # Write hdf5 file ---------------------------------------------------------
 
-    # Write hdf5 file
-    if(file.exists(path)) {
-      fid <- H5Fopen(path)
-      if(length(h5ls(fid)) == 0) {
-        current.structure <- ""
-      } else {
-        current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
-      }
-      rhdf5::h5closeAll()
+  # Generate directory structure
+  directory <- dirname(path)
+  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
 
-    } else {
-      fid <- rhdf5::h5createFile(path)
+  # Write hdf5 file
+  if(file.exists(path)) {
+    fid <- H5Fopen(path)
+    if(length(h5ls(fid)) == 0) {
       current.structure <- ""
-    }
-
-    # Generate internal structure
-    if(grepl("/", component)) {
-      directory.structure <- strsplit(component, "/")[[1]]
     } else {
-      directory.structure <- component
+      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
     }
-
-    for (i in seq_along(directory.structure)) {
-      # This structure needs to be added
-      if(i==1) {
-        build.structure <- directory.structure[1]
-      } else {
-        build.structure <- paste0(build.structure, "/", directory.structure[i])
-      }
-      # If the structure doesn't exist make it
-      if(!build.structure %in% current.structure)
-        rhdf5::h5createGroup(path, build.structure)
-      # Update current structure
-      current.structure <- c(current.structure, build.structure)
-    }
-
-    # Attach data
-    rhdf5::h5write(array, path, paste0(component, "/array"))
-
-    # Dimension names and titles ----------------------------------------------
-
-    if (!missing(dimension_names)) {
-      # Attach dimension titles
-      dimension_titles <- names(dimension_names)
-
-      for(i in seq_along(dimension_titles)) {
-        attribute_component <- paste0(component, "/Dimension_", i, "_title")
-        rhdf5::h5write(dimension_titles[i], path, attribute_component)
-      }
-
-      # Attach dimension names
-      for(j in seq_along(dimension_names)) {
-        attribute_component <- paste0(component, "/Dimension_", j, "_names")
-        rhdf5::h5write(dimension_names[[j]], path, attribute_component)
-      }
-    }
-
-    # Dimension values and units ----------------------------------------------
-
-    # Attach dimension values
-    if(!missing(dimension_values)) {
-      dimensions.with.values <- which(!is.na(dimension_values))
-      for(k in dimensions.with.values) {
-        value_component <- paste0(component, "/Dimension_", k, "_values")
-        rhdf5::h5write(dimension_values[[k]], path, value_component)
-      }
-    }
-
-    # Attach dimension units
-    if(!missing(dimension_units)) {
-      dimensions.with.units <- which(!is.na(dimension_units))
-      for(m in dimensions.with.units) {
-        unit_component <- paste0(component, "/Dimension_", m, "_units")
-        rhdf5::h5write(dimension_units[[m]], path, unit_component)
-      }
-    }
-
-    # Attach units
-    if(!missing(units)) {
-      rhdf5::h5write(units, path, paste0(component, "/units"))
-    }
-
     rhdf5::h5closeAll()
 
-    cli::cli_alert_success(
-      "Writing {.value {component}} to {.value {data_product}}")
+  } else {
+    fid <- rhdf5::h5createFile(path)
+    current.structure <- ""
+  }
 
-    # Write to handle ---------------------------------------------------------
+  # Generate internal structure
+  if(grepl("/", component)) {
+    directory.structure <- strsplit(component, "/")[[1]]
+  } else {
+    directory.structure <- component
+  }
 
-    index <- lapply(handle$yaml$write, function(x)
-      data_product == x$data_product) %>%
-      unlist() %>% which()
-    this_dp <- handle$yaml$write[[index]]
+  for (i in seq_along(directory.structure)) {
+    # This structure needs to be added
+    if(i==1) {
+      build.structure <- directory.structure[1]
+    } else {
+      build.structure <- paste0(build.structure, "/", directory.structure[i])
+    }
+    # If the structure doesn't exist make it
+    if(!build.structure %in% current.structure)
+      rhdf5::h5createGroup(path, build.structure)
+    # Update current structure
+    current.structure <- c(current.structure, build.structure)
+  }
 
-    version <- this_dp$version
+  # Attach data
+  rhdf5::h5write(array, path, paste0(component, "/array"))
 
-    handle$write_dataproduct(data_product,
-                             path,
-                             component,
-                             description,
-                             version)
+  # Dimension names and titles ----------------------------------------------
 
-    invisible(handle$output_index(data_product, component, version))
-  # }
+  if (!missing(dimension_names)) {
+    # Attach dimension titles
+    dimension_titles <- names(dimension_names)
 
+    for(i in seq_along(dimension_titles)) {
+      attribute_component <- paste0(component, "/Dimension_", i, "_title")
+      rhdf5::h5write(dimension_titles[i], path, attribute_component)
+    }
+
+    # Attach dimension names
+    for(j in seq_along(dimension_names)) {
+      attribute_component <- paste0(component, "/Dimension_", j, "_names")
+      rhdf5::h5write(dimension_names[[j]], path, attribute_component)
+    }
+  }
+
+  # Dimension values and units ----------------------------------------------
+
+  # Attach dimension values
+  if(!missing(dimension_values)) {
+    dimensions.with.values <- which(!is.na(dimension_values))
+    for(k in dimensions.with.values) {
+      value_component <- paste0(component, "/Dimension_", k, "_values")
+      rhdf5::h5write(dimension_values[[k]], path, value_component)
+    }
+  }
+
+  # Attach dimension units
+  if(!missing(dimension_units)) {
+    dimensions.with.units <- which(!is.na(dimension_units))
+    for(m in dimensions.with.units) {
+      unit_component <- paste0(component, "/Dimension_", m, "_units")
+      rhdf5::h5write(dimension_units[[m]], path, unit_component)
+    }
+  }
+
+  # Attach units
+  if(!missing(units)) {
+    rhdf5::h5write(units, path, paste0(component, "/units"))
+  }
+
+  rhdf5::h5closeAll()
+
+  cli::cli_alert_success(
+    "Writing {.value {component}} to {.value {data_product}}")
+
+  # Write to handle ---------------------------------------------------------
+
+  index <- lapply(handle$yaml$write, function(x)
+    data_product == x$data_product) %>%
+    unlist() %>% which()
+  this_dp <- handle$yaml$write[[index]]
+
+  version <- this_dp$version
+
+  handle$write_dataproduct(data_product,
+                           path,
+                           component,
+                           description,
+                           version)
+
+  invisible(handle$output_index(data_product, component, version))
 }
