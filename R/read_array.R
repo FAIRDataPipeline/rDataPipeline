@@ -41,7 +41,8 @@ read_array <- function(handle,
 
   run_server()
 
-  namespace_url <- get_entry("namespace", list(name = namespace))
+  namespace_url <- get_url("namespace", list(name = namespace)) %>%
+    extract_id()
 
   this_entry <- get_entry("data_product",
                           list(name = data_product,
