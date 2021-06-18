@@ -271,6 +271,10 @@ fdp <- R6::R6Class("fdp", list(
       self$outputs$dataproduct_uri[index] <- data_product_url
       self$outputs$version[index] <- version
       self$outputs$hash[index] <- hash
+      # Re-write path
+      oldfilename <- self$outputs$path[index]
+      newfilename <- gsub(basename(oldfilename), paste0(hash, ".h5"), oldfilename)
+      self$outputs$path[index] <- newfilename
     }
 
     invisible(self)
