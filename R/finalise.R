@@ -46,6 +46,7 @@ finalise <- function(handle) {
         file.rename(path, new_path)
 
       } else {
+        new_path <- this_metadata$path
         hash <- unique(this_metadata$hash)
         if (is.na(hash))
           usethis::ui_stop("Something is wrong")
@@ -66,36 +67,33 @@ finalise <- function(handle) {
 
       # Record file location in data registry
 
-      storage_location <- gsub(datastore, "", path)
+      storage_location <- gsub(datastore, "", new_path)
 
       dp_exists <- get_entry("data_product", list(name = dp,
                                                   version = this_version))
 
-      if (is.null(dp_exists)) {
-        storage_location_url <- new_storage_location(
-          path = storage_location,
-          hash = hash,
-          storage_root_url = datastore_root_url)
+      storage_location_url <- new_storage_location(
+        path = storage_location,
+        hash = hash,
+        storage_root_url = datastore_root_url)
 
-        object_url <- new_object(storage_location_url = storage_location_url,
-                                 description = description)
+      object_url <- new_object(storage_location_url = storage_location_url,
+                               description = description)
 
-        # Add data product to data registry
-        dataproduct_url <- new_data_product(name = dp,
-                                            version = this_version,
-                                            object_url = object_url,
-                                            namespace_url = namespace_url)
+      # Add data product to data registry
+      dataproduct_url <- new_data_product(name = dp,
+                                          version = this_version,
+                                          object_url = object_url,
+                                          namespace_url = namespace_url)
 
-        usethis::ui_done(paste("Writing", usethis::ui_value(dp),
-                               "to local registry"))
-
-      } else {
-        assertthat::assert_that(length(dp_exists) == 1)
-        dataproduct_url <- dp_exists[[1]]$url
-      }
+      usethis::ui_done(paste("Writing", usethis::ui_value(dp),
+                             "to local registry"))
 
       # Update handle
-      handle$write_dataproduct_url(dp, dataproduct_url, this_version, hash)
+      handle$write_dataproduct_url(data_product = dp,
+                                   data_product_url = dataproduct_url,
+                                   version = this_version,
+                                   hash = hash)
 
       # Record components in data registry --------------------------------------
 
