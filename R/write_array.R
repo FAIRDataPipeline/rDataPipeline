@@ -33,6 +33,10 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
+ if (!"write" %in% names(handle$yaml))
+   usethis::ui_stop(paste(usethis::ui_field("write"),
+                          "section not listed in config.yaml"))
+
   listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
 
   if (!data_product %in% listed)
