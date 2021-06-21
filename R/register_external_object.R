@@ -15,8 +15,6 @@ register_external_object <- function(register_this,
 
   # Original source ---------------------------------------------------------
 
-  run_server()
-
   # Add the website to the data registry (e.g. home page of the database)
   source_url <- new_namespace(
     name = register_this$source_abbreviation,
@@ -55,7 +53,7 @@ register_external_object <- function(register_this,
                                          accessibility = 0) # TODO
 
   # Does this file already exist?
-  file_path <- file.path(namespace, register_this$product_name, filename)
+  file_path <- file.path(namespace, register_this$external_object, filename)
 
   # Add local data store location to the data registry
   datastore_location_url <- new_storage_location(
@@ -65,6 +63,8 @@ register_external_object <- function(register_this,
 
   datastore_object_url <- new_object(
     storage_location_url = datastore_location_url)
+
+
 
   # Source data (e.g. *.csv) is defined as having a single component
   # called "raw_data"
@@ -103,8 +103,6 @@ register_external_object <- function(register_this,
                                       version = version,
                                       object_url = datastore_object_url,
                                       namespace_url)
-
-  stop_server()
 
   usethis::ui_done(
     paste("Writing", usethis::ui_value(register_this$external_object),
