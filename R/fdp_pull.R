@@ -6,6 +6,8 @@
 #'
 fdp_pull <- function(path = "config.yaml") {
 
+  run_server()
+
   # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
@@ -102,5 +104,7 @@ fdp_pull <- function(path = "config.yaml") {
 
     }
   }
+
+  stop_server()
 
 }
