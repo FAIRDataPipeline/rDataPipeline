@@ -40,6 +40,26 @@ is_queryable <- function(table, query) {
   } else if (!valid_query) {
     usethis::ui_stop("query contains fields of incorrect class")
 
+    # msg <- vapply(seq_len(length(invalid_f)), function(y) {
+    #   num_fields <- length(invalid_f)
+    #
+    #   if (num_fields == 2 & y == 2) {
+    #     prepend <- " and "
+    #   } else if (num_fields > 2) {
+    #     prepend <- dplyr::if_else(y == num_fields, ", and ",
+    #                               dplyr::if_else(y == 1, "", ", "))
+    #   } else
+    #     prepend <- ""
+    #
+    #   paste0(prepend, invalid_f[y], " (",
+    #          invalid_t[y], ")")
+    # }, character(1)) %>%
+    #   paste(collapse = "")
+    #
+    # tmp <- paste("Invalid query - please check the following fields are of",
+    #              "the correct class:\n   {msg}")
+    # usethis::ui_stop(tmp)
+
   } else {
     return(TRUE)
   }
