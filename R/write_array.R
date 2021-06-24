@@ -33,9 +33,11 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
- if (!"write" %in% names(handle$yaml))
-   usethis::ui_stop(paste(usethis::ui_field("write"),
-                          "section not listed in config.yaml"))
+  # Checks ------------------------------------------------------------------
+
+  if (!"write" %in% names(handle$yaml))
+    usethis::ui_stop(paste(usethis::ui_field("write"),
+                           "section not listed in config.yaml"))
 
   listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
 
@@ -43,27 +45,48 @@ write_array <- function(array,
     usethis::ui_stop(paste(usethis::ui_field(data_product),
                            "not listed in config.yaml"))
 
-  # if (data_product %in% handle$outputs$data_product &
-  #     component %in% handle$outputs$component)
-  #
-  #   cli::cli_alert_info("Component already recorded in handle")
-  #   version <- handle$outputs %>%
-  #     invisible(handle$output_index(data_product, component, version))
+  # Get metadata ------------------------------------------------------------
 
+  index <- lapply(handle$yaml$write, function(x)
+    data_product == x$data_product) %>%
+    unlist() %>% which()
+  this_dp <- handle$yaml$write[[index]]
 
-  # Extract metadata from config.yaml
   datastore <- handle$yaml$run_metadata$write_data_store
-  namespace <- handle$yaml$run_metadata$default_output_namespace
+
+  # Get alias
+  if ("use" %in% names(this_dp)) {
+    alias <- this_dp$use
+  } else {
+    alias <- list()
+  }
+
+  # Get namespace
+  if ("namespace" %in% names(alias)) {
+    namespace <- alias$namespace
+  } else {
+    namespace <- handle$yaml$run_metadata$default_output_namespace
+  }
+
+  if ("data_product" %in% names(alias)) {
+    data_product <- alias$data_product
+  } else {
+    data_product <- this_dp$data_product
+  }
+
+  if ("component" %in% names(alias)) {
+    component <- alias$component
+  } else {
+    component <- this_dp$component
+  }
+
+  version <- this_dp$use$version
 
   # Extract / set save location
   if (data_product %in% handle$outputs$data_product) {
-    dp. <- data_product
-    path <- handle$outputs %>%
-      dplyr::filter(.data$data_product == dp.) %>%
-      dplyr::select(.data$path) %>%
-      unique() %>%
-      unlist() %>%
-      unname()
+    tmp <- handle$outputs
+    ind <- which(tmp$data_product == data_product)
+    path <- tmp$path[ind]
 
   } else {
     filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
@@ -185,12 +208,9 @@ write_array <- function(array,
 
   # Write to handle ---------------------------------------------------------
 
-  index <- lapply(handle$yaml$write, function(x)
-    data_product == x$data_product) %>%
-    unlist() %>% which()
-  this_dp <- handle$yaml$write[[index]]
 
-  version <- this_dp$use$version
+
+
 
   handle$write_dataproduct(data_product,
                            path,
