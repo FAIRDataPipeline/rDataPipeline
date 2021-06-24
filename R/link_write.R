@@ -39,9 +39,23 @@ link_write <- function(handle, name) {
     data_product <- this_write$data_product
   }
 
+  description <- this_write$description
+  version <- this_write$use$version
+
   file_type <- this_write$file_type
   filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".", file_type)
 
   path <- file.path(paste0(datastore, namespace), data_product, filename)
+
+  # Generate directory structure
+  directory <- dirname(path)
+  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+
+  handle$write_dataproduct(data_product,
+                           path,
+                           component = NA,
+                           description,
+                           version)
+
   invisible(path)
 }
