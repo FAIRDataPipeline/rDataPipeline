@@ -8,7 +8,6 @@ fdp_run(config_file, skip = TRUE)
 
 handle <- initialise()
 
-
 data_product <- "test/array"
 component <- "this_component"
 component2 <- "another_component"
