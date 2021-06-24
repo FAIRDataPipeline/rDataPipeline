@@ -8,7 +8,7 @@
 patch_data <- function(url,
                        data) {
 
-  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
+  key <- get_token()
   h <- c(Authorization = paste("token", key))
 
   result <- httr::PATCH(url,
