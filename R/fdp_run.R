@@ -21,7 +21,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
   # Extract local data store location
-  localstore <- yaml$run_metadata$default_data_store
+  localstore <- yaml$run_metadata$write_data_store
   if (grepl("/$", localstore))
     localstore <- gsub("/$", "", localstore)
 
@@ -242,7 +242,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Record config.yaml location in data registry ----------------------------
 
-  datastore_root <- yaml$run_metadata$default_data_store
+  datastore_root <- yaml$run_metadata$write_data_store
   datastore_name <- paste("local datastore:", datastore_root)
   config_storageroot_id <- new_storage_root(name = datastore_name,
                                             root = datastore_root,

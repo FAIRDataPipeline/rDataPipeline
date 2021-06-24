@@ -21,8 +21,6 @@ initialise <- function() {
   yaml <- yaml::read_yaml(file.path(directory, "config.yaml"))
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
-  datastore_root <- yaml$run_metadata$default_data_store
-  localstore <- run_metadata$default_data_store
 
   cli::cli_alert_info("Reading {.file {config_file}} from data store")
 

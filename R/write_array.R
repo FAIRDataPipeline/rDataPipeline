@@ -52,7 +52,7 @@ write_array <- function(array,
 
 
   # Extract metadata from config.yaml
-  datastore <- handle$yaml$run_metadata$default_data_store
+  datastore <- handle$yaml$run_metadata$write_data_store
   namespace <- handle$yaml$run_metadata$default_output_namespace
 
   # Extract / set save location
