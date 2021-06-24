@@ -28,4 +28,3 @@ read:
   use:
     data_product: test/array2
     version: 0.1.0
-
