@@ -110,11 +110,18 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
         read_version <- alias$version
 
       } else {
-        entries <- get_entry("data_product", list(name = read_dataproduct,
-                                                  namespace = read_namespace_id))
-        read_version <- lapply(entries, function(x) x$version) %>%
-          unlist() %>%
-          max()
+        entries <- get_entry("data_product",
+                             list(name = read_dataproduct,
+                                  namespace = read_namespace_id))
+        if (is.null(entries)) {
+          stop("Something went wrong")
+
+        } else {
+          read_version <- lapply(entries, function(x) x$version) %>%
+            unlist() %>%
+            max()
+        }
+
         read[[i]]$use$version <- read_version
       }
     }
