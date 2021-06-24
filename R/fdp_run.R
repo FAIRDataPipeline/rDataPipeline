@@ -157,46 +157,48 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
       # Get write version
       if ("use" %in% names(this_write)) {
         alias <- this_write$use
-
-        # If version is listed in the `use:` block
-        if ("version" %in% names(alias)) {
-          version <- alias$version
-
-          if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {
-            stop("Not written")
-
-          } else if (grepl("\\$\\{\\{MINOR\\}\\}", version)) {
-            stop("Not written")
-
-          } else if (grepl("\\$\\{\\{MAJOR\\}\\}", version)) {
-            stop("Not written")
-
-          } else if (grepl("\\$\\{\\{DATETIME\\}\\}", alias$version)) {
-            datetime <- gsub("-", "", Sys.Date())
-            write_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
-                                  alias$version)
-
-          } else {
-            write_version <- alias$version
-          }
-
-          # If version isn't listed anywhere
-        } else {
-
-          entries <- get_entry("data_product", list(name = data_product,
-                                                    namespace = write_namespace_id))
-
-          if (!is.null(entries)) {
-            write_version <- "0.0.1"
-
-          } else {
-            write_version <- lapply(entries, function(x) x$version) %>%
-              unlist() %>%
-              max()
-          }
-        }
-        write[[i]]$use$version <- write_version
+      } else {
+        alias <- list()
       }
+
+      # If version is listed in the `use:` block
+      if ("version" %in% names(alias)) {
+        version <- alias$version
+
+        if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {
+          stop("Not written")
+
+        } else if (grepl("\\$\\{\\{MINOR\\}\\}", version)) {
+          stop("Not written")
+
+        } else if (grepl("\\$\\{\\{MAJOR\\}\\}", version)) {
+          stop("Not written")
+
+        } else if (grepl("\\$\\{\\{DATETIME\\}\\}", alias$version)) {
+          datetime <- gsub("-", "", Sys.Date())
+          write_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
+                                alias$version)
+
+        } else {
+          write_version <- alias$version
+        }
+
+        # If version isn't listed in the `use:` block
+      } else {
+        entries <- get_entry("data_product",
+                             list(name = data_product,
+                                  namespace = write_namespace_id))
+
+        if (is.null(entries)) {
+          write_version <- "0.0.1"
+
+        } else {
+          write_version <- lapply(entries, function(x) x$version) %>%
+            unlist() %>%
+            max()
+        }
+      }
+      write[[i]]$use$version <- write_version
 
       # If a data product already exists with the same name, version, and
       # namespace, throw an error
