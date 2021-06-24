@@ -172,7 +172,6 @@ finalise <- function(handle) {
   #  key = key)
 
   # record the code run in the data registry --------------------------------
-
   patch_data(url = handle$code_run,
              data = list(inputs = as.list(handle$inputs$object_url),
                          outputs = as.list(handle$outputs$component_url)))
