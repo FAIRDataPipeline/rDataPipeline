@@ -190,7 +190,7 @@ write_array <- function(array,
     unlist() %>% which()
   this_dp <- handle$yaml$write[[index]]
 
-  version <- this_dp$version
+  version <- this_dp$use$version
 
   handle$write_dataproduct(data_product,
                            path,
