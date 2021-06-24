@@ -10,7 +10,7 @@ finalise <- function(handle) {
 
   # Add local data store root to the data registry
 
-  datastore <- handle$yaml$run_metadata$default_data_store
+  datastore <- handle$yaml$run_metadata$write_data_store
   datastore_name <- paste("local datastore:", datastore)
   datastore_root_url <- new_storage_root(
     name = datastore_name,
