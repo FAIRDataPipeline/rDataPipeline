@@ -126,10 +126,10 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
       write_namespace_id <- extract_id(write_namespace_url)
 
       if ("version" %in% names(this_write)) { # version before `use:` block
-        version <- this_write$version
+        write_version <- resolve_version(this_write$version)
 
       } else if ("version" %in% names(alias)) { # version in `use:` block
-        version <- alias$version
+        write_version <- resolve_version(alias$version)
 
       } else { # version missing
 
@@ -138,33 +138,18 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
                                   namespace = write_namespace_id))
 
         if (is.null(entries)) {
-          version <- "0.0.1"
+          write_version <- "0.0.1"
 
         } else {
-          version <- lapply(entries, function(x) x$version) %>%
+          write_version <- lapply(entries, function(x) x$version) %>%
             unlist() %>%
             max()
+          tmp <- semver::parse_version(write_version)
+          patch <- tmp[[1]]$patch
+          tmp[[1]]$patch <- as.integer(patch + 1)
+          write_version <- as.character(tmp)
         }
         write[[i]]$version <- write_version # version should be heres
-      }
-
-      # Take care of variables
-      if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {
-        stop("Not written")
-
-      } else if (grepl("\\$\\{\\{MINOR\\}\\}", version)) {
-        stop("Not written")
-
-      } else if (grepl("\\$\\{\\{MAJOR\\}\\}", version)) {
-        stop("Not written")
-
-      } else if (grepl("\\$\\{\\{DATETIME\\}\\}", version)) {
-        datetime <- gsub("-", "", Sys.Date())
-        write_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
-                              version)
-
-      } else {
-        write_version <- version
       }
 
       # If a data product already exists with the same name, version, and
