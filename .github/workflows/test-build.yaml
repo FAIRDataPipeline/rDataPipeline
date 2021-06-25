@@ -127,8 +127,8 @@ jobs:
 # Located within the macOS-latest (release) job
 
       - name: Test coverage (setup)
-        # Only when master is pushed
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        # Only when main is pushed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         # Use the default GITHUB_TOKEN as an enviromental version for all steps
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -140,7 +140,7 @@ jobs:
       # * Echoes to git credential-osxkeychain
       # * This emulate stdin() line by line
       - name: Add credentials in keychain
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         env:
           GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
         run: |
@@ -154,7 +154,7 @@ jobs:
       # Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
       # registry
       - name: Test coverage
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         env:
           SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
           RUN_TEST: "TRUE"
@@ -167,14 +167,14 @@ jobs:
 # Located within the macOS-latest (release) job
 
       - name: Build and deploy docs (setup)
-        # Only when master is pushed
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        # Only when main is pushed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         # Setup pandoc needed to build docs
         uses: r-lib/actions/setup-pandoc@v1
 
       # Install Mac OS requirements
       - name: Build and deploy docs (system requirements)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         run : |
               brew install harfbuzz
               brew install fribidi
@@ -182,7 +182,7 @@ jobs:
 
       # Build documentation with pkgdown
       - name: Build Docs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/mains' && runner.os == 'macOS'
         run: |
           install.packages("pkgdown")
           pkgdown::build_site()
@@ -190,7 +190,7 @@ jobs:
 
       # Create a development branch and commit to it
       - name: Commit to development branch
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         run: |
           git checkout -b development
           git add .
@@ -199,12 +199,12 @@ jobs:
 
       # Deploy the docs using JamesIves/github-pages-deploy-action
       - name: Deploy Docs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && runner.os == 'macOS'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
           BASE_BRANCH: development
-          BRANCH: master # The branch the action should deploy to.
+          BRANCH: main # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
           TARGET_FOLDER: docs
           COMMIT_MESSAGE: 'build docs [skip ci]'
