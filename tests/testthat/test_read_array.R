@@ -113,6 +113,14 @@ test_that("the correct dataframe is returned", {
                     data_product = "test/array",
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_v1)
+
+  expect_equivalent(attributes(tmp)$dimnames[[1]], dimension_names$rowvalue )
+  expect_equivalent(attributes(tmp)$dimnames[[2]], dimension_names$colvalue )
+  expect_equivalent(attributes(tmp)$Dimension_1_title, names(dimension_names)[1] )
+  expect_equivalent(attributes(tmp)$Dimension_2_title, names(dimension_names)[2] )
+  expect_equivalent(attributes(tmp)$Dimension_2_units, dimension_units[[2]])
+  expect_equivalent(attributes(tmp)$Dimension_2_values, dimension_values[[2]])
+  expect_equivalent(attributes(tmp)$units, units)
 })
 
 test_that("the correct dataframe is returned", {
@@ -137,16 +145,3 @@ test_that("the correct dataframe is returned", {
 })
 
 finalise(handle)
-
-test_that("read_array returns correct attributes", {
-  tmp <- read_array(handle = handle,
-                    data_product = "test/array",
-                    component = component)
-  expect_equivalent(attributes(tmp)$dimnames[[1]], dimension_names$rowvalue )
-  expect_equivalent(attributes(tmp)$dimnames[[2]], dimension_names$colvalue )
-  expect_equivalent(attributes(tmp)$Dimension_1_title, names(dimension_names)[1] )
-  expect_equivalent(attributes(tmp)$Dimension_2_title, names(dimension_names)[2] )
-  expect_equivalent(attributes(tmp)$Dimension_2_units, dimension_units[[2]])
-  expect_equivalent(attributes(tmp)$Dimension_2_values, dimension_values[[2]])
-  expect_equivalent(attributes(tmp)$units, units)
-})
