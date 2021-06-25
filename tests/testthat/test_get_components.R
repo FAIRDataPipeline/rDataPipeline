@@ -1,6 +1,6 @@
 context("Testing get_components()")
 
-config_file <- "write_array/config.yaml"
+config_file <- "config_files/get_components/config.yaml"
 fdp_pull(config_file)
 fdp_run(config_file, skip = TRUE)
 
