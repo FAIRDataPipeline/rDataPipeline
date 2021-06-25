@@ -9,49 +9,33 @@ new_external_object(
   primary_not_supplement = TRUE,
   release_date,
   title,
-  description = "",
-  version,
-  object_id,
-  source_id,
-  original_store_id = "",
-  key
+  description,
+  object_url,
+  original_store_url
 )
 }
 \arguments{
 \item{doi_or_unique_name}{a \code{string} specifying the DOI or name of the
-\code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
+\code{external_object}}
 
-\item{primary_not_supplement}{a boolean flag to indicate
+\item{primary_not_supplement}{(optional) a boolean flag to indicate
 whether the external object is the primary source (\code{TRUE}) or not
 (\code{FALSE})}
 
 \item{release_date}{the date-time that the \code{external_object} was
 released \emph{e.g.} \code{Sys.time()} or "2010-07-11 12:15:00 BST"}
 
-\item{title}{a \code{string} specifying the title of the \code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information"}
+\item{title}{a \code{string} specifying the title of the \code{external_object}}
 
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{external_object}
-\emph{e.g.} "scottish coronavirus-covid-19-management-information dataset"}
+description of the \code{external_object}}
 
-\item{version}{a \code{string} specifying the version identifier of the
-\code{external_object} (must conform to semantic versioning syntax)
-\emph{e.g.} "0.20100711.1"}
+\item{object_url}{a \code{string} specifying the URL of an entry in the
+\code{object} table}
 
-\item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/12/"}
-
-\item{source_id}{a \code{string} specifying the API URL of the
-associated \code{source} table \emph{e.g.} "https://data.scrc.uk/api/source/9/"}
-
-\item{original_store_id}{(optional) a \code{string} specifying the API URL of the
-associated \code{storage_location} table that references the original
-location of the \code{external_object}
-\emph{e.g.} "https://data.scrc.uk/api/storage_location/19/"}
-
-\item{key}{API token from data.scrc.uk}
+\item{original_store_url}{(optional) a \code{string} specifying the URL of a
+an entry in the \code{storage_location} table that references the original
+location of an \code{external_object}}
 }
 \description{
 Upload information to the \code{external_object} table in the data registry
@@ -60,16 +44,19 @@ Upload information to the \code{external_object} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

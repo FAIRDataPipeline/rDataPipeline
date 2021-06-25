@@ -3,15 +3,12 @@
 #' Upload information to the \code{code_repo_release} table in the data registry
 #'
 #' @param name a \code{string} specifying the name of an official release of
-#' code *e.g.* "ScottishCovidResponse/SCRCdata"
+#' code
 #' @param version a \code{string} specifying the version release
-#' (conforming with semantic versioning syntax) *e.g.* "0.1.0"
+#' (conforming with semantic versioning syntax)
 #' @param website (optional) a \code{string} specifying the URL of the
 #' website for this code release
-#' *e.g.* "https://github.com/ScottishCovidResponse/SCRCdata"
-#' @param object_id a \code{string} specifying the API URL of the associated
-#' `object` table *e.g.* "https://data.scrc.uk/api/object/154/"
-#' @param key API token from data.scrc.uk
+#' @param object_url a \code{string} specifying the URL of an \code{object}
 #'
 #' @family new functions
 #'
@@ -19,14 +16,16 @@
 #'
 new_code_repo_release <- function(name,
                                   version,
-                                  website = "",
-                                  object_id,
-                                  key) {
+                                  object_url,
+                                  website) {
+
+  data <- list(name = name,
+               version = version,
+               object = object_url)
+
+  if (!missing(website))
+    data$website <- website
 
   post_data(table = "code_repo_release",
-            data = list(name = name,
-                        version = version,
-                        website = website,
-                        object = object_id),
-            key)
+            data = data)
 }

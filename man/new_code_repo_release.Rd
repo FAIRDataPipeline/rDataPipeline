@@ -4,23 +4,19 @@
 \alias{new_code_repo_release}
 \title{Post entry to code_repo_release table}
 \usage{
-new_code_repo_release(name, version, website = "", object_id, key)
+new_code_repo_release(name, version, object_url, website)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of an official release of
-code \emph{e.g.} "ScottishCovidResponse/SCRCdata"}
+code}
 
 \item{version}{a \code{string} specifying the version release
-(conforming with semantic versioning syntax) \emph{e.g.} "0.1.0"}
+(conforming with semantic versioning syntax)}
+
+\item{object_url}{a \code{string} specifying the URL of an \code{object}}
 
 \item{website}{(optional) a \code{string} specifying the URL of the
-website for this code release
-\emph{e.g.} "https://github.com/ScottishCovidResponse/SCRCdata"}
-
-\item{object_id}{a \code{string} specifying the API URL of the associated
-\code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/154/"}
-
-\item{key}{API token from data.scrc.uk}
+website for this code release}
 }
 \description{
 Upload information to the \code{code_repo_release} table in the data registry
@@ -28,17 +24,20 @@ Upload information to the \code{code_repo_release} table in the data registry
 \seealso{
 Other new functions: 
 \code{\link{new_author}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

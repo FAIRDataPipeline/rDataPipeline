@@ -4,16 +4,12 @@
 \alias{validate_fields}
 \title{Validate fields}
 \usage{
-validate_fields(table, data, key, online = TRUE)
+validate_fields(table, data)
 }
 \arguments{
 \item{table}{table name as character}
 
 \item{data}{data as a named list}
-
-\item{key}{API Token as character}
-
-\item{online}{\code{boolean} if FALSE will not check if data registry objects exist}
 }
 \value{
 Returns

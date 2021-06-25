@@ -1,39 +1,40 @@
 context("Testing table_exists()")
 
-sleep_time <- 0.5
+tables <- c("users",
+            "groups",
+            "file_type",
+            "issue",
+            "organisation",
+            "author",
+            "object",
+            "object_author_org",
+            "object_component",
+            "code_run",
+            "storage_root",
+            "storage_location",
+            "external_object",
+            "quality_controlled",
+            "keyword",
+            "licence",
+            "namespace",
+            "data_product",
+            "code_repo_release",
+            "key_value")
 
-tables <- c( "users",
-             "groups",
-             "issue",
-             "object",
-             "object_component",
-             "code_run",
-             "storage_root",
-             "storage_location",
-             "source",
-             "external_object",
-             "quality_controlled",
-             "keyword",
-             "author",
-             "licence",
-             "namespace",
-             "data_product",
-             "code_repo_release",
-             "key_value",
-             "text_file")
+run_server()
 
 test_that("check table returns true with correct tables", {
-  for(i in seq_along(tables)){
-    expect_true(check_table_exists(tables[i]))
-    Sys.sleep(sleep_time)
-  }
+  tmp <- lapply(seq_along(tables), function(x) {
+    check_table_exists(tables[x])
+  }) %>% unlist()
+  expect_true(all(tmp))
 })
 
 test_that("unknown table returns false", {
   expect_false(check_table_exists("unknown"))
 })
 
-test_that("invalid table name, produces and error", {
+test_that("invalid table name returns error", {
   expect_error(check_table_exists(NULL))
   expect_error(check_table_exists(NA))
   expect_error(check_table_exists(NaN))
@@ -41,3 +42,5 @@ test_that("invalid table name, produces and error", {
   expect_error(check_table_exists(TRUE))
   expect_error(check_table_exists())
 })
+
+stop_server()

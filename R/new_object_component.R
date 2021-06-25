@@ -2,42 +2,44 @@
 #'
 #' Upload information to the \code{object_component} table in the data registry
 #'
+#' @param object_url a \code{string} specifying the URL of an existing
+#' \code{object}
 #' @param name a \code{string} specifying the name of the
 #' \code{object_component}, unique in the context of \code{object_component}
 #' and its \code{object} reference
-#' @param object_id a \code{string} specifying the API URL of the
-#' associated \code{object} table
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object_component}
-#' @param key API token from data.scrc.uk
+#' @param whole_object a \code{boolean} flag specifying whether or not this
+#' \code{object_component} refers to the whole object or not - default is
+#' \code{FALSE}
+#' @param issues_urls (optional) a \code{list} of \code{issues} URLs to associate
+#' with this \code{object}
 #'
 #' Note that the \code{object_component} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
 #' \code{attach_issue()} and associated functionality to attach issues to
-#' objects and objet components.
+#' objects and object components.
 #'
 #' @family new functions
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' \donttest{
-#' new_object_component(name = "age_group/week-persons-country-all_deaths",
-#'                      object_id = "https://data.scrc.uk/api/object/156/",
-#'                      description = "A very useful component",
-#'                      key = key)
-#' }}
-#'
-new_object_component <- function(name,
-                                 object_id,
-                                 description = "",
-                                 key) {
+new_object_component <- function(object_url,
+                                 name,
+                                 description,
+                                 whole_object = FALSE,
+                                 issues_urls) {
+
+  data <- list(object = object_url,
+               name = name,
+               whole_object = whole_object)
+
+  if (!missing(description))
+    data$description <- description
+
+  if (!missing(issues_urls))
+    data$issues <- issues_urls
 
   post_data(table = "object_component",
-            data = list(name = name,
-                        object = object_id,
-                        description = description),
-            key)
-
+            data = data)
 }

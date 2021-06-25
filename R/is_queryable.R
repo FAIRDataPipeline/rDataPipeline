@@ -3,26 +3,64 @@
 #' Check whether fields are queryable
 #'
 #' @param table a \code{string} specifying the name of the table
-#' @param query_parameter a \code{string} or \code{vector} of field names
+#' @param query a \code{list} containing the query
 #'
 #' @return Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
 #' isn't
 #' @export
 #' @keywords internal
 #'
-#' @examples
-#' is_queryable("storage_root", "name")
-#' is_queryable("storage_root", c("not_a_field", "name"))
-#' is_queryable("not_a_table", "name")
-#'
-is_queryable <- function(table, query_parameter) {
-  if(table == "users" | table == "groups")
-    return(FALSE) # only queryable with token
+is_queryable <- function(table, query) {
 
-  if(!check_table_exists(table)) {
-    message("table doesn't exist")
-    return(FALSE)
+  # Check whether field names are valid
+
+  fields <- names(query)
+  valid_fields <- all(fields %in% get_table_queryable(table))
+
+  # Check whether the class of each field in the query matches what is expected
+
+  valid_query <- !(any(check_fields(table, query) == FALSE))
+
+  # Output
+
+  if (table == "users" | table == "groups") {
+    # Only queryable with token
+    usethis::ui_stop("Unable to query {ui_field(table)}")
+
+  } else if (!check_table_exists(table)) {
+    usethis::ui_stop("{ui_field(table)} does not exist")
+
+  } else if (any(is.character(fields) & fields == "")) {
+    # An empty string is not a valid field
+    usethis::ui_stop("{ui_field(fields)} contains invalid fields")
+
+  } else if (!valid_fields) {
+    usethis::ui_stop("{ui_field(fields)} contains invalid fields")
+
+  } else if (!valid_query) {
+    usethis::ui_stop("query contains fields of incorrect class")
+
+    # msg <- vapply(seq_len(length(invalid_f)), function(y) {
+    #   num_fields <- length(invalid_f)
+    #
+    #   if (num_fields == 2 & y == 2) {
+    #     prepend <- " and "
+    #   } else if (num_fields > 2) {
+    #     prepend <- dplyr::if_else(y == num_fields, ", and ",
+    #                               dplyr::if_else(y == 1, "", ", "))
+    #   } else
+    #     prepend <- ""
+    #
+    #   paste0(prepend, invalid_f[y], " (",
+    #          invalid_t[y], ")")
+    # }, character(1)) %>%
+    #   paste(collapse = "")
+    #
+    # tmp <- paste("Invalid query - please check the following fields are of",
+    #              "the correct class:\n   {msg}")
+    # usethis::ui_stop(tmp)
+
+  } else {
+    return(TRUE)
   }
-
-  query_parameter %in% get_table_queryable(table)
 }

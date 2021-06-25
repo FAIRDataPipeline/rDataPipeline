@@ -4,22 +4,25 @@
 \alias{new_object}
 \title{Post entry to object table}
 \usage{
-new_object(storage_location_id, description = "", key)
+new_object(
+  description,
+  storage_location_url,
+  issues_urls = list(),
+  authors_urls = list()
+)
 }
 \arguments{
-\item{storage_location_id}{a \code{string} specifying the API URL of the
-associated \code{storage_location} table
-\emph{e.g.} "https://data.scrc.uk/api/storage_location/411/"}
-
 \item{description}{(optional) a \code{string} containing a free text
-description of the \code{object_component}}
+description of the \code{object}}
 
-\item{key}{API token from data.scrc.uk
+\item{storage_location_url}{(optional) a \code{string} specifying the URL
+of an entry in the \code{storage_location} table}
 
-Note that the \code{object} table contains \code{issues} as an
-additional optional field. This is not included here. Instead use
-\code{attach_issue()} and associated functionality to attach issues to
-objects and object components.}
+\item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to associate
+with this \code{object}}
+
+\item{authors_urls}{(optional) a \code{list} of \code{author} URLs to associate
+with this \code{object}}
 }
 \description{
 Upload information to the \code{object} table in the data registry
@@ -28,16 +31,19 @@ Upload information to the \code{object} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

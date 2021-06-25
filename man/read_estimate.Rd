@@ -13,28 +13,3 @@ file to be read}
 \description{
 Function to read point-estimate type data from toml file.
 }
-\examples{
-# Write a single estimate into a toml file
-filename <- "test.toml"
-
-create_estimate(filename = filename,
-                path = ".",
-                parameters = list(asymptomatic_period = 192.0))
-
-read_estimate(filepath = filename)
-
-file.remove(filename)
-
-# Write multiple estimates into a toml file
-filename <- "anothertest.toml"
-
-create_estimate(filename = filename,
-                path = ".",
-                parameters = list(asymptomatic_period = 192.0,
-                                  latent_period = 123.12))
-
-read_estimate(filepath = filename)
-
-file.remove(filename)
-
-}

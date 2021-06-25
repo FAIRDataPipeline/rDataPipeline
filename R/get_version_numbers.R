@@ -7,8 +7,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' data_product <- "records/SARS-CoV-2/scotland/cases-and-management/testing"
 #' get_version_numbers(data_product)
+#' }
 #'
 get_version_numbers <- function(data_product) {
   entries <- get_entry("data_product", list(name = data_product))

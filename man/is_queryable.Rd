@@ -4,12 +4,12 @@
 \alias{is_queryable}
 \title{Check whether fields are queryable}
 \usage{
-is_queryable(table, query_parameter)
+is_queryable(table, query)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
 
-\item{query_parameter}{a \code{string} or \code{vector} of field names}
+\item{query}{a \code{list} containing the query}
 }
 \value{
 Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
@@ -17,11 +17,5 @@ isn't
 }
 \description{
 Check whether fields are queryable
-}
-\examples{
-is_queryable("storage_root", "name")
-is_queryable("storage_root", c("not_a_field", "name"))
-is_queryable("not_a_table", "name")
-
 }
 \keyword{internal}

@@ -1,28 +1,28 @@
 context("Testing new_code_repo_release()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
-
-sleep_time <- 0.5
-
-test_user <- "22"
-
-test_identifier <- sample(1:1000000, 1, replace=TRUE)
-
-name <- paste0("Code Repo Release ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
+name <- paste0("test_new_code_repo_release_",
+               openssl::sha1(x = as.character(Sys.time())))
 version <- create_version_number()
+website <- paste0("https://www.", gsub("_", "", name), ".com")
 
-website_indentifier <- paste(sample(letters, 10, FALSE), collapse ="", sep = "")
+run_server()
 
-website <- paste0("https://www.", website_indentifier, ".com")
+object_url <- post_data("object", list(description = name))
 
-object_id <- post_data("object",
-                         list(description = name),
-                         key)
-test_that("New code repo release returns a character",{
-  expect_true(is.character(new_code_repo_release(name, version, website, object_id, key)))
+test_that("new entry in code_repo_release returns API URL",{
+  expect_true(grepl("code_repo_release",
+                    new_code_repo_release(name = name,
+                                          version = version,
+                                          object_url = object_url,
+                                          website = website)))
 })
 
-# test_that("code_repo_release produces a message if the code_repo_release already exists", {
-#   expect_message(expect_true(is.character(new_code_repo_release(name, version, website, object_id, key))))
-# })
+test_that("existing entry in code_repo_release returns API URL", {
+  expect_true(grepl("code_repo_release",
+                    new_code_repo_release(name = name,
+                                          version = version,
+                                          object_url = object_url,
+                                          website = website)))
+})
+
+stop_server()

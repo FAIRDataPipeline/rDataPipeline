@@ -15,7 +15,9 @@ repository. This function assumes git is installed and located in the
 System PATH.
 }
 \examples{
+\dontrun{
 get_github_hash("ScottishCovidResponse/SCRCdata")
+}
 
 }
 \seealso{

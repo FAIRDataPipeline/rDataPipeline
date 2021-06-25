@@ -1,0 +1,30 @@
+run_metadata:
+  description: test read_array
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: /Users/Soniam/Desktop/git/FAIRDataPipeline/FDP_validation
+  script: |-
+    R -f read_array/submission_script.R {CONFIG_DIR}
+
+read:
+- data_product: test/array
+  component: level/a/s/d/f/s
+  use:
+    version: 0.1.0
+- data_product: test/array2 # will return v.0.2.0, but call it test/array2
+  component: level/a/s/d/f/s
+  use:
+    data_product: test/array
+- data_product: test/array3 # will use the one in the johnsmith namespace, but call it test/array4
+  component: level/a/s/d/f/s
+  use:
+    data_product: test/array
+    namespace: johnsmith
+- data_product: test/array4 # will use test/array2, but call it test/array3
+  component: level/a/s/d/f/s
+  use:
+    data_product: test/array2
+    version: 0.1.0

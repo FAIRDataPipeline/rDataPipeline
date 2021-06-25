@@ -1,39 +1,32 @@
 context("Testing new_storage_location()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
-
 sleep_time <- 0.5
 
-test_user <- "22"
+root_name <- paste0("test_new_storate_location_",
+                    openssl::sha1(x = as.character(Sys.time())))
+root <- paste0("https://", root_name, ".com")
+hash <- openssl::sha1(x = root_name)
+path <- paste0(hash, ".h5")
 
-test_identifier <- sample(1:1000000, 1, replace=TRUE)
+run_server()
 
-UID <- paste0("storage location ", format(Sys.time(), "%d%m%y%H%M%S"))
-UID_ <- paste0("storagelocation", format(Sys.time(), "%d%m%y%H%M%S"))
-path <- paste0(UID_, ".h5")
-path_uri <- paste0("https://", UID_, ".com")
-hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
+# Register storage root
+storage_root_url <- new_storage_root(name = root_name,
+                                     root = root,
+                                     accessibility = 0)
 
-storage_root_id <- get_entry("storage_root", list(updated_by = test_user))[[1]]$url
-
-if(is.null(storage_root_id)){
-  storage_root_id <- post_data("storage_root",
-                               list(name = UID,
-                                    root = path_uri),
-                               key)
-}
-
-test_that("new_storage_location creates a new storage location", {
-  expect_true(is.character(new_storage_location(path,
-                                                hash,
-                                                storage_root_id,
-                                                key)))
+test_that("new entry in storage_location returns API URL", {
+  expect_true(grepl("storage_location",
+                    new_storage_location(path = path,
+                                         hash = hash,
+                                         storage_root_url = storage_root_url)))
 })
 
-test_that("new_storage_location produces a message if the location already exists", {
-  expect_message(expect_true(is.character(new_storage_location(path,
-                                                hash,
-                                                storage_root_id,
-                                                key))))
+test_that("existing entry in storage_location returns API URL", {
+  expect_true(grepl("storage_location",
+                    new_storage_location(path = path,
+                                         hash = hash,
+                                         storage_root_url = storage_root_url)))
 })
+
+stop_server()

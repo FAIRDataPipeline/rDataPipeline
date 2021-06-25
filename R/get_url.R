@@ -11,25 +11,22 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Retrieve URLs for all entries in a table
 #' get_url(table = "storage_root")
 #'
 #' # Retrieve the URL of a particular entry in a table
 #' get_url(table = "storage_root", list(name = "github"))
+#' }
 #'
 get_url <- function(table, query = list()) {
 
-  tmp <- httr::GET(paste("https://data.scrc.uk/api", table, "", sep = "/"),
-                   query = query) %>%
-    httr::content(as = "text", encoding = "UTF-8") %>%
-    jsonlite::fromJSON(simplifyVector = FALSE)
-
-  tmp <- tmp$results
+  tmp <- get_entry(table, query)
 
   if(length(tmp) == 1) {
     return(tmp[[1]]$url)
   } else if(length(tmp) == 0) {
-    stop("No objects were returned")
+    message("No objects were returned")
   } else {
     return(lapply(tmp, function(x) x$url))
   }

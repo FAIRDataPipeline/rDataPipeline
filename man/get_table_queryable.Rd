@@ -15,8 +15,4 @@ Returns a character vector of queryable fields
 \description{
 Get queryable fields
 }
-\examples{
-get_table_queryable("data_product")
-
-}
 \keyword{internal}

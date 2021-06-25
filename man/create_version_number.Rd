@@ -53,9 +53,7 @@ This function prioritizes download date and version over all other parameters
 }
 \seealso{
 Other create functions: 
-\code{\link{create_array}()},
 \code{\link{create_distribution}()},
-\code{\link{create_estimate}()},
-\code{\link{create_table}()}
+\code{\link{create_estimate}()}
 }
 \concept{create functions}

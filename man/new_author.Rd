@@ -4,22 +4,16 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(family_name, personal_name, object_id, key, ...)
+new_author(family_name, personal_name, orcid)
 }
 \arguments{
-\item{family_name}{a \code{string} specifying the author's family name
-\emph{e.g.} "Mitchell"}
+\item{family_name}{a \code{string} specifying the author's family name}
 
 \item{personal_name}{a \code{string} specifying the author's first name
-and / or middle name and / or any initials \emph{e.g.} "Sonia" or "Sonia N" or
-"Sonia Natalie"}
+and / or middle name and / or any initials}
 
-\item{object_id}{a \code{string} specifying the API URL of the associated
-\code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31858/"}
-
-\item{key}{API token from data.scrc.uk}
-
-\item{...}{internal parameters}
+\item{orcid}{(optional) a \code{string} specifying the ORCID iD of the
+\code{author}}
 }
 \description{
 Upload information to the \code{author} table in the data registry
@@ -27,17 +21,20 @@ Upload information to the \code{author} table in the data registry
 \seealso{
 Other new functions: 
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

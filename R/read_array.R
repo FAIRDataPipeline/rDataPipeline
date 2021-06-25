@@ -2,10 +2,9 @@
 #'
 #' Function to read array type data from hdf5 file.
 #'
-#' @param filepath a \code{string} specifying the path and filename of the file to
-#' be read
-#' @param component a \code{string} specifying a location within the hdf5 file,
-#' e.g. "location/per_week/all_deaths"
+#' @param handle \code{fdp} object
+#' @param data_product a \code{string} specifying a data product
+#' @param component a \code{string} specifying a data product component
 #'
 #' @return Returns an array with attached \code{Dimension_i_title},
 #' \code{Dimension_i_units}, \code{Dimension_i_values}, and \code{units}
@@ -13,31 +12,74 @@
 #'
 #' @export
 #'
-#' @examples
-#' df <- data.frame(a = 1:2, b = 3:4)
-#' rownames(df) <- 1:2
-#' array <- as.matrix(df)
-#' filename <- "test_array.h5"
-#'
-#' create_array(filename = filename,
-#'              path = ".",
-#'              component = "level/a/s/d/f/s",
-#'              array = array,
-#'              dimension_names = list(rowvalue = rownames(df),
-#'                                     colvalue = colnames(df)),
-#'              dimension_values = list(NA, 10),
-#'              dimension_units = list(NA, "km"),
-#'              units = "s")
-#'
-#' read_array(filepath = filename,
-#'            component = "level/a/s/d/f/s")
-#'
-#' file.remove(filename)
-#'
-read_array <- function(filepath,
+read_array <- function(handle,
+                       data_product,
                        component) {
+
+  read <- handle$yaml$read
+
+  # If names(read) is not null, then a single entry has been added that
+  # is not in a list, so put it in a list
+  if (!all(is.null(names(read))))
+    read <- list(read)
+
+  # Find data product in `read:` section of config.yaml
+  index <- lapply(seq_along(read), function(x)
+    read[[x]]$data_product == data_product &&
+      read[[x]]$component == component) %>%
+    unlist() %>%
+    which()
+
+  this_read <- read[[index]]
+
+  # Get aliases
+  alias <- this_read$use
+
+  # Get data product name
+  if (any(names(alias) == "data_product")) {
+    data_product <- this_read$use$data_product
+  } else {
+    data_product <- this_read$data_product
+  }
+
+  # Get component name
+  if (any(names(alias) == "component")) {
+    component <- this_read$use$component
+  } else {
+    component <- this_read$component
+  }
+
+  # Get version number
+  version <- this_read$use$version
+
+  # Get namespace
+  if (any(names(alias) == "namespace")) {
+    namespace <- alias$namespace
+  } else {
+    namespace <- handle$yaml$run_metadata$default_input_namespace
+  }
+
+  run_server()
+
+  namespace_url <- get_url("namespace", list(name = namespace)) %>%
+    extract_id()
+
+  this_entry <- get_entry("data_product",
+                          list(name = data_product,
+                               version = version,
+                               namespace = namespace_url))
+  assertthat::assert_that(length(this_entry) == 1)
+  this_entry <- this_entry[[1]]
+
+  this_object <- get_entity(this_entry$object)
+  this_location <- get_entity(this_object$storage_location)
+
+  stop_server()
+
   # Read hdf5 file
-  file.h5 <- rhdf5::h5read(filepath, component)
+  path <- this_location$path
+  datastore <- handle$yaml$run_metadata$default_data_store
+  file.h5 <- rhdf5::h5read(paste0(datastore, path), component)
 
   # Extract data object
   object <- file.h5$array

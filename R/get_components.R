@@ -12,6 +12,9 @@
 #'
 get_components <- function(filename) {
 
+  if (!file.exists(filename))
+    stop("File does not exist")
+
   tmp <- rhdf5::H5Fopen(filename) %>%
     h5ls() %>%
     dplyr::filter(.data$name == "array" | .data$name == "table") %>%

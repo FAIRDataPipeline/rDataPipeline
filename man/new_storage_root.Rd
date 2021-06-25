@@ -4,20 +4,17 @@
 \alias{new_storage_root}
 \title{Post entry to storage_root table}
 \usage{
-new_storage_root(name, root, accessibility = 0, key)
+new_storage_root(name, root, accessibility = 0)
 }
 \arguments{
-\item{name}{a \code{string} specifying the name of the \code{storage_root}
-\emph{e.g.} "boydorr"}
+\item{name}{a \code{string} specifying the name of the \code{storage_root}}
 
-\item{root}{a \code{string} specifying the URI to the root of a
-\code{storage_location}, which is then prepended to a \code{storage_location}
-\emph{e.g.} "ftp://boydorr.gla.ac.uk/scrc/"}
+\item{root}{a \code{string} specifying the URI of a
+\code{storage_location}, which when prepended to a \code{storage_location}
+produces a complete URI to a file}
 
-\item{accessibility}{(optional) an \code{integer} value for the accessibility
-enum, where 0 is public (default) and 1 is private}
-
-\item{key}{API token from data.scrc.uk}
+\item{accessibility}{(optional) an \code{integer} value for the
+accessibility enum, where 0 is public (default) and 1 is private}
 }
 \description{
 Upload information to the \code{storage_root} table in the data registry
@@ -26,16 +23,19 @@ Upload information to the \code{storage_root} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
 \code{\link{new_keyword}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
-\code{\link{new_storage_location}()},
-\code{\link{new_text_file}()}
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
+\code{\link{new_storage_location}()}
 }
 \concept{new functions}

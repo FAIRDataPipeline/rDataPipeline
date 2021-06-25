@@ -4,16 +4,13 @@
 \alias{new_keyword}
 \title{Post entry to keyword table}
 \usage{
-new_keyword(keyphrase, object_id, key)
+new_keyword(object_url, keyphrase)
 }
 \arguments{
-\item{keyphrase}{a \code{string} specifying a single keyword or keyphrase
-\emph{e.g.} "covid-19" or "cardiovascular diseases"}
+\item{object_url}{a \code{string} specifying the URL of an \code{object}}
 
-\item{object_id}{a \code{string} specifying the API URL of the
-associated \code{object} table \emph{e.g.} "https://data.scrc.uk/api/object/31817/"}
-
-\item{key}{API token from data.scrc.uk}
+\item{keyphrase}{a \code{string} a \code{string} containing a free text
+key phrase}
 }
 \description{
 Upload information to the \code{keyword} table in the data registry
@@ -22,16 +19,19 @@ Upload information to the \code{keyword} table in the data registry
 Other new functions: 
 \code{\link{new_author}()},
 \code{\link{new_code_repo_release}()},
-\code{\link{new_coderun}()},
+\code{\link{new_code_run}()},
 \code{\link{new_data_product}()},
 \code{\link{new_external_object}()},
+\code{\link{new_file_type}()},
 \code{\link{new_issue}()},
+\code{\link{new_licence}()},
 \code{\link{new_namespace}()},
+\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_source}()},
+\code{\link{new_organisation}()},
+\code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()},
-\code{\link{new_text_file}()}
+\code{\link{new_storage_root}()}
 }
 \concept{new functions}

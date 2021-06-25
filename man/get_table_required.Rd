@@ -4,12 +4,10 @@
 \alias{get_table_required}
 \title{Get required fields}
 \usage{
-get_table_required(table, key)
+get_table_required(table)
 }
 \arguments{
 \item{table}{name of table}
-
-\item{key}{api key / token}
 }
 \value{
 a dataframe of required fields and their properties

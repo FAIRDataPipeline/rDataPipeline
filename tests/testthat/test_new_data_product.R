@@ -1,36 +1,30 @@
 context("Testing new_data_product()")
 
-# get the token
-key <- Sys.getenv("SCRC_API_TOKEN")
+UID <- paste0("test_new_data_product_",
+              openssl::sha1(x = as.character(Sys.time())))
 
-sleep_time <- 0.5
+run_server()
 
-test_user <- "22"
+object_url <- post_data("object",
+                        list(description = UID))
 
-test_identifier <- sample(1:1000000, 1, replace=TRUE)
-UID <- paste0("data_product ", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
+namespace_url <- post_data("namespace",
+                           list(name = UID))
 
-object_id <- post_data("object",
-                         list(description= UID),
-                         key)
-
-
-namespace_id <- post_data("namespace",
-                         list(name = UID),
-                         key)
-
-test_that("new_data_product posts to data registry", {
-  expect_true(is.character(new_data_product(UID,
-                                            create_version_number(),
-                                            object_id,
-                                            namespace_id,
-                                            key)))
+test_that("new entry in data_product returns API URL", {
+  expect_true(grepl("data_product",
+                    new_data_product(name = UID,
+                                     version = create_version_number(),
+                                     object_url = object_url,
+                                     namespace_url = namespace_url)))
 })
 
-# test_that("new_data_product produces a message if the object exists", {
-#   expect_message(expect_true(is.character(new_data_product(UID,
-#                                             create_version_number(),
-#                                             object_id,
-#                                             namespace_id,
-#                                             key))))
-# })
+test_that("existing entry in data_product returns API URL", {
+  expect_true(grepl("data_product",
+                    new_data_product(name = UID,
+                                     version = create_version_number(),
+                                     object_url = object_url,
+                                     namespace_url = namespace_url)))
+})
+
+stop_server()

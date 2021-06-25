@@ -18,12 +18,6 @@ Returns a \code{list} of fields present in the specified entry
 \description{
 Return all fields associated with a table entry in the data registry
 }
-\examples{
-# Get list of entries
-data_product <- "records/SARS-CoV-2/scotland/cases-and-management/ambulance"
-get_entry("data_product", list(name = data_product))
-
-}
 \seealso{
 Other get functions: 
 \code{\link{get_components}()},

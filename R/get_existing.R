@@ -16,22 +16,30 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Get all entries in storage_root
 #' get_existing("storage_root", limit_results = FALSE)
 #'
 #' # Get 100 newest entries in data_product
 #' get_existing("data_product")
+#' }
 #'
 get_existing <- function(table, limit_results = TRUE, detail = "all") {
 
-  if(!check_table_exists(table))
-    stop(paste0("Table: ", table, " does not exist\n",
-                "For available tables use: get_tables()"))
+  if (!check_table_exists(table))
+    usethis::ui_stop(paste(
+      usethis::ui_field(table),
+      "is not a valid table - for available tables use get_tables()"))
+
+  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
+  h <- c(Authorization = paste("token", key))
 
   tryCatch({
 
     # Get the 100 newest results
-    output <- httr::GET(paste("http://data.scrc.uk/api", table, "", sep = "/")) %>%
+    output <- httr::GET(paste("http://localhost:8000/api", table, "",
+                              sep = "/"),
+                        httr::add_headers(.headers = h)) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)
     results <- output$results
@@ -66,8 +74,8 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
   })
 
   # Convert NULL values to NA to prevent rbind from erroring
- results <- lapply(results, function(x)
-   sapply(x, function(y) if(is.null(y)) NA else y))
+  results <- lapply(results, function(x)
+    sapply(x, function(y) if(is.null(y)) NA else y))
 
   # bind the results into a dataframe
   results <- dplyr::bind_rows(results)

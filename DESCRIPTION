@@ -1,6 +1,6 @@
-Package: SCRCdataAPI
-Title: Functions to Interact with the SCRC Data Pipeline
-Version: 1.17.6
+Package: rFDP
+Title: Functions to Interact with the FAIR Data Pipeline
+Version: 1.18.0
 Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
                   role = c("cre", "aut"), comment = c(ORCID = "0000-0003-1536-2066")),
              person("Ryan", "Field", role = "ctb", 
@@ -12,6 +12,7 @@ Description: Functions to interact with the SCRC data pipeline.
 License: GPL-3 + file LICENSE
 Imports:
     assertthat,
+    cli,
     configr,
     dplyr,
     httr,
@@ -25,7 +26,11 @@ Imports:
     utils,
     crayon,
     semver,
-    rhdf5
+    rhdf5,
+    yaml,
+    R6,
+    git2r,
+    usethis
 Suggests:
     units,
     testthat
@@ -35,5 +40,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://github.com/ScottishCovidResponse/SCRCdataAPI
-BugReports: https://github.com/ScottishCovidResponse/SCRCdataAPI/issues
+URL: https://github.com/FAIRDataPipeline/rFDP
+BugReports: https://github.com/FAIRDataPipeline/rFDP/issues

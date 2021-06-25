@@ -3,34 +3,24 @@
 #' Use API endpoint to produce a list of fields for a table. Requires API key.
 #'
 #' @param table a \code{string} specifying the name of the table
-#' @param key (optional) API token from data.scrc.uk
-#' @param live a \code{boolean} specifying whether or not to get the field
-#' definitions directly from the API
 #'
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
 #' @export
 #' @keywords internal
 #'
-get_fields <- function(table, key, live = FALSE){
+get_fields <- function(table){
 
   # Users and Groups are valid tables but cannot be posted to
-  if(table == "users" | table == "groups")
+  if (table == "users" | table == "groups")
     stop("users and groups are protected tables")
 
-  fields.file <- system.file("validation", paste0(table, ".rds"),
-                             package = "SCRCdataAPI")
-  if(fields.file == "" | live)
-  {
-
-    if(missing(key))
-      stop("Key is required for this operation")
-
   # Add token to options request header
+  key <- get_token()
   h <- c(Authorization = paste("token", key))
 
   # Perform an options request
-  out <- httr::VERB("OPTIONS", paste("https://data.scrc.uk/api", table, "",
+  out <- httr::VERB("OPTIONS", paste("http://localhost:8000/api", table, "",
                                      sep = "/"),
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
@@ -42,24 +32,24 @@ get_fields <- function(table, key, live = FALSE){
 
     name <- names(field)
     data_type <- field[[1]]$type
-    min_value <- NA
-    max_value <- NA
+    min_length <- NA
+    max_length <- NA
     choice_values <- NA
     choice_names <- NA
 
     read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
     required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
 
-    if("min_value" %in% names(field[[1]])) {
-      min_value <- field[[1]]$min_value
+    if("min_length" %in% names(field[[1]])) {
+      min_length <- field[[1]]$min_length
     } else {
-      min_value <- NA
+      min_length <- NA
     }
 
-    if("max_value" %in% names(field[[1]])) {
-      max_value <- field[[1]]$max_value
+    if("max_length" %in% names(field[[1]])) {
+      max_length <- field[[1]]$max_length
     } else {
-      max_value <- NA
+      max_length <- NA
     }
 
     if("choices" %in% names(field[[1]])){
@@ -82,13 +72,11 @@ get_fields <- function(table, key, live = FALSE){
                data_type = data_type,
                read_only = read_only,
                required = required,
-               min_value = min_value,
-               max_value = max_value,
+               min_length = min_length,
+               max_length = max_length,
                choice_values = choice_values,
                choice_names = choice_names,
                stringsAsFactors = FALSE)
   }) %>% (function(x){do.call(rbind.data.frame, x)})
-  } else {
-    readRDS(fields.file)
-  }
+
 }
