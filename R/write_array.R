@@ -74,19 +74,17 @@ write_array <- function(array,
     data_product <- this_dp$data_product
   }
 
-  if ("component" %in% names(alias)) {
-    component <- alias$component
+  if ("version" %in% names(alias)) {
+    version <- alias$version
   } else {
-    component <- this_dp$component
+    version <- this_dp$version
   }
-
-  version <- this_dp$use$version
 
   # Extract / set save location
   if (data_product %in% handle$outputs$data_product) {
     tmp <- handle$outputs
     ind <- which(tmp$data_product == data_product)
-    path <- tmp$path[ind]
+    path <- unique(tmp$path[ind])
 
   } else {
     filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
@@ -207,10 +205,6 @@ write_array <- function(array,
     "Writing {.value {component}} to {.value {data_product}}")
 
   # Write to handle ---------------------------------------------------------
-
-
-
-
 
   handle$write_dataproduct(data_product,
                            path,

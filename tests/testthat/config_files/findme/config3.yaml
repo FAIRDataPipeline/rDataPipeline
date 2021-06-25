@@ -9,6 +9,6 @@ run_metadata:
   script: |-
     R -f write_array/submission_script.R {CONFIG_DIR}
 write:
-- data_product: test/array2
+- data_product: findme/test/array2
   description: a test array
   version: 0.1.0

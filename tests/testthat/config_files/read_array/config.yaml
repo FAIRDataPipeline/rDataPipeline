@@ -11,5 +11,4 @@ run_metadata:
 write:
 - data_product: test/array
   description: a test array
-  use:
-    version: 0.1.0
+  version: 0.1.0

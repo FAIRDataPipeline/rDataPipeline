@@ -17,8 +17,17 @@ new_storage_root <- function(name,
                              root,
                              accessibility = 0) {
 
+  # If storage root doesn't end in a slash, add one
   if (!grepl("\\/$", root))
     root <- paste0(root, "/")
+
+  # # If a storage root entry already exists, with the same root but a different
+  # # name, then increment the name
+  # root <- get_entry(table = "storage_root", query = list(root = root))
+  # root_exists <- !is.null(root)
+  #
+  # name <- get_entry(table = "storage_root", query = list(name = name))
+  # name_exists
 
   post_data(table = "storage_root",
             data = list(name = name,

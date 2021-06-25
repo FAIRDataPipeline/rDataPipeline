@@ -1,5 +1,5 @@
 #' get_token
 #'
 get_token <- function() {
-  readLines(file.path("~", ".scrc", "token"))
+  readLines(file.path("~", ".fair", "registry", "token"))
 }

@@ -1,5 +1,5 @@
 #' stop_server
 #'
 stop_server <- function() {
-  system2("sh", "~/.scrc/scripts/stop_scrc_server")
+  system2("sh", "~/.fair/registry/scripts/stop_scrc_server")
 }

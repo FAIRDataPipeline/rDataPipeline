@@ -33,8 +33,9 @@ link_read <- function(handle, name) {
   doi <- this_read$doi_or_unique_name
   external_object <- get_entry("external_object",
                                list(doi_or_unique_name = doi,
-                                    title = this_read$title,
-                                    version = this_read$version)) # data product
+                                    title = this_read$title))
+                               # ,
+                               #      version = this_read$version)) # data product
   assertthat::assert_that(length(external_object) == 1)
   external_object <- external_object[[1]]
 

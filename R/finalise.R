@@ -65,6 +65,13 @@ finalise <- function(handle) {
 
       this_version <- unique(this_metadata$version)
 
+      if (grepl("\\$\\{\\{DATETIME\\}\\}", this_version)) {
+        datetime <- gsub("-", "", Sys.Date())
+        this_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
+                        this_version)
+
+      }
+
       # Record file location in data registry
 
       storage_location <- gsub(datastore, "", new_path)
@@ -173,7 +180,7 @@ finalise <- function(handle) {
 
   # record the code run in the data registry --------------------------------
   patch_data(url = handle$code_run,
-             data = list(inputs = as.list(handle$inputs$object_url),
+             data = list(inputs = as.list(handle$inputs$object_id),
                          outputs = as.list(handle$outputs$component_url)))
 
   # coderun_id <- new_code_run(run_date = Sys.time(),

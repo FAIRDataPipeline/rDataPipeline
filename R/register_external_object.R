@@ -61,10 +61,14 @@ register_external_object <- function(register_this,
     hash = hash,
     storage_root_url = datastore_root_url)
 
+  # file_type <- new_file_type(name = ,
+  #                            extension = )
+  # file_type_url <- get_url(file_type)
+
   datastore_object_url <- new_object(
     storage_location_url = datastore_location_url)
-
-
+    # ,
+    # file_type = file_type_url)
 
   # Source data (e.g. *.csv) is defined as having a single component
   # called "raw_data"
@@ -77,15 +81,15 @@ register_external_object <- function(register_this,
 
   # Get release_date
   release_date <- register_this$release_date
-  if ("DATETIME" %in% names(release_date)) {
+  if ("${{DATETIME}}" == release_date) {
     release_date <- Sys.time()
   }
 
   # Get version
   version <- register_this$version
-  if (grepl("\\{DATETIME\\}", version)) {
+  if (grepl("\\$\\{\\{DATETIME\\}\\}", version)) {
     datetime <- gsub("-", "", Sys.Date())
-    version <- gsub("\\{DATETIME\\}", datetime, version)
+    version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime, version)
   }
 
   externalobject_url <- new_external_object(
