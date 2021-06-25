@@ -1,4 +1,4 @@
-# Write test/array v.0.1.0 in 'username' namespace
+library(rFDP)
 
 config_file <- "config1.yaml"
 fdp_pull(config_file)
