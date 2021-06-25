@@ -29,6 +29,26 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Generate working config.yaml --------------------------------------------
 
+  # Check for presence of `read` section
+  if (any("read" %in% names(yaml))) {
+
+    read <- yaml$read
+
+    # If names(read) is not null, then a single entry has been added that
+    # is not in a list, so put it in a list
+    if (!all(is.null(names(read))))
+      read <- list(read)
+
+    # Ensure version number is present
+    for (i in seq_along(read)) {
+      read_version <- fdp_resolve_read(read[[i]], yaml)
+      read[[i]]$use$version <- read_version # version should be here
+    }
+
+  } else {
+    read <- list()
+  }
+
   # Check for presence of `register` section
   if (any("register" %in% names(yaml))) {
 
@@ -42,23 +62,24 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     # Find `register:` entries. Then, since fdp pull has already registered
     # these entries, re-list them under `read:` in the working config.yaml file
     types <- c("external_object", "data_product", "object")
-    for (x in register) {
+    for (x in seq_along(register)) {
       for (y in types) {
-        entry <- x[[y]]
+        entry <- register[[x]][[y]]
         if (!is.null(entry)) {
           index <- length(read) + 1
           read[[index]] <- list()
           read[[index]][y] <- entry
-          read[[index]]$doi_or_unique_name <- x$unique_name
-          read[[index]]$title <- x$title
+          read[[index]]$doi_or_unique_name <- register[[x]]$unique_name
+          read[[index]]$title <- register[[x]]$title
 
           # YUCK!
-          if (grepl("\\{DATETIME\\}", x$version)) {
+          if (grepl("\\$\\{\\{DATETIME\\}\\}", register[[x]]$version)) {
             datetime <- gsub("-", "", Sys.Date())
-            version <- gsub("\\{DATETIME\\}", datetime, x$version)
+            version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
+                            register[[x]]$version)
 
           } else {
-            version <- x$version
+            version <- register[[x]]$version
           }
 
           read[[index]]$version <- version
@@ -66,70 +87,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
       }
     }
   }
-
-
-  # Check for presence of `read` section
-  if (any("read" %in% names(yaml))) {
-
-    read <- yaml$read
-
-    # If names(read) is not null, then a single entry has been added that
-    # is not in a list, so put it in a list
-    if (!all(is.null(names(read))))
-      read <- list(read)
-
-    for (i in seq_along(read)) {
-      this_read <- read[[i]]
-
-      # Get alias
-      if ("use" %in% names(this_read)) {
-        alias <- this_read$use
-      } else {
-        alias <- list()
-      }
-
-      # Get data product
-      if ("data_product" %in% names(alias)) {
-        read_dataproduct <- alias$data_product
-      } else {
-        read_dataproduct <- this_read$data_product
-      }
-
-      # Get namespace
-      if ("namespace" %in% names(alias)) {
-        read_namespace <- alias$namespace
-      } else {
-        read_namespace <- yaml$run_metadata$default_input_namespace
-      }
-
-      read_namespace_url <- new_namespace(read_namespace)
-      read_namespace_id <- extract_id(read_namespace_url)
-
-      # Get version
-      if ("version" %in% names(alias)) {
-        read_version <- alias$version
-
-      } else {
-        entries <- get_entry("data_product",
-                             list(name = read_dataproduct,
-                                  namespace = read_namespace_id))
-        if (is.null(entries)) {
-          stop("Something went wrong")
-
-        } else {
-          read_version <- lapply(entries, function(x) x$version) %>%
-            unlist() %>%
-            max()
-        }
-
-        read[[i]]$use$version <- read_version
-      }
-    }
-
-  } else {
-    read <- list()
-  }
-
 
   # Check for presence of `write` section
   if (any("write" %in% names(yaml))) {
@@ -143,6 +100,13 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
     for (i in seq_along(write)) {
       this_write <- write[[i]]
+
+      # Get write version
+      if ("use" %in% names(this_write)) {
+        alias <- this_write$use
+      } else {
+        alias <- list()
+      }
 
       # Get data product
       if ("data_product" %in% names(alias)) {
@@ -161,51 +125,47 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
       write_namespace_url <- new_namespace(write_namespace)
       write_namespace_id <- extract_id(write_namespace_url)
 
-      # Get write version
-      if ("use" %in% names(this_write)) {
-        alias <- this_write$use
-      } else {
-        alias <- list()
-      }
+      if ("version" %in% names(this_write)) { # version before `use:` block
+        version <- this_write$version
 
-      # If version is listed in the `use:` block
-      if ("version" %in% names(alias)) {
+      } else if ("version" %in% names(alias)) { # version in `use:` block
         version <- alias$version
 
-        if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {
-          stop("Not written")
+      } else { # version missing
 
-        } else if (grepl("\\$\\{\\{MINOR\\}\\}", version)) {
-          stop("Not written")
-
-        } else if (grepl("\\$\\{\\{MAJOR\\}\\}", version)) {
-          stop("Not written")
-
-        } else if (grepl("\\$\\{\\{DATETIME\\}\\}", alias$version)) {
-          datetime <- gsub("-", "", Sys.Date())
-          write_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
-                                alias$version)
-
-        } else {
-          write_version <- alias$version
-        }
-
-        # If version isn't listed in the `use:` block
-      } else {
         entries <- get_entry("data_product",
-                             list(name = data_product,
+                             list(name = write_dataproduct,
                                   namespace = write_namespace_id))
 
         if (is.null(entries)) {
-          write_version <- "0.0.1"
+          version <- "0.0.1"
 
         } else {
-          write_version <- lapply(entries, function(x) x$version) %>%
+          version <- lapply(entries, function(x) x$version) %>%
             unlist() %>%
             max()
         }
+        write[[i]]$version <- write_version # version should be heres
       }
-      write[[i]]$use$version <- write_version
+
+      # Take care of variables
+      if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {
+        stop("Not written")
+
+      } else if (grepl("\\$\\{\\{MINOR\\}\\}", version)) {
+        stop("Not written")
+
+      } else if (grepl("\\$\\{\\{MAJOR\\}\\}", version)) {
+        stop("Not written")
+
+      } else if (grepl("\\$\\{\\{DATETIME\\}\\}", version)) {
+        datetime <- gsub("-", "", Sys.Date())
+        write_version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
+                              version)
+
+      } else {
+        write_version <- version
+      }
 
       # If a data product already exists with the same name, version, and
       # namespace, throw an error
@@ -216,7 +176,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
       if (!is.null(check_exists))
         usethis::ui_stop("A data product with the same name ({write_dataproduct}), version ({write_version}), and namespace ({write_namespace}) already exists")
-
     }
 
   } else {
