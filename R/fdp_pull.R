@@ -16,7 +16,7 @@ fdp_pull <- function(path = "config.yaml") {
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
-  datastore <- yaml$run_metadata$default_data_store
+  datastore <- yaml$run_metadata$write_data_store
   namespace <- yaml$run_metadata$default_output_namespace
 
   # Download any data required by `read:` from the remote data store and record
@@ -51,13 +51,6 @@ fdp_pull <- function(path = "config.yaml") {
     for (i in seq_along(register)) {
 
       register_this <- register[[i]]
-
-      # Check that release_date is in the correct format
-
-      release_date <- register_this$release_date
-      # if (is.na(lubridate::ymd_hm(release_date)))
-      #   usethis::ui_stop(paste(usethis::ui_field("release_date"), "has wrong format "))
-
 
       # Local data store location
       local_path <- file.path(paste0(datastore, namespace),
