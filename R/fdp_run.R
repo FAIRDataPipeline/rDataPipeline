@@ -239,10 +239,16 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   assertthat::assert_that("local_repo" %in% names(yaml$run_metadata))
 
   # Check local repo is clean
-  if (!skip) check_local_repo(yaml$run_metadata$local_repo)
+  local_repo <- yaml$run_metadata$local_repo
+  if (!skip) check_local_repo(local_repo)
 
   # Get hash of latest commit
-  sha <- git2r::sha(git2r::last_commit(yaml$run_metadata$local_repo))
+  if (!dir.exists(local_repo))
+    usethis::ui_stop("Directory, {local_repo}, does not exist")
+  if (!git2r::in_repository(local_repo))
+    usethis::ui_stop("Directory, {local_repo}, is not a git repository")
+
+  sha <- git2r::sha(git2r::last_commit(local_repo))
 
   cli::cli_alert_info("Checking local repository status")
 
