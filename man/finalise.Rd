@@ -10,5 +10,5 @@ finalise(handle)
 \item{handle}{\code{fdp} object}
 }
 \description{
-finalise
+Push metadata to registry
 }

@@ -1,6 +1,10 @@
 #' finalise
 #'
+#' Push metadata to registry
+#'
 #' @param handle \code{fdp} object
+#'
+#' @export
 #'
 finalise <- function(handle) {
 
