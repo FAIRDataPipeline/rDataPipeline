@@ -201,10 +201,18 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
                                             accessibility = 0)
 
   config_hash <- get_file_hash(config_path)
-  config_location_url <- new_storage_location(
-    path = config_path,
-    hash = config_hash,
-    storage_root_url = config_storageroot_id)
+
+  config_exists <- get_entry("storage_location", list(hash = config_hash))
+
+  if (is.null(config_exists)) {
+    config_location_url <- new_storage_location(
+      path = config_path,
+      hash = config_hash,
+      storage_root_url = config_storageroot_id)
+
+  } else {
+    config_location_url <- config_exists[[1]]$url
+  }
 
   config_object_url <- new_object(
     storage_location_url = config_location_url,
@@ -224,10 +232,18 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
   script_storageroot_id <- config_storageroot_id
 
   script_hash <- get_file_hash(submission_script_path)
-  script_location_url <- new_storage_location(
-    path = submission_script_path,
-    hash = script_hash,
-    storage_root_url = script_storageroot_id)
+
+  script_exists <- get_entry("storage_location", list(hash = script_hash))
+
+  if (is.null(script_exists)) {
+    script_location_url <- new_storage_location(
+      path = submission_script_path,
+      hash = script_hash,
+      storage_root_url = script_storageroot_id)
+
+  } else {
+    script_location_url <- script_exists[[1]]$url
+  }
 
   script_object_url <- new_object(
     storage_location_url = script_location_url,
@@ -277,15 +293,29 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
   # Record analysis / processing script location in data registry -----------
 
   repo_storageroot_url <- new_storage_root(name = "github",
-                                           root = "https://github.com/",
-                                           accessibility = 0)
-  repo_location_url <- new_storage_location(path = repo_name,
-                                            hash = sha,
-                                            storage_root_url = repo_storageroot_url)
+                                           root = "https://github.com/")
 
-  repo_object_url <- new_object(
-    storage_location_url = repo_location_url,
-    description = "Analysis / processing script location")
+  proc_exists <- get_entry("storage_location", list(hash = script_hash))
+
+  if (is.null(proc_exists)) {
+    proc_location_url <- new_storage_location(
+      path = repo_name,
+      hash = sha,
+      storage_root_url = repo_storageroot_url)
+
+    proc_object_url <- new_object(
+      storage_location_url = proc_location_url,
+      description = "Analysis / processing script location")
+
+  } else {
+    obj_exists <- get_entry("object",
+                            list(storage_location = proc_exists[[1]]$url))
+    if (is.null(obj_exists)) {
+      proc_object_url <- new_object(
+        storage_location_url = proc_exists[[1]]$url,
+        description = "Analysis / processing script location")
+    }
+  }
 
   cli::cli_alert_success("Writing processing script to local registry")
 }
