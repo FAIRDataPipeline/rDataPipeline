@@ -10,8 +10,6 @@ finalise <- function(handle) {
 
   # record data product metadata (e.g. location, components, various descriptions, issues) in the data registry --------
 
-  run_server()
-
   # Add local data store root to the data registry
 
   datastore <- handle$yaml$run_metadata$write_data_store
@@ -195,7 +193,4 @@ finalise <- function(handle) {
   #                           inputs_urls = as.list(handle$inputs$object_url),
   #                           outputs_urls = as.list(handle$outputs$component_url))
 
-
-
-  stop_server()
 }

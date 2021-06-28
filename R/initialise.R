@@ -24,8 +24,6 @@ initialise <- function() {
 
   cli::cli_alert_info("Reading {.file {config_file}} from data store")
 
-  run_server()
-
   # Get working config.yaml object url --------------------------------------
 
   config_path <- file.path(directory, "config.yaml")
@@ -72,8 +70,6 @@ initialise <- function() {
 
   field <- "code_run"
   cli::cli_alert_success("Writing new {.field {field}} to local registry")
-
-  stop_server()
 
   # Write to handle
   fdp$new(yaml = yaml,

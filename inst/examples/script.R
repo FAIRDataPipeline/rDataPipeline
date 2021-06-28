@@ -1,5 +1,7 @@
 library(rFDP)
 
+run_server()
+
 config_file <- "config1.yaml"
 fdp_pull(config_file)
 fdp_run(config_file, skip = TRUE)

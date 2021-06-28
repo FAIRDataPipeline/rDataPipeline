@@ -10,8 +10,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   # Save names in data store
   config_file <- "config.yaml"
 
-  run_server()
-
   # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
@@ -278,6 +276,4 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     description = "Analysis / processing script location")
 
   cli::cli_alert_success("Writing processing script to local registry")
-
-  stop_server()
 }
