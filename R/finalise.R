@@ -81,10 +81,15 @@ finalise <- function(handle) {
       dp_exists <- get_entry("data_product", list(name = dp,
                                                   version = this_version))
 
-      storage_location_url <- new_storage_location(
-        path = storage_location,
-        hash = hash,
-        storage_root_url = datastore_root_url)
+      if (is.null(dp_exists)) {
+        storage_location_url <- new_storage_location(
+          path = storage_location,
+          hash = hash,
+          storage_root_url = datastore_root_url)
+
+      } else {
+        storage_location_url <- dp_exists$url
+      }
 
       object_url <- new_object(storage_location_url = storage_location_url,
                                description = description)
