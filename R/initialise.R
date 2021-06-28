@@ -20,8 +20,9 @@ initialise <- function(config, script) {
 
   # Get working config.yaml object url --------------------------------------
 
+  config_hash <- get_file_hash(config)
   config_location_url <- get_entry("storage_location",
-                                   list(path = config))
+                                   list(hash = config_hash))
   assertthat::assert_that(length(config_location_url) == 1)
   config_location_id <- extract_id(config_location_url[[1]]$url)
 
@@ -35,8 +36,9 @@ initialise <- function(config, script) {
 
   # Get script object url ---------------------------------------------------
 
+  script_hash <- get_file_hash(script)
   script_location_url <- get_entry("storage_location",
-                                   list(path = script))
+                                   list(hash = script_hash))
   assertthat::assert_that(length(script_location_url) == 1)
   script_location_id <- extract_id(script_location_url[[1]]$url)
 
