@@ -4,10 +4,12 @@
 \alias{resolve_version}
 \title{resolve_version}
 \usage{
-resolve_version(version)
+resolve_version(version, data_product, namespace_id)
 }
 \arguments{
 \item{version}{version number}
+
+\item{namespace_id}{}
 }
 \description{
 resolve_version
