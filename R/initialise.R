@@ -1,37 +1,27 @@
 #' initialise
 #'
-#' Reads in config.yaml file and generates new entry in code_run and returns id
-#' and creates new submission_script in local registry and if necessary creates
-#' a new code_repo entry in local registry.
+#' Reads in a working config file and generates new Code Run entry.
+#'
+#' @param config a \code{string} specifying the location of the working
+#' config file in the data store
+#' @param script a \code{string} specifying the location of the submission
+#' script in the data store
 #'
 #' @export
 #'
-initialise <- function() {
+initialise <- function(config, script) {
 
   # Read working config.yaml ------------------------------------------------
-
-  directory <- Sys.getenv("FDP_CONFIG_DIR")
-  config_file <- "config.yaml"
-  script_file <- "script.sh"
-
-  if (directory == "")
-    cli::cli_alert_danger(
-      "{.file {config_file}} is missing from data store, please try again")
-
-  yaml <- yaml::read_yaml(file.path(directory, "config.yaml"))
+  yaml <- yaml::read_yaml(config)
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
 
-  cli::cli_alert_info("Reading {.file {config_file}} from data store")
-
-  run_server()
+  cli::cli_alert_info("Reading {.file {config}} from data store")
 
   # Get working config.yaml object url --------------------------------------
 
-  config_path <- file.path(directory, "config.yaml")
-
   config_location_url <- get_entry("storage_location",
-                                   list(path = config_path))
+                                   list(path = config))
   assertthat::assert_that(length(config_location_url) == 1)
   config_location_id <- extract_id(config_location_url[[1]]$url)
 
@@ -41,14 +31,12 @@ initialise <- function() {
   config_object_url <- config_object_url[[1]]$url
 
   cli::cli_alert_info(
-    "Reading {.file {config_file}} metadata from local registry")
+    "Reading {.file {config}} metadata from local registry")
 
   # Get script object url ---------------------------------------------------
 
-  script_path <- file.path(directory, "script.sh")
-
   script_location_url <- get_entry("storage_location",
-                                   list(path = script_path))
+                                   list(path = script))
   assertthat::assert_that(length(script_location_url) == 1)
   script_location_id <- extract_id(script_location_url[[1]]$url)
 
@@ -58,7 +46,7 @@ initialise <- function() {
   script_object_url <- script_object_url[[1]]$url
 
   cli::cli_alert_info(
-    "Reading {.file {script_file}} metadata from local registry")
+    "Reading {.file {script}} metadata from local registry")
 
   # record the code run in the data registry --------------------------------
 
@@ -72,8 +60,6 @@ initialise <- function() {
 
   field <- "code_run"
   cli::cli_alert_success("Writing new {.field {field}} to local registry")
-
-  stop_server()
 
   # Write to handle
   fdp$new(yaml = yaml,

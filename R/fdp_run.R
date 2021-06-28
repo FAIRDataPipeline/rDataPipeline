@@ -10,8 +10,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   # Save names in data store
   config_file <- "config.yaml"
 
-  run_server()
-
   # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
@@ -101,7 +99,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     for (i in seq_along(write)) {
       this_write <- write[[i]]
 
-      # Get write version
+      # Get alias
       if ("use" %in% names(this_write)) {
         alias <- this_write$use
       } else {
@@ -125,11 +123,18 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
       write_namespace_url <- new_namespace(write_namespace)
       write_namespace_id <- extract_id(write_namespace_url)
 
+      # Get version
       if ("version" %in% names(this_write)) { # version before `use:` block
-        write_version <- resolve_version(this_write$version)
+        write_version <- resolve_version(version = this_write$version,
+                                         data_product = write_dataproduct,
+                                         namespace_id = write_namespace_id)
+        write[[i]]$version <- write_version # version should be here
 
       } else if ("version" %in% names(alias)) { # version in `use:` block
-        write_version <- resolve_version(alias$version)
+        write_version <- resolve_version(version = alias$version,
+                                         data_product = write_dataproduct,
+                                         namespace_id = write_namespace_id)
+        write[[i]]$use$version <- write_version # version should be here
 
       } else { # version missing
 
@@ -149,7 +154,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
           tmp[[1]]$patch <- as.integer(patch + 1)
           write_version <- as.character(tmp)
         }
-        write[[i]]$version <- write_version # version should be heres
+        write[[i]]$version <- write_version # version should be here
       }
 
       # If a data product already exists with the same name, version, and
@@ -278,6 +283,4 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     description = "Analysis / processing script location")
 
   cli::cli_alert_success("Writing processing script to local registry")
-
-  stop_server()
 }

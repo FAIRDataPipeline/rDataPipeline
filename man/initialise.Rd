@@ -4,10 +4,15 @@
 \alias{initialise}
 \title{initialise}
 \usage{
-initialise()
+initialise(config, script)
+}
+\arguments{
+\item{config}{a \code{string} specifying the location of the working
+config file in the data store}
+
+\item{script}{a \code{string} specifying the location of the submission
+script in the data store}
 }
 \description{
-Reads in config.yaml file and generates new entry in code_run and returns id
-and creates new submission_script in local registry and if necessary creates
-a new code_repo entry in local registry.
+Reads in a working config file and generates new Code Run entry.
 }

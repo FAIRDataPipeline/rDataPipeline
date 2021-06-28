@@ -2,6 +2,8 @@
 #'
 #' FAIR Data Pipeline API
 #'
+#' For more information see [https://fairdatapipeline.github.io](https://fairdatapipeline.github.io)
+#'
 #' @name rFDP-package
 #' @aliases rFDP
 #' @docType package
