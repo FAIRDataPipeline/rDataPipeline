@@ -16,14 +16,13 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    cli::cli_alert_info("Reading {.file {config_file}}")
+    cli::cli_alert_info("Reading {.file {path}}")
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
   # Extract local data store location
   localstore <- yaml$run_metadata$write_data_store
-  if (grepl("/$", localstore))
-    localstore <- gsub("/$", "", localstore)
+  localstore <- file.path(dirname(localstore), basename(localstore))
 
   run_metadata <- yaml$run_metadata
 
@@ -43,6 +42,7 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
     for (i in seq_along(read)) {
       read_version <- fdp_resolve_read(read[[i]], yaml)
       read[[i]]$use$version <- read_version # version should be here
+      read[[i]]$version <- NULL
     }
 
   } else {
@@ -61,7 +61,7 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
 
     # Find `register:` entries. Then, since fdp pull has already registered
     # these entries, re-list them under `read:` in the working config.yaml file
-    types <- c("external_object", "data_product", "object")
+    types <- c("external_object", "data_product")
     for (x in seq_along(register)) {
       for (y in types) {
         entry <- register[[x]][[y]]
@@ -130,7 +130,8 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
         write_version <- resolve_version(version = this_write$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
-        write[[i]]$version <- write_version # version should be here
+        write[[i]]$use$version <- write_version # version should be here
+        write[[i]]$version <- NULL
 
       } else if ("version" %in% names(alias)) { # version in `use:` block
         write_version <- resolve_version(version = alias$version,
@@ -262,9 +263,11 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
   # Get GitHub username/repository ------------------------------------------
 
   if ("remote_repo" %in% names(yaml$run_metadata)) {
-    repo_name <- gsub("https://github.com/", yaml$run_metadata$remote_repo)
+    repo_name <- gsub("https://github.com/", "", yaml$run_metadata$remote_repo)
   } else {
     repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
+    if (length(repo_name) > 1) stop("Add remote_repo field")
+
     repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
     repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
   }
