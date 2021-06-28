@@ -1,11 +1,11 @@
-#' fdp_run
+#' fair_run
 #'
 #' @param path string
 #' @param skip don't bother checking whether the repo is clean
 #'
 #' @export
 #'
-fdp_run <- function(path = "config.yaml", skip = FALSE) {
+fair_run <- function(path = "config.yaml", skip = FALSE) {
 
   run_server()
 

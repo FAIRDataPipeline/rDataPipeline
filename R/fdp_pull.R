@@ -1,10 +1,10 @@
-#' fdp_pull
+#' fair_pull
 #'
 #' @param path path
 #'
 #' @export
 #'
-fdp_pull <- function(path = "config.yaml") {
+fair_pull <- function(path = "config.yaml") {
 
   # Read config.yaml --------------------------------------------------------
 
