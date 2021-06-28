@@ -7,7 +7,9 @@
 get_max_version(data_product, namespace_id)
 }
 \arguments{
-\item{namespace_id}{}
+\item{data_product}{data_product}
+
+\item{namespace_id}{namespace_id}
 }
 \description{
 get_max_version

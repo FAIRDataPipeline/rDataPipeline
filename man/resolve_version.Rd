@@ -9,7 +9,9 @@ resolve_version(version, data_product, namespace_id)
 \arguments{
 \item{version}{version number}
 
-\item{namespace_id}{}
+\item{data_product}{data_product}
+
+\item{namespace_id}{namespace_id}
 }
 \description{
 resolve_version

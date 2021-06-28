@@ -7,6 +7,8 @@
 #'
 fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
+  run_server()
+
   # Save names in data store
   config_file <- "config.yaml"
 
