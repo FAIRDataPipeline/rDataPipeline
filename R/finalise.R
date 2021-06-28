@@ -16,8 +16,7 @@ finalise <- function(handle) {
   datastore_name <- paste("local datastore:", datastore)
   datastore_root_url <- new_storage_root(
     name = datastore_name,
-    root = datastore,
-    accessibility = 0) # TODO
+    root = datastore)
 
   # rename the data product as {hash}.h5 -----------------------------------
 
