@@ -76,7 +76,7 @@ write_distribution <- function(filename,
 
   # Checks ------------------------------------------------------------------
 
-  check_yaml_for_write(handle, data_product)
+  check_yaml_write(handle, data_product)
 
   # Get metadata ------------------------------------------------------------
 
