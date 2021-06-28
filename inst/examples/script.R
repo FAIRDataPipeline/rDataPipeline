@@ -22,4 +22,4 @@ write_array(array = as.matrix(data),
 finalise(handle)
 
 file <- handle$outputs$path
-findme(file)
+rFDP:::findme(file)
