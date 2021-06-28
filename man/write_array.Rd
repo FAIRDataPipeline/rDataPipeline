@@ -19,7 +19,7 @@ write_array(
 \arguments{
 \item{array}{an \code{array} containing the data}
 
-\item{handle}{list}
+\item{handle}{\code{fdp} object}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
@@ -47,6 +47,7 @@ Function to populate hdf5 file with array type data.
 }
 \seealso{
 Other write functions: 
+\code{\link{write_estimate}()},
 \code{\link{write_table}()}
 }
 \concept{write functions}

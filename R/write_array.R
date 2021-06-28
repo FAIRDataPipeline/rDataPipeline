@@ -3,7 +3,7 @@
 #' Function to populate hdf5 file with array type data.
 #'
 #' @param array an \code{array} containing the data
-#' @param handle list
+#' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the hdf5 file
 #' @param description a \code{string} describing the data product component
@@ -33,63 +33,16 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
-  # Checks ------------------------------------------------------------------
-
-  if (!"write" %in% names(handle$yaml))
-    usethis::ui_stop(paste(usethis::ui_field("write"),
-                           "section not listed in config.yaml"))
-
-  listed <- lapply(handle$yaml$write, function(x) x$data_product) %>% unlist()
-
-  if (!data_product %in% listed)
-    usethis::ui_stop(paste(usethis::ui_field(data_product),
-                           "not listed in config.yaml"))
-
   # Get metadata ------------------------------------------------------------
-
-  index <- lapply(handle$yaml$write, function(x)
-    data_product == x$data_product) %>%
-    unlist() %>% which()
-  this_dp <- handle$yaml$write[[index]]
 
   datastore <- handle$yaml$run_metadata$write_data_store
 
-  # Get alias
-  if ("use" %in% names(this_dp)) {
-    alias <- this_dp$use
-  } else {
-    alias <- list()
-  }
-
-  # Get namespace
-  if ("namespace" %in% names(alias)) {
-    namespace <- alias$namespace
-  } else {
-    namespace <- handle$yaml$run_metadata$default_output_namespace
-  }
-
-  if ("data_product" %in% names(alias)) {
-    data_product <- alias$data_product
-  } else {
-    data_product <- this_dp$data_product
-  }
-
-  if ("version" %in% names(alias)) {
-    version <- alias$version
-  } else {
-    version <- this_dp$version
-  }
-
-  # Extract / set save location
-  if (data_product %in% handle$outputs$data_product) {
-    tmp <- handle$outputs
-    ind <- which(tmp$data_product == data_product)
-    path <- unique(tmp$path[ind])
-
-  } else {
-    filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".h5")
-    path <- file.path(paste0(datastore, namespace), data_product, filename)
-  }
+  write_metadata <- resolve_write(handle = handle,
+                                  data_product = data_product,
+                                  file_type = "h5")
+  data_product <- write_metadata$data_product
+  version <- write_metadata$version
+  path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
 
@@ -115,7 +68,7 @@ write_array <- function(array,
 
   # Generate directory structure
   directory <- dirname(path)
-  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+  if(!dir.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Write hdf5 file
   if(file.exists(path)) {

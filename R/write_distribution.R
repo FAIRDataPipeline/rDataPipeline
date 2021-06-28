@@ -1,4 +1,4 @@
-#' Create distribution-type TOML file
+#' Write distribution-type TOML file
 #'
 #' Function to populate toml file with distribution type data, *e.g.*
 #' \itemize{
@@ -30,12 +30,12 @@
 #'
 #' @examples
 #' filename <- "0.1.0.toml"
-#' data_product_name <- "some/descriptive/name/latency-period"
+#' data_product_name <- "sonia/latency-period"
 #'
 #' # Write a single distribution into a toml file
 #' dist <- list(name = "latency-period",
-#'                   distribution = "gamma",
-#'                   parameters = list(shape = 2.0, scale = 3.0))
+#'              distribution = "gamma",
+#'              parameters = list(shape = 2.0, scale = 3.0))
 #'
 #' create_distribution(filename = filename,
 #'                                 path = data_product_name,
@@ -70,9 +70,17 @@
 #'
 #' file.remove(file.path(data_product_name, filename))
 #'
-create_distribution <- function(filename,
-                                path,
-                                distribution) {
+write_distribution <- function(filename,
+                               path,
+                               distribution) {
+
+  # Checks ------------------------------------------------------------------
+
+  check_yaml_for_write(handle, data_product)
+
+  # Get metadata ------------------------------------------------------------
+
+
   # Check filename is a toml
   if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
 

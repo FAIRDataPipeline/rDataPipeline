@@ -1,7 +1,7 @@
 #' resolve_version
 #' @param version version number
-#' @param data_product
-#' @param namespace_id
+#' @param data_product data_product
+#' @param namespace_id namespace_id
 #'
 resolve_version <- function(version, data_product, namespace_id) {
 
