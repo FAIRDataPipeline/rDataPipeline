@@ -7,6 +7,7 @@
 resolve_write <- function(handle, data_product, file_type) {
 
   check_yaml_write(handle, data_product)
+  datastore <- handle$yaml$run_metadata$write_data_store
 
   index <- lapply(handle$yaml$write, function(x)
     data_product == x$data_product) %>%

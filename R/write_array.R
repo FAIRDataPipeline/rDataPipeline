@@ -35,8 +35,6 @@ write_array <- function(array,
 
   # Get metadata ------------------------------------------------------------
 
-  datastore <- handle$yaml$run_metadata$write_data_store
-
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = "h5")
