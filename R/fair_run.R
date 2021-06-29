@@ -295,7 +295,7 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
   repo_storageroot_url <- new_storage_root(name = "github",
                                            root = "https://github.com/")
 
-  proc_exists <- get_entry("storage_location", list(hash = script_hash))
+  proc_exists <- get_entry("storage_location", list(hash = sha))
 
   if (is.null(proc_exists)) {
     proc_location_url <- new_storage_location(
