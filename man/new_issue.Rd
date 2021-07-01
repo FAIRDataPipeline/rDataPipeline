@@ -4,16 +4,13 @@
 \alias{new_issue}
 \title{Post entry to issue table}
 \usage{
-new_issue(severity, description, object_issues, component_issues)
+new_issue(severity, description, component_issues)
 }
 \arguments{
 \item{severity}{an \code{integer} specifying the severity of the \code{issue}}
 
 \item{description}{a \code{string} containing a free text description of the
 \code{issue}}
-
-\item{object_issues}{a \code{list} of \code{object} URLs with which the
-\code{issue} is associated; this can be an empty list}
 
 \item{component_issues}{a \code{list} of \code{object_component} URLs with
 which the \code{issue} is associated; this can be an empty list}

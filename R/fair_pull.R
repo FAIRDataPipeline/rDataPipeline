@@ -1,10 +1,10 @@
-#' fdp_pull
+#' fair_pull
 #'
 #' @param path path
 #'
 #' @export
 #'
-fdp_pull <- function(path = "config.yaml") {
+fair_pull <- function(path = "config.yaml") {
 
   # Read config.yaml --------------------------------------------------------
 
@@ -41,7 +41,7 @@ fdp_pull <- function(path = "config.yaml") {
       register <- list(register)
 
     # Find entry to register
-    types <- c("external_object", "data_product", "object")
+    types <- c("external_object", "data_product")
     entries <- lapply(register, function(x)
       lapply(types, function(y) x[[y]]) %>% unlist())
 

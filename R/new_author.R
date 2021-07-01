@@ -3,24 +3,24 @@
 #' Upload information to the \code{author} table in the data registry
 #'
 #' @param family_name a \code{string} specifying the author's family name
-#' @param personal_name a \code{string} specifying the author's first name
+#' @param given_name a \code{string} specifying the author's first name
 #' and / or middle name and / or any initials
-#' @param orcid (optional) a \code{string} specifying the ORCID iD of the
-#' \code{author}
+#' @param identifier (optional) a \code{string} specifying the full URL of
+#' the \code{author}s identifier, *e.g.* ORCID iD
 #'
 #' @family new functions
 #'
 #' @export
 #'
 new_author <- function(family_name,
-                       personal_name,
-                       orcid) {
+                       given_name,
+                       identifier) {
 
   data <- list(family_name = family_name,
-               personal_name = personal_name)
+               given_name = given_name)
 
-  if (!missing(orcid))
-    data$orcid <- orcid
+  if (!missing(identifier))
+    data$identifier <- identifier
 
   post_data(table = "author",
             data =  data)

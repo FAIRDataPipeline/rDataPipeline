@@ -1,63 +1,74 @@
-#' Create estimate-type TOML file
+#' Write estimate-type TOML file
 #'
-#' Function to populate toml file with point-estimate type data, *e.g.*
-#' \itemize{
-#' \item{Generate a single toml file containing a single point-estimate component}
-#' \item{Generate a single toml file containing multiple point-estimate components}
-#' }
-#' If a file already exists at the specified location, an error will be returned.
+#' Function to populate toml file with point-estimate type data. If a file
+#' already exists at the specified location, an additional component will be
+#' added.
 #'
-#' @param filename a \code{string} specifying the name of the toml file
-#' @param path a \code{string} specifying the directory in which you want to
-#' save the toml file; this will be automatically generated if it doesn't
-#' already exist
-#' @param parameters a \code{list} (see Examples)
+#' @param value an object of class \code{numeric}
+#' @param handle \code{fdp} object
+#' @param data_product a \code{string} specifying the name of the data product
+#' @param component a \code{string} specifying a location within the toml file
+#' @param description a \code{string} describing the data product component
 #'
-#' @family create functions
+#' @family write functions
 #'
 #' @export
 #'
-#' @examples
-#' filename <- "0.1.0.toml"
-#' data_product_name <- "some/descriptive/name/asymptomatic-period"
-#'
-#' # Write a single estimate into a toml file
-#' create_estimate(filename = filename,
-#'                 path = data_product_name,
-#'                 parameters = list(`asymptomatic-period` = 192.0))
-#'
-#' file.remove(file.path(data_product_name, filename))
-#'
-#' # Write multiple estimates into a toml file
-#' create_estimate(filename = filename,
-#'                 path = data_product_name,
-#'                 parameters = list(`asymptomatic-period-1` = 192.0,
-#'                                   `asymptomatic-period-2` = 190.2))
-#'
-#' file.remove(file.path(data_product_name, filename))
-#'
-create_estimate <- function(filename,
-                            path,
-                            parameters) {
-  # Check filename is a toml
-  if(!(grepl(".toml$", filename))) stop("filename must be *.toml")
+write_estimate <- function(value,
+                           handle,
+                           data_product,
+                           component,
+                           description) {
 
-  # If path is missing, use working directory
-  if(missing(path)) path <- getwd()
+  # Get metadata ------------------------------------------------------------
 
-  # If file exists, stop
-  if(file.exists(file.path(path, filename)))
-    stop("File already exists at this location")
+  datastore <- handle$yaml$run_metadata$write_data_store
 
-  # If path doesn't exist, generate directory structure
-  if(!file.exists(path))
-    dir.create(path, recursive = TRUE)
+  write_metadata <- resolve_write(handle = handle,
+                                  data_product = data_product,
+                                  file_type = "toml")
+  data_product <- write_metadata$data_product
+  version <- write_metadata$version
+  path <- write_metadata$path
 
-  # Write toml
-  tmp <- lapply(seq_along(parameters), function(i) {
-    paste0("[", names(parameters)[[i]], "]\ntype = \"point-estimate\"",
-           "\nvalue = ", parameters[[i]], "\n")
-  })
+  # Checks ------------------------------------------------------------------
 
-  cat(paste(tmp, collapse = "\n"), file = file.path(path, filename))
+  if (!is.numeric(value))
+    usethis::ui_stop("{value} should be numeric")
+
+  # If directory doesn't exist, generate directory structure
+  directory <- dirname(path)
+  if(!dir.exists(directory)) dir.create(directory, recursive = TRUE)
+
+  # Write toml file ---------------------------------------------------------
+
+  contents <- paste0("[", data_product, "]\n",
+                     "type = \"point-estimate\"",
+                     "\nvalue = ", value, "\n")
+
+  if (file.exists(path)) {
+
+    # Check that entry doesn't already exist
+    existing <- read_estimate(path)
+    if (data_product %in% names(existing))
+      usethis::ui_stop("{data_product} is already listed in toml file")
+
+    cat(contents, file = path, append = FALSE)
+
+  } else {
+    cat(paste0("\n", contents), file = path, append = TRUE)
+  }
+
+  cli::cli_alert_success(
+    "Writing {.value {data_product}} to file")
+
+  # Write to handle ---------------------------------------------------------
+
+  handle$write_dataproduct(data_product,
+                           path,
+                           component,
+                           description,
+                           version)
+
+  invisible(handle$output_index(data_product, component, version))
 }

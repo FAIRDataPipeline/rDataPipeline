@@ -85,45 +85,45 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Add inputs field
-  #' @param name text
-  #' @param type text
-  #' @param doi_or_unique_name external object field
-  #' @param title external object field
-  #' @param version text
-  #' @param path text
-  #' @param object_id text
+  #' @param data_product data_product
+  #' @param use_data_product use_data_product
+  #' @param use_component use_component
+  #' @param use_version use_version
+  #' @param use_namespace namespace
+  #' @param path path
+  #' @param component_url component_url
   #'
-  input = function(name,
-                   type,
-                   doi_or_unique_name,
-                   title,
-                   version,
+  input = function(data_product,
+                   use_data_product,
+                   use_component,
+                   use_version,
+                   use_namespace,
                    path,
-                   object_id) {
+                   component_url) {
 
     index <- get_index(self)
 
     if (is.null(self$inputs)) {
       existing <- data.frame(index = numeric(),
-                             name = character(),
-                             type = character(),
-                             doi_or_unique_name = character(),
-                             title = character(),
-                             version = character(),
+                             data_product = character(),
+                             use_data_product = character(),
+                             use_component = character(),
+                             use_version = character(),
+                             use_namespace = character(),
                              path = character(),
-                             object_id = character())
+                             component_url = character())
     } else {
       existing <- self$inputs
     }
 
     new <- data.frame(index = index,
-                      name = name,
-                      type = type,
-                      doi_or_unique_name = doi_or_unique_name,
-                      title = title,
-                      version = version,
+                      data_product = data_product,
+                      use_data_product = use_data_product,
+                      use_component = use_component,
+                      use_version = use_version,
+                      use_namespace = use_namespace,
                       path = path,
-                      object_id = object_id)
+                      component_url = component_url)
     self$inputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -131,43 +131,53 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Add outputs field
-  #' @param data_product text
-  #' @param path text
-  #' @param component text
-  #' @param description text
-  #' @param version text
+  #' @param data_product data_product
+  #' @param use_data_product use_data_product
+  #' @param use_component use_component
+  #' @param use_version use_version
+  #' @param use_namespace use_namespace
+  #' @param path path
+  #' @param description description
   #'
-  write_dataproduct = function(data_product,
-                               path,
-                               component,
-                               description,
-                               version) {
+  output = function(data_product,
+                    use_data_product,
+                    use_component,
+                    use_version,
+                    use_namespace,
+                    path,
+                    description) {
 
     index <- get_index(self)
 
     if (is.null(self$outputs)) {
       existing <- data.frame(index = numeric(),
                              data_product = character(),
+                             use_data_product = character(),
+                             use_component = character(),
+                             use_version = character(),
+                             use_namespace = character(),
                              path = character(),
-                             component = character(),
                              description = character(),
-                             version = character(),
                              hash = character(),
-                             component_uri = character(),
-                             dataproduct_uri = character())
+                             data_product_url = character(),
+                             component_url = character(),
+                             registered_data_product = logical())
     } else {
       existing <- self$outputs
     }
 
     new <- data.frame(index = index,
                       data_product = data_product,
+                      use_data_product = use_data_product,
+                      use_component = use_component,
+                      use_version = use_version,
+                      use_namespace = use_namespace,
                       path = path,
-                      component = component,
                       description = description,
-                      version = version,
                       hash = NA,
-                      component_uri = NA,
-                      dataproduct_uri = NA)
+                      data_product_url = NA,
+                      component_url = NA,
+                      registered_data_product = FALSE)
     self$outputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -175,47 +185,44 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Return index
-  #' @param this_data_product text
-  #' @param this_component text
-  #' @param this_version text
+  #' @param data_product use_data_product
+  #' @param component use_component
+  #' @param version use_version
   #'
-  output_index = function(this_data_product,
-                          this_component,
-                          this_version) {
+  output_index = function(data_product,
+                          component,
+                          version) {
 
-    self$outputs %>% dplyr::filter(.data$data_product == this_data_product,
-                                   .data$component == this_component,
-                                   .data$version == this_version) %>%
+    self$outputs %>% dplyr::filter(.data$use_data_product == data_product,
+                                   .data$use_component == component,
+                                   .data$use_version == version) %>%
       select(index) %>% unlist() %>% unname()
   },
 
   #' @description
   #' Add issues field
   #' @param index text
-  #' @param component text
-  #' @param data_product text
-  #' @param external_object text
-  #' @param version text
-  #' @param namespace text
+  #' @param use_data_product text
+  #' @param use_component text
+  #' @param use_version text
+  #' @param use_namespace text
   #' @param issue text
   #' @param severity text
   #'
   raise_issue = function(index,
-                         component,
-                         data_product,
-                         external_object,
-                         version,
-                         namespace,
+                         use_data_product,
+                         use_component,
+                         use_version,
+                         use_namespace,
                          issue,
                          severity) {
 
     if (is.null(self$issues)) {
       existing <- data.frame(index = numeric(),
-                             component = character(),
-                             data_product = character(),
-                             external_object = character(),
-                             version = character(),
-                             namespace = character(),
+                             use_data_product = character(),
+                             use_component = character(),
+                             use_version = character(),
+                             use_namespace = character(),
                              issue = character(),
                              severity = numeric())
     } else {
@@ -223,11 +230,10 @@ fdp <- R6::R6Class("fdp", list(
     }
 
     new <- data.frame(index = index,
-                      component = component,
-                      data_product = data_product,
-                      external_object = external_object,
-                      version = version,
-                      namespace = namespace,
+                      use_data_product = use_data_product,
+                      use_component = use_component,
+                      use_version = use_version,
+                      use_namespace = use_namespace,
                       issue = issue,
                       severity = severity)
     self$issues <- rbind.data.frame(existing, new)
@@ -237,39 +243,18 @@ fdp <- R6::R6Class("fdp", list(
 
   #' @description
   #' Add outputs field
-  #' @param data_product text
-  #' @param component text
-  #' @param component_url text
-  #'
-  write_component_url = function(data_product,
-                                 component,
-                                 component_url) {
-
-    index <- which(self$outputs$data_product == data_product &
-                     self$outputs$component == component)
-
-    self$outputs$component_url[index] <- component_url
-
-    invisible(self)
-  },
-
-  #' @description
-  #' Add outputs field
-  #' @param data_product text
-  #' @param data_product_url text
-  #' @param version text
+  #' @param use_data_product text
+  #' @param use_version text
   #' @param hash text
   #'
-  write_dataproduct_url = function(data_product,
-                                   data_product_url,
-                                   version,
-                                   hash) {
+  finalise_output_hash = function(use_data_product,
+                                  use_version,
+                                  hash) {
 
-    index <- which(self$outputs$data_product == data_product)
+    index <- which(self$outputs$use_data_product == use_data_product)
 
     if (length(index) != 0) {
-      self$outputs$dataproduct_uri[index] <- data_product_url
-      self$outputs$version[index] <- version
+      self$outputs$use_version[index] <- use_version
       self$outputs$hash[index] <- hash
       # Re-write path
       oldfilename <- unique(self$outputs$path[index])
@@ -277,6 +262,38 @@ fdp <- R6::R6Class("fdp", list(
                           paste0(hash, ".h5"), oldfilename)
       self$outputs$path[index] <- newfilename
     }
+
+    invisible(self)
+  },
+  #' @description
+  #' Add outputs field
+  #' @param use_data_product text
+  #' @param use_component text
+  #' @param data_product_url text
+  #' @param component_url text
+  #'
+  finalise_output_url = function(use_data_product,
+                                 use_component,
+                                 data_product_url,
+                                 component_url) {
+
+    # Update handle with component URL
+    index <- which(self$outputs$use_data_product == use_data_product &
+                     self$outputs$use_component == use_component)
+    self$outputs$component_url[index] <- component_url
+
+    # If a data product URL is already in the handle, check it matches
+    if (!is.na(self$outputs$data_product_url) &&
+        self$outputs$data_product_url != data_product_url)
+      stop("Something went wrong")
+
+    # Update handle with data product URL
+    index_data_products <- which(self$outputs$use_data_product %in%
+                                   use_data_product)
+    self$outputs$data_product_url[index_data_products] <- data_product_url
+
+    # Update handle with flag to show data product has already been registered
+    self$outputs$registered_data_product[index_data_products] <- TRUE
 
     invisible(self)
   }

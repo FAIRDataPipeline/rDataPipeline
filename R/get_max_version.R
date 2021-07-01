@@ -1,7 +1,7 @@
 #' get_max_version
 #'
-#' @param data_product
-#' @param namespace_id
+#' @param data_product data_product
+#' @param namespace_id namespace_id
 #'
 get_max_version <- function(data_product, namespace_id) {
 

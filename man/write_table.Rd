@@ -17,7 +17,7 @@ write_table(
 \arguments{
 \item{df}{an \code{dataframe} containing the data}
 
-\item{handle}{list}
+\item{handle}{\code{fdp} object}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
@@ -34,6 +34,7 @@ Function to populate hdf5 file with array type data.
 }
 \seealso{
 Other write functions: 
-\code{\link{write_array}()}
+\code{\link{write_array}()},
+\code{\link{write_estimate}()}
 }
 \concept{write functions}

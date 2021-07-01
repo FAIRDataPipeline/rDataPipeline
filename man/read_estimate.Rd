@@ -4,11 +4,14 @@
 \alias{read_estimate}
 \title{Read estimate from TOML file}
 \usage{
-read_estimate(filepath)
+read_estimate(handle, data_product, component)
 }
 \arguments{
-\item{filepath}{a \code{string} specifying the path and filename of the
-file to be read}
+\item{handle}{\code{fdp} object}
+
+\item{data_product}{a \code{string} specifying a data product}
+
+\item{component}{a \code{string} specifying a data product component}
 }
 \description{
 Function to read point-estimate type data from toml file.

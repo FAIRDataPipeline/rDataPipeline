@@ -1,11 +1,11 @@
-#' fdp_run
+#' fair_run
 #'
 #' @param path string
 #' @param skip don't bother checking whether the repo is clean
 #'
 #' @export
 #'
-fdp_run <- function(path = "config.yaml", skip = FALSE) {
+fair_run <- function(path = "config.yaml", skip = FALSE) {
 
   run_server()
 
@@ -16,14 +16,13 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    cli::cli_alert_info("Reading {.file {config_file}}")
+    cli::cli_alert_info("Reading {.file {path}}")
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
   # Extract local data store location
   localstore <- yaml$run_metadata$write_data_store
-  if (grepl("/$", localstore))
-    localstore <- gsub("/$", "", localstore)
+  localstore <- file.path(dirname(localstore), basename(localstore))
 
   run_metadata <- yaml$run_metadata
 
@@ -43,6 +42,7 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     for (i in seq_along(read)) {
       read_version <- fdp_resolve_read(read[[i]], yaml)
       read[[i]]$use$version <- read_version # version should be here
+      read[[i]]$version <- NULL
     }
 
   } else {
@@ -61,23 +61,19 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
     # Find `register:` entries. Then, since fdp pull has already registered
     # these entries, re-list them under `read:` in the working config.yaml file
-    types <- c("external_object", "data_product", "object")
+    types <- c("external_object", "data_product")
     for (x in seq_along(register)) {
       for (y in types) {
         entry <- register[[x]][[y]]
         if (!is.null(entry)) {
           index <- length(read) + 1
           read[[index]] <- list()
-          read[[index]][y] <- entry
-          read[[index]]$doi_or_unique_name <- register[[x]]$unique_name
-          read[[index]]$title <- register[[x]]$title
+          read[[index]]$data_product <- entry
 
-          # YUCK!
-          if (grepl("\\$\\{\\{DATETIME\\}\\}", register[[x]]$version)) {
-            datetime <- gsub("-", "", Sys.Date())
-            version <- gsub("\\$\\{\\{DATETIME\\}\\}", datetime,
+          if (grepl("\\$\\{\\{CLI.DATE\\}\\}", register[[x]]$version)) {
+            datetime <- format(Sys.Date(), "%Y%m%d")
+            version <- gsub("\\$\\{\\{CLI.DATE\\}\\}", datetime,
                             register[[x]]$version)
-
           } else {
             version <- register[[x]]$version
           }
@@ -130,7 +126,8 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
         write_version <- resolve_version(version = this_write$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
-        write[[i]]$version <- write_version # version should be here
+        write[[i]]$use$version <- write_version # version should be here
+        write[[i]]$version <- NULL
 
       } else if ("version" %in% names(alias)) { # version in `use:` block
         write_version <- resolve_version(version = alias$version,
@@ -174,6 +171,40 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
     write <- list()
   }
 
+  # Get latest commit sha ---------------------------------------------------
+
+  assertthat::assert_that("local_repo" %in% names(yaml$run_metadata))
+
+  # Check local repo is clean
+  local_repo <- yaml$run_metadata$local_repo
+  if (!skip) check_local_repo(local_repo)
+
+  # Get hash of latest commit
+  if (!dir.exists(local_repo))
+    usethis::ui_stop("Directory, {local_repo}, does not exist")
+  if (!git2r::in_repository(local_repo))
+    usethis::ui_stop("Directory, {local_repo}, is not a git repository")
+
+  sha <- git2r::sha(git2r::last_commit(local_repo))
+  run_metadata$latest_commit <- sha
+
+  cli::cli_alert_info("Checking local repository status")
+
+  # Get GitHub username/repository ------------------------------------------
+
+  if ("remote_repo" %in% names(yaml$run_metadata)) {
+    repo_name <- gsub("https://github.com/", "", yaml$run_metadata$remote_repo)
+  } else {
+    repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
+    if (length(repo_name) > 1) stop("Add remote_repo field")
+
+    repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
+    repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
+  }
+
+  run_metadata$remote_repo <- repo_name
+  cli::cli_alert_info("Locating remote repository")
+
   # Save working config.yaml in data store ----------------------------------
 
   # If coderun directory doesn't exist, create it
@@ -191,26 +222,6 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
 
   cli::cli_alert_success("Writing working {.file {config_file}} to data store")
 
-  # Record config.yaml location in data registry ----------------------------
-
-  datastore_root <- yaml$run_metadata$write_data_store
-  datastore_name <- paste("local datastore:", datastore_root)
-  config_storageroot_id <- new_storage_root(name = datastore_name,
-                                            root = datastore_root,
-                                            accessibility = 0)
-
-  config_hash <- get_file_hash(config_path)
-  config_location_url <- new_storage_location(
-    path = config_path,
-    hash = config_hash,
-    storage_root_url = config_storageroot_id)
-
-  config_object_url <- new_object(
-    storage_location_url = config_location_url,
-    description = "Working config.yaml file location in local datastore")
-
-  cli::cli_alert_success("Writing {.file {config_file}} to local registry")
-
   # Write submission script to data store -----------------------------------
 
   script_file <- "script.sh"
@@ -218,71 +229,10 @@ fdp_run <- function(path = "config.yaml", skip = FALSE) {
   cat(yaml$run_metadata$script, file = submission_script_path)
   cli::cli_alert_success("Writing {.file {script_file}} to local data store")
 
-  # Record submission script location in data registry ----------------------
-
-  script_storageroot_id <- config_storageroot_id
-
-  script_hash <- get_file_hash(submission_script_path)
-  script_location_url <- new_storage_location(
-    path = submission_script_path,
-    hash = script_hash,
-    storage_root_url = script_storageroot_id)
-
-  script_object_url <- new_object(
-    storage_location_url = script_location_url,
-    description = "Submission script location in local datastore")
-
-  cli::cli_alert_success("Writing {.file {script_file}} to local registry")
-
   # Save FDP_CONFIG_DIR in global environment ------------------------------
 
   Sys.setenv(FDP_CONFIG_DIR = configdir)
   variable_name <- "FDP_CONFIG_DIR"
   cli::cli_alert_success(
-    "Writing {.value {variable_name}} to global environment")
-
-  # Get latest commit sha ---------------------------------------------------
-
-  assertthat::assert_that("local_repo" %in% names(yaml$run_metadata))
-
-  # Check local repo is clean
-  local_repo <- yaml$run_metadata$local_repo
-  if (!skip) check_local_repo(local_repo)
-
-  # Get hash of latest commit
-  if (!dir.exists(local_repo))
-    usethis::ui_stop("Directory, {local_repo}, does not exist")
-  if (!git2r::in_repository(local_repo))
-    usethis::ui_stop("Directory, {local_repo}, is not a git repository")
-
-  sha <- git2r::sha(git2r::last_commit(local_repo))
-
-  cli::cli_alert_info("Checking local repository status")
-
-  # Get GitHub username/repository ------------------------------------------
-
-  if ("remote_repo" %in% names(yaml$run_metadata)) {
-    repo_name <- gsub("https://github.com/", yaml$run_metadata$remote_repo)
-  } else {
-    repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
-    repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
-    repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
-  }
-
-  cli::cli_alert_info("Locating remote repository")
-
-  # Record analysis / processing script location in data registry -----------
-
-  repo_storageroot_url <- new_storage_root(name = "github",
-                                           root = "https://github.com/",
-                                           accessibility = 0)
-  repo_location_url <- new_storage_location(path = repo_name,
-                                            hash = sha,
-                                            storage_root_url = repo_storageroot_url)
-
-  repo_object_url <- new_object(
-    storage_location_url = repo_location_url,
-    description = "Analysis / processing script location")
-
-  cli::cli_alert_success("Writing processing script to local registry")
+    "Writing {.file {variable_name}} to global environment")
 }

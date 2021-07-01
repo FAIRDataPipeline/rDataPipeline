@@ -3,6 +3,7 @@
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing a valid query for the table, *e.g.*
 #' \code{list(field = value)}
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a \code{list} of fields present in the specified entry
 #'
@@ -10,7 +11,7 @@
 #'
 #' @export
 #'
-get_entry <- function(table, query) {
+get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
 
   key <- get_token()
   h <- c(Authorization = paste("token", key))
@@ -21,7 +22,7 @@ get_entry <- function(table, query) {
 
   is_queryable(table, query)
 
-  output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
+  output <- httr::GET(paste0(endpoint, table, ""),
                       query = query,
                       httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%

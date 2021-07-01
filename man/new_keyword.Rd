@@ -4,13 +4,16 @@
 \alias{new_keyword}
 \title{Post entry to keyword table}
 \usage{
-new_keyword(object_url, keyphrase)
+new_keyword(object_url, keyphrase, identifier)
 }
 \arguments{
 \item{object_url}{a \code{string} specifying the URL of an \code{object}}
 
 \item{keyphrase}{a \code{string} a \code{string} containing a free text
 key phrase}
+
+\item{identifier}{(optional) a \code{string} specifying the URL of ontology
+annotation to associate with this \code{Keyword}}
 }
 \description{
 Upload information to the \code{keyword} table in the data registry

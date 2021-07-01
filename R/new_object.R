@@ -6,10 +6,10 @@
 #' description of the \code{object}
 #' @param storage_location_url (optional) a \code{string} specifying the URL
 #' of an entry in the \code{storage_location} table
-#' @param issues_urls (optional) a \code{list} of \code{issues} URLs to associate
-#' with this \code{object}
 #' @param authors_urls (optional) a \code{list} of \code{author} URLs to associate
 #' with this \code{object}
+#' @param file_type_url (optional) a \code{string} specifying the URL
+#' of an entry in the \code{file_type} table
 #'
 #' @family new functions
 #'
@@ -17,17 +17,23 @@
 #'
 new_object <- function(description,
                        storage_location_url,
-                       issues_urls = list(),
-                       authors_urls = list()) {
+                       authors_urls = list(),
+                       file_type_url) {
 
-  data <- list(issues = issues_urls,
-               authors = authors_urls)
+  data <- list()
 
   if (!missing(description))
     data$description <- description
 
   if (!missing(storage_location_url))
     data$storage_location <- storage_location_url
+
+  if (!missing(authors_urls))
+    data$authors <- authors_urls
+
+  if (!missing(file_type_url))
+    data$file_type <- file_type_url
+
 
   post_data(table = "object",
             data = data)

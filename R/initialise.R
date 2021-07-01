@@ -12,47 +12,117 @@
 initialise <- function(config, script) {
 
   # Read working config.yaml ------------------------------------------------
+  if (!file.exists(config)) usethis::ui_stop("{config} doesn't exist.")
   yaml <- yaml::read_yaml(config)
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
 
   cli::cli_alert_info("Reading {.file {config}} from data store")
 
-  # Get working config.yaml object url --------------------------------------
+  # Record config.yaml location in data registry ----------------------------
 
-  config_location_url <- get_entry("storage_location",
-                                   list(path = config))
-  assertthat::assert_that(length(config_location_url) == 1)
-  config_location_id <- extract_id(config_location_url[[1]]$url)
+  datastore_root <- yaml$run_metadata$write_data_store
+  config_storageroot_id <- new_storage_root(root = datastore_root,
+                                            local = TRUE)
 
-  config_object_url <- get_entry("object",
-                                 list(storage_location = config_location_id))
-  assertthat::assert_that(length(config_object_url) == 1)
-  config_object_url <- config_object_url[[1]]$url
+  config_hash <- get_file_hash(config)
 
-  cli::cli_alert_info(
-    "Reading {.file {config}} metadata from local registry")
+  config_exists <- get_url("storage_location", list(hash = config_hash))
 
-  # Get script object url ---------------------------------------------------
+  if (is.null(config_exists)) {
+    config_location_url <- new_storage_location(
+      path = config,
+      hash = config_hash,
+      storage_root_url = config_storageroot_id)
 
-  script_location_url <- get_entry("storage_location",
-                                   list(path = script))
-  assertthat::assert_that(length(script_location_url) == 1)
-  script_location_id <- extract_id(script_location_url[[1]]$url)
+  } else {
+    assertthat::assert_that(length(config_exists) == 1)
+    config_location_url <- config_exists
+  }
 
-  script_object_url <- get_entry("object",
-                                 list(storage_location = script_location_id))
-  assertthat::assert_that(length(script_object_url) == 1)
-  script_object_url <- script_object_url[[1]]$url
+  config_file_type <- new_file_type(name = "yaml",
+                                    extension = "yaml")
 
-  cli::cli_alert_info(
-    "Reading {.file {script}} metadata from local registry")
+  config_object_url <- new_object(
+    description = "Working config.yaml file location in local datastore",
+    storage_location_url = config_location_url,
+    file_type_url = config_file_type)
 
-  # record the code run in the data registry --------------------------------
+  cli::cli_alert_success("Writing {.file {config_file}} to local registry")
+
+  # Record submission script location in data registry ----------------------
+
+  script_storageroot_id <- config_storageroot_id
+
+  script_hash <- get_file_hash(script)
+
+  script_exists <- get_url("storage_location", list(hash = script_hash))
+
+  if (is.null(script_exists)) {
+    script_location_url <- new_storage_location(
+      path = script,
+      hash = script_hash,
+      storage_root_url = script_storageroot_id)
+
+  } else {
+    assertthat::assert_that(length(script_exists) == 1)
+    script_location_url <- script_exists
+  }
+
+  script_file_type <- new_file_type(name = "sh",
+                                    extension = "sh")
+
+  script_object_url <- new_object(
+    description = "Submission script location in local datastore",
+    storage_location_url = script_location_url,
+    file_type_url = script_file_type)
+
+  cli::cli_alert_success("Writing {.file {script_file}} to local registry")
+
+  # Record code repo location in data registry ------------------------------
+
+  repo_storageroot_url <- new_storage_root(root = "https://github.com/",
+                                           local = FALSE)
+
+  sha <- yaml$run_metadata$latest_commit
+  repo_name <- yaml$run_metadata$remote_repo
+
+  coderepo_exists <- get_id("storage_location", list(hash = sha))
+
+  if (is.null(coderepo_exists)) {
+    coderepo_location_url <- new_storage_location(
+      path = repo_name,
+      hash = sha,
+      storage_root_url = repo_storageroot_url)
+
+    coderepo_object_url <- new_object(
+      storage_location_url = coderepo_location_url,
+      description = "Analysis / processing script location")
+
+  } else {
+    assertthat::assert_that(length(coderepo_exists) == 1)
+    coderepo_location_id <- coderepo_exists
+    obj_exists <- get_url("object",
+                          list(storage_location = coderepo_location_id))
+
+    if (is.null(obj_exists)) {
+      coderepo_object_url <- new_object(
+        storage_location_url = coderepo_location_id,
+        description = "Analysis / processing script location")
+
+    } else {
+      assertthat::assert_that(length(obj_exists) == 1)
+      coderepo_object_url <- obj_exists
+    }
+  }
+
+  cli::cli_alert_success("Writing {.file {repo_name}} to local registry")
+
+  # Record the code run in the data registry --------------------------------
 
   coderun_url <- new_code_run(run_date = Sys.time(),
                               description = yaml$run_metadata$description,
-                              # code_repo_id = "",
+                              code_repo_url = coderepo_object_url,
                               model_config_url = config_object_url,
                               submission_script_url = script_object_url,
                               inputs_urls = list(),

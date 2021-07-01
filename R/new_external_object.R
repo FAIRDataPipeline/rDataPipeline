@@ -12,8 +12,8 @@
 #' @param title a `string` specifying the title of the \code{external_object}
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{external_object}
-#' @param object_url a \code{string} specifying the URL of an entry in the
-#' \code{object} table
+#' @param data_product_url a \code{string} specifying the URL of an entry in
+#' the \code{data_product} table
 #' @param original_store_url (optional) a `string` specifying the URL of a
 #' an entry in the \code{storage_location} table that references the original
 #' location of an \code{external_object}
@@ -27,13 +27,13 @@ new_external_object <- function(doi_or_unique_name,
                                 release_date,
                                 title,
                                 description,
-                                object_url,
+                                data_product_url,
                                 original_store_url) {
 
   data <- list(doi_or_unique_name = doi_or_unique_name,
                release_date = release_date,
                title = title,
-               object = object_url)
+               data_product = data_product_url)
 
   if (!missing(primary_not_supplement))
     data$primary_not_supplement <- primary_not_supplement

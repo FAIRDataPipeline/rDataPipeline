@@ -3,7 +3,7 @@
 #' Function to populate hdf5 file with array type data.
 #'
 #' @param df an \code{dataframe} containing the data
-#' @param handle list
+#' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the hdf5 file,
 #' @param description a \code{string} describing the data product component
