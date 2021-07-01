@@ -7,8 +7,8 @@
 new_object(
   description,
   storage_location_url,
-  issues_urls = list(),
-  authors_urls = list()
+  authors_urls = list(),
+  file_type_url
 )
 }
 \arguments{
@@ -18,11 +18,11 @@ description of the \code{object}}
 \item{storage_location_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{storage_location} table}
 
-\item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to associate
-with this \code{object}}
-
 \item{authors_urls}{(optional) a \code{list} of \code{author} URLs to associate
 with this \code{object}}
+
+\item{file_type_url}{(optional) a \code{string} specifying the URL
+of an entry in the \code{file_type} table}
 }
 \description{
 Upload information to the \code{object} table in the data registry

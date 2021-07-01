@@ -4,13 +4,13 @@
 \alias{link_write}
 \title{link_write}
 \usage{
-link_write(handle, name)
+link_write(handle, data_product)
 }
 \arguments{
 \item{handle}{an object of class \code{fdp, R6} containing metadata required
 by the Data Pipeline API}
 
-\item{name}{a \code{string} representing an external object in the
+\item{data_product}{a \code{string} representing an external object in the
 config.yaml file}
 }
 \description{

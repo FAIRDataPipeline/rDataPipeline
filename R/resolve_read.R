@@ -2,8 +2,9 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
+#' @param component a \code{string} specifying a data product component
 #'
-resolve_read <- function(handle, data_product) {
+resolve_read <- function(handle, data_product, component = NA) {
 
   read <- handle$yaml$read
 
@@ -14,10 +15,28 @@ resolve_read <- function(handle, data_product) {
 
   # Find data product in `read:` section of config.yaml
   index <- lapply(seq_along(read), function(x)
-    read[[x]]$data_product == data_product &&
-      read[[x]]$component == component) %>%
+    if (is.na(component)) {
+      read[[x]]$data_product == data_product
+    } else {
+      read[[x]]$data_product == data_product &&
+        read[[x]]$component == component
+    }
+  ) %>%
     unlist() %>%
     which()
+
+  if (length(index) == 0) {
+    if (is.na(component)) {
+      usethis::ui_stop(paste(usethis::ui_field(data_product),
+                             "not found in config file"))
+    } else {
+      usethis::ui_stop(paste(usethis::ui_field(component),
+                             "not found in config file"))
+    }
+
+  } else if(length(index) > 1) {
+    usethis::ui_stop("Multiple entries found in config file")
+  }
 
   this_read <- read[[index]]
 
@@ -29,13 +48,6 @@ resolve_read <- function(handle, data_product) {
     data_product <- this_read$use$data_product
   } else {
     data_product <- this_read$data_product
-  }
-
-  # Get component name
-  if (any(names(alias) == "component")) {
-    component <- this_read$use$component
-  } else {
-    component <- this_read$component
   }
 
   # Get version number
@@ -52,17 +64,45 @@ resolve_read <- function(handle, data_product) {
     namespace <- handle$yaml$run_metadata$default_input_namespace
   }
 
-  namespace_url <- get_url("namespace", list(name = namespace))
-  namespace_id <- extract_id(namespace_url)
+  namespace_id <- get_id("namespace", list(name = namespace))
 
+  if (is.null(namespace_id))
+    usethis::ui_stop(paste("default_input_namespace",
+                           usethis::ui_field(namespace),
+                           "not present in data registry"))
+
+  assertthat::assert_that(length(namespace_id) == 1)
+
+  # Get data product
   this_entry <- get_entry("data_product",
                           list(name = data_product,
                                version = version,
                                namespace = namespace_id))
-  assertthat::assert_that(length(this_entry) == 1)
-  this_entry <- this_entry[[1]]
 
-  this_object <- get_entity(this_entry$object)
+  # Get data product path
+  assertthat::assert_that(length(this_entry) == 1)
+  this_object <- get_entity(this_entry[[1]]$object)
   this_location <- get_entity(this_object$storage_location)
-  this_location$path
+  this_path <- this_location$path
+  this_root <- get_entity(this_location$storage_root)$root
+
+  # Get object component URL
+  if (is.na(component)) {
+    component_url <- get_url("object_component",
+                             list(object = extract_id(this_object$url),
+                                  whole_object = TRUE))
+  } else {
+    component_url <- get_url("object_component",
+                             list(object = extract_id(this_object$url),
+                                  name = component))
+  }
+
+  assertthat::assert_that(length(component_url) == 1)
+
+  list(data_product = data_product,
+       component = component,
+       component_url = component_url,
+       version = version,
+       namespace = namespace,
+       path = paste0(this_root, this_path))
 }

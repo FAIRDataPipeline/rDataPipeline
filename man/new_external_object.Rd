@@ -10,7 +10,7 @@ new_external_object(
   release_date,
   title,
   description,
-  object_url,
+  data_product_url,
   original_store_url
 )
 }
@@ -30,8 +30,8 @@ released \emph{e.g.} \code{Sys.time()} or "2010-07-11 12:15:00 BST"}
 \item{description}{(optional) a \code{string} containing a free text
 description of the \code{external_object}}
 
-\item{object_url}{a \code{string} specifying the URL of an entry in the
-\code{object} table}
+\item{data_product_url}{a \code{string} specifying the URL of an entry in
+the \code{data_product} table}
 
 \item{original_store_url}{(optional) a \code{string} specifying the URL of a
 an entry in the \code{storage_location} table that references the original

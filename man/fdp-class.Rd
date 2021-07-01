@@ -35,11 +35,11 @@ Contained for class \code{fdp}.
 \item \href{#method-new}{\code{fdp$new()}}
 \item \href{#method-print}{\code{fdp$print()}}
 \item \href{#method-input}{\code{fdp$input()}}
-\item \href{#method-write_dataproduct}{\code{fdp$write_dataproduct()}}
+\item \href{#method-output}{\code{fdp$output()}}
 \item \href{#method-output_index}{\code{fdp$output_index()}}
 \item \href{#method-raise_issue}{\code{fdp$raise_issue()}}
-\item \href{#method-write_component_url}{\code{fdp$write_component_url()}}
-\item \href{#method-write_dataproduct_url}{\code{fdp$write_dataproduct_url()}}
+\item \href{#method-finalise_output_hash}{\code{fdp$finalise_output_hash()}}
+\item \href{#method-finalise_output_url}{\code{fdp$finalise_output_url()}}
 \item \href{#method-clone}{\code{fdp$clone()}}
 }
 }
@@ -85,50 +85,70 @@ Print function
 \subsection{Method \code{input()}}{
 Add inputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$input(name, type, doi_or_unique_name, title, version, path, object_id)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$input(
+  data_product,
+  use_data_product,
+  use_component,
+  use_version,
+  use_namespace,
+  path,
+  component_url
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{name}}{text}
+\item{\code{data_product}}{data_product}
 
-\item{\code{type}}{text}
+\item{\code{use_data_product}}{use_data_product}
 
-\item{\code{doi_or_unique_name}}{external object field}
+\item{\code{use_component}}{use_component}
 
-\item{\code{title}}{external object field}
+\item{\code{use_version}}{use_version}
 
-\item{\code{version}}{text}
+\item{\code{use_namespace}}{namespace}
 
-\item{\code{path}}{text}
+\item{\code{path}}{path}
 
-\item{\code{object_id}}{text}
+\item{\code{component_url}}{component_url}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_dataproduct"></a>}}
-\if{latex}{\out{\hypertarget{method-write_dataproduct}{}}}
-\subsection{Method \code{write_dataproduct()}}{
+\if{html}{\out{<a id="method-output"></a>}}
+\if{latex}{\out{\hypertarget{method-output}{}}}
+\subsection{Method \code{output()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct(data_product, path, component, description, version)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output(
+  data_product,
+  use_data_product,
+  use_component,
+  use_version,
+  use_namespace,
+  path,
+  description
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{text}
+\item{\code{data_product}}{data_product}
 
-\item{\code{path}}{text}
+\item{\code{use_data_product}}{use_data_product}
 
-\item{\code{component}}{text}
+\item{\code{use_component}}{use_component}
 
-\item{\code{description}}{text}
+\item{\code{use_version}}{use_version}
 
-\item{\code{version}}{text}
+\item{\code{use_namespace}}{use_namespace}
+
+\item{\code{path}}{path}
+
+\item{\code{description}}{description}
 }
 \if{html}{\out{</div>}}
 }
@@ -139,17 +159,17 @@ Add outputs field
 \subsection{Method \code{output_index()}}{
 Return index
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(this_data_product, this_component, this_version)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{this_data_product}}{text}
+\item{\code{data_product}}{use_data_product}
 
-\item{\code{this_component}}{text}
+\item{\code{component}}{use_component}
 
-\item{\code{this_version}}{text}
+\item{\code{version}}{use_version}
 }
 \if{html}{\out{</div>}}
 }
@@ -162,11 +182,10 @@ Add issues field
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue(
   index,
-  component,
-  data_product,
-  external_object,
-  version,
-  namespace,
+  use_data_product,
+  use_component,
+  use_version,
+  use_namespace,
   issue,
   severity
 )}\if{html}{\out{</div>}}
@@ -177,15 +196,13 @@ Add issues field
 \describe{
 \item{\code{index}}{text}
 
-\item{\code{component}}{text}
+\item{\code{use_data_product}}{text}
 
-\item{\code{data_product}}{text}
+\item{\code{use_component}}{text}
 
-\item{\code{external_object}}{text}
+\item{\code{use_version}}{text}
 
-\item{\code{version}}{text}
-
-\item{\code{namespace}}{text}
+\item{\code{use_namespace}}{text}
 
 \item{\code{issue}}{text}
 
@@ -195,45 +212,50 @@ Add issues field
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_component_url"></a>}}
-\if{latex}{\out{\hypertarget{method-write_component_url}{}}}
-\subsection{Method \code{write_component_url()}}{
+\if{html}{\out{<a id="method-finalise_output_hash"></a>}}
+\if{latex}{\out{\hypertarget{method-finalise_output_hash}{}}}
+\subsection{Method \code{finalise_output_hash()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_component_url(data_product, component, component_url)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(use_data_product, use_version, hash)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{text}
+\item{\code{use_data_product}}{text}
 
-\item{\code{component}}{text}
+\item{\code{use_version}}{text}
 
-\item{\code{component_url}}{text}
+\item{\code{hash}}{text}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-write_dataproduct_url"></a>}}
-\if{latex}{\out{\hypertarget{method-write_dataproduct_url}{}}}
-\subsection{Method \code{write_dataproduct_url()}}{
+\if{html}{\out{<a id="method-finalise_output_url"></a>}}
+\if{latex}{\out{\hypertarget{method-finalise_output_url}{}}}
+\subsection{Method \code{finalise_output_url()}}{
 Add outputs field
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$write_dataproduct_url(data_product, data_product_url, version, hash)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(
+  use_data_product,
+  use_component,
+  data_product_url,
+  component_url
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{text}
+\item{\code{use_data_product}}{text}
+
+\item{\code{use_component}}{text}
 
 \item{\code{data_product_url}}{text}
 
-\item{\code{version}}{text}
-
-\item{\code{hash}}{text}
+\item{\code{component_url}}{text}
 }
 \if{html}{\out{</div>}}
 }

@@ -38,8 +38,9 @@ write_array <- function(array,
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = "h5")
-  data_product <- write_metadata$data_product
-  version <- write_metadata$version
+  write_data_product <- write_metadata$data_product
+  write_version <- write_metadata$version
+  write_namespace <- write_metadata$namespace
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
@@ -153,15 +154,20 @@ write_array <- function(array,
   rhdf5::h5closeAll()
 
   cli::cli_alert_success(
-    "Writing {.value {component}} to {.value {data_product}}")
+    "Writing {.value {component}} to {.value {write_data_product}}")
 
   # Write to handle ---------------------------------------------------------
 
-  handle$write_dataproduct(data_product,
-                           path,
-                           component,
-                           description,
-                           version)
+  handle$output(data_product = data_product,
+                use_data_product = write_data_product,
+                use_component = component,
+                use_version = write_version,
+                use_namespace = write_namespace,
+                path = path,
+                description = description)
 
-  invisible(handle$output_index(data_product, component, version))
+  index <- handle$output_index(data_product = write_data_product,
+                               component = component,
+                               version = write_version)
+  invisible(index)
 }

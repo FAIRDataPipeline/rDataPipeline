@@ -18,8 +18,8 @@ read_array <- function(handle,
 
   # Read hdf5 file
   path <- resolve_read(handle, data_product)
-  datastore <- handle$yaml$run_metadata$write_data_store
-  file.h5 <- rhdf5::h5read(paste0(datastore, path), component)
+  # datastore <- handle$yaml$run_metadata$write_data_store
+  file.h5 <- rhdf5::h5read(path, component)
 
   # Extract data object
   object <- file.h5$array

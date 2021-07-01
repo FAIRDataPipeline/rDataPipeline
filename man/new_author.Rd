@@ -4,16 +4,16 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(family_name, personal_name, orcid)
+new_author(family_name, given_name, identifier)
 }
 \arguments{
 \item{family_name}{a \code{string} specifying the author's family name}
 
-\item{personal_name}{a \code{string} specifying the author's first name
+\item{given_name}{a \code{string} specifying the author's first name
 and / or middle name and / or any initials}
 
-\item{orcid}{(optional) a \code{string} specifying the ORCID iD of the
-\code{author}}
+\item{identifier}{(optional) a \code{string} specifying the full URL of
+the \code{author}s identifier, \emph{e.g.} ORCID iD}
 }
 \description{
 Upload information to the \code{author} table in the data registry

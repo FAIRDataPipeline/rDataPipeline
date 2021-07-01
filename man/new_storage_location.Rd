@@ -4,7 +4,7 @@
 \alias{new_storage_location}
 \title{Post entry to storage_location table}
 \usage{
-new_storage_location(path, hash, storage_root_url)
+new_storage_location(path, hash, public, storage_root_url)
 }
 \arguments{
 \item{path}{a \code{string} specifying the path from the \code{storage_root}
@@ -13,6 +13,9 @@ produces a complete URL}
 
 \item{hash}{a \code{string} specifying the SHA1 hash of a file stored in
 \code{storage_location}}
+
+\item{public}{a \code{boolean} indicating whether the \code{storage_location}
+is public or not (default is \code{TRUE})}
 
 \item{storage_root_url}{a \code{string} specifying the URL of an entry in
 the \code{storage_root} table}
