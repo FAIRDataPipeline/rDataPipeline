@@ -9,55 +9,42 @@
 #'
 link_write <- function(handle, data_product) {
 
-  # Get object metadata from working config.yaml
+  # Get metadata ------------------------------------------------------------
+
   write <- handle$yaml$write
   index <- lapply(write, function(x)
-    data_product == x$data_product) %>% unlist() %>% which()
+    which(data_product == x$data_product)) %>% unlist()
 
   if (length(index) == 0)
     usethis::ui_stop("{data_product} not present in config.yaml")
 
   this_write <- write[[index]]
+  file_type <- this_write$file_type
 
-  if ("use" %in% names(this_write)) {
-    alias <- this_write$use
-  } else {
-    alias <- list()
-  }
-
-  datastore <- handle$yaml$run_metadata$write_data_store
-
-  if ("namespace" %in% names(alias)) {
-    write_namespace <- alias$namespace
-  } else {
-    write_namespace <- handle$yaml$run_metadata$default_output_namespace
-  }
-
-  if ("data_product" %in% names(alias)) {
-    write_data_product <- alias$data_product
-  } else {
-    write_data_product <- this_write$data_product
-  }
+  write_metadata <- resolve_write(handle = handle,
+                                  data_product = data_product,
+                                  file_type = file_type)
+  write_data_product <- write_metadata$data_product
+  write_version <- write_metadata$version
+  write_namespace <- write_metadata$namespace
+  path <- write_metadata$path
 
   description <- this_write$description
-  write_version <- this_write$use$version
 
-  file_type <- this_write$file_type
-  filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".", file_type)
+  # Generate directory structure --------------------------------------------
 
-  path <- file.path(paste0(datastore, write_namespace),
-                    write_data_product,
-                    filename)
-
-  # Generate directory structure
   directory <- dirname(path)
   if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
 
-  handle$write_dataproduct(write_data_product,
-                           path,
-                           component = NA,
-                           description,
-                           write_version)
+  # Write to handle ---------------------------------------------------------
+
+  handle$output(data_product = data_product,
+                use_data_product = write_data_product,
+                use_component = NA,
+                use_version = write_version,
+                use_namespace = write_namespace,
+                path = path,
+                description = description)
 
   invisible(path)
 }
