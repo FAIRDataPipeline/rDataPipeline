@@ -25,6 +25,7 @@ added.
 \seealso{
 Other write functions: 
 \code{\link{write_array}()},
+\code{\link{write_distribution}()},
 \code{\link{write_table}()}
 }
 \concept{write functions}

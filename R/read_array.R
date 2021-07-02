@@ -16,7 +16,8 @@ read_array <- function(handle,
                        data_product,
                        component) {
 
-  # Read hdf5 file
+  # Read file ---------------------------------------------------------------
+
   tmp <- resolve_read(handle, data_product, component)
   read_dataproduct <- tmp$data_product
   read_component <- tmp$component
@@ -70,6 +71,8 @@ read_array <- function(handle,
 
   cli::cli_alert_success(
     "Reading {.value {read_component}} from {.value {read_dataproduct}}")
+
+  # Generate output ---------------------------------------------------------
 
   object
 }

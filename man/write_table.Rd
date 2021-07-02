@@ -35,6 +35,7 @@ Function to populate hdf5 file with array type data.
 \seealso{
 Other write functions: 
 \code{\link{write_array}()},
+\code{\link{write_distribution}()},
 \code{\link{write_estimate}()}
 }
 \concept{write functions}

@@ -4,12 +4,15 @@
 \alias{read_distribution}
 \title{Read distribution from TOML file}
 \usage{
-read_distribution(filepath)
+read_distribution(handle, data_product, component)
 }
 \arguments{
-\item{filepath}{a \code{string} specifying the path and filename of the file
-to be read}
+\item{handle}{\code{fdp} object}
+
+\item{data_product}{a \code{string} specifying a data product}
+
+\item{component}{a \code{string} specifying a data product component}
 }
 \description{
-Function to read disdtribution type data from toml file.
+Function to read distribution type data from toml file.
 }
