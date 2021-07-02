@@ -8,31 +8,22 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-dist <- list(name = "latency",
-             distribution = "gamma",
-             parameters = list(shape = 2.0, scale = 3.0))
+test_that("function behaves as it should", {
 
-test_that("incorrect filename throws an error", {
-  testthat::expect_error(
-    create_distribution(filename = "test_distribution.tom",
-                        path = "data-raw",
-                        distribution = dist)
-  )
+  ind <- write_distribution(handle = handle,
+                            data_product = "test/distribution/symptom-delay",
+                            component = "symptom-delay",
+                            distribution = "Gaussian",
+                            parameters = list(mean = -16.08, SD = 30),
+                            description = "symptom delay")
+
+  tmp <- handle$outputs %>%
+    dplyr::filter(index == ind)
+  path <- tmp$path
+
+  # File should be toml format
+  expect_true(configr::is.toml.file(path))
 })
 
-test_that("output is a toml file", {
-  create_distribution(filename = "test_distribution.toml",
-                      path = "data-raw",
-                      distribution = dist)
-  testthat::expect_true(is.toml.file("data-raw/test_distribution.toml"))
-})
-
-test_that("function works with missing path", {
-  create_distribution(filename = "test_distribution_1.toml",
-                      distribution = dist)
-  testthat::expect_true(is.toml.file("test_distribution_1.toml"))
-})
-
-# Remove test file
-file.remove("data-raw/test_distribution.toml")
-file.remove("test_distribution_1.toml")
+directory <- handle$yaml$run_metadata$write_data_store
+unlink(directory, recursive = TRUE)
