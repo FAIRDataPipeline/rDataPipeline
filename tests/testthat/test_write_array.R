@@ -1,6 +1,5 @@
 context("Testing write_array()")
 
-
 config_file <- "config_files/write_array/config.yaml"
 fdp_pull(config_file)
 fdp_run(config_file, skip = TRUE)

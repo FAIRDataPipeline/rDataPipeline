@@ -1,25 +1,25 @@
 context("Testing create_estimate()")
 
+config_file <- "config_files/write_estimate/config.yaml"
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
 test_that("function behaves as it should", {
 
-  # Incorrect file name should throw error
-  testthat::expect_error(
-    create_estimate(filename = "test_estimate",
-                    path = "data-raw",
-                    parameters = list(asymptomatic_period = 192.0)))
+  ind <- write_estimate(value =  192.0,
+                        handle = handle,
+                        data_product = "test/estimate/asymptomatic-period",
+                        component = "asymptomatic-period",
+                        description = "asymptomatic period")
+
+  tmp <- handle$outputs %>%
+    dplyr::filter(index == ind)
+  path <- tmp$path
 
   # File should be toml format
-  create_estimate(filename = "test_estimate.toml",
-                  path = "data-raw",
-                  parameters = list(asymptomatic_period = 192.0))
-  testthat::expect_true(is.toml.file("data-raw/test_estimate.toml"))
-
-  # File should be toml format
-  create_estimate(filename = "test_estimate_1.toml",
-                  parameters = list(asymptomatic_period = 192.0))
-  testthat::expect_true(is.toml.file("test_estimate_1.toml"))
+  expect_true(configr::is.toml.file(path))
 })
-
-# Remove test file
-file.remove("data-raw/test_estimate.toml")
-file.remove("test_estimate_1.toml")
