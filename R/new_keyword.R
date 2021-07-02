@@ -16,8 +16,12 @@ new_keyword <- function(object_url,
                         keyphrase,
                         identifier) {
 
+  data <- list(object = object_url,
+               keyphrase = keyphrase)
+
+  if (!missing(identifier))
+    data$identifier <- identifier
+
   post_data(table = "keyword",
-            data =  list(object = object_url,
-                         keyphrase = keyphrase,
-                         identifier = identifier))
+            data = data)
 }
