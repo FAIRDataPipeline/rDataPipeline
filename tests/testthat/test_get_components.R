@@ -1,10 +1,12 @@
 context("Testing get_components()")
 
 config_file <- "config_files/get_components/config.yaml"
-fdp_pull(config_file)
-fdp_run(config_file, skip = TRUE)
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-handle <- initialise()
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
 # Create Test Data in test-dir directory
 
@@ -109,5 +111,5 @@ test_that("file structures are equal to Component names", {
 })
 
 # Remove test datastore
-directory <- handle$yaml$run_metadata$default_data_store
+directory <- handle$yaml$run_metadata$write_data_store
 unlink(directory, recursive = TRUE)

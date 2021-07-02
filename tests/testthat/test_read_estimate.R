@@ -39,3 +39,6 @@ test_that("function behaves as it should", {
   testthat::expect_equal(dat, value)
 
 })
+
+directory <- handle$yaml$run_metadata$write_data_store
+unlink(directory, recursive = TRUE)
