@@ -13,16 +13,16 @@ read_estimate <- function(handle,
                           component) {
 
   # Read file
-  path <- resolve_read(handle, data_product)
-  datastore <- handle$yaml$run_metadata$write_data_store
-  fullpath <- paste0(datastore, path)
-  contents <- configr::read.config(file = fullpath)
+  tmp <- resolve_read(handle, data_product)
+  path <- tmp$path
+  contents <- configr::read.config(file = path)
+  this_component <- contents[[component]]
 
   # Check file
-  if (contents[[1]]$type != "point-estimate") {
+  if (this_component$type != "point-estimate") {
     msg <- "The file you are trying to read does not contain a point-estimate"
     usethis::ui_stop(msg)
   }
 
-  contents
+  this_component$value
 }
