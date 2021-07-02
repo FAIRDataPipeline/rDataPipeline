@@ -27,8 +27,9 @@ write_estimate <- function(value,
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = "toml")
-  data_product <- write_metadata$data_product
-  version <- write_metadata$version
+  write_data_product <- write_metadata$data_product
+  write_version <- write_metadata$version
+  write_namespace <- write_metadata$namespace
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
@@ -42,33 +43,35 @@ write_estimate <- function(value,
 
   # Write toml file ---------------------------------------------------------
 
-  contents <- paste0("[", data_product, "]\n",
+  contents <- paste0("[", component, "]\n",
                      "type = \"point-estimate\"",
                      "\nvalue = ", value, "\n")
 
   if (file.exists(path)) {
 
-    # Check that entry doesn't already exist
+    # Check that component doesn't already exist
     existing <- read_estimate(path)
-    if (data_product %in% names(existing))
-      usethis::ui_stop("{data_product} is already listed in toml file")
+    if (write_data_product %in% names(existing))
+      usethis::ui_stop("{write_data_product} is already listed in toml file")
 
-    cat(contents, file = path, append = FALSE)
+    cat(paste0("\n", contents), file = path, append = TRUE)
 
   } else {
-    cat(paste0("\n", contents), file = path, append = TRUE)
+    cat(contents, file = path, append = FALSE)
   }
 
   cli::cli_alert_success(
-    "Writing {.value {data_product}} to file")
+    "Writing {.value {write_data_product}} to file")
 
   # Write to handle ---------------------------------------------------------
 
-  handle$write_dataproduct(data_product,
-                           path,
-                           component,
-                           description,
-                           version)
+  handle$output(data_product = data_product,
+                use_data_product = write_data_product,
+                use_component = component,
+                use_version = write_version,
+                use_namespace = write_namespace,
+                path = path,
+                description = description)
 
-  invisible(handle$output_index(data_product, component, version))
+  invisible(handle$output_index(data_product, component, write_version))
 }
