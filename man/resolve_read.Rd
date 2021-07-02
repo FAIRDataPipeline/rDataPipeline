@@ -11,7 +11,8 @@ resolve_read(handle, data_product, component = NA)
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
-\item{component}{a \code{string} specifying a data product component}
+\item{component}{a \code{string} specifying the name of data product
+component}
 }
 \description{
 resolve_read

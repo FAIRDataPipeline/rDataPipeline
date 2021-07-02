@@ -14,12 +14,8 @@ sleep_time <- 0.5
 # tables_sample <- tables[sample(length(tables), 3)]
 
 test_that("Expect Dataframe is returned for each table", {
-  for(i in seq_along(tables)){
+  for(i in seq_along(tables))
     expect_true(is.data.frame(get_existing(tables[i])))
-    # Add a delay to stop the API from erroring
-    # Sys.sleep(sleep_time)
-  }
-
 })
 
 test_that("Check errors and messages", {
@@ -36,5 +32,3 @@ test_that("detail = id provides correct data.frame", {
   expect_true(all(utils::hasName(get_existing(table_100, detail = "id"),
                                  c("url", "id"))))
 })
-
-stop_server()

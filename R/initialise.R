@@ -48,7 +48,7 @@ initialise <- function(config, script) {
     storage_location_url = config_location_url,
     file_type_url = config_file_type)
 
-  cli::cli_alert_success("Writing {.file {config_file}} to local registry")
+  cli::cli_alert_success("Writing {.file {config}} to local registry")
 
   # Record submission script location in data registry ----------------------
 
@@ -77,7 +77,7 @@ initialise <- function(config, script) {
     storage_location_url = script_location_url,
     file_type_url = script_file_type)
 
-  cli::cli_alert_success("Writing {.file {script_file}} to local registry")
+  cli::cli_alert_success("Writing {.file {script}} to local registry")
 
   # Record code repo location in data registry ------------------------------
 

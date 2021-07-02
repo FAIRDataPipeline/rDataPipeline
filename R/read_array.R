@@ -16,10 +16,17 @@ read_array <- function(handle,
                        data_product,
                        component) {
 
-  # Read hdf5 file
-  path <- resolve_read(handle, data_product)
-  # datastore <- handle$yaml$run_metadata$write_data_store
-  file.h5 <- rhdf5::h5read(path, component)
+  # Read file ---------------------------------------------------------------
+
+  tmp <- resolve_read(handle, data_product, component)
+  read_dataproduct <- tmp$data_product
+  read_component <- tmp$component
+  read_component_url <- tmp$component_url
+  read_version <- tmp$version
+  read_namespace <- tmp$namespace
+  path <- tmp$path
+
+  file.h5 <- rhdf5::h5read(path, read_component)
 
   # Extract data object
   object <- file.h5$array
@@ -27,29 +34,45 @@ read_array <- function(handle,
 
   # Extract dimension names and make sure they're in the right order
   ind <- grep("Dimension_[0-9]*_names", names(file.h5))
-  tmp <- file.h5[ind]
-  ord <- order(names(tmp))
-  tmp <- tmp[ord]
+  h5file <- file.h5[ind]
+  ord <- order(names(h5file))
+  h5file <- h5file[ord]
 
   # Attach dimension names to the object
-  for(i in seq_along(tmp)) {
+  for(i in seq_along(h5file)) {
     if(i == 1) {
-      rownames(object) <- tmp[[i]]
+      rownames(object) <- h5file[[i]]
     } else if(i == 2) {
-      colnames(object) <- tmp[[i]]
+      colnames(object) <- h5file[[i]]
     } else {
-      dimnames(object)[[i]] <- tmp[[i]]
+      dimnames(object)[[i]] <- h5file[[i]]
     }
   }
 
   # Attach remaining list elements as attributes
   ind <- grep("Dimension_[0-9]_names|array", names(file.h5))
-  tmp <- file.h5[-ind]
+  h5attr <- file.h5[-ind]
 
-  for(i in seq_along(tmp)) {
-    attr(object, names(tmp)[i]) <- tmp[[i]]
+  for(i in seq_along(h5attr)) {
+    attr(object, names(h5attr)[i]) <- h5attr[[i]]
   }
 
   rhdf5::h5closeAll()
+
+  # Write to handle ---------------------------------------------------------
+
+  handle$input(data_product = data_product,
+               use_data_product = read_dataproduct,
+               use_component = read_component,
+               use_version = read_version,
+               use_namespace = read_namespace,
+               path = path,
+               component_url = read_component_url)
+
+  cli::cli_alert_success(
+    "Reading {.value {read_component}} from {.value {read_dataproduct}}")
+
+  # Generate output ---------------------------------------------------------
+
   object
 }

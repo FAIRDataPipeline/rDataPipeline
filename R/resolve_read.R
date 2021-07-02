@@ -2,7 +2,8 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
-#' @param component a \code{string} specifying a data product component
+#' @param component a \code{string} specifying the name of data product
+#' component
 #'
 resolve_read <- function(handle, data_product, component = NA) {
 
@@ -14,29 +15,17 @@ resolve_read <- function(handle, data_product, component = NA) {
     read <- list(read)
 
   # Find data product in `read:` section of config.yaml
-  index <- lapply(seq_along(read), function(x)
-    if (is.na(component)) {
-      read[[x]]$data_product == data_product
-    } else {
-      read[[x]]$data_product == data_product &&
-        read[[x]]$component == component
-    }
-  ) %>%
-    unlist() %>%
-    which()
+  list_reads <- lapply(read, function(x) x$data_product) %>%
+    unlist()
 
-  if (length(index) == 0) {
-    if (is.na(component)) {
-      usethis::ui_stop(paste(usethis::ui_field(data_product),
-                             "not found in config file"))
-    } else {
-      usethis::ui_stop(paste(usethis::ui_field(component),
-                             "not found in config file"))
-    }
+  index <- which(data_product %in% list_reads)
 
-  } else if(length(index) > 1) {
+  if (length(index) == 0)
+    usethis::ui_stop(paste(usethis::ui_field(data_product),
+                           "not found in config file"))
+
+  if(length(index) > 1)
     usethis::ui_stop("Multiple entries found in config file")
-  }
 
   this_read <- read[[index]]
 
@@ -48,6 +37,13 @@ resolve_read <- function(handle, data_product, component = NA) {
     data_product <- this_read$use$data_product
   } else {
     data_product <- this_read$data_product
+  }
+
+  # Get component
+  if (any(names(alias) == "component")) {
+    component <- alias$component
+  } else {
+    component <- component
   }
 
   # Get version number

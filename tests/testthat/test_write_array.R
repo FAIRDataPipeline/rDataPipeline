@@ -1,11 +1,12 @@
 context("Testing write_array()")
 
-
 config_file <- "config_files/write_array/config.yaml"
-fdp_pull(config_file)
-fdp_run(config_file, skip = TRUE)
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-handle <- initialise()
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
 data_product <- "test/array"
 component <- "this_component"
@@ -120,5 +121,5 @@ test_that(".h5 file is generated with unit and dimension values", {
   testthat::expect_equal(tmp, c(component2, component))
 })
 
-directory <- handle$yaml$run_metadata$default_data_store
+directory <- handle$yaml$run_metadata$write_data_store
 unlink(directory, recursive = TRUE)

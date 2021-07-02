@@ -8,14 +8,14 @@
 #'
 finalise <- function(handle) {
 
-  # record data product metadata (e.g. location, components, various descriptions, issues) in the data registry --------
+  # record data product metadata in the data registry --------
 
   # Add local data store root to the data registry
 
   datastore <- handle$yaml$run_metadata$write_data_store
   datastore_root_url <- new_storage_root(root = datastore,
                                          local = TRUE)
-
+  datastore_root_id <- extract_id(datastore_root_url)
 
   if (!is.null(handle$outputs)) {
 
@@ -54,8 +54,10 @@ finalise <- function(handle) {
 
       # Update handle
       handle$finalise_output_hash(use_data_product = dp,
-                                  use_version = version,
-                                  hash = hash)
+                                  use_namespace = this_write$use_namespace,
+                                  use_version = this_write$use_version,
+                                  hash = hash,
+                                  new_path = new_path)
 
     }
 
@@ -64,19 +66,13 @@ finalise <- function(handle) {
     for (j in seq_len(nrow(handle$outputs))) {
       this_write <- handle$outputs[j, ]
 
-      # Get data product
+      # Get metadata
       write_data_product <- this_write$use_data_product
-
-      # Get component
       write_component <- this_write$use_component
-
-      # Get namespace
+      write_version <- this_write$use_version
       write_namespace <- this_write$use_namespace
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace)
-
-      # Get version
-      write_version <- this_write$use_version
 
       if (!this_write$registered_data_product) {
 
@@ -87,17 +83,20 @@ finalise <- function(handle) {
 
         # Record file location in data registry
         storage_location <- gsub(datastore, "", this_write$path)
-        dp_exists <- get_url("data_product", list(name = write_data_product,
-                                                  version = write_version))
+        storage_exists <- get_url("storage_location",
+                                  list(hash = hash,
+                                       # public = public,
+                                       storage_root = datastore_root_id))
 
-        if (is.null(dp_exists)) {
+        if (is.null(storage_exists)) {
           storage_location_url <- new_storage_location(
             path = storage_location,
             hash = hash,
+            # public = public,
             storage_root_url = datastore_root_url)
 
         } else {
-          storage_location_url <- dp_exists
+          storage_location_url <- storage_exists
         }
 
         object_url <- new_object(storage_location_url = storage_location_url,

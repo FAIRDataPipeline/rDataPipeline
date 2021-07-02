@@ -1,52 +1,44 @@
 context("testing read_estimate")
 
-#set paths and filename for re-usability
-path <- "data-raw"
+# Write estimate ----------------------------------------------------------
 
-# create a distribution for failure tests
-test_distribution_name <- "test_distribution.toml"
-test_distribution_path <- paste0(path, "/", test_distribution_name)
-dist <- list(name = "latency",
-             distribution = "gamma",
-             parameters = list(shape = 2.0, scale = 3.0))
+config_file <- "config_files/write_estimate/config.yaml"
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-create_distribution(filename = test_distribution_name,
-                    path = path,
-                    distribution = dist)
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
-test_estimate_name <- "test_estimate_1.toml"
-test_estimate_path <- paste0(path, "/", test_estimate_name)
-parameters = list(asymptomatic_period = 192.0)
+value <- 192.0
 
-create_estimate(filename = test_estimate_name,
-                path = path,
-                parameters = parameters)
+write_estimate(value =  value,
+               handle = handle,
+               data_product = "test/estimate/asymptomatic-period",
+               component = "asymptomatic-period",
+               description = "asymptomatic period")
 
-comp_estimate <- list()
-comp_estimate[[names(parameters)[1]]] <- list(type = "point-estimate")
-comp_estimate[[names(parameters)[1]]] <- c(comp_estimate[[names(parameters)[1]]],
-                                           value = parameters[[1]][1])
+finalise(handle)
 
-#create a csv for failure test
-csv_name <- "test.csv"
-csv_path <- paste0(path, "/", csv_name)
-write.csv(dist, csv_path)
+# Read estimate -----------------------------------------------------------
 
+config_file <- "config_files/read_estimate/config.yaml"
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-test_that("read distribution works with toml files", {
-  expect_true(is.list(read_estimate(test_estimate_path)))
-  expect_equivalent(read_estimate(test_estimate_path), comp_estimate)
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+test_that("function behaves as it should", {
+
+  dat <- read_estimate(handle = handle,
+                       data_product = "test/estimate/asymptomatic-period",
+                       component = "asymptomatic-period")
+
+  testthat::expect_equal(dat, value)
+
 })
 
-##################################################################
-##          to do add file checks to read_distribution          ##
-##################################################################
-
-test_that("read_distribution fails correctly", {
-  #This needs fixing it should not warn and error:
-  expect_error(suppressWarnings(read_estimate("unknown_file")))
-  expect_error(read_estimate(test_distribution_path))
-  expect_error(read_estimate(csv_path))
-})
-
-unlink(path, recursive = TRUE)
+directory <- handle$yaml$run_metadata$write_data_store
+unlink(directory, recursive = TRUE)

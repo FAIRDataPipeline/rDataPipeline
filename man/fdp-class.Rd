@@ -159,7 +159,7 @@ Add outputs field
 \subsection{Method \code{output_index()}}{
 Return index
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version, namespace)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -170,6 +170,8 @@ Return index
 \item{\code{component}}{use_component}
 
 \item{\code{version}}{use_version}
+
+\item{\code{namespace}}{namespace}
 }
 \if{html}{\out{</div>}}
 }
@@ -215,9 +217,15 @@ Add issues field
 \if{html}{\out{<a id="method-finalise_output_hash"></a>}}
 \if{latex}{\out{\hypertarget{method-finalise_output_hash}{}}}
 \subsection{Method \code{finalise_output_hash()}}{
-Add outputs field
+Add file hash to outputs and re-write path name
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(use_data_product, use_version, hash)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(
+  use_data_product,
+  use_version,
+  use_namespace,
+  hash,
+  new_path
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -227,7 +235,11 @@ Add outputs field
 
 \item{\code{use_version}}{text}
 
+\item{\code{use_namespace}}{text}
+
 \item{\code{hash}}{text}
+
+\item{\code{new_path}}{text}
 }
 \if{html}{\out{</div>}}
 }

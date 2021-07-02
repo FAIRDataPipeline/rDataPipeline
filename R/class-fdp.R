@@ -67,17 +67,16 @@ fdp <- R6::R6Class("fdp", list(
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "Inputs:", "\n")
-      self$inputs %>% dplyr::select(name) %>%
+      self$inputs %>% dplyr::select(data_product) %>%
         print()
     }
 
     if (!is.null(self$outputs)) {
       cat("\n\n", "outputs:", "\n")
-      lapply(seq_len(nrow(self$outputs)), function(x) {
-        tmp <- self$outputs[x,] %>%
-          dplyr::select(index, component, data_product, version)
-        cat(tmp$component, "\n")
-      })
+      tmp <- self$outputs %>%
+        dplyr::select(use_component, use_data_product, use_version)
+      names(tmp) <- gsub("use_", "", names(tmp))
+      print(tmp)
     }
 
     invisible(self)
@@ -188,15 +187,19 @@ fdp <- R6::R6Class("fdp", list(
   #' @param data_product use_data_product
   #' @param component use_component
   #' @param version use_version
+  #' @param namespace  namespace
   #'
   output_index = function(data_product,
                           component,
-                          version) {
+                          version,
+                          namespace) {
 
-    self$outputs %>% dplyr::filter(.data$use_data_product == data_product,
-                                   .data$use_component == component,
-                                   .data$use_version == version) %>%
-      select(index) %>% unlist() %>% unname()
+    index <- which(self$outputs$use_data_product == data_product &
+                     self$outputs$use_component == component &
+                     self$outputs$use_version == version &
+                     self$outputs$use_namespace == namespace)
+
+    invisible(self$outputs$index[index])
   },
 
   #' @description
@@ -242,25 +245,29 @@ fdp <- R6::R6Class("fdp", list(
   },
 
   #' @description
-  #' Add outputs field
+  #' Add file hash to outputs and re-write path name
   #' @param use_data_product text
   #' @param use_version text
+  #' @param use_namespace text
   #' @param hash text
+  #' @param new_path text
   #'
   finalise_output_hash = function(use_data_product,
                                   use_version,
-                                  hash) {
+                                  use_namespace,
+                                  hash,
+                                  new_path) {
 
-    index <- which(self$outputs$use_data_product == use_data_product)
+    index <- which(self$outputs$use_data_product == use_data_product &
+                     self$outputs$use_namespace == use_namespace &
+                     self$outputs$use_version == use_version)
 
-    if (length(index) != 0) {
-      self$outputs$use_version[index] <- use_version
+    if (length(index) == 0) {
+      stop("Handle not updated")
+
+    } else {
       self$outputs$hash[index] <- hash
-      # Re-write path
-      oldfilename <- unique(self$outputs$path[index])
-      newfilename <- gsub(paste0(basename(oldfilename), "$"),
-                          paste0(hash, ".h5"), oldfilename)
-      self$outputs$path[index] <- newfilename
+      self$outputs$path[index] <- new_path
     }
 
     invisible(self)
@@ -278,8 +285,14 @@ fdp <- R6::R6Class("fdp", list(
                                  component_url) {
 
     # Update handle with component URL
-    index <- which(self$outputs$use_data_product == use_data_product &
-                     self$outputs$use_component == use_component)
+    if (is.na(use_component)) {
+      index <- which(self$outputs$use_data_product == use_data_product &
+                       is.na(self$outputs$use_component))
+    } else {
+      index <- which(self$outputs$use_data_product == use_data_product &
+                       self$outputs$use_component == use_component)
+    }
+
     self$outputs$component_url[index] <- component_url
 
     # If a data product URL is already in the handle, check it matches

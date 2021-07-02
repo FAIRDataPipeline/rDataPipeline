@@ -168,6 +168,7 @@ write_array <- function(array,
 
   index <- handle$output_index(data_product = write_data_product,
                                component = component,
-                               version = write_version)
+                               version = write_version,
+                               namespace = write_namespace)
   invisible(index)
 }

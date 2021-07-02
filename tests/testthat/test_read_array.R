@@ -5,10 +5,12 @@ component <- "level/a/s/d/f/s"
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
 config_file <- "config_files/read_array/config.yaml"
-fdp_pull(config_file)
-fdp_run(config_file, skip = TRUE)
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-handle <- initialise()
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
 df_v1 <- data.frame(a = 1:2, b = 3:4)
 rownames(df_v1) <- 1:2

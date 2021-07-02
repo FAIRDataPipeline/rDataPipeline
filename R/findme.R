@@ -81,7 +81,5 @@ findme <- function(file, filter = TRUE) {
 
   }
 
-  stop_server()
-
   cat(msg)
 }
