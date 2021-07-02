@@ -1,4 +1,4 @@
-context("Testing create_estimate()")
+context("Testing write_estimate()")
 
 config_file <- "config_files/write_estimate/config.yaml"
 fair_pull(config_file)
@@ -23,3 +23,6 @@ test_that("function behaves as it should", {
   # File should be toml format
   expect_true(configr::is.toml.file(path))
 })
+
+directory <- handle$yaml$run_metadata$write_data_store
+unlink(directory, recursive = TRUE)

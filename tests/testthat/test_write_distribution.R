@@ -1,5 +1,13 @@
 context("Testing create_distribution()")
 
+config_file <- "config_files/write_distribution/config.yaml"
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
 dist <- list(name = "latency",
              distribution = "gamma",
              parameters = list(shape = 2.0, scale = 3.0))
