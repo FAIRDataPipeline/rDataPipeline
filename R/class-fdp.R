@@ -242,26 +242,29 @@ fdp <- R6::R6Class("fdp", list(
   },
 
   #' @description
-  #' Add outputs field
+  #' Add file hash to outputs and re-write path name
   #' @param use_data_product text
   #' @param use_version text
+  #' @param use_namespace text
   #' @param hash text
   #'
   finalise_output_hash = function(use_data_product,
                                   use_version,
+                                  use_namespace,
                                   hash) {
 
-    index <- which(self$outputs$use_data_product == use_data_product)
+    index <- which(self$outputs$use_data_product == use_data_product &&
+                     self$outputs$use_namespace == use_namespace &&
+                     self$outputs$use_version == use_version)
 
     if (length(index) != 0) {
-      self$outputs$use_version[index] <- use_version
       self$outputs$hash[index] <- hash
-      # Re-write path
       oldfilename <- unique(self$outputs$path[index])
       newfilename <- gsub(paste0(basename(oldfilename), "$"),
                           paste0(hash, ".h5"), oldfilename)
       self$outputs$path[index] <- newfilename
-    }
+
+    } else stop("Handle not updated")
 
     invisible(self)
   },
@@ -278,8 +281,14 @@ fdp <- R6::R6Class("fdp", list(
                                  component_url) {
 
     # Update handle with component URL
-    index <- which(self$outputs$use_data_product == use_data_product &
-                     self$outputs$use_component == use_component)
+    if (is.na(use_component)) {
+      index <- which(self$outputs$use_data_product == use_data_product &
+                       is.na(self$outputs$use_component))
+    } else {
+      index <- which(self$outputs$use_data_product == use_data_product &
+                       self$outputs$use_component == use_component)
+    }
+
     self$outputs$component_url[index] <- component_url
 
     # If a data product URL is already in the handle, check it matches

@@ -8,7 +8,7 @@
 #'
 finalise <- function(handle) {
 
-  # record data product metadata (e.g. location, components, various descriptions, issues) in the data registry --------
+  # record data product metadata in the data registry --------
 
   # Add local data store root to the data registry
 
@@ -54,7 +54,8 @@ finalise <- function(handle) {
 
       # Update handle
       handle$finalise_output_hash(use_data_product = dp,
-                                  use_version = version,
+                                  use_namespace = this_write$use_namespace,
+                                  use_version = this_write$use_version,
                                   hash = hash)
 
     }
