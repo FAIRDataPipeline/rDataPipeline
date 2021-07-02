@@ -187,15 +187,19 @@ fdp <- R6::R6Class("fdp", list(
   #' @param data_product use_data_product
   #' @param component use_component
   #' @param version use_version
+  #' @param namespace  namespace
   #'
   output_index = function(data_product,
                           component,
-                          version) {
+                          version,
+                          namespace) {
 
-    self$outputs %>% dplyr::filter(.data$use_data_product == data_product,
-                                   .data$use_component == component,
-                                   .data$use_version == version) %>%
-      select(index) %>% unlist() %>% unname()
+    index <- which(self$outputs$use_data_product == data_product &
+                     self$outputs$use_component == component &
+                     self$outputs$use_version == version &
+                     self$outputs$use_namespace == namespace)
+
+    invisible(self$outputs$path[index])
   },
 
   #' @description
@@ -254,8 +258,8 @@ fdp <- R6::R6Class("fdp", list(
                                   hash,
                                   new_path) {
 
-    index <- which(self$outputs$use_data_product == use_data_product &&
-                     self$outputs$use_namespace == use_namespace &&
+    index <- which(self$outputs$use_data_product == use_data_product &
+                     self$outputs$use_namespace == use_namespace &
                      self$outputs$use_version == use_version)
 
     if (length(index) == 0) {

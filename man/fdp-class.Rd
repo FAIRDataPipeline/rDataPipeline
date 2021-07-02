@@ -159,7 +159,7 @@ Add outputs field
 \subsection{Method \code{output_index()}}{
 Return index
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version, namespace)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -170,6 +170,8 @@ Return index
 \item{\code{component}}{use_component}
 
 \item{\code{version}}{use_version}
+
+\item{\code{namespace}}{namespace}
 }
 \if{html}{\out{</div>}}
 }

@@ -31,7 +31,7 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
       usethis::ui_field(table),
       "is not a valid table - for available tables use get_tables()"))
 
-  key <- readLines(file.path("~", ".scrc", "TOKEN.txt"))
+  key <- get_token()
   h <- c(Authorization = paste("token", key))
 
   tryCatch({
