@@ -199,7 +199,7 @@ fdp <- R6::R6Class("fdp", list(
                      self$outputs$use_version == version &
                      self$outputs$use_namespace == namespace)
 
-    invisible(self$outputs$path[index])
+    invisible(self$outputs$index[index])
   },
 
   #' @description
