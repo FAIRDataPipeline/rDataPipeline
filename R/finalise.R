@@ -15,7 +15,7 @@ finalise <- function(handle) {
   datastore <- handle$yaml$run_metadata$write_data_store
   datastore_root_url <- new_storage_root(root = datastore,
                                          local = TRUE)
-
+  datastore_root_id <- extract_id(datastore_root_url)
 
   if (!is.null(handle$outputs)) {
 
@@ -83,17 +83,20 @@ finalise <- function(handle) {
 
         # Record file location in data registry
         storage_location <- gsub(datastore, "", this_write$path)
-        dp_exists <- get_url("data_product", list(name = write_data_product,
-                                                  version = write_version))
+        storage_exists <- get_url("storage_location",
+                                  list(hash = hash,
+                                       # public = public,
+                                       storage_root = datastore_root_id))
 
-        if (is.null(dp_exists)) {
+        if (is.null(storage_exists)) {
           storage_location_url <- new_storage_location(
             path = storage_location,
             hash = hash,
+            # public = public,
             storage_root_url = datastore_root_url)
 
         } else {
-          storage_location_url <- dp_exists
+          storage_location_url <- storage_exists
         }
 
         object_url <- new_object(storage_location_url = storage_location_url,

@@ -67,17 +67,16 @@ fdp <- R6::R6Class("fdp", list(
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "Inputs:", "\n")
-      self$inputs %>% dplyr::select(name) %>%
+      self$inputs %>% dplyr::select(data_product) %>%
         print()
     }
 
     if (!is.null(self$outputs)) {
       cat("\n\n", "outputs:", "\n")
-      lapply(seq_len(nrow(self$outputs)), function(x) {
-        tmp <- self$outputs[x,] %>%
-          dplyr::select(index, component, data_product, version)
-        cat(tmp$component, "\n")
-      })
+      tmp <- self$outputs %>%
+        dplyr::select(use_component, use_data_product, use_version)
+      names(tmp) <- gsub("use_", "", names(tmp))
+      print(tmp)
     }
 
     invisible(self)
