@@ -247,24 +247,25 @@ fdp <- R6::R6Class("fdp", list(
   #' @param use_version text
   #' @param use_namespace text
   #' @param hash text
+  #' @param new_path text
   #'
   finalise_output_hash = function(use_data_product,
                                   use_version,
                                   use_namespace,
-                                  hash) {
+                                  hash,
+                                  new_path) {
 
     index <- which(self$outputs$use_data_product == use_data_product &&
                      self$outputs$use_namespace == use_namespace &&
                      self$outputs$use_version == use_version)
 
-    if (length(index) != 0) {
-      self$outputs$hash[index] <- hash
-      oldfilename <- unique(self$outputs$path[index])
-      newfilename <- gsub(paste0(basename(oldfilename), "$"),
-                          paste0(hash, ".h5"), oldfilename)
-      self$outputs$path[index] <- newfilename
+    if (length(index) == 0) {
+      stop("Handle not updated")
 
-    } else stop("Handle not updated")
+    } else {
+      self$outputs$hash[index] <- hash
+      self$outputs$path[index] <- new_path
+    }
 
     invisible(self)
   },

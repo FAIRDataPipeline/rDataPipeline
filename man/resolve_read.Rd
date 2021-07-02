@@ -4,12 +4,15 @@
 \alias{resolve_read}
 \title{resolve_read}
 \usage{
-resolve_read(handle, data_product)
+resolve_read(handle, data_product, component = NA)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
+
+\item{component}{a \code{string} specifying the name of data product
+component}
 }
 \description{
 resolve_read

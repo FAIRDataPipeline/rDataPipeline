@@ -118,7 +118,8 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
         write_namespace <- yaml$run_metadata$default_output_namespace
       }
 
-      write_namespace_url <- new_namespace(write_namespace)
+      write_namespace_url <- new_namespace(name = write_namespace,
+                                           full_name = write_namespace)
       write_namespace_id <- extract_id(write_namespace_url)
 
       # Get version

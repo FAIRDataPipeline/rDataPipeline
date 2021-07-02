@@ -9,15 +9,14 @@
 #'
 link_read <- function(handle, data_product) {
 
+  # If the data_product is already recorded in the handle, return the path
   if (!is.null(handle$inputs)) {
-    # If the data_product is already recorded in the handle, return the path
     if (data_product %in% handle$inputs$name) {
       output <- handle$inputs %>%
         dplyr::filter(.data$name == data_product) %>%
         dplyr::select(.data$path) %>%
         unlist() %>%
         unname()
-
       return(invisible(output))
     }
   }

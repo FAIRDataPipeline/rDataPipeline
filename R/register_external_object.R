@@ -81,7 +81,8 @@ register_external_object <- function(register_this,
     version <- gsub("\\$\\{\\{CLI.DATE\\}\\}", datetime, version)
   }
 
-  namespace_url <- new_namespace(name = namespace, full_name = namespace)
+  namespace_url <- new_namespace(name = namespace,
+                                 full_name = namespace)
 
   data_product_url <- new_data_product(name = register_this$external_object,
                                        version = version,

@@ -217,7 +217,13 @@ Add issues field
 \subsection{Method \code{finalise_output_hash()}}{
 Add file hash to outputs and re-write path name
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(use_data_product, use_version, use_namespace, hash)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(
+  use_data_product,
+  use_version,
+  use_namespace,
+  hash,
+  new_path
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -230,6 +236,8 @@ Add file hash to outputs and re-write path name
 \item{\code{use_namespace}}{text}
 
 \item{\code{hash}}{text}
+
+\item{\code{new_path}}{text}
 }
 \if{html}{\out{</div>}}
 }

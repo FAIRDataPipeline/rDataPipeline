@@ -17,7 +17,7 @@ read_array <- function(handle,
                        component) {
 
   # Read hdf5 file
-  tmp <- resolve_read(handle, data_product)
+  tmp <- resolve_read(handle, data_product, component)
   read_dataproduct <- tmp$data_product
   read_component <- tmp$component
   read_component_url <- tmp$component_url

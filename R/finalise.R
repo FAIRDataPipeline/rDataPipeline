@@ -56,7 +56,8 @@ finalise <- function(handle) {
       handle$finalise_output_hash(use_data_product = dp,
                                   use_namespace = this_write$use_namespace,
                                   use_version = this_write$use_version,
-                                  hash = hash)
+                                  hash = hash,
+                                  new_path = new_path)
 
     }
 
@@ -65,19 +66,13 @@ finalise <- function(handle) {
     for (j in seq_len(nrow(handle$outputs))) {
       this_write <- handle$outputs[j, ]
 
-      # Get data product
+      # Get metadata
       write_data_product <- this_write$use_data_product
-
-      # Get component
       write_component <- this_write$use_component
-
-      # Get namespace
+      write_version <- this_write$use_version
       write_namespace <- this_write$use_namespace
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace)
-
-      # Get version
-      write_version <- this_write$use_version
 
       if (!this_write$registered_data_product) {
 

@@ -2,8 +2,10 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
+#' @param component a \code{string} specifying the name of data product
+#' component
 #'
-resolve_read <- function(handle, data_product) {
+resolve_read <- function(handle, data_product, component = NA) {
 
   read <- handle$yaml$read
 
@@ -35,6 +37,13 @@ resolve_read <- function(handle, data_product) {
     data_product <- this_read$use$data_product
   } else {
     data_product <- this_read$data_product
+  }
+
+  # Get component
+  if (any(names(alias) == "component")) {
+    component <- alias$component
+  } else {
+    component <- component
   }
 
   # Get version number
