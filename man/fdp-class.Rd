@@ -215,9 +215,9 @@ Add issues field
 \if{html}{\out{<a id="method-finalise_output_hash"></a>}}
 \if{latex}{\out{\hypertarget{method-finalise_output_hash}{}}}
 \subsection{Method \code{finalise_output_hash()}}{
-Add outputs field
+Add file hash to outputs and re-write path name
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(use_data_product, use_version, hash)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(use_data_product, use_version, use_namespace, hash)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -226,6 +226,8 @@ Add outputs field
 \item{\code{use_data_product}}{text}
 
 \item{\code{use_version}}{text}
+
+\item{\code{use_namespace}}{text}
 
 \item{\code{hash}}{text}
 }
