@@ -4,15 +4,15 @@
 #' \code{read_dataproduct()} and \code{write_dataproduct()} functions to
 #' add read and write blocks.
 #'
-#' @param path
-#' @param description
-#' @param input_namespace
-#' @param output_namespace
+#' @param path config file path
+#' @param description description field
+#' @param input_namespace input_namespace field
+#' @param output_namespace output_namespace field
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun {
+#' \dontrun{
 #' write_config("test_config/config.yaml",
 #'              description = "test",
 #'              input_namespace = "test_user",

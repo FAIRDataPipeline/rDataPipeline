@@ -3,11 +3,11 @@
 #' @param path config file path
 #' @param data_product data_product field
 #' @param description component field
-#' @param (optional) version version field
-#' @param (optional) use_data_product use_data_product field
-#' @param (optional) use_component use_component field
-#' @param (optional) use_version use_version field
-#' @param (optional) use_namespace use_namespace field
+#' @param version (optional) version version field
+#' @param use_data_product (optional) use_data_product use_data_product field
+#' @param use_component (optional) use_component use_component field
+#' @param use_version (optional) use_version use_version field
+#' @param use_namespace (optional) use_namespace use_namespace field
 #'
 #' @export
 #'

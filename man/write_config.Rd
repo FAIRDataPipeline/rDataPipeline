@@ -7,7 +7,13 @@
 write_config(path, description, input_namespace, output_namespace)
 }
 \arguments{
-\item{output_namespace}{}
+\item{path}{config file path}
+
+\item{description}{description field}
+
+\item{input_namespace}{input_namespace field}
+
+\item{output_namespace}{output_namespace field}
 }
 \description{
 Generates (user generated) config.yaml files for unit tests. Use
@@ -15,7 +21,7 @@ Generates (user generated) config.yaml files for unit tests. Use
 add read and write blocks.
 }
 \examples{
-\dontrun {
+\dontrun{
 write_config("test_config/config.yaml",
              description = "test",
              input_namespace = "test_user",
