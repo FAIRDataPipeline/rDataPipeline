@@ -12,11 +12,4 @@ github_files(repo)
 \description{
 List files in GitHub repository
 }
-\examples{
-\dontrun{
-filelist <- github_files("ScottishCovidResponse/SCRCdata")
-files <- grep("scotgov_deaths.R$", filelist, value = TRUE)
-}
-
-}
 \keyword{internal}
