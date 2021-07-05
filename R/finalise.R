@@ -58,7 +58,6 @@ finalise <- function(handle) {
                                   use_version = this_write$use_version,
                                   hash = hash,
                                   new_path = new_path)
-
     }
 
     # Register entries in local registry
