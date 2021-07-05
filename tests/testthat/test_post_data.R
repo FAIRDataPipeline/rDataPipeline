@@ -12,45 +12,41 @@ unknown_table <- "unknown"
 id <- sample(1:100, 1, replace = TRUE)
 uid <- paste0("Test - ", Sys.time())
 
-object_id <- get_entry("object", list(updated_by = test_user))[[1]]$url
-
-if(is.null(object_id)){
-  source_id <- post_data("object",
-                         list(description = UID),
-                         key)
-}
+object_id <- post_data("object", list(description = uid))
 
 test_that("incorrect tables produce and error", {
-  expect_error(post_data(unknown_table, data = list(), key))
-  expect_error(post_data(NULL, data = list(), key))
+  expect_error(post_data(unknown_table, data = list()))
+  expect_error(post_data(NULL, data = list()))
 })
 
 test_that("post_data works with all tables",{
-  for(i in seq_along(tables)){
+  for(i in seq_along(tables)) {
     table <- tables[i]
-    if(table == "users" | table == "groups")
-      expect_error(post_data(tables[i], data = list("username = test"), key))
-    else{
-      Sys.sleep(sleep_time)
-      table.writable <- get_table_writable(table, key)
-      Sys.sleep(sleep_time)
-      table.required <- get_table_required(table, key)
+
+    if(table == "users" | table == "groups") {
+      expect_error(post_data(tables[i], data = list("username = test")))
+
+    } else {
+      table.writable <- get_table_writable(table)
+      table.required <- get_table_required(table)
 
       data_correct <- list()
       data_incorrect <- list()
 
-      if(nrow(table.required) > 1 ){
+      if (nrow(table.required) > 1) {
         test_that(paste0(table, " fails when no data is present"), {
-          expect_error(post_data(table, data = list(), key))
+          expect_error(post_data(table, data = list()))
         })
 
-      } else if(nrow(table.required) == 0) {
+      } else if (nrow(table.required) == 0) {
         test_that(paste0(table, " allows creation with no data"), {
-          expect_warning(expect_true(is.character(post_data(table, NULL, key))))
+          expect_true(is.character(post_data(table, NULL)))
         })
         data_incorrect <- list(unknown = "unknown")
-      } else{
-        for(ii in seq_along(table.required$field)){
+
+      } else {
+
+        for (ii in seq_along(table.required$field)) {
           field = table.required$field[ii]
           data_type = table.required$data_type[ii]
 
@@ -75,30 +71,28 @@ test_that("post_data works with all tables",{
             data_type == "datetime" ~ as.character(Sys.time()),
             data_type == "boolean" ~ "TRUE"
           )
-          if(data_type == "field" & (grepl(".*?s$", field) |
-                                     grepl(".*?s_of$", field))){
+          if (data_type == "field" & (grepl(".*?s$", field) |
+                                      grepl(".*?s_of$", field))) {
             data_correct[[field]] <- NULL
           }
 
-          if(data_type == "string" & !is.na(max_value))
-          {
+          if(data_type == "string" & !is.null(max_value)) {
             data_incorrect[[field]] <- paste(rep("t", max_value + 1),
                                              collapse = "")
           }
-
         }
 
-        test_that(paste0("table ", table, " works with correct data"),{
-          expect_true(is.character(post_data(table, data_correct, key)))
+        test_that(paste0("table ", table, " works with correct data"), {
+          expect_true(is.character(post_data(table, data_correct)))
         })
 
       }
 
-      Sys.sleep(sleep_time)
-      test_that(paste0("table ", table, " does not works with correct data"),{
-        expect_error(post_data(table, data_incorrect, key))
-      })
-
+      if (table != "object")
+        test_that(paste0("table ", table,
+                         " does not works with correct data"), {
+                           expect_error(post_data(table, data_incorrect))
+                         })
     }
   }
 })

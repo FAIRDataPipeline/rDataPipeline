@@ -54,12 +54,12 @@ write_distribution <- function(handle,
 
   if (file.exists(path)) {
 
-    # # Check that component doesn't already exist
-    # existing <- read_distribution(path)
-    # if (write_data_product %in% names(existing))
-    #   usethis::ui_stop("{write_data_product} is already listed in toml file")
-    #
-    # cat(paste0("\n", contents), file = path, append = TRUE)
+    # Check that component doesn't already exist
+    existing <- configr::read.config(file = path)
+    if (write_data_product %in% names(existing))
+      usethis::ui_stop("{write_data_product} is already listed in toml file")
+
+    cat(paste0("\n", contents), file = path, append = TRUE)
 
   } else {
     cat(contents, file = path, append = FALSE)
@@ -78,5 +78,8 @@ write_distribution <- function(handle,
                 path = path,
                 description = description)
 
-  invisible(handle$output_index(data_product, component, write_version))
+  invisible(handle$output_index(data_product = data_product,
+                                component = component,
+                                version = write_version,
+                                namespace = write_namespace))
 }

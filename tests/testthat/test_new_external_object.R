@@ -8,17 +8,26 @@ hash <- sha1(UID)
 
 run_server()
 
-object_url <- post_data("object",
-                        list(description = UID))
-
 storage_root_url <- post_data("storage_root",
-                              list(name = UID,
-                                   root = path_url))
+                              list(root = path_url))
 
-original_store_url <- post_data("storage_location",
+storage_location_url <- post_data("storage_location",
                                 list(path = path,
                                      hash = hash,
                                      storage_root = storage_root_url))
+
+object_url <- post_data("object", list(desription = "text",
+                                       storage_location_url = storage_location_url))
+
+namespace_url <- post_data("namespace",
+                           list(name = "testuser",
+                                full_name = "testuser"))
+
+data_product_url <- post_data("data_product",
+                              list(name = UID,
+                                   version = "0.1.0",
+                                   object = object_url,
+                                   namespace = namespace_url))
 
 test_that("New external object creates an external object with all fields", {
   expect_true(grepl("external_object",
@@ -27,8 +36,6 @@ test_that("New external object creates an external object with all fields", {
                                         release_date = Sys.time(),
                                         title = UID,
                                         description = UID,
-                                        object_url = object_url,
-                                        original_store_url = original_store_url)))
+                                        data_product_url = data_product_url,
+                                        original_store_url = storage_location_url)))
 })
-
-stop_server()

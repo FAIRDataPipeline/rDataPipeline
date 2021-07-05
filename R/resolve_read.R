@@ -18,7 +18,7 @@ resolve_read <- function(handle, data_product, component = NA) {
   list_reads <- lapply(read, function(x) x$data_product) %>%
     unlist()
 
-  index <- which(data_product %in% list_reads)
+  index <- which(list_reads %in% data_product)
 
   if (length(index) == 0)
     usethis::ui_stop(paste(usethis::ui_field(data_product),

@@ -1,21 +1,55 @@
 context("Testing get_components()")
 
+uid <- random_hash()
+data_product1 <- paste("test/get_components1", uid, sep = "_")
+data_product2 <- paste("test/get_components2", uid, sep = "_")
+data_product3 <- paste("test/get_components3", uid, sep = "_")
+data_product4 <- paste("test/get_components4", uid, sep = "_")
+component1 <- "level1"
+component2 <- "level1/level2"
+component3 <- "level1/level2/level3"
+version1 <- "0.1.0"
+coderun_description <- "Register a file in the pipeline"
+dataproduct_description <- "data product description"
+namespace1 <- "username"
+
+# User written config file
 config_file <- "config_files/get_components/config.yaml"
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace1,
+             output_namespace = namespace1)
+write_dataproduct(path = config_file,
+                  data_product = data_product1,
+                  description = dataproduct_description,
+                  version = version1)
+write_dataproduct(path = config_file,
+                  data_product = data_product2,
+                  description = dataproduct_description,
+                  version = version1)
+write_dataproduct(path = config_file,
+                  data_product = data_product3,
+                  description = dataproduct_description,
+                  version = version1)
+write_dataproduct(path = config_file,
+                  data_product = data_product4,
+                  description = dataproduct_description,
+                  version = version1)
+
+# CLI functions
 fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
+# Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-# Create Test Data in test-dir directory
-
+# Write data
 df <- data.frame(a = 1:2, b = 3:4)
 rownames(df) <- 1:nrow(df)
 array <- as.matrix(df)
 
-data_product1 <- "test/get_components1"
-component1 <- "level1"
 index1 <- write_array(array = array,
                       handle = handle,
                       data_product = data_product1,
@@ -28,8 +62,6 @@ filename1 <- handle$outputs %>%
   dplyr::select(path) %>%
   unlist() %>% unname()
 
-data_product2 <- "test/get_components2"
-component2 <- "level1/level2"
 index2 <- write_array(array = array,
                       handle = handle,
                       data_product = data_product2,
@@ -42,8 +74,6 @@ filename2 <- handle$outputs %>%
   dplyr::select(path) %>%
   unlist() %>% unname()
 
-data_product3 <- "test/get_components3"
-component3 <- "level1/level2/level3"
 index3 <- write_array(array = array,
                       handle = handle,
                       data_product = data_product3,
@@ -56,7 +86,6 @@ filename3 <- handle$outputs %>%
   dplyr::select(path) %>%
   unlist() %>% unname()
 
-data_product4 <- "test/get_components4"
 index4 <- write_array(array = array,
                       handle = handle,
                       data_product = data_product4,
@@ -109,7 +138,3 @@ test_that("file structures are equal to Component names", {
   testthat::expect_equal(get_components(filename4),
                          c(component1, component2, component3))
 })
-
-# Remove test datastore
-directory <- handle$yaml$run_metadata$write_data_store
-unlink(directory, recursive = TRUE)

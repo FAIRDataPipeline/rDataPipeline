@@ -174,37 +174,49 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
 
   # Get latest commit sha ---------------------------------------------------
 
-  assertthat::assert_that("local_repo" %in% names(yaml$run_metadata))
+  if (!skip) {
+    assertthat::assert_that("local_repo" %in% names(yaml$run_metadata))
 
-  # Check local repo is clean
-  local_repo <- yaml$run_metadata$local_repo
-  if (!skip) check_local_repo(local_repo)
+    # Check local repo is clean
+    local_repo <- yaml$run_metadata$local_repo
+    check_local_repo(local_repo)
 
-  # Get hash of latest commit
-  if (!dir.exists(local_repo))
-    usethis::ui_stop("Directory, {local_repo}, does not exist")
-  if (!git2r::in_repository(local_repo))
-    usethis::ui_stop("Directory, {local_repo}, is not a git repository")
+    # Get hash of latest commit
+    if (!dir.exists(local_repo))
+      usethis::ui_stop("Directory, {local_repo}, does not exist")
+    if (!git2r::in_repository(local_repo))
+      usethis::ui_stop("Directory, {local_repo}, is not a git repository")
 
-  sha <- git2r::sha(git2r::last_commit(local_repo))
-  run_metadata$latest_commit <- sha
+    sha <- git2r::sha(git2r::last_commit(local_repo))
+    run_metadata$latest_commit <- sha
 
-  cli::cli_alert_info("Checking local repository status")
+    cli::cli_alert_info("Checking local repository status")
+
+  } else {
+    random_hash <- openssl::sha1(as.character(Sys.time()))
+    run_metadata$latest_commit <- random_hash
+  }
 
   # Get GitHub username/repository ------------------------------------------
 
-  if ("remote_repo" %in% names(yaml$run_metadata)) {
-    repo_name <- gsub("https://github.com/", "", yaml$run_metadata$remote_repo)
+  if (!skip) {
+    if ("remote_repo" %in% names(yaml$run_metadata)) {
+      repo_name <- gsub("https://github.com/", "", yaml$run_metadata$remote_repo)
+    } else {
+      repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
+      if (length(repo_name) > 1) stop("Add remote_repo field")
+
+      repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
+      repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
+    }
+
+    run_metadata$remote_repo <- repo_name
+    cli::cli_alert_info("Locating remote repository")
+
   } else {
-    repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
-    if (length(repo_name) > 1) stop("Add remote_repo field")
-
-    repo_name <- gsub("https://github.com/", "", repo_name, fixed = TRUE)
-    repo_name <- gsub(".git", "", repo_name, fixed = TRUE)
+    fake_remote_repo <- "https://github.com/fake_org/fake_repo"
+    run_metadata$remote_repo <- fake_remote_repo
   }
-
-  run_metadata$remote_repo <- repo_name
-  cli::cli_alert_info("Locating remote repository")
 
   # Save working config.yaml in data store ----------------------------------
 
