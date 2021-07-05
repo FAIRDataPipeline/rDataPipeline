@@ -1,59 +1,68 @@
 context("Test read_distribution")
 
-#set paths and filename for re-usability
-path <- "data-raw"
-filename <- "test_distribution.toml"
+uid <- random_hash()
+data_product1 <- paste("test/distribution/symptom-delay", uid, sep = "_")
+component1 <- "symptom-delay"
+coderun_description <- "Register a file in the pipeline"
+dataproduct_description <- "Estimate of symptom delay"
+namespace1 <- "username"
 
-rel_file_path <- paste0(path, "/", filename)
+# User written config file
+config_file <- "config_files/read_distribution/config.yaml"
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace1,
+             output_namespace = namespace1)
+write_dataproduct(path = config_file,
+                  data_product = data_product1,
+                  description = dataproduct_description)
 
-# create a distribution
-name <- "latency"
-distribution <- "gamma"
-parameters <- list(shape = 2.0, scale = 3.0)
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-dist <- list(name = name,
-             distribution = distribution,
-             parameters = parameters)
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
-create_distribution(filename = filename,
-                    path = path,
-                    distribution = dist)
+# Write data
+write_distribution(handle = handle,
+                   data_product = data_product1,
+                   component = component1,
+                   distribution = "Gaussian",
+                   parameters = list(mean = -16.08, SD = 30),
+                   description = "symptom delay")
 
-# Create a comparable list (distribution) dynamically
-comp_dist <- list()
-comp_dist[[name]] <- list(
-  distribution = distribution)
+# Finalise code run
+finalise(handle)
 
-comp_dist[[name]] <- c(comp_dist[[name]], sort(unlist(parameters), decreasing = TRUE))
-comp_dist[[name]] <- c(comp_dist[[name]], type = "distribution")
+# Start tests -------------------------------------------------------------
 
-# create an estimate for failure test
-test_estimate_name <- "test_estimate_1.toml"
-test_estimate_path <- paste0(path, "/", test_estimate_name)
+config_file <- "config_files/read_distribution/config2.yaml"
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace1,
+             output_namespace = namespace1)
+read_dataproduct(path = config_file,
+                 data_product = data_product1,
+                 component = component1)
 
-create_estimate(filename = test_estimate_path,
-                parameters = list(asymptomatic_period = 192.0))
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
 
-#create a csv for failure test
-csv_name <- "test.csv"
-csv_path <- paste0(path, "/", csv_name)
-write.csv(dist, csv_path)
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
 
-
-test_that("read distribution works with toml files", {
-  expect_true(is.list(read_distribution(rel_file_path)))
-  expect_equivalent(read_distribution(rel_file_path), comp_dist)
+test_that("function works correctly", {
+  tmp <- list(distribution = "Gaussian",
+              SD = 30,
+              mean = -16.08)
+  dist <- read_distribution(handle = handle,
+                            data_product = data_product1,
+                            component = component1)
+  expect_equivalent(dist, tmp)
 })
-
-##################################################################
-##          to do add file checks to read_distribution          ##
-##################################################################
-
-test_that("read_distribution fails correctly", {
-  #This needs fixing it should not warn and error:
-  expect_error(suppressWarnings(read_distribution("unknown_file")))
-  expect_error(read_distribution(test_estimate_path))
-  expect_error(read_distribution(csv_path))
-})
-
-unlink(path, recursive = TRUE)
