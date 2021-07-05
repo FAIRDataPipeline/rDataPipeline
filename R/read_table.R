@@ -15,39 +15,17 @@ read_table <- function(handle,
                        data_product,
                        component) {
 
-  read <- handle$yaml$read
+  # Read file ---------------------------------------------------------------
 
-  # If names(read) is not null, then a single entry has been added that
-  # is not in a list, so put it in a list
-  if (!all(is.null(names(read))))
-    read <- list(read)
+  tmp <- resolve_read(handle, data_product, component)
+  read_dataproduct <- tmp$data_product
+  read_component <- tmp$component
+  read_component_url <- tmp$component_url
+  read_version <- tmp$version
+  read_namespace <- tmp$namespace
+  path <- tmp$path
 
-  # Find data product in `read:` section of config.yaml
-  index <- lapply(seq_along(read), function(x)
-    read[[x]]$data_product == data_product &&
-      read[[x]]$component == component) %>%
-    unlist() %>%
-    which()
-
-  this_read <- read[[index]]
-  version <- this_read$version
-
-  run_server()
-
-  this_entry <- get_entry("data_product",
-                          list(name = data_product,
-                               version = this_read$version,
-                               namespace = this_read$namespace))[[1]]
-
-  this_object <- get_entity(this_entry$object)
-  this_location <- get_entity(this_object$storage_location)
-
-  stop_server()
-
-  # Read hdf5 file
-  path <- this_location$path
-  datastore <- handle$yaml$run_metadata$default_data_store
-  file.h5 <- rhdf5::h5read(paste0(datastore, path), component)
+  file.h5 <- rhdf5::h5read(path, read_component)
 
   # Extract data object
   object <- file.h5$table
@@ -65,6 +43,23 @@ read_table <- function(handle,
   }
 
   rhdf5::h5closeAll()
+
   object <- data.frame(lapply(object, type.convert, as.is = TRUE))
+
+  # Write to handle ---------------------------------------------------------
+
+  handle$input(data_product = data_product,
+               use_data_product = read_dataproduct,
+               use_component = read_component,
+               use_version = read_version,
+               use_namespace = read_namespace,
+               path = path,
+               component_url = read_component_url)
+
+  cli::cli_alert_success(
+    "Reading {.value {read_component}} from {.value {read_dataproduct}}")
+
+  # Generate output ---------------------------------------------------------
+
   object
 }

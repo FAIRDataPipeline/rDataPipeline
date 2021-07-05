@@ -22,24 +22,21 @@ write_table <- function(df,
                         row_names,
                         column_units) {
 
-  # Extract metadata from config.yaml
-  datastore <- handle$yaml$run_metadata$write_data_store
-  namespace <- handle$yaml$run_metadata$default_output_namespace
+  # Get metadata ------------------------------------------------------------
 
-  # Extract / set save location
-  if (data_product %in% names(handle$outputs)) {
-    path <- unname(handle$outputs$dataproducts[[data_product]]$path)
-  } else {
-    filename <- paste0(openssl::sha1(as.character(Sys.time())), ".h5")
-    path <- file.path(paste0(datastore, namespace), data_product, filename)
-  }
+  write_metadata <- resolve_write(handle = handle,
+                                  data_product = data_product,
+                                  file_type = "h5")
+  write_data_product <- write_metadata$data_product
+  write_version <- write_metadata$version
+  write_namespace <- write_metadata$namespace
+  path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
 
-  if(!grepl(".h5$", path)) stop("path must be *.h5")
   if(!is.data.frame(df)) stop("df must be a data.frame")
 
-  # Save file ---------------------------------------------------------------
+  # Write hdf5 file ---------------------------------------------------------
 
   # Generate directory structure
   directory <- dirname(path)
@@ -93,21 +90,22 @@ write_table <- function(df,
 
   rhdf5::h5closeAll()
 
-  usethis::ui_done(paste("Added component:", usethis::ui_value(component), "\n",
-                         "to data product:", usethis::ui_value(data_product)))
+  cli::cli_alert_success(
+    "Writing {.value {component}} to {.value {write_data_product}}")
 
-  index <- lapply(handle$yaml$write, function(x)
-    data_product == x$data_product) %>%
-    unlist() %>% which()
-  this_dp <- handle$yaml$write[[index]]
+  # Write to handle ---------------------------------------------------------
 
-  version <- this_dp$version
+  handle$output(data_product = data_product,
+                use_data_product = write_data_product,
+                use_component = component,
+                use_version = write_version,
+                use_namespace = write_namespace,
+                path = path,
+                description = description)
 
-  handle$write_dataproduct(data_product,
-                           path,
-                           component,
-                           description,
-                           version)
-
-  invisible(handle$output_index(data_product, component, version))
+  index <- handle$output_index(data_product = write_data_product,
+                               component = component,
+                               version = write_version,
+                               namespace = write_namespace)
+  invisible(index)
 }
