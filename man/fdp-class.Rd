@@ -153,7 +153,8 @@ Record \code{code_run} outputs in \code{fdp} object
   use_version,
   use_namespace,
   path,
-  description
+  description,
+  public
 )}\if{html}{\out{</div>}}
 }
 
@@ -180,6 +181,8 @@ in the local data store}
 
 \item{\code{description}}{a \code{string} containing a description of the data
 product}
+
+\item{\code{public}}{}
 }
 \if{html}{\out{</div>}}
 }
