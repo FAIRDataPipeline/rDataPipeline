@@ -4,7 +4,13 @@
 \alias{new_storage_location}
 \title{Post entry to storage_location table}
 \usage{
-new_storage_location(path, hash, public, storage_root_url)
+new_storage_location(
+  path,
+  hash,
+  public,
+  storage_root_url,
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{path}{a \code{string} specifying the path from the \code{storage_root}
@@ -19,6 +25,8 @@ is public or not (default is \code{TRUE})}
 
 \item{storage_root_url}{a \code{string} specifying the URL of an entry in
 the \code{storage_root} table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{storage_location} table in the data registry

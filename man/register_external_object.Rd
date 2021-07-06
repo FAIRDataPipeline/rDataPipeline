@@ -4,12 +4,14 @@
 \alias{register_external_object}
 \title{register_external_object}
 \usage{
-register_external_object(yaml, register_this)
+register_external_object(yaml, register_this, endpoint)
 }
 \arguments{
 \item{yaml}{config yaml}
 
 \item{register_this}{metadata}
+
+\item{endpoint}{endpoint}
 }
 \description{
 register_external_object

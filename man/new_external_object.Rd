@@ -11,7 +11,8 @@ new_external_object(
   title,
   description,
   data_product_url,
-  original_store_url
+  original_store_url,
+  endpoint = "http://localhost:8000/api/"
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ the \code{data_product} table}
 \item{original_store_url}{(optional) a \code{string} specifying the URL of a
 an entry in the \code{storage_location} table that references the original
 location of an \code{external_object}}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{external_object} table in the data registry

@@ -8,7 +8,8 @@ new_object(
   description,
   storage_location_url,
   authors_urls = list(),
-  file_type_url
+  file_type_url,
+  endpoint = "http://localhost:8000/api/"
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ of an entry in the \code{storage_location} table}
 
 \item{file_type_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{file_type} table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{object} table in the data registry

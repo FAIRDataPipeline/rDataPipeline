@@ -55,6 +55,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      # Install local registry
+      - name: Install registry
+        run: |
+             /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
+        shell: bash
+
       # Install system_requirements requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -62,16 +68,6 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-        shell: bash
-
-      # Install system_requirements on ubuntu 16.04 (Boydorr)
-      - name: Install system requirements (ubuntu-16.04)
-        if: matrix.config.os == 'ubuntu-16.04'
-        run : |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
         shell: bash
 
       # Install system requirements on ubuntu 20.04

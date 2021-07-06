@@ -4,7 +4,12 @@
 \alias{new_namespace}
 \title{Post entry to namespace table}
 \usage{
-new_namespace(name, full_name, website)
+new_namespace(
+  name,
+  full_name,
+  website,
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the namespace}
@@ -14,6 +19,8 @@ namespace}
 
 \item{website}{(optional) a \code{string} specifying the website URL
 associated with the namespace}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{namespace} table in the data registry

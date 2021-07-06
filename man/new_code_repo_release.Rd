@@ -4,7 +4,13 @@
 \alias{new_code_repo_release}
 \title{Post entry to code_repo_release table}
 \usage{
-new_code_repo_release(name, version, object_url, website)
+new_code_repo_release(
+  name,
+  version,
+  object_url,
+  website,
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of an official release of
@@ -17,6 +23,8 @@ code}
 
 \item{website}{(optional) a \code{string} specifying the URL of the
 website for this code release}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{code_repo_release} table in the data registry

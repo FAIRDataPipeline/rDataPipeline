@@ -11,7 +11,8 @@ new_code_run(
   model_config_url,
   submission_script_url,
   inputs_urls = list(),
-  outputs_urls = list()
+  outputs_urls = list(),
+  endpoint = "http://localhost:8000/api/"
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ of an \code{object} associated with the submission script used for the
 
 \item{outputs_urls}{a \code{list} of \code{object_component} URLs referencing
 \code{code_run} outputs}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{code_run} table in the data registry

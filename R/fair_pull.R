@@ -1,10 +1,12 @@
 #' fair_pull
 #'
 #' @param path path
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
 #'
-fair_pull <- function(path = "config.yaml") {
+fair_pull <- function(path = "config.yaml",
+                      endpoint = "http://localhost:8000/api/") {
 
   run_server()
 
@@ -47,7 +49,8 @@ fair_pull <- function(path = "config.yaml") {
     # Download raw data to data store and register in data registry
     for (i in seq_along(register)) {
       register_external_object(yaml = yaml,
-                               register_this = register[[i]])
+                               register_this = register[[i]],
+                               endpoint = endpoint)
     }
   }
 

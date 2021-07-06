@@ -4,7 +4,7 @@
 \alias{new_storage_root}
 \title{Post entry to storage_root table}
 \usage{
-new_storage_root(root, local)
+new_storage_root(root, local, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{root}{a \code{string} specifying the URI of a
@@ -13,6 +13,8 @@ produces a complete URI to a file}
 
 \item{local}{(optional) a \code{boolean} indicating whether the
 \code{storage_root} is local or not}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{storage_root} table in the data registry

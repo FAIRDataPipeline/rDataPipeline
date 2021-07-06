@@ -2,9 +2,11 @@
 #'
 #' @param yaml config yaml
 #' @param register_this metadata
+#' @param endpoint endpoint
 #'
 register_external_object <- function(yaml,
-                                     register_this) {
+                                     register_this,
+                                     endpoint) {
 
   datastore <- yaml$run_metadata$write_data_store
   namespace <- yaml$run_metadata$default_output_namespace
@@ -60,7 +62,8 @@ register_external_object <- function(yaml,
   datastore_location_url <- new_storage_location(
     path = file_path,
     hash = hash,
-    storage_root_url = datastore_root_url)
+    storage_root_url = datastore_root_url,
+    endpoint = endpoint)
 
   # Get external object metadata --------------------------------------------
 
@@ -80,7 +83,8 @@ register_external_object <- function(yaml,
 
   # Get namespace
   register_namespace_url <- new_namespace(name = namespace,
-                                          full_name = namespace)
+                                          full_name = namespace,
+                                          endpoint = endpoint)
   register_namespace_id <- extract_id(register_namespace_url)
 
   # Get data_product
@@ -90,7 +94,8 @@ register_external_object <- function(yaml,
   data_product_exists <- get_entry("data_product",
                                    list(name = register_data_product,
                                         version = register_version,
-                                        namespace = register_namespace_id))
+                                        namespace = register_namespace_id,
+                                        endpoint = endpoint))
 
   if (is.null(data_product_exists)) {
     # Original source ---------------------------------------------------------
@@ -99,17 +104,20 @@ register_external_object <- function(yaml,
     source_url <- new_namespace(
       name = register_this$source_abbreviation,
       full_name = register_this$source_name,
-      website = register_this$source_website)
+      website = register_this$source_website,
+      endpoint = endpoint)
 
     source_root_url <- new_storage_root(
       root = register_this$root,
-      local = FALSE)
+      local = FALSE,
+      endpoint = endpoint)
 
     # Add source location to the data registry
     source_location_url <- new_storage_location(
       path = register_this$path,
       hash = hash,
-      storage_root_url = source_root_url)
+      storage_root_url = source_root_url,
+      endpoint = endpoint)
 
     usethis::ui_done(
       paste("Writing", usethis::ui_value(register_this$external_object),
@@ -122,7 +130,8 @@ register_external_object <- function(yaml,
 
     if (is.null(filetype_exists)) {
       filetype_url <- new_file_type(name = register_this$file_type,
-                                    extension = register_this$file_type)
+                                    extension = register_this$file_type,
+                                    endpoint = endpoint)
     } else {
       assertthat::assert_that(length(filetype_exists) == 1)
       filetype_url <- filetype_exists
@@ -131,12 +140,14 @@ register_external_object <- function(yaml,
     datastore_object_url <- new_object(
       description = register_this$description,
       storage_location_url = datastore_location_url,
-      file_type_url = filetype_url)
+      file_type_url = filetype_url,
+      endpoint = endpoint)
 
     data_product_url <- new_data_product(name = register_data_product,
                                          version = register_version,
                                          object_url = datastore_object_url,
-                                         namespace_url = register_namespace_url)
+                                         namespace_url = register_namespace_url,
+                                         endpoint = endpoint)
 
     externalobject_url <- new_external_object(
       doi_or_unique_name = register_this$unique_name,
@@ -145,7 +156,8 @@ register_external_object <- function(yaml,
       title = register_this$title,
       description = register_this$description,
       data_product_url = data_product_url,
-      original_store_url = source_location_url)
+      original_store_url = source_location_url,
+      endpoint = endpoint)
 
     usethis::ui_done(
       paste("Writing", usethis::ui_value(register_this$external_object),

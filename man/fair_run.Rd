@@ -4,10 +4,16 @@
 \alias{fair_run}
 \title{fair_run}
 \usage{
-fair_run(path = "config.yaml", skip = FALSE)
+fair_run(
+  path = "config.yaml",
+  endpoint = "http://localhost:8000/api/",
+  skip = FALSE
+)
 }
 \arguments{
 \item{path}{string}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 
 \item{skip}{don't bother checking whether the repo is clean}
 }

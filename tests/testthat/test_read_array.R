@@ -12,6 +12,7 @@ version1 <- "0.1.0"
 version2 <- "0.2.0"
 namespace1 <- "username"
 namespace2 <- "johnsmith"
+endpoint <- "https://data.scrc.uk/api/"
 
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
@@ -27,8 +28,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -71,8 +72,8 @@ write_dataproduct(path = config_file,
                   version = version2)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -111,8 +112,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -151,8 +152,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -214,8 +215,8 @@ read_dataproduct(path = config_file,
                  use_version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")

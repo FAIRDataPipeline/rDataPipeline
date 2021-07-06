@@ -4,7 +4,7 @@
 \alias{post_data}
 \title{Post entry to data registry}
 \usage{
-post_data(table, data, endpoint = "http://localhost:8000/api/")
+post_data(table, data, endpoint)
 }
 \arguments{
 \item{table}{table name as a character}
