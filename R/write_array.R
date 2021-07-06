@@ -93,7 +93,7 @@ write_array <- function(array,
 
   for (i in seq_along(directory.structure)) {
     # This structure needs to be added
-    if(i==1) {
+    if(i == 1) {
       build.structure <- directory.structure[1]
     } else {
       build.structure <- paste0(build.structure, "/", directory.structure[i])
