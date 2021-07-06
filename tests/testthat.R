@@ -1,5 +1,5 @@
-library(testthat)
-library(rFDP)
-
-testthat::test_check("rFDP")
+# library(testthat)
+# library(rFDP)
+#
+# testthat::test_check("rFDP")
 
