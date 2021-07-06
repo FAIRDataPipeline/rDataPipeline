@@ -38,31 +38,29 @@ register_external_object <- function(yaml,
   hash <- get_file_hash(file.path(local_path, tmp_filename))
 
   # Does this file already exist?
-  register_hash <- get_url("storage_location", list(hash = hash))
+  new_filename <- paste(hash, register_this$file_type, sep = ".")
+  file_exists <- file.exists(new_filename)
 
-  if (is.null(register_hash)) {
-    # Rename file
-    new_filename <- paste(hash, register_this$file_type, sep = ".")
+  # Rename file or delete it
+  if (!file_exists) {
     file.rename(file.path(local_path, tmp_filename),
                 file.path(local_path, new_filename))
-
-    # Add local data store root to the data registry
-    datastore_root_url <- new_storage_root(root = datastore,
-                                           local = TRUE)
-
-    file_path <- file.path(namespace, register_this$external_object,
-                           new_filename)
-
-    # Add local data store location to the data registry
-    datastore_location_url <- new_storage_location(
-      path = file_path,
-      hash = hash,
-      storage_root_url = datastore_root_url)
-
   } else {
     file.remove(file.path(local_path, tmp_filename))
-    datastore_location_url <- register_hash
   }
+
+  # Add local data store root to the data registry
+  datastore_root_url <- new_storage_root(root = datastore,
+                                         local = TRUE)
+
+  file_path <- file.path(namespace, register_this$external_object,
+                         new_filename)
+
+  # Add local data store location to the data registry
+  datastore_location_url <- new_storage_location(
+    path = file_path,
+    hash = hash,
+    storage_root_url = datastore_root_url)
 
   # Get external object metadata --------------------------------------------
 
