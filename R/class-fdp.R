@@ -167,6 +167,7 @@ fdp <- R6::R6Class("fdp", list(
   #' in the local data store
   #' @param description a \code{string} containing a description of the data
   #' product
+  #' @param public
   #'
   #' @return Returns an updated \code{fdp} object
   #'
@@ -176,7 +177,8 @@ fdp <- R6::R6Class("fdp", list(
                     use_version,
                     use_namespace,
                     path,
-                    description) {
+                    description,
+                    public) {
 
     index <- get_index(self)
 
@@ -189,6 +191,7 @@ fdp <- R6::R6Class("fdp", list(
                              use_namespace = character(),
                              path = character(),
                              description = character(),
+                             public = logical(),
                              hash = character(),
                              data_product_url = character(),
                              component_url = character(),
@@ -205,6 +208,7 @@ fdp <- R6::R6Class("fdp", list(
                       use_namespace = use_namespace,
                       path = path,
                       description = description,
+                      public = public,
                       hash = NA,
                       data_product_url = NA,
                       component_url = NA,
