@@ -1,6 +1,6 @@
 #' register_external_object
 #'
-#' @param ymal yaml
+#' @param yaml config yaml
 #' @param register_this metadata
 #'
 register_external_object <- function(yaml,
