@@ -42,13 +42,21 @@ initialise <- function(config, script) {
     config_location_url <- config_exists
   }
 
-  config_file_type <- new_file_type(name = "yaml",
-                                    extension = "yaml")
+  config_filetype_exists <- get_url("file_type", list(extension = "yaml"))
+
+  if (is.null(config_filetype_exists)) {
+    config_filetype_url <- new_file_type(name = "yaml", extension = "yaml")
+  } else {
+    config_filetype_url <- config_filetype_exists
+  }
+
+  # authors_url <- get_url("user_author_org", list())
 
   config_object_url <- new_object(
     description = "Working config.yaml file location in local datastore",
     storage_location_url = config_location_url,
-    file_type_url = config_file_type)
+    # authors_urls = list(authors_url),
+    file_type_url = config_filetype_url)
 
   cli::cli_alert_success("Writing {.file {config}} to local registry")
 
@@ -72,13 +80,19 @@ initialise <- function(config, script) {
     script_location_url <- script_exists
   }
 
-  script_file_type <- new_file_type(name = "sh",
-                                    extension = "sh")
+  script_filetype_exists <- get_url("file_type", list(extension = "sh"))
+
+  if (is.null(script_filetype_exists)) {
+    script_filetype_url <- new_file_type(name = "sh", extension = "sh")
+  } else {
+    script_filetype_url <- script_filetype_exists
+  }
 
   script_object_url <- new_object(
     description = "Submission script location in local datastore",
     storage_location_url = script_location_url,
-    file_type_url = script_file_type)
+    # authors_urls = list(authors_url),
+    file_type_url = script_filetype_url)
 
   cli::cli_alert_success("Writing {.file {script}} to local registry")
 
