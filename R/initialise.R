@@ -34,6 +34,7 @@ initialise <- function(config, script) {
     config_location_url <- new_storage_location(
       path = config,
       hash = config_hash,
+      public = TRUE,
       storage_root_url = config_storageroot_id)
 
   } else {
@@ -63,6 +64,7 @@ initialise <- function(config, script) {
     script_location_url <- new_storage_location(
       path = script,
       hash = script_hash,
+      public = TRUE,
       storage_root_url = script_storageroot_id)
 
   } else {
@@ -94,6 +96,7 @@ initialise <- function(config, script) {
     coderepo_location_url <- new_storage_location(
       path = repo_name,
       hash = sha,
+      public = TRUE,
       storage_root_url = repo_storageroot_url)
 
     coderepo_object_url <- new_object(
