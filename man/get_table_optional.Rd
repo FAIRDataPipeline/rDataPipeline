@@ -4,13 +4,15 @@
 \alias{get_table_optional}
 \title{Get optional fields}
 \usage{
-get_table_optional(table)
+get_table_optional(table, endpoint)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
-Returns a \code{data.frame} of optional fields and thier properties
+Returns a \code{data.frame} of optional fields and their properties
 }
 \description{
 Get optional fields

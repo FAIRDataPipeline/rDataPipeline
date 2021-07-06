@@ -4,10 +4,11 @@ name <- paste0("test_new_code_repo_release_",
                openssl::sha1(x = as.character(Sys.time())))
 version <- create_version_number()
 website <- paste0("https://www.", gsub("_", "", name), ".com")
+endpoint <- "https://data.scrc.uk/api/"
 
 run_server()
 
-object_url <- post_data("object", list(description = name))
+object_url <- post_data("object", list(description = name), endpoint = endpoint)
 
 test_that("new entry in code_repo_release returns API URL",{
   expect_true(grepl("code_repo_release",
@@ -24,5 +25,3 @@ test_that("existing entry in code_repo_release returns API URL", {
                                           object_url = object_url,
                                           website = website)))
 })
-
-stop_server()

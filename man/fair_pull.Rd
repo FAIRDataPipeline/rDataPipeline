@@ -4,7 +4,7 @@
 \alias{fair_pull}
 \title{fair_pull}
 \usage{
-fair_pull(path = "config.yaml")
+fair_pull(path = "config.yaml", endpoint = "")
 }
 \arguments{
 \item{path}{path}

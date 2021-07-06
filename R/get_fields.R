@@ -3,13 +3,15 @@
 #' Use API endpoint to produce a list of fields for a table. Requires API key.
 #'
 #' @param table a \code{string} specifying the name of the table
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
+#'
 #' @export
 #' @keywords internal
 #'
-get_fields <- function(table){
+get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
 
   # Users and Groups are valid tables but cannot be posted to
   if (table == "users" | table == "groups")
@@ -19,9 +21,11 @@ get_fields <- function(table){
   key <- get_token()
   h <- c(Authorization = paste("token", key))
 
+  api_url <- paste0(endpoint, table)
+  api_url <- file.path(dirname(api_url), basename(api_url), "")
+
   # Perform an options request
-  out <- httr::VERB("OPTIONS", paste("http://localhost:8000/api", table, "",
-                                     sep = "/"),
+  out <- httr::VERB("OPTIONS", api_url,
                     httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)

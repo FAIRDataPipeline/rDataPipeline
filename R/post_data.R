@@ -4,19 +4,18 @@
 #'
 #' @param table table name as a character
 #' @param data data as a named list
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
 #' @keywords internal
 #'
-post_data <- function(table, data) {
+post_data <- function(table, data, endpoint = "http://localhost:8000/api/") {
 
   key <- get_token()
   h <- c(Authorization = paste("token", key))
-  api_url <- paste0("http://localhost:8000/api/", table)
 
-  # Check there is a trailing slash (windows issue with file.path())
-  api_url <- dplyr::if_else(substring(api_url, nchar(api_url)) == "/", api_url,
-                    paste(api_url, "/", sep = ""))
+  api_url <- paste0(endpoint, table)
+  api_url <- file.path(dirname(api_url), basename(api_url), "")
 
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :

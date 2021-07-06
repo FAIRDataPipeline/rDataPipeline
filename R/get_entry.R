@@ -22,8 +22,10 @@ get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
 
   is_queryable(table, query)
 
-  output <- httr::GET(paste0(endpoint, table, ""),
-                      query = query,
+  api_url <- paste0(endpoint, table)
+  api_url <- file.path(dirname(api_url), basename(api_url), "")
+
+  output <- httr::GET(api_url, query = query,
                       httr::add_headers(.headers = h)) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)

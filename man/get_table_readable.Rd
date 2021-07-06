@@ -4,10 +4,12 @@
 \alias{get_table_readable}
 \title{Get readable fields}
 \usage{
-get_table_readable(table)
+get_table_readable(table, endpoint)
 }
 \arguments{
 \item{table}{name of table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
 a dataframe of readable fields and their properties

@@ -1,5 +1,5 @@
-# library(testthat)
-# library(SCRCdataAPI)
-#
-# testthat::test_check("SCRCdataAPI")
-#
+library(testthat)
+library(rFDP)
+
+testthat::test_check("rFDP")
+

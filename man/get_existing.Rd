@@ -4,7 +4,12 @@
 \alias{get_existing}
 \title{Return all entries posted to a table in the data registry}
 \usage{
-get_existing(table, limit_results = TRUE, detail = "all")
+get_existing(
+  table,
+  limit_results = TRUE,
+  detail = "all",
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
@@ -14,6 +19,8 @@ the results, default is \code{TRUE}}
 
 \item{detail}{a \code{string} specifying what level of detail to return;
 options are \code{"all"} for all details or \code{"id"} for just URL and IDs}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
 Returns a \code{data.frame} of entries in table, default is limited
