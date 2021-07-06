@@ -11,6 +11,7 @@
 #' is public or not (default is \code{TRUE})
 #' @param storage_root_url a \code{string} specifying the URL of an entry in
 #' the \code{storage_root} table
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -19,7 +20,8 @@
 new_storage_location <- function(path,
                                  hash,
                                  public,
-                                 storage_root_url) {
+                                 storage_root_url,
+                                 endpoint = "http://localhost:8000/api/") {
   data <- list(path = path,
                hash = hash,
                storage_root = storage_root_url)
@@ -28,5 +30,6 @@ new_storage_location <- function(path,
     data$public <- public
 
   post_data(table = "storage_location",
-            data = data)
+            data = data,
+            endpoint = endpoint)
 }

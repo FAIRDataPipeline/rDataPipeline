@@ -43,5 +43,6 @@ test_that("New external object creates an external object with all fields", {
                                         title = UID,
                                         description = UID,
                                         data_product_url = data_product_url,
-                                        original_store_url = storage_location_url)))
+                                        original_store_url = storage_location_url,
+                                        endpoint = endpoint)))
 })

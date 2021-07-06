@@ -4,7 +4,7 @@
 #'
 #' @export
 #'
-fair_pull <- function(path = "config.yaml", endpoint = "") {
+fair_pull <- function(path = "config.yaml") {
 
   run_server()
 

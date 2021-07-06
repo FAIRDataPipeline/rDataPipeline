@@ -15,7 +15,8 @@ test_that("new entry in code_repo_release returns API URL",{
                     new_code_repo_release(name = name,
                                           version = version,
                                           object_url = object_url,
-                                          website = website)))
+                                          website = website,
+                                          endpoint = endpoint)))
 })
 
 test_that("existing entry in code_repo_release returns API URL", {
@@ -23,5 +24,6 @@ test_that("existing entry in code_repo_release returns API URL", {
                     new_code_repo_release(name = name,
                                           version = version,
                                           object_url = object_url,
-                                          website = website)))
+                                          website = website,
+                                          endpoint = endpoint)))
 })

@@ -9,6 +9,7 @@
 #' \code{object} table
 #' @param namespace_url a \code{string} specifying the URL of the entry in the
 #' \code{namespace} table
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -17,11 +18,13 @@
 new_data_product <- function(name,
                              version,
                              object_url,
-                             namespace_url) {
+                             namespace_url,
+                             endpoint = "http://localhost:8000/api/") {
 
   post_data(table = "data_product",
             data =  list(name = name,
                          version = version,
                          object = object_url,
-                         namespace = namespace_url))
+                         namespace = namespace_url),
+            endpoint = endpoint)
 }

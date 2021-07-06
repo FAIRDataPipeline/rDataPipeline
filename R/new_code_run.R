@@ -18,6 +18,7 @@
 #' \code{code_run} inputs
 #' @param outputs_urls a \code{list} of \code{object_component} URLs referencing
 #' \code{code_run} outputs
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -29,7 +30,8 @@ new_code_run <- function(run_date,
                          model_config_url,
                          submission_script_url,
                          inputs_urls = list(),
-                         outputs_urls = list()) {
+                         outputs_urls = list(),
+                         endpoint = "http://localhost:8000/api/") {
 
   data <- list(run_date = run_date,
                inputs = inputs_urls,
@@ -48,5 +50,6 @@ new_code_run <- function(run_date,
     data$submission_script <- submission_script_url
 
   post_data(table = "code_run",
-            data = data)
+            data = data,
+            endpoint = endpoint)
 }

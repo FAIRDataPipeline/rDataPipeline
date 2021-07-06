@@ -20,7 +20,8 @@ test_that("new entry in code_run returns API URL",{
                                    description = description,
                                    code_repo_url = code_repo_url,
                                    model_config_url = code_model_config,
-                                   submission_script_url = code_submission_script))
+                                   submission_script_url = code_submission_script,
+                                   endpoint = endpoint))
   )
 })
 
@@ -30,6 +31,7 @@ test_that("existing entry in code_run returns API URL", {
                                    description = description,
                                    code_repo_url = code_repo_url,
                                    model_config_url = code_model_config,
-                                   submission_script_url = code_submission_script))
+                                   submission_script_url = code_submission_script,
+                                   endpoint = endpoint))
   )
 })

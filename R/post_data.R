@@ -9,7 +9,7 @@
 #' @export
 #' @keywords internal
 #'
-post_data <- function(table, data, endpoint = "http://localhost:8000/api/") {
+post_data <- function(table, data, endpoint) {
 
   key <- get_token()
   h <- c(Authorization = paste("token", key))

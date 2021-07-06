@@ -8,6 +8,7 @@
 #' \code{author}
 #' @param organisations_urls (optional) a \code{list} of URLs specifying which
 #' \code{organisation}s to associate with this \code{object_author_org}
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -15,10 +16,12 @@
 #'
 new_object_author_org <- function(object_url,
                                   author_url,
-                                  organisations_urls = list()) {
+                                  organisations_urls = list(),
+                                  endpoint = "http://localhost:8000/api/") {
 
   post_data(table = "object_author_org",
             data =  list(object = object_url,
                          author = author_url,
-                         organisations = organisations_urls))
+                         organisations = organisations_urls),
+            endpoint = endpoint)
 }

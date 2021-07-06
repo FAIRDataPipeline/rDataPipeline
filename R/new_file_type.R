@@ -4,15 +4,18 @@
 #'
 #' @param name a \code{string} specifying the name of the file type
 #' @param extension a \code{string} specifying the filename extension
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
 #' @export
 #'
 new_file_type <- function(name,
-                          extension) {
+                          extension,
+                          endpoint = "http://localhost:8000/api/") {
 
   post_data(table = "file_type",
             data =  list(name = name,
-                         extension = extension))
+                         extension = extension),
+            endpoint = endpoint)
 }
