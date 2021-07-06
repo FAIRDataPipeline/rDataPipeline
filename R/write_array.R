@@ -165,7 +165,8 @@ write_array <- function(array,
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description)
+                description = description,
+                public = write_public)
 
   index <- handle$output_index(data_product = write_data_product,
                                component = component,
