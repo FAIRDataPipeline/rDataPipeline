@@ -122,6 +122,22 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
                                            full_name = write_namespace)
       write_namespace_id <- extract_id(write_namespace_url)
 
+      # Get public flag
+      if ("public" %in% names(this_write)) {
+        write_public <- this_write$public
+      } else {
+        write_public <- "true"
+      }
+
+      if (tolower(write_public) == "true") {
+        write_public <- TRUE
+      } else if (tolower(write_public) == "false") {
+        write_public <- FALSE
+      } else {
+        stop ("public value not recognised")
+      }
+      write[[i]]$public <- write_public
+
       # Get version
       if ("version" %in% names(this_write)) { # version before `use:` block
         write_version <- resolve_version(version = this_write$version,
