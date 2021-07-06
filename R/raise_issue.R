@@ -1,4 +1,4 @@
-#' issue_with_component
+#' raise_issue
 #'
 #' @param index component_id
 #' @param handle handle
@@ -8,6 +8,8 @@
 #' @param namespace namespace
 #' @param issue issue
 #' @param severity severity
+#'
+#' @export
 #'
 raise_issue <- function(index,
                         handle,
