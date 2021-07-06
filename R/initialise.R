@@ -114,8 +114,8 @@ initialise <- function(config, script) {
       storage_root_url = repo_storageroot_url)
 
     coderepo_object_url <- new_object(
-      storage_location_url = coderepo_location_url,
-      description = "Analysis / processing script location")
+      description = "Analysis / processing script location",
+      storage_location_url = coderepo_location_url)
 
   } else {
     assertthat::assert_that(length(coderepo_exists) == 1)
