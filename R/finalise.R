@@ -27,6 +27,8 @@ finalise <- function(handle) {
 
       index_row <- which(handle$outputs$data_product == data_products[i])
       this_write <- handle$outputs[index_row, ]
+      this_namespace <- unique(this_write$use_namespace)
+      this_version <- unique(this_write$use_version)
 
       # Get file path
       path <- unique(this_write$path)
@@ -48,8 +50,8 @@ finalise <- function(handle) {
 
       # Update handle
       handle$finalise_output_hash(use_data_product = data_products[i],
-                                  use_namespace = this_write$use_namespace,
-                                  use_version = this_write$use_version,
+                                  use_namespace = this_namespace,
+                                  use_version = this_version,
                                   hash = hash,
                                   new_path = new_path)
     }
