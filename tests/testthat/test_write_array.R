@@ -20,10 +20,6 @@ write_dataproduct(path = config_file,
                   data_product = data_product1,
                   description = dataproduct_description,
                   version = version1)
-write_dataproduct(path = config_file,
-                 data_product = data_product1,
-                 component = component1,
-                 version = version2)
 
 # CLI functions
 fair_pull(config_file)

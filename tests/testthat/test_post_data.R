@@ -1,12 +1,6 @@
 context("Testing post_data()")
 
-sleep_time <- 0.5
-
-key <- Sys.getenv("SCRC_API_TOKEN")
-
-test_user <- "22"
-
-#get all tables
+# Get all tables
 tables <- get_tables()
 unknown_table <- "unknown"
 id <- sample(1:100, 1, replace = TRUE)
