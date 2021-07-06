@@ -10,22 +10,30 @@ fdp-class
 fdp-class
 }
 \details{
-Contained for class \code{fdp}.
+Container for class \code{fdp}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{yaml}}{working config.yaml contents}
+\item{\code{yaml}}{a \code{list} containing the contents of the working
+config.yaml}
 
-\item{\code{model_config}}{object URI associated with config.yaml storage location}
+\item{\code{model_config}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the \code{storage_location} of the
+working config.yaml}
 
-\item{\code{submission_script}}{object URI associated with submission script storage}
+\item{\code{submission_script}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the \code{storage_location} of the
+submission script}
 
-\item{\code{code_run}}{object URI associated with code run}
+\item{\code{code_run}}{a \code{string} specifying the URL of an entry in
+the \code{code_run} table}
 
-\item{\code{inputs}}{metadata associated with code run inputs}
+\item{\code{inputs}}{a \code{data.frame} containing metadata associated with
+\code{code_run} inputs}
 
-\item{\code{outputs}}{metadata associated with code run outputs}
+\item{\code{outputs}}{a \code{data.frame} containing metadata associated with
+\code{code_run} outputs}
 }
 \if{html}{\out{</div>}}
 }
@@ -47,7 +55,7 @@ Contained for class \code{fdp}.
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new fdp object
+Create a new \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script, code_run)}\if{html}{\out{</div>}}
 }
@@ -55,25 +63,31 @@ Create a new fdp object
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{yaml}}{working config.yaml contents}
+\item{\code{yaml}}{a \code{list} containing the contents of the working
+config.yaml}
 
-\item{\code{model_config}}{object URI associated with config.yaml storage location}
+\item{\code{model_config}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the \code{storage_location} of the
+working config.yaml}
 
-\item{\code{submission_script}}{object URI associated with submission script storage location}
+\item{\code{submission_script}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the \code{storage_location} of the
+submission script}
 
-\item{\code{code_run}}{object URI associated with code run}
+\item{\code{code_run}}{a \code{string} specifying the URL of an entry in
+the \code{code_run} table}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{fdp} object.
+Returns a new \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
-Print function
+Print method
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$print(...)}\if{html}{\out{</div>}}
 }
@@ -83,7 +97,7 @@ Print function
 \if{html}{\out{<a id="method-input"></a>}}
 \if{latex}{\out{\hypertarget{method-input}{}}}
 \subsection{Method \code{input()}}{
-Add inputs field
+Record \code{code_run} inputs in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$input(
   data_product,
@@ -99,28 +113,38 @@ Add inputs field
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{data_product}
+\item{\code{data_product}}{a \code{string} specifying the name of the data
+product, used as a reference}
 
-\item{\code{use_data_product}}{use_data_product}
+\item{\code{use_data_product}}{a \code{string} specifying the name of the data
+product, used as input in the \code{code_run}}
 
-\item{\code{use_component}}{use_component}
+\item{\code{use_component}}{a \code{string} specifying the name of the data
+product component, used as input in the \code{code_run}}
 
-\item{\code{use_version}}{use_version}
+\item{\code{use_version}}{a \code{string} specifying the data product version,
+used as input in the \code{code_run}}
 
-\item{\code{use_namespace}}{namespace}
+\item{\code{use_namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as input in the \code{code_run}}
 
-\item{\code{path}}{path}
+\item{\code{path}}{a \code{string} specifying the location of the data product
+in the local data store}
 
-\item{\code{component_url}}{component_url}
+\item{\code{component_url}}{a \code{string} specifying the URL of an entry in the
+\code{object_component} table}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-output"></a>}}
 \if{latex}{\out{\hypertarget{method-output}{}}}
 \subsection{Method \code{output()}}{
-Add outputs field
+Record \code{code_run} outputs in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$output(
   data_product,
@@ -136,28 +160,39 @@ Add outputs field
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{data_product}
+\item{\code{data_product}}{a \code{string} specifying the name of the data
+product, used as a reference}
 
-\item{\code{use_data_product}}{use_data_product}
+\item{\code{use_data_product}}{a \code{string} specifying the name of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{use_component}}{use_component}
+\item{\code{use_component}}{a \code{string} specifying the name of the data product component,
+used as output in the \code{code_run}}
 
-\item{\code{use_version}}{use_version}
+\item{\code{use_version}}{a \code{string} specifying the version of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{use_namespace}}{use_namespace}
+\item{\code{use_namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as output in the \code{code_run}}
 
-\item{\code{path}}{path}
+\item{\code{path}}{a \code{string} specifying the location of the data product
+in the local data store}
 
-\item{\code{description}}{description}
+\item{\code{description}}{a \code{string} containing a description of the data
+product}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-output_index"></a>}}
 \if{latex}{\out{\hypertarget{method-output_index}{}}}
 \subsection{Method \code{output_index()}}{
-Return index
+Return index of data product recorded in \code{fdp} object
+so that an issue may be attached
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$output_index(data_product, component, version, namespace)}\if{html}{\out{</div>}}
 }
@@ -165,22 +200,29 @@ Return index
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{use_data_product}
+\item{\code{data_product}}{a \code{string} specifying the name of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{component}}{use_component}
+\item{\code{component}}{a \code{string} specifying the name of the data
+product component, used as output in the \code{code_run}}
 
-\item{\code{version}}{use_version}
+\item{\code{version}}{a \code{string} specifying the name of the data
+product version, used as output in the \code{code_run}}
 
-\item{\code{namespace}}{namespace}
+\item{\code{namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as input in the \code{code_run}}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an index used to identify the data product
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-raise_issue"></a>}}
 \if{latex}{\out{\hypertarget{method-raise_issue}{}}}
 \subsection{Method \code{raise_issue()}}{
-Add issues field
+Record \code{issue} in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue(
   index,
@@ -196,28 +238,38 @@ Add issues field
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{index}}{text}
+\item{\code{index}}{a \code{numeric} index, used to identify each input and
+output in the \code{fdp} object}
 
-\item{\code{use_data_product}}{text}
+\item{\code{use_data_product}}{a \code{string} specifying the name of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{use_component}}{text}
+\item{\code{use_component}}{a \code{string} specifying the name of the data
+product component, used as output in the \code{code_run}}
 
-\item{\code{use_version}}{text}
+\item{\code{use_version}}{a \code{string} specifying the name of the data
+product version, used as output in the \code{code_run}}
 
-\item{\code{use_namespace}}{text}
+\item{\code{use_namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as input in the \code{code_run}}
 
-\item{\code{issue}}{text}
+\item{\code{issue}}{a \code{string} containing a free text description of the
+\code{issue}}
 
-\item{\code{severity}}{text}
+\item{\code{severity}}{an \code{integer} specifying the severity of the
+\code{issue}}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-finalise_output_hash"></a>}}
 \if{latex}{\out{\hypertarget{method-finalise_output_hash}{}}}
 \subsection{Method \code{finalise_output_hash()}}{
-Add file hash to outputs and re-write path name
+Record file hash and update path name in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(
   use_data_product,
@@ -231,24 +283,32 @@ Add file hash to outputs and re-write path name
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{use_data_product}}{text}
+\item{\code{use_data_product}}{a \code{string} specifying the name of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{use_version}}{text}
+\item{\code{use_version}}{a \code{string} specifying the name of the data
+product version, used as output in the \code{code_run}}
 
-\item{\code{use_namespace}}{text}
+\item{\code{use_namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as input in the \code{code_run}}
 
-\item{\code{hash}}{text}
+\item{\code{hash}}{a \code{string} specifying the hash of the file}
 
-\item{\code{new_path}}{text}
+\item{\code{new_path}}{a \code{string} specifying the updated location (filename
+is now the hash of the file) of the data product in the local data store}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-finalise_output_url"></a>}}
 \if{latex}{\out{\hypertarget{method-finalise_output_url}{}}}
 \subsection{Method \code{finalise_output_url()}}{
-Add outputs field
+Record \code{data_product} and component URLs in \code{fdp}
+object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(
   use_data_product,
@@ -261,15 +321,22 @@ Add outputs field
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{use_data_product}}{text}
+\item{\code{use_data_product}}{a \code{string} specifying the name of the data
+product, used as output in the \code{code_run}}
 
-\item{\code{use_component}}{text}
+\item{\code{use_component}}{a \code{string} specifying the name of the data
+product component, used as output in the \code{code_run}}
 
-\item{\code{data_product_url}}{text}
+\item{\code{data_product_url}}{a \code{string} specifying the URL of an
+\code{object} associated with the \code{data_product}}
 
-\item{\code{component_url}}{text}
+\item{\code{component_url}}{a \code{string} specifying the URL of an entry in the
+\code{object_component} table}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
