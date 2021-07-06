@@ -1,17 +1,25 @@
 #' fdp-class
 #'
-#' Contained for class \code{fdp}.
+#' Container for class \code{fdp}
 #'
 #' @name fdp-class
 #' @rdname fdp-class
 #'
 fdp <- R6::R6Class("fdp", list(
-  #' @field yaml working config.yaml contents
-  #' @field model_config object URI associated with config.yaml storage location
-  #' @field submission_script object URI associated with submission script storage
-  #' @field code_run object URI associated with code run
-  #' @field inputs metadata associated with code run inputs
-  #' @field outputs metadata associated with code run outputs
+  #' @field yaml a \code{list} containing the contents of the working
+  #' config.yaml
+  #' @field model_config a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the \code{storage_location} of the
+  #' working config.yaml
+  #' @field submission_script a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the \code{storage_location} of the
+  #' submission script
+  #' @field code_run a \code{string} specifying the URL of an entry in
+  #' the \code{code_run} table
+  #' @field inputs a \code{data.frame} containing metadata associated with
+  #' \code{code_run} inputs
+  #' @field outputs a \code{data.frame} containing metadata associated with
+  #' \code{code_run} outputs
   #'
   yaml = NULL,
   model_config = NULL,
@@ -21,13 +29,20 @@ fdp <- R6::R6Class("fdp", list(
   outputs = NULL,
   issues = NULL,
 
-  #' @description
-  #' Create a new fdp object
-  #' @param yaml working config.yaml contents
-  #' @param model_config object URI associated with config.yaml storage location
-  #' @param submission_script object URI associated with submission script storage location
-  #' @param code_run object URI associated with code run
-  #' @return A new `fdp` object.
+  #' @description Create a new \code{fdp} object
+  #'
+  #' @param yaml a \code{list} containing the contents of the working
+  #' config.yaml
+  #' @param model_config a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the \code{storage_location} of the
+  #' working config.yaml
+  #' @param submission_script a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the \code{storage_location} of the
+  #' submission script
+  #' @param code_run a \code{string} specifying the URL of an entry in
+  #' the \code{code_run} table
+  #'
+  #' @return Returns a new \code{fdp} object
   #'
   initialize = function(yaml,
                         model_config,
@@ -47,8 +62,7 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self)
   },
 
-  #' @description
-  #' Print function
+  #' @description Print method
   #'
   #' @export
   #'
@@ -82,15 +96,24 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self)
   },
 
-  #' @description
-  #' Add inputs field
-  #' @param data_product data_product
-  #' @param use_data_product use_data_product
-  #' @param use_component use_component
-  #' @param use_version use_version
-  #' @param use_namespace namespace
-  #' @param path path
-  #' @param component_url component_url
+  #' @description Record \code{code_run} inputs in \code{fdp} object
+  #'
+  #' @param data_product a \code{string} specifying the name of the data
+  #' product, used as a reference
+  #' @param use_data_product a \code{string} specifying the name of the data
+  #' product, used as input in the \code{code_run}
+  #' @param use_component a \code{string} specifying the name of the data
+  #' product component, used as input in the \code{code_run}
+  #' @param use_version a \code{string} specifying the data product version,
+  #' used as input in the \code{code_run}
+  #' @param use_namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as input in the \code{code_run}
+  #' @param path a \code{string} specifying the location of the data product
+  #' in the local data store
+  #' @param component_url a \code{string} specifying the URL of an entry in the
+  #' \code{object_component} table
+  #'
+  #' @return Returns an updated \code{fdp} object
   #'
   input = function(data_product,
                    use_data_product,
@@ -128,15 +151,25 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self)
   },
 
-  #' @description
-  #' Add outputs field
-  #' @param data_product data_product
-  #' @param use_data_product use_data_product
-  #' @param use_component use_component
-  #' @param use_version use_version
-  #' @param use_namespace use_namespace
-  #' @param path path
-  #' @param description description
+  #' @description Record \code{code_run} outputs in \code{fdp} object
+  #'
+  #' @param data_product a \code{string} specifying the name of the data
+  #' product, used as a reference
+  #' @param use_data_product a \code{string} specifying the name of the data
+  #' product, used as output in the \code{code_run}
+  #' @param use_component a \code{string} specifying the name of the data product component,
+  #' used as output in the \code{code_run}
+  #' @param use_version a \code{string} specifying the version of the data
+  #' product, used as output in the \code{code_run}
+  #' @param use_namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as output in the \code{code_run}
+  #' @param path a \code{string} specifying the location of the data product
+  #' in the local data store
+  #' @param description a \code{string} containing a description of the data
+  #' product
+  #' @param public
+  #'
+  #' @return Returns an updated \code{fdp} object
   #'
   output = function(data_product,
                     use_data_product,
@@ -144,7 +177,8 @@ fdp <- R6::R6Class("fdp", list(
                     use_version,
                     use_namespace,
                     path,
-                    description) {
+                    description,
+                    public) {
 
     index <- get_index(self)
 
@@ -157,6 +191,7 @@ fdp <- R6::R6Class("fdp", list(
                              use_namespace = character(),
                              path = character(),
                              description = character(),
+                             public = logical(),
                              hash = character(),
                              data_product_url = character(),
                              component_url = character(),
@@ -173,6 +208,7 @@ fdp <- R6::R6Class("fdp", list(
                       use_namespace = use_namespace,
                       path = path,
                       description = description,
+                      public = public,
                       hash = NA,
                       data_product_url = NA,
                       component_url = NA,
@@ -182,12 +218,19 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self)
   },
 
-  #' @description
-  #' Return index
-  #' @param data_product use_data_product
-  #' @param component use_component
-  #' @param version use_version
-  #' @param namespace  namespace
+  #' @description Return index of data product recorded in \code{fdp} object
+  #' so that an issue may be attached
+  #'
+  #' @param data_product a \code{string} specifying the name of the data
+  #' product, used as output in the \code{code_run}
+  #' @param component a \code{string} specifying the name of the data
+  #' product component, used as output in the \code{code_run}
+  #' @param version a \code{string} specifying the name of the data
+  #' product version, used as output in the \code{code_run}
+  #' @param namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as input in the \code{code_run}
+  #'
+  #' @return Returns an index used to identify the data product
   #'
   output_index = function(data_product,
                           component,
@@ -202,15 +245,24 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self$outputs$index[index])
   },
 
-  #' @description
-  #' Add issues field
-  #' @param index text
-  #' @param use_data_product text
-  #' @param use_component text
-  #' @param use_version text
-  #' @param use_namespace text
-  #' @param issue text
-  #' @param severity text
+  #' @description Record \code{issue} in \code{fdp} object
+  #'
+  #' @param index a \code{numeric} index, used to identify each input and
+  #' output in the \code{fdp} object
+  #' @param use_data_product a \code{string} specifying the name of the data
+  #' product, used as output in the \code{code_run}
+  #' @param use_component a \code{string} specifying the name of the data
+  #' product component, used as output in the \code{code_run}
+  #' @param use_version a \code{string} specifying the name of the data
+  #' product version, used as output in the \code{code_run}
+  #' @param use_namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as input in the \code{code_run}
+  #' @param issue a \code{string} containing a free text description of the
+  #' \code{issue}
+  #' @param severity an \code{integer} specifying the severity of the
+  #' \code{issue}
+  #'
+  #' @return Returns an updated \code{fdp} object
   #'
   raise_issue = function(index,
                          use_data_product,
@@ -244,13 +296,19 @@ fdp <- R6::R6Class("fdp", list(
     invisible(self)
   },
 
-  #' @description
-  #' Add file hash to outputs and re-write path name
-  #' @param use_data_product text
-  #' @param use_version text
-  #' @param use_namespace text
-  #' @param hash text
-  #' @param new_path text
+  #' @description Record file hash and update path name in \code{fdp} object
+  #'
+  #' @param use_data_product a \code{string} specifying the name of the data
+  #' product, used as output in the \code{code_run}
+  #' @param use_version a \code{string} specifying the name of the data
+  #' product version, used as output in the \code{code_run}
+  #' @param use_namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as input in the \code{code_run}
+  #' @param hash a \code{string} specifying the hash of the file
+  #' @param new_path a \code{string} specifying the updated location (filename
+  #' is now the hash of the file) of the data product in the local data store
+  #'
+  #' @return Returns an updated \code{fdp} object
   #'
   finalise_output_hash = function(use_data_product,
                                   use_version,
@@ -272,12 +330,20 @@ fdp <- R6::R6Class("fdp", list(
 
     invisible(self)
   },
-  #' @description
-  #' Add outputs field
-  #' @param use_data_product text
-  #' @param use_component text
-  #' @param data_product_url text
-  #' @param component_url text
+
+  #' @description Record \code{data_product} and component URLs in \code{fdp}
+  #' object
+  #'
+  #' @param use_data_product a \code{string} specifying the name of the data
+  #' product, used as output in the \code{code_run}
+  #' @param use_component a \code{string} specifying the name of the data
+  #' product component, used as output in the \code{code_run}
+  #' @param data_product_url a \code{string} specifying the URL of an
+  #' \code{object} associated with the \code{data_product}
+  #' @param component_url a \code{string} specifying the URL of an entry in the
+  #' \code{object_component} table
+  #'
+  #' @return Returns an updated \code{fdp} object
   #'
   finalise_output_url = function(use_data_product,
                                  use_component,

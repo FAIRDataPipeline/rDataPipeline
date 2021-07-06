@@ -17,7 +17,8 @@ initialise <- function(config, script) {
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
 
-  cli::cli_alert_info("Reading {.file {config}} from data store")
+  filename <- basename(config)
+  cli::cli_alert_info("Reading {.file {filename}} from data store")
 
   # Record config.yaml location in data registry ----------------------------
 
@@ -33,6 +34,7 @@ initialise <- function(config, script) {
     config_location_url <- new_storage_location(
       path = config,
       hash = config_hash,
+      public = TRUE,
       storage_root_url = config_storageroot_id)
 
   } else {
@@ -40,13 +42,21 @@ initialise <- function(config, script) {
     config_location_url <- config_exists
   }
 
-  config_file_type <- new_file_type(name = "yaml",
-                                    extension = "yaml")
+  config_filetype_exists <- get_url("file_type", list(extension = "yaml"))
+
+  if (is.null(config_filetype_exists)) {
+    config_filetype_url <- new_file_type(name = "yaml", extension = "yaml")
+  } else {
+    config_filetype_url <- config_filetype_exists
+  }
+
+  # authors_url <- get_url("user_author_org", list())
 
   config_object_url <- new_object(
     description = "Working config.yaml file location in local datastore",
     storage_location_url = config_location_url,
-    file_type_url = config_file_type)
+    # authors_urls = list(authors_url),
+    file_type_url = config_filetype_url)
 
   cli::cli_alert_success("Writing {.file {config}} to local registry")
 
@@ -62,6 +72,7 @@ initialise <- function(config, script) {
     script_location_url <- new_storage_location(
       path = script,
       hash = script_hash,
+      public = TRUE,
       storage_root_url = script_storageroot_id)
 
   } else {
@@ -69,13 +80,19 @@ initialise <- function(config, script) {
     script_location_url <- script_exists
   }
 
-  script_file_type <- new_file_type(name = "sh",
-                                    extension = "sh")
+  script_filetype_exists <- get_url("file_type", list(extension = "sh"))
+
+  if (is.null(script_filetype_exists)) {
+    script_filetype_url <- new_file_type(name = "sh", extension = "sh")
+  } else {
+    script_filetype_url <- script_filetype_exists
+  }
 
   script_object_url <- new_object(
     description = "Submission script location in local datastore",
     storage_location_url = script_location_url,
-    file_type_url = script_file_type)
+    # authors_urls = list(authors_url),
+    file_type_url = script_filetype_url)
 
   cli::cli_alert_success("Writing {.file {script}} to local registry")
 
@@ -93,11 +110,12 @@ initialise <- function(config, script) {
     coderepo_location_url <- new_storage_location(
       path = repo_name,
       hash = sha,
+      public = TRUE,
       storage_root_url = repo_storageroot_url)
 
     coderepo_object_url <- new_object(
-      storage_location_url = coderepo_location_url,
-      description = "Analysis / processing script location")
+      description = "Analysis / processing script location",
+      storage_location_url = coderepo_location_url)
 
   } else {
     assertthat::assert_that(length(coderepo_exists) == 1)

@@ -4,17 +4,12 @@
 \alias{register_external_object}
 \title{register_external_object}
 \usage{
-register_external_object(register_this, datastore, namespace, filename)
+register_external_object(yaml, register_this)
 }
 \arguments{
+\item{yaml}{config yaml}
+
 \item{register_this}{metadata}
-
-\item{datastore}{a \code{string} specifying the default local data storage
-location}
-
-\item{namespace}{a \code{string} specifying the name of the namespace}
-
-\item{filename}{a \code{string} specifying the filename}
 }
 \description{
 register_external_object

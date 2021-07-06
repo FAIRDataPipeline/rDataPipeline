@@ -42,6 +42,15 @@ resolve_write <- function(handle, data_product, file_type) {
     version <- this_dp$version
   }
 
+  # Get public flag
+  public <- this_dp$public
+
+  if (public == "true") {
+    public <- TRUE
+  } else if (public == "false") {
+    public <- FALSE
+  }
+
   # Extract / set save location
   if (data_product %in% handle$outputs$data_product) {
     tmp <- handle$outputs
@@ -56,5 +65,6 @@ resolve_write <- function(handle, data_product, file_type) {
   list(data_product = data_product,
        version = version,
        namespace = namespace,
+       public = public,
        path = path)
 }

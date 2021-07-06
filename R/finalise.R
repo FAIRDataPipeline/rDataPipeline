@@ -25,18 +25,15 @@ finalise <- function(handle) {
 
     for (i in seq_along(data_products)) {
 
-      dp <- data_products[i]
-      this_write <- handle$outputs %>%
-        dplyr::filter(.data$data_product == dp)
+      index_row <- which(handle$outputs$data_product == data_products[i])
+      this_write <- handle$outputs[index_row, ]
+      this_namespace <- unique(this_write$use_namespace)
+      this_version <- unique(this_write$use_version)
 
       # Get file path
-
-      path <- this_write %>%
-        dplyr::select(.data$path) %>%
-        unique() %>% unlist() %>% unname()
+      path <- unique(this_write$path)
 
       # Rename file
-
       if (file.exists(path)) {
         hash <- get_file_hash(path)
         tmp_filename <- basename(path)
@@ -44,7 +41,6 @@ finalise <- function(handle) {
         new_filename <- paste(hash, extension, sep = ".")
         new_path <- gsub(tmp_filename, new_filename, path)
         file.rename(path, new_path)
-
       } else {
         new_path <- this_write$path
         hash <- unique(this_write$hash)
@@ -53,9 +49,9 @@ finalise <- function(handle) {
       }
 
       # Update handle
-      handle$finalise_output_hash(use_data_product = dp,
-                                  use_namespace = this_write$use_namespace,
-                                  use_version = this_write$use_version,
+      handle$finalise_output_hash(use_data_product = data_products[i],
+                                  use_namespace = this_namespace,
+                                  use_version = this_version,
                                   hash = hash,
                                   new_path = new_path)
     }
@@ -63,9 +59,10 @@ finalise <- function(handle) {
     # Register entries in local registry
 
     for (j in seq_len(nrow(handle$outputs))) {
-      this_write <- handle$outputs[j, ]
 
       # Get metadata
+      this_write <- handle$outputs[j, ]
+      this_data_product <- this_write$data_product
       write_data_product <- this_write$use_data_product
       write_component <- this_write$use_component
       write_version <- this_write$use_version
@@ -73,11 +70,13 @@ finalise <- function(handle) {
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace)
 
+      # Check whether the data product has been registered on a previous loop
+      # iteration
       if (!this_write$registered_data_product) {
 
         # Get data product description (from config.yaml)
         index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
-          dp == x$data_product)))
+          this_data_product == x$data_product)))
         description <- handle$yaml$write[[index_dp]]$description
 
         # Record file location in data registry
@@ -107,7 +106,7 @@ finalise <- function(handle) {
                                             object_url = object_url,
                                             namespace_url = write_namespace_url)
 
-        usethis::ui_done(paste("Writing", usethis::ui_value(dp),
+        usethis::ui_done(paste("Writing", usethis::ui_value(this_data_product),
                                "to local registry"))
 
       } else {

@@ -18,8 +18,8 @@ description of the \code{object}}
 \item{storage_location_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{storage_location} table}
 
-\item{authors_urls}{(optional) a \code{list} of \code{author} URLs to associate
-with this \code{object}}
+\item{authors_urls}{(optional) a \code{list} of URLs referencing
+\code{author}s to associate with this \code{object}}
 
 \item{file_type_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{file_type} table}

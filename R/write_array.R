@@ -41,6 +41,7 @@ write_array <- function(array,
   write_data_product <- write_metadata$data_product
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace
+  write_public <- write_metadata$public
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
@@ -93,7 +94,7 @@ write_array <- function(array,
 
   for (i in seq_along(directory.structure)) {
     # This structure needs to be added
-    if(i==1) {
+    if(i == 1) {
       build.structure <- directory.structure[1]
     } else {
       build.structure <- paste0(build.structure, "/", directory.structure[i])
@@ -164,7 +165,8 @@ write_array <- function(array,
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description)
+                description = description,
+                public = write_public)
 
   index <- handle$output_index(data_product = write_data_product,
                                component = component,
