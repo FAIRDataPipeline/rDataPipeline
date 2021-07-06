@@ -7,9 +7,9 @@
 register_external_object(yaml, register_this)
 }
 \arguments{
-\item{register_this}{metadata}
+\item{yaml}{config yaml}
 
-\item{ymal}{yaml}
+\item{register_this}{metadata}
 }
 \description{
 register_external_object
