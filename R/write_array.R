@@ -41,6 +41,7 @@ write_array <- function(array,
   write_data_product <- write_metadata$data_product
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace
+  write_public <- write_metadata$public
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
