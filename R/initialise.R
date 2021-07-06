@@ -17,7 +17,8 @@ initialise <- function(config, script) {
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
 
-  cli::cli_alert_info("Reading {.file {config}} from data store")
+  filename <- basename(config)
+  cli::cli_alert_info("Reading {.file {filename}} from data store")
 
   # Record config.yaml location in data registry ----------------------------
 
