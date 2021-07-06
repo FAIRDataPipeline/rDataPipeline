@@ -30,6 +30,7 @@ write_estimate <- function(value,
   write_data_product <- write_metadata$data_product
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace
+  write_public <- write_metadata$public
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
@@ -71,7 +72,8 @@ write_estimate <- function(value,
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description)
+                description = description,
+                public = write_public)
 
   invisible(handle$output_index(data_product = data_product,
                                 component = component,
