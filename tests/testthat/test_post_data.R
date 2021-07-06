@@ -1,22 +1,17 @@
 context("Testing post_data()")
 
-sleep_time <- 0.5
-
-key <- Sys.getenv("SCRC_API_TOKEN")
-
-test_user <- "22"
-
-#get all tables
+# Get all tables
 tables <- get_tables()
 unknown_table <- "unknown"
 id <- sample(1:100, 1, replace = TRUE)
 uid <- paste0("Test - ", Sys.time())
+endpoint <- "https://data.scrc.uk/api/"
 
-object_id <- post_data("object", list(description = uid))
+object_id <- post_data("object", list(description = uid), endpoint = endpoint)
 
 test_that("incorrect tables produce and error", {
-  expect_error(post_data(unknown_table, data = list()))
-  expect_error(post_data(NULL, data = list()))
+  expect_error(post_data(unknown_table, data = list(), endpoint = endpoint))
+  expect_error(post_data(NULL, data = list(), endpoint = endpoint))
 })
 
 test_that("post_data works with all tables",{
@@ -24,7 +19,8 @@ test_that("post_data works with all tables",{
     table <- tables[i]
 
     if(table == "users" | table == "groups") {
-      expect_error(post_data(tables[i], data = list("username = test")))
+      expect_error(post_data(tables[i], data = list("username = test"),
+                             endpoint = endpoint))
 
     } else {
       table.writable <- get_table_writable(table)
@@ -35,12 +31,12 @@ test_that("post_data works with all tables",{
 
       if (nrow(table.required) > 1) {
         test_that(paste0(table, " fails when no data is present"), {
-          expect_error(post_data(table, data = list()))
+          expect_error(post_data(table, data = list(), endpoint = endpoint))
         })
 
       } else if (nrow(table.required) == 0) {
         test_that(paste0(table, " allows creation with no data"), {
-          expect_true(is.character(post_data(table, NULL)))
+          expect_true(is.character(post_data(table, NULL, endpoint = endpoint)))
         })
         data_incorrect <- list(unknown = "unknown")
 
@@ -83,7 +79,8 @@ test_that("post_data works with all tables",{
         }
 
         test_that(paste0("table ", table, " works with correct data"), {
-          expect_true(is.character(post_data(table, data_correct)))
+          expect_true(is.character(post_data(table, data_correct,
+                                             endpoint = endpoint)))
         })
 
       }
@@ -91,7 +88,8 @@ test_that("post_data works with all tables",{
       if (table != "object")
         test_that(paste0("table ", table,
                          " does not works with correct data"), {
-                           expect_error(post_data(table, data_incorrect))
+                           expect_error(post_data(table, data_incorrect,
+                                                  endpoint = endpoint))
                          })
     }
   }

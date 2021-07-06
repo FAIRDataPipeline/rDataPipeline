@@ -7,6 +7,7 @@ dataproduct_description <- "Test table"
 data_product1 <- paste("test/table", uid, sep = "_")
 component1 <- "a/b/c/d"
 version1 <- "0.1.0"
+endpoint <- "https://data.scrc.uk/api/"
 
 # User written config file
 config_file <- "config_files/write_table/config.yaml"
@@ -20,8 +21,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")

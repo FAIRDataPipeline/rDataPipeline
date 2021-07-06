@@ -4,12 +4,14 @@
 \alias{new_file_type}
 \title{Post entry to file_type table}
 \usage{
-new_file_type(name, extension)
+new_file_type(name, extension, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the file type}
 
 \item{extension}{a \code{string} specifying the filename extension}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{file_type} table in the data registry

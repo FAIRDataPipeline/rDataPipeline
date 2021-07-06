@@ -4,13 +4,15 @@
 \alias{new_licence}
 \title{Post entry to licence table}
 \usage{
-new_licence(object_url, licence_info)
+new_licence(object_url, licence_info, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{object_url}{a \code{string} specifying the URL of an \code{object}}
 
 \item{licence_info}{a free text \code{string} containing information about
 the \code{licence}}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{licence} table in the data registry

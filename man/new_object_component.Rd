@@ -9,7 +9,8 @@ new_object_component(
   name,
   description,
   whole_object = FALSE,
-  issues_urls
+  issues_urls,
+  endpoint = "http://localhost:8000/api/"
 )
 }
 \arguments{
@@ -28,7 +29,9 @@ description of the \code{object_component}}
 \code{FALSE}}
 
 \item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to associate
-with this \code{object}
+with this \code{object}}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint
 
 Note that the \code{object_component} table contains \code{issues} as an
 additional optional field. This is not included here. Instead use

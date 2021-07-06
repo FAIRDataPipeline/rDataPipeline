@@ -2,10 +2,13 @@
 #'
 #' @param path string
 #' @param skip don't bother checking whether the repo is clean
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
 #'
-fair_run <- function(path = "config.yaml", skip = FALSE) {
+fair_run <- function(path = "config.yaml",
+                     endpoint = "http://localhost:8000/api/",
+                     skip = FALSE) {
 
   run_server()
 
@@ -156,7 +159,8 @@ fair_run <- function(path = "config.yaml", skip = FALSE) {
 
         entries <- get_entry("data_product",
                              list(name = write_dataproduct,
-                                  namespace = write_namespace_id))
+                                  namespace = write_namespace_id),
+                             endpoint = endpoint)
 
         if (is.null(entries)) {
           write_version <- "0.0.1"

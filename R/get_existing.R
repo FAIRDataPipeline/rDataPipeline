@@ -7,6 +7,7 @@
 #' the results, default is \code{TRUE}
 #' @param detail a \code{string} specifying what level of detail to return;
 #' options are \code{"all"} for all details or \code{"id"} for just URL and IDs
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a \code{data.frame} of entries in table, default is limited
 #' to 100 entries
@@ -24,7 +25,10 @@
 #' get_existing("data_product")
 #' }
 #'
-get_existing <- function(table, limit_results = TRUE, detail = "all") {
+get_existing <- function(table,
+                         limit_results = TRUE,
+                         detail = "all",
+                         endpoint = "http://localhost:8000/api/") {
 
   if (!check_table_exists(table))
     usethis::ui_stop(paste(
@@ -34,11 +38,13 @@ get_existing <- function(table, limit_results = TRUE, detail = "all") {
   key <- get_token()
   h <- c(Authorization = paste("token", key))
 
+  api_url <- paste0(endpoint, table)
+  api_url <- file.path(dirname(api_url), basename(api_url), "")
+
   tryCatch({
 
     # Get the 100 newest results
-    output <- httr::GET(paste("http://localhost:8000/api", table, "",
-                              sep = "/"),
+    output <- httr::GET(api_url,
                         httr::add_headers(.headers = h)) %>%
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(simplifyVector = FALSE)

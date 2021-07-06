@@ -4,10 +4,10 @@
 \alias{get_tables}
 \title{Get tables from registry}
 \usage{
-get_tables(live = FALSE)
+get_tables(endpoint = "http://localhost:8000/api/")
 }
 \arguments{
-\item{live}{whether or not to get the tables directly from the API}
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
 a character vector of tables

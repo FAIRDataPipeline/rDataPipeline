@@ -10,6 +10,7 @@
 #' \code{author}s to associate with this \code{object}
 #' @param file_type_url (optional) a \code{string} specifying the URL
 #' of an entry in the \code{file_type} table
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -18,7 +19,8 @@
 new_object <- function(description,
                        storage_location_url,
                        authors_urls = list(),
-                       file_type_url) {
+                       file_type_url,
+                       endpoint = "http://localhost:8000/api/") {
 
   data <- list()
 
@@ -36,6 +38,7 @@ new_object <- function(description,
 
 
   post_data(table = "object",
-            data = data)
+            data = data,
+            endpoint = endpoint)
   # }
 }

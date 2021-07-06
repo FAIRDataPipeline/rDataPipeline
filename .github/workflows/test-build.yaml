@@ -21,10 +21,10 @@ jobs:
       # Define operating systems
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
+          # - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-16.04, r: '3.6.3'} # Boydorr Server
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          # - {os: ubuntu-16.04, r: '3.6.3'} # Boydorr Server
+          # - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
       # Checkout repo
@@ -55,6 +55,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      # Install local registry
+      - name: Install registry
+        run: |
+             /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
+        shell: bash
+
       # Install system_requirements requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -62,16 +68,6 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-        shell: bash
-
-      # Install system_requirements on ubuntu 16.04 (Boydorr)
-      - name: Install system requirements (ubuntu-16.04)
-        if: matrix.config.os == 'ubuntu-16.04'
-        run : |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "16.04"), sep = "\n")')
         shell: bash
 
       # Install system requirements on ubuntu 20.04
@@ -91,27 +87,11 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      # Run CMD check on all but Boydorr (convert2grid test will fail on Boydorr)
-      # Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
-      # registry
-      - name: Check (All but Boydorr)
-        if: matrix.config.os != 'ubuntu-16.04'
+      # Run CMD check
+      - name: Run CMD check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
-          SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
           R_CHECK_SYSTEM_CLOCK: 0
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-
-      # Run CMD check on Boydorr usinging BOYDORR: "TRUE" to skip convert2grid test
-      # Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
-      # registry
-      - name: Check (Boydorr)
-        if: matrix.config.os == 'ubuntu-16.04'
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-          SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          BOYDORR: "TRUE"
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
@@ -122,89 +102,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-# Coverage ------------------------------------------------------------------
-# Located within the macOS-latest (release) job
-
-      - name: Test coverage (setup)
-        # Only when main is pushed
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        # Use the default GITHUB_TOKEN as an enviromental version for all steps
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        # Setup keychain needed to cache github token for upload_toml_to_github test
-        uses: sinoru/actions-setup-keychain@v1.0
-
-      # Add github Personal Access Token to keychain:
-      # * Needed for upload_toml_to_github test
-      # * Echoes to git credential-osxkeychain
-      # * This emulate stdin() line by line
-      - name: Add credentials in keychain
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        env:
-          GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
-        run: |
-          echo "\
-          protocol=https
-          host=github.com
-          username=Personal Access Token
-          password=$GITHUB_TOKEN" | git credential-osxkeychain store
-
-      # Run code coverage with RUN_TEST to enable upload_toml_to_github test
-      # Use SCRC_API_TOKEN (PAT from Jonathan Hollocombe) to interact with the data
-      # registry
-      - name: Test coverage
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        env:
-          SCRC_API_TOKEN: ${{ secrets.SCRC_API_TOKEN }}
-          RUN_TEST: "TRUE"
-        run: |
-          remotes::install_cran("covr")
-          covr::codecov()
-        shell: Rscript {0}
-
-# Build and deploy DOCS -----------------------------------------------------
-# Located within the macOS-latest (release) job
-
-      - name: Build and deploy docs (setup)
-        # Only when main is pushed
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        # Setup pandoc needed to build docs
-        uses: r-lib/actions/setup-pandoc@v1
-
-      # Install Mac OS requirements
-      - name: Build and deploy docs (system requirements)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        run : |
-              brew install harfbuzz
-              brew install fribidi
-        shell: bash
-
-      # Build documentation with pkgdown
-      - name: Build Docs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/mains' && runner.os == 'macOS'
-        run: |
-          install.packages("pkgdown")
-          pkgdown::build_site()
-        shell: Rscript {0}
-
-      # Create a development branch and commit to it
-      - name: Commit to development branch
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        run: |
-          git checkout -b development
-          git add .
-          git commit -m '[skip ci]'
-        shell: bash
-
-      # Deploy the docs using JamesIves/github-pages-deploy-action
-      - name: Deploy Docs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.SCRC_API_PAT }}
-          BASE_BRANCH: development
-          BRANCH: main # The branch the action should deploy to.
-          FOLDER: docs # The folder the action should deploy.
-          TARGET_FOLDER: docs
-          COMMIT_MESSAGE: 'build docs [skip ci]'

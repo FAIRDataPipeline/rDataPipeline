@@ -1,13 +1,14 @@
 context("Testing get_entry()")
 
 sleep_time <- 0.5
-
+endpoint <- "https://data.scrc.uk/api/"
 description <- paste0("test_get_entry_",
                       openssl::sha1(x = as.character(Sys.time())))
 
 run_server()
 
-object_uri <- post_data("object", data = list(description = description))
+object_uri <- post_data("object", data = list(description = description),
+                        endpoint = endpoint)
 object_id <- extract_id(object_uri)
 Sys.sleep(sleep_time)
 
@@ -40,7 +41,7 @@ test_that("invalid query causes and error", {
 Sys.sleep(sleep_time)
 
 test_that("multiple matches returns a list of more than one object", {
-  post_data("object", data = list(description = description))
+  post_data("object", data = list(description = description), endpoint = endpoint)
   Sys.sleep(sleep_time)
   expect_true(length(get_entry("object", list(description = description))) > 1)
 })

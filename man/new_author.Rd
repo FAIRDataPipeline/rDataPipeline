@@ -4,7 +4,12 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(family_name, given_name, identifier)
+new_author(
+  family_name,
+  given_name,
+  identifier,
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{family_name}{a \code{string} specifying the author's family name}
@@ -14,6 +19,8 @@ and / or middle name and / or any initials}
 
 \item{identifier}{(optional) a \code{string} specifying the full URL of
 the \code{author}s identifier, \emph{e.g.} ORCID iD}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{author} table in the data registry

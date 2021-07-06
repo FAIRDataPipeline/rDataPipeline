@@ -4,10 +4,12 @@
 \alias{new_quality_controlled}
 \title{Post entry to quality_controlled table}
 \usage{
-new_quality_controlled(object_url)
+new_quality_controlled(object_url, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{object_url}{a \code{string} specifying the URL of an \code{object}}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{quality_controlled} table in the data registry

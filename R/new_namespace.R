@@ -7,6 +7,7 @@
 #' namespace
 #' @param website (optional) a \code{string} specifying the website URL
 #' associated with the namespace
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -14,7 +15,8 @@
 #'
 new_namespace <- function(name,
                           full_name,
-                          website) {
+                          website,
+                          endpoint = "http://localhost:8000/api/") {
 
   data <- list(name = name)
 
@@ -25,5 +27,6 @@ new_namespace <- function(name,
     data$website <- website
 
   post_data(table = "namespace",
-            data = data)
+            data = data,
+            endpoint = endpoint)
 }

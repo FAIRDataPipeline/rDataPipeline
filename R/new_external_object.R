@@ -17,6 +17,7 @@
 #' @param original_store_url (optional) a `string` specifying the URL of a
 #' an entry in the \code{storage_location} table that references the original
 #' location of an \code{external_object}
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -28,7 +29,8 @@ new_external_object <- function(doi_or_unique_name,
                                 title,
                                 description,
                                 data_product_url,
-                                original_store_url) {
+                                original_store_url,
+                                endpoint = "http://localhost:8000/api/") {
 
   data <- list(doi_or_unique_name = doi_or_unique_name,
                release_date = release_date,
@@ -45,5 +47,6 @@ new_external_object <- function(doi_or_unique_name,
     data$original_store <- original_store_url
 
   post_data(table = "external_object",
-            data = data)
+            data = data,
+            endpoint = endpoint)
 }

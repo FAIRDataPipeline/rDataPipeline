@@ -4,7 +4,13 @@
 \alias{new_data_product}
 \title{Post entry to data_product table}
 \usage{
-new_data_product(name, version, object_url, namespace_url)
+new_data_product(
+  name,
+  version,
+  object_url,
+  namespace_url,
+  endpoint = "http://localhost:8000/api/"
+)
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{data_product}}
@@ -17,6 +23,8 @@ new_data_product(name, version, object_url, namespace_url)
 
 \item{namespace_url}{a \code{string} specifying the URL of the entry in the
 \code{namespace} table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 Upload information to the \code{data_product} table in the data registry

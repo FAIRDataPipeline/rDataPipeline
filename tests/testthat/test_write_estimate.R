@@ -5,6 +5,7 @@ data_product1 <- paste("test/estimate/asymptomatic-period", uid, sep = "_")
 coderun_description <- "Register a file in the pipeline"
 dataproduct_description <- "Estimate of asymptomatic period"
 namespace1 <- "username"
+endpoint <- "https://data.scrc.uk/api/"
 
 # User written config file
 config_file <- "config_files/write_estimate/config.yaml"
@@ -17,8 +18,8 @@ write_dataproduct(path = config_file,
                   description = dataproduct_description)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")

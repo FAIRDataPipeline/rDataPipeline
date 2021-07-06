@@ -4,14 +4,14 @@
 
 known_fields <- c("character", "integer", "field", "boolean", "datetime",
                   "numeric", "url")
+endpoint <- "https://data.scrc.uk/api/"
 
 run_server()
 
-tables <- get_tables() %>% setdiff(c("users", "groups"))
+tables <- get_tables(endpoint = endpoint) %>%
+  setdiff(c("users", "groups"))
 fields <- lapply(tables, function(x) {
   get_fields(x) %>%
     dplyr::filter(read_only == "FALSE") %>%
     dplyr::select(data_type)
 }) %>% unlist() %>% unique()
-
-stop_server()

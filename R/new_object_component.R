@@ -14,6 +14,7 @@
 #' \code{FALSE}
 #' @param issues_urls (optional) a \code{list} of \code{issues} URLs to associate
 #' with this \code{object}
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' Note that the \code{object_component} table contains \code{issues} as an
 #' additional optional field. This is not included here. Instead use
@@ -28,7 +29,8 @@ new_object_component <- function(object_url,
                                  name,
                                  description,
                                  whole_object = FALSE,
-                                 issues_urls) {
+                                 issues_urls,
+                                 endpoint = "http://localhost:8000/api/") {
 
   data <- list(object = object_url,
                name = name,
@@ -41,5 +43,6 @@ new_object_component <- function(object_url,
     data$issues <- issues_urls
 
   post_data(table = "object_component",
-            data = data)
+            data = data,
+            endpoint = endpoint)
 }

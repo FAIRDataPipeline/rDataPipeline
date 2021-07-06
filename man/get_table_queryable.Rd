@@ -4,10 +4,12 @@
 \alias{get_table_queryable}
 \title{Get queryable fields}
 \usage{
-get_table_queryable(table)
+get_table_queryable(table, endpoint)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
 Returns a character vector of queryable fields

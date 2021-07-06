@@ -7,6 +7,7 @@
 #' and / or middle name and / or any initials
 #' @param identifier (optional) a \code{string} specifying the full URL of
 #' the \code{author}s identifier, *e.g.* ORCID iD
+#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
 #'
@@ -14,7 +15,8 @@
 #'
 new_author <- function(family_name,
                        given_name,
-                       identifier) {
+                       identifier,
+                       endpoint = "http://localhost:8000/api/") {
 
   data <- list(family_name = family_name,
                given_name = given_name)
@@ -23,5 +25,6 @@ new_author <- function(family_name,
     data$identifier <- identifier
 
   post_data(table = "author",
-            data =  data)
+            data =  data,
+            endpoint = endpoint)
 }

@@ -7,19 +7,21 @@ root_name <- paste0("test_new_storate_location_",
 root <- paste0("https://", root_name, ".com")
 hash <- openssl::sha1(x = root_name)
 path <- paste0(hash, ".h5")
-
+endpoint <- "https://data.scrc.uk/api/"
 run_server()
 
 # Register storage root
 storage_root_url <- new_storage_root(root = root,
-                                     local = TRUE)
+                                     local = TRUE,
+                                     endpoint = endpoint)
 
 test_that("new entry in storage_location returns API URL", {
   expect_true(grepl("storage_location",
                     new_storage_location(path = path,
                                          hash = hash,
                                          public = TRUE,
-                                         storage_root_url = storage_root_url)))
+                                         storage_root_url = storage_root_url,
+                                         endpoint = endpoint)))
 })
 
 test_that("existing entry in storage_location returns API URL", {
@@ -27,7 +29,6 @@ test_that("existing entry in storage_location returns API URL", {
                     new_storage_location(path = path,
                                          hash = hash,
                                          public = TRUE,
-                                         storage_root_url = storage_root_url)))
+                                         storage_root_url = storage_root_url,
+                                         endpoint = endpoint)))
 })
-
-stop_server()

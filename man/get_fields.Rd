@@ -4,10 +4,12 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table)
+get_fields(table, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
+
+\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \value{
 Returns a \code{data.frame} of fields and their attributes set to
