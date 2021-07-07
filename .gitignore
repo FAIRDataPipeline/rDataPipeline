@@ -41,5 +41,6 @@ vignettes/*.pdf
 .DS_Store
 /data-raw
 
-# Token
-^token\.txt$
+# Test files
+/tests/testthat/config_files/*
+/tests/testthat/test_datastore/*
