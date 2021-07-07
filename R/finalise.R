@@ -3,10 +3,11 @@
 #' Push metadata to registry
 #'
 #' @param handle \code{fdp} object
+#' @param endpoint endpoint
 #'
 #' @export
 #'
-finalise <- function(handle) {
+finalise <- function(handle, endpoint) {
 
   # record data product metadata in the data registry --------
 
@@ -45,7 +46,7 @@ finalise <- function(handle) {
         new_path <- this_write$path
         hash <- unique(this_write$hash)
         if (is.na(hash))
-          usethis::ui_stop("Something is wrong")
+          usethis::ui_stop("File is missing")
       }
 
       # Update handle
@@ -137,49 +138,51 @@ finalise <- function(handle) {
     }
   }
 
+  issues <- handle$issues
 
+  if (!is.null(issues)) {
 
+    # Attach issues to components ---------------------------------------------
 
+    component_issues <- handle$issues %>%
+      dplyr::filter(!is.na(.data$use_component))
 
-  # issues <- handle$issues
-  #
-  # if (!is.null(issues)) {
-  #
-  #   # Attach issues to components ---------------------------------------------
-  #
-  #   component_issues <- handle$issues %>%
-  #     dplyr::filter(!is.na(component))
-  #
-  #   if (nrow(component_issues) != 0) {
-  #     for (k in seq_len(nrow(component_issues))) {
-  #
-  #       this_issue <- component_issues[k, ]
-  #       register_issue_dataproduct(handle, this_issue)
-  #
-  #       usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
-  #                              usethis::ui_field("issue"),
-  #                              "to local registry"))
-  #     }
-  #   }
-  #
-  #   # Attach issues to data product
-  #
-  #   dataproduct_issues <- handle$issues %>%
-  #     dplyr::filter(is.na(component))
-  #
-  #   if (nrow(dataproduct_issues) != 0) {
-  #     for (k in seq_len(nrow(dataproduct_issues))) {
-  #
-  #       this_issue <- dataproduct_issues[k, ]
-  #       register_issue_dataproduct(handle, this_issue)
-  #
-  #       usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
-  #                              usethis::ui_field("issue"),
-  #                              "to local registry"))
-  #     }
-  #   }
-  #
-  # }
+    if (nrow(component_issues) != 0) {
+      for (k in seq_len(nrow(component_issues))) {
+
+        this_issue <- component_issues[k, ]
+        register_issue_dataproduct(handle = handle,
+                                   this_issue = this_issue,
+                                   endpoint = endpoint)
+
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_component),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
+    # Attach issues to data product
+
+    dataproduct_issues <- handle$issues %>%
+      dplyr::filter(is.na(component))
+
+    if (nrow(dataproduct_issues) != 0) {
+      for (k in seq_len(nrow(dataproduct_issues))) {
+
+        this_issue <- dataproduct_issues[k, ]
+        register_issue_dataproduct(handle = handle,
+                                   this_issue = this_issue,
+                                   endpoint = endpoint)
+
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_data_product),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
+  }
 
   # record the code run in the data registry --------------------------------
   patch_data(url = handle$code_run,

@@ -28,7 +28,7 @@ findme <- function(file, endpoint) {
     object <- get_entry("object",
                         list(storage_location = storage_id))
     location <- this_storagelocation$path
-    msg <- paste(msg, "\nlocation:", full_path)
+    msg <- paste(msg, "\nlocation:", location)
 
     # There could be multiple Objects attached to the same Storage Location
 

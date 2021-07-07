@@ -9,6 +9,7 @@ write_dataproduct(
   data_product,
   description,
   version,
+  file_type,
   use_data_product,
   use_component,
   use_version,
@@ -22,15 +23,17 @@ write_dataproduct(
 
 \item{description}{component field}
 
-\item{version}{(optional) version version field}
+\item{version}{(optional) version field}
 
-\item{use_data_product}{(optional) use_data_product use_data_product field}
+\item{file_type}{(optional) file type field}
 
-\item{use_component}{(optional) use_component use_component field}
+\item{use_data_product}{(optional) use_data_product field}
 
-\item{use_version}{(optional) use_version use_version field}
+\item{use_component}{(optional) use_component field}
 
-\item{use_namespace}{(optional) use_namespace use_namespace field}
+\item{use_version}{(optional) use_version field}
+
+\item{use_namespace}{(optional) use_namespace field}
 }
 \description{
 write_dataproduct

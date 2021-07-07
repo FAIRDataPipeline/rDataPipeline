@@ -1,56 +1,31 @@
-# context("Testing new_issue()")
-#
-# sleep_time <- 0.5
-#
-# test_user <- "22"
-#
-# test_identifier <- sample(1:1000000, 1, replace=TRUE)
-#
-# UID <- paste0("issue test", format(Sys.time(), "%d%m%y%H%M%S"), test_identifier)
-#
-# run_server()
-#
-# object_id <- post_data("object",
-#                        list(description = UID))
-#
-# object_component_id <- post_data("object_component",
-#                                  list(name = UID,
-#                                       object = object_id))
-#
-# test_that("new issue creates a new issue on the data registry and associates it with an object", {
-#   expect_true(is.character(new_issue(severity = 5,
-#                                      description = UID,
-#                                      object_issues = list(object_id),
-#                                      component_issues = list())))
-# })
-#
-# UID <- paste0(UID, "1")
-#
-# test_that("new issue creates a new issue on the data registry and associates it with an object", {
-#   expect_true(is.character(
-#     new_issue(severity = 5,
-#               description = UID,
-#               object_issues = list(object_id),
-#               component_issues = list(object_component_id))))
-# })
-#
-# UID <- paste0(UID, "2")
-#
-# test_that("new issue creates a new issue on the data registry and associates it with an object", {
-#   expect_true(is.character(new_issue(severity = 5,
-#                                      description = UID,
-#                                      object_issues = list(),
-#                                      component_issues = list())))
-# })
-#
-# stop_server()
-#
-# # Issue allows multiple issues with the same details
-#
-# # test_that("new issue errors with same issue", {
-# #   expect_message(expect_true(is.character(new_issue(severity = 5,
-# #                                      description = UID,
-# #                                      object_issues = list(),
-# #                                      component_issues = list(),
-# #                                      key = key))))
-# # })
+context("Testing new_issue()")
+
+uid <- as.character(random_hash())
+
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
+
+object_url <- post_data(table = "object",
+                        data = list(name = uid),
+                        endpoint = endpoint)
+
+object_component_url <- post_data(table = "object_component",
+                                  data = list(name = uid,
+                                              object = object_url),
+                                  endpoint = endpoint)
+
+test_that("new issue creates an issue and associates it with a component", {
+  tmp <- new_issue(severity = 5,
+                   description = uid,
+                   component_issues = list(),
+                   endpoint = endpoint)
+  expect_true(grepl(endpoint, tmp))
+})
+
+test_that("new issue creates an issue and associates it with a component", {
+  tmp <- new_issue(severity = 5,
+                   description = uid,
+                   component_issues = list(object_component_url),
+                   endpoint = endpoint)
+  expect_true(grepl(endpoint, tmp))
+})

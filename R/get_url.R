@@ -15,7 +15,9 @@ get_url <- function(table,
                     query = list(),
                     endpoint = "http://localhost:8000/api/") {
 
-  output <- get_entry(table, query, endpoint)
+  output <- get_entry(table = table,
+                      query = query,
+                      endpoint = endpoint)
 
   if(length(output) == 1) {
     return(output[[1]]$url)
