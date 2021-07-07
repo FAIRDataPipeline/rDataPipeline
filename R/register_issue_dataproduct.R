@@ -2,62 +2,42 @@
 #'
 #' @param handle handle
 #' @param this_issue this_issue
+#' @param endpoint endpoint
 #'
-register_issue_dataproduct <- function(handle, this_issue) {
-
-  this_id <- this_issue$index
-
-  # Extract data product version
-
-  if (grepl("\\{DATETIME\\}", this_issue$version)) {
-    index_inputs <- which(this_id %in% handle$inputs$index)
-    index_outputs <- which(this_id %in% handle$outputs$index)
-
-    if (length(index_inputs) != 0) {
-      issue_version <- handle$inputs$version[index_inputs]
-
-    } else if (length(index_outputs) != 0) {
-      issue_version <- handle$outputs$version[index_outputs]
-    }
-
-  } else {
-    issue_version <- this_issue$version
-  }
-
-  tmp <- check_issue(this_issue$issue, this_issue$severity)
-  issueId <- tmp$issueId
-  current_objects <- tmp$current_objects
-  current_components <- tmp$current_components
+register_issue_dataproduct <- function(handle, this_issue, endpoint) {
 
   # Which object component do we want to associate with the issue?
-  namespace_uri <- get_url("namespace", list(name = this_issue$namespace))
-  namespace_id <- extract_id(namespace_uri)
-  dataProduct <- get_entry("data_product", list(name = this_issue$data_product,
-                                            version = issue_version,
-                                            namespace = namespace_id))
-  assertthat::assert_that(length(dataProduct) == 1)
-  object_uri <- dataProduct[[1]]$object
-  object_id <- extract_id(object_uri)
+  namespace_url <- get_url(table = "namespace",
+                           query = list(name = this_issue$use_namespace),
+                           endpoint = endpoint)
+  namespace_id <- extract_id(url = namespace_url)
+  data_product_entry <- get_entry(table = "data_product",
+                                  query = list(name = this_issue$use_data_product,
+                                               version = this_issue$use_version,
+                                               namespace = namespace_id),
+                                  endpoint = endpoint)
 
-  if (!is.na(this_issue$component)) {
-    component_id <- get_url("object_component",
-                                 list(name = this_issue$component,
-                                      object = object_id))
-    # Add this to the current list
-    component_issues <- c(current_components, component_id)
-    object_issues <- current_objects
+  assertthat::assert_that(length(data_product_entry) == 1)
+  object_url <- data_product_entry[[1]]$object
+  object_id <- extract_id(object_url)
+
+  if (is.na(this_issue$use_component)) {
+    component_url <- get_url(table = "object_component",
+                             query = list(object = object_id,
+                                          whole_object = TRUE),
+                             endpoint = endpoint)
 
   } else {
-    # Add this to the current list
-    component_issues <- current_components
-    object_issues <- c(current_objects, object_uri)
+    component_url <- get_url(table = "object_component",
+                             query = list(name = this_issue$use_component,
+                                          object = object_id),
+                             endpoint = endpoint)
   }
 
   # Upload issue to the data registry ---------------------------------------
 
-  patch_data(url = issueId,
-             data = list(severity = this_issue$severity,
-                         description = this_issue$issue,
-                         object_issues = object_issues,
-                         component_issues = component_issues))
+  new_issue(severity = this_issue$severity,
+            description = this_issue$issue,
+            component_issues = list(component_url),
+            endpoint = endpoint)
 }

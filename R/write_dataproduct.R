@@ -15,6 +15,7 @@ write_dataproduct <- function(path,
                               data_product,
                               description,
                               version,
+                              file_type,
                               use_data_product,
                               use_component,
                               use_version,
@@ -26,6 +27,7 @@ write_dataproduct <- function(path,
   new_write$description <- description
 
   if (!missing(version)) new_write$version <- version
+  if (!missing(file_type)) new_write$file_type <- file_type
   if (!missing(use_data_product)) new_write$use$data_product <- use_data_product
   if (!missing(use_component)) new_write$use$component <- use_component
   if (!missing(use_version)) new_write$use$version <- use_version

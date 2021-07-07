@@ -7,7 +7,7 @@
 raise_issue(
   index,
   handle,
-  component,
+  component = NA,
   data_product,
   version,
   namespace,

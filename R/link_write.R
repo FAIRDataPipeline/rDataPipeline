@@ -21,12 +21,20 @@ link_write <- function(handle, data_product) {
   this_write <- write[[index]]
   file_type <- this_write$file_type
 
+  if (is.null(file_type)) {
+    tmp <- "file_type"
+    usethis::ui_stop(paste("Unknown", usethis::ui_field(tmp), "in",
+                           usethis::ui_value(data_product),
+                           "write block, please edit config file"))
+  }
+
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = file_type)
   write_data_product <- write_metadata$data_product
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace
+  write_public <- write_metadata$public
   path <- write_metadata$path
 
   description <- this_write$description
@@ -44,7 +52,8 @@ link_write <- function(handle, data_product) {
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description)
+                description = description,
+                public = write_public)
 
   invisible(path)
 }

@@ -13,7 +13,7 @@
 #'
 raise_issue <- function(index,
                         handle,
-                        component,
+                        component = NA,
                         data_product,
                         version,
                         namespace,

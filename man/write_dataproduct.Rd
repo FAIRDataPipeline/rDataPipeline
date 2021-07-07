@@ -9,6 +9,7 @@ write_dataproduct(
   data_product,
   description,
   version,
+  file_type,
   use_data_product,
   use_component,
   use_version,
