@@ -1,22 +1,23 @@
-context("Testing write_estimate()")
+context("Testing link_write()")
 
 uid <- random_hash()
-data_product1 <- paste("test/estimate/asymptomatic-period", uid, sep = "_")
+data_product1 <- paste("test/csv", uid, sep = "_")
 coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "Estimate of asymptomatic period"
+dataproduct_description <- "A csv file"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- "config_files/write_estimate/config.yaml"
+config_file <- "config_files/link_write/config.yaml"
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
 write_dataproduct(path = config_file,
                   data_product = data_product1,
-                  description = dataproduct_description)
+                  description = dataproduct_description,
+                  file_type = "csv")
 
 # CLI functions
 fair_pull(path = config_file, endpoint = endpoint)
@@ -30,16 +31,7 @@ handle <- initialise(config, script, endpoint)
 # Run tests ---------------------------------------------------------------
 
 test_that("function behaves as it should", {
-
-  ind <- write_estimate(value =  192.0,
-                        handle = handle,
-                        data_product = data_product1,
-                        component = "asymptomatic-period",
-                        description = "asymptomatic period")
-
-  tmp <- handle$outputs %>%
-    dplyr::filter(index == ind)
-  path <- tmp$path
-
-  expect_true(configr::is.toml.file(path))
+  tmp <- link_write(handle, data_product1)
+  path <- file.path(namespace1, data_product1)
+  testthat::expect_true(grepl(path, tmp))
 })

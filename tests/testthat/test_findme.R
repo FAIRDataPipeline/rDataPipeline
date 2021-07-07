@@ -33,7 +33,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -60,7 +60,7 @@ write_array(array = as.matrix(df),
             dimension_units = list(NA, "km"),
             units = "s")
 
-finalise(handle)
+finalise(handle, endpoint)
 
 # Start tests
 file <- unique(handle$outputs$path)
@@ -93,7 +93,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Write data
 write_array(array = as.matrix(df),
@@ -118,7 +118,7 @@ write_array(array = as.matrix(df),
             dimension_units = list(NA, "km"),
             units = "s")
 
-finalise(handle)
+finalise(handle, endpoint)
 
 # Start tests
 file <- unique(handle$outputs$path)
@@ -153,7 +153,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -186,7 +186,7 @@ write_array(array = as.matrix(df),
                             dimension_units = list(NA, "km"),
                             units = "s")
 
-finalise(handle)
+finalise(handle, endpoint)
 
 # Start tests
 file <- unique(handle$outputs$path)

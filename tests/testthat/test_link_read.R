@@ -1,19 +1,15 @@
-context("Testing read_array()")
+context("Testing link_read()")
 
 uid <- random_hash()
-coderun_description <- "Test read_table"
-dataproduct_description <- "A test table"
-data_product1 <- paste("test/table", uid, sep = "_")
-component <- "a/b/c/d"
-version1 <- "0.1.0"
+data_product1 <- paste("test/csv", uid, sep = "_")
+coderun_description <- "Register a file in the pipeline"
+dataproduct_description <- "A csv file"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
 
-# Write test/array v.0.1.0 'username' namespace ---------------------------
-
 # User written config file
-config_file <- "config_files/read_table/config.yaml"
+config_file <- "config_files/link_read/config.yaml"
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -21,7 +17,7 @@ write_config(path = config_file,
 write_dataproduct(path = config_file,
                   data_product = data_product1,
                   description = dataproduct_description,
-                  version = version1)
+                  file_type = "csv")
 
 # CLI functions
 fair_pull(path = config_file, endpoint = endpoint)
@@ -33,31 +29,23 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script, endpoint)
 
 # Write data
-df <- data.frame(a = 1:2, b = 3:4)
-rownames(df) <- 1:2
+path <- link_write(handle, data_product1)
+df <- data.frame(a = uid, b = uid)
+write.csv(df, path)
 
-write_table(df = df,
-            handle = handle,
-            data_product = data_product1,
-            component = component,
-            description = "Some description")
+finalise(handle, endpoint)
 
-# Finalise code run
-finalise(handle, finalise, endpoint)
 
-# Start tests -------------------------------------------------------------
+# Run tests ---------------------------------------------------------------
 
 # User written config file
-config_file <- "config_files/read_table/config2.yaml"
-
+config_file <- "config_files/link_read/config2.yaml"
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
 read_dataproduct(path = config_file,
-                 data_product = data_product1,
-                 component = component,
-                 use_version = version1)
+                 data_product = data_product1)
 
 # CLI functions
 fair_pull(path = config_file, endpoint = endpoint)
@@ -68,10 +56,10 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script, endpoint)
 
-# Run tests
-test_that("the correct dataframe is returned", {
-  tmp <- read_table(handle = handle,
-                    data_product = data_product1,
-                    component = component)
-  expect_equivalent(as.data.frame(tmp), df)
+# Read data
+test_that("function behaves as it should", {
+  path <- link_read(handle, data_product1)
+  testthat::expect_true(is.character(path))
+  tmp <- read.csv(path)
+  testthat::expect_equal(tmp[,-1], df)
 })

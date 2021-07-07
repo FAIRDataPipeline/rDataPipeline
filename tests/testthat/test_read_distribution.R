@@ -26,7 +26,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Write data
 write_distribution(handle = handle,
@@ -37,7 +37,7 @@ write_distribution(handle = handle,
                    description = "symptom delay")
 
 # Finalise code run
-finalise(handle)
+finalise(handle, endpoint)
 
 # Start tests -------------------------------------------------------------
 
@@ -57,7 +57,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 test_that("function works correctly", {
   tmp <- list(distribution = "Gaussian",

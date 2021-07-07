@@ -1,0 +1,17 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 1848822502d182d4089d57c1d60272a9ebce6404
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/distribution/symptom-delay_bda98a198f549d0dd989dd3cf40c01b447ad9d73
+  description: Estimate of symptom delay
+  public: yes
+  version: 0.0.1
