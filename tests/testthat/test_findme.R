@@ -1,6 +1,6 @@
 context("Testing findme()")
 
-uid <- random_hash()
+uid <- as.character(random_hash())
 data_product1 <- paste("findme/test/array", uid, sep = "_")
 data_product2 <- paste("findme/test/array2", uid, sep = "_")
 component1 <- "component1/a/s/d/f/s"
@@ -10,6 +10,8 @@ dataproduct_description <- "a test array"
 version1 <- "0.1.0"
 version2 <- "0.2.0"
 namespace1 <- "username"
+
+endpoint <- Sys.getenv("FDP_endpoint")
 
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
@@ -34,8 +36,7 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df <- data.frame(a = 1:2, b = 3:4)
-rownames(df) <- 1:2
+df <- data.frame(a = uid, b = uid)
 
 write_array(array = as.matrix(df),
             handle = handle,
@@ -60,6 +61,17 @@ write_array(array = as.matrix(df),
             units = "s")
 
 finalise(handle)
+
+# Start tests
+file <- unique(handle$outputs$path)
+
+test_that("findme prints output",{
+  tmp <- testthat::capture_output_lines(findme(file = file,
+                                               endpoint = endpoint))
+  testthat::expect_true(grepl("hash", tmp[1]))
+  testthat::expect_true(grepl("path", tmp[3]))
+  testthat::expect_true(grepl("data product", tmp[5]))
+})
 
 # Write v0.2.0 of test/array to local registry and data store ---------------
 
@@ -108,7 +120,20 @@ write_array(array = as.matrix(df),
 
 finalise(handle)
 
+# Start tests
+file <- unique(handle$outputs$path)
+
+test_that("findme lists two data products",{
+  tmp <- testthat::capture_output_lines(findme(file = file,
+                                               endpoint = endpoint))
+  testthat::expect_true(grepl("data product", tmp[5]))
+  testthat::expect_true(grepl("data product", tmp[15]))
+})
+
 # Write v0.1.0 of test/array2 to local registry and data store --------------
+
+uid <- as.character(random_hash())
+data_product3 <- paste("findme/test/array2", uid, sep = "_")
 
 # User written config file
 config_file <- "config_files/findme/config3.yaml"
@@ -117,7 +142,7 @@ write_config(path = config_file,
              input_namespace = namespace1,
              output_namespace = namespace1)
 write_dataproduct(path = config_file,
-                  data_product = data_product2,
+                  data_product = data_product3,
                   description = dataproduct_description,
                   version = version1)
 
@@ -131,9 +156,12 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-write_array(array = as.matrix(df),
+df <- data.frame(a = uid, b = uid)
+
+# Write data
+component_id <- write_array(array = as.matrix(df),
             handle = handle,
-            data_product = data_product2,
+            data_product = data_product3,
             component = component1,
             description = "Some description",
             dimension_names = list(rowvalue = rownames(df),
@@ -142,9 +170,14 @@ write_array(array = as.matrix(df),
             dimension_units = list(NA, "km"),
             units = "s")
 
-component_id <- write_array(array = as.matrix(df),
+raise_issue(index = component_id,
+            handle = handle,
+            issue = "some issue",
+            severity = 7)
+
+write_array(array = as.matrix(df),
                             handle = handle,
-                            data_product = data_product2,
+                            data_product = data_product3,
                             component = component2,
                             description = "Some description",
                             dimension_names = list(rowvalue = rownames(df),
@@ -153,20 +186,12 @@ component_id <- write_array(array = as.matrix(df),
                             dimension_units = list(NA, "km"),
                             units = "s")
 
-raise_issue(index = component_id,
-            handle = handle,
-            issue = "some issue",
-            severity = 7)
-
 finalise(handle)
 
-# Start tests -------------------------------------------------------------
+# Start tests
+file <- unique(handle$outputs$path)
 
-# file <- unique(handle$outputs$path)
-#
-# # Find v0.1.0 of test/array2
-# findme(file)
-#
-# # Find all entries with matching hash
-# findme(file, filter = FALSE)
-#
+test_that("findme returns TRUE",{
+  tmp <- findme(file = file, endpoint = endpoint)
+  testthat::expect_true(tmp)
+})
