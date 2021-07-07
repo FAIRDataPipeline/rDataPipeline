@@ -1,0 +1,33 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 9b2273fbc0baf76128623057a3995377ed4ff870
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/get_components1_e45ba8987137788654b60bfa9763a83812c454d6
+  description: data product description
+  public: yes
+  use:
+    version: 0.1.0
+- data_product: test/get_components2_e45ba8987137788654b60bfa9763a83812c454d6
+  description: data product description
+  public: yes
+  use:
+    version: 0.1.0
+- data_product: test/get_components3_e45ba8987137788654b60bfa9763a83812c454d6
+  description: data product description
+  public: yes
+  use:
+    version: 0.1.0
+- data_product: test/get_components4_e45ba8987137788654b60bfa9763a83812c454d6
+  description: data product description
+  public: yes
+  use:
+    version: 0.1.0

@@ -1,0 +1,12 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+write:
+- data_product: test/distribution/symptom-delay_759878b01c8e27c354e9be620c1ac851d34e7a3f
+  description: Estimate of symptom delay

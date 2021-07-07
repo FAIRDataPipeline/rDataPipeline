@@ -1,0 +1,18 @@
+run_metadata:
+  description: Test read_table
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 522fbe697c4d225cd07ae870befe6ab9d2b6a50e
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/table_64516c77c5a8b956a29cf024da7c0ac155056588
+  description: A test table
+  public: yes
+  use:
+    version: 0.1.0

@@ -1,0 +1,17 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 7f2822e723d41d5196ebf8116cd53ff74f241e59
+  remote_repo: https://github.com/fake_org/fake_repo
+read:
+- data_product: test/estimate/asymptomatic-period_d2c410e42424c92e8f2356998dc6c26b374b46c3
+  component: asymptomatic-period
+  use:
+    version: 0.0.1
+write: []

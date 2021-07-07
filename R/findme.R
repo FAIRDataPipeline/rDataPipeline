@@ -9,7 +9,7 @@
 findme <- function(file, endpoint) {
 
   hash <- get_file_hash(file)
-  msg <- paste("\nhash:", hash)
+  msg <- paste("hash:", hash)
 
   if (grepl("localhost", endpoint)) run_server()
 
@@ -50,7 +50,11 @@ findme <- function(file, endpoint) {
       namespace <- get_entity(data_product$namespace)$name
       user <- get_entity(data_product$updated_by)$full_name
 
-      msg <- paste(msg, "\n\ndata products:")
+      if (z == 1) {
+        msg <- paste(msg, "\n\ndata products:")
+      } else {
+        msg <- paste(msg, "\n")
+      }
       msg <- paste(msg, "\n-", data_product$name)
       msg <- paste(msg, "\n  description:", description)
       msg <- paste(msg, "\n  version:", data_product$version)

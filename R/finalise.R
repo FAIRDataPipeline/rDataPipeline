@@ -15,7 +15,8 @@ finalise <- function(handle, endpoint) {
 
   datastore <- handle$yaml$run_metadata$write_data_store
   datastore_root_url <- new_storage_root(root = datastore,
-                                         local = TRUE)
+                                         local = TRUE,
+                                         endpoint = endpoint)
   datastore_root_id <- extract_id(datastore_root_url)
 
   if (!is.null(handle$outputs)) {
@@ -69,7 +70,8 @@ finalise <- function(handle, endpoint) {
       write_version <- this_write$use_version
       write_namespace <- this_write$use_namespace
       write_namespace_url <- new_namespace(name = write_namespace,
-                                           full_name = write_namespace)
+                                           full_name = write_namespace,
+                                           endpoint = endpoint)
 
       # Check whether the data product has been registered on a previous loop
       # iteration
@@ -85,27 +87,46 @@ finalise <- function(handle, endpoint) {
         storage_exists <- get_url("storage_location",
                                   list(hash = hash,
                                        # public = public,
-                                       storage_root = datastore_root_id))
+                                       storage_root = datastore_root_id),
+                                  endpoint = endpoint)
 
         if (is.null(storage_exists)) {
           storage_location_url <- new_storage_location(
             path = storage_location,
             hash = hash,
             # public = public,
-            storage_root_url = datastore_root_url)
+            storage_root_url = datastore_root_url,
+            endpoint = endpoint)
 
         } else {
           storage_location_url <- storage_exists
         }
 
+        extension <- strsplit(this_write$path, "\\.")[[1]][2]
+
+        file_type_exists <- get_url(table = "file_type",
+                                    query = list(extension = extension),
+                                    endpoint = endpoint)
+
+        if (is.null(file_type_exists)) {
+          file_type_url <- new_file_type(name = extension,
+                                         extension = extension,
+                                         endpoint = endpoint)
+        } else {
+          file_type_url <- file_type_exists
+        }
+
         object_url <- new_object(storage_location_url = storage_location_url,
-                                 description = description)
+                                 description = description,
+                                 file_type_url = file_type_url,
+                                 endpoint = endpoint)
 
         # Register data product in local registry
         dataproduct_url <- new_data_product(name = write_data_product,
                                             version = write_version,
                                             object_url = object_url,
-                                            namespace_url = write_namespace_url)
+                                            namespace_url = write_namespace_url,
+                                            endpoint = endpoint)
 
         usethis::ui_done(paste("Writing", usethis::ui_value(this_data_product),
                                "to local registry"))
@@ -117,13 +138,15 @@ finalise <- function(handle, endpoint) {
 
       # Register component in local registry
       if (is.na(write_component)) {
-        component_url <- get_url("object_component",
-                                 list(object = extract_id(object_url)))
+        component_url <- get_url(table = "object_component",
+                                 query = list(object = extract_id(object_url)),
+                                 endpoint = endpoint)
         assertthat::assert_that(length(component_url) == 1)
 
       } else {
         component_url <- new_object_component(name = write_component,
-                                              object_url = object_url)
+                                              object_url = object_url,
+                                              endpoint = endpoint)
       }
 
       # Update handle
@@ -165,7 +188,7 @@ finalise <- function(handle, endpoint) {
     # Attach issues to data product
 
     dataproduct_issues <- handle$issues %>%
-      dplyr::filter(is.na(component))
+      dplyr::filter(is.na(.data$use_component))
 
     if (nrow(dataproduct_issues) != 0) {
       for (k in seq_len(nrow(dataproduct_issues))) {
@@ -188,5 +211,4 @@ finalise <- function(handle, endpoint) {
   patch_data(url = handle$code_run,
              data = list(inputs = as.list(handle$inputs$component_url),
                          outputs = as.list(handle$outputs$component_url)))
-
 }
