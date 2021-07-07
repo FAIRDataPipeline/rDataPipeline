@@ -26,7 +26,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Write data
 value <- 192.0
@@ -37,7 +37,7 @@ write_estimate(value =  value,
                description = "asymptomatic period")
 
 # Finalise code run
-finalise(handle)
+finalise(handle, endpoint)
 
 # Start tests -------------------------------------------------------------
 
@@ -55,7 +55,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, finalise)
 
 test_that("function behaves as it should", {
   dat <- read_estimate(handle = handle,

@@ -42,5 +42,5 @@ link_read <- function(handle, data_product) {
                component_url = read_component_url)
 
   # Return storage location
-  invisible(read_path)
+  read_path
 }

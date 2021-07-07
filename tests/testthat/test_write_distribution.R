@@ -25,7 +25,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, endpoint)
 
 # Run tests ---------------------------------------------------------------
 

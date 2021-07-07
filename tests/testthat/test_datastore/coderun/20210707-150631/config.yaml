@@ -1,0 +1,17 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 79113105d96db56bf9626f3d049d538477be23a3
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/csv_2c02da7ea7d2512d4e497f6b7023ccd60918dd0c
+  description: A csv file
+  public: yes
+  version: 0.0.1

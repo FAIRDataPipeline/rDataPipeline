@@ -43,7 +43,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script)
+handle <- initialise(config, script, finalise)
 
 # Write data
 df <- data.frame(a = 1:2, b = 3:4)
