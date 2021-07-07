@@ -55,7 +55,7 @@ fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, finalise)
+handle <- initialise(config, script, endpoint)
 
 test_that("function behaves as it should", {
   dat <- read_estimate(handle = handle,

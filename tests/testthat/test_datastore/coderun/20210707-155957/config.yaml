@@ -1,0 +1,18 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 113a623821b35a15a4a1fdde6c5d6ad58f115be3
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/array_cf1a5bf8a1cca625af895fa43d1617a83ff813b4
+  description: Try to write two components with the same name
+  public: yes
+  use:
+    version: 0.1.0

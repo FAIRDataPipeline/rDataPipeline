@@ -1,6 +1,6 @@
 context("Testing link_read()")
 
-uid <- random_hash()
+uid <- as.character(random_hash())
 data_product1 <- paste("test/csv", uid, sep = "_")
 coderun_description <- "Register a file in the pipeline"
 dataproduct_description <- "A csv file"

@@ -1,0 +1,12 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+read:
+- data_product: test/estimate/asymptomatic-period_4a982888232c8cce4749dc9d1193b9917d88948b
+  component: asymptomatic-period

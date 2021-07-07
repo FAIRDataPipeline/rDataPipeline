@@ -43,7 +43,7 @@ write_table(df = df,
             description = "Some description")
 
 # Finalise code run
-finalise(handle, finalise, endpoint)
+finalise(handle, endpoint)
 
 # Start tests -------------------------------------------------------------
 

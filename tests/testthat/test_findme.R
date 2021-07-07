@@ -27,8 +27,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -69,7 +69,7 @@ test_that("findme prints output",{
   tmp <- testthat::capture_output_lines(findme(file = file,
                                                endpoint = endpoint))
   testthat::expect_true(grepl("hash", tmp[1]))
-  testthat::expect_true(grepl("path", tmp[3]))
+  testthat::expect_true(grepl("location", tmp[3]))
   testthat::expect_true(grepl("data product", tmp[5]))
 })
 
@@ -87,8 +87,8 @@ write_dataproduct(path = config_file,
                   version = version2)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -126,8 +126,8 @@ file <- unique(handle$outputs$path)
 test_that("findme lists two data products",{
   tmp <- testthat::capture_output_lines(findme(file = file,
                                                endpoint = endpoint))
-  testthat::expect_true(grepl("data product", tmp[5]))
-  testthat::expect_true(grepl("data product", tmp[15]))
+  testthat::expect_true(grepl(data_product1, tmp[6]))
+  testthat::expect_true(grepl(data_product1, tmp[17]))
 })
 
 # Write v0.1.0 of test/array2 to local registry and data store --------------
@@ -147,8 +147,8 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(config_file)
-fair_run(config_file, skip = TRUE)
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
