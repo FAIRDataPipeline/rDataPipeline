@@ -4,20 +4,14 @@
 \alias{findme}
 \title{findme}
 \usage{
-findme(file, endpoint, filter = TRUE)
+findme(file, endpoint)
 }
 \arguments{
 \item{file}{file path}
 
 \item{endpoint}{endpoint}
-
-\item{filter}{when \code{TRUE} (default), attempts to match \code{file}
-to a storage location}
 }
 \description{
 Returns metadata associated with the calculated hash of a target file.
 When multiple entries exist in the data registry all are returned.
-These entries can be filtered, when \code{filter} is \code{TRUE}, by
-attempting to match \code{file} to the Storage Location entry in the data
-registry. The deeper the file path, the better the match.
 }
