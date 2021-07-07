@@ -1,5 +1,0 @@
-[symptom-delay]
-type = "distribution"
-distribution = "Gaussian"
-mean = -16.08
-SD = 30
