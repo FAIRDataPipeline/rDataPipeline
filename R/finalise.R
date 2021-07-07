@@ -181,7 +181,7 @@ finalise <- function(handle, endpoint) {
     # Attach issues to data product
 
     dataproduct_issues <- handle$issues %>%
-      dplyr::filter(is.na(component))
+      dplyr::filter(is.na(.data$use_component))
 
     if (nrow(dataproduct_issues) != 0) {
       for (k in seq_len(nrow(dataproduct_issues))) {
