@@ -40,8 +40,8 @@ read_dataproduct <- function(path,
   # Generate read block
   new_read <- list()
   new_read$data_product <- data_product
-  new_read$component <- component
 
+  if (!missing(component)) new_read$component <- component
   if (!missing(version)) new_read$version <- version
   if (!missing(use_data_product)) new_read$use$data_product <- use_data_product
   if (!missing(use_component)) new_read$use$component <- use_component
