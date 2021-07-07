@@ -4,7 +4,7 @@
 \alias{initialise}
 \title{initialise}
 \usage{
-initialise(config, script)
+initialise(config, script, endpoint)
 }
 \arguments{
 \item{config}{a \code{string} specifying the location of the working
@@ -12,6 +12,8 @@ config file in the data store}
 
 \item{script}{a \code{string} specifying the location of the submission
 script in the data store}
+
+\item{endpoint}{endpoint}
 }
 \description{
 Reads in a working config file and generates new Code Run entry.

@@ -4,10 +4,12 @@
 \alias{finalise}
 \title{finalise}
 \usage{
-finalise(handle)
+finalise(handle, endpoint)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
+
+\item{endpoint}{endpoint}
 }
 \description{
 Push metadata to registry

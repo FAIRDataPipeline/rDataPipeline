@@ -1,0 +1,18 @@
+run_metadata:
+  description: Register a file in the pipeline
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: username
+  default_output_namespace: username
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: b275f0d42d5aeca3e2533e7f69c185f29c4175e9
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: findme/test/array_97daa5e23a5fda955c45cdc849032ae9e6125b65
+  description: a test array
+  public: yes
+  use:
+    version: 0.1.0

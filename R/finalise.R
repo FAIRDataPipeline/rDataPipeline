@@ -3,10 +3,11 @@
 #' Push metadata to registry
 #'
 #' @param handle \code{fdp} object
+#' @param endpoint endpoint
 #'
 #' @export
 #'
-finalise <- function(handle) {
+finalise <- function(handle, endpoint) {
 
   # record data product metadata in the data registry --------
 
@@ -144,7 +145,7 @@ finalise <- function(handle) {
     # Attach issues to components ---------------------------------------------
 
     component_issues <- handle$issues %>%
-      dplyr::filter(!is.na(use_component))
+      dplyr::filter(!is.na(.data$use_component))
 
     if (nrow(component_issues) != 0) {
       for (k in seq_len(nrow(component_issues))) {
@@ -154,7 +155,8 @@ finalise <- function(handle) {
                                    this_issue = this_issue,
                                    endpoint = endpoint)
 
-        usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_component),
                                usethis::ui_field("issue"),
                                "to local registry"))
       }
@@ -173,7 +175,8 @@ finalise <- function(handle) {
                                    this_issue = this_issue,
                                    endpoint = endpoint)
 
-        usethis::ui_done(paste("Writing", usethis::ui_value(components[j]),
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_data_product),
                                usethis::ui_field("issue"),
                                "to local registry"))
       }
