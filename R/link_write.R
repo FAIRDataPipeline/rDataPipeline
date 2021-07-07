@@ -55,5 +55,5 @@ link_write <- function(handle, data_product) {
                 description = description,
                 public = write_public)
 
-  invisible(path)
+  path
 }
