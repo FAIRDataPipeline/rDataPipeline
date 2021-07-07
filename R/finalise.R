@@ -98,8 +98,24 @@ finalise <- function(handle, endpoint) {
           storage_location_url <- storage_exists
         }
 
+        extension <- strsplit(this_write$path, "\\.")[[1]][2]
+
+        file_type_exists <- get_url(table = "file_type",
+                                    query = list(extension = extension),
+                                    endpoint = endpoint)
+
+        if (is.null(file_type_exists)) {
+          file_type_url <- new_file_type(name = extension,
+                                         extension = extension,
+                                         endpoint = endpoint)
+        } else {
+          file_type_url <- file_type_exists
+        }
+
         object_url <- new_object(storage_location_url = storage_location_url,
-                                 description = description)
+                                 description = description,
+                                 file_type_url = file_type_url,
+                                 endpoint = endpoint)
 
         # Register data product in local registry
         dataproduct_url <- new_data_product(name = write_data_product,
