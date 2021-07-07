@@ -1,9 +1,9 @@
-## SCRCdataAPI
+## rFDP
 
-[![](https://img.shields.io/badge/docs-SCRCdataAPI-blue)](https://scottishcovidresponse.github.io/SCRCdataAPI/)
-[![test-build](https://github.com/ScottishCovidResponse/SCRCdataAPI/workflows/build/badge.svg?=1)](https://github.com/ScottishCovidResponse/SCRCdataAPI/actions)
-[![codecov](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI/branch/master/graph/badge.svg?=1)](https://codecov.io/gh/ScottishCovidResponse/SCRCdataAPI)
-[![CodeFactor](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi/badge)](https://www.codefactor.io/repository/github/scottishcovidresponse/scrcdataapi)
+[![](https://img.shields.io/badge/docs-rFDP-blue)](https://FAIRDataPipeline.github.io/rFDP/)
+[![test-build](https://github.com/FAIRDataPipeline/rFDP/workflows/build/badge.svg?=1)](https://github.com/FAIRDataPipeline/rFDP/actions)
+[![codecov](https://codecov.io/gh/FAIRDataPipeline/rFDP/branch/main/graph/badge.svg?=1)](https://codecov.io/gh/FAIRDataPipeline/rFDP)
+[![CodeFactor](https://www.codefactor.io/repository/github/FAIRDataPipeline/rFDP/badge)](https://www.codefactor.io/repository/github/FAIRDataPipeline/rFDP)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 
 Functions to generate and process data files for the SCRC data pipeline.
@@ -13,7 +13,7 @@ Functions to generate and process data files for the SCRC data pipeline.
 In R:
 ```{r}
 library(devtools)
-install_github("ScottishCovidResponse/SCRCdataAPI")
+install_github("FAIRDataPipeline/rFDP")
 ```
 
 For more information, please visit the FAIR Data Pipeline [website](https://fairdatapipeline.github.io)
