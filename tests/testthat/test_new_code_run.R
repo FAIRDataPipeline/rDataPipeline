@@ -3,9 +3,9 @@ context("Testing new_code_run()")
 description <- paste0("test_new_code_run_",
                       openssl::sha1(x = as.character(Sys.time())))
 run_date <- Sys.time()
-endpoint <- "https://data.scrc.uk/api/"
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 code_repo_url <- post_data("object", list(description = description),
                            endpoint = endpoint)

@@ -2,15 +2,16 @@
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing the query
+#' @param endpoint endpoint
 #'
 #' @export
 #' @keywords internal
 #'
-check_fields <- function(table, query) {
+check_fields <- function(table, query, endpoint) {
 
   fields <- names(query)
 
-  expected_types <- get_fields(table) %>%
+  expected_types <- get_fields(table = table, endpoint = endpoint) %>%
     dplyr::filter(.data$field %in% fields) %>%
     dplyr::arrange(factor(.data$field, levels = fields)) %>%
     dplyr::select(.data$data_type) %>%
@@ -27,7 +28,10 @@ check_fields <- function(table, query) {
     # field ------------------------------------------------------------------
 
     if (this_type == "field") {
-      output <- check_field(fields[x], query_class, this_query)
+      output <- check_field(fields = fields[x],
+                            query_class = query_class,
+                            this_query = this_query,
+                            endpoint = endpoint)
 
       # datetime -------------------------------------------------------------
 
@@ -70,10 +74,10 @@ check_fields <- function(table, query) {
   }) %>% unlist()
 }
 
-check_field <- function(fields, query_class, this_query) {
+check_field <- function(fields, query_class, this_query, endpoint) {
   if (is.character(this_query)) {
 
-    if (grepl("^http://localhost:8000/api/", this_query)) {
+    if (grepl(endpoint, this_query)) {
       return(TRUE)
 
     } else if (!grepl("\\D", this_query)) {

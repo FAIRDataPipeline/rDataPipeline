@@ -1,6 +1,7 @@
 context("Testing validate_fields()")
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 #get all tables
 tables <- get_tables()
@@ -9,29 +10,38 @@ unknown_table <- "unknown"
 UID <- paste0("test_validate_fields_ ",
               openssl::sha1(x = as.character(Sys.time())))
 
-object_id <- post_data("object",
-                       list(description = UID))
+object_id <- post_data(table = "object",
+                       data = list(description = UID),
+                       endpoint = endpoint)
 
 
 test_that("incorrect tables produce and error", {
-  expect_error(validate_fields(unknown_table, data = list()))
-  expect_error(validate_fields(NULL, data = list()))
+  expect_error(validate_fields(table = unknown_table,
+                               data = list(),
+                               endpoint = endpoint))
+  expect_error(validate_fields(table = NULL,
+                               data = list(),
+                               endpoint = endpoint))
 })
 
 test_that("validate_fields works with all tables",{
   for (i in seq_along(tables)) {
-    print(i)
     table <- tables[i]
 
     if (table == "users" | table == "groups") {
-      expect_error(validate_fields(tables[i], data = list("username = test")))
+      expect_error(validate_fields(table = tables[i],
+                                   data = list("username = test"),
+                                   endpoint = endpoint))
 
     } else {
-      table.writable <- get_table_writable(table)
-      table.required <- get_table_required(table)
+      table.writable <- get_table_writable(table = table,
+                                           endpoint = endpoint)
+      table.required <- get_table_required(table = table)
 
       if(nrow(table.required)  > 1)
-        expect_error(validate_fields(table, data = list()))
+        expect_error(validate_fields(table = table,
+                                     data = list(),
+                                     endpoint = endpoint))
 
       data_correct <- list()
       data_correct_2 <- list()
@@ -113,18 +123,32 @@ test_that("validate_fields works with all tables",{
         }
 
       }
-      expect_true(is.list(validate_fields(table, data_correct)))
-      expect_true(is.list(validate_fields(table, data_correct_2)))
-      expect_true(is.list(validate_fields(table, data_correct_3)))
-      expect_true(is.list(validate_fields(table, data_correct_4)))
+      expect_true(is.list(validate_fields(table = table,
+                                          data = data_correct,
+                                          endpoint = endpoint)))
+      expect_true(is.list(validate_fields(table = table,
+                                          data = data_correct_2,
+                                          endpoint = endpoint)))
+      expect_true(is.list(validate_fields(table = table,
+                                          data = data_correct_3,
+                                          endpoint = endpoint)))
+      expect_true(is.list(validate_fields(table = table,
+                                          data = data_correct_4,
+                                          endpoint = endpoint)))
 
-      expect_error(validate_fields(table, data_incorrect))
-      expect_error(validate_fields(table, data_incorrect_2))
-      expect_error(validate_fields(table, data_incorrect_3))
-      expect_error(validate_fields(table, data_incorrect_4))
+      expect_error(validate_fields(table = table,
+                                   data = data_incorrect,
+                                   endpoint = endpoint))
+      expect_error(validate_fields(table = table,
+                                   data = data_incorrect_2,
+                                   endpoint = endpoint))
+      expect_error(validate_fields(table = table,
+                                   data = data_incorrect_3,
+                                   endpoint = endpoint))
+      expect_error(validate_fields(table = table,
+                                   data = data_incorrect_4,
+                                   endpoint = endpoint))
 
     }
   }
 })
-
-stop_server()

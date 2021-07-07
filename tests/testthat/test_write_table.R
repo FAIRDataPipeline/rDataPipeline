@@ -7,7 +7,8 @@ dataproduct_description <- "Test table"
 data_product1 <- paste("test/table", uid, sep = "_")
 component1 <- "a/b/c/d"
 version1 <- "0.1.0"
-endpoint <- "https://data.scrc.uk/api/"
+
+endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
 config_file <- "config_files/write_table/config.yaml"

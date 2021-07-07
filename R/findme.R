@@ -7,15 +7,16 @@
 #' registry. The deeper the file path, the better the match.
 #'
 #' @param file file path
+#' @param endpoint endpoint
 #' @param filter when \code{TRUE} (default), attempts to match \code{file}
 #' to a storage location
 #'
-findme <- function(file, filter = TRUE) {
+findme <- function(file, endpoint, filter = TRUE) {
 
   hash <- get_file_hash(file)
   msg <- paste("hash:", hash)
 
-  run_server()
+  if (grepl("localhost", endpoint)) run_server()
 
   # There could be multiple Storage Locations with the same hash
 

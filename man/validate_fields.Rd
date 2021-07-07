@@ -4,12 +4,14 @@
 \alias{validate_fields}
 \title{Validate fields}
 \usage{
-validate_fields(table, data)
+validate_fields(table, data, endpoint)
 }
 \arguments{
 \item{table}{table name as character}
 
 \item{data}{data as a named list}
+
+\item{endpoint}{endpoint}
 }
 \value{
 Returns

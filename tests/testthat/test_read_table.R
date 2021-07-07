@@ -7,7 +7,8 @@ data_product1 <- paste("test/table", uid, sep = "_")
 component <- "a/b/c/d"
 version1 <- "0.1.0"
 namespace1 <- "username"
-endpoint <- "https://data.scrc.uk/api/"
+
+endpoint <- Sys.getenv("FDP_endpoint")
 
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
@@ -38,7 +39,7 @@ rownames(df) <- 1:2
 write_table(df = df,
             handle = handle,
             data_product = data_product1,
-            component = component1,
+            component = component,
             description = "Some description")
 
 # Finalise code run
@@ -47,7 +48,7 @@ finalise(handle)
 # Start tests -------------------------------------------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config2.yaml"
+config_file <- "config_files/read_table/config2.yaml"
 
 write_config(path = config_file,
              description = coderun_description,
@@ -55,7 +56,7 @@ write_config(path = config_file,
              output_namespace = namespace1)
 read_dataproduct(path = config_file,
                  data_product = data_product1,
-                 component = component1,
+                 component = component,
                  use_version = version1)
 
 # CLI functions

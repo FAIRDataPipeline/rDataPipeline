@@ -2,8 +2,9 @@ context("Testing new_keyword()")
 
 keyphrase <- paste0("test_new_keyword_",
                     openssl::sha1(x = as.character(Sys.time())))
-endpoint <- "https://data.scrc.uk/api/"
-run_server()
+
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data("object",
                         list(description = paste0(keyphrase, " Test")),

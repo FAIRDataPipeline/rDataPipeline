@@ -4,6 +4,7 @@
 #'
 #' @param table table name as character
 #' @param data data as a named list
+#' @param endpoint endpoint
 #'
 #' @return Returns
 #' @export
@@ -16,9 +17,9 @@
 #'                                personal_name = "S"), key)
 #' }}
 #'
-validate_fields <- function(table, data){
+validate_fields <- function(table, data, endpoint){
 
-  table.fields <- get_fields(table)
+  table.fields <- get_fields(table, endpoint = endpoint)
 
   table.required <- table.fields %>%
     filter(.data$required)
@@ -94,7 +95,7 @@ validate_fields <- function(table, data){
         } else {
           # if a list expect a list of api objects
           for (i in seq_along(value)) {
-            if (!grepl("http://localhost:8000/api/.+/.+", value[[i]])) {
+            if (!grepl(paste0(endpoint ,".+/.+"), value[[i]])) {
               stop(paste0(name, " Must be an api url"))
             } else if(!get_entity(value[[i]])$url == value[[i]]){
               stop(paste0(name, " must be in the data registry"))
@@ -104,7 +105,7 @@ validate_fields <- function(table, data){
 
         # If the field isn't plural expect a character of an api url
       } else if(is.character(value)){
-        if (!grepl("http://localhost:8000/api/.+/.+", value)) {
+        if (!grepl(paste0(endpoint, ".+/.+"), value)) {
           stop(paste0(name, " Must be an api url"))
         } else if(!get_entity(value)$url == value) {
           stop(paste0(name, " must be in the data registry"))

@@ -9,7 +9,8 @@ component1 <- "a/b/c/d"
 component2 <- "another/component"
 version1 <- "0.1.0"
 version2 <- "0.2.0"
-endpoint <- "https://data.scrc.uk/api/"
+
+endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
 config_file <- "config_files/write_array/config.yaml"

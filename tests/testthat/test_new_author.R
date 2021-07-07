@@ -4,9 +4,9 @@ family_name <- paste0("test_new_author_",
                       openssl::sha1(x = as.character(Sys.time())))
 personal_name <- paste0("test_new_author_",
                         openssl::sha1(x = as.character(Sys.time())))
-endpoint <- "https://data.scrc.uk/api/"
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 test_that("new entry in author returns an API URL", {
   expect_true(grepl("author", new_author(family_name = family_name,

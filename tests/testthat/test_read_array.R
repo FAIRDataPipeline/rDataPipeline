@@ -12,7 +12,8 @@ version1 <- "0.1.0"
 version2 <- "0.2.0"
 namespace1 <- "username"
 namespace2 <- "johnsmith"
-endpoint <- "https://data.scrc.uk/api/"
+
+endpoint <- Sys.getenv("FDP_endpoint")
 
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 

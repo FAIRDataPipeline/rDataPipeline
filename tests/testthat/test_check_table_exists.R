@@ -21,7 +21,8 @@ tables <- c("users",
             "code_repo_release",
             "key_value")
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 test_that("check table returns true with correct tables", {
   tmp <- lapply(seq_along(tables), function(x) {
@@ -42,5 +43,3 @@ test_that("invalid table name returns error", {
   expect_error(check_table_exists(TRUE))
   expect_error(check_table_exists())
 })
-
-stop_server()

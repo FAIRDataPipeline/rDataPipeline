@@ -4,11 +4,13 @@
 \alias{clean_query}
 \title{Clean query}
 \usage{
-clean_query(data)
+clean_query(data, endpoint)
 }
 \arguments{
 \item{data}{a \code{list} containing a valid query for the table, \emph{e.g.}
 \code{list(field = value)}}
+
+\item{endpoint}{endpoint}
 }
 \description{
 Function to clean a query and return it without an api prefix

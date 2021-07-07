@@ -1,0 +1,18 @@
+run_metadata:
+  description: Test read_array
+  local_data_registry_url: https://localhost:8000/api/
+  remote_data_registry_url: https://data.scrc.uk/api/
+  default_input_namespace: johnsmith
+  default_output_namespace: johnsmith
+  write_data_store: test_datastore/
+  local_repo: local_repo
+  script: ''
+  latest_commit: 076b69d0bf39a0c8a59ebcc01173bb8a85fb88b6
+  remote_repo: https://github.com/fake_org/fake_repo
+read: []
+write:
+- data_product: test/array_949b7a0f30c22889a2499322c20569e73e8763d3
+  description: A test array
+  public: yes
+  use:
+    version: 0.1.0

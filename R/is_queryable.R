@@ -4,22 +4,27 @@
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing the query
+#' @param endpoint endpoint
 #'
 #' @return Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
 #' isn't
 #' @export
 #' @keywords internal
 #'
-is_queryable <- function(table, query) {
+is_queryable <- function(table, query, endpoint) {
 
   # Check whether field names are valid
 
   fields <- names(query)
-  valid_fields <- all(fields %in% get_table_queryable(table))
+  valid_fields <- all(fields %in%
+                        get_table_queryable(table = table,
+                                            endpoint = endpoint))
 
   # Check whether the class of each field in the query matches what is expected
-
-  valid_query <- !(any(check_fields(table, query) == FALSE))
+  valid_query <- check_fields(table = table,
+                              query = query,
+                              endpoint = endpoint)
+  valid_query <- !(any(valid_query == FALSE))
 
   # Output
 

@@ -55,12 +55,6 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      # Install local registry
-      - name: Install registry
-        run: |
-             /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
-        shell: bash
-
       # Install system_requirements requirements on macOS
       - name: Install system requirements (macOS-latest)
         if: runner.os == 'macOS'

@@ -64,7 +64,11 @@ post_data <- function(table, data, endpoint) {
   } else if(result$status == 409) {
 
     # tryCatch({
-    output <- get_entry(table, clean_query(data))
+    new_query <- clean_query(data = data,
+                             endpoint = endpoint)
+    output <- get_entry(table = table,
+                        query = new_query,
+                        endpoint = endpoint)
     if (is.null(output)) stop(detail)
     assertthat::assert_that(length(output) == 1)
     return(output[[1]]$url)

@@ -4,10 +4,12 @@
 \alias{findme}
 \title{findme}
 \usage{
-findme(file, filter = TRUE)
+findme(file, endpoint, filter = TRUE)
 }
 \arguments{
 \item{file}{file path}
+
+\item{endpoint}{endpoint}
 
 \item{filter}{when \code{TRUE} (default), attempts to match \code{file}
 to a storage location}

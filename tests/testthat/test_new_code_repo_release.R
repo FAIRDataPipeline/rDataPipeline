@@ -4,9 +4,9 @@ name <- paste0("test_new_code_repo_release_",
                openssl::sha1(x = as.character(Sys.time())))
 version <- create_version_number()
 website <- paste0("https://www.", gsub("_", "", name), ".com")
-endpoint <- "https://data.scrc.uk/api/"
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data("object", list(description = name), endpoint = endpoint)
 

@@ -4,17 +4,18 @@
 #'
 #' @param data a \code{list} containing a valid query for the table, *e.g.*
 #' \code{list(field = value)}
+#' @param endpoint endpoint
 #'
 #' @export
 #' @keywords internal
 #'
-clean_query <- function(data) {
+clean_query <- function(data, endpoint) {
 
   data_tmp <- lapply(data, function(x) {
     if (!is.character(x)) {
       output <- x
 
-    } else if (grepl("^http://localhost:8000/api/.*([0-9]+$|[0-9]+/$)", x)) {
+    } else if (grepl(paste0(endpoint, ".*([0-9]+$|[0-9]+/$)"), x)) {
       output <- basename(x)
 
     } else {

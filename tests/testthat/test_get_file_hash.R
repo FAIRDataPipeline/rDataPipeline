@@ -17,3 +17,5 @@ test_that("an error is produced if file does not exist", {
 test_that("returned object is class character", {
   expect_error(class(get_file_hash("unknown_file.txt") == "character"))
 })
+
+file.remove(filename)

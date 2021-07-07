@@ -4,9 +4,9 @@
 
 known_fields <- c("character", "integer", "field", "boolean", "datetime",
                   "numeric", "url")
-endpoint <- "https://data.scrc.uk/api/"
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 tables <- get_tables(endpoint = endpoint) %>%
   setdiff(c("users", "groups"))

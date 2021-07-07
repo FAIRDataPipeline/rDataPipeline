@@ -1,23 +1,24 @@
 context("Testing check_exists()")
 
-run_server()
-
-test_that("empty query returns true", {
-  testthat::expect_true(check_exists("object", ""))
-})
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 test_that("invalid table throws an error", {
-  testthat::expect_error(check_exists("unknown", ""),
+  testthat::expect_error(check_exists(table = "unknown",
+                                      query = ""),
                          regexp = "Table does not exist")
 })
 
 test_that("invalid query throws an error", {
-  testthat::expect_error(check_exists("object", "unknown=unknown"))
-  testthat::expect_error(check_exists("object", "unknown"))
+  testthat::expect_error(check_exists(table = "object",
+                                      query = "unknown=unknown"))
+  testthat::expect_error(check_exists(table = "object",
+                                      query = "unknown"))
 })
 
 test_that("object does not exists returns false", {
-  testthat::expect_false(check_exists("object", "description=unknown00001"))
+  testthat::expect_false(check_exists(table = "object",
+                                      query = "description=unknown00001"))
 })
 
 description <- paste0("test_check_exists_",
@@ -26,7 +27,6 @@ description <- paste0("test_check_exists_",
 new_object(description = description)
 
 test_that("object exists returns true", {
-  testthat::expect_true(check_exists("object", list(description = description)))
+  testthat::expect_true(check_exists(table = "object",
+                                     query = list(description = description)))
 })
-
-stop_server()

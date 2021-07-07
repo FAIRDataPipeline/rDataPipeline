@@ -4,8 +4,9 @@ UID <- paste0("test_new_object_", openssl::sha1(x = as.character(Sys.time())))
 path <- paste0(UID, ".h5")
 path_url <- paste0("https://", path, ".com")
 hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
-endpoint <- "https://data.scrc.uk/api/"
-run_server()
+
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 storage_root_url <- post_data("storage_root",
                               list(name = UID,

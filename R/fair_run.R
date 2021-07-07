@@ -10,7 +10,7 @@ fair_run <- function(path = "config.yaml",
                      endpoint = "http://localhost:8000/api/",
                      skip = FALSE) {
 
-  run_server()
+  if (grepl("localhost", endpoint)) run_server()
 
   # Save names in data store
   config_file <- "config.yaml"
@@ -122,7 +122,8 @@ fair_run <- function(path = "config.yaml",
       }
 
       write_namespace_url <- new_namespace(name = write_namespace,
-                                           full_name = write_namespace)
+                                           full_name = write_namespace,
+                                           endpoint = endpoint)
       write_namespace_id <- extract_id(write_namespace_url)
 
       # Get public flag
@@ -182,7 +183,8 @@ fair_run <- function(path = "config.yaml",
       check_exists <- get_entry("data_product",
                                 list(name = write_dataproduct,
                                      version = write_version,
-                                     namespace = write_namespace_id))
+                                     namespace = write_namespace_id),
+                                endpoint = endpoint)
 
       if (!is.null(check_exists))
         usethis::ui_stop("A data product with the same name ({write_dataproduct}), version ({write_version}), and namespace ({write_namespace}) already exists")
