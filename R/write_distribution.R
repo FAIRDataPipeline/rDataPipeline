@@ -60,7 +60,7 @@ write_distribution <- function(handle,
     if (write_data_product %in% names(existing))
       usethis::ui_stop("{write_data_product} is already listed in toml file")
 
-    cat(paste0("\n", contents), file = path, append = TRUE)
+    cat(paste0("\n\n", contents), file = path, append = TRUE)
 
   } else {
     cat(contents, file = path, append = FALSE)
