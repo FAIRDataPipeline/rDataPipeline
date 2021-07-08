@@ -51,7 +51,7 @@ write_distribution <- function(handle,
     FUN.VALUE = character(1)) %>%
     paste0(collapse = "\n")
 
-  contents <- paste0(start, end)
+  contents <- paste0(start, end, "\n")
 
   if (file.exists(path)) {
 
@@ -60,7 +60,7 @@ write_distribution <- function(handle,
     if (component %in% names(existing))
       usethis::ui_stop("{component} is already listed in toml file")
 
-    cat(paste0("\n\n", contents), file = path, append = TRUE)
+    cat(paste0("\n", contents), file = path, append = TRUE)
 
   } else {
     cat(contents, file = path, append = FALSE)

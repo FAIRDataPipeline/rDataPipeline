@@ -55,7 +55,7 @@ write_estimate <- function(value,
     if (component %in% names(existing))
       usethis::ui_stop("{component} is already listed in toml file")
 
-    cat(paste0("\n\n", contents), file = path, append = TRUE)
+    cat(paste0("\n", contents), file = path, append = TRUE)
 
   } else {
     cat(contents, file = path, append = FALSE)
