@@ -57,8 +57,8 @@ write_distribution <- function(handle,
 
     # Check that component doesn't already exist
     existing <- configr::read.config(file = path)
-    if (write_data_product %in% names(existing))
-      usethis::ui_stop("{write_data_product} is already listed in toml file")
+    if (component %in% names(existing))
+      usethis::ui_stop("{component} is already listed in toml file")
 
     cat(paste0("\n\n", contents), file = path, append = TRUE)
 
