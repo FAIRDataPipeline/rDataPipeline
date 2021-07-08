@@ -22,6 +22,8 @@ read_distribution <- function(handle,
   read_namespace <- tmp$namespace
   path <- tmp$path
 
+  if (!file.exists(path)) usethis::ui_stop("File missing from data store")
+
   contents <- configr::read.config(file = path)
   this_component <- contents[[read_component]]
 
