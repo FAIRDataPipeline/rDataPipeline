@@ -7,7 +7,9 @@ data_product1 <- paste("test/array", uid, sep = "_")
 data_product2 <- paste("test/array2", uid, sep = "_")
 data_product3 <- paste("test/array3", uid, sep = "_")
 data_product4 <- paste("test/array4", uid, sep = "_")
+data_product5 <- paste("test/array5", uid, sep = "_")
 component <- "a/b/c/d"
+component2 <- "component2"
 version1 <- "0.1.0"
 version2 <- "0.2.0"
 namespace1 <- "username"
@@ -179,10 +181,55 @@ write_array(array = as.matrix(df2),
 # Finalise code run
 finalise(handle, endpoint)
 
-# Start tests -------------------------------------------------------------
+# Multiple components -----------------------------------------------------
 
 # User written config file
 config_file <- "config_files/read_array/config5.yaml"
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace1,
+             output_namespace = namespace1)
+write_dataproduct(path = config_file,
+                  data_product = data_product5,
+                  description = dataproduct_description,
+                  version = version1)
+
+# CLI functions
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script, endpoint)
+
+comp1 <- data.frame(a = 17:18, b = 19:20)
+rownames(comp1) <-9:10
+
+write_array(array = as.matrix(comp1),
+            handle = handle,
+            data_product = data_product5,
+            component = component,
+            description = "component1",
+            dimension_names = dimension_names)
+
+comp2 <- data.frame(a = 21:22, b = 23:24)
+rownames(comp2) <- 11:12
+
+write_array(array = as.matrix(comp2),
+            handle = handle,
+            data_product = data_product5,
+            component = component2,
+            description = "component2",
+            dimension_names = dimension_names)
+
+# Finalise code run
+finalise(handle, endpoint)
+
+# Test use block ----------------------------------------------------------
+
+# User written config file
+config_file <- "config_files/read_array/config6.yaml"
 
 write_config(path = config_file,
              description = coderun_description,
@@ -225,7 +272,7 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script, endpoint)
 
 # Run tests
-test_that("the correct dataframe is returned", {
+test_that("df_v1 is returned", {
   tmp <- read_array(handle = handle,
                     data_product = data_product1,
                     component = component)
@@ -240,23 +287,66 @@ test_that("the correct dataframe is returned", {
   expect_equivalent(attributes(tmp)$units, units)
 })
 
-test_that("the correct dataframe is returned", {
+test_that("df_v2 is returned", {
   tmp <- read_array(handle = handle,
                     data_product = data_product2,
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_v2)
 })
 
-test_that("the correct dataframe is returned", {
+test_that("df_js is returned", {
   tmp <- read_array(handle = handle,
                     data_product = data_product3,
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_js)
 })
 
-test_that("the correct dataframe is returned", {
+test_that("df2 is returned", {
   tmp <- read_array(handle = handle,
                     data_product = data_product4,
                     component = component)
   expect_equivalent(as.data.frame(tmp), df2)
+})
+
+# Test multiple components ------------------------------------------------
+
+# User written config file
+config_file <- "config_files/read_array/config7.yaml"
+
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace1,
+             output_namespace = namespace1)
+
+# Will return v.0.1.0, not v.0.2.0
+read_dataproduct(path = config_file,
+                 data_product = data_product5,
+                 component = component,
+                 use_version = version1)
+read_dataproduct(path = config_file,
+                 data_product = data_product5,
+                 component = component2,
+                 use_version = version1)
+
+# CLI functions
+fair_pull(path = config_file, endpoint = endpoint)
+fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script, endpoint)
+
+test_that("component1 is returned", {
+tmp <- read_array(handle = handle,
+                  data_product = data_product5,
+                  component = component)
+expect_equivalent(as.data.frame(tmp), comp1)
+})
+
+test_that("component2 is returned", {
+tmp <- read_array(handle = handle,
+                  data_product = data_product5,
+                  component = component2)
+expect_equivalent(as.data.frame(tmp), comp2)
 })

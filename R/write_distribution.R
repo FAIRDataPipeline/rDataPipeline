@@ -51,14 +51,14 @@ write_distribution <- function(handle,
     FUN.VALUE = character(1)) %>%
     paste0(collapse = "\n")
 
-  contents <- paste0(start, end)
+  contents <- paste0(start, end, "\n")
 
   if (file.exists(path)) {
 
     # Check that component doesn't already exist
     existing <- configr::read.config(file = path)
-    if (write_data_product %in% names(existing))
-      usethis::ui_stop("{write_data_product} is already listed in toml file")
+    if (component %in% names(existing))
+      usethis::ui_stop("{component} is already listed in toml file")
 
     cat(paste0("\n", contents), file = path, append = TRUE)
 

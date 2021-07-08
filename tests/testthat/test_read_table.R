@@ -1,10 +1,11 @@
-context("Testing read_array()")
+context("Testing read_table()")
 
 uid <- random_hash()
 coderun_description <- "Test read_table"
 dataproduct_description <- "A test table"
 data_product1 <- paste("test/table", uid, sep = "_")
 component <- "a/b/c/d"
+component2 <- "component2"
 version1 <- "0.1.0"
 namespace1 <- "username"
 
@@ -42,6 +43,15 @@ write_table(df = df,
             component = component,
             description = "Some description")
 
+df2 <- data.frame(a = 5:6, b = 7:8)
+rownames(df2) <- 3:4
+
+write_table(df = df2,
+            handle = handle,
+            data_product = data_product1,
+            component = component2,
+            description = "Some description")
+
 # Finalise code run
 finalise(handle, endpoint)
 
@@ -58,6 +68,10 @@ read_dataproduct(path = config_file,
                  data_product = data_product1,
                  component = component,
                  use_version = version1)
+read_dataproduct(path = config_file,
+                 data_product = data_product1,
+                 component = component2,
+                 use_version = version1)
 
 # CLI functions
 fair_pull(path = config_file, endpoint = endpoint)
@@ -69,9 +83,16 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script, endpoint)
 
 # Run tests
-test_that("the correct dataframe is returned", {
+test_that("df is returned", {
   tmp <- read_table(handle = handle,
                     data_product = data_product1,
                     component = component)
   expect_equivalent(as.data.frame(tmp), df)
+})
+
+test_that("df2 is returned", {
+  tmp <- read_table(handle = handle,
+                    data_product = data_product1,
+                    component = component2)
+  expect_equivalent(as.data.frame(tmp), df2)
 })
