@@ -10,6 +10,7 @@ register_external_object <- function(yaml,
 
   datastore <- yaml$run_metadata$write_data_store
   namespace <- yaml$run_metadata$default_output_namespace
+  public <- register_this$public
 
   # Local data store location
   local_path <- file.path(paste0(datastore, namespace),
@@ -62,6 +63,7 @@ register_external_object <- function(yaml,
   datastore_location_url <- new_storage_location(
     path = file_path,
     hash = hash,
+    public = TRUE,
     storage_root_url = datastore_root_url,
     endpoint = endpoint)
 
@@ -94,8 +96,8 @@ register_external_object <- function(yaml,
   data_product_exists <- get_entry("data_product",
                                    list(name = register_data_product,
                                         version = register_version,
-                                        namespace = register_namespace_id,
-                                        endpoint = endpoint))
+                                        namespace = register_namespace_id),
+                                   endpoint = endpoint)
 
   if (is.null(data_product_exists)) {
     # Original source ---------------------------------------------------------
@@ -116,6 +118,7 @@ register_external_object <- function(yaml,
     source_location_url <- new_storage_location(
       path = register_this$path,
       hash = hash,
+      public = TRUE,
       storage_root_url = source_root_url,
       endpoint = endpoint)
 
