@@ -2,6 +2,7 @@ context("testing read_estimate")
 
 uid <- random_hash()
 data_product1 <- paste("test/estimate/asymptomatic-period", uid, sep = "_")
+missing_data_product <- paste0("missing_", uid)
 component1 <- "asymptomatic-period"
 component2 <- "asymptomatic-period2"
 coderun_description <- "Register a file in the pipeline"
@@ -18,6 +19,9 @@ write_config(path = config_file,
              output_namespace = namespace1)
 write_dataproduct(path = config_file,
                   data_product = data_product1,
+                  description = dataproduct_description)
+write_dataproduct(path = config_file,
+                  data_product = missing_data_product,
                   description = dataproduct_description)
 
 # CLI functions
@@ -44,8 +48,19 @@ write_estimate(value =  value2,
                component = component2,
                description = "asymptomatic period2")
 
+value3 <- 999999999999999999999999.0123456789
+write_estimate(value =  value3,
+               handle = handle,
+               data_product = missing_data_product,
+               component = component1,
+               description = "asymptomatic period1")
+
 # Finalise code run
 finalise(handle, endpoint)
+
+# Remove missing_data_product from data store
+index <- which(handle$outputs$data_product == missing_data_product)
+file.remove(handle$outputs$path[index])
 
 # Start tests -------------------------------------------------------------
 
@@ -60,6 +75,9 @@ read_dataproduct(path = config_file,
 read_dataproduct(path = config_file,
                  data_product = data_product1,
                  component = component2)
+read_dataproduct(path = config_file,
+                 data_product = missing_data_product,
+                 component = component1)
 
 fair_pull(path = config_file, endpoint = endpoint)
 fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
@@ -68,7 +86,16 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script, endpoint)
 
-test_that("function behaves as it should", {
+test_that("error is thrown when file is missing from data store", {
+  testthat::expect_error(
+    read_estimate(handle = handle,
+                  data_product = missing_data_product,
+                  component = component1),
+    regexp = "File missing from data store"
+  )
+})
+
+test_that("component1 is returned", {
   dat <- read_estimate(handle = handle,
                        data_product = data_product1,
                        component = component1)
@@ -76,7 +103,7 @@ test_that("function behaves as it should", {
   testthat::expect_equal(dat, value1)
 })
 
-test_that("function behaves as it should", {
+test_that("component2 is returned", {
   dat <- read_estimate(handle = handle,
                        data_product = data_product1,
                        component = component2)
