@@ -38,6 +38,15 @@ finalise <- function(handle, endpoint) {
                                            endpoint = endpoint)
       path <- unique(this_write$path)
 
+      if (grepl("\\$\\{\\{DPAPI.RUN_ID\\}\\}", write_use_data_product)) {
+        this_coderun <- get_entity(handle$code_run)
+        uuid <- this_coderun$uuid
+
+        write_use_data_product <- gsub("\\$\\{\\{DPAPI.RUN_ID\\}\\}",
+                                       uuid,
+                                       write_use_data_product)
+      }
+
       # Get data product description (from config.yaml)
       index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
         write_data_product == x$data_product)))
