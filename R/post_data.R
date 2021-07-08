@@ -23,7 +23,6 @@ post_data <- function(table, data, endpoint) {
   # Repeating the action works eventually...
   continue <- TRUE
   while (continue) {
-    # tryCatch({ # Try retrieving entry
     result <- httr::POST(api_url,
                          body = jsonlite::toJSON(data, pretty = T,
                                                  auto_unbox = T,
@@ -31,9 +30,6 @@ post_data <- function(table, data, endpoint) {
                          httr::content_type('application/json'),
                          httr::add_headers(.headers = h))
     continue <- FALSE
-    # },
-    # error = function(e) {
-    # })
   }
 
   # Status 404: Not Found (table doesn't exist)
@@ -51,19 +47,10 @@ post_data <- function(table, data, endpoint) {
 
     # Status 400: Bad Request (error in field)
   } else if(result$status == 400) {
-
-    # tryCatch({
-    #   data <- clean_query(data)
-    #   return(get_url(table, data))
-    # },
-    # error = function(err) {
     stop(paste(names(detail), unlist(detail)))
-    # })
 
     # Status 409: Conflict (entry already exists)
   } else if(result$status == 409) {
-
-    # tryCatch({
     new_query <- clean_query(data = data,
                              endpoint = endpoint)
     output <- get_entry(table = table,
@@ -72,10 +59,6 @@ post_data <- function(table, data, endpoint) {
     if (is.null(output)) stop(detail)
     assertthat::assert_that(length(output) == 1)
     return(output[[1]]$url)
-    # },
-    # error = function(err) {
-    #   stop(detail)
-    # })
 
     # Status non-201 (something went wrong)
   } else {
