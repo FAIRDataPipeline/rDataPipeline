@@ -27,6 +27,8 @@ read_table <- function(handle,
   read_namespace <- tmp$namespace
   path <- tmp$path
 
+  if (!file.exists(path)) usethis::ui_stop("File missing from data store")
+
   file.h5 <- rhdf5::h5read(path, read_component)
 
   # Extract data object
