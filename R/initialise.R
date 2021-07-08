@@ -31,7 +31,9 @@ initialise <- function(config, script, endpoint) {
   config_hash <- get_file_hash(config)
 
   config_exists <- get_url(table = "storage_location",
-                           query = list(hash = config_hash),
+                           query = list(hash = config_hash,
+                                        public = TRUE,
+                                        storage_root = config_storageroot_id),
                            endpoint = endpoint)
 
   if (is.null(config_exists)) {
@@ -77,7 +79,9 @@ initialise <- function(config, script, endpoint) {
   script_hash <- get_file_hash(script)
 
   script_exists <- get_url(table = "storage_location",
-                           query = list(hash = script_hash),
+                           query = list(hash = script_hash,
+                                        public = TRUE,
+                                        storage_root = script_storageroot_id),
                            endpoint = endpoint)
 
   if (is.null(script_exists)) {
@@ -119,12 +123,14 @@ initialise <- function(config, script, endpoint) {
   repo_storageroot_url <- new_storage_root(root = "https://github.com/",
                                            local = FALSE,
                                            endpoint = endpoint)
-
+  repo_storageroot_id <- extract_id(repo_storageroot_url)
   sha <- yaml$run_metadata$latest_commit
   repo_name <- yaml$run_metadata$remote_repo
 
   coderepo_exists <- get_id(table = "storage_location",
-                            query = list(hash = sha),
+                            query = list(hash = sha,
+                                         public = TRUE,
+                                         storage_root = repo_storageroot_id),
                             endpoint = endpoint)
 
   if (is.null(coderepo_exists)) {
@@ -145,7 +151,7 @@ initialise <- function(config, script, endpoint) {
     coderepo_location_id <- coderepo_exists
     obj_exists <- get_url(table = "object",
                           query = list(storage_location = coderepo_location_id,
-                               endpoint = endpoint))
+                                       endpoint = endpoint))
 
     if (is.null(obj_exists)) {
       coderepo_object_url <- new_object(
