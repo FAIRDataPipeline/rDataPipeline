@@ -8,8 +8,7 @@
 fair_pull <- function(path = "config.yaml",
                       endpoint = "http://localhost:8000/api/") {
 
-  if (grepl("localhost", endpoint))
-    run_server()
+  if (grepl("localhost", endpoint)) run_server()
 
   # Read config.yaml --------------------------------------------------------
 
