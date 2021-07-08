@@ -42,41 +42,45 @@ finalise <- function(handle, endpoint) {
         write_data_product == x$data_product)))
       description <- handle$yaml$write[[index_dp]]$description
 
-      # Rename file
       if (file.exists(path)) {
         hash <- get_file_hash(path)
-        tmp_filename <- basename(path)
-        extension <- strsplit(tmp_filename, split = "\\.")[[1]][2]
-        new_filename <- paste(hash, extension, sep = ".")
-        new_path <- gsub(tmp_filename, new_filename, path)
-        file.rename(path, new_path)
       } else {
-        new_path <- this_write$path
-        hash <- unique(this_write$hash)
-        if (is.na(hash))
-          usethis::ui_stop("File is missing")
+        usethis::ui_stop("File is missing")
       }
 
-      # Record file location in data registry
-      storage_location <- gsub(datastore, "", path)
+      # Does a file with the same hash already exist in the registry?
       storage_exists <- get_url("storage_location",
                                 list(hash = hash,
                                      # public = public,
                                      storage_root = datastore_root_id),
                                 endpoint = endpoint)
 
-      # If a file with the same hash already exists, delete this one
       if (is.null(storage_exists)) {
+        # Rename file
+        tmp_filename <- basename(path)
+        extension <- strsplit(tmp_filename, split = "\\.")[[1]][2]
+        new_filename <- paste(hash, extension, sep = ".")
+        new_path <- gsub(tmp_filename, new_filename, path)
+        file.rename(path, new_path)
+        new_storage_location <- gsub(datastore, "", new_path)
+
+        # Record file location in data registry
         storage_location_url <- new_storage_location(
-          path = storage_location,
+          path = new_storage_location,
           hash = hash,
           # public = public,
           storage_root_url = datastore_root_url,
           endpoint = endpoint)
 
       } else {
+        # If a file already exists with the same hash, delete this one
         storage_location_url <- storage_exists
-        file.remove(new_path)
+        file.remove(path)
+
+        # Recursively delete parent folders, if empty
+        remove_empty_parents(path = path, root = datastore)
+
+        # Get metadata
         tmp <- get_entity(storage_location_url)
         existing_path <- tmp$path
         existing_root <- get_entity(tmp$storage_root)$root
@@ -84,7 +88,7 @@ finalise <- function(handle, endpoint) {
         new_path <- replacement_path
       }
 
-      extension <- strsplit(path, "\\.")[[1]][2]
+      extension <- strsplit(new_path, "\\.")[[1]][2]
 
       file_type_exists <- get_url(table = "file_type",
                                   query = list(extension = extension),
@@ -105,10 +109,10 @@ finalise <- function(handle, endpoint) {
 
       # Register data product in local registry
       data_product_url <- new_data_product(name = write_data_product,
-                                          version = write_version,
-                                          object_url = object_url,
-                                          namespace_url = write_namespace_url,
-                                          endpoint = endpoint)
+                                           version = write_version,
+                                           object_url = object_url,
+                                           namespace_url = write_namespace_url,
+                                           endpoint = endpoint)
 
       usethis::ui_done(paste("Writing", usethis::ui_value(write_data_product),
                              "to local registry"))
