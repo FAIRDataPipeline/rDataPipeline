@@ -279,7 +279,8 @@ Record file hash and update path name in \code{fdp} object
   use_version,
   use_namespace,
   hash,
-  new_path
+  new_path,
+  data_product_url
 )}\if{html}{\out{</div>}}
 }
 
@@ -299,6 +300,9 @@ the data product resides, used as input in the \code{code_run}}
 
 \item{\code{new_path}}{a \code{string} specifying the updated location (filename
 is now the hash of the file) of the data product in the local data store}
+
+\item{\code{data_product_url}}{a \code{string} specifying the URL of an
+\code{object} associated with the \code{data_product}}
 }
 \if{html}{\out{</div>}}
 }
@@ -313,12 +317,7 @@ Returns an updated \code{fdp} object
 Record \code{data_product} and component URLs in \code{fdp}
 object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(
-  use_data_product,
-  use_component,
-  data_product_url,
-  component_url
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(use_data_product, use_component, component_url)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -329,9 +328,6 @@ product, used as output in the \code{code_run}}
 
 \item{\code{use_component}}{a \code{string} specifying the name of the data
 product component, used as output in the \code{code_run}}
-
-\item{\code{data_product_url}}{a \code{string} specifying the URL of an
-\code{object} associated with the \code{data_product}}
 
 \item{\code{component_url}}{a \code{string} specifying the URL of an entry in the
 \code{object_component} table}

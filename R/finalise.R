@@ -23,17 +23,24 @@ finalise <- function(handle, endpoint) {
 
     # rename the data product as {hash}.h5 -----------------------------------
 
-    data_products <- unique(handle$outputs$data_product)
+    data_products <- unique(handle$outputs$use_data_product)
 
     for (i in seq_along(data_products)) {
 
-      index_row <- which(handle$outputs$data_product == data_products[i])
+      index_row <- which(handle$outputs$use_data_product == data_products[i])
       this_write <- handle$outputs[index_row, ]
-      this_namespace <- unique(this_write$use_namespace)
-      this_version <- unique(this_write$use_version)
-
-      # Get file path
+      write_data_product <- data_products[i]
+      write_namespace <- unique(this_write$use_namespace)
+      write_version <- unique(this_write$use_version)
+      write_namespace_url <- new_namespace(name = write_namespace,
+                                           full_name = write_namespace,
+                                           endpoint = endpoint)
       path <- unique(this_write$path)
+
+      # Get data product description (from config.yaml)
+      index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
+        write_data_product == x$data_product)))
+      description <- handle$yaml$write[[index_dp]]$description
 
       # Rename file
       if (file.exists(path)) {
@@ -50,12 +57,64 @@ finalise <- function(handle, endpoint) {
           usethis::ui_stop("File is missing")
       }
 
+      # Record file location in data registry
+      storage_location <- gsub(datastore, "", path)
+      storage_exists <- get_url("storage_location",
+                                list(hash = hash,
+                                     # public = public,
+                                     storage_root = datastore_root_id),
+                                endpoint = endpoint)
+
+      # If a file with the same hash already exists, delete this one
+      if (is.null(storage_exists)) {
+        storage_location_url <- new_storage_location(
+          path = storage_location,
+          hash = hash,
+          # public = public,
+          storage_root_url = datastore_root_url,
+          endpoint = endpoint)
+
+      } else {
+        storage_location_url <- storage_exists
+        file.remove(new_path)
+      }
+
+      extension <- strsplit(path, "\\.")[[1]][2]
+
+      file_type_exists <- get_url(table = "file_type",
+                                  query = list(extension = extension),
+                                  endpoint = endpoint)
+
+      if (is.null(file_type_exists)) {
+        file_type_url <- new_file_type(name = extension,
+                                       extension = extension,
+                                       endpoint = endpoint)
+      } else {
+        file_type_url <- file_type_exists
+      }
+
+      object_url <- new_object(storage_location_url = storage_location_url,
+                               description = description,
+                               file_type_url = file_type_url,
+                               endpoint = endpoint)
+
+      # Register data product in local registry
+      data_product_url <- new_data_product(name = write_data_product,
+                                          version = write_version,
+                                          object_url = object_url,
+                                          namespace_url = write_namespace_url,
+                                          endpoint = endpoint)
+
+      usethis::ui_done(paste("Writing", usethis::ui_value(write_data_product),
+                             "to local registry"))
+
       # Update handle
-      handle$finalise_output_hash(use_data_product = data_products[i],
-                                  use_namespace = this_namespace,
-                                  use_version = this_version,
+      handle$finalise_output_hash(use_data_product = write_data_product,
+                                  use_namespace = write_namespace,
+                                  use_version = write_version,
                                   hash = hash,
-                                  new_path = new_path)
+                                  new_path = new_path,
+                                  data_product_url = object_url)
     }
 
     # Register entries in local registry
@@ -64,82 +123,16 @@ finalise <- function(handle, endpoint) {
 
       # Get metadata
       this_write <- handle$outputs[j, ]
-      this_data_product <- this_write$data_product
       write_data_product <- this_write$use_data_product
       write_component <- this_write$use_component
       write_version <- this_write$use_version
-      write_namespace <- this_write$use_namespace
-      write_namespace_url <- new_namespace(name = write_namespace,
-                                           full_name = write_namespace,
-                                           endpoint = endpoint)
-
-      # Check whether the data product has been registered on a previous loop
-      # iteration
-      if (!this_write$registered_data_product) {
-
-        # Get data product description (from config.yaml)
-        index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
-          this_data_product == x$data_product)))
-        description <- handle$yaml$write[[index_dp]]$description
-
-        # Record file location in data registry
-        storage_location <- gsub(datastore, "", this_write$path)
-        storage_exists <- get_url("storage_location",
-                                  list(hash = hash,
-                                       # public = public,
-                                       storage_root = datastore_root_id),
-                                  endpoint = endpoint)
-
-        if (is.null(storage_exists)) {
-          storage_location_url <- new_storage_location(
-            path = storage_location,
-            hash = hash,
-            # public = public,
-            storage_root_url = datastore_root_url,
-            endpoint = endpoint)
-
-        } else {
-          storage_location_url <- storage_exists
-        }
-
-        extension <- strsplit(this_write$path, "\\.")[[1]][2]
-
-        file_type_exists <- get_url(table = "file_type",
-                                    query = list(extension = extension),
-                                    endpoint = endpoint)
-
-        if (is.null(file_type_exists)) {
-          file_type_url <- new_file_type(name = extension,
-                                         extension = extension,
-                                         endpoint = endpoint)
-        } else {
-          file_type_url <- file_type_exists
-        }
-
-        object_url <- new_object(storage_location_url = storage_location_url,
-                                 description = description,
-                                 file_type_url = file_type_url,
-                                 endpoint = endpoint)
-
-        # Register data product in local registry
-        dataproduct_url <- new_data_product(name = write_data_product,
-                                            version = write_version,
-                                            object_url = object_url,
-                                            namespace_url = write_namespace_url,
-                                            endpoint = endpoint)
-
-        usethis::ui_done(paste("Writing", usethis::ui_value(this_data_product),
-                               "to local registry"))
-
-      } else {
-        write_component <- this_write$use_component
-        object_url <- this_write$data_product_url
-      }
+      object_url <- this_write$data_product_url
+      object_id <- extract_id(object_url)
 
       # Register component in local registry
       if (is.na(write_component)) {
         component_url <- get_url(table = "object_component",
-                                 query = list(object = extract_id(object_url)),
+                                 query = list(object = object_id),
                                  endpoint = endpoint)
         assertthat::assert_that(length(component_url) == 1)
 
@@ -152,7 +145,6 @@ finalise <- function(handle, endpoint) {
       # Update handle
       handle$finalise_output_url(use_data_product = write_data_product,
                                  use_component = write_component,
-                                 data_product_url = object_url,
                                  component_url = component_url)
 
       usethis::ui_done(paste("Writing", usethis::ui_value(write_component),

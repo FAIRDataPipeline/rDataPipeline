@@ -307,6 +307,8 @@ fdp <- R6::R6Class("fdp", list(
   #' @param hash a \code{string} specifying the hash of the file
   #' @param new_path a \code{string} specifying the updated location (filename
   #' is now the hash of the file) of the data product in the local data store
+  #' @param data_product_url a \code{string} specifying the URL of an
+  #' \code{object} associated with the \code{data_product}
   #'
   #' @return Returns an updated \code{fdp} object
   #'
@@ -314,7 +316,8 @@ fdp <- R6::R6Class("fdp", list(
                                   use_version,
                                   use_namespace,
                                   hash,
-                                  new_path) {
+                                  new_path,
+                                  data_product_url) {
 
     index <- which(self$outputs$use_data_product == use_data_product &
                      self$outputs$use_namespace == use_namespace &
@@ -326,6 +329,7 @@ fdp <- R6::R6Class("fdp", list(
     } else {
       self$outputs$hash[index] <- hash
       self$outputs$path[index] <- new_path
+      self$outputs$data_product_url[index] <- data_product_url
     }
 
     invisible(self)
@@ -338,8 +342,6 @@ fdp <- R6::R6Class("fdp", list(
   #' product, used as output in the \code{code_run}
   #' @param use_component a \code{string} specifying the name of the data
   #' product component, used as output in the \code{code_run}
-  #' @param data_product_url a \code{string} specifying the URL of an
-  #' \code{object} associated with the \code{data_product}
   #' @param component_url a \code{string} specifying the URL of an entry in the
   #' \code{object_component} table
   #'
@@ -347,7 +349,6 @@ fdp <- R6::R6Class("fdp", list(
   #'
   finalise_output_url = function(use_data_product,
                                  use_component,
-                                 data_product_url,
                                  component_url) {
 
     # Update handle with component URL
@@ -360,19 +361,6 @@ fdp <- R6::R6Class("fdp", list(
     }
 
     self$outputs$component_url[index] <- component_url
-
-    # If a data product URL is already in the handle, check it matches
-    if (!is.na(self$outputs$data_product_url) &&
-        self$outputs$data_product_url != data_product_url)
-      stop("Something went wrong")
-
-    # Update handle with data product URL
-    index_data_products <- which(self$outputs$use_data_product %in%
-                                   use_data_product)
-    self$outputs$data_product_url[index_data_products] <- data_product_url
-
-    # Update handle with flag to show data product has already been registered
-    self$outputs$registered_data_product[index_data_products] <- TRUE
 
     invisible(self)
   }
