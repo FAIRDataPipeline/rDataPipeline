@@ -37,6 +37,7 @@ finalise <- function(handle, endpoint) {
                                            full_name = write_namespace,
                                            endpoint = endpoint)
       path <- unique(this_write$path)
+      public <- this_write$public
 
       if (grepl("\\$\\{\\{DPAPI.RUN_ID\\}\\}", write_use_data_product)) {
         this_coderun <- get_entity(handle$code_run)
@@ -61,7 +62,7 @@ finalise <- function(handle, endpoint) {
       # Does a file with the same hash already exist in the registry?
       storage_exists <- get_url("storage_location",
                                 list(hash = hash,
-                                     # public = public,
+                                     public = public,
                                      storage_root = datastore_root_id),
                                 endpoint = endpoint)
 
@@ -78,7 +79,7 @@ finalise <- function(handle, endpoint) {
         storage_location_url <- new_storage_location(
           path = new_storage_location,
           hash = hash,
-          # public = public,
+          public = public,
           storage_root_url = datastore_root_url,
           endpoint = endpoint)
 
