@@ -29,7 +29,8 @@ finalise <- function(handle, endpoint) {
 
       index_row <- which(handle$outputs$use_data_product == data_products[i])
       this_write <- handle$outputs[index_row, ]
-      write_data_product <- data_products[i]
+      write_data_product <- this_write$data_product
+      write_use_data_product <- this_write$use_data_product
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
       write_namespace_url <- new_namespace(name = write_namespace,
@@ -108,17 +109,17 @@ finalise <- function(handle, endpoint) {
                                endpoint = endpoint)
 
       # Register data product in local registry
-      data_product_url <- new_data_product(name = write_data_product,
+      data_product_url <- new_data_product(name = write_use_data_product,
                                            version = write_version,
                                            object_url = object_url,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      usethis::ui_done(paste("Writing", usethis::ui_value(write_data_product),
+      usethis::ui_done(paste("Writing", usethis::ui_value(write_use_data_product),
                              "to local registry"))
 
       # Update handle
-      handle$finalise_output_hash(use_data_product = write_data_product,
+      handle$finalise_output_hash(use_data_product = write_use_data_product,
                                   use_namespace = write_namespace,
                                   use_version = write_version,
                                   hash = hash,
@@ -132,7 +133,7 @@ finalise <- function(handle, endpoint) {
 
       # Get metadata
       this_write <- handle$outputs[j, ]
-      write_data_product <- this_write$use_data_product
+      write_use_data_product <- this_write$use_data_product
       write_component <- this_write$use_component
       write_version <- this_write$use_version
       object_url <- this_write$data_product_url
@@ -152,7 +153,7 @@ finalise <- function(handle, endpoint) {
       }
 
       # Update handle
-      handle$finalise_output_url(use_data_product = write_data_product,
+      handle$finalise_output_url(use_data_product = write_use_data_product,
                                  use_component = write_component,
                                  component_url = component_url)
 
