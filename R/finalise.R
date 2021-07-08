@@ -77,6 +77,11 @@ finalise <- function(handle, endpoint) {
       } else {
         storage_location_url <- storage_exists
         file.remove(new_path)
+        tmp <- get_entity(storage_location_url)
+        existing_path <- tmp$path
+        existing_root <- get_entity(tmp$storage_root)$root
+        replacement_path <- paste0(existing_root, existing_path)
+        new_path <- replacement_path
       }
 
       extension <- strsplit(path, "\\.")[[1]][2]
