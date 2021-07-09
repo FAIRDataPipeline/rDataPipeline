@@ -10,7 +10,7 @@ resolve_write <- function(handle, data_product, file_type) {
   datastore <- handle$yaml$run_metadata$write_data_store
 
   # Check data product name isn't too long
-  tmp <- get_fields("data_product")
+  tmp <- get_fields("data_product", endpoint = endpoint)
   index <- which(tmp$field == "name")
   data_product_fields <- tmp[index, ]
   max_length_name <- data_product_fields$max_length

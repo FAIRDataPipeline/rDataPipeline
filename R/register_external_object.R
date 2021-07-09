@@ -54,7 +54,8 @@ register_external_object <- function(yaml,
 
   # Add local data store root to the data registry
   datastore_root_url <- new_storage_root(root = datastore,
-                                         local = TRUE)
+                                         local = TRUE,
+                                         endpoint = endpoint)
 
   file_path <- file.path(namespace, register_this$external_object,
                          new_filename)
@@ -129,7 +130,8 @@ register_external_object <- function(yaml,
     # Register external object ------------------------------------------------
 
     filetype_exists <- get_url("file_type",
-                               list(extension = register_this$file_type))
+                               list(extension = register_this$file_type),
+                               endpoint = endpoint)
 
     if (is.null(filetype_exists)) {
       filetype_url <- new_file_type(name = register_this$file_type,
