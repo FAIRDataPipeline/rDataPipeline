@@ -24,9 +24,10 @@ initialise <- function(config, script, endpoint) {
   # Record config.yaml location in data registry ----------------------------
 
   datastore_root <- yaml$run_metadata$write_data_store
-  config_storageroot_id <- new_storage_root(root = datastore_root,
-                                            local = TRUE,
-                                            endpoint = endpoint)
+  config_storageroot_url <- new_storage_root(root = datastore_root,
+                                         local = TRUE,
+                                         endpoint = endpoint)
+  config_storageroot_id <- extract_id(config_storageroot_url)
 
   config_hash <- get_file_hash(config)
 
@@ -41,7 +42,7 @@ initialise <- function(config, script, endpoint) {
       path = config,
       hash = config_hash,
       public = TRUE,
-      storage_root_url = config_storageroot_id,
+      storage_root_url = config_storageroot_url,
       endpoint = endpoint)
 
   } else {
@@ -74,6 +75,7 @@ initialise <- function(config, script, endpoint) {
 
   # Record submission script location in data registry ----------------------
 
+  script_storageroot_url <- config_storageroot_url
   script_storageroot_id <- config_storageroot_id
 
   script_hash <- get_file_hash(script)
@@ -89,7 +91,7 @@ initialise <- function(config, script, endpoint) {
       path = script,
       hash = script_hash,
       public = TRUE,
-      storage_root_url = script_storageroot_id,
+      storage_root_url = script_storageroot_url,
       endpoint = endpoint)
 
   } else {
@@ -124,6 +126,7 @@ initialise <- function(config, script, endpoint) {
                                            local = FALSE,
                                            endpoint = endpoint)
   repo_storageroot_id <- extract_id(repo_storageroot_url)
+
   sha <- yaml$run_metadata$latest_commit
   repo_name <- yaml$run_metadata$remote_repo
 
