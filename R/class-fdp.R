@@ -194,8 +194,7 @@ fdp <- R6::R6Class("fdp", list(
                              public = logical(),
                              hash = character(),
                              data_product_url = character(),
-                             component_url = character(),
-                             registered_data_product = logical())
+                             component_url = character())
     } else {
       existing <- self$outputs
     }
@@ -211,8 +210,7 @@ fdp <- R6::R6Class("fdp", list(
                       public = public,
                       hash = NA,
                       data_product_url = NA,
-                      component_url = NA,
-                      registered_data_product = FALSE)
+                      component_url = NA)
     self$outputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -313,6 +311,7 @@ fdp <- R6::R6Class("fdp", list(
   #' @return Returns an updated \code{fdp} object
   #'
   finalise_output_hash = function(use_data_product,
+                                  use_data_product_runid,
                                   use_version,
                                   use_namespace,
                                   hash,
@@ -327,6 +326,7 @@ fdp <- R6::R6Class("fdp", list(
       stop("Handle not updated")
 
     } else {
+      self$outputs$use_data_product[index] <- use_data_product_runid
       self$outputs$hash[index] <- hash
       self$outputs$path[index] <- new_path
       self$outputs$data_product_url[index] <- data_product_url

@@ -28,24 +28,28 @@ finalise <- function(handle, endpoint) {
     for (i in seq_along(data_products)) {
 
       index_row <- which(handle$outputs$use_data_product == data_products[i])
+      if (length(index_row) == 0) next
+
       this_write <- handle$outputs[index_row, ]
-      write_data_product <- this_write$data_product
-      write_use_data_product <- this_write$use_data_product
+      write_data_product <- unique(this_write$data_product)
+      write_use_data_product <- unique(this_write$use_data_product)
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace,
                                            endpoint = endpoint)
       path <- unique(this_write$path)
-      public <- this_write$public
+      public <- unique(this_write$public)
 
       if (grepl("\\$\\{\\{DPAPI.RUN_ID\\}\\}", write_use_data_product)) {
         this_coderun <- get_entity(handle$code_run)
         uuid <- this_coderun$uuid
 
-        write_use_data_product <- gsub("\\$\\{\\{DPAPI.RUN_ID\\}\\}",
+        use_data_product_runid <- gsub("\\$\\{\\{DPAPI.RUN_ID\\}\\}",
                                        uuid,
                                        write_use_data_product)
+      } else {
+        use_data_product_runid <- write_use_data_product
       }
 
       # Get data product description (from config.yaml)
@@ -119,17 +123,18 @@ finalise <- function(handle, endpoint) {
                                endpoint = endpoint)
 
       # Register data product in local registry
-      data_product_url <- new_data_product(name = write_use_data_product,
+      data_product_url <- new_data_product(name = use_data_product_runid,
                                            version = write_version,
                                            object_url = object_url,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      usethis::ui_done(paste("Writing", usethis::ui_value(write_use_data_product),
+      usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
                              "to local registry"))
 
       # Update handle
       handle$finalise_output_hash(use_data_product = write_use_data_product,
+                                  use_data_product_runid = use_data_product_runid,
                                   use_namespace = write_namespace,
                                   use_version = write_version,
                                   hash = hash,

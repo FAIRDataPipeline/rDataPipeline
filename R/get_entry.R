@@ -20,7 +20,10 @@ get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
   if (is.list(query) && length(query) == 0)
     stop("a query must be defined")
 
-  is_queryable(table = table, query = query, endpoint = endpoint)
+  is_queryable(table = table,
+               query = query,
+               method = "GET",
+               endpoint = endpoint)
 
   api_url <- paste0(endpoint, table)
   api_url <- file.path(dirname(api_url), basename(api_url), "")

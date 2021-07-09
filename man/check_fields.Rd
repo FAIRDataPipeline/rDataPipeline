@@ -4,12 +4,14 @@
 \alias{check_fields}
 \title{check_fields}
 \usage{
-check_fields(table, query, endpoint)
+check_fields(table, query, method, endpoint)
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}
 
 \item{query}{a \code{list} containing the query}
+
+\item{method}{a \code{string} specifying the method, c("GET", "POST")}
 
 \item{endpoint}{endpoint}
 }
