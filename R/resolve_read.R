@@ -77,7 +77,14 @@ resolve_read <- function(handle, data_product, component = NA) {
   this_entry <- get_entry("data_product",
                           list(name = data_product,
                                version = version,
-                               namespace = namespace_id))
+                               namespace = namespace_id),
+                          endpoint = endpoint)
+
+  if (is.null(this_entry))
+    usethis::ui_stop(paste0(usethis::ui_field(namespace), ":",
+                           usethis::ui_field(data_product), "@v.",
+                           usethis::ui_field(version), " ",
+                           "missing from data registry"))
 
   # Get data product path
   assertthat::assert_that(length(this_entry) == 1)
@@ -91,11 +98,13 @@ resolve_read <- function(handle, data_product, component = NA) {
   if (is.na(component)) {
     component_url <- get_url("object_component",
                              list(object = this_object_id,
-                                  whole_object = TRUE))
+                                  whole_object = TRUE),
+                             endpoint = endpoint)
   } else {
     component_url <- get_url("object_component",
                              list(object = this_object_id,
-                                  name = component))
+                                  name = component),
+                             endpoint = endpoint)
   }
 
   assertthat::assert_that(length(component_url) == 1)
