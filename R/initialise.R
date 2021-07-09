@@ -25,8 +25,8 @@ initialise <- function(config, script, endpoint) {
 
   datastore_root <- yaml$run_metadata$write_data_store
   config_storageroot_url <- new_storage_root(root = datastore_root,
-                                         local = TRUE,
-                                         endpoint = endpoint)
+                                             local = TRUE,
+                                             endpoint = endpoint)
   config_storageroot_id <- extract_id(config_storageroot_url)
 
   config_hash <- get_file_hash(config)
@@ -153,8 +153,8 @@ initialise <- function(config, script, endpoint) {
     assertthat::assert_that(length(coderepo_exists) == 1)
     coderepo_location_id <- coderepo_exists
     obj_exists <- get_url(table = "object",
-                          query = list(storage_location = coderepo_location_id,
-                                       endpoint = endpoint))
+                          query = list(storage_location = coderepo_location_id),
+                          endpoint = endpoint)
 
     if (is.null(obj_exists)) {
       coderepo_object_url <- new_object(
