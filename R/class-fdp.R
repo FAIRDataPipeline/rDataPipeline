@@ -298,6 +298,9 @@ fdp <- R6::R6Class("fdp", list(
   #'
   #' @param use_data_product a \code{string} specifying the name of the data
   #' product, used as output in the \code{code_run}
+  #' @param use_data_product_runid a \code{string} specifying the name of the
+  #' data product, the same as \code{use_data_product} excluding the RUN_ID
+  #' variable
   #' @param use_version a \code{string} specifying the name of the data
   #' product version, used as output in the \code{code_run}
   #' @param use_namespace a \code{string} specifying the namespace in which

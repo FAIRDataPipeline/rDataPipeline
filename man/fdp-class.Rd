@@ -275,8 +275,8 @@ Returns an updated \code{fdp} object
 Record file hash and update path name in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_hash(
-  data_product,
   use_data_product,
+  use_data_product_runid,
   use_version,
   use_namespace,
   hash,
@@ -288,11 +288,12 @@ Record file hash and update path name in \code{fdp} object
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data_product}}{a \code{string} specifying the name of the data
-product, used as a reference}
-
 \item{\code{use_data_product}}{a \code{string} specifying the name of the data
 product, used as output in the \code{code_run}}
+
+\item{\code{use_data_product_runid}}{a \code{string} specifying the name of the
+data product, the same as \code{use_data_product} excluding the RUN_ID
+variable}
 
 \item{\code{use_version}}{a \code{string} specifying the name of the data
 product version, used as output in the \code{code_run}}
