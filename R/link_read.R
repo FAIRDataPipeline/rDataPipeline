@@ -21,6 +21,13 @@ link_read <- function(handle, data_product) {
     }
   }
 
+  # If data_product is missing from config file, return an error
+  list_reads <- lapply(handle$yaml$read, function(x) x$data_product) %>% unlist()
+  missing_from_config <- !(data_product %in% list_reads)
+  if (missing_from_config)
+    usethis::ui_stop(paste(usethis::ui_field(data_product),
+                           "missing from config file"))
+
   # Get data_product metadata
   tmp <- resolve_read(handle, data_product)
   read_dataproduct <- tmp$data_product
