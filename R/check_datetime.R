@@ -10,7 +10,7 @@ check_datetime <- function(table,
                            query_class,
                            this_query) {
 
-  if (query_class %in% "POSIXct") {
+  if (any(query_class %in% "POSIXct")) {
     return(TRUE)
 
   } else if (is.character(this_query)) {
