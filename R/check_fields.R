@@ -24,6 +24,7 @@ check_fields <- function(table, query, method, endpoint) {
     this_type <- expected_types[x]
     this_query <- query[[x]]
     query_class <- class(this_query)
+
     if (is.list(query_class))
       query_class <- class(query_class[[1]])
 
