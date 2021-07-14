@@ -13,7 +13,7 @@ data_product <- paste("findme/test/array", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- "config_files/raise_issue/config1.yaml"
+config_file <- paste0("config_files/raise_issue/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
@@ -68,7 +68,7 @@ data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- "config_files/raise_issue/config2.yaml"
+config_file <- paste0("config_files/raise_issue/config2_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
@@ -122,7 +122,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- "config_files/raise_issue/config3.yaml"
+config_file <- paste0("config_files/raise_issue/config3_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
@@ -189,7 +189,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- "config_files/raise_issue/config4.yaml"
+config_file <- paste0("config_files/raise_issue/config4_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
@@ -259,7 +259,7 @@ data_product <- paste("findme/test/array5-one", uid, sep = "_")
 data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
 # User written config file
-config_file <- "config_files/raise_issue/config5.yaml"
+config_file <- paste0("config_files/raise_issue/config5_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
@@ -322,7 +322,7 @@ finalise(handle, endpoint)
 # Test writing issues to multiple objects by index ------------------------
 
 # User written config file
-config_file <- "config_files/raise_issue/config6.yaml"
+config_file <- paste0("config_files/raise_issue/config6_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,

@@ -9,7 +9,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- "config_files/write_estimate/config.yaml"
+config_file <- paste0("config_files/write_estimate/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -43,3 +43,4 @@ test_that("function behaves as it should", {
 
   expect_true(configr::is.toml.file(path))
 })
+

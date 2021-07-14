@@ -20,7 +20,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config.yaml"
+config_file <- paste0("config_files/read_array/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -64,7 +64,7 @@ finalise(handle, endpoint)
 # Write test/array v.0.2.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config2.yaml"
+config_file <- paste0("config_files/read_array/config2_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -104,7 +104,7 @@ finalise(handle, endpoint)
 # Write test/array v.0.1.0 'johnsmith' namespace --------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config3.yaml"
+config_file <- paste0("config_files/read_array/config3_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace2,
@@ -144,7 +144,7 @@ finalise(handle, endpoint)
 # Write test/array2 v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config4.yaml"
+config_file <- paste0("config_files/read_array/config4_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -184,7 +184,7 @@ finalise(handle, endpoint)
 # Multiple components -----------------------------------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config5.yaml"
+config_file <- paste0("config_files/read_array/config5_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -229,7 +229,7 @@ finalise(handle, endpoint)
 # Test use block ----------------------------------------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config6.yaml"
+config_file <- paste0("config_files/read_array/config6_", uid , ".yaml")
 
 write_config(path = config_file,
              description = coderun_description,
@@ -311,7 +311,7 @@ test_that("df2 is returned", {
 # Test multiple components ------------------------------------------------
 
 # User written config file
-config_file <- "config_files/read_array/config7.yaml"
+config_file <- paste0("config_files/read_array/config7_", uid , ".yaml")
 
 write_config(path = config_file,
              description = coderun_description,

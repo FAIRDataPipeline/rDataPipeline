@@ -11,7 +11,7 @@ version1 <- "0.1.0"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- "config_files/write_table/config.yaml"
+config_file <- paste0("config_files/write_table/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
