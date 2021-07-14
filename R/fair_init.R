@@ -32,7 +32,7 @@ fair_init <- function(family_name,
                              endpoint = endpoint)
   }
 
-  if (missing(ror)) {
+  if (missing(identifier)) {
     organisation_urls <- lapply(organisation, function(x)
       new_organisation(name = x,
                        endpoint = endpoint))
