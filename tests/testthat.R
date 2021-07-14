@@ -8,6 +8,7 @@ Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
 # testthat::test_check("rFDP")
 
 endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 rFDP::fair_init(family_name = "Mitchell",
                 given_name = "Sonia",
