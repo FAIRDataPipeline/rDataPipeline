@@ -54,7 +54,7 @@ resolve_write <- function(handle, data_product, file_type) {
   }
 
   # Get public flag
-  public <- this_dp$public
+  public <- this_dp$use$public
 
   if (public == "true") {
     public <- TRUE
