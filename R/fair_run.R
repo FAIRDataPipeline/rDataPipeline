@@ -94,7 +94,7 @@ fair_run <- function(path = "config.yaml",
             version <- register[[x]]$version
           }
 
-          read[[index]]$version <- version
+          read[[index]]$use$version <- version
         }
       }
     }
