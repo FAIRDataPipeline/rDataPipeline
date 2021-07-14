@@ -26,6 +26,9 @@ working config.yaml}
 the \code{object} table associated with the \code{storage_location} of the
 submission script}
 
+\item{\code{code_repo}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the GitHub repository}
+
 \item{\code{code_run}}{a \code{string} specifying the URL of an entry in
 the \code{code_run} table}
 
@@ -57,7 +60,7 @@ the \code{code_run} table}
 \subsection{Method \code{new()}}{
 Create a new \code{fdp} object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script, code_run)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script, code_repo, code_run)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -73,6 +76,9 @@ working config.yaml}
 \item{\code{submission_script}}{a \code{string} specifying the URL of an entry in
 the \code{object} table associated with the \code{storage_location} of the
 submission script}
+
+\item{\code{code_repo}}{a \code{string} specifying the URL of an entry in
+the \code{object} table associated with the GitHub repository}
 
 \item{\code{code_run}}{a \code{string} specifying the URL of an entry in
 the \code{code_run} table}
@@ -233,6 +239,7 @@ Record \code{issue} in \code{fdp} object
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$raise_issue(
   index,
+  type,
   use_data_product,
   use_component,
   use_version,
@@ -247,6 +254,9 @@ Record \code{issue} in \code{fdp} object
 \describe{
 \item{\code{index}}{a \code{numeric} index, used to identify each input and
 output in the \code{fdp} object}
+
+\item{\code{type}}{a \code{string} specifying the type of issue (one of
+"data", "config", "script", "repo")}
 
 \item{\code{use_data_product}}{a \code{string} specifying the name of the data
 product, used as output in the \code{code_run}}
