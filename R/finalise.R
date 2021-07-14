@@ -262,7 +262,7 @@ finalise <- function(handle) {
     # Attach issues to components ---------------------------------------------
 
     component_issues <- handle$issues %>%
-      dplyr::filter(type == "data",
+      dplyr::filter(.data$type == "data",
                     !is.na(.data$use_component))
 
     if (nrow(component_issues) != 0) {
@@ -282,7 +282,7 @@ finalise <- function(handle) {
     # Attach issues to data product -------------------------------------------
 
     dataproduct_issues <- handle$issues %>%
-      dplyr::filter(type == "data",
+      dplyr::filter(.datatype == "data",
                     is.na(.data$use_component))
 
     if (nrow(dataproduct_issues) != 0) {
