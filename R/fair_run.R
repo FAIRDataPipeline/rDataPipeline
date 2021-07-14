@@ -197,7 +197,7 @@ fair_run <- function(path = "config.yaml",
           tmp[[1]]$patch <- as.integer(patch + 1)
           write_version <- as.character(tmp)
         }
-        write[[i]]$version <- write_version # version should be here
+        write[[i]]$use$version <- write_version # version should be here
       }
 
       # If a data product already exists with the same name, version, and
