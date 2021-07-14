@@ -31,6 +31,7 @@ raise_issue <- function(index,
         this_component <- component[j]
 
         handle$raise_issue(index = index,
+                           type = "data",
                            use_data_product = this_data_product,
                            use_component = this_component,
                            use_version = use_version,
@@ -72,6 +73,7 @@ raise_issue <- function(index,
       use_namespace <- tmp$use_namespace
 
       handle$raise_issue(index = this_index,
+                         type = "data",
                          use_data_product = use_data_product,
                          use_component = use_component,
                          use_version = use_version,
