@@ -17,4 +17,15 @@ check_yaml_write <- function(handle, data_product, endpoint) {
   if (!data_product %in% listed)
     usethis::ui_stop(paste(usethis::ui_field(data_product),
                            "not listed in config.yaml"))
+
+  # Check data product name isn't too long
+  tmp <- get_fields("data_product",
+                    endpoint = endpoint)
+  index <- which(tmp$field == "name")
+  data_product_fields <- tmp[index, ]
+  max_length_name <- data_product_fields$max_length
+  if (nchar(data_product) > max_length_name)
+    usethis::ui_stop(paste(usethis::ui_field(data_product),
+                           "must be",
+                           max_length_name, "characters or less"))
 }
