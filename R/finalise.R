@@ -199,18 +199,78 @@ finalise <- function(handle) {
 
   if (!is.null(issues)) {
 
+    # Attach issues to config -------------------------------------------------
+
+    config_issues <- handle$issues %>%
+      dplyr::filter(type == "config")
+
+    if (nrow(config_issues) != 0) {
+      for (k in seq_len(nrow(config_issues))) {
+
+        this_issue <- config_issues[k, ]
+        register_issue_script(handle = handle,
+                              this_issue = this_issue,
+                              type = "config")
+
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_data_product),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
+    # Attach issues to script -------------------------------------------------
+
+    script_issues <- handle$issues %>%
+      dplyr::filter(type == "script")
+
+    if (nrow(script_issues) != 0) {
+      for (k in seq_len(nrow(script_issues))) {
+
+        this_issue <- script_issues[k, ]
+        register_issue_script(handle = handle,
+                              this_issue = this_issue,
+                              type = "script")
+
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_data_product),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
+    # Attach issues to repo -------------------------------------------------
+
+    repo_issues <- handle$issues %>%
+      dplyr::filter(type == "repo")
+
+    if (nrow(repo_issues) != 0) {
+      for (k in seq_len(nrow(repo_issues))) {
+
+        this_issue <- repo_issues[k, ]
+        register_issue_script(handle = handle,
+                              this_issue = this_issue,
+                              type = "repo")
+
+        usethis::ui_done(paste("Writing",
+                               usethis::ui_value(this_issue$use_data_product),
+                               usethis::ui_field("issue"),
+                               "to local registry"))
+      }
+    }
+
     # Attach issues to components ---------------------------------------------
 
     component_issues <- handle$issues %>%
-      dplyr::filter(!is.na(.data$use_component))
+      dplyr::filter(type == "data",
+                    !is.na(.data$use_component))
 
     if (nrow(component_issues) != 0) {
       for (k in seq_len(nrow(component_issues))) {
 
         this_issue <- component_issues[k, ]
         register_issue_dataproduct(handle = handle,
-                                   this_issue = this_issue,
-                                   endpoint = endpoint)
+                                   this_issue = this_issue)
 
         usethis::ui_done(paste("Writing",
                                usethis::ui_value(this_issue$use_component),
@@ -219,10 +279,11 @@ finalise <- function(handle) {
       }
     }
 
-    # Attach issues to data product
+    # Attach issues to data product -------------------------------------------
 
     dataproduct_issues <- handle$issues %>%
-      dplyr::filter(is.na(.data$use_component))
+      dplyr::filter(type == "data",
+                    is.na(.data$use_component))
 
     if (nrow(dataproduct_issues) != 0) {
       for (k in seq_len(nrow(dataproduct_issues))) {
