@@ -4,13 +4,13 @@
 \alias{new_organisation}
 \title{Post entry to organisation table}
 \usage{
-new_organisation(name, ror, endpoint = "http://localhost:8000/api/")
+new_organisation(name, identifier, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
 \item{name}{a \code{string} specifying the name of the \code{organisation}}
 
-\item{ror}{(optional) a unique 9-character \code{string} representing the
-ROR ID of the \code{organisation} (https://ror.org)}
+\item{identifier}{(optional) a \code{string} representing
+the organisation identifier URL, \emph{e.g.} ROR ID}
 
 \item{endpoint}{a \code{string} specifying the registry endpoint}
 }
@@ -34,6 +34,7 @@ Other new functions:
 \code{\link{new_object}()},
 \code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()}
+\code{\link{new_storage_root}()},
+\code{\link{new_user_author_org}()}
 }
 \concept{new functions}
