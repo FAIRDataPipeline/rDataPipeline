@@ -14,8 +14,13 @@
 #'
 is_queryable <- function(table, query, method, endpoint) {
 
-  # Check whether field names are valid
+  if (table == "users") {
+    return(NULL)
+  } else if (table == "groups") {
+    usethis::ui_stop("Can't query {ui_field(table)} table")
+  }
 
+  # Check whether field names are valid
   fields <- names(query)
   valid_fields <- all(fields %in%
                         get_table_queryable(table = table,
@@ -29,12 +34,7 @@ is_queryable <- function(table, query, method, endpoint) {
   valid_query <- !(any(valid_query == FALSE))
 
   # Output
-
-  if (table == "users" | table == "groups") {
-    # Only queryable with token
-    usethis::ui_stop("Unable to query {ui_field(table)}")
-
-  } else if (!check_table_exists(table)) {
+  if (!check_table_exists(table)) {
     usethis::ui_stop("{ui_field(table)} does not exist")
 
   } else if (any(is.character(fields) & fields == "")) {
