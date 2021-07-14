@@ -119,86 +119,25 @@ fair_run <- function(path = "config.yaml",
                              usethis::ui_field("data_product"),
                              "entries with the same name"))
 
+    working_write <- list()
+
     for (i in seq_along(write)) {
       this_write <- write[[i]]
+      index <- length(working_write) + 1
+      working_write[[index]] <- this_write
 
-      # Get alias
-      if ("use" %in% names(this_write)) {
-        alias <- this_write$use
-      } else {
-        alias <- list()
-      }
+      tmp_write <- fdp_resolve_write(this_write = this_write,
+                                     yaml = yaml,
+                                     endpoint = endpoint)
 
-      # Get data product
-      if ("data_product" %in% names(alias)) {
-        write_dataproduct <- alias$data_product
-      } else {
-        write_dataproduct <- this_write$data_product
-      }
+      write_dataproduct <- tmp_write$write_dataproduct
+      write_public <- tmp_write$write_public
+      write_version <- tmp_write$write_version
+      write_namespace_id <- tmp_write$write_namespace_id
 
-      # Get namespace
-      if ("namespace" %in% names(alias)) {
-        write_namespace <- alias$namespace
-      } else {
-        write_namespace <- yaml$run_metadata$default_output_namespace
-      }
-
-      write_namespace_url <- new_namespace(name = write_namespace,
-                                           full_name = write_namespace,
-                                           endpoint = endpoint)
-      write_namespace_id <- extract_id(write_namespace_url)
-
-      # Get public flag
-      if ("public" %in% names(this_write)) {
-        write_public <- this_write$public
-      } else {
-        write_public <- "true"
-      }
-
-      if (tolower(write_public) == "true") {
-        write_public <- TRUE
-      } else if (tolower(write_public) == "false") {
-        write_public <- FALSE
-      } else {
-        stop ("public value not recognised")
-      }
-      write[[i]]$use$public <- write_public
-
-      # Get version
-      if ("version" %in% names(this_write)) { # before `use:` block
-        write_version <- resolve_version(version = this_write$version,
-                                         data_product = write_dataproduct,
-                                         namespace_id = write_namespace_id)
-        write[[i]]$use$version <- write_version # version should be here
-        write[[i]]$version <- NULL
-
-      } else if ("version" %in% names(alias)) { # in `use:` block
-        write_version <- resolve_version(version = alias$version,
-                                         data_product = write_dataproduct,
-                                         namespace_id = write_namespace_id)
-        write[[i]]$use$version <- write_version # version should be here
-
-      } else { # version missing
-
-        entries <- get_entry("data_product",
-                             list(name = write_dataproduct,
-                                  namespace = write_namespace_id),
-                             endpoint = endpoint)
-
-        if (is.null(entries)) {
-          write_version <- "0.0.1"
-
-        } else {
-          write_version <- lapply(entries, function(x) x$version) %>%
-            unlist() %>%
-            max()
-          tmp <- semver::parse_version(write_version)
-          patch <- tmp[[1]]$patch
-          tmp[[1]]$patch <- as.integer(patch + 1)
-          write_version <- as.character(tmp)
-        }
-        write[[i]]$use$version <- write_version # version should be here
-      }
+      working_write[[index]]$use$public <- write_public
+      working_write[[index]]$use$version <- write_version
+      working_write[[index]]$version <- NULL
 
       # If a data product already exists with the same name, version, and
       # namespace, throw an error
@@ -208,12 +147,48 @@ fair_run <- function(path = "config.yaml",
                                      namespace = write_namespace_id),
                                 endpoint = endpoint)
 
-      if (!is.null(check_exists))
-        usethis::ui_stop("A data product with the same name ({write_dataproduct}), version ({write_version}), and namespace ({write_namespace}) already exists")
+      if (basename(write_dataproduct) == "*") {
+        data_products <- get_entry(table = "data_product",
+                                   query = list(name = write_dataproduct),
+                                   endpoint = endpoint)
+
+        check_dataproduct_exists(write_dataproduct = write_dataproduct,
+                                 write_version = write_version,
+                                 write_namespace_id = write_namespace_id,
+                                 endpoint = endpoint)
+
+        for (k in seq_along(data_products)) {
+          this_dataproduct <- data_products[[k]]
+          this_subwrite <- this_write
+          this_subwrite$data_product <- this_dataproduct$name
+
+          index <- length(working_write) + 1
+          working_write[[index]] <- this_subwrite
+
+          tmp_subwrite <- fdp_resolve_write(this_write = this_subwrite,
+                                            yaml = yaml,
+                                            endpoint = endpoint)
+
+          subwrite_dataproduct <- tmp_subwrite$write_dataproduct
+          subwrite_public <- tmp_subwrite$write_public
+          subwrite_version <- tmp_subwrite$write_version
+          subwrite_namespace_id <- tmp_subwrite$write_namespace_id
+
+
+          working_write[[index]]$use$public <- subwrite_public
+          working_write[[index]]$use$version <- subwrite_version
+          working_write[[index]]$version <- NULL
+
+          check_dataproduct_exists(write_dataproduct = subwrite_dataproduct,
+                                   write_version = subwrite_version,
+                                   write_namespace_id = subwrite_namespace_id,
+                                   endpoint = endpoint)
+        }
+      }
     }
 
   } else {
-    write <- list()
+    working_write <- list()
   }
 
   # Get latest commit sha ---------------------------------------------------
@@ -274,7 +249,7 @@ fair_run <- function(path = "config.yaml",
   # Generate working config.yaml file
   working_yaml <- list(run_metadata = run_metadata,
                        read = read,
-                       write = write)
+                       write = working_write)
   yaml::write_yaml(working_yaml, file = config_path)
 
   cli::cli_alert_success("Writing working {.file {config_file}} to data store")
