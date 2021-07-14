@@ -4,7 +4,7 @@
 \alias{resolve_write}
 \title{resolve_data_product}
 \usage{
-resolve_write(handle, data_product, file_type)
+resolve_write(handle, data_product, file_type, endpoint)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
@@ -12,6 +12,8 @@ resolve_write(handle, data_product, file_type)
 \item{data_product}{a \code{string} specifying the name of the data product}
 
 \item{file_type}{a \code{string} specifying the file type}
+
+\item{endpoint}{endpoint}
 }
 \description{
 resolve_data_product

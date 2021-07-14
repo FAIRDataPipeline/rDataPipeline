@@ -18,10 +18,10 @@ new_object_author_org(
 \item{author_url}{a \code{string} specifying the URL of an existing
 \code{author}}
 
-\item{organisations_urls}{(optional) a \code{list} of URLs specifying which
-\code{organisation}s to associate with this \code{object_author_org}}
-
 \item{endpoint}{a \code{string} specifying the registry endpoint}
+
+\item{organisations_url}{(optional) a \code{string} specifying the URL of an
+existing \code{organisation} to associate with this \code{object_author_org}}
 }
 \description{
 Upload information to the \code{object_author_org} table in the data registry

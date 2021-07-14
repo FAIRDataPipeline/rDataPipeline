@@ -5,7 +5,7 @@
 #' @param orcid a \code{string} specifying an orcid id URL
 #' @param organisation a \code{string} or vector of \code{strings} specifying
 #' the name of the organisation(s)
-#' @param ror a \code{string} specifying the organisation identifer (ROR ID) URL
+#' @param identifier a \code{string} specifying the organisation identifer (ROR ID) URL
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
@@ -14,7 +14,7 @@ fair_init <- function(family_name,
                       given_name,
                       orcid,
                       organisation,
-                      ror,
+                      identifier,
                       endpoint = "http://localhost:8000/api/") {
 
   user_url <- get_url(table = "users",
@@ -39,7 +39,7 @@ fair_init <- function(family_name,
   } else {
     organisation_urls <- lapply(organisation, function(x)
       new_organisation(name = x,
-                       ror = ror,
+                       identifier = identifier,
                        endpoint = endpoint))
 
   }

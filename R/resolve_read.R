@@ -4,8 +4,9 @@
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying the name of data product
 #' component
+#' @param endpoint endpoint
 #'
-resolve_read <- function(handle, data_product, component = NA) {
+resolve_read <- function(handle, data_product, component = NA, endpoint) {
 
   read <- handle$yaml$read
 
