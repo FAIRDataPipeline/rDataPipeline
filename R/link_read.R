@@ -4,10 +4,11 @@
 #' by the Data Pipeline API
 #' @param data_product a \code{string} representing an external object in the
 #' config.yaml file
+#' @param endpoint endpoint
 #'
 #' @export
 #'
-link_read <- function(handle, data_product) {
+link_read <- function(handle, data_product, endpoint) {
 
   # If the data_product is already recorded in the handle, return the path
   if (!is.null(handle$inputs)) {
@@ -29,7 +30,9 @@ link_read <- function(handle, data_product) {
                            "missing from config file"))
 
   # Get data_product metadata
-  tmp <- resolve_read(handle, data_product)
+  tmp <- resolve_read(handle = handle,
+                      data_product = data_product,
+                      endpoint = endpoint)
   read_dataproduct <- tmp$data_product
   read_component <- tmp$component
   read_component_url <- tmp$component_url
