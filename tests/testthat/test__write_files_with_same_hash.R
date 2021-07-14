@@ -10,6 +10,7 @@ version1 <- "0.1.0"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
@@ -31,13 +32,13 @@ write_dataproduct(path = config_file,
                   file_type = "txt")
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 path1 <- link_write(handle, data_product1)
@@ -46,7 +47,7 @@ cat(uid, file = path1)
 path2 <- link_write(handle, data_product2)
 cat(uid, file = path2)
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Start tests
 data_store <- handle$yaml$run_metadata$write_data_store

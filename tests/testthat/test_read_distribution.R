@@ -21,13 +21,13 @@ write_dataproduct(path = config_file,
                   description = dataproduct_description)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 dat1 <- list(distribution = "Gaussian",
@@ -51,7 +51,7 @@ write_distribution(handle = handle,
                    description = "symptom delay")
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Start tests -------------------------------------------------------------
 
@@ -68,13 +68,13 @@ read_dataproduct(path = config_file,
                  component = component2)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 test_that("function works correctly", {
   tmp <- list(distribution = dat1$distribution,

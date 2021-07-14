@@ -4,12 +4,10 @@
 \alias{fair_pull}
 \title{fair_pull}
 \usage{
-fair_pull(path = "config.yaml", endpoint = "http://localhost:8000/api/")
+fair_pull(path = "config.yaml")
 }
 \arguments{
 \item{path}{path}
-
-\item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
 fair_pull

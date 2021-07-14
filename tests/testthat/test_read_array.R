@@ -31,13 +31,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df_v1 <- data.frame(a = 1:2, b = 3:4)
@@ -59,7 +59,7 @@ write_array(array = as.matrix(df_v1),
             units = units)
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Write test/array v.0.2.0 'username' namespace ---------------------------
 
@@ -75,13 +75,13 @@ write_dataproduct(path = config_file,
                   version = version2)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df_v2 <- data.frame(a = 5:6, b = 7:8)
@@ -99,7 +99,7 @@ write_array(array = as.matrix(df_v2),
             units = "s")
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Write test/array v.0.1.0 'johnsmith' namespace --------------------------
 
@@ -115,13 +115,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df_js <- data.frame(a = 9:10, b = 11:12)
@@ -139,7 +139,7 @@ write_array(array = as.matrix(df_js),
             units = "s")
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Write test/array2 v.0.1.0 'username' namespace ---------------------------
 
@@ -155,13 +155,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df2 <- data.frame(a = 13:14, b = 15:16)
@@ -179,7 +179,7 @@ write_array(array = as.matrix(df2),
             units = "s")
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Multiple components -----------------------------------------------------
 
@@ -195,13 +195,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 comp1 <- data.frame(a = 17:18, b = 19:20)
 rownames(comp1) <-9:10
@@ -224,7 +224,7 @@ write_array(array = as.matrix(comp2),
             dimension_names = dimension_names)
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Test use block ----------------------------------------------------------
 
@@ -263,13 +263,13 @@ read_dataproduct(path = config_file,
                  use_version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Run tests
 test_that("df_v1 is returned", {
@@ -329,13 +329,13 @@ read_dataproduct(path = config_file,
                  use_version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 test_that("component1 is returned", {
 tmp <- read_array(handle = handle,

@@ -27,13 +27,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -60,7 +60,7 @@ write_array(array = as.matrix(df),
             dimension_units = list(NA, "km"),
             units = "s")
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Start tests
 file <- unique(handle$outputs$path)
@@ -87,13 +87,13 @@ write_dataproduct(path = config_file,
                   version = version2)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 write_array(array = as.matrix(df),
@@ -118,7 +118,7 @@ write_array(array = as.matrix(df),
             dimension_units = list(NA, "km"),
             units = "s")
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Start tests
 file <- unique(handle$outputs$path)
@@ -147,38 +147,22 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
 
 # Write data
 component_id <- write_array(array = as.matrix(df),
-            handle = handle,
-            data_product = data_product3,
-            component = component1,
-            description = "Some description",
-            dimension_names = list(rowvalue = rownames(df),
-                                   colvalue = colnames(df)),
-            dimension_values = list(NA, 10),
-            dimension_units = list(NA, "km"),
-            units = "s")
-
-raise_issue(index = component_id,
-            handle = handle,
-            issue = "some issue",
-            severity = 7)
-
-write_array(array = as.matrix(df),
                             handle = handle,
                             data_product = data_product3,
-                            component = component2,
+                            component = component1,
                             description = "Some description",
                             dimension_names = list(rowvalue = rownames(df),
                                                    colvalue = colnames(df)),
@@ -186,7 +170,23 @@ write_array(array = as.matrix(df),
                             dimension_units = list(NA, "km"),
                             units = "s")
 
-finalise(handle, endpoint)
+raise_issue(index = component_id,
+            handle = handle,
+            issue = "some issue",
+            severity = 7)
+
+write_array(array = as.matrix(df),
+            handle = handle,
+            data_product = data_product3,
+            component = component2,
+            description = "Some description",
+            dimension_names = list(rowvalue = rownames(df),
+                                   colvalue = colnames(df)),
+            dimension_values = list(NA, 10),
+            dimension_units = list(NA, "km"),
+            units = "s")
+
+finalise(handle)
 
 # Start tests
 file <- unique(handle$outputs$path)

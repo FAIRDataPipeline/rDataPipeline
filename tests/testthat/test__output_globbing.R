@@ -10,6 +10,7 @@ dataproduct_description <- "A csv file"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 # User written config file
 config_file <- paste0("config_files/outputglobbing/config_", uid , ".yaml")
@@ -27,26 +28,26 @@ write_dataproduct(path = config_file,
                   file_type = "csv")
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
-path1 <- link_write(handle, data_product1, endpoint)
+path1 <- link_write(handle, data_product1)
 uid1 <- paste0(uid, "_1")
 df1 <- data.frame(a = uid1, b = uid1)
 write.csv(df1, path1)
 
-path2 <- link_write(handle, data_product2, endpoint)
+path2 <- link_write(handle, data_product2)
 uid2 <- paste0(uid, "_2")
 df2 <- data.frame(a = uid2, b = uid2)
 write.csv(df2, path2)
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Output globbing ---------------------------------------------------------
 
@@ -66,13 +67,13 @@ write_dataproduct(path = config_file,
                   use_version = use_version)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 test_that("data products recorded in working config",{
   writes <- handle$yaml$write
@@ -89,15 +90,13 @@ data_product4 <- file.path(dirname(data_product3), "new")
 
 # Write data
 path4 <- link_write(handle = handle,
-                    data_product = data_product4,
-                    endpoint = endpoint)
+                    data_product = data_product4)
 uid4 <- paste0(uid, "_1")
 df4 <- data.frame(a = uid4, b = uid4)
 write.csv(df4, path4)
 
 path5 <- link_write(handle = handle,
-                    data_product = data_product2,
-                    endpoint = endpoint)
+                    data_product = data_product2)
 uid5 <- paste0(uid, "_1")
 df5 <- data.frame(a = uid5, b = uid5)
 write.csv(df5, path5)
