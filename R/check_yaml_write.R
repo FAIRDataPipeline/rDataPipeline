@@ -2,8 +2,10 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
+#' @param endpoint endpoint
 #'
-check_yaml_write <- function(handle, data_product) {
+check_yaml_write <- function(handle, data_product, endpoint) {
+
   # Check that `write:` section is listed in config yaml
   if (!"write" %in% names(handle$yaml))
     usethis::ui_stop(paste(usethis::ui_field("write"),
