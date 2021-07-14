@@ -3,16 +3,13 @@
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param file_type a \code{string} specifying the file type
-#' @param endpoint endpoint
 #'
 resolve_write <- function(handle,
                           data_product,
-                          file_type,
-                          endpoint) {
+                          file_type) {
 
   check_yaml_write(handle = handle,
-                   data_product = data_product,
-                   endpoint = endpoint)
+                   data_product = data_product)
 
   datastore <- handle$yaml$run_metadata$write_data_store
 

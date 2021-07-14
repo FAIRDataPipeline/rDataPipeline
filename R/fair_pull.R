@@ -1,22 +1,22 @@
 #' fair_pull
 #'
 #' @param path path
-#' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
 #'
-fair_pull <- function(path = "config.yaml",
-                      endpoint = "http://localhost:8000/api/") {
+fair_pull <- function(path = "config.yaml") {
 
   if (grepl("localhost", endpoint)) run_server()
 
-  # Read config.yaml --------------------------------------------------------
+    # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
     usethis::ui_info(paste("Reading", usethis::ui_value("config.yaml")))
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
+
+  endpoint <- yaml$run_metadata$local_data_registry_url
 
   # Download any data required by `read:` from the remote data store and record
   # metadata in the data registry -------------------------------------------

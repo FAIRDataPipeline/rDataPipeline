@@ -3,13 +3,14 @@
 #' Push metadata to registry
 #'
 #' @param handle \code{fdp} object
-#' @param endpoint endpoint
 #'
 #' @export
 #'
-finalise <- function(handle, endpoint) {
+finalise <- function(handle) {
 
   # record data product metadata in the data registry --------
+
+  endpoint <- handle$yaml$run_metadata$local_data_registry_url
 
   # Add local data store root to the data registry
 

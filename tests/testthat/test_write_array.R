@@ -24,13 +24,13 @@ write_dataproduct(path = config_file,
                   version = version1)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = 1:2, b = 3:4)

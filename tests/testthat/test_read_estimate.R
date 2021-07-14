@@ -25,13 +25,13 @@ write_dataproduct(path = config_file,
                   description = dataproduct_description)
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 value1 <- 192.0
@@ -56,7 +56,7 @@ write_estimate(value =  value3,
                description = "asymptomatic period1")
 
 # Finalise code run
-finalise(handle, endpoint)
+finalise(handle)
 
 # Remove missing_data_product from data store
 index <- which(handle$outputs$data_product == missing_data_product)
@@ -79,12 +79,12 @@ read_dataproduct(path = config_file,
                  data_product = missing_data_product,
                  component = component1)
 
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 test_that("error is thrown when file is missing from data store", {
   testthat::expect_error(

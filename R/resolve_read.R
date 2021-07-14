@@ -8,6 +8,7 @@
 #'
 resolve_read <- function(handle, data_product, component = NA, endpoint) {
 
+  endpoint <- handle$yaml$run_metadata$local_data_registry_url
   read <- handle$yaml$read
 
   # If names(read) is not null, then a single entry has been added that
@@ -83,9 +84,9 @@ resolve_read <- function(handle, data_product, component = NA, endpoint) {
 
   if (is.null(this_entry))
     usethis::ui_stop(paste0(usethis::ui_field(namespace), ":",
-                           usethis::ui_field(data_product), "@v.",
-                           usethis::ui_field(version), " ",
-                           "missing from data registry"))
+                            usethis::ui_field(data_product), "@v.",
+                            usethis::ui_field(version), " ",
+                            "missing from data registry"))
 
   # Get data product path
   assertthat::assert_that(length(this_entry) == 1)

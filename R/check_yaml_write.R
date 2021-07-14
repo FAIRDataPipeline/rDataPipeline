@@ -2,9 +2,10 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
-#' @param endpoint endpoint
 #'
-check_yaml_write <- function(handle, data_product, endpoint) {
+check_yaml_write <- function(handle, data_product) {
+
+  endpoint <- handle$yaml$run_metadata$local_data_registry_url
 
   # Check that `write:` section is listed in config yaml
   if (!"write" %in% names(handle$yaml))

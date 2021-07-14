@@ -30,7 +30,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -86,7 +86,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -139,7 +139,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -206,7 +206,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = uid, b = uid)
@@ -282,7 +282,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 uid <- paste0(uid, 4)
@@ -317,7 +317,7 @@ test_that("handle contains issues block",{
   testthat::expect_equal(unique(handle$issues$severity), severity)
 })
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Test writing issues to multiple objects by index ------------------------
 
@@ -341,7 +341,7 @@ fair_run(config_file, skip = TRUE)
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Read data (write to handle)
 path <- link_read(handle, data_product)

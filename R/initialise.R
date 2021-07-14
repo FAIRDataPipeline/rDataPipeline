@@ -6,17 +6,17 @@
 #' config file in the data store
 #' @param script a \code{string} specifying the location of the submission
 #' script in the data store
-#' @param endpoint endpoint
 #'
 #' @export
 #'
-initialise <- function(config, script, endpoint) {
+initialise <- function(config, script) {
 
   # Read working config.yaml ------------------------------------------------
   if (!file.exists(config)) usethis::ui_stop("{config} doesn't exist.")
   yaml <- yaml::read_yaml(config)
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
+  endpoint <- run_metadata$local_data_registry_url
 
   filename <- basename(config)
   cli::cli_alert_info("Reading {.file {filename}} from data store")

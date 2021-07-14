@@ -33,13 +33,13 @@ write_dataproduct(path = config_file,
                   file_type = "txt")
 
 # CLI functions
-fair_pull(path = config_file, endpoint = endpoint)
-fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-handle <- initialise(config, script, endpoint)
+handle <- initialise(config, script)
 
 # Write data
 path1 <- link_write(handle, data_product1)
@@ -51,7 +51,7 @@ cat(paste0(uid, 2), file = path2)
 path3 <- link_write(handle, data_product3)
 cat(paste0(uid, 3), file = path3)
 
-finalise(handle, endpoint)
+finalise(handle)
 
 # Read with globbing ------------------------------------------------------
 
@@ -71,8 +71,8 @@ finalise(handle, endpoint)
 #                  data_product = data_product1)
 #
 # # CLI functions
-# fair_pull(path = config_file, endpoint = endpoint)
-# fair_run(path = config_file, endpoint = endpoint, skip = TRUE)
+# fair_pull(path = config_file)
+# fair_run(path = config_file, skip = TRUE)
 #
 # # Initialise code run
 # config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
