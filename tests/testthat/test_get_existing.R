@@ -1,34 +1,37 @@
 context("Testing get_existing()")
 
-run_server()
+endpoint <- Sys.getenv("FDP_endpoint")
+if (grepl("localhost", endpoint)) run_server()
 
 # Get all tables
-tables <- get_tables()
+tables <- get_tables(endpoint)
+tables <- setdiff(tables, c("users", "groups"))
 
 # Use a table that has more than 100 entries
-table_100 <- "storage_location"
-
-sleep_time <- 0.5
-
-# Use a sample of tables to prevent api from erroring
-# tables_sample <- tables[sample(length(tables), 3)]
+lapply(1:100, function(x) new_object(description = x,
+                                     endpoint = endpoint))
+table <- "object"
 
 test_that("Expect Dataframe is returned for each table", {
   for(i in seq_along(tables))
-    expect_true(is.data.frame(get_existing(tables[i])))
+    expect_true(is.data.frame(get_existing(table = tables[i],
+                                           endpoint = endpoint)))
 })
 
 test_that("Check errors and messages", {
-  expect_error(get_existing("unknown"))
+  expect_error(get_existing(table = "unknown",
+                            endpoint = endpoint))
 })
 
-# test_that("Check limit works with pagination", {
-#   Sys.sleep(sleep_time)
-#   expect_gt(nrow(get_existing(table_100, limit = FALSE)), 100)
-# })
+test_that("Check limit works with pagination", {
+  expect_gt(nrow(get_existing(table = table,
+                              limit = FALSE,
+                              endpoint = endpoint)), 100)
+})
 
 test_that("detail = id provides correct data.frame", {
-  Sys.sleep(sleep_time)
-  expect_true(all(utils::hasName(get_existing(table_100, detail = "id"),
+  expect_true(all(utils::hasName(get_existing(table = table,
+                                              detail = "id",
+                                              endpoint = endpoint),
                                  c("url", "id"))))
 })

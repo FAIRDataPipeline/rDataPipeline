@@ -76,14 +76,14 @@ fair_run <- function(path = "config.yaml",
           if ("public" %in% names(register[[x]])) {
             is_public <- register[[x]]$public
             if (tolower(is_public) == "true") {
-              read[[index]]$public <- TRUE
+              read[[index]]$use$public <- TRUE
             } else if (tolower(is_public) == "false") {
-              read[[index]]$public <- FALSE
+              read[[index]]$use$public <- FALSE
             } else {
               stop("Unknown value in public field")
             }
           } else {
-            read[[index]]$public <- TRUE
+            read[[index]]$use$public <- TRUE
           }
 
           if (grepl("\\$\\{\\{CLI.DATE\\}\\}", register[[x]]$version)) {
@@ -94,7 +94,7 @@ fair_run <- function(path = "config.yaml",
             version <- register[[x]]$version
           }
 
-          read[[index]]$version <- version
+          read[[index]]$use$version <- version
         }
       }
     }
@@ -109,6 +109,15 @@ fair_run <- function(path = "config.yaml",
     # is not in a list, so put it in a list
     if (!all(is.null(names(write))))
       write <- list(write)
+
+    # Check data_products are unique
+
+    test <- lapply(write, function(x) x$data_product) %>%
+      unlist() %>% duplicated() %>% any()
+    if (test)
+      usethis::ui_stop(paste("write block contains multiple",
+                             usethis::ui_field("data_product"),
+                             "entries with the same name"))
 
     for (i in seq_along(write)) {
       this_write <- write[[i]]
@@ -153,17 +162,17 @@ fair_run <- function(path = "config.yaml",
       } else {
         stop ("public value not recognised")
       }
-      write[[i]]$public <- write_public
+      write[[i]]$use$public <- write_public
 
       # Get version
-      if ("version" %in% names(this_write)) { # version before `use:` block
+      if ("version" %in% names(this_write)) { # before `use:` block
         write_version <- resolve_version(version = this_write$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
         write[[i]]$use$version <- write_version # version should be here
         write[[i]]$version <- NULL
 
-      } else if ("version" %in% names(alias)) { # version in `use:` block
+      } else if ("version" %in% names(alias)) { # in `use:` block
         write_version <- resolve_version(version = alias$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
@@ -188,7 +197,7 @@ fair_run <- function(path = "config.yaml",
           tmp[[1]]$patch <- as.integer(patch + 1)
           write_version <- as.character(tmp)
         }
-        write[[i]]$version <- write_version # version should be here
+        write[[i]]$use$version <- write_version # version should be here
       }
 
       # If a data product already exists with the same name, version, and

@@ -14,7 +14,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- "config_files/samehash/config1.yaml"
+config_file <- paste0("config_files/samehash/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,

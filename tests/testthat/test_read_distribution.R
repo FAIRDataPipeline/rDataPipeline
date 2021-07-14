@@ -11,7 +11,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- "config_files/read_distribution/config.yaml"
+config_file <- paste0("config_files/read_distribution/config_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
@@ -55,7 +55,7 @@ finalise(handle, endpoint)
 
 # Start tests -------------------------------------------------------------
 
-config_file <- "config_files/read_distribution/config2.yaml"
+config_file <- paste0("config_files/read_distribution/config2_", uid , ".yaml")
 write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
