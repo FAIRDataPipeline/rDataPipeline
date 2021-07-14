@@ -34,6 +34,7 @@ finalise <- function(handle) {
       this_write <- handle$outputs[index_row, ]
       write_data_product <- unique(this_write$data_product)
       write_use_data_product <- unique(this_write$use_data_product)
+      write_dataproduct_description <- unique(this_write$data_product_decription)
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
       write_namespace_url <- new_namespace(name = write_namespace,
@@ -53,11 +54,7 @@ finalise <- function(handle) {
         use_data_product_runid <- write_use_data_product
       }
 
-      # Get data product description (from config.yaml)
-      index_dp <- which(unlist(lapply(handle$yaml$write, function(x)
-        write_data_product == x$data_product)))
-      description <- handle$yaml$write[[index_dp]]$description
-
+      # Get path
       if (file.exists(path)) {
         hash <- get_file_hash(path)
       } else {
@@ -119,7 +116,7 @@ finalise <- function(handle) {
       }
 
       object_url <- new_object(storage_location_url = storage_location_url,
-                               description = description,
+                               description = write_dataproduct_description,
                                file_type_url = file_type_url,
                                endpoint = endpoint)
 

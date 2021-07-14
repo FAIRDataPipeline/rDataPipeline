@@ -33,8 +33,6 @@ link_write <- function(handle, data_product) {
   write_public <- write_metadata$public
   path <- write_metadata$path
 
-  description <- this_write$description
-
   # Generate directory structure --------------------------------------------
 
   directory <- dirname(path)
@@ -48,7 +46,8 @@ link_write <- function(handle, data_product) {
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description,
+                data_product_decription = this_write$description,
+                component_description = NA,
                 public = write_public)
 
   invisible(path)
