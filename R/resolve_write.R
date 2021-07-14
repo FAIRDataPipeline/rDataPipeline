@@ -7,7 +7,9 @@
 #'
 resolve_write <- function(handle, data_product, file_type, endpoint) {
 
-  check_yaml_write(handle, data_product)
+  check_yaml_write(handle = handle,
+                   data_product = data_product,
+                   endpoint = endpoint)
   datastore <- handle$yaml$run_metadata$write_data_store
 
   # Get entry
