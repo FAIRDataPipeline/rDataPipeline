@@ -34,6 +34,7 @@ Other new functions:
 \code{\link{new_organisation}()},
 \code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
-\code{\link{new_storage_root}()}
+\code{\link{new_storage_root}()},
+\code{\link{new_user_author_org}()}
 }
 \concept{new functions}

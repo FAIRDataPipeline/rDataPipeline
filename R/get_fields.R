@@ -13,10 +13,6 @@
 #'
 get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
 
-  # Users and Groups are valid tables but cannot be posted to
-  if (table == "users" | table == "groups")
-    stop("users and groups are protected tables")
-
   # Add token to options request header
   key <- get_token()
   h <- c(Authorization = paste("token", key))

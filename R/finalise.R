@@ -122,6 +122,25 @@ finalise <- function(handle, endpoint) {
                                file_type_url = file_type_url,
                                endpoint = endpoint)
 
+      # Get user metadata
+      user_url <- get_url(table = "users",
+                          query = list(username = "admin"),
+                          endpoint = endpoint)
+      assertthat::assert_that(length(user_url) == 1)
+      user_id <- extract_id(user_url)
+      user_author_org_url <- get_entry("user_author_org",
+                                       query = list(user = user_id),
+                                       endpoint = endpoint)
+      assertthat::assert_that(length(user_author_org_url) == 1)
+      author_url <- user_author_org_url[[1]]$author
+      organisations_urls <- user_author_org_url[[1]]$organisations
+
+      new_object_author_org(
+        object_url = object_url,
+        author_url = author_url,
+        organisations_urls = organisations_urls,
+        endpoint = endpoint)
+
       # Register data product in local registry
       data_product_url <- new_data_product(name = use_data_product_runid,
                                            version = write_version,

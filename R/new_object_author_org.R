@@ -6,8 +6,8 @@
 #' \code{object}
 #' @param author_url a \code{string} specifying the URL of an existing
 #' \code{author}
-#' @param organisations_urls (optional) a \code{list} of URLs specifying which
-#' \code{organisation}s to associate with this \code{object_author_org}
+#' @param organisations_url (optional) a \code{string} specifying the URL of an
+#' existing \code{organisation} to associate with this \code{object_author_org}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @family new functions
