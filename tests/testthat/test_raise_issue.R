@@ -368,3 +368,144 @@ test_that("handle contains issues block",{
   testthat::expect_equal(unique(handle$issues$issue), issue)
   testthat::expect_equal(unique(handle$issues$severity), severity)
 })
+
+# Test writing issues to config -------------------------------------------
+
+# User written config file
+config_file <- paste0("config_files/raise_issue/config7_", uid , ".yaml")
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace,
+             output_namespace = namespace)
+read_dataproduct(path = config_file,
+                 data_product = data_product,
+                 version = version)
+
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+config_issue <- "issue with config"
+config_severity <- 8
+raise_issue_config(handle = handle,
+                   issue = config_issue,
+                   severity = config_severity)
+
+test_that("config issue is in handle",{
+  testthat::expect_equal(handle$issues$type, "config")
+  testthat::expect_equal(handle$issues$issue, config_issue)
+  testthat::expect_equal(handle$issues$severity, config_severity)
+})
+
+finalise(handle)
+
+test_that("config issue is in registry",{
+  component_url <- get_entity(handle$model_config)$components
+  testthat::expect_equal(length(component_url), 1)
+
+  issue_url <- get_entity(component_url[[1]])$issues
+  testthat::expect_equal(length(issue_url), 1)
+  tmp <- get_entity(issue_url[[1]])
+
+  testthat::expect_equal(tmp$description, config_issue)
+  testthat::expect_equal(tmp$severity, config_severity)
+})
+
+# Test writing issues to script -------------------------------------------
+
+# User written config file
+config_file <- paste0("config_files/raise_issue/config8_", uid , ".yaml")
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace,
+             output_namespace = namespace)
+read_dataproduct(path = config_file,
+                 data_product = data_product,
+                 version = version)
+
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+script_issue <- "issue with script"
+script_severity <- 9
+raise_issue_script(handle = handle,
+                   issue = script_issue,
+                   severity = script_severity)
+
+test_that("script issue is in handle",{
+  testthat::expect_equal(handle$issues$type, "script")
+  testthat::expect_equal(handle$issues$issue, script_issue)
+  testthat::expect_equal(handle$issues$severity, script_severity)
+})
+
+finalise(handle)
+
+test_that("script issue is in registry",{
+  component_url <- get_entity(handle$submission_script)$components
+  testthat::expect_equal(length(component_url), 1)
+
+  issue_url <- get_entity(component_url[[1]])$issues
+  testthat::expect_equal(length(issue_url), 1)
+  tmp <- get_entity(issue_url[[1]])
+
+  testthat::expect_equal(tmp$description, script_issue)
+  testthat::expect_equal(tmp$severity, script_severity)
+})
+
+# Test writing issues to GitHub repo --------------------------------------
+
+# User written config file
+config_file <- paste0("config_files/raise_issue/config9_", uid , ".yaml")
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace,
+             output_namespace = namespace)
+read_dataproduct(path = config_file,
+                 data_product = data_product,
+                 version = version)
+
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+repo_issue <- "issue with repo"
+repo_severity <- 2
+raise_issue_repo(handle = handle,
+                 issue = repo_issue,
+                 severity = repo_severity)
+
+test_that("repo issue is in handle",{
+  testthat::expect_equal(handle$issues$type, "repo")
+  testthat::expect_equal(handle$issues$issue, repo_issue)
+  testthat::expect_equal(handle$issues$severity, repo_severity)
+})
+
+finalise(handle)
+
+test_that("repo issue is in registry",{
+  component_url <- get_entity(handle$code_repo)$components
+  testthat::expect_equal(length(component_url), 1)
+
+  issue_url <- get_entity(component_url[[1]])$issues
+  testthat::expect_equal(length(issue_url), 1)
+  tmp <- get_entity(issue_url[[1]])
+
+  testthat::expect_equal(tmp$description, repo_issue)
+  testthat::expect_equal(tmp$severity, repo_severity)
+})
