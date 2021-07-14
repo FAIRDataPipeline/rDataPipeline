@@ -222,5 +222,6 @@ initialise <- function(config, script) {
   fdp$new(yaml = yaml,
           model_config = config_object_url,
           submission_script = script_object_url,
+          code_repo = coderepo_object_url,
           code_run = coderun_url)
 }

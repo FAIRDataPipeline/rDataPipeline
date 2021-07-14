@@ -4,14 +4,12 @@
 \alias{register_issue_dataproduct}
 \title{register_issue_dataproduct}
 \usage{
-register_issue_dataproduct(handle, this_issue, endpoint)
+register_issue_dataproduct(handle, this_issue)
 }
 \arguments{
 \item{handle}{handle}
 
 \item{this_issue}{this_issue}
-
-\item{endpoint}{endpoint}
 }
 \description{
 register_issue_dataproduct
