@@ -4,7 +4,7 @@
 \alias{link_read}
 \title{link_read}
 \usage{
-link_read(handle, data_product)
+link_read(handle, data_product, endpoint)
 }
 \arguments{
 \item{handle}{an object of class \code{fdp, R6} containing metadata required
@@ -12,6 +12,8 @@ by the Data Pipeline API}
 
 \item{data_product}{a \code{string} representing an external object in the
 config.yaml file}
+
+\item{endpoint}{endpoint}
 }
 \description{
 link_read

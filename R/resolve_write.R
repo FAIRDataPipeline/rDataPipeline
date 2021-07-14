@@ -7,18 +7,10 @@
 #'
 resolve_write <- function(handle, data_product, file_type, endpoint) {
 
-  check_yaml_write(handle, data_product)
+  check_yaml_write(handle = handle,
+                   data_product = data_product,
+                   endpoint = endpoint)
   datastore <- handle$yaml$run_metadata$write_data_store
-
-  # Check data product name isn't too long
-  tmp <- get_fields("data_product", endpoint = endpoint)
-  index <- which(tmp$field == "name")
-  data_product_fields <- tmp[index, ]
-  max_length_name <- data_product_fields$max_length
-  if (nchar(data_product) > max_length_name)
-    usethis::ui_stop(paste(usethis::ui_field(data_product),
-                           "must be",
-                           max_length_name, "characters or less"))
 
   # Get entry
   index <- lapply(handle$yaml$write, function(x)

@@ -12,5 +12,5 @@ get_max_version(data_product, namespace_id)
 \item{namespace_id}{namespace_id}
 }
 \description{
-get_max_version
+If entry doesn't exist in the registry, return version 0.0.0
 }

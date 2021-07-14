@@ -5,6 +5,10 @@
 #'
 resolve_version <- function(version, data_product, namespace_id) {
 
+  # Escape wildcard
+  if (basename(data_product) == "*")
+    data_product <- file.path(dirname(data_product), "\\*")
+
   # Increment patch ---------------------------------------------------------
 
   if (grepl("\\$\\{\\{PATCH\\}\\}", version)) {

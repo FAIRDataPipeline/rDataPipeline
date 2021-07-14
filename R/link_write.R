@@ -4,10 +4,11 @@
 #' by the Data Pipeline API
 #' @param data_product a \code{string} representing an external object in the
 #' config.yaml file
+#' @param endpoint endpoint
 #'
 #' @export
 #'
-link_write <- function(handle, data_product) {
+link_write <- function(handle, data_product, endpoint) {
 
   # Get metadata ------------------------------------------------------------
 
@@ -30,7 +31,8 @@ link_write <- function(handle, data_product) {
 
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
-                                  file_type = file_type)
+                                  file_type = file_type,
+                                  endpoint = endpoint)
   write_data_product <- write_metadata$data_product
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace

@@ -4,12 +4,14 @@
 \alias{check_yaml_write}
 \title{check_yaml_write}
 \usage{
-check_yaml_write(handle, data_product)
+check_yaml_write(handle, data_product, endpoint)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
+
+\item{endpoint}{endpoint}
 }
 \description{
 check_yaml_write
