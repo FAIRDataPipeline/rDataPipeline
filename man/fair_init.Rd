@@ -9,7 +9,7 @@ fair_init(
   given_name,
   orcid,
   organisation,
-  ror,
+  identifier,
   endpoint = "http://localhost:8000/api/"
 )
 }
@@ -23,7 +23,7 @@ fair_init(
 \item{organisation}{a \code{string} or vector of \code{strings} specifying
 the name of the organisation(s)}
 
-\item{ror}{a \code{string} specifying the organisation identifer (ROR ID) URL}
+\item{identifier}{a \code{string} specifying the organisation identifer (ROR ID) URL}
 
 \item{endpoint}{a \code{string} specifying the registry endpoint}
 }
