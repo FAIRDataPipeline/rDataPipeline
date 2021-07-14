@@ -165,16 +165,16 @@ finalise <- function(handle, endpoint) {
         component_url <- new_object_component(name = write_component,
                                               object_url = object_url,
                                               endpoint = endpoint)
+
+        usethis::ui_done(paste("Writing", usethis::ui_value(write_component),
+                               usethis::ui_field("component"),
+                               "to local registry"))
       }
 
       # Update handle
       handle$finalise_output_url(use_data_product = write_use_data_product,
                                  use_component = write_component,
                                  component_url = component_url)
-
-      usethis::ui_done(paste("Writing", usethis::ui_value(write_component),
-                             usethis::ui_field("component"),
-                             "to local registry"))
     }
   }
 
