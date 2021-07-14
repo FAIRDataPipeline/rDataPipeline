@@ -76,14 +76,14 @@ fair_run <- function(path = "config.yaml",
           if ("public" %in% names(register[[x]])) {
             is_public <- register[[x]]$public
             if (tolower(is_public) == "true") {
-              read[[index]]$public <- TRUE
+              read[[index]]$use$public <- TRUE
             } else if (tolower(is_public) == "false") {
-              read[[index]]$public <- FALSE
+              read[[index]]$use$public <- FALSE
             } else {
               stop("Unknown value in public field")
             }
           } else {
-            read[[index]]$public <- TRUE
+            read[[index]]$use$public <- TRUE
           }
 
           if (grepl("\\$\\{\\{CLI.DATE\\}\\}", register[[x]]$version)) {
