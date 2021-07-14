@@ -202,7 +202,7 @@ finalise <- function(handle) {
     # Attach issues to config -------------------------------------------------
 
     config_issues <- handle$issues %>%
-      dplyr::filter(type == "config")
+      dplyr::filter(.data$type == "config")
 
     if (nrow(config_issues) != 0) {
       for (k in seq_len(nrow(config_issues))) {
@@ -222,7 +222,7 @@ finalise <- function(handle) {
     # Attach issues to script -------------------------------------------------
 
     script_issues <- handle$issues %>%
-      dplyr::filter(type == "script")
+      dplyr::filter(.data$type == "script")
 
     if (nrow(script_issues) != 0) {
       for (k in seq_len(nrow(script_issues))) {
@@ -242,7 +242,7 @@ finalise <- function(handle) {
     # Attach issues to repo -------------------------------------------------
 
     repo_issues <- handle$issues %>%
-      dplyr::filter(type == "repo")
+      dplyr::filter(.data$type == "repo")
 
     if (nrow(repo_issues) != 0) {
       for (k in seq_len(nrow(repo_issues))) {
@@ -290,8 +290,7 @@ finalise <- function(handle) {
 
         this_issue <- dataproduct_issues[k, ]
         register_issue_dataproduct(handle = handle,
-                                   this_issue = this_issue,
-                                   endpoint = endpoint)
+                                   this_issue = this_issue)
 
         usethis::ui_done(paste("Writing",
                                usethis::ui_value(this_issue$use_data_product),

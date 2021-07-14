@@ -17,7 +17,7 @@ register_issue_script <- function(handle,
   } else if (type == "repo") {
     object <- handle$code_repo
   } else {
-    usethis:ui_stop("Unknown type")
+    usethis::ui_stop("Unknown type")
   }
 
   object_id <- extract_id(object)
