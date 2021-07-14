@@ -74,6 +74,7 @@ resolve_write <- function(handle,
   }
 
   list(data_product = write_dataproduct,
+       description = this_dp$description,
        version = version,
        namespace = namespace,
        public = public,

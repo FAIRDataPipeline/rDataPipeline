@@ -29,6 +29,7 @@ write_distribution <- function(handle,
   write_version <- write_metadata$version
   write_namespace <- write_metadata$namespace
   write_public <- write_metadata$public
+  data_product_decription <- write_metadata$description
   path <- write_metadata$path
 
   # Checks ------------------------------------------------------------------
@@ -77,7 +78,8 @@ write_distribution <- function(handle,
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                description = description,
+                data_product_description = data_product_decription,
+                component_description = description,
                 public = write_public)
 
   invisible(handle$output_index(data_product = data_product,
