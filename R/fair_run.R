@@ -162,17 +162,17 @@ fair_run <- function(path = "config.yaml",
       } else {
         stop ("public value not recognised")
       }
-      write[[i]]$public <- write_public
+      write[[i]]$use$public <- write_public
 
       # Get version
-      if ("version" %in% names(this_write)) { # version before `use:` block
+      if ("version" %in% names(this_write)) { # before `use:` block
         write_version <- resolve_version(version = this_write$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
         write[[i]]$use$version <- write_version # version should be here
         write[[i]]$version <- NULL
 
-      } else if ("version" %in% names(alias)) { # version in `use:` block
+      } else if ("version" %in% names(alias)) { # in `use:` block
         write_version <- resolve_version(version = alias$version,
                                          data_product = write_dataproduct,
                                          namespace_id = write_namespace_id)
