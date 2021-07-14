@@ -110,6 +110,15 @@ fair_run <- function(path = "config.yaml",
     if (!all(is.null(names(write))))
       write <- list(write)
 
+    # Check data_products are unique
+
+    test <- lapply(write, function(x) x$data_product) %>%
+      unlist() %>% duplicated() %>% any()
+    if (test)
+      usethis::ui_stop(paste("write block contains multiple",
+                             usethis::ui_field("data_product"),
+                             "entries with the same name"))
+
     for (i in seq_along(write)) {
       this_write <- write[[i]]
 
