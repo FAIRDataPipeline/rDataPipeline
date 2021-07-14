@@ -5,17 +5,23 @@
 #' @param file_type a \code{string} specifying the file type
 #' @param endpoint endpoint
 #'
-resolve_write <- function(handle, data_product, file_type, endpoint) {
+resolve_write <- function(handle,
+                          data_product,
+                          file_type,
+                          endpoint) {
 
   check_yaml_write(handle = handle,
                    data_product = data_product,
                    endpoint = endpoint)
+
   datastore <- handle$yaml$run_metadata$write_data_store
 
   # Get entry
-  index <- lapply(handle$yaml$write, function(x)
-    data_product == x$data_product) %>%
-    unlist() %>% which()
+  write <- handle$yaml$write
+  index <- write_index(index = index,
+                       write = write,
+                       data_product = data_product)
+
   this_dp <- handle$yaml$write[[index]]
 
   # Get alias
@@ -27,9 +33,13 @@ resolve_write <- function(handle, data_product, file_type, endpoint) {
 
   # Get data product name
   if ("data_product" %in% names(alias)) {
-    data_product <- alias$data_product
+    write_dataproduct <- alias$data_product
   } else {
-    data_product <- this_dp$data_product
+    write_dataproduct <- this_dp$data_product
+
+    if (basename(write_dataproduct) == "*") {
+      write_dataproduct <- data_product
+    }
   }
 
   # Get namespace
@@ -56,17 +66,17 @@ resolve_write <- function(handle, data_product, file_type, endpoint) {
   }
 
   # Extract / set save location
-  if (data_product %in% handle$outputs$data_product) {
+  if (write_dataproduct %in% handle$outputs$data_product) {
     tmp <- handle$outputs
     ind <- which(tmp$data_product == data_product)
     path <- unique(tmp$path[ind])
 
   } else {
     filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".", file_type)
-    path <- file.path(paste0(datastore, namespace), data_product, filename)
+    path <- file.path(paste0(datastore, namespace), write_dataproduct, filename)
   }
 
-  list(data_product = data_product,
+  list(data_product = write_dataproduct,
        version = version,
        namespace = namespace,
        public = public,
