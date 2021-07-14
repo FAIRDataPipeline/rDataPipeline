@@ -2,9 +2,10 @@
 #'
 #' @param handle handle
 #' @param this_issue this_issue
-#' @param endpoint endpoint
 #'
-register_issue_dataproduct <- function(handle, this_issue, endpoint) {
+register_issue_dataproduct <- function(handle, this_issue) {
+
+  endpoint <- handle$yaml$run_metadata$local_data_registry_url
 
   # Which object component do we want to associate with the issue?
   namespace_url <- get_url(table = "namespace",
