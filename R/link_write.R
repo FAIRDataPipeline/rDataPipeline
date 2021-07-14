@@ -13,11 +13,7 @@ link_write <- function(handle, data_product, endpoint) {
   # Get metadata ------------------------------------------------------------
 
   write <- handle$yaml$write
-  index <- lapply(write, function(x)
-    which(data_product == x$data_product)) %>% unlist()
-
-  if (length(index) == 0)
-    usethis::ui_stop("{data_product} not present in config.yaml")
+  index <- write_index(index, write, data_product)
 
   this_write <- write[[index]]
   file_type <- this_write$file_type

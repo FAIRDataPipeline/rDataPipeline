@@ -141,21 +141,15 @@ fair_run <- function(path = "config.yaml",
 
       # If a data product already exists with the same name, version, and
       # namespace, throw an error
-      check_exists <- get_entry("data_product",
-                                list(name = write_dataproduct,
-                                     version = write_version,
-                                     namespace = write_namespace_id),
-                                endpoint = endpoint)
+      check_dataproduct_exists(write_dataproduct = write_dataproduct,
+                               write_version = write_version,
+                               write_namespace_id = write_namespace_id,
+                               endpoint = endpoint)
 
       if (basename(write_dataproduct) == "*") {
         data_products <- get_entry(table = "data_product",
                                    query = list(name = write_dataproduct),
                                    endpoint = endpoint)
-
-        check_dataproduct_exists(write_dataproduct = write_dataproduct,
-                                 write_version = write_version,
-                                 write_namespace_id = write_namespace_id,
-                                 endpoint = endpoint)
 
         for (k in seq_along(data_products)) {
           this_dataproduct <- data_products[[k]]
