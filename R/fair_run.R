@@ -86,9 +86,9 @@ fair_run <- function(path = "config.yaml",
             read[[index]]$use$public <- TRUE
           }
 
-          if (grepl("\\$\\{\\{CLI.DATE\\}\\}", register[[x]]$version)) {
+          if (grepl("\\$\\{\\{DATE\\}\\}", register[[x]]$version)) {
             datetime <- format(Sys.Date(), "%Y%m%d")
-            version <- gsub("\\$\\{\\{CLI.DATE\\}\\}", datetime,
+            version <- gsub("\\$\\{\\{DATE\\}\\}", datetime,
                             register[[x]]$version)
           } else {
             version <- register[[x]]$version

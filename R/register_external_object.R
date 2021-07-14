@@ -72,15 +72,15 @@ register_external_object <- function(yaml,
 
   # Get release_date
   release_date <- register_this$release_date
-  if ("${{CLI.DATETIME}}" == release_date) {
+  if ("${{DATETIME}}" == release_date) {
     release_date <- Sys.time()
   }
 
   # Get version
   register_version <- register_this$version
-  if (grepl("\\$\\{\\{CLI.DATE\\}\\}", register_version)) {
+  if (grepl("\\$\\{\\{DATE\\}\\}", register_version)) {
     datetime <- gsub("-", "", Sys.Date())
-    register_version <- gsub("\\$\\{\\{CLI.DATE\\}\\}", datetime,
+    register_version <- gsub("\\$\\{\\{DATE\\}\\}", datetime,
                              register_version)
   }
 

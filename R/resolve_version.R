@@ -29,9 +29,9 @@ resolve_version <- function(version, data_product, namespace_id) {
     max_version[[1]]$major <- as.integer(major + 1)
     write_version <- as.character(max_version)
 
-  } else if (grepl("\\$\\{\\{CLI.DATE\\}\\}", version)) {
+  } else if (grepl("\\$\\{\\{DATE\\}\\}", version)) {
     datetime <- format(Sys.Date(), "%Y%m%d")
-    write_version <- gsub("\\$\\{\\{CLI.DATE\\}\\}", datetime,
+    write_version <- gsub("\\$\\{\\{DATE\\}\\}", datetime,
                           version)
 
   } else {
