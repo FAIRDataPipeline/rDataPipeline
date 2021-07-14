@@ -14,6 +14,8 @@ fdp <- R6::R6Class("fdp", list(
   #' @field submission_script a \code{string} specifying the URL of an entry in
   #' the \code{object} table associated with the \code{storage_location} of the
   #' submission script
+  #' @field code_repo a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the GitHub repository
   #' @field code_run a \code{string} specifying the URL of an entry in
   #' the \code{code_run} table
   #' @field inputs a \code{data.frame} containing metadata associated with
@@ -24,6 +26,7 @@ fdp <- R6::R6Class("fdp", list(
   yaml = NULL,
   model_config = NULL,
   submission_script = NULL,
+  code_repo = NULL,
   code_run = NULL,
   inputs = NULL,
   outputs = NULL,
@@ -39,6 +42,8 @@ fdp <- R6::R6Class("fdp", list(
   #' @param submission_script a \code{string} specifying the URL of an entry in
   #' the \code{object} table associated with the \code{storage_location} of the
   #' submission script
+  #' @param code_repo a \code{string} specifying the URL of an entry in
+  #' the \code{object} table associated with the GitHub repository
   #' @param code_run a \code{string} specifying the URL of an entry in
   #' the \code{code_run} table
   #'
@@ -47,6 +52,7 @@ fdp <- R6::R6Class("fdp", list(
   initialize = function(yaml,
                         model_config,
                         submission_script,
+                        code_repo,
                         code_run) {
 
     stopifnot(is.list(yaml))
@@ -57,6 +63,7 @@ fdp <- R6::R6Class("fdp", list(
     self$yaml <- yaml
     self$model_config <- model_config
     self$submission_script <- submission_script
+    self$code_repo <- code_repo
     self$code_run <- code_run
 
     invisible(self)
