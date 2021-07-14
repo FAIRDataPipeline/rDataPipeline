@@ -252,6 +252,8 @@ fdp <- R6::R6Class("fdp", list(
   #'
   #' @param index a \code{numeric} index, used to identify each input and
   #' output in the \code{fdp} object
+  #' @param type a \code{string} specifying the type of issue (one of
+  #' "data", "config", "script", "repo")
   #' @param use_data_product a \code{string} specifying the name of the data
   #' product, used as output in the \code{code_run}
   #' @param use_component a \code{string} specifying the name of the data
@@ -268,6 +270,7 @@ fdp <- R6::R6Class("fdp", list(
   #' @return Returns an updated \code{fdp} object
   #'
   raise_issue = function(index,
+                         type,
                          use_data_product,
                          use_component,
                          use_version,
@@ -277,6 +280,7 @@ fdp <- R6::R6Class("fdp", list(
 
     if (is.null(self$issues)) {
       existing <- data.frame(index = numeric(),
+                             type = character(),
                              use_data_product = character(),
                              use_component = character(),
                              use_version = character(),
@@ -288,6 +292,7 @@ fdp <- R6::R6Class("fdp", list(
     }
 
     new <- data.frame(index = index,
+                      type = type,
                       use_data_product = use_data_product,
                       use_component = use_component,
                       use_version = use_version,
