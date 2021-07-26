@@ -2,13 +2,33 @@
 #'
 #' Push metadata to registry
 #'
+#' If a CodeRun does not read an input, write an output, or attach an issue then
+#' `delete_if_empty` should delete the CodeRun entry when set to `TRUE`.
+#'
 #' @param handle \code{fdp} object
+#' @param delete_if_empty (optional) default is `FALSE`
 #'
 #' @export
 #'
-finalise <- function(handle) {
+finalise <- function(handle, delete_if_empty = FALSE) {
 
-  # record data product metadata in the data registry --------
+  # If `delete_if_empty` is true and no input was read, output was written, or
+  # issue was attached, then delete the CodeRun entry
+
+  if (delete_if_empty) {
+
+    code_run_url <- handle$code_run
+    key <- get_token()
+    h <- c(Authorization = paste("token", key))
+    result <- httr::DELETE(code_run_url,
+                           httr::content_type('application/json'),
+                           httr::add_headers(.headers = h),
+                           verbose())
+
+    return(invisible(NULL))
+  }
+
+  # Record data product metadata in the data registry --------
 
   endpoint <- handle$yaml$run_metadata$local_data_registry_url
 
@@ -279,7 +299,7 @@ finalise <- function(handle) {
       }
     }
 
-    # Attach issues to data product -------------------------------------------
+    # Attach issues to data product -----------------------------------------
 
     dataproduct_issues <- handle$issues %>%
       dplyr::filter(.data$type == "data",

@@ -4,11 +4,17 @@
 \alias{finalise}
 \title{finalise}
 \usage{
-finalise(handle)
+finalise(handle, delete_if_empty = FALSE)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
+
+\item{delete_if_empty}{(optional) default is \code{FALSE}}
 }
 \description{
 Push metadata to registry
+}
+\details{
+If a CodeRun does not read an input, write an output, or attach an issue then
+\code{delete_if_empty} should delete the CodeRun entry when set to \code{TRUE}.
 }
