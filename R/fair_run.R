@@ -137,7 +137,11 @@ fair_run <- function(path = "config.yaml",
       write_version <- tmp_write$write_version
       write_namespace_id <- tmp_write$write_namespace_id
 
-      working_write[[index]]$use$public <- write_public
+      if (!write_public) {
+        working_write[[index]]$use$public <- write_public
+        working_write[[index]]$public <- NULL
+      }
+
       working_write[[index]]$use$version <- write_version
       working_write[[index]]$version <- NULL
 
@@ -170,8 +174,11 @@ fair_run <- function(path = "config.yaml",
           subwrite_version <- tmp_subwrite$write_version
           subwrite_namespace_id <- tmp_subwrite$write_namespace_id
 
+          if (!subwrite_public) {
+            working_write[[index]]$use$public <- subwrite_public
+            working_write[[index]]$public <- NULL
+          }
 
-          working_write[[index]]$use$public <- subwrite_public
           working_write[[index]]$use$version <- subwrite_version
           working_write[[index]]$version <- NULL
 
