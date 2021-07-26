@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/FAIRDataPipeline/rFDP/branch/main/graph/badge.svg?=1)](https://codecov.io/gh/FAIRDataPipeline/rFDP)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 
-Functions to generate and process data files for the SCRC data pipeline.
+Functions to generate and process data files for the FAIR data pipeline.
 
 ## Installation
 
