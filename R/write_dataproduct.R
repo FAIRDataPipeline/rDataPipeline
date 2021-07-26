@@ -1,4 +1,4 @@
-#' write_dataproduct
+#' add_write
 #'
 #' @param path config file path
 #' @param data_product data_product field
@@ -12,15 +12,15 @@
 #'
 #' @export
 #'
-write_dataproduct <- function(path,
-                              data_product,
-                              description,
-                              version,
-                              file_type,
-                              use_data_product,
-                              use_component,
-                              use_version,
-                              use_namespace) {
+add_write <- function(path,
+                      data_product,
+                      description,
+                      version,
+                      file_type,
+                      use_data_product,
+                      use_component,
+                      use_version,
+                      use_namespace) {
 
   # Generate write block
   new_write <- list()

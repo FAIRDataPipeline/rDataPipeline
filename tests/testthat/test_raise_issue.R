@@ -18,10 +18,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version)
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -73,11 +73,11 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version,
-                  file_type = "csv")
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version,
+          file_type = "csv")
 
 # CLI functions
 fair_pull(config_file)
@@ -126,10 +126,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version)
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -190,10 +190,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version)
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -257,10 +257,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version)
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -327,16 +327,16 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-write_dataproduct(path = config_file,
-                  data_product = data_product,
-                  description = dataproduct_description,
-                  version = version,
-                  file_type = "csv")
-write_dataproduct(path = config_file,
-                  data_product = data_product2,
-                  description = dataproduct_description,
-                  version = version,
-                  file_type = "csv")
+add_write(path = config_file,
+          data_product = data_product,
+          description = dataproduct_description,
+          version = version,
+          file_type = "csv")
+add_write(path = config_file,
+          data_product = data_product2,
+          description = dataproduct_description,
+          version = version,
+          file_type = "csv")
 
 # CLI functions
 fair_pull(config_file)
@@ -390,12 +390,12 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-read_dataproduct(path = config_file,
-                 data_product = data_product,
-                 version = version)
-read_dataproduct(path = config_file,
-                 data_product = data_product2,
-                 version = version)
+add_read(path = config_file,
+         data_product = data_product,
+         version = version)
+add_read(path = config_file,
+         data_product = data_product2,
+         version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -440,9 +440,9 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-read_dataproduct(path = config_file,
-                 data_product = data_product,
-                 version = version)
+add_read(path = config_file,
+         data_product = data_product,
+         version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -487,9 +487,9 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-read_dataproduct(path = config_file,
-                 data_product = data_product,
-                 version = version)
+add_read(path = config_file,
+         data_product = data_product,
+         version = version)
 
 # CLI functions
 fair_pull(config_file)
@@ -534,9 +534,9 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
-read_dataproduct(path = config_file,
-                 data_product = data_product,
-                 version = version)
+add_read(path = config_file,
+         data_product = data_product,
+         version = version)
 
 # CLI functions
 fair_pull(config_file)

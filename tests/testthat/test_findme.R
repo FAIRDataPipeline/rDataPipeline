@@ -21,10 +21,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -81,10 +81,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  version = version2)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          version = version2)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -141,10 +141,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product3,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product3,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)

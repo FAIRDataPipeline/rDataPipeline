@@ -6,12 +6,9 @@ reference:
     Functions for writing data products
   contents:
   - link_write
-  - write_array
-  - write_table
-  - write_distribution
-  - write_estimate
+  - starts_with("write")
 - title: "Read"
   desc: "Functions for reading data products"
 - contents:
   - link_read
-  - starts_with("read") %>% select(-"read_dataproduct")
+  - starts_with("read")

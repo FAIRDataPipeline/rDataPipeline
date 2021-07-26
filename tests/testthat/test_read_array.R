@@ -25,10 +25,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -69,10 +69,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  version = version2)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          version = version2)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -109,10 +109,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace2,
              output_namespace = namespace2)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -149,10 +149,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product2,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product2,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -189,10 +189,10 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product5,
-                  description = dataproduct_description,
-                  version = version1)
+add_write(path = config_file,
+          data_product = data_product5,
+          description = dataproduct_description,
+          version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -237,30 +237,30 @@ write_config(path = config_file,
              output_namespace = namespace1)
 
 # Will return v.0.1.0, not v.0.2.0
-read_dataproduct(path = config_file,
-                 data_product = data_product1,
-                 component = component,
-                 use_version = version1)
+add_read(path = config_file,
+         data_product = data_product1,
+         component = component,
+         use_version = version1)
 
 # Will return test/array, but call it test/array2
-read_dataproduct(path = config_file,
-                 data_product = data_product2,
-                 component = component,
-                 use_data_product = data_product1)
+add_read(path = config_file,
+         data_product = data_product2,
+         component = component,
+         use_data_product = data_product1)
 
 # Will return test/array in the johnsmith namespace, but call it test/array3
-read_dataproduct(path = config_file,
-                 data_product = data_product3,
-                 component = component,
-                 use_data_product = data_product1,
-                 use_namespace = namespace2)
+add_read(path = config_file,
+         data_product = data_product3,
+         component = component,
+         use_data_product = data_product1,
+         use_namespace = namespace2)
 
 # Will return test/array2 v.0.1.0, but call it test/array4
-read_dataproduct(path = config_file,
-                 data_product = data_product4,
-                 component = component,
-                 use_data_product = data_product2,
-                 use_version = version1)
+add_read(path = config_file,
+         data_product = data_product4,
+         component = component,
+         use_data_product = data_product2,
+         use_version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -319,14 +319,14 @@ write_config(path = config_file,
              output_namespace = namespace1)
 
 # Will return v.0.1.0, not v.0.2.0
-read_dataproduct(path = config_file,
-                 data_product = data_product5,
-                 component = component,
-                 use_version = version1)
-read_dataproduct(path = config_file,
-                 data_product = data_product5,
-                 component = component2,
-                 use_version = version1)
+add_read(path = config_file,
+         data_product = data_product5,
+         component = component,
+         use_version = version1)
+add_read(path = config_file,
+         data_product = data_product5,
+         component = component2,
+         use_version = version1)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -338,15 +338,15 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 test_that("component1 is returned", {
-tmp <- read_array(handle = handle,
-                  data_product = data_product5,
-                  component = component)
-expect_equivalent(as.data.frame(tmp), comp1)
+  tmp <- read_array(handle = handle,
+                    data_product = data_product5,
+                    component = component)
+  expect_equivalent(as.data.frame(tmp), comp1)
 })
 
 test_that("component2 is returned", {
-tmp <- read_array(handle = handle,
-                  data_product = data_product5,
-                  component = component2)
-expect_equivalent(as.data.frame(tmp), comp2)
+  tmp <- read_array(handle = handle,
+                    data_product = data_product5,
+                    component = component2)
+  expect_equivalent(as.data.frame(tmp), comp2)
 })

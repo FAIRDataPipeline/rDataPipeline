@@ -1,4 +1,4 @@
-#' read_dataproduct
+#' add_read
 #'
 #' @param path config file path
 #' @param data_product data_product field
@@ -22,20 +22,20 @@
 #'              output_namespace = "test_user")
 #'
 #' # Write read block
-#' read_dataproduct(path = path,
+#' add_read(path = path,
 #'                  data_product = "test/array",
 #'                  component = "level/a/s/d/f/s",
 #'                  version = "0.2.0")
 #' }
 #'
-read_dataproduct <- function(path,
-                             data_product,
-                             component,
-                             version,
-                             use_data_product,
-                             use_component,
-                             use_version,
-                             use_namespace) {
+add_read <- function(path,
+                     data_product,
+                     component,
+                     version,
+                     use_data_product,
+                     use_component,
+                     use_version,
+                     use_namespace) {
 
   # Generate read block
   new_read <- list()

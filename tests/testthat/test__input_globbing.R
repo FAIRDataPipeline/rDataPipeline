@@ -18,14 +18,14 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  file_type = "csv")
-write_dataproduct(path = config_file,
-                  data_product = data_product2,
-                  description = dataproduct_description,
-                  file_type = "csv")
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          file_type = "csv")
+add_write(path = config_file,
+          data_product = data_product2,
+          description = dataproduct_description,
+          file_type = "csv")
 
 # CLI functions
 fair_pull(path = config_file)
@@ -59,8 +59,8 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-read_dataproduct(path = config_file,
-                 data_product = data_product3)
+add_read(path = config_file,
+         data_product = data_product3)
 
 # CLI functions
 fair_pull(path = config_file)

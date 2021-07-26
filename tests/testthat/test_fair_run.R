@@ -19,18 +19,18 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description,
-                  file_type = "txt")
-write_dataproduct(path = config_file,
-                  data_product = data_product2,
-                  description = dataproduct_description,
-                  file_type = "txt")
-write_dataproduct(path = config_file,
-                  data_product = data_product3,
-                  description = dataproduct_description,
-                  file_type = "txt")
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description,
+          file_type = "txt")
+add_write(path = config_file,
+          data_product = data_product2,
+          description = dataproduct_description,
+          file_type = "txt")
+add_write(path = config_file,
+          data_product = data_product3,
+          description = dataproduct_description,
+          file_type = "txt")
 
 # CLI functions
 fair_pull(path = config_file)
@@ -67,7 +67,7 @@ finalise(handle)
 #              description = coderun_description,
 #              input_namespace = namespace1,
 #              output_namespace = namespace1)
-# read_dataproduct(path = config_file,
+# add_read(path = config_file,
 #                  data_product = data_product1)
 #
 # # CLI functions

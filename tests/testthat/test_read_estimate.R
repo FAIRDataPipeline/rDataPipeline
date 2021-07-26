@@ -17,12 +17,12 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-write_dataproduct(path = config_file,
-                  data_product = data_product1,
-                  description = dataproduct_description)
-write_dataproduct(path = config_file,
-                  data_product = missing_data_product,
-                  description = dataproduct_description)
+add_write(path = config_file,
+          data_product = data_product1,
+          description = dataproduct_description)
+add_write(path = config_file,
+          data_product = missing_data_product,
+          description = dataproduct_description)
 
 # CLI functions
 fair_pull(path = config_file)
@@ -69,15 +69,15 @@ write_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace1,
              output_namespace = namespace1)
-read_dataproduct(path = config_file,
-                 data_product = data_product1,
-                 component = component1)
-read_dataproduct(path = config_file,
-                 data_product = data_product1,
-                 component = component2)
-read_dataproduct(path = config_file,
-                 data_product = missing_data_product,
-                 component = component1)
+add_read(path = config_file,
+         data_product = data_product1,
+         component = component1)
+add_read(path = config_file,
+         data_product = data_product1,
+         component = component2)
+add_read(path = config_file,
+         data_product = missing_data_product,
+         component = component1)
 
 fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
