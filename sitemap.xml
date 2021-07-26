@@ -43,6 +43,12 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/clean_query.html</loc>
   </url>
   <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/create_config.html</loc>
+  </url>
+  <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/create_index.html</loc>
+  </url>
+  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/create_version_number.html</loc>
   </url>
   <url>
@@ -301,16 +307,10 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_array.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_config.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_distribution.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_estimate.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_index.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_table.html</loc>

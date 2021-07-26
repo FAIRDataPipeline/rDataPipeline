@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Post entry to object_author_org table — new_object_author_org • rFDP</title>
+<title>create_index — create_index • rFDP</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Post entry to object_author_org table — new_object_author_org" />
-<meta property="og:description" content="Upload information to the object_author_org table in the data registry" />
+<meta property="og:title" content="create_index — create_index" />
+<meta property="og:description" content="create_index" />
 
 
 
@@ -108,66 +108,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Post entry to object_author_org table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rFDP/blob/master/R/new_object_author_org.R'><code>R/new_object_author_org.R</code></a></small>
-    <div class="hidden name"><code>new_object_author_org.Rd</code></div>
+    <h1>create_index</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rFDP/blob/master/R/create_index.R'><code>R/create_index.R</code></a></small>
+    <div class="hidden name"><code>create_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Upload information to the <code>object_author_org</code> table in the data registry</p>
+    <p>create_index</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_object_author_org</span><span class='op'>(</span>
-  <span class='va'>object_url</span>,
-  <span class='va'>author_url</span>,
-  organisations_urls <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>,
-  endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>create_index</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object_url</th>
-      <td><p>a <code>string</code> specifying the URL of an existing
-<code>object</code></p></td>
-    </tr>
-    <tr>
-      <th>author_url</th>
-      <td><p>a <code>string</code> specifying the URL of an existing
-<code>author</code></p></td>
-    </tr>
-    <tr>
-      <th>organisations_urls</th>
-      <td><p>(optional) a <code>string</code> specifying the URL of an
-existing <code>organisation</code> to associate with this <code>object_author_org</code></p></td>
-    </tr>
-    <tr>
-      <th>endpoint</th>
-      <td><p>a <code>string</code> specifying the registry endpoint</p></td>
+      <th>self</th>
+      <td><p>self</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other new functions: 
-<code><a href='new_author.html'>new_author</a>()</code>,
-<code><a href='new_code_repo_release.html'>new_code_repo_release</a>()</code>,
-<code><a href='new_code_run.html'>new_code_run</a>()</code>,
-<code><a href='new_data_product.html'>new_data_product</a>()</code>,
-<code><a href='new_external_object.html'>new_external_object</a>()</code>,
-<code><a href='new_file_type.html'>new_file_type</a>()</code>,
-<code><a href='new_issue.html'>new_issue</a>()</code>,
-<code><a href='new_keyword.html'>new_keyword</a>()</code>,
-<code><a href='new_licence.html'>new_licence</a>()</code>,
-<code><a href='new_namespace.html'>new_namespace</a>()</code>,
-<code><a href='new_object_component.html'>new_object_component</a>()</code>,
-<code><a href='new_object.html'>new_object</a>()</code>,
-<code><a href='new_organisation.html'>new_organisation</a>()</code>,
-<code><a href='new_quality_controlled.html'>new_quality_controlled</a>()</code>,
-<code><a href='new_storage_location.html'>new_storage_location</a>()</code>,
-<code><a href='new_storage_root.html'>new_storage_root</a>()</code>,
-<code><a href='new_user_author_org.html'>new_user_author_org</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
