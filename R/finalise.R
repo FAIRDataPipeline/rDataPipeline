@@ -282,7 +282,7 @@ finalise <- function(handle) {
     # Attach issues to data product -------------------------------------------
 
     dataproduct_issues <- handle$issues %>%
-      dplyr::filter(.datatype == "data",
+      dplyr::filter(.data$type == "data",
                     is.na(.data$use_component))
 
     if (nrow(dataproduct_issues) != 0) {
