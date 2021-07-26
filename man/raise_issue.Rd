@@ -12,7 +12,8 @@ raise_issue(
   version,
   namespace,
   issue,
-  severity
+  severity,
+  whole_object
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ raise_issue(
 \item{issue}{issue}
 
 \item{severity}{severity}
+
+\item{whole_object}{whole_object}
 }
 \description{
 raise_issue
