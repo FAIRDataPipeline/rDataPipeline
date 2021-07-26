@@ -1,4 +1,4 @@
-#' raise_issue_config
+#' raise_issue_script
 #'
 #' @param handle handle
 #' @param issue issue
@@ -6,12 +6,12 @@
 #'
 #' @export
 #'
-raise_issue_config <- function(handle,
+raise_issue_script <- function(handle,
                                issue,
                                severity) {
 
   handle$raise_issue(index = NA,
-                     type = "config",
+                     type = "script",
                      use_data_product = NA,
                      use_component = NA,
                      use_version = NA,
