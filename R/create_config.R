@@ -1,4 +1,4 @@
-#' write_config
+#' create_config
 #'
 #' Generates (user generated) config.yaml files for unit tests. Use
 #' \code{read_dataproduct()} and \code{write_dataproduct()} functions to
@@ -13,13 +13,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' write_config("test_config/config.yaml",
+#' create_config("test_config/config.yaml",
 #'              description = "test",
 #'              input_namespace = "test_user",
 #'              output_namespace = "test_user")
 #' }
 #'
-write_config <- function(path,
+create_config <- function(path,
                          description,
                          input_namespace,
                          output_namespace) {

@@ -21,10 +21,10 @@ endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
 config_file <- paste0("config_files/read_array/config_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -65,10 +65,10 @@ finalise(handle)
 
 # User written config file
 config_file <- paste0("config_files/read_array/config2_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -105,10 +105,10 @@ finalise(handle)
 
 # User written config file
 config_file <- paste0("config_files/read_array/config3_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace2,
-             output_namespace = namespace2)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace2,
+              output_namespace = namespace2)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -145,10 +145,10 @@ finalise(handle)
 
 # User written config file
 config_file <- paste0("config_files/read_array/config4_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product2,
           description = dataproduct_description,
@@ -185,10 +185,10 @@ finalise(handle)
 
 # User written config file
 config_file <- paste0("config_files/read_array/config5_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product5,
           description = dataproduct_description,
@@ -231,10 +231,10 @@ finalise(handle)
 # User written config file
 config_file <- paste0("config_files/read_array/config6_", uid , ".yaml")
 
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 
 # Will return v.0.1.0, not v.0.2.0
 add_read(path = config_file,
@@ -313,10 +313,10 @@ test_that("df2 is returned", {
 # User written config file
 config_file <- paste0("config_files/read_array/config7_", uid , ".yaml")
 
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 
 # Will return v.0.1.0, not v.0.2.0
 add_read(path = config_file,

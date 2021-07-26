@@ -130,7 +130,7 @@ fdp <- R6::R6Class("fdp", list(
                    path,
                    component_url) {
 
-    index <- get_index(self)
+    index <- create_index(self)
 
     if (is.null(self$inputs)) {
       existing <- data.frame(index = numeric(),
@@ -190,7 +190,7 @@ fdp <- R6::R6Class("fdp", list(
                     component_description,
                     public) {
 
-    index <- get_index(self)
+    index <- create_index(self)
 
     if (is.null(self$outputs)) {
       existing <- data.frame(index = numeric(),

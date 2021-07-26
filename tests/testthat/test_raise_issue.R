@@ -14,10 +14,10 @@ component <- "component/a/s/d/f/s"
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -69,10 +69,10 @@ component <- "component/a/s/d/f/s"
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config2_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -122,10 +122,10 @@ component <- "component/a/s/d/f/s"
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config2b_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -186,10 +186,10 @@ component2 <- "component2/a/s/d/f/s"
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config3_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -253,10 +253,10 @@ component2 <- "component2/a/s/d/f/s"
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config4_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -323,10 +323,10 @@ data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config5_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_write(path = config_file,
           data_product = data_product,
           description = dataproduct_description,
@@ -386,10 +386,10 @@ finalise(handle)
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config6_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_read(path = config_file,
          data_product = data_product,
          version = version)
@@ -436,10 +436,10 @@ test_that("handle contains issues block",{
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config7_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_read(path = config_file,
          data_product = data_product,
          version = version)
@@ -483,10 +483,10 @@ test_that("config issue is in registry",{
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config8_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_read(path = config_file,
          data_product = data_product,
          version = version)
@@ -530,10 +530,10 @@ test_that("script issue is in registry",{
 
 # User written config file
 config_file <- paste0("config_files/raise_issue/config9_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace,
+              output_namespace = namespace)
 add_read(path = config_file,
          data_product = data_product,
          version = version)

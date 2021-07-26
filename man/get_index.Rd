@@ -4,10 +4,12 @@
 \alias{get_index}
 \title{get_index}
 \usage{
-get_index(self)
+get_index(write, data_product)
 }
 \arguments{
-\item{self}{self}
+\item{write}{write}
+
+\item{data_product}{data_product}
 }
 \description{
 get_index

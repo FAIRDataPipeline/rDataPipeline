@@ -28,24 +28,24 @@ coderun_description <- "Register a file in the pipeline"
 namespace <- "soniamitchell"
 
 # Generate config.yaml file
-write_config(path = config_file,
+create_config(path = config_file,
              description = coderun_description,
              input_namespace = namespace,
              output_namespace = namespace)
              
 # Add data product to `write` block
-write_dataproduct(path = config_file,
-                  data_product = file.path("real", "data", "1"),
-                  description = "My first dataset",
-                  file_type = "csv")
+add_write(path = config_file,
+          data_product = file.path("real", "data", "1"),
+          description = "My first dataset",
+          file_type = "csv")
                   
-write_dataproduct(path = config_file,
-                  data_product = file.path("real", "data", "2"),
-                  description = "My second dataset",
-                  file_type = "csv")
+add_write(path = config_file,
+          data_product = file.path("real", "data", "2"),
+          description = "My second dataset",
+          file_type = "csv")
 ```
 
-Similarly, `read_dataproduct()` can be used to add data products to the `read`
+Similarly, `add_read()` can be used to add data products to the `read`
 block.
 
 ## FAIR DataPipeline CLI

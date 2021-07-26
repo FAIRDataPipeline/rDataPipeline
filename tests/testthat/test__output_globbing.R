@@ -14,10 +14,10 @@ if (grepl("localhost", endpoint)) run_server()
 
 # User written config file
 config_file <- paste0("config_files/outputglobbing/config_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -56,10 +56,10 @@ use_version <- "${{MAJOR}}"
 
 # User written config file
 config_file <- paste0("config_files/outputglobbing/config2_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product3,
           description = dataproduct_description,

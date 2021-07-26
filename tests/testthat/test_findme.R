@@ -17,10 +17,10 @@ endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
 config_file <- paste0("config_files/findme/config_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -77,10 +77,10 @@ test_that("findme prints output",{
 
 # User written config file
 config_file <- paste0("config_files/findme/config2_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
@@ -137,10 +137,10 @@ data_product3 <- paste("findme/test/array2", uid, sep = "_")
 
 # User written config file
 config_file <- paste0("config_files/findme/config3_", uid , ".yaml")
-write_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace1,
-             output_namespace = namespace1)
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
 add_write(path = config_file,
           data_product = data_product3,
           description = dataproduct_description,

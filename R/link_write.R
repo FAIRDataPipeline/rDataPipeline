@@ -12,7 +12,7 @@ link_write <- function(handle, data_product) {
   # Get metadata ------------------------------------------------------------
 
   write <- handle$yaml$write
-  index <- write_index(write, data_product)
+  index <- get_index(write, data_product)
 
   this_write <- write[[index]]
   file_type <- this_write$file_type

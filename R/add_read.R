@@ -16,7 +16,7 @@
 #' path <- "test_config/config.yaml"
 #'
 #' # Write run_metadata block
-#' write_config(path = path,
+#' create_config(path = path,
 #'              description = "test",
 #'              input_namespace = "test_user",
 #'              output_namespace = "test_user")
