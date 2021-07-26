@@ -1,6 +1,26 @@
 url: https://fairdatapipeline.github.io/rFDP
 
 reference:
+- title: "CLI"
+  desc: >
+    Stand in CLI functions
+  contents:
+  - fair_init
+  - fair_pull
+  - fair_run
+- title: "config.yaml"
+  desc: >
+    Functions for writing a config.yaml
+  contents:
+  - create_config
+  - add_write
+  - add_read
+- title: "CodeRun"
+  desc: >
+    Functions for generating a Code Run
+  contents:
+  - initialise
+  - finalise
 - title: "Write"
   desc: >
     Functions for writing data products
@@ -9,6 +29,15 @@ reference:
   - starts_with("write")
 - title: "Read"
   desc: "Functions for reading data products"
-- contents:
+  contents:
   - link_read
   - starts_with("read")
+- title: "Issues"
+  desc: "Functions for attaching issues"
+  contents:
+  - starts_with("raise_issue")
+- title: "Misc"
+  desc: "Miscellaneous functions"
+  contents:
+  - findme
+  - get_components
