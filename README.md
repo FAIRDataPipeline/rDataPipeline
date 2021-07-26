@@ -14,6 +14,7 @@ In R:
 ```{r}
 library(devtools)
 install_github("FAIRDataPipeline/rFDP")
+library(rFDP)
 ```
 
 ## User-written *config.yaml*
@@ -58,12 +59,12 @@ local data registry. This only needs to be done once, when the local registry is
 first installed.
 
 ```{r}
-rFDP::fair_init(family_name = "Mitchell",
-                given_name = "Sonia",
-                orcid = "https://orcid.org/0000-0003-1536-2066",
-                organisation = c("University of Glasgow",
-                                 "Boydorr Centre for Population and Ecosystem Health"),
-                endpoint = "http://localhost:8000/api/")
+fair_init(family_name = "Mitchell",
+          given_name = "Sonia",
+          orcid = "https://orcid.org/0000-0003-1536-2066",
+          organisation = c("University of Glasgow",
+                           "Boydorr Centre for Population and Ecosystem Health"),
+          endpoint = "http://localhost:8000/api/")
 ```
 
 The R implementation of `fair_pull()` is used to register external data products 
