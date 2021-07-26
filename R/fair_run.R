@@ -103,6 +103,8 @@ fair_run <- function(path = "config.yaml",
   # Check for presence of `write` section
   if (any("write" %in% names(yaml))) {
 
+    run_metadata$public <- TRUE
+
     write <- yaml$write
 
     # If names(write) is not null, then a single entry has been added that
