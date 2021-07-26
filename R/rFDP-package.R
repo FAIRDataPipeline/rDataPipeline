@@ -18,7 +18,6 @@
 #' @import jsonlite
 #' @importFrom openssl sha1
 #' @importFrom reshape2 dcast
-#' @import sf
 #' @importFrom stats setNames
 #' @import tibble
 #' @import tidyr
