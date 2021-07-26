@@ -159,7 +159,7 @@ Record \code{code_run} outputs in \code{fdp} object
   use_version,
   use_namespace,
   path,
-  data_product_decription,
+  data_product_description,
   component_description,
   public
 )}\if{html}{\out{</div>}}
@@ -186,7 +186,7 @@ the data product resides, used as output in the \code{code_run}}
 \item{\code{path}}{a \code{string} specifying the location of the data product
 in the local data store}
 
-\item{\code{data_product_decription}}{a \code{string} containing a description of
+\item{\code{data_product_description}}{a \code{string} containing a description of
 the data product}
 
 \item{\code{component_description}}{a \code{string} containing a description of
