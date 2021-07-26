@@ -110,6 +110,8 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global user.email "sonia.mitchell@glasgow.ac.uk"
+          git config --global user.name "Sonia Mitchell"
           R CMD INSTALL .
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
         shell: bash
