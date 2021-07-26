@@ -41,15 +41,42 @@ fair_run <- function(path = "config.yaml",
     if (!all(is.null(names(read))))
       read <- list(read)
 
-    # Ensure version number is present
+    working_read <- list()
+
     for (i in seq_along(read)) {
-      read_version <- fdp_resolve_read(read[[i]], yaml)
-      read[[i]]$use$version <- read_version # version should be here
-      read[[i]]$version <- NULL
+      this_read <- read[[i]]
+      index <- length(working_read) + 1
+      read_dataproduct <- this_read$data_product
+
+      if (basename(read_dataproduct) == "*") {
+        data_products <- get_entry(table = "data_product",
+                                   query = list(name = read_dataproduct),
+                                   endpoint = endpoint)
+
+        for (k in seq_along(data_products)) {
+          this_dataproduct <- data_products[[k]]
+          this_subread <- this_read
+
+          this_subread$data_product <- this_dataproduct$name
+
+          index <- length(working_read) + 1
+          working_read[[index]] <- this_subread
+          read_version <- fdp_resolve_read(this_subread, yaml)
+          working_read[[index]]$use$version <- read_version
+          working_read[[index]]$version <- NULL
+        }
+
+      } else {
+
+        working_read[[index]] <- this_read
+        read_version <- fdp_resolve_read(this_read, yaml)
+        working_read[[index]]$use$version <- read_version
+        working_read[[index]]$version <- NULL
+      }
     }
 
   } else {
-    read <- list()
+    working_read <- list()
   }
 
   # Check for presence of `register` section
@@ -251,7 +278,7 @@ fair_run <- function(path = "config.yaml",
 
   # Generate working config.yaml file
   working_yaml <- list(run_metadata = run_metadata,
-                       read = read,
+                       read = working_read,
                        write = working_write)
   yaml::write_yaml(working_yaml, file = config_path)
 
