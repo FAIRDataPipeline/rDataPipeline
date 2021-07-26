@@ -8,6 +8,7 @@
 #' @param namespace namespace
 #' @param issue issue
 #' @param severity severity
+#' @param whole_object whole_object
 #'
 #' @export
 #'
@@ -18,7 +19,8 @@ raise_issue <- function(index,
                         version,
                         namespace,
                         issue,
-                        severity) {
+                        severity,
+                        whole_object) {
 
   if (missing(index)) {
     index <- NA
@@ -68,7 +70,13 @@ raise_issue <- function(index,
 
       data_product <- tmp$data_product
       use_data_product <- tmp$use_data_product
-      use_component <- tmp$use_component
+
+      if (whole_object) {
+        use_component <- NA
+      } else {
+        use_component <- tmp$use_component
+      }
+
       use_version <- tmp$use_version
       use_namespace <- tmp$use_namespace
 
