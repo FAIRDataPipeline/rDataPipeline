@@ -44,3 +44,4 @@ vignettes/*.pdf
 # Test files
 /tests/testthat/config_files/*
 /tests/testthat/test_datastore/*
+docs
