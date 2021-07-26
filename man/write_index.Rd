@@ -4,11 +4,9 @@
 \alias{write_index}
 \title{write_index}
 \usage{
-write_index(index, write, data_product)
+write_index(write, data_product)
 }
 \arguments{
-\item{index}{index}
-
 \item{write}{write}
 
 \item{data_product}{data_product}

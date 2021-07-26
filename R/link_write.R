@@ -12,7 +12,7 @@ link_write <- function(handle, data_product) {
   # Get metadata ------------------------------------------------------------
 
   write <- handle$yaml$write
-  index <- write_index(index, write, data_product)
+  index <- write_index(write, data_product)
 
   this_write <- write[[index]]
   file_type <- this_write$file_type
@@ -46,7 +46,7 @@ link_write <- function(handle, data_product) {
                 use_version = write_version,
                 use_namespace = write_namespace,
                 path = path,
-                data_product_decription = this_write$description,
+                data_product_description = this_write$description,
                 component_description = NA,
                 public = write_public)
 

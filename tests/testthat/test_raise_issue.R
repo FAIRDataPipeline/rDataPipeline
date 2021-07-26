@@ -62,7 +62,7 @@ test_that("handle contains issues block",{
   testthat::expect_equal(handle$issues$severity, severity)
 })
 
-# Test writing issues to whole object -------------------------------------
+# Test writing issues to whole object by reference --------------------------
 
 data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
@@ -106,6 +106,69 @@ raise_issue(handle = handle,
             namespace = namespace,
             issue = issue,
             severity = severity)
+
+test_that("handle contains issues block",{
+  testthat::expect_true(is.data.frame(handle$issues))
+  testthat::expect_equal(handle$issues$use_data_product, data_product)
+  testthat::expect_equal(handle$issues$use_component, NA)
+  testthat::expect_equal(handle$issues$issue, issue)
+  testthat::expect_equal(handle$issues$severity, severity)
+})
+
+# Test writing issues to whole object by index --------------------------
+
+data_product <- paste("findme/test/array2b", uid, sep = "_")
+component <- "component/a/s/d/f/s"
+
+# User written config file
+config_file <- paste0("config_files/raise_issue/config2b_", uid , ".yaml")
+write_config(path = config_file,
+             description = coderun_description,
+             input_namespace = namespace,
+             output_namespace = namespace)
+write_dataproduct(path = config_file,
+                  data_product = data_product,
+                  description = dataproduct_description,
+                  version = version)
+
+# CLI functions
+fair_pull(config_file)
+fair_run(config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+# Write data
+df <- data.frame(a = uid, b = uid)
+component_id1 <- write_array(array = as.matrix(df),
+                             handle = handle,
+                             data_product = data_product,
+                             component = component,
+                             description = "Some description",
+                             dimension_names = list(rowvalue = rownames(df),
+                                                    colvalue = colnames(df)))
+
+component_id2 <- write_array(array = as.matrix(df),
+                             handle = handle,
+                             data_product = data_product,
+                             component = "component2",
+                             description = "Some description",
+                             dimension_names = list(rowvalue = rownames(df),
+                                                    colvalue = colnames(df)))
+
+test_that("handle issues is null",{
+  testthat::expect_true(is.null(handle$issues))
+})
+
+issue <- "another issue"
+severity <- 9
+raise_issue(index = component_id,
+            handle = handle,
+            issue = issue,
+            severity = severity,
+            whole_object = TRUE)
 
 test_that("handle contains issues block",{
   testthat::expect_true(is.data.frame(handle$issues))
@@ -509,3 +572,4 @@ test_that("repo issue is in registry",{
   testthat::expect_equal(tmp$description, repo_issue)
   testthat::expect_equal(tmp$severity, repo_severity)
 })
+

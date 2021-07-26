@@ -172,7 +172,7 @@ fdp <- R6::R6Class("fdp", list(
   #' the data product resides, used as output in the \code{code_run}
   #' @param path a \code{string} specifying the location of the data product
   #' in the local data store
-  #' @param data_product_decription a \code{string} containing a description of
+  #' @param data_product_description a \code{string} containing a description of
   #' the data product
   #' @param component_description a \code{string} containing a description of
   #' the data product component
@@ -186,7 +186,7 @@ fdp <- R6::R6Class("fdp", list(
                     use_version,
                     use_namespace,
                     path,
-                    data_product_decription,
+                    data_product_description,
                     component_description,
                     public) {
 
@@ -200,7 +200,7 @@ fdp <- R6::R6Class("fdp", list(
                              use_version = character(),
                              use_namespace = character(),
                              path = character(),
-                             data_product_decription = character(),
+                             data_product_description = character(),
                              component_description = character(),
                              public = logical(),
                              hash = character(),
@@ -217,7 +217,7 @@ fdp <- R6::R6Class("fdp", list(
                       use_version = use_version,
                       use_namespace = use_namespace,
                       path = path,
-                      data_product_decription = data_product_decription,
+                      data_product_description = data_product_description,
                       component_description = component_description,
                       public = public,
                       hash = NA,

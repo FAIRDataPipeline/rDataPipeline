@@ -1,10 +1,9 @@
 #' write_index
 #'
-#' @param index index
 #' @param write write
 #' @param data_product data_product
 #'
-write_index <- function(index, write, data_product) {
+write_index <- function(write, data_product) {
   index <- lapply(write, function(x)
     data_product == x$data_product) %>%
     unlist() %>% which()

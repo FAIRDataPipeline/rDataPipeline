@@ -15,8 +15,7 @@ resolve_write <- function(handle,
 
   # Get entry
   write <- handle$yaml$write
-  index <- write_index(index = index,
-                       write = write,
+  index <- write_index(write = write,
                        data_product = data_product)
 
   this_dp <- handle$yaml$write[[index]]
@@ -56,9 +55,11 @@ resolve_write <- function(handle,
   # Get public flag
   public <- this_dp$use$public
 
-  if (public == "true") {
+  if (is.null(public)) {
     public <- TRUE
-  } else if (public == "false") {
+  } else if (tolower(public) == "true") {
+    public <- TRUE
+  } else if (tolower(public) == "false") {
     public <- FALSE
   }
 
