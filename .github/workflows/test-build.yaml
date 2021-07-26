@@ -94,23 +94,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-# Documentation ------------------------------------------------------------
-
-      - name: Install dependencies
-        run: |
-          install.packages("pkgdown")
-        shell: Rscript {0}
-
-      - name: Install package and deploy documentation
-        # Only when main is pushed and only on Windows
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'windows'
-        # Use the default GITHUB_TOKEN as an enviromental version
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          R CMD INSTALL .
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
-        shell: bash
