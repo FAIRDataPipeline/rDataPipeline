@@ -4,6 +4,12 @@
     <loc>https://fairdatapipeline.github.io/rFDP/index.html</loc>
   </url>
   <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/add_read.html</loc>
+  </url>
+  <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/add_write.html</loc>
+  </url>
+  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/check_dataproduct_exists.html</loc>
   </url>
   <url>
@@ -250,9 +256,6 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/read_array.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/read_dataproduct.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/read_distribution.html</loc>
   </url>
   <url>
@@ -299,9 +302,6 @@
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_config.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_dataproduct.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/write_distribution.html</loc>
