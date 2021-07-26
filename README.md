@@ -89,7 +89,7 @@ below) -- this has not been implemented in R.
 fair_run(path = config_file)
 ```
 
-## Sumbission script
+## Submission script
 
 It is intended that `fair_run()` should run generate a Code Run from a 
 submission script. Until the Python-based CLI tools are written, the submission
