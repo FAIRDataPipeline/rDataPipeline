@@ -1,28 +1,30 @@
 #' create_config
 #'
 #' Generates (user generated) config.yaml files for unit tests. Use
-#' \code{read_dataproduct()} and \code{write_dataproduct()} functions to
-#' add read and write blocks.
+#' \code{add_read()} and \code{add_write()} functions to add read and write
+#' blocks.
 #'
 #' @param path config file path
 #' @param description description field
 #' @param input_namespace input_namespace field
 #' @param output_namespace output_namespace field
+#' @param write_data_store write_data_store field
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' create_config("test_config/config.yaml",
-#'              description = "test",
-#'              input_namespace = "test_user",
-#'              output_namespace = "test_user")
+#'               description = "test",
+#'               input_namespace = "test_user",
+#'               output_namespace = "test_user")
 #' }
 #'
 create_config <- function(path,
                           description,
                           input_namespace,
-                          output_namespace) {
+                          output_namespace,
+                          write_data_store = "test/datastore/") {
 
   if (file.exists(path))
     usethis::ui_stop(paste(usethis::ui_field(path), "already exists"))
@@ -33,7 +35,7 @@ create_config <- function(path,
                        remote_data_registry_url = "https://data.scrc.uk/api/",
                        default_input_namespace = input_namespace,
                        default_output_namespace = output_namespace,
-                       write_data_store = "/Users/username/datastore/",
+                       write_data_store = write_data_store,
                        local_repo = "local_repo",
                        script = "")
 
