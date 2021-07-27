@@ -3,5 +3,9 @@
 #' Generates a random hash
 #'
 random_hash <- function() {
-  openssl::sha1(as.character(Sys.time()))
+  tmp <- format(Sys.time(), "%Y%m%d%H%M%S%OS3") %>%
+    as.numeric() * stats::runif(1, 1, 1000000)
+
+  tmp %>% as.character() %>%
+    openssl::sha1()
 }
