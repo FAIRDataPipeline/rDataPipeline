@@ -70,7 +70,7 @@ resolve_write <- function(handle,
     path <- unique(tmp$path[ind])
 
   } else {
-    filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".", file_type)
+    filename <- paste0("dat-", random_hash(), ".", file_type)
     path <- file.path(paste0(datastore, namespace), write_dataproduct, filename)
   }
 
