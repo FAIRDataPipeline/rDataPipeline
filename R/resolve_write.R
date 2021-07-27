@@ -16,7 +16,7 @@ resolve_write <- function(handle,
   # Get entry
   write <- handle$yaml$write
   index <- get_index(write = write,
-                       data_product = data_product)
+                     data_product = data_product)
 
   this_dp <- handle$yaml$write[[index]]
 
