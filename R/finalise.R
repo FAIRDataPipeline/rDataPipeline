@@ -44,11 +44,11 @@ finalise <- function(handle, delete_if_empty = FALSE) {
 
     # rename the data product as {hash}.h5 -----------------------------------
 
-    data_products <- unique(handle$outputs$use_data_product)
+    data_products <- unique(handle$outputs$data_product)
 
     for (i in seq_along(data_products)) {
 
-      index_row <- which(handle$outputs$use_data_product == data_products[i])
+      index_row <- which(handle$outputs$data_product == data_products[i])
       if (length(index_row) == 0) next
 
       this_write <- handle$outputs[index_row, ]
