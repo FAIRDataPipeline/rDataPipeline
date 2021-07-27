@@ -22,6 +22,8 @@ fdp <- R6::R6Class("fdp", list(
   #' \code{code_run} inputs
   #' @field outputs a \code{data.frame} containing metadata associated with
   #' \code{code_run} outputs
+  #' @field issues a \code{data.frame} containing metadata associated with
+  #' \code{code_run} issues
   #'
   yaml = NULL,
   model_config = NULL,
