@@ -21,8 +21,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_external_object <- function(doi_or_unique_name,
                                 primary_not_supplement = TRUE,
                                 release_date,

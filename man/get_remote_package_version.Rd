@@ -21,4 +21,3 @@ get_remote_package_version("ScottishCovidResponse/SCRCdataAPI")
 }
 
 }
-\keyword{internal}

@@ -21,4 +21,3 @@ get_storage_location("http://localhost:8000/api/storage_location/258/")
 }
 
 }
-\keyword{internal}

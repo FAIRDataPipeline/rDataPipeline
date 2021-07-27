@@ -9,8 +9,6 @@
 #'
 #' @family get functions
 #'
-#' @export
-#'
 get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
 
   key <- get_token()

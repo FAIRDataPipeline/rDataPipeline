@@ -6,9 +6,6 @@
 #' \code{list(field = value)}
 #' @param endpoint endpoint
 #'
-#' @export
-#' @keywords internal
-#'
 clean_query <- function(data, endpoint) {
 
   data_tmp <- lapply(data, function(x) {

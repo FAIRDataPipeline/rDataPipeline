@@ -5,7 +5,6 @@
 #' @param location the url of an entry in the storage_location table
 #'
 #' @return Returns a \code{list} of fields associated with the specified entry
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

@@ -7,8 +7,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_quality_controlled <- function(object_url,
                                    endpoint = "http://localhost:8000/api/") {
 

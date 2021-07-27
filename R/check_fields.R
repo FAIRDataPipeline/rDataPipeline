@@ -5,9 +5,6 @@
 #' @param method a \code{string} specifying the method, c("GET", "POST")
 #' @param endpoint endpoint
 #'
-#' @export
-#' @keywords internal
-#'
 check_fields <- function(table, query, method, endpoint) {
 
   fields <- names(query)

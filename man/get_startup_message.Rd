@@ -23,4 +23,3 @@ get_startup_message("ScottishCovidResponse/SCRCdata", "SCRCdata")
 }
 
 }
-\keyword{internal}

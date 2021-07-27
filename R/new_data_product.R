@@ -13,8 +13,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_data_product <- function(name,
                              version,
                              object_url,

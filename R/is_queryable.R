@@ -9,8 +9,6 @@
 #'
 #' @return Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
 #' isn't
-#' @export
-#' @keywords internal
 #'
 is_queryable <- function(table, query, method, endpoint) {
 

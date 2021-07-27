@@ -11,8 +11,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_namespace <- function(name,
                           full_name,
                           website,

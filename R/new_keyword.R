@@ -11,8 +11,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_keyword <- function(object_url,
                         keyphrase,
                         identifier,

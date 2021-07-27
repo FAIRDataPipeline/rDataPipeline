@@ -2,14 +2,6 @@
 #'
 #' @param url a \code{string} specifying the url of an entry
 #'
-#' @export
-#' @keywords internal
-#'
-#' @examples
-#' \dontrun{
-#' get_entity("http://localhost:8000/api/data_product/50/")
-#' }
-#'
 get_entity <- function(url) {
 
   key <- get_token()

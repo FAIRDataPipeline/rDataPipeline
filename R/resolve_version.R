@@ -1,4 +1,5 @@
 #' resolve_version
+#'
 #' @param version version number
 #' @param data_product data_product
 #' @param namespace_id namespace_id

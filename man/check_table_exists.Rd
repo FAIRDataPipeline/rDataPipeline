@@ -15,4 +15,3 @@ Returns \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 \description{
 Check if table exists in the data registry
 }
-\keyword{internal}

@@ -8,8 +8,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_file_type <- function(name,
                           extension,
                           endpoint = "http://localhost:8000/api/") {

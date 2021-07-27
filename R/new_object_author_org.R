@@ -12,8 +12,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_object_author_org <- function(object_url,
                                   author_url,
                                   organisations_urls = list(),

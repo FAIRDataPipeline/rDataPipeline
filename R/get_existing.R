@@ -14,17 +14,6 @@
 #'
 #' @family get functions
 #'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' # Get all entries in storage_root
-#' get_existing("storage_root", limit_results = FALSE)
-#'
-#' # Get 100 newest entries in data_product
-#' get_existing("data_product")
-#' }
-#'
 get_existing <- function(table,
                          limit_results = TRUE,
                          detail = "all",

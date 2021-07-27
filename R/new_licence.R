@@ -9,8 +9,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_licence <- function(object_url,
                         licence_info,
                         endpoint = "http://localhost:8000/api/") {

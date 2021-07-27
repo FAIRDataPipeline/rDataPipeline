@@ -5,7 +5,6 @@
 #'
 #' @return Returns true if the loaded package is the same version as the github
 #' package
-#' @keywords internal
 #'
 is_current_version <- function(repo = "ScottishCovidResponse/SCRCdataAPI",
                                package = "SCRCdataAPI")

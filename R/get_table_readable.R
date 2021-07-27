@@ -4,7 +4,6 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return a dataframe of readable fields and their properties
-#' @export
 #' @keywords internal
 #'
 get_table_readable <- function(table, endpoint){

@@ -8,9 +8,6 @@
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
 #'
-#' @export
-#' @keywords internal
-#'
 get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
 
   # Add token to options request header

@@ -7,8 +7,6 @@
 #' @param endpoint endpoint
 #'
 #' @return Returns
-#' @export
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

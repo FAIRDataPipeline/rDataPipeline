@@ -11,8 +11,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_storage_root <- function(root,
                              local,
                              endpoint = "http://localhost:8000/api/") {

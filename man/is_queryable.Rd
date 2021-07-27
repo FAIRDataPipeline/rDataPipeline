@@ -22,4 +22,3 @@ isn't
 \description{
 Check whether fields are queryable
 }
-\keyword{internal}

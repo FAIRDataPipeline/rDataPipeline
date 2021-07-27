@@ -6,7 +6,6 @@
 #' @param data data as a named list
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @export
 #' @keywords internal
 #'
 post_data <- function(table, data, endpoint) {

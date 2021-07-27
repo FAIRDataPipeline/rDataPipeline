@@ -34,8 +34,6 @@
 #'
 #' @family create functions
 #'
-#' @export
-#'
 create_version_number <- function(download_date = NULL,
                                   version = NULL, major = 0, minor = "1", patch = 0) {
   #check if a version number was used

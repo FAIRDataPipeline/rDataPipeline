@@ -11,8 +11,6 @@
 #'
 #' @family download functions
 #'
-#' @export
-#'
 #' @return Returns list comprising two elements
 #' \itemize{
 #'  \item{"downloaded_to"}{absolute path of H5 file after downloading}

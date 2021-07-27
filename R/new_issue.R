@@ -11,8 +11,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_issue <- function(severity,
                       description,
                       component_issues,

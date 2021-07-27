@@ -20,9 +20,9 @@
 #' }
 #'
 create_config <- function(path,
-                         description,
-                         input_namespace,
-                         output_namespace) {
+                          description,
+                          input_namespace,
+                          output_namespace) {
 
   if (file.exists(path))
     usethis::ui_stop(paste(usethis::ui_field(path), "already exists"))
@@ -33,7 +33,7 @@ create_config <- function(path,
                        remote_data_registry_url = "https://data.scrc.uk/api/",
                        default_input_namespace = input_namespace,
                        default_output_namespace = output_namespace,
-                       write_data_store = "test_datastore/",
+                       write_data_store = "/Users/username/datastore/",
                        local_repo = "local_repo",
                        script = "")
 

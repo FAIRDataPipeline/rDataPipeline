@@ -9,7 +9,6 @@
 #'
 #' @return Returns a string or list of strings specifying the URL or URLs of
 #' entries in a table
-#' @export
 #'
 get_url <- function(table,
                     query = list(),

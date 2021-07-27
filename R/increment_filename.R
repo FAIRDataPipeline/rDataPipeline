@@ -4,8 +4,6 @@
 #'
 #' @param path path
 #'
-#' @export
-#'
 increment_filename <- function(path) {
 
   directory <- dirname(path)

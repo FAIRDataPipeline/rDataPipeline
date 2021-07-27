@@ -4,7 +4,6 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return a character vector of tables
-#' @export
 #' @keywords internal
 #'
 get_tables <- function(endpoint = "http://localhost:8000/api/"){

@@ -9,8 +9,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_organisation <- function(name,
                              identifier,
                              endpoint = "http://localhost:8000/api/") {

@@ -12,8 +12,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_object <- function(description,
                        storage_location_url,
                        file_type_url,

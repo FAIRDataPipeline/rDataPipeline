@@ -10,8 +10,6 @@
 #'
 #' @family download functions
 #'
-#' @export
-#'
 #' @examples
 #' \donttest{
 #' \dontrun{

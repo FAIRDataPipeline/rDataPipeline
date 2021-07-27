@@ -8,8 +8,6 @@
 #'
 #' @family get functions
 #'
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #' get_github_hash("ScottishCovidResponse/SCRCdata")

@@ -3,8 +3,6 @@
 #' @param path Local repository file path
 #' @return \code{boolean}, if local repository is clean (TRUE, else FALSE)
 #'
-#' @export
-#'
 check_local_repo <- function(path) {
   if (grepl("^~", path)) path <- gsub("^~", "", path)
 

@@ -11,8 +11,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_author <- function(family_name,
                        given_name,
                        identifier,

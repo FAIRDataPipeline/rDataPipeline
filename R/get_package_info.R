@@ -21,8 +21,6 @@
 #'
 #' @family get functions
 #'
-#' @export
-#'
 #' @examples
 #' \donttest{
 #' \dontrun{

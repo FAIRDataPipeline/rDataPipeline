@@ -29,16 +29,6 @@ to 100 entries
 \description{
 Get entries (from the data registry) in a particular table
 }
-\examples{
-\dontrun{
-# Get all entries in storage_root
-get_existing("storage_root", limit_results = FALSE)
-
-# Get 100 newest entries in data_product
-get_existing("data_product")
-}
-
-}
 \seealso{
 Other get functions: 
 \code{\link{get_components}()},

@@ -18,4 +18,3 @@ check_fields(table, query, method, endpoint)
 \description{
 check_fields
 }
-\keyword{internal}

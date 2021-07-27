@@ -22,8 +22,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_code_run <- function(run_date,
                          description,
                          code_repo_url,

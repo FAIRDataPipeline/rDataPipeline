@@ -15,4 +15,3 @@ Returns the current package version
 \description{
 Get loaded package version
 }
-\keyword{internal}

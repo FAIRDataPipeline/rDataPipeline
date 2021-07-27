@@ -13,8 +13,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_code_repo_release <- function(name,
                                   version,
                                   object_url,

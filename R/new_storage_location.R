@@ -15,8 +15,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_storage_location <- function(path,
                                  hash,
                                  public,

@@ -6,6 +6,8 @@
 #' @param file file path
 #' @param endpoint endpoint
 #'
+#' @export
+#'
 findme <- function(file, endpoint) {
 
   hash <- get_file_hash(file)

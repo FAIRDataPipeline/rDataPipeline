@@ -3,7 +3,6 @@
 #' @param repo a \code{string} specifying the github username/repository
 #'
 #' @return Returns the current package version
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

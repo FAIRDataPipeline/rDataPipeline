@@ -23,8 +23,6 @@
 #'
 #' @family new functions
 #'
-#' @export
-#'
 new_object_component <- function(object_url,
                                  name,
                                  description,

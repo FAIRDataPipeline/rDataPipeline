@@ -4,7 +4,6 @@
 #' @param package a \code{string} specifying the package name
 #'
 #' @return returns the startup message
-#' @keywords internal
 #'
 #' @examples
 #' \dontrun{
