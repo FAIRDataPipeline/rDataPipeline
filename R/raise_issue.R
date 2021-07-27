@@ -20,7 +20,7 @@ raise_issue <- function(index,
                         namespace,
                         issue,
                         severity,
-                        whole_object) {
+                        whole_object = FALSE) {
 
   if (missing(index)) {
     index <- NA
