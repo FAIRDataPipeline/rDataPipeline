@@ -46,9 +46,9 @@ path1 <- link_write(handle, data_product1)
 write.csv(df, path1)
 
 uid2 <- paste0(uid, "_2")
-df <- data.frame(a = uid2, b = uid2)
+df2 <- data.frame(a = uid2, b = uid2)
 path2 <- link_write(handle, data_product2)
-write.csv(df, path2)
+write.csv(df2, path2)
 
 test_that("data products recorded in working config",{
   writes <- handle$outputs
@@ -115,5 +115,8 @@ test_that("data products recorded in working config",{
 
   testthat::expect_equal(reads$use_version[1], "0.0.1")
   testthat::expect_equal(reads$use_version[2], "0.0.2")
+
+  testthat::expect_equal(read.csv(path1)[,-1], df)
+  testthat::expect_equal(read.csv(path2)[,-1], df2)
 })
 
