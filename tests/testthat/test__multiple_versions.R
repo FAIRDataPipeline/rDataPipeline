@@ -64,8 +64,6 @@ test_that("data products recorded in working config",{
 
 finalise(handle)
 
-
-
 test_that("data products recorded in working config",{
   versions <- c("0.0.1", "0.0.2")
   for (i in 1:2) {
@@ -76,5 +74,46 @@ test_that("data products recorded in working config",{
     testthat::expect_equal(get_entity(output_dp_url)$name, data_product1)
     testthat::expect_equal(get_entity(output_dp_url)$version, versions[i])
   }
+})
+
+# Read from registry -------------------------------------------------------
+
+# User written config file
+config_file <- paste0("config_files/multiversion/config2_", uid , ".yaml")
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
+add_read(path = config_file,
+         data_product = data_product1,
+         version = "0.0.1")
+add_read(path = config_file,
+         data_product = data_product2,
+         use_data_product = data_product1,
+         version = "0.0.2")
+
+# CLI functions
+fair_pull(path = config_file)
+fair_run(path = config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+
+handle <- initialise(config, script)
+
+path1 <- link_read(handle, data_product1)
+path2 <- link_read(handle, data_product2)
+
+test_that("data products recorded in working config",{
+  reads <- handle$inputs
+  testthat::expect_equal(reads$data_product[1], data_product1)
+  testthat::expect_equal(reads$data_product[2], data_product2)
+
+  testthat::expect_equal(reads$use_data_product[1], data_product1)
+  testthat::expect_equal(reads$use_data_product[2], data_product1)
+
+  testthat::expect_equal(reads$use_version[1], "0.0.1")
+  testthat::expect_equal(reads$use_version[2], "0.0.2")
 })
 
