@@ -63,8 +63,21 @@ resolve_write <- function(handle,
     public <- FALSE
   }
 
-  # Extract / set save location
-  if (write_dataproduct %in% handle$outputs$data_product) {
+  # Extract / set save location ---------------------------------------------
+
+  # Check whether this data product has been written to in this Code Run
+  # (could be a multi-component object)
+  if (is.null(handle$outputs)) {
+    file_exists <- FALSE
+  } else {
+    file_exists <- handle$outputs %>%
+      filter(.data$data_product == write_dataproduct,
+             .data$use_version == version,
+             .data$use_namespace == namespace)
+    file_exists <- nrow(file_exists) != 0
+  }
+
+  if (file_exists) {
     tmp <- handle$outputs
     ind <- which(tmp$data_product == data_product)
     path <- unique(tmp$path[ind])
