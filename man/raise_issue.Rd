@@ -13,7 +13,7 @@ raise_issue(
   namespace,
   issue,
   severity,
-  whole_object
+  whole_object = FALSE
 )
 }
 \arguments{

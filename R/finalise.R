@@ -44,11 +44,11 @@ finalise <- function(handle, delete_if_empty = FALSE) {
 
     # rename the data product as {hash}.h5 -----------------------------------
 
-    data_products <- unique(handle$outputs$use_data_product)
+    data_products <- unique(handle$outputs$data_product)
 
     for (i in seq_along(data_products)) {
 
-      index_row <- which(handle$outputs$use_data_product == data_products[i])
+      index_row <- which(handle$outputs$data_product == data_products[i])
       if (length(index_row) == 0) next
 
       this_write <- handle$outputs[index_row, ]
@@ -60,6 +60,7 @@ finalise <- function(handle, delete_if_empty = FALSE) {
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace,
                                            endpoint = endpoint)
+      write_namespace_id <- extract_id(write_namespace_url)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
@@ -121,53 +122,53 @@ finalise <- function(handle, delete_if_empty = FALSE) {
         new_path <- replacement_path
       }
 
-      extension <- strsplit(new_path, "\\.")[[1]][2]
+        extension <- strsplit(new_path, "\\.")[[1]][2]
 
-      file_type_exists <- get_url(table = "file_type",
-                                  query = list(extension = extension),
-                                  endpoint = endpoint)
+        file_type_exists <- get_url(table = "file_type",
+                                    query = list(extension = extension),
+                                    endpoint = endpoint)
 
-      if (is.null(file_type_exists)) {
-        file_type_url <- new_file_type(name = extension,
-                                       extension = extension,
-                                       endpoint = endpoint)
-      } else {
-        file_type_url <- file_type_exists
-      }
+        if (is.null(file_type_exists)) {
+          file_type_url <- new_file_type(name = extension,
+                                         extension = extension,
+                                         endpoint = endpoint)
+        } else {
+          file_type_url <- file_type_exists
+        }
 
-      object_url <- new_object(storage_location_url = storage_location_url,
-                               description = write_dataproduct_description,
-                               file_type_url = file_type_url,
-                               endpoint = endpoint)
+        object_url <- new_object(storage_location_url = storage_location_url,
+                                 description = write_dataproduct_description,
+                                 file_type_url = file_type_url,
+                                 endpoint = endpoint)
 
-      # Get user metadata
-      user_url <- get_url(table = "users",
-                          query = list(username = "admin"),
-                          endpoint = endpoint)
-      assertthat::assert_that(length(user_url) == 1)
-      user_id <- extract_id(user_url)
-      user_author_org_url <- get_entry("user_author_org",
-                                       query = list(user = user_id),
-                                       endpoint = endpoint)
-      assertthat::assert_that(length(user_author_org_url) == 1)
-      author_url <- user_author_org_url[[1]]$author
-      organisations_urls <- user_author_org_url[[1]]$organisations
+        # Get user metadata
+        user_url <- get_url(table = "users",
+                            query = list(username = "admin"),
+                            endpoint = endpoint)
+        assertthat::assert_that(length(user_url) == 1)
+        user_id <- extract_id(user_url)
+        user_author_org_url <- get_entry("user_author_org",
+                                         query = list(user = user_id),
+                                         endpoint = endpoint)
+        assertthat::assert_that(length(user_author_org_url) == 1)
+        author_url <- user_author_org_url[[1]]$author
+        organisations_urls <- user_author_org_url[[1]]$organisations
 
-      new_object_author_org(
-        object_url = object_url,
-        author_url = author_url,
-        organisations_urls = organisations_urls,
-        endpoint = endpoint)
+        new_object_author_org(
+          object_url = object_url,
+          author_url = author_url,
+          organisations_urls = organisations_urls,
+          endpoint = endpoint)
 
-      # Register data product in local registry
-      data_product_url <- new_data_product(name = use_data_product_runid,
-                                           version = write_version,
-                                           object_url = object_url,
-                                           namespace_url = write_namespace_url,
-                                           endpoint = endpoint)
+        # Register data product in local registry
+        data_product_url <- new_data_product(name = use_data_product_runid,
+                                             version = write_version,
+                                             object_url = object_url,
+                                             namespace_url = write_namespace_url,
+                                             endpoint = endpoint)
 
-      usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
-                             "to local registry"))
+        usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
+                               "to local registry"))
 
       # Update handle
       handle$finalise_output_hash(use_data_product = write_use_data_product,
@@ -188,6 +189,7 @@ finalise <- function(handle, delete_if_empty = FALSE) {
       write_use_data_product <- this_write$use_data_product
       write_component <- this_write$use_component
       write_version <- this_write$use_version
+      write_namespace <- this_write$use_namespace
       object_url <- this_write$data_product_url
       object_id <- extract_id(object_url)
 
@@ -211,6 +213,8 @@ finalise <- function(handle, delete_if_empty = FALSE) {
       # Update handle
       handle$finalise_output_url(use_data_product = write_use_data_product,
                                  use_component = write_component,
+                                 use_version = write_version,
+                                 use_namespace = write_namespace,
                                  component_url = component_url)
     }
   }

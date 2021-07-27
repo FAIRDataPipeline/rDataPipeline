@@ -36,6 +36,15 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
+test_that("data products recorded in working config",{
+  writes <- handle$yaml$write
+  testthat::expect_equal(writes[[1]]$data_product, data_product1)
+  testthat::expect_equal(writes[[2]]$data_product, data_product2)
+
+  testthat::expect_equal(writes[[1]]$use$version, "0.0.1")
+  testthat::expect_equal(writes[[2]]$use$version, "0.0.1")
+})
+
 # Write data
 path1 <- link_write(handle, data_product1)
 uid1 <- paste0(uid, "_1")
@@ -82,8 +91,8 @@ test_that("data products recorded in working config",{
   testthat::expect_equal(writes[[3]]$data_product, data_product1)
 
   testthat::expect_equal(writes[[1]]$use$version, "1.0.0")
-  testthat::expect_equal(writes[[2]]$use$version, "1.0.1")
-  testthat::expect_equal(writes[[3]]$use$version, "1.0.1")
+  testthat::expect_equal(writes[[2]]$use$version, "1.0.0")
+  testthat::expect_equal(writes[[3]]$use$version, "1.0.0")
 })
 
 data_product4 <- file.path(dirname(data_product3), "new")
@@ -107,5 +116,5 @@ test_that("data products recorded in working config",{
   testthat::expect_equal(outputs$data_product[2], data_product2)
 
   testthat::expect_equal(outputs$use_version[1], "1.0.0")
-  testthat::expect_equal(outputs$use_version[2], "1.0.1")
+  testthat::expect_equal(outputs$use_version[2], "1.0.0")
 })

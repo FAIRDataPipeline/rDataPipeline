@@ -16,7 +16,7 @@ resolve_write <- function(handle,
   # Get entry
   write <- handle$yaml$write
   index <- get_index(write = write,
-                       data_product = data_product)
+                     data_product = data_product)
 
   this_dp <- handle$yaml$write[[index]]
 
@@ -63,14 +63,27 @@ resolve_write <- function(handle,
     public <- FALSE
   }
 
-  # Extract / set save location
-  if (write_dataproduct %in% handle$outputs$data_product) {
+  # Extract / set save location ---------------------------------------------
+
+  # Check whether this data product has been written to in this Code Run
+  # (could be a multi-component object)
+  if (is.null(handle$outputs)) {
+    file_exists <- FALSE
+  } else {
+    file_exists <- handle$outputs %>%
+      filter(.data$data_product == write_dataproduct,
+             .data$use_version == version,
+             .data$use_namespace == namespace)
+    file_exists <- nrow(file_exists) != 0
+  }
+
+  if (file_exists) {
     tmp <- handle$outputs
     ind <- which(tmp$data_product == data_product)
     path <- unique(tmp$path[ind])
 
   } else {
-    filename <- paste0(format(Sys.time(), "%Y%m%d-%H%M%S"), ".", file_type)
+    filename <- paste0("dat-", random_hash(), ".", file_type)
     path <- file.path(paste0(datastore, namespace), write_dataproduct, filename)
   }
 

@@ -22,6 +22,8 @@ fdp <- R6::R6Class("fdp", list(
   #' \code{code_run} inputs
   #' @field outputs a \code{data.frame} containing metadata associated with
   #' \code{code_run} outputs
+  #' @field issues a \code{data.frame} containing metadata associated with
+  #' \code{code_run} issues
   #'
   yaml = NULL,
   model_config = NULL,
@@ -362,6 +364,10 @@ fdp <- R6::R6Class("fdp", list(
   #' product, used as output in the \code{code_run}
   #' @param use_component a \code{string} specifying the name of the data
   #' product component, used as output in the \code{code_run}
+  #' @param use_version a \code{string} specifying the name of the data
+  #' product version, used as output in the \code{code_run}
+  #' @param use_namespace a \code{string} specifying the namespace in which
+  #' the data product resides, used as input in the \code{code_run}
   #' @param component_url a \code{string} specifying the URL of an entry in the
   #' \code{object_component} table
   #'
@@ -369,14 +375,20 @@ fdp <- R6::R6Class("fdp", list(
   #'
   finalise_output_url = function(use_data_product,
                                  use_component,
+                                 use_version,
+                                 use_namespace,
                                  component_url) {
 
     # Update handle with component URL
     if (is.na(use_component)) {
       index <- which(self$outputs$use_data_product == use_data_product &
+                       self$outputs$use_namespace == use_namespace &
+                       self$outputs$use_version == use_version &
                        is.na(self$outputs$use_component))
     } else {
       index <- which(self$outputs$use_data_product == use_data_product &
+                       self$outputs$use_namespace == use_namespace &
+                       self$outputs$use_version == use_version &
                        self$outputs$use_component == use_component)
     }
 

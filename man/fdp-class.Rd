@@ -37,6 +37,9 @@ the \code{code_run} table}
 
 \item{\code{outputs}}{a \code{data.frame} containing metadata associated with
 \code{code_run} outputs}
+
+\item{\code{issues}}{a \code{data.frame} containing metadata associated with
+\code{code_run} issues}
 }
 \if{html}{\out{</div>}}
 }
