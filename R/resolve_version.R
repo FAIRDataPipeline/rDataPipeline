@@ -24,6 +24,7 @@ resolve_version <- function(version, data_product, namespace_id) {
     max_version <- get_max_version(data_product, namespace_id)
     minor <- max_version[[1]]$minor
     max_version[[1]]$minor <- as.integer(minor + 1)
+    max_version[[1]]$patch <- as.integer(0)
     write_version <- as.character(max_version)
 
     # Increment major ---------------------------------------------------------
@@ -32,6 +33,8 @@ resolve_version <- function(version, data_product, namespace_id) {
     max_version <- get_max_version(data_product, namespace_id)
     major <- max_version[[1]]$major
     max_version[[1]]$major <- as.integer(major + 1)
+    max_version[[1]]$minor <- as.integer(0)
+    max_version[[1]]$patch <- as.integer(0)
     write_version <- as.character(max_version)
 
   } else if (grepl("\\$\\{\\{DATE\\}\\}", version)) {
