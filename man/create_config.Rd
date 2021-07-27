@@ -4,7 +4,13 @@
 \alias{create_config}
 \title{create_config}
 \usage{
-create_config(path, description, input_namespace, output_namespace)
+create_config(
+  path,
+  description,
+  input_namespace,
+  output_namespace,
+  write_data_store = "test/datastore/"
+)
 }
 \arguments{
 \item{path}{config file path}
@@ -14,18 +20,20 @@ create_config(path, description, input_namespace, output_namespace)
 \item{input_namespace}{input_namespace field}
 
 \item{output_namespace}{output_namespace field}
+
+\item{write_data_store}{write_data_store field}
 }
 \description{
 Generates (user generated) config.yaml files for unit tests. Use
-\code{read_dataproduct()} and \code{write_dataproduct()} functions to
-add read and write blocks.
+\code{add_read()} and \code{add_write()} functions to add read and write
+blocks.
 }
 \examples{
 \dontrun{
 create_config("test_config/config.yaml",
-             description = "test",
-             input_namespace = "test_user",
-             output_namespace = "test_user")
+              description = "test",
+              input_namespace = "test_user",
+              output_namespace = "test_user")
 }
 
 }
