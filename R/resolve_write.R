@@ -70,6 +70,8 @@ resolve_write <- function(handle,
   if (is.null(handle$outputs)) {
     file_exists <- FALSE
   } else {
+    # Different versions of the same data product may have the same
+    # write_dataproduct, so filtering by that is not enough
     file_exists <- handle$outputs %>%
       filter(.data$data_product == write_dataproduct,
              .data$use_version == version,

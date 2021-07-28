@@ -49,7 +49,7 @@ write.csv(df2, path2)
 
 finalise(handle)
 
-# Output globbing ---------------------------------------------------------
+# Input globbing ----------------------------------------------------------
 
 data_product3 <- file.path("real", "data", uid, "*")
 

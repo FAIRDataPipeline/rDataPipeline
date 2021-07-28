@@ -2,21 +2,26 @@
 #'
 #' Finalise Code Run and push associated metadata to the local registry.
 #'
-#' If a CodeRun does not read an input, write an output, or attach an issue then
-#' `delete_if_empty` should delete the CodeRun entry when set to `TRUE`.
+#' If a Code Run does not read an input, write an output, or attach an issue,
+#' then delete the Code Run entry when `delete_if_empty` is set to `TRUE`.
+#'
+#' If a data product has the same hash as a previous version, remove it from
+#' the registry when `delete_if_duplicate` is set to `TRUE`.
 #'
 #' @param handle \code{fdp} object
 #' @param delete_if_empty (optional) default is `FALSE`; see Details
+#' @param delete_if_duplicate (optional) default is `FALSE`; see Details
 #'
 #' @export
 #'
-finalise <- function(handle, delete_if_empty = FALSE) {
+finalise <- function(handle,
+                     delete_if_empty = FALSE,
+                     delete_if_duplicate = FALSE) {
 
   # If `delete_if_empty` is true and no input was read, output was written, or
   # issue was attached, then delete the CodeRun entry
 
   if (delete_if_empty) {
-
     code_run_url <- handle$code_run
     key <- get_token()
     h <- c(Authorization = paste("token", key))
@@ -24,7 +29,6 @@ finalise <- function(handle, delete_if_empty = FALSE) {
                            httr::content_type('application/json'),
                            httr::add_headers(.headers = h),
                            verbose())
-
     return(invisible(NULL))
   }
 
@@ -42,14 +46,13 @@ finalise <- function(handle, delete_if_empty = FALSE) {
 
   if (!is.null(handle$outputs)) {
 
-    # rename the data product as {hash}.h5 -----------------------------------
+    # Rename file and register data product ---------------------------------
 
     data_products <- unique(handle$outputs$data_product)
 
     for (i in seq_along(data_products)) {
 
       index_row <- which(handle$outputs$data_product == data_products[i])
-      if (length(index_row) == 0) next
 
       this_write <- handle$outputs[index_row, ]
       write_data_product <- unique(this_write$data_product)
@@ -80,6 +83,32 @@ finalise <- function(handle, delete_if_empty = FALSE) {
         hash <- get_file_hash(path)
       } else {
         usethis::ui_stop("File is missing")
+      }
+
+      # If `delete_if_duplicate` is `TRUE`, check whether hash is the same as
+      # previous versions of the data product
+      if (delete_if_duplicate) {
+        existing_dp <- get_entry("data_product",
+                                 list(name = write_use_data_product),
+                                 endpoint = endpoint)
+
+        if (!is.null(existing_dp)) {
+          existing_hash <- lapply(existing_dp, function(x) {
+            existing_obj <- get_entity(x$object)
+            existing_loc <- get_entity(existing_obj$storage_location)
+            existing_loc$hash
+          }) %>% unlist()
+
+          if (hash %in% existing_hash) {
+            handle$finalise_output_hash(use_data_product = write_use_data_product,
+                                        use_data_product_runid = use_data_product_runid,
+                                        use_version = write_version,
+                                        use_namespace = write_namespace,
+                                        hash = hash,
+                                        delete_if_duplicate = TRUE)
+            next
+          }
+        }
       }
 
       # Does a file with the same hash already exist in the registry?
@@ -122,70 +151,73 @@ finalise <- function(handle, delete_if_empty = FALSE) {
         new_path <- replacement_path
       }
 
-        extension <- strsplit(new_path, "\\.")[[1]][2]
+      extension <- strsplit(new_path, "\\.")[[1]][2]
 
-        file_type_exists <- get_url(table = "file_type",
-                                    query = list(extension = extension),
-                                    endpoint = endpoint)
+      file_type_exists <- get_url(table = "file_type",
+                                  query = list(extension = extension),
+                                  endpoint = endpoint)
 
-        if (is.null(file_type_exists)) {
-          file_type_url <- new_file_type(name = extension,
-                                         extension = extension,
-                                         endpoint = endpoint)
-        } else {
-          file_type_url <- file_type_exists
-        }
+      if (is.null(file_type_exists)) {
+        file_type_url <- new_file_type(name = extension,
+                                       extension = extension,
+                                       endpoint = endpoint)
+      } else {
+        file_type_url <- file_type_exists
+      }
 
-        object_url <- new_object(storage_location_url = storage_location_url,
-                                 description = write_dataproduct_description,
-                                 file_type_url = file_type_url,
-                                 endpoint = endpoint)
+      object_url <- new_object(storage_location_url = storage_location_url,
+                               description = write_dataproduct_description,
+                               file_type_url = file_type_url,
+                               endpoint = endpoint)
 
-        # Get user metadata
-        user_url <- get_url(table = "users",
-                            query = list(username = "admin"),
-                            endpoint = endpoint)
-        assertthat::assert_that(length(user_url) == 1)
-        user_id <- extract_id(user_url)
-        user_author_org_url <- get_entry("user_author_org",
-                                         query = list(user = user_id),
-                                         endpoint = endpoint)
-        assertthat::assert_that(length(user_author_org_url) == 1)
-        author_url <- user_author_org_url[[1]]$author
-        organisations_urls <- user_author_org_url[[1]]$organisations
+      # Get user metadata
+      user_url <- get_url(table = "users",
+                          query = list(username = "admin"),
+                          endpoint = endpoint)
+      assertthat::assert_that(length(user_url) == 1)
+      user_id <- extract_id(user_url)
+      user_author_org_url <- get_entry("user_author_org",
+                                       query = list(user = user_id),
+                                       endpoint = endpoint)
+      assertthat::assert_that(length(user_author_org_url) == 1)
+      author_url <- user_author_org_url[[1]]$author
+      organisations_urls <- user_author_org_url[[1]]$organisations
 
-        new_object_author_org(
-          object_url = object_url,
-          author_url = author_url,
-          organisations_urls = organisations_urls,
-          endpoint = endpoint)
+      new_object_author_org(
+        object_url = object_url,
+        author_url = author_url,
+        organisations_urls = organisations_urls,
+        endpoint = endpoint)
 
-        # Register data product in local registry
-        data_product_url <- new_data_product(name = use_data_product_runid,
-                                             version = write_version,
-                                             object_url = object_url,
-                                             namespace_url = write_namespace_url,
-                                             endpoint = endpoint)
+      # Register data product in local registry
+      data_product_url <- new_data_product(name = use_data_product_runid,
+                                           version = write_version,
+                                           object_url = object_url,
+                                           namespace_url = write_namespace_url,
+                                           endpoint = endpoint)
 
-        usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
-                               "to local registry"))
+      usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
+                             "to local registry"))
 
       # Update handle
       handle$finalise_output_hash(use_data_product = write_use_data_product,
                                   use_data_product_runid = use_data_product_runid,
-                                  use_namespace = write_namespace,
                                   use_version = write_version,
+                                  use_namespace = write_namespace,
                                   hash = hash,
                                   new_path = new_path,
                                   data_product_url = object_url)
     }
 
-    # Register entries in local registry
+    # Register components ---------------------------------------------------
 
     for (j in seq_len(nrow(handle$outputs))) {
 
       # Get metadata
       this_write <- handle$outputs[j, ]
+
+      if (this_write$delete_if_duplicate) next
+
       write_use_data_product <- this_write$use_data_product
       write_component <- this_write$use_component
       write_version <- this_write$use_version
@@ -326,7 +358,17 @@ finalise <- function(handle, delete_if_empty = FALSE) {
   }
 
   # record the code run in the data registry --------------------------------
-  patch_data(url = handle$code_run,
-             data = list(inputs = as.list(handle$inputs$component_url),
-                         outputs = as.list(handle$outputs$component_url)))
+
+  if (all(is.na(handle$outputs$component_url))) {
+    patch_data(url = handle$code_run,
+               data = list(inputs = as.list(handle$inputs$component_url),
+                           outputs = list()))
+  } else {
+    patch_data(url = handle$code_run,
+               data = list(inputs = as.list(handle$inputs$component_url),
+                           outputs = as.list(handle$outputs$component_url)))
+  }
+
+
+
 }

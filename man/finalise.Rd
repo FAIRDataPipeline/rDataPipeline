@@ -4,17 +4,22 @@
 \alias{finalise}
 \title{finalise}
 \usage{
-finalise(handle, delete_if_empty = FALSE)
+finalise(handle, delete_if_empty = FALSE, delete_if_duplicate = FALSE)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
 
 \item{delete_if_empty}{(optional) default is \code{FALSE}; see Details}
+
+\item{delete_if_duplicate}{(optional) default is \code{FALSE}; see Details}
 }
 \description{
 Finalise Code Run and push associated metadata to the local registry.
 }
 \details{
-If a CodeRun does not read an input, write an output, or attach an issue then
-\code{delete_if_empty} should delete the CodeRun entry when set to \code{TRUE}.
+If a Code Run does not read an input, write an output, or attach an issue,
+then delete the Code Run entry when \code{delete_if_empty} is set to \code{TRUE}.
+
+If a data product has the same hash as a previous version, remove it from
+the registry when \code{delete_if_duplicate} is set to \code{TRUE}.
 }
