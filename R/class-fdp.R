@@ -207,7 +207,8 @@ fdp <- R6::R6Class("fdp", list(
                              public = logical(),
                              hash = character(),
                              data_product_url = character(),
-                             component_url = character())
+                             component_url = character(),
+                             delete_if_duplicate = logical())
     } else {
       existing <- self$outputs
     }
@@ -224,7 +225,8 @@ fdp <- R6::R6Class("fdp", list(
                       public = public,
                       hash = NA,
                       data_product_url = NA,
-                      component_url = NA)
+                      component_url = NA,
+                      delete_if_duplicate = NA)
     self$outputs <- rbind.data.frame(existing, new)
 
     invisible(self)
@@ -329,6 +331,7 @@ fdp <- R6::R6Class("fdp", list(
   #' is now the hash of the file) of the data product in the local data store
   #' @param data_product_url a \code{string} specifying the URL of an
   #' \code{object} associated with the \code{data_product}
+  #' @param delete_if_duplicate (optional) default is `FALSE`
   #'
   #' @return Returns an updated \code{fdp} object
   #'
@@ -338,8 +341,11 @@ fdp <- R6::R6Class("fdp", list(
                                   use_namespace,
                                   hash,
                                   new_path,
-                                  data_product_url) {
+                                  data_product_url,
+                                  delete_if_duplicate = FALSE) {
 
+    # We want to record this data in all component rows so filtering by
+    # alias is not enough
     index <- which(self$outputs$use_data_product == use_data_product &
                      self$outputs$use_namespace == use_namespace &
                      self$outputs$use_version == use_version)
@@ -348,10 +354,21 @@ fdp <- R6::R6Class("fdp", list(
       stop("Handle not updated")
 
     } else {
-      self$outputs$use_data_product[index] <- use_data_product_runid
-      self$outputs$hash[index] <- hash
-      self$outputs$path[index] <- new_path
-      self$outputs$data_product_url[index] <- data_product_url
+
+      if (delete_if_duplicate) {
+        self$outputs$use_data_product[index] <- use_data_product_runid
+        self$outputs$hash[index] <- hash
+        self$outputs$path[index] <- NA
+        self$outputs$data_product_url[index] <- NA
+        self$outputs$delete_if_duplicate[index] <- TRUE
+
+      } else {
+        self$outputs$use_data_product[index] <- use_data_product_runid
+        self$outputs$hash[index] <- hash
+        self$outputs$path[index] <- new_path
+        self$outputs$data_product_url[index] <- data_product_url
+        self$outputs$delete_if_duplicate[index] <- FALSE
+      }
     }
 
     invisible(self)

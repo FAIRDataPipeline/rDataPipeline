@@ -298,7 +298,8 @@ Record file hash and update path name in \code{fdp} object
   use_namespace,
   hash,
   new_path,
-  data_product_url
+  data_product_url,
+  delete_if_duplicate = FALSE
 )}\if{html}{\out{</div>}}
 }
 
@@ -325,6 +326,8 @@ is now the hash of the file) of the data product in the local data store}
 
 \item{\code{data_product_url}}{a \code{string} specifying the URL of an
 \code{object} associated with the \code{data_product}}
+
+\item{\code{delete_if_duplicate}}{(optional) default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
