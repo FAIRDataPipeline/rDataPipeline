@@ -73,7 +73,7 @@ fdp-class" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rFDP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.18.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.20.0</span>
       </span>
     </div>
 
@@ -363,7 +363,8 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
   <span class='va'>use_namespace</span>,
   <span class='va'>hash</span>,
   <span class='va'>new_path</span>,
-  <span class='va'>data_product_url</span>
+  <span class='va'>data_product_url</span>,
+  delete_if_duplicate <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
@@ -388,6 +389,8 @@ is now the hash of the file) of the data product in the local data store</p></dd
 
 <dt><code>data_product_url</code></dt><dd><p>a <code>string</code> specifying the URL of an
 <code>object</code> associated with the <code>data_product</code></p></dd>
+
+<dt><code>delete_if_duplicate</code></dt><dd><p>(optional) default is <code>FALSE</code></p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
