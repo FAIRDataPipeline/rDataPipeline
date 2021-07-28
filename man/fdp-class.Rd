@@ -339,7 +339,13 @@ Returns an updated \code{fdp} object
 Record \code{data_product} and component URLs in \code{fdp}
 object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(use_data_product, use_component, component_url)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$finalise_output_url(
+  use_data_product,
+  use_component,
+  use_version,
+  use_namespace,
+  component_url
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -350,6 +356,12 @@ product, used as output in the \code{code_run}}
 
 \item{\code{use_component}}{a \code{string} specifying the name of the data
 product component, used as output in the \code{code_run}}
+
+\item{\code{use_version}}{a \code{string} specifying the name of the data
+product version, used as output in the \code{code_run}}
+
+\item{\code{use_namespace}}{a \code{string} specifying the namespace in which
+the data product resides, used as input in the \code{code_run}}
 
 \item{\code{component_url}}{a \code{string} specifying the URL of an entry in the
 \code{object_component} table}

@@ -9,10 +9,10 @@ finalise(handle, delete_if_empty = FALSE)
 \arguments{
 \item{handle}{\code{fdp} object}
 
-\item{delete_if_empty}{(optional) default is \code{FALSE}}
+\item{delete_if_empty}{(optional) default is \code{FALSE}; see Details}
 }
 \description{
-Push metadata to registry
+Finalise Code Run and push associated metadata to the local registry.
 }
 \details{
 If a CodeRun does not read an input, write an output, or attach an issue then

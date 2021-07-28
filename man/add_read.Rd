@@ -22,18 +22,19 @@ add_read(
 
 \item{component}{component field}
 
-\item{version}{(optional) version version field}
+\item{version}{(optional) version field}
 
-\item{use_data_product}{(optional) use_data_product use_data_product field}
+\item{use_data_product}{(optional) use_data_product field}
 
-\item{use_component}{(optional) use_component use_component field}
+\item{use_component}{(optional) use_component field}
 
-\item{use_version}{(optional) use_version use_version field}
+\item{use_version}{(optional) use_version field}
 
-\item{use_namespace}{(optional) use_namespace use_namespace field}
+\item{use_namespace}{(optional) use_namespace field}
 }
 \description{
-add_read
+Add data product to \code{read} block of user-written config file. Used in
+combination with \code{create_config()} for unit testing.
 }
 \examples{
 \dontrun{
@@ -41,15 +42,15 @@ path <- "test_config/config.yaml"
 
 # Write run_metadata block
 create_config(path = path,
-             description = "test",
-             input_namespace = "test_user",
-             output_namespace = "test_user")
+              description = "test",
+              input_namespace = "test_user",
+              output_namespace = "test_user")
 
 # Write read block
 add_read(path = path,
-                 data_product = "test/array",
-                 component = "level/a/s/d/f/s",
-                 version = "0.2.0")
+         data_product = "test/array",
+         component = "level/a/s/d/f/s",
+         version = "0.2.0")
 }
 
 }

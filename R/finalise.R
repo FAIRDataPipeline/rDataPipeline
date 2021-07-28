@@ -1,12 +1,12 @@
 #' finalise
 #'
-#' Push metadata to registry
+#' Finalise Code Run and push associated metadata to the local registry.
 #'
 #' If a CodeRun does not read an input, write an output, or attach an issue then
 #' `delete_if_empty` should delete the CodeRun entry when set to `TRUE`.
 #'
 #' @param handle \code{fdp} object
-#' @param delete_if_empty (optional) default is `FALSE`
+#' @param delete_if_empty (optional) default is `FALSE`; see Details
 #'
 #' @export
 #'
