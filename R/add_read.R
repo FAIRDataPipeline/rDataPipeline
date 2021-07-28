@@ -1,13 +1,16 @@
 #' add_read
 #'
+#' Add data product to `read` block of user-written config file. Used in
+#' combination with \code{create_config()} for unit testing.
+#'
 #' @param path config file path
 #' @param data_product data_product field
 #' @param component component field
-#' @param version (optional) version version field
-#' @param use_data_product (optional) use_data_product use_data_product field
-#' @param use_component (optional) use_component use_component field
-#' @param use_version (optional) use_version use_version field
-#' @param use_namespace (optional) use_namespace use_namespace field
+#' @param version (optional) version field
+#' @param use_data_product (optional) use_data_product field
+#' @param use_component (optional) use_component field
+#' @param use_version (optional) use_version field
+#' @param use_namespace (optional) use_namespace field
 #'
 #' @export
 #'
@@ -17,15 +20,15 @@
 #'
 #' # Write run_metadata block
 #' create_config(path = path,
-#'              description = "test",
-#'              input_namespace = "test_user",
-#'              output_namespace = "test_user")
+#'               description = "test",
+#'               input_namespace = "test_user",
+#'               output_namespace = "test_user")
 #'
 #' # Write read block
 #' add_read(path = path,
-#'                  data_product = "test/array",
-#'                  component = "level/a/s/d/f/s",
-#'                  version = "0.2.0")
+#'          data_product = "test/array",
+#'          component = "level/a/s/d/f/s",
+#'          version = "0.2.0")
 #' }
 #'
 add_read <- function(path,

@@ -36,5 +36,24 @@ add_write(
 \item{use_namespace}{(optional) use_namespace field}
 }
 \description{
-add_write
+Add data product to \code{read} block of user-written config file. Used in
+combination with \code{create_config()} for unit testing.
+}
+\examples{
+\dontrun{
+path <- "test_config/config.yaml"
+
+# Write run_metadata block
+create_config(path = path,
+              description = "test",
+              input_namespace = "test_user",
+              output_namespace = "test_user")
+
+# Write read block
+add_write(path = path,
+          data_product = "test/array",
+          description = "data product description",
+          version = "0.2.0")
+}
+
 }

@@ -1,5 +1,8 @@
 #' add_write
 #'
+#' Add data product to `read` block of user-written config file. Used in
+#' combination with \code{create_config()} for unit testing.
+#'
 #' @param path config file path
 #' @param data_product data_product field
 #' @param description component field
@@ -11,6 +14,23 @@
 #' @param use_namespace (optional) use_namespace field
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' path <- "test_config/config.yaml"
+#'
+#' # Write run_metadata block
+#' create_config(path = path,
+#'               description = "test",
+#'               input_namespace = "test_user",
+#'               output_namespace = "test_user")
+#'
+#' # Write read block
+#' add_write(path = path,
+#'           data_product = "test/array",
+#'           description = "data product description",
+#'           version = "0.2.0")
+#' }
 #'
 add_write <- function(path,
                       data_product,
