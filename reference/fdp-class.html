@@ -396,7 +396,13 @@ is now the hash of the file) of the data product in the local data store</p></dd
 <a id="method-finalise_output_url"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>finalise_output_url()</code></h3>
 <p>Record <code>data_product</code> and component URLs in <code>fdp</code>
 object</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>fdp</span><span class='op'>$</span><span class='fu'>finalise_output_url</span><span class='op'>(</span><span class='va'>use_data_product</span>, <span class='va'>use_component</span>, <span class='va'>component_url</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>fdp</span><span class='op'>$</span><span class='fu'>finalise_output_url</span><span class='op'>(</span>
+  <span class='va'>use_data_product</span>,
+  <span class='va'>use_component</span>,
+  <span class='va'>use_version</span>,
+  <span class='va'>use_namespace</span>,
+  <span class='va'>component_url</span>
+<span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -405,6 +411,12 @@ product, used as output in the <code>code_run</code></p></dd>
 
 <dt><code>use_component</code></dt><dd><p>a <code>string</code> specifying the name of the data
 product component, used as output in the <code>code_run</code></p></dd>
+
+<dt><code>use_version</code></dt><dd><p>a <code>string</code> specifying the name of the data
+product version, used as output in the <code>code_run</code></p></dd>
+
+<dt><code>use_namespace</code></dt><dd><p>a <code>string</code> specifying the namespace in which
+the data product resides, used as input in the <code>code_run</code></p></dd>
 
 <dt><code>component_url</code></dt><dd><p>a <code>string</code> specifying the URL of an entry in the
 <code>object_component</code> table</p></dd>
