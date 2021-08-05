@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rFDP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.20.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.21.0</span>
       </span>
     </div>
 
@@ -120,6 +120,7 @@
     <pre class="usage"><span class='fu'>new_object</span><span class='op'>(</span>
   <span class='va'>description</span>,
   <span class='va'>storage_location_url</span>,
+  <span class='va'>authors_url</span>,
   <span class='va'>file_type_url</span>,
   endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
 <span class='op'>)</span></pre>
@@ -136,6 +137,11 @@ description of the <code>object</code></p></td>
       <th>storage_location_url</th>
       <td><p>(optional) a <code>string</code> specifying the URL
 of an entry in the <code>storage_location</code> table</p></td>
+    </tr>
+    <tr>
+      <th>authors_url</th>
+      <td><p>(optional) a <code>list</code> of <code>author</code> URLs
+associated with this <code>object</code></p></td>
     </tr>
     <tr>
       <th>file_type_url</th>
@@ -161,13 +167,11 @@ of an entry in the <code>file_type</code> table</p></td>
 <code><a href='new_keyword.html'>new_keyword</a>()</code>,
 <code><a href='new_licence.html'>new_licence</a>()</code>,
 <code><a href='new_namespace.html'>new_namespace</a>()</code>,
-<code><a href='new_object_author_org.html'>new_object_author_org</a>()</code>,
 <code><a href='new_object_component.html'>new_object_component</a>()</code>,
-<code><a href='new_organisation.html'>new_organisation</a>()</code>,
 <code><a href='new_quality_controlled.html'>new_quality_controlled</a>()</code>,
 <code><a href='new_storage_location.html'>new_storage_location</a>()</code>,
 <code><a href='new_storage_root.html'>new_storage_root</a>()</code>,
-<code><a href='new_user_author_org.html'>new_user_author_org</a>()</code></p></div>
+<code><a href='new_user_author.html'>new_user_author</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

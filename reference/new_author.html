@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rFDP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.20.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.21.0</span>
       </span>
     </div>
 
@@ -117,29 +117,21 @@
     <p>Upload information to the <code>author</code> table in the data registry</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_author</span><span class='op'>(</span>
-  <span class='va'>family_name</span>,
-  <span class='va'>given_name</span>,
-  <span class='va'>identifier</span>,
-  endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>new_author</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>identifier</span>, endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>family_name</th>
-      <td><p>a <code>string</code> specifying the author's family name</p></td>
-    </tr>
-    <tr>
-      <th>given_name</th>
-      <td><p>a <code>string</code> specifying the author's first name
-and / or middle name and / or any initials</p></td>
+      <th>name</th>
+      <td><p>a <code>string</code> specifying the full name or organisation name of
+the <code>author</code>; note that at least one of name or identifier must be
+specified</p></td>
     </tr>
     <tr>
       <th>identifier</th>
-      <td><p>(optional) a <code>string</code> specifying the full URL of
-the <code>author</code>s identifier, <em>e.g.</em> ORCID iD</p></td>
+      <td><p>(optional) a <code>string</code> specifying the full URL
+identifier (<em>e.g.</em> ORCiD or ROR ID) of the <code>author</code></p></td>
     </tr>
     <tr>
       <th>endpoint</th>
@@ -159,14 +151,12 @@ the <code>author</code>s identifier, <em>e.g.</em> ORCID iD</p></td>
 <code><a href='new_keyword.html'>new_keyword</a>()</code>,
 <code><a href='new_licence.html'>new_licence</a>()</code>,
 <code><a href='new_namespace.html'>new_namespace</a>()</code>,
-<code><a href='new_object_author_org.html'>new_object_author_org</a>()</code>,
 <code><a href='new_object_component.html'>new_object_component</a>()</code>,
 <code><a href='new_object.html'>new_object</a>()</code>,
-<code><a href='new_organisation.html'>new_organisation</a>()</code>,
 <code><a href='new_quality_controlled.html'>new_quality_controlled</a>()</code>,
 <code><a href='new_storage_location.html'>new_storage_location</a>()</code>,
 <code><a href='new_storage_root.html'>new_storage_root</a>()</code>,
-<code><a href='new_user_author_org.html'>new_user_author_org</a>()</code></p></div>
+<code><a href='new_user_author.html'>new_user_author</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

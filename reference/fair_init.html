@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rFDP</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.20.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.21.0</span>
       </span>
     </div>
 
@@ -117,38 +117,21 @@
     <p>fair_init</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fair_init</span><span class='op'>(</span>
-  <span class='va'>family_name</span>,
-  <span class='va'>given_name</span>,
-  <span class='va'>orcid</span>,
-  <span class='va'>organisation</span>,
-  <span class='va'>identifier</span>,
-  endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>fair_init</span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>identifier</span>, endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>family_name</th>
-      <td><p>a <code>string</code> specifying family name</p></td>
-    </tr>
-    <tr>
-      <th>given_name</th>
-      <td><p>a <code>string</code> specifying given name(s)</p></td>
-    </tr>
-    <tr>
-      <th>orcid</th>
-      <td><p>a <code>string</code> specifying an orcid id URL</p></td>
-    </tr>
-    <tr>
-      <th>organisation</th>
-      <td><p>a <code>string</code> or vector of <code>strings</code> specifying
-the name of the organisation(s)</p></td>
+      <th>name</th>
+      <td><p>a <code>string</code> specifying the full name or organisation name of
+the <code>author</code>; note that at least one of name or identifier must be
+specified</p></td>
     </tr>
     <tr>
       <th>identifier</th>
-      <td><p>a <code>string</code> specifying the organisation identifer (ROR ID) URL</p></td>
+      <td><p>(optional) a <code>string</code> specifying the full URL
+identifier (<em>e.g.</em> ORCiD or ROR ID) of the <code>author</code></p></td>
     </tr>
     <tr>
       <th>endpoint</th>

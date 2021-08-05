@@ -88,6 +88,9 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/findme.html</loc>
   </url>
   <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_author_url.html</loc>
+  </url>
+  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_components.html</loc>
   </url>
   <url>
@@ -211,13 +214,7 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/new_object.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_object_author_org.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/new_object_component.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_organisation.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/new_quality_controlled.html</loc>
@@ -229,7 +226,7 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/new_storage_root.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_user_author_org.html</loc>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_user_author.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/paper_exists.html</loc>
