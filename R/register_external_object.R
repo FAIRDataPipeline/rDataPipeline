@@ -147,7 +147,7 @@ register_external_object <- function(yaml,
     datastore_object_url <- new_object(
       description = register_this$description,
       storage_location_url = datastore_location_url,
-      authors_url = list(author_url),
+      authors_url = list(author_url), # THIS IS WRONG! - but this function will be deleted
       file_type_url = filetype_url,
       endpoint = endpoint)
 
