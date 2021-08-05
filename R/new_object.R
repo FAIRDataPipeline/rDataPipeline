@@ -34,9 +34,7 @@ new_object <- function(description,
   if (!missing(file_type_url))
     data$file_type <- file_type_url
 
-
   post_data(table = "object",
             data = data,
             endpoint = endpoint)
-  # }
 }
