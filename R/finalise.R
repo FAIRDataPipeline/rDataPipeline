@@ -165,29 +165,13 @@ finalise <- function(handle,
         file_type_url <- file_type_exists
       }
 
-      object_url <- new_object(storage_location_url = storage_location_url,
-                               description = write_dataproduct_description,
+      author_url <- get_author_url(endpoint = endpoint)
+
+      object_url <- new_object(description = write_dataproduct_description,
+                               storage_location_url = storage_location_url,
+                               authors = list(author_url),
                                file_type_url = file_type_url,
                                endpoint = endpoint)
-
-      # Get user metadata
-      user_url <- get_url(table = "users",
-                          query = list(username = "admin"),
-                          endpoint = endpoint)
-      assertthat::assert_that(length(user_url) == 1)
-      user_id <- extract_id(user_url)
-      user_author_org_url <- get_entry("user_author_org",
-                                       query = list(user = user_id),
-                                       endpoint = endpoint)
-      assertthat::assert_that(length(user_author_org_url) == 1)
-      author_url <- user_author_org_url[[1]]$author
-      organisations_urls <- user_author_org_url[[1]]$organisations
-
-      new_object_author_org(
-        object_url = object_url,
-        author_url = author_url,
-        organisations_urls = organisations_urls,
-        endpoint = endpoint)
 
       # Register data product in local registry
       data_product_url <- new_data_product(name = use_data_product_runid,
@@ -354,7 +338,6 @@ finalise <- function(handle,
                                "to local registry"))
       }
     }
-
   }
 
   # record the code run in the data registry --------------------------------
@@ -368,7 +351,5 @@ finalise <- function(handle,
                data = list(inputs = as.list(handle$inputs$component_url),
                            outputs = as.list(handle$outputs$component_url)))
   }
-
-
 
 }
