@@ -352,4 +352,11 @@ finalise <- function(handle,
                            outputs = as.list(handle$outputs$component_url)))
   }
 
+  coderuns_txt <- file.path(handle$fdp_config_dir, paste0("coderuns.txt"))
+  if (file.exists(coderuns_txt)) {
+    cat(paste0("\n", handle$code_run), file = coderuns_txt, append = TRUE)
+  } else {
+    cat(handle$code_run, file = coderuns_txt)
+  }
+
 }

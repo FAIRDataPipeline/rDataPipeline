@@ -8,6 +8,8 @@
 fdp <- R6::R6Class("fdp", list(
   #' @field yaml a \code{list} containing the contents of the working
   #' config.yaml
+  #' @field fdp_config_dir a \code{string} specifying the directory passed
+  #' from `fair run`
   #' @field model_config a \code{string} specifying the URL of an entry in
   #' the \code{object} table associated with the \code{storage_location} of the
   #' working config.yaml
@@ -26,6 +28,7 @@ fdp <- R6::R6Class("fdp", list(
   #' \code{code_run} issues
   #'
   yaml = NULL,
+  fdp_config_dir = NULL,
   model_config = NULL,
   submission_script = NULL,
   code_repo = NULL,
@@ -38,6 +41,8 @@ fdp <- R6::R6Class("fdp", list(
   #'
   #' @param yaml a \code{list} containing the contents of the working
   #' config.yaml
+  #' @param fdp_config_dir  a \code{string} specifying the directory passed
+  #' from `fair run`
   #' @param model_config a \code{string} specifying the URL of an entry in
   #' the \code{object} table associated with the \code{storage_location} of the
   #' working config.yaml
@@ -52,17 +57,20 @@ fdp <- R6::R6Class("fdp", list(
   #' @return Returns a new \code{fdp} object
   #'
   initialize = function(yaml,
+                        fdp_config_dir,
                         model_config,
                         submission_script,
                         code_repo,
                         code_run) {
 
     stopifnot(is.list(yaml))
+    stopifnot(is.character(fdp_config_dir), length(fdp_config_dir) == 1)
     stopifnot(is.character(model_config), length(model_config) == 1)
     stopifnot(is.character(submission_script), length(submission_script) == 1)
     stopifnot(is.character(code_run), length(code_run) == 1)
 
     self$yaml <- yaml
+    self$fdp_config_dir <- fdp_config_dir
     self$model_config <- model_config
     self$submission_script <- submission_script
     self$code_repo <- code_repo
@@ -78,12 +86,14 @@ fdp <- R6::R6Class("fdp", list(
   print = function(...) {
 
     contains_yaml <- !is.null(self$yaml)
+    contains_dir <- !is.null(self$fdp_config_dir)
     contains_config <- !is.null(self$model_config)
     contains_script <- !is.null(self$submission_script)
     contains_coderun <- !is.null(self$code_run)
 
     cat("Contains:\n")
     if (contains_yaml) cat("- Config file\n")
+    if (contains_dir) cat("- Config dir\n")
     if (contains_config) cat("- Config file URL\n")
     if (contains_script) cat("- Submission script URL\n")
     if (contains_coderun) cat("- Code run URL\n")

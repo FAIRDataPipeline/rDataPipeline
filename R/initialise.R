@@ -188,6 +188,7 @@ initialise <- function(config, script) {
 
   # Write to handle
   fdp$new(yaml = yaml,
+          fdp_config_dir = dirname(config),
           model_config = config_object_url,
           submission_script = script_object_url,
           code_repo = coderepo_object_url,
