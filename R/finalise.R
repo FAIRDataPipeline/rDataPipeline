@@ -169,7 +169,7 @@ finalise <- function(handle,
 
       object_url <- new_object(description = write_dataproduct_description,
                                storage_location_url = storage_location_url,
-                               authors = list(author_url),
+                               authors_url = list(author_url),
                                file_type_url = file_type_url,
                                endpoint = endpoint)
 

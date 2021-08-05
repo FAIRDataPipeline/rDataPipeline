@@ -67,7 +67,7 @@ initialise <- function(config, script) {
   config_object_url <- new_object(
     description = "Working config.yaml file location in local datastore",
     storage_location_url = config_location_url,
-    authors = list(author_url),
+    authors_url = list(author_url),
     file_type_url = config_filetype_url,
     endpoint = endpoint)
 
@@ -114,7 +114,7 @@ initialise <- function(config, script) {
   script_object_url <- new_object(
     description = "Submission script location in local datastore",
     storage_location_url = script_location_url,
-    authors = list(author_url),
+    authors_url = list(author_url),
     file_type_url = script_filetype_url,
     endpoint = endpoint)
 
@@ -147,7 +147,7 @@ initialise <- function(config, script) {
     coderepo_object_url <- new_object(
       description = "Analysis / processing script location",
       storage_location_url = coderepo_location_url,
-      authors = list(author_url),
+      authors_url = list(author_url),
       endpoint = endpoint)
 
   } else {
@@ -161,7 +161,7 @@ initialise <- function(config, script) {
       coderepo_object_url <- new_object(
         description = "Analysis / processing script location",
         storage_location_url = coderepo_location_id,
-        authors = list(author_url),
+        authors_url = list(author_url),
         endpoint = endpoint)
 
     } else {
