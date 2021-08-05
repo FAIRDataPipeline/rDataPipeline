@@ -17,10 +17,7 @@
 #' @import httr
 #' @import jsonlite
 #' @importFrom openssl sha1
-#' @importFrom reshape2 dcast
 #' @importFrom stats setNames
-#' @import tibble
-#' @import tidyr
 #' @import usethis
 #' @importFrom utils download.file read.csv unzip write.csv type.convert
 #' @import semver
