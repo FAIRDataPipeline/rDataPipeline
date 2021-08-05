@@ -18,6 +18,9 @@ Container for class \code{fdp}
 \item{\code{yaml}}{a \code{list} containing the contents of the working
 config.yaml}
 
+\item{\code{fdp_config_dir}}{a \code{string} specifying the directory passed
+from \verb{fair run}}
+
 \item{\code{model_config}}{a \code{string} specifying the URL of an entry in
 the \code{object} table associated with the \code{storage_location} of the
 working config.yaml}
@@ -63,7 +66,14 @@ the \code{code_run} table}
 \subsection{Method \code{new()}}{
 Create a new \code{fdp} object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{fdp$new(yaml, model_config, submission_script, code_repo, code_run)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{fdp$new(
+  yaml,
+  fdp_config_dir,
+  model_config,
+  submission_script,
+  code_repo,
+  code_run
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -71,6 +81,9 @@ Create a new \code{fdp} object
 \describe{
 \item{\code{yaml}}{a \code{list} containing the contents of the working
 config.yaml}
+
+\item{\code{fdp_config_dir}}{a \code{string} specifying the directory passed
+from \verb{fair run}}
 
 \item{\code{model_config}}{a \code{string} specifying the URL of an entry in
 the \code{object} table associated with the \code{storage_location} of the
