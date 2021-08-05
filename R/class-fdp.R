@@ -84,9 +84,9 @@ fdp <- R6::R6Class("fdp", list(
 
     cat("Contains:\n")
     if (contains_yaml) cat("- Config file\n")
-    if (contains_config) cat("- Config file URI\n")
-    if (contains_script) cat("- Submission script URI\n")
-    if (contains_coderun) cat("- Code run URI\n")
+    if (contains_config) cat("- Config file URL\n")
+    if (contains_script) cat("- Submission script URL\n")
+    if (contains_coderun) cat("- Code run URL\n")
 
     if (!is.null(self$inputs)) {
       cat("\n\n", "Inputs:", "\n")
