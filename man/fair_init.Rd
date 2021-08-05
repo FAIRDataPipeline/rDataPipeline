@@ -4,26 +4,15 @@
 \alias{fair_init}
 \title{fair_init}
 \usage{
-fair_init(
-  family_name,
-  given_name,
-  orcid,
-  organisation,
-  identifier,
-  endpoint = "http://localhost:8000/api/"
-)
+fair_init(name, identifier, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
-\item{family_name}{a \code{string} specifying family name}
+\item{name}{a \code{string} specifying the full name or organisation name of
+the \code{author}; note that at least one of name or identifier must be
+specified}
 
-\item{given_name}{a \code{string} specifying given name(s)}
-
-\item{orcid}{a \code{string} specifying an orcid id URL}
-
-\item{organisation}{a \code{string} or vector of \code{strings} specifying
-the name of the organisation(s)}
-
-\item{identifier}{a \code{string} specifying the organisation identifer (ROR ID) URL}
+\item{identifier}{(optional) a \code{string} specifying the full URL
+identifier (\emph{e.g.} ORCiD or ROR ID) of the \code{author}}
 
 \item{endpoint}{a \code{string} specifying the registry endpoint}
 }

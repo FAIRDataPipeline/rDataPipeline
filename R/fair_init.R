@@ -1,19 +1,15 @@
 #' fair_init
 #'
-#' @param family_name a \code{string} specifying family name
-#' @param given_name a \code{string} specifying given name(s)
-#' @param orcid a \code{string} specifying an orcid id URL
-#' @param organisation a \code{string} or vector of \code{strings} specifying
-#' the name of the organisation(s)
-#' @param identifier a \code{string} specifying the organisation identifer (ROR ID) URL
+#' @param name a \code{string} specifying the full name or organisation name of
+#' the \code{author}; note that at least one of name or identifier must be
+#' specified
+#' @param identifier (optional) a \code{string} specifying the full URL
+#' identifier (*e.g.* ORCiD or ROR ID) of the \code{author}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
 #'
-fair_init <- function(family_name,
-                      given_name,
-                      orcid,
-                      organisation,
+fair_init <- function(name,
                       identifier,
                       endpoint = "http://localhost:8000/api/") {
 
@@ -21,31 +17,11 @@ fair_init <- function(family_name,
                       query = list(username = "admin"),
                       endpoint = endpoint)
 
-  if (missing(orcid)) {
-    author_url <- new_author(family_name = family_name,
-                             given_name = given_name,
-                             endpoint = endpoint)
-  } else {
-    author_url <- new_author(family_name = family_name,
-                             given_name = given_name,
-                             identifier = orcid,
-                             endpoint = endpoint)
-  }
+  author_url <- new_author(name = name,
+                           identifier = identifier,
+                           endpoint = endpoint)
 
-  if (missing(identifier)) {
-    organisation_urls <- lapply(organisation, function(x)
-      new_organisation(name = x,
-                       endpoint = endpoint))
-  } else {
-    organisation_urls <- lapply(organisation, function(x)
-      new_organisation(name = x,
-                       identifier = identifier,
-                       endpoint = endpoint))
-
-  }
-
-  new_user_author_org(user_url = user_url,
-                      author_url = author_url,
-                      organisations_urls = organisation_urls,
-                      endpoint = endpoint)
+  new_user_author(user_url = user_url,
+                  author_url = author_url,
+                  endpoint = endpoint)
 }

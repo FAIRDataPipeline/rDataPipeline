@@ -4,21 +4,15 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(
-  family_name,
-  given_name,
-  identifier,
-  endpoint = "http://localhost:8000/api/"
-)
+new_author(name, identifier, endpoint = "http://localhost:8000/api/")
 }
 \arguments{
-\item{family_name}{a \code{string} specifying the author's family name}
+\item{name}{a \code{string} specifying the full name or organisation name of
+the \code{author}; note that at least one of name or identifier must be
+specified}
 
-\item{given_name}{a \code{string} specifying the author's first name
-and / or middle name and / or any initials}
-
-\item{identifier}{(optional) a \code{string} specifying the full URL of
-the \code{author}s identifier, \emph{e.g.} ORCID iD}
+\item{identifier}{(optional) a \code{string} specifying the full URL
+identifier (\emph{e.g.} ORCiD or ROR ID) of the \code{author}}
 
 \item{endpoint}{a \code{string} specifying the registry endpoint}
 }
@@ -36,13 +30,11 @@ Other new functions:
 \code{\link{new_keyword}()},
 \code{\link{new_licence}()},
 \code{\link{new_namespace}()},
-\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
 \code{\link{new_object}()},
-\code{\link{new_organisation}()},
 \code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
 \code{\link{new_storage_root}()},
-\code{\link{new_user_author_org}()}
+\code{\link{new_user_author}()}
 }
 \concept{new functions}

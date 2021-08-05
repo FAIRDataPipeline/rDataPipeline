@@ -62,30 +62,13 @@ initialise <- function(config, script) {
     config_filetype_url <- config_filetype_exists
   }
 
+  author_url <- get_author_url(endpoint = endpoint)
 
   config_object_url <- new_object(
     description = "Working config.yaml file location in local datastore",
     storage_location_url = config_location_url,
+    authors_url = list(author_url),
     file_type_url = config_filetype_url,
-    endpoint = endpoint)
-
-  # Get user metadata
-  user_url <- get_url(table = "users",
-                      query = list(username = "admin"),
-                      endpoint = endpoint)
-  assertthat::assert_that(length(user_url) == 1)
-  user_id <- extract_id(user_url)
-  user_author_org_url <- get_entry("user_author_org",
-                                   query = list(user = user_id),
-                                   endpoint = endpoint)
-  assertthat::assert_that(length(user_author_org_url) == 1)
-  author_url <- user_author_org_url[[1]]$author
-  organisations_urls <- user_author_org_url[[1]]$organisations
-
-  new_object_author_org(
-    object_url = config_object_url,
-    author_url = author_url,
-    organisations_urls = organisations_urls,
     endpoint = endpoint)
 
   cli::cli_alert_success("Writing {.file {config}} to local registry")
@@ -131,13 +114,8 @@ initialise <- function(config, script) {
   script_object_url <- new_object(
     description = "Submission script location in local datastore",
     storage_location_url = script_location_url,
+    authors_url = list(author_url),
     file_type_url = script_filetype_url,
-    endpoint = endpoint)
-
-  new_object_author_org(
-    object_url = script_object_url,
-    author_url = author_url,
-    organisations_urls = organisations_urls,
     endpoint = endpoint)
 
   cli::cli_alert_success("Writing {.file {script}} to local registry")
@@ -169,12 +147,7 @@ initialise <- function(config, script) {
     coderepo_object_url <- new_object(
       description = "Analysis / processing script location",
       storage_location_url = coderepo_location_url,
-      endpoint = endpoint)
-
-    new_object_author_org(
-      object_url = coderepo_object_url,
-      author_url = author_url,
-      organisations_urls = organisations_urls,
+      authors_url = list(author_url),
       endpoint = endpoint)
 
   } else {
@@ -186,14 +159,9 @@ initialise <- function(config, script) {
 
     if (is.null(obj_exists)) {
       coderepo_object_url <- new_object(
-        storage_location_url = coderepo_location_id,
         description = "Analysis / processing script location",
-        endpoint = endpoint)
-
-      new_object_author_org(
-        object_url = coderepo_object_url,
-        author_url = author_url,
-        organisations_urls = organisations_urls,
+        storage_location_url = coderepo_location_id,
+        authors_url = list(author_url),
         endpoint = endpoint)
 
     } else {
@@ -220,6 +188,7 @@ initialise <- function(config, script) {
 
   # Write to handle
   fdp$new(yaml = yaml,
+          fdp_config_dir = dirname(config),
           model_config = config_object_url,
           submission_script = script_object_url,
           code_repo = coderepo_object_url,

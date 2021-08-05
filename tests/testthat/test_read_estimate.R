@@ -48,7 +48,7 @@ write_estimate(value =  value2,
                component = component2,
                description = "asymptomatic period2")
 
-value3 <- 999999999999999999999999.0123456789
+value3 <- runif(1, 1, 1000000000000)
 write_estimate(value =  value3,
                handle = handle,
                data_product = missing_data_product,

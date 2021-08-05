@@ -7,6 +7,7 @@
 new_object(
   description,
   storage_location_url,
+  authors_url,
   file_type_url,
   endpoint = "http://localhost:8000/api/"
 )
@@ -17,6 +18,9 @@ description of the \code{object}}
 
 \item{storage_location_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{storage_location} table}
+
+\item{authors_url}{(optional) a \code{list} of \code{author} URLs
+associated with this \code{object}}
 
 \item{file_type_url}{(optional) a \code{string} specifying the URL
 of an entry in the \code{file_type} table}
@@ -38,12 +42,10 @@ Other new functions:
 \code{\link{new_keyword}()},
 \code{\link{new_licence}()},
 \code{\link{new_namespace}()},
-\code{\link{new_object_author_org}()},
 \code{\link{new_object_component}()},
-\code{\link{new_organisation}()},
 \code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
 \code{\link{new_storage_root}()},
-\code{\link{new_user_author_org}()}
+\code{\link{new_user_author}()}
 }
 \concept{new functions}

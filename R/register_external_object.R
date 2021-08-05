@@ -142,29 +142,13 @@ register_external_object <- function(yaml,
       filetype_url <- filetype_exists
     }
 
+    author_url <- get_author_url(endpoint = endpoint)
+
     datastore_object_url <- new_object(
       description = register_this$description,
       storage_location_url = datastore_location_url,
+      authors_url = list(author_url), # THIS IS WRONG! - but this function will be deleted
       file_type_url = filetype_url,
-      endpoint = endpoint)
-
-    # Get user metadata
-    user_url <- get_url(table = "users",
-                        query = list(username = "admin"),
-                        endpoint = endpoint)
-    assertthat::assert_that(length(user_url) == 1)
-    user_id <- extract_id(user_url)
-    user_author_org_url <- get_entry("user_author_org",
-                                     query = list(user = user_id),
-                                     endpoint = endpoint)
-    assertthat::assert_that(length(user_author_org_url) == 1)
-    author_url <- user_author_org_url[[1]]$author
-    organisations_urls <- user_author_org_url[[1]]$organisations
-
-    new_object_author_org(
-      object_url = datastore_object_url,
-      author_url = author_url,
-      organisations_urls = organisations_urls,
       endpoint = endpoint)
 
     data_product_url <- new_data_product(name = register_data_product,
