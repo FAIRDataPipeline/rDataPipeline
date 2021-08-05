@@ -1,23 +1,19 @@
 context("Testing new_author()")
 
-family_name <- paste0("test_new_author_",
+name <- paste0("test_new_author_",
                       openssl::sha1(x = as.character(Sys.time())))
-personal_name <- paste0("test_new_author_",
-                        openssl::sha1(x = as.character(Sys.time())))
 
 endpoint <- Sys.getenv("FDP_endpoint")
 if (grepl("localhost", endpoint)) run_server()
 
 test_that("new entry in author returns an API URL", {
-  expect_true(grepl("author", new_author(family_name = family_name,
-                                         given_name = personal_name,
-                                         # identifier,
+  expect_true(grepl("author", new_author(name = name,
+                                         # identifier = ,
                                          endpoint = endpoint)))
 })
 
 test_that("existing entry in author returns an API URL", {
-  expect_true(grepl("author", new_author(family_name = family_name,
-                                         given_name = personal_name,
+  expect_true(grepl("author", new_author(name = name,
                                          # identifier = ,
                                          endpoint = endpoint)))
 })

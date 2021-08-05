@@ -39,12 +39,13 @@ test_that("post_data works with all tables",{
         })
 
       } else if (nrow(table.required) == 0) {
-        test_that(paste0(table, " allows creation with no data"), {
-          expect_true(is.character(post_data(table = table,
-                                             data = NULL,
-                                             endpoint = endpoint)))
-        })
-        data_incorrect <- list(unknown = "unknown")
+        # test_that(paste0(table, " allows creation with no data"), {
+        #   expect_true(is.character(post_data(table = table,
+        #                                      data = NULL,
+        #                                      endpoint = endpoint)))
+        # })
+        # data_incorrect <- list(unknown = "unknown")
+        next
 
       } else {
 

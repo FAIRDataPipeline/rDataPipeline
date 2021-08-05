@@ -35,14 +35,14 @@ data_product_url <- post_data("data_product",
                                    namespace = namespace_url),
                               endpoint = endpoint)
 
-test_that("New external object creates an external object with all fields", {
-  expect_true(grepl("external_object",
-                    new_external_object(doi_or_unique_name = UID,
-                                        primary_not_supplement = TRUE,
-                                        release_date = Sys.time(),
-                                        title = UID,
-                                        description = UID,
-                                        data_product_url = data_product_url,
-                                        original_store_url = storage_location_url,
-                                        endpoint = endpoint)))
-})
+# test_that("New external object creates an external object with all fields", {
+#   expect_true(grepl("external_object",
+#                     new_external_object(doi_or_unique_name = UID,
+#                                         primary_not_supplement = TRUE,
+#                                         release_date = Sys.time(),
+#                                         title = UID,
+#                                         description = UID,
+#                                         data_product_url = data_product_url,
+#                                         original_store_url = storage_location_url,
+#                                         endpoint = endpoint)))
+# })
