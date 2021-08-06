@@ -352,11 +352,13 @@ finalise <- function(handle,
                            outputs = as.list(handle$outputs$component_url)))
   }
 
+  code_run_uuid <- get_entity(handle$code_run)$uuid
+
   coderuns_txt <- file.path(handle$fdp_config_dir, paste0("coderuns.txt"))
   if (file.exists(coderuns_txt)) {
-    cat(paste0("\n", handle$code_run), file = coderuns_txt, append = TRUE)
+    cat(paste0("\n", code_run_uuid), file = coderuns_txt, append = TRUE)
   } else {
-    cat(handle$code_run, file = coderuns_txt)
+    cat(code_run_uuid, file = coderuns_txt)
   }
 
 }
