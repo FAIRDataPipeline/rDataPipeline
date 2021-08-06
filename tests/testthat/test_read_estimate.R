@@ -34,21 +34,22 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-value1 <- 192.0
+tmp <- sample(1:1E10, 3, FALSE)
+value1 <- tmp[1]
 write_estimate(value =  value1,
                handle = handle,
                data_product = data_product1,
                component = component1,
                description = "asymptomatic period")
 
-value2 <- 1
+value2 <- tmp[2]
 write_estimate(value =  value2,
                handle = handle,
                data_product = data_product1,
                component = component2,
                description = "asymptomatic period2")
 
-value3 <- runif(1, 1, 1000000000000)
+value3 <- tmp[3]
 write_estimate(value =  value3,
                handle = handle,
                data_product = missing_data_product,
