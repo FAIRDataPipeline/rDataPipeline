@@ -22,14 +22,17 @@ finalise <- function(handle,
   # issue was attached, then delete the CodeRun entry
 
   if (delete_if_empty) {
-    code_run_url <- handle$code_run
-    key <- get_token()
-    h <- c(Authorization = paste("token", key))
-    result <- httr::DELETE(code_run_url,
-                           httr::content_type('application/json'),
-                           httr::add_headers(.headers = h),
-                           verbose())
-    return(invisible(NULL))
+    if (is.null(handle$inputs) && is.null(handle$outputs) &&
+        is.null(handle$issues)) {
+      code_run_url <- handle$code_run
+      key <- get_token()
+      h <- c(Authorization = paste("token", key))
+      result <- httr::DELETE(code_run_url,
+                             httr::content_type('application/json'),
+                             httr::add_headers(.headers = h),
+                             verbose())
+      return(invisible(NULL))
+    }
   }
 
   # Record data product metadata in the data registry --------
