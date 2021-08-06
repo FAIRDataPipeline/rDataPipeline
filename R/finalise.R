@@ -103,12 +103,21 @@ finalise <- function(handle,
           }) %>% unlist()
 
           if (hash %in% existing_hash) {
-            handle$finalise_output_hash(use_data_product = write_use_data_product,
-                                        use_data_product_runid = use_data_product_runid,
-                                        use_version = write_version,
-                                        use_namespace = write_namespace,
-                                        hash = hash,
-                                        delete_if_duplicate = TRUE)
+            # Remove file
+            file.remove(path)
+
+            # Recursively delete parent folders, if empty
+            remove_empty_parents(path = path, root = datastore)
+
+            # Remove from handle
+            handle$finalise_output_hash(
+              use_data_product = write_use_data_product,
+              use_data_product_runid = use_data_product_runid,
+              use_version = write_version,
+              use_namespace = write_namespace,
+              hash = hash,
+              delete_if_duplicate = TRUE)
+
             next
           }
         }
