@@ -1,6 +1,6 @@
 Package: rFDP
 Title: Functions to Interact with the FAIR Data Pipeline
-Version: 0.22.0
+Version: 0.23.0
 Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
                   role = c("cre", "aut"), comment = c(ORCID = "0000-0003-1536-2066")),
              person("Ryan", "Field", role = "ctb", 
