@@ -17,14 +17,8 @@ resolve_read <- function(handle, data_product, component = NA, endpoint) {
     read <- list(read)
 
   # Find data product in `read:` section of config.yaml
-  if (is.na(component)) {
-    index <- lapply(read, function(x) x$data_product == data_product) %>%
-      unlist() %>% which()
-  } else {
-    index <- lapply(read, function(x) x$data_product == data_product &&
-                      x$component == component ) %>%
-      unlist() %>% which()
-  }
+  index <- lapply(read, function(x) x$data_product == data_product) %>%
+    unlist() %>% which()
 
   if (length(index) == 0)
     usethis::ui_stop(paste(usethis::ui_field(data_product),
