@@ -494,7 +494,7 @@ write.csv(df2, path2)
 
 finalise(handle)
 
-# Input globbing
+# 2 - Input globbing
 
 data_product3 <- file.path("real", "data", uid, "*")
 
@@ -519,9 +519,11 @@ handle <- initialise(config, script)
 path <- link_read(handle, data_product1)
 path <- link_read(handle, data_product2)
 
+finalise(handle)
+
 # CodeRun with write globbing -----------------------------------------------
 
-# 2 - Write to registry
+# 1 - Write to registry
 
 uid <- as.character(random_hash())
 data_product1 <- file.path("real", "data", uid, "1")
@@ -567,7 +569,7 @@ write.csv(df2, path2)
 
 finalise(handle)
 
-# Output globbing
+# 2 - Output globbing
 
 data_product3 <- file.path("real", "data", uid, "*")
 use_version <- "${{MAJOR}}"
