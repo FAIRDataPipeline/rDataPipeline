@@ -4,6 +4,17 @@
 
 library(rFDP)
 
+# Do this once, on install ------------------------------------------------
+
+# endpoint <- "http://localhost:8000/api/"
+#
+# rFDP::fair_init(
+#   name = "Sonia Mitchell",
+#   identifier = "https://orcid.org/0000-0003-1536-2066",
+#   endpoint = endpoint)
+
+# Initialise variables ----------------------------------------------------
+
 uid <- random_hash()
 namespace <- "username"
 coderun_description <- "Nice description"
@@ -328,7 +339,7 @@ create_config(path = config_file,
               input_namespace = namespace,
               output_namespace = namespace)
 add_write(path = config_file,
-          data_product_issues = data_product_issues2,
+          data_product = data_product_issues2,
           description = "a test array", file_type = "csv")
 
 # CLI functions
