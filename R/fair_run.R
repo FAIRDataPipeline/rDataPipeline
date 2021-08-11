@@ -263,7 +263,7 @@ fair_run <- function(path = "config.yaml",
     cli::cli_alert_info("Locating remote repository")
 
   } else {
-    fake_remote_repo <- "https://github.com/fake_org/fake_repo"
+    fake_remote_repo <- "https://github.com/fake_org/fake_repo/"
     run_metadata$remote_repo <- fake_remote_repo
   }
 

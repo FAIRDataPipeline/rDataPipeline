@@ -122,13 +122,15 @@ initialise <- function(config, script) {
 
   # Record code repo location in data registry ------------------------------
 
-  repo_storageroot_url <- new_storage_root(root = "https://github.com/",
+  github <- "https://github.com/"
+  repo_storageroot_url <- new_storage_root(root = github,
                                            local = FALSE,
                                            endpoint = endpoint)
   repo_storageroot_id <- extract_id(repo_storageroot_url)
 
   sha <- yaml$run_metadata$latest_commit
   repo_name <- yaml$run_metadata$remote_repo
+  repo_name <- gsub(github, "", repo_name)
 
   coderepo_exists <- get_id(table = "storage_location",
                             query = list(hash = sha,
