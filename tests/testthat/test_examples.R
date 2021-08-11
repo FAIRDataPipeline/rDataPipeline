@@ -4,10 +4,11 @@
 
 library(rFDP)
 
+Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
+endpoint <- Sys.getenv("FDP_endpoint")
+
 # Do this once, on install ------------------------------------------------
 
-# endpoint <- "http://localhost:8000/api/"
-#
 # rFDP::fair_init(
 #   name = "Sonia Mitchell",
 #   identifier = "https://orcid.org/0000-0003-1536-2066",
