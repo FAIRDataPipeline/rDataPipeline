@@ -10,10 +10,10 @@ run_server()
 
 # Do this once, on install ------------------------------------------------
 
-# rFDP::fair_init(
-#   name = "Sonia Mitchell",
-#   identifier = "https://orcid.org/0000-0003-1536-2066",
-#   endpoint = endpoint)
+rFDP::fair_init(
+  name = "Sonia Mitchell",
+  identifier = "https://orcid.org/0000-0003-1536-2066",
+  endpoint = endpoint)
 
 # Initialise variables ----------------------------------------------------
 
