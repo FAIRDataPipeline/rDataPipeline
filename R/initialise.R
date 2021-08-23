@@ -122,21 +122,22 @@ initialise <- function(config, script) {
 
   # Record code repo location in data registry ------------------------------
 
-  github <- "https://github.com/"
-  repo_storageroot_url <- new_storage_root(root = github,
+  repo_name <- yaml$run_metadata$remote_repo
+  repo_root <- gsub("([a-z]*://[a-z]*.[a-z]*/).*", "\\1", repo_name)
+
+  repo_storageroot_url <- new_storage_root(root = repo_root,
                                            local = FALSE,
                                            endpoint = endpoint)
   repo_storageroot_id <- extract_id(repo_storageroot_url)
 
   sha <- yaml$run_metadata$latest_commit
-  repo_name <- yaml$run_metadata$remote_repo
-  repo_name <- gsub(github, "", repo_name)
+  repo_name <- gsub(repo_root, "", repo_name)
 
-  coderepo_exists <- get_id(table = "storage_location",
-                            query = list(hash = sha,
-                                         public = TRUE,
-                                         storage_root = repo_storageroot_id),
-                            endpoint = endpoint)
+  coderepo_exists <- get_url(table = "storage_location",
+                             query = list(hash = sha,
+                                          public = TRUE,
+                                          storage_root = repo_storageroot_id),
+                             endpoint = endpoint)
 
   if (is.null(coderepo_exists)) {
     coderepo_location_url <- new_storage_location(
@@ -154,7 +155,8 @@ initialise <- function(config, script) {
 
   } else {
     assertthat::assert_that(length(coderepo_exists) == 1)
-    coderepo_location_id <- coderepo_exists
+    coderepo_location_url <- coderepo_exists
+    coderepo_location_id <- extract_id(coderepo_location_url)
     obj_exists <- get_url(table = "object",
                           query = list(storage_location = coderepo_location_id),
                           endpoint = endpoint)
@@ -162,7 +164,7 @@ initialise <- function(config, script) {
     if (is.null(obj_exists)) {
       coderepo_object_url <- new_object(
         description = "Analysis / processing script location",
-        storage_location_url = coderepo_location_id,
+        storage_location_url = coderepo_location_url,
         authors_url = list(author_url),
         endpoint = endpoint)
 
