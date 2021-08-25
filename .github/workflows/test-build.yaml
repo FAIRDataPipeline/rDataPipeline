@@ -88,6 +88,8 @@ jobs:
 
       - name: Test coverage
         if: runner.os == 'macOS'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           remotes::install_cran("covr")
           covr::codecov()
