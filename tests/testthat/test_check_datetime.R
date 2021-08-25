@@ -98,8 +98,7 @@ test_that("numeric throws error", {
     check_datetime(table = "code_run",
                    this_field = "release_date",
                    query_class = class(run_date),
-                   this_query = run_date),
-    regexp = "code_run field release_date is incorrectly formatted"
+                   this_query = run_date)
   )
 })
 
@@ -130,8 +129,7 @@ test_that("numeric throws error", {
     check_datetime(table = "code_run",
                    this_field = "release_date",
                    query_class = class(run_date),
-                   this_query = run_date),
-    regexp = "code_run field release_date is incorrectly formatted"
+                   this_query = run_date)
   )
 })
 
@@ -162,8 +160,7 @@ test_that("numeric throws error", {
     check_datetime(table = "code_run",
                    this_field = "release_date",
                    query_class = class(run_date),
-                   this_query = run_date),
-    regexp = "code_run field release_date is incorrectly formatted"
+                   this_query = run_date)
   )
 })
 
