@@ -6,7 +6,7 @@ Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
              person("Ryan", "Field", role = "ctb", 
                   comment = c(ORCID = "0000-0002-4424-9890")))
 Description: Functions to interact with the FAIR data pipeline.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Imports:
     assertthat,
     cli,
