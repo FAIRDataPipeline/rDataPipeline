@@ -99,7 +99,7 @@ test_that("numeric throws error", {
                    this_field = "release_date",
                    query_class = class(run_date),
                    this_query = run_date),
-    regexp = "code_run field \033\\[32mrelease_date\033\\[39m is incorrectly formatted"
+    regexp = "code_run field release_date is incorrectly formatted"
   )
 })
 
@@ -131,7 +131,7 @@ test_that("numeric throws error", {
                    this_field = "release_date",
                    query_class = class(run_date),
                    this_query = run_date),
-    regexp = "code_run field \033\\[32mrelease_date\033\\[39m is incorrectly formatted"
+    regexp = "code_run field release_date is incorrectly formatted"
   )
 })
 
@@ -163,6 +163,7 @@ test_that("numeric throws error", {
                    this_field = "release_date",
                    query_class = class(run_date),
                    this_query = run_date),
-    regexp = "code_run field \033\\[32mrelease_date\033\\[39m is incorrectly formatted"
+    regexp = "code_run field release_date is incorrectly formatted"
   )
 })
+

@@ -6,7 +6,7 @@ test_that("github_files errors if repo does not exist",{
 
 test_that("github_files works on rDataPipeline",{
   expect_true(is.character(
-    rFDP:::github_files("FAIRDataPipeline/rDataPipeline")))
+    rDataPipeline:::github_files("FAIRDataPipeline/rDataPipeline")))
   expect_true(any(grepl(
     "DESCRIPTION", rDataPipeline:::github_files("FAIRDataPipeline/rDataPipeline"))))
 })
