@@ -1,11 +1,11 @@
-#' rFDP
+#' rDataPipeline
 #'
 #' FAIR Data Pipeline API
 #'
 #' For more information see [https://fairdatapipeline.github.io](https://fairdatapipeline.github.io)
 #'
-#' @name rFDP-package
-#' @aliases rFDP
+#' @name rDataPipeline-package
+#' @aliases rDataPipeline
 #' @docType package
 #'
 #' @rawNamespace import(assertthat, except = has_name)
