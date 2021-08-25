@@ -47,10 +47,12 @@ for (i in 1:3) {
     testthat::expect_equal(handle$outputs$use_version, "0.0.1")
   })
 
-  output_component_url <- get_entity(handle$code_run)$outputs[[1]]
-  output_object_url <- get_entity(output_component_url)$object
+  output_component_url <- get_entity(handle$code_run)$outputs
+  assertthat::assert_that(length(output_component_url) == 1)
+  output_object_url <- get_entity(output_component_url[[1]])$object
   output_dp_url <- get_entity(output_object_url)$data_product
-  output_dp_name <- get_entity(output_dp_url)$name
+  assertthat::assert_that(length(output_dp_url) == 1)
+  output_dp_name <- get_entity(output_dp_url[[1]])$name
 
   test_that("data products recorded in registry",{
     testthat::expect_equal(output_dp_name, data_product_x)

@@ -70,9 +70,10 @@ test_that("data products recorded in working config",{
     output_component_url <- get_entity(handle$code_run)$outputs[[i]]
     output_object_url <- get_entity(output_component_url)$object
     output_dp_url <- get_entity(output_object_url)$data_product
+    assertthat::assert_that(length(output_dp_url) == 1)
 
-    testthat::expect_equal(get_entity(output_dp_url)$name, data_product1)
-    testthat::expect_equal(get_entity(output_dp_url)$version, versions[i])
+    testthat::expect_equal(get_entity(output_dp_url[[1]])$name, data_product1)
+    testthat::expect_equal(get_entity(output_dp_url[[1]])$version, versions[i])
   }
 })
 

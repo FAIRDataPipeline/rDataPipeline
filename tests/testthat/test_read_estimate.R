@@ -34,22 +34,22 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-tmp <- sample(1:1E10, 3, FALSE)
-value1 <- tmp[1]
+values <- sample(1:1E9, 3, FALSE)
+value1 <- values[1]
 write_estimate(value =  value1,
                handle = handle,
                data_product = data_product1,
                component = component1,
                description = "asymptomatic period")
 
-value2 <- tmp[2]
+value2 <- values[2]
 write_estimate(value =  value2,
                handle = handle,
                data_product = data_product1,
                component = component2,
                description = "asymptomatic period2")
 
-value3 <- tmp[3]
+value3 <- values[3]
 write_estimate(value =  value3,
                handle = handle,
                data_product = missing_data_product,
@@ -71,14 +71,9 @@ create_config(path = config_file,
               input_namespace = namespace1,
               output_namespace = namespace1)
 add_read(path = config_file,
-         data_product = data_product1,
-         component = component1)
+         data_product = data_product1)
 add_read(path = config_file,
-         data_product = data_product1,
-         component = component2)
-add_read(path = config_file,
-         data_product = missing_data_product,
-         component = component1)
+         data_product = missing_data_product)
 
 fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)

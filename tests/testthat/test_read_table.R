@@ -65,11 +65,6 @@ create_config(path = config_file,
               output_namespace = namespace1)
 add_read(path = config_file,
          data_product = data_product1,
-         component = component,
-         use_version = version1)
-add_read(path = config_file,
-         data_product = data_product1,
-         component = component2,
          use_version = version1)
 
 # CLI functions

@@ -36,7 +36,8 @@ findme <- function(file, endpoint) {
 
     for (z in seq_along(object)) {
       data_product_url <- object[[z]]$data_product
-      data_product <- get_entity(data_product_url)
+      assertthat::assert_that(length(data_product_url) == 1)
+      data_product <- get_entity(data_product_url[[1]])
       description <- object[[z]]$description
       components_url <- object[[z]]$components
       components <- lapply(components_url, function(w)
