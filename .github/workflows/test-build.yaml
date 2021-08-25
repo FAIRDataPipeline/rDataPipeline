@@ -10,15 +10,10 @@ jobs:
   R-CMD-check:
     # If the commit message isn't [skip ci]
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    # Use a matrix to define what operating systems to run on
     runs-on: ${{ matrix.config.os }}
-    # Name the job dynamically based on OS and R version
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
     strategy:
       fail-fast: false
-
-      # Define operating systems
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
@@ -26,11 +21,9 @@ jobs:
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     steps:
-      # Checkout repo
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2  # Checkout repo
         with:
           persist-credentials: false
-
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
@@ -92,3 +85,12 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Test coverage
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          remotes::install_cran("covr")
+          covr::codecov()
+        shell: Rscript {0}
