@@ -87,9 +87,7 @@ jobs:
           path: check
 
       - name: Test coverage
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && runner.os == 'macOS'
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        if: runner.os == 'macOS'
         run: |
           remotes::install_cran("covr")
           covr::codecov()
