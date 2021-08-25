@@ -45,3 +45,9 @@ vignettes/*.pdf
 /tests/testthat/config_files/*
 /tests/testthat/test_datastore/*
 docs
+
+/.fair
+/config_files
+/test
+/tests/testthat/test
+sonia.yaml

@@ -1,8 +1,8 @@
-## rFDP
+## rDataPipeline
 
-[![](https://img.shields.io/badge/docs-rFDP-blue)](https://FAIRDataPipeline.github.io/rFDP/)
-[![test-build](https://github.com/FAIRDataPipeline/rFDP/workflows/build/badge.svg?=1)](https://github.com/FAIRDataPipeline/rFDP/actions)
-[![codecov](https://codecov.io/gh/FAIRDataPipeline/rFDP/branch/main/graph/badge.svg?=1)](https://codecov.io/gh/FAIRDataPipeline/rFDP)
+[![](https://img.shields.io/badge/docs-rDataPipeline-blue)](https://FAIRDataPipeline.github.io/rDataPipeline/)
+[![test-build](https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1)](https://github.com/FAIRDataPipeline/rDataPipeline/actions)
+[![codecov](https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?=1)](https://codecov.io/gh/FAIRDataPipeline/rDataPipeline)
 [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
 
 Functions to generate and process data files for the FAIR data pipeline.
@@ -13,8 +13,8 @@ In R:
 
 ```{r}
 library(devtools)
-install_github("FAIRDataPipeline/rFDP")
-library(rFDP)
+install_github("FAIRDataPipeline/rDataPipeline")
+library(rDataPipeline)
 ```
 
 ## User-written *config.yaml*

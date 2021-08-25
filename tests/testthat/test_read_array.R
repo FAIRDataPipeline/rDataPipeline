@@ -239,26 +239,22 @@ create_config(path = config_file,
 # Will return v.0.1.0, not v.0.2.0
 add_read(path = config_file,
          data_product = data_product1,
-         component = component,
          use_version = version1)
 
 # Will return test/array, but call it test/array2
 add_read(path = config_file,
          data_product = data_product2,
-         component = component,
          use_data_product = data_product1)
 
 # Will return test/array in the johnsmith namespace, but call it test/array3
 add_read(path = config_file,
          data_product = data_product3,
-         component = component,
          use_data_product = data_product1,
          use_namespace = namespace2)
 
 # Will return test/array2 v.0.1.0, but call it test/array4
 add_read(path = config_file,
          data_product = data_product4,
-         component = component,
          use_data_product = data_product2,
          use_version = version1)
 
@@ -321,11 +317,6 @@ create_config(path = config_file,
 # Will return v.0.1.0, not v.0.2.0
 add_read(path = config_file,
          data_product = data_product5,
-         component = component,
-         use_version = version1)
-add_read(path = config_file,
-         data_product = data_product5,
-         component = component2,
          use_version = version1)
 
 # CLI functions

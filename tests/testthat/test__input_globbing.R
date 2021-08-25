@@ -79,3 +79,6 @@ test_that("data products recorded in working config",{
   testthat::expect_equal(reads[[1]]$use$version, "0.0.1")
   testthat::expect_equal(reads[[2]]$use$version, "0.0.1")
 })
+
+path <- link_read(handle, data_product1)
+path <- link_read(handle, data_product2)

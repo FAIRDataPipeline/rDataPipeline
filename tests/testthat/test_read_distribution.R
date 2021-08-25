@@ -61,11 +61,7 @@ create_config(path = config_file,
               input_namespace = namespace1,
               output_namespace = namespace1)
 add_read(path = config_file,
-         data_product = data_product1,
-         component = component1)
-add_read(path = config_file,
-         data_product = data_product1,
-         component = component2)
+         data_product = data_product1)
 
 # CLI functions
 fair_pull(path = config_file)

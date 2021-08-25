@@ -1,4 +1,4 @@
-library(rFDP)
+library(rDataPipeline)
 
 run_server()
 

@@ -1,4 +1,4 @@
-Package: rFDP
+Package: rDataPipeline
 Title: Functions to Interact with the FAIR Data Pipeline
 Version: 0.25.1
 Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
@@ -33,5 +33,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://fairdatapipeline.github.io/rFDP, https://github.com/FAIRDataPipeline/rFDP
-BugReports: https://github.com/FAIRDataPipeline/rFDP/issues
+URL: https://fairdatapipeline.github.io/rFDP, https://github.com/FAIRDataPipeline/rDataPipeline
+BugReports: https://github.com/FAIRDataPipeline/rDataPipeline/issues
