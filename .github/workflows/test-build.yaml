@@ -91,5 +91,5 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           remotes::install_cran("covr")
-          covr::codecov(path = "tests")
+          covr::codecov(path = "tests", quiet = FALSE)
         shell: Rscript {0}
