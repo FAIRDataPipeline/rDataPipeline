@@ -90,6 +90,7 @@ jobs:
         if: runner.os == 'macOS'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           remotes::install_cran("covr")
           covr::codecov()
