@@ -68,11 +68,9 @@ jobs:
         shell: Rscript {0}
 
       - name: Install local registry
-        if: runner.os == 'macOS'
         run: /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
 
       - name: Run CMD check
-        if: runner.os == 'macOS'
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
           R_CHECK_SYSTEM_CLOCK: 0
@@ -93,5 +91,5 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           remotes::install_cran("covr")
-          covr::codecov()
+          covr::codecov(path = "tests")
         shell: Rscript {0}
