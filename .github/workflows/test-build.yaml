@@ -34,13 +34,32 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Checkout FAIRDataPipeline/FAIR-CLI
+        uses: actions/checkout@v2
+        with:
+          repository: FAIRDataPipeline/FAIR-CLI
+          path: './FAIR-CLI'
+      - name: Install local registry
+        run: /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
+      - name: Install poetry
+        run: python -m pip install poetry
+      - name: Install FAIR CLI
+        working-directory: ./FAIR-CLI
+        run: |
+          poetry install
+          poetry shell
+      - name: Initialise FAIR CLI
+        run: fair init --using init.yaml
+
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-        shell: bash
       - name: Install R API system requirements (ubuntu-20.04)
         if: matrix.config.os == 'ubuntu-20.04'
         run: |
@@ -48,12 +67,9 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-        shell: bash
-      - name: Install local registry
-        run: /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
+
       - name: Start registry
         run: $HOME/.fair/registry/scripts/start_fair_registry
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
