@@ -86,7 +86,7 @@ jobs:
           path: check
 
       - name: Test coverage
-        if: runner.os == 'macOS'
+        if: matrix.config.os == 'ubuntu-20.04'
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
