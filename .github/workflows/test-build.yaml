@@ -71,9 +71,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
-      - name: Test coverage
-        run: |
-          remotes::install_cran("covr")
-          covr::codecov(path = "tests", quiet = FALSE)
-        shell: Rscript {0}
