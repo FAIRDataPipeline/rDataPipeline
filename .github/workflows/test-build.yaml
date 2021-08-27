@@ -50,7 +50,7 @@ jobs:
         working-directory: ./FAIR-CLI
         run: |
           poetry install
-          poetry shell
+#          poetry shell
       - name: Initialise FAIR CLI
         run: fair init --using init.yaml
 
