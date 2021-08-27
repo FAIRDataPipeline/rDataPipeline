@@ -6,7 +6,6 @@ path_url <- paste0("https://", path, ".com")
 hash <- paste0(Sys.time(), "%d%m%y%H%M%S")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 storage_root_url <- post_data("storage_root",
                               list(name = UID,

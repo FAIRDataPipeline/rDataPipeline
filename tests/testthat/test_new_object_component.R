@@ -5,7 +5,6 @@ UID <- paste0("test_new_object_component_",
 UID2 <- paste0(UID, "1")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data("object", list(description = UID), endpoint = endpoint)
 object_url2 <- post_data("object", list(description = UID2), endpoint = endpoint)

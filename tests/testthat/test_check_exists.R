@@ -1,7 +1,6 @@
 context("Testing check_exists()")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 test_that("invalid table throws an error", {
   testthat::expect_error(check_exists(table = "unknown",

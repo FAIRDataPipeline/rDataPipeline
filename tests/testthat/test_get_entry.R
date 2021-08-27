@@ -4,7 +4,6 @@ description <- paste0("test_get_entry_",
                       openssl::sha1(x = as.character(Sys.time())))
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 object_uri <- post_data("object", data = list(description = description),
                         endpoint = endpoint)

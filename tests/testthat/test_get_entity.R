@@ -4,7 +4,6 @@ description <- paste0("test_get_entity_",
                       openssl::sha1(x = as.character(Sys.time())))
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 entity_url <- post_data("object", list(description = description),
                         endpoint = endpoint)

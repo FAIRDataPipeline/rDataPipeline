@@ -5,7 +5,6 @@ description <- paste0("test_new_code_run_",
 run_date <- Sys.time()
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 code_repo_url <- post_data("object", list(description = description),
                            endpoint = endpoint)

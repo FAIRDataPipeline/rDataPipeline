@@ -9,7 +9,6 @@ dataproduct_description <- "A csv file"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 # User written config file
 config_file <- paste0("config_files/multicoderun/config_", uid , ".yaml")

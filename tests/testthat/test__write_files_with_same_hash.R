@@ -10,7 +10,6 @@ version1 <- "0.1.0"
 namespace1 <- "username"
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 # Write v0.1.0 of test/array to local registry and data store ---------------
 

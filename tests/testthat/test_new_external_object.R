@@ -7,7 +7,6 @@ path_url <- paste0("https://", path)
 hash <- sha1(UID)
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 storage_root_url <- post_data("storage_root",
                               list(root = path_url),

@@ -1,7 +1,6 @@
 context("Testing check_datetime()")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 tables <- get_tables(endpoint = endpoint)
 tables <- setdiff(tables, c("users", "groups"))

@@ -6,7 +6,6 @@ version <- create_version_number()
 website <- paste0("https://www.", gsub("_", "", name), ".com")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data("object", list(description = name), endpoint = endpoint)
 

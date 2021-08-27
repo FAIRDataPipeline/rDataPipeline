@@ -1,7 +1,6 @@
 context("Testing get_existing()")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 # Get all tables
 tables <- get_tables(endpoint)

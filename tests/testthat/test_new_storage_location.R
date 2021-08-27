@@ -9,7 +9,6 @@ hash <- openssl::sha1(x = root_name)
 path <- paste0(hash, ".h5")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 # Register storage root
 storage_root_url <- new_storage_root(root = root,

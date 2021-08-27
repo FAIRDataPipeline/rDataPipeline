@@ -1,7 +1,6 @@
 context("Testing validate_fields()")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 #get all tables
 tables <- get_tables()

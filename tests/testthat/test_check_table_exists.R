@@ -20,7 +20,6 @@ tables <- c("users",
             "key_value")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 test_that("check table returns true with correct tables", {
   tmp <- lapply(seq_along(tables), function(x) {

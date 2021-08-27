@@ -3,7 +3,6 @@ context("Testing new_issue()")
 uid <- as.character(random_hash())
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data(table = "object",
                         data = list(name = uid),

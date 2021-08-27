@@ -4,7 +4,6 @@ UID <- paste0("test_new_data_product_",
               openssl::sha1(x = as.character(Sys.time())))
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 object_url <- post_data("object",
                         list(description = UID),

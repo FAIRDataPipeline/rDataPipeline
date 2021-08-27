@@ -1,6 +1,5 @@
 library(rDataPipeline)
 
-run_server()
 
 config_file <- "config1.yaml"
 fdp_pull(config_file)

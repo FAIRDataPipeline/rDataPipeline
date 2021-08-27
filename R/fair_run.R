@@ -10,8 +10,6 @@ fair_run <- function(path = "config.yaml",
                      endpoint = "http://localhost:8000/api/",
                      skip = FALSE) {
 
-  if (grepl("localhost", endpoint)) run_server()
-
   # Save names in data store
   config_file <- "config.yaml"
 

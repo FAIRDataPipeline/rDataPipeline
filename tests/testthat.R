@@ -3,7 +3,6 @@ library(rDataPipeline)
 
 Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
 endpoint <- Sys.getenv("FDP_endpoint")
-run_server()
 
 rDataPipeline::fair_init(
   name = "Sonia Mitchell",

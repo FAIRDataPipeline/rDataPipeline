@@ -6,8 +6,6 @@
 #'
 fair_pull <- function(path = "config.yaml") {
 
-  if (grepl("localhost", endpoint)) run_server()
-
     # Read config.yaml --------------------------------------------------------
 
   if (file.exists(path)) {

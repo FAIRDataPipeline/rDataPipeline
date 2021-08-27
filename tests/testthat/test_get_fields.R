@@ -6,7 +6,6 @@ known_fields <- c("character", "integer", "field", "boolean", "datetime",
                   "numeric", "url")
 
 endpoint <- Sys.getenv("FDP_endpoint")
-if (grepl("localhost", endpoint)) run_server()
 
 tables <- get_tables(endpoint = endpoint) %>%
   setdiff(c("users", "groups"))

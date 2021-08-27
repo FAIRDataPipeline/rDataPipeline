@@ -13,8 +13,6 @@ findme <- function(file, endpoint) {
   hash <- get_file_hash(file)
   msg <- paste("hash:", hash)
 
-  if (grepl("localhost", endpoint)) run_server()
-
   # There could be multiple Storage Locations with the same hash
   storage_location <- get_entry("storage_location", list(hash = hash))
 
