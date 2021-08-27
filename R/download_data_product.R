@@ -19,8 +19,6 @@
 #'
 download_data_product <- function(data_product, version, namespace, data_dir) {
 
-  run_server()
-
   # Where is the file -------------------------------------------------------
 
   namespace_id <- get_entry("namespace", list(name = namespace))[[1]]$url %>%
@@ -37,8 +35,6 @@ download_data_product <- function(data_product, version, namespace, data_dir) {
   object_url <- entry[[1]]$object
   object <- get_entity(object_url)
   storage_location <- get_storage_location(object$storage_location)
-
-  stop_server()
 
   # Where should we save it -------------------------------------------------
 
