@@ -7,8 +7,8 @@ namespaces:
   output: sonia
 registries:
   local:
-    data_store: /Users/Soniam/.fair/data
-    directory: /Users/Soniam/.fair/registry
+    data_store: $HOME/.fair/data
+    directory: $HOME/.fair/registry
     uri: http://localhost:8000/api/
   origin:
     data_store: https://data.scrc.uk/data/
