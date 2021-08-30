@@ -61,6 +61,7 @@ jobs:
           cd ..
           ls .
           fair init --using init.yaml
+          fair registry start
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
