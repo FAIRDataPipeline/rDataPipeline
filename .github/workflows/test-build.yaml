@@ -45,7 +45,7 @@ jobs:
           repository: FAIRDataPipeline/FAIR-CLI
           path: FAIR-CLI
       - name: Move FAIR-CLI
-        run: mv FAIR-CLI $HOME/FAIR-CLI
+        run: mv FAIR-CLI ~/FAIR-CLI
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
@@ -54,7 +54,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Install and initialise FAIR CLI
-        working-directory: ${{ home }}/FAIR-CLI
+        working-directory: ~/FAIR-CLI
         run: |
           echo "workspace"
           ls ${{ github.workspace }}
