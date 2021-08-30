@@ -67,7 +67,7 @@ jobs:
           cd ${{ github.workspace }}
           fair init --using mac.yaml
       - name: Install and initialise FAIR CLI
-        if: runner.os == 'Ubuntu'
+        if: matrix.config.os == 'ubuntu-20.04'
         run: |
           echo "workspace"
           ls ${{ github.workspace }}
