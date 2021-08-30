@@ -44,20 +44,13 @@ jobs:
         with:
           repository: FAIRDataPipeline/FAIR-CLI
           path: './FAIR-CLI'
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-path: '$HOME/.FAIR-CLI'
-          virtualenvs-create: true
-          virtualenvs-in-project: true
 
       - name: Install FAIR CLI
         working-directory: ./FAIR-CLI
         run: |
-          poetry install
- #         poetry shell
-      - name: Initialise FAIR CLI
-        run: fair init --using init.yaml
+          python -m pip install poetry
+          python -m poetry install
+          fair init --ci
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
