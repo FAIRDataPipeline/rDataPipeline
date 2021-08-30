@@ -12,7 +12,7 @@ registries:
     uri: http://localhost:8000/api/
   origin:
     data_store: https://data.scrc.uk/data/
-    token: /Users/Soniam/Desktop/git/FAIRDataPipeline/rFDP/token.txt
+    token: $HOME/token.txt
     uri: https://data.scrc.uk/api/
 user:
   email: sonia.mitchell@glasgow.ac.uk
