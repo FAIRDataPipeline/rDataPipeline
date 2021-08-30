@@ -56,7 +56,7 @@ jobs:
         run: |
           poetry install
           source .venv/bin/activate
-          fair init --using ./init.yaml
+          fair init --using $HOME/init.yaml
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
