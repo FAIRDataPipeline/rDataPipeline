@@ -24,8 +24,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: R-API
       - uses: r-lib/actions/setup-pandoc@master
       - uses: r-lib/actions/setup-r@v1
         with:
@@ -33,7 +31,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v1
-        path: R-API
         with:
           extra-packages: rcmdcheck
 
@@ -47,6 +44,8 @@ jobs:
         with:
           repository: FAIRDataPipeline/FAIR-CLI
           path: FAIR-CLI
+      - name: Move FAIR-CLI
+        run: mv FAIR-CLI $HOME/FAIR-CLI
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
@@ -54,19 +53,17 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-#      - name: Start registry
-#        run: $HOME/.fair/registry/scripts/start_fair_registry
       - name: Install and initialise FAIR CLI
-        working-directory: FAIR-CLI
+        working-directory: $HOME/FAIR-CLI
         run: |
           poetry install
           source .venv/bin/activate
-          cd ..
           echo "workspace"
           ls ${{ github.workspace }}
           echo "home"
           ls $HOME
-          fair init --using R-API/init.yaml
+          cd ${{ github.workspace }}
+          fair init --using init.yaml
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -83,7 +80,6 @@ jobs:
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
       - name: Check
-        working-directory: R-API
         env:
           _R_CHECK_CRAN_INCOMING_: false
         run: |
