@@ -1,0 +1,31 @@
+{
+  "title": "rDataPipeline - FAIR Data Pipeline in R",
+  "description": "Package for interfacing with the FAIR Data Pipeline in R",
+  "upload_type": "software",
+  "creators": [
+    {
+      "affiliation": "University of Glasgow",
+      "name": "Mitchell, Sonia",
+      "orcid": "0000-0003-1536-2066"
+    },
+    {
+      "affiliation": "University of Glasgow",
+      "name": "Field, Ryan",
+      "orcid": "0000-0002-4424-9890"
+    }
+  ],
+  "access_right": "open",
+  "license": "GPL-3.0+",
+  "related_identifiers": [
+    {
+      "scheme": "url",
+      "identifier": "https://github.com/FAIRDataPipeline/rDataPipeline",
+      "relation": "isIdenticalTo"
+    }
+  ],
+  "keywords": [
+    "FAIR",
+    "R",
+    "data"
+  ]
+}
