@@ -1,22 +1,22 @@
 description: project
 git:
   local_repo: /Users/Soniam/Desktop/git/FAIRDataPipeline/rFDP
-remote: origin
+  remote: origin
 namespaces:
   input: sonia
-output: sonia
+  output: sonia
 registries:
   local:
-  data_store: /home/runner/.fair/data/
-  directory: /home/runner/.fair/registry/
-  uri: http://localhost:8000/api/
+    data_store: /home/runner/.fair/data/
+    directory: /home/runner/.fair/registry/
+    uri: http://localhost:8000/api/
   origin:
-  data_store: https://data.scrc.uk/data/
-  token: ${{ github.workspace }}/token.txt
-uri: https://data.scrc.uk/api/
-  user:
+    data_store: https://data.scrc.uk/data/
+    token: ${{ github.workspace }}/token.txt
+    uri: https://data.scrc.uk/api/
+user:
   email: sonia.mitchell@glasgow.ac.uk
-family_name: Mitchell
-given_names: Sonia
-orcid: 0000-0003-1536-2066
-uuid: 595638a0-fe69-4314-b108-3043b5785515
+  family_name: Mitchell
+  given_names: Sonia
+  orcid: 0000-0003-1536-2066
+  uuid: 595638a0-fe69-4314-b108-3043b5785515
