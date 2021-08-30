@@ -51,13 +51,16 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
+      - name: Start registry
+        run: $HOME/.fair/registry/scripts/start_fair_registry
       - name: Install and initialise FAIR CLI
         working-directory: ${{ github.workspace }}/FAIR-CLI
         run: |
           poetry install
           source .venv/bin/activate
-          ls ${{ github.workspace }}
-          fair init --using ${{ github.workspace }}/init.yaml
+          cd ..
+          ls .
+          fair init --using init.yaml
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -73,8 +76,6 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
 
-      - name: Start registry
-        run: $HOME/.fair/registry/scripts/start_fair_registry
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
