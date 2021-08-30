@@ -59,7 +59,7 @@ jobs:
           echo "workspace"
           ls ${{ github.workspace }}
           echo "home"
-          ls ${{ home }}
+          ls $HOME
           poetry install
           source .venv/bin/activate
           cd ${{ github.workspace }}
