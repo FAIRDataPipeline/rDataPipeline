@@ -51,14 +51,12 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      - name: Install FAIR CLI
+      - name: Install and initialise FAIR CLI
         working-directory: ${{ github.workspace }}/FAIR-CLI
         run: |
           poetry install
           source .venv/bin/activate
-      - name: Initialise FAIR CLI
-        working-directory: ${{ github.workspace }}/FAIR-CLI/.venv
-        run: fair init --using ./init.yaml
+          fair init --using ./init.yaml
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
