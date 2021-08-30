@@ -51,17 +51,19 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      - name: Start registry
-        run: $HOME/.fair/registry/scripts/start_fair_registry
+#      - name: Start registry
+#        run: $HOME/.fair/registry/scripts/start_fair_registry
       - name: Install and initialise FAIR CLI
         working-directory: ${{ github.workspace }}/FAIR-CLI
         run: |
           poetry install
           source .venv/bin/activate
           cd ..
-          ls .
+          echo "workspace"
+          ls ${{ github.workspace }}
+          echo "home"
+          ls $HOME
           fair init --using init.yaml
-          fair registry start
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
