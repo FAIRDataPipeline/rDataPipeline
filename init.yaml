@@ -7,8 +7,8 @@ namespaces:
   output: sonia
 registries:
   local:
-    data_store: /home/runner/work/rDataPipeline/rDataPipeline/.fair/data/
-    directory: /home/runner/work/rDataPipeline/rDataPipeline/.fair/registry/
+    data_store: /home/runner/.fair/data/
+    directory: /home/runner/.fair/registry/
     uri: http://localhost:8000/api/
   origin:
     data_store: https://data.scrc.uk/data/
