@@ -57,6 +57,7 @@ jobs:
           poetry install
  #         poetry shell
       - name: Initialise FAIR CLI
+        working-directory: ./FAIR-CLI
         run: fair init --using init.yaml
 
       - name: Install R API system requirements (macOS-latest)
