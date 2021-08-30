@@ -45,7 +45,7 @@ jobs:
           repository: FAIRDataPipeline/FAIR-CLI
           path: FAIR-CLI
       - name: Move FAIR-CLI
-        run: mv FAIR-CLI ${{ home }}/FAIR-CLI
+        run: mv FAIR-CLI $HOME/FAIR-CLI
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
