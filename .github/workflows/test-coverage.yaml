@@ -1,12 +1,9 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/master/examples
-#
-# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
-# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
 on:
   push:
-    branches: [main, master]
+    branches: main
   pull_request:
-    branches: [main, master]
+    branches: main
 
 name: test-coverage
 
@@ -42,7 +39,6 @@ jobs:
 
       - name: init
         run: |
-
           rDataPipeline::fair_init(
             name = "Sonia Mitchell",
             identifier = "https://orcid.org/0000-0003-1536-2066",
