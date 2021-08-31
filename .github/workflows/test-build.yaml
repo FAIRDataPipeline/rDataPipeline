@@ -55,24 +55,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Install and initialise FAIR CLI
-        if: runner.os == 'macOS'
         run: |
-          echo "workspace"
-          ls ${{ github.workspace }}
-          echo "above"
-          ls ..
-          cd ../FAIR-CLI
-          poetry install
-          source .venv/bin/activate
-          cd ${{ github.workspace }}
-          fair init --using mac.yaml
-      - name: Install and initialise FAIR CLI
-        if: matrix.config.os == 'ubuntu-20.04'
-        run: |
-          echo "workspace"
-          ls ${{ github.workspace }}
-          echo "above"
-          ls ..
           cd ../FAIR-CLI
           poetry install
           source .venv/bin/activate
