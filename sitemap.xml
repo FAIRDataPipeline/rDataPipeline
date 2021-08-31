@@ -118,19 +118,10 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_loaded_package_version.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_max_version.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_package_info.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_remote_package_version.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_startup_message.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_storage_location.html</loc>
@@ -167,9 +158,6 @@
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/initialise.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/is_current_version.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/is_queryable.html</loc>
