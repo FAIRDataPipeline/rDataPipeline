@@ -67,9 +67,6 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/fair_init.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fair_pull.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/fair_run.html</loc>
   </url>
   <url>
@@ -254,9 +251,6 @@
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/read_table.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/register_external_object.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/register_issue_dataproduct.html</loc>

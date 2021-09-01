@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rDataPipeline</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.26.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.27.0</span>
       </span>
     </div>
 
@@ -119,9 +119,9 @@ add_write(path = config_file,
           organisation = c("University of Glasgow",
                            "Boydorr Centre for Population and Ecosystem Health"),
           endpoint = "http://localhost:8000/api/")</a></code></pre>
-<p>The R implementation of <code><a href="reference/fair_pull.html">fair_pull()</a></code> is used to register external data products in the local registry and data store.</p>
+<p>The R implementation of <code>fair_pull()</code> is used to register external data products in the local registry and data store.</p>
 <p>Note that the full implementation will also pull data from the remote registry and data store – this has not been implemented in R.</p>
-<pre class="{r}"><code><a href="reference/fair_pull.html">fair_pull(path = config_file)</a></code></pre>
+<pre class="{r}"><code>fair_pull(path = config_file)</code></pre>
 <p>The R implementation of <code><a href="reference/fair_run.html">fair_run()</a></code> will generate a working config file from the user-written <em>config.yaml</em> file, containing information required by the DataPipeline API. This file is saved in the local data store and the directory in which it resides is written to a global variable, <code>FDP_CONFIG_DIR</code>.</p>
 <p>Note that the full implementation will also run the submission script (detailed below) – this has not been implemented in R.</p>
 <pre class="{r}"><code><a href="reference/fair_run.html">fair_run(path = config_file)</a></code></pre>
