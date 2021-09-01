@@ -33,5 +33,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://fairdatapipeline.github.io/rFDP, https://github.com/FAIRDataPipeline/rDataPipeline
+URL: https://fairdatapipeline.github.io/rDataPipeline, https://github.com/FAIRDataPipeline/rDataPipeline
 BugReports: https://github.com/FAIRDataPipeline/rDataPipeline/issues
