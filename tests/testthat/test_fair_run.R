@@ -33,7 +33,6 @@ add_write(path = config_file,
           file_type = "txt")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
@@ -71,7 +70,6 @@ finalise(handle)
 #                  data_product = data_product1)
 #
 # # CLI functions
-# fair_pull(path = config_file)
 # fair_run(path = config_file, skip = TRUE)
 #
 # # Initialise code run

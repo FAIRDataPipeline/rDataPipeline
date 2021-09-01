@@ -31,7 +31,6 @@ add_write(path = config_file,
           file_type = "txt")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
@@ -84,3 +83,30 @@ test_that("data registry shows correct path",{
   testthat::expect_equal(paste0(root, tmp[[1]]$path),
                          file1)
 })
+
+# -------------------------------------------------------------------------
+
+# User written config file
+config_file <- paste0("config_files/samehash2/config_", uid , ".yaml")
+
+create_config(path = config_file,
+              description = coderun_description,
+              input_namespace = namespace1,
+              output_namespace = namespace1)
+
+# Will return v.0.1.0, not v.0.2.0
+add_read(path = config_file,
+         data_product = data_product1,
+         use_version = version1)
+
+# CLI functions
+fair_run(path = config_file, skip = TRUE)
+
+# Initialise code run
+config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
+script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+handle <- initialise(config, script)
+
+path <- link_read(handle, data_product1)
+
+file.exists(path)

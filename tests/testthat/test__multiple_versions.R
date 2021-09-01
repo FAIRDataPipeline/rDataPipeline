@@ -30,7 +30,6 @@ add_write(path = config_file,
           use_version = "0.0.2")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
@@ -93,7 +92,6 @@ add_read(path = config_file,
          version = "0.0.2")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run

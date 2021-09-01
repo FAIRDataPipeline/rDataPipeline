@@ -21,7 +21,6 @@ add_write(path = config_file,
           description = dataproduct_description)
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
@@ -64,7 +63,6 @@ add_read(path = config_file,
          data_product = data_product1)
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
