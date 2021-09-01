@@ -24,7 +24,6 @@ add_write(path = config_file,
           version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -80,7 +79,6 @@ add_write(path = config_file,
           file_type = "csv")
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -132,7 +130,6 @@ add_write(path = config_file,
           version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -196,7 +193,6 @@ add_write(path = config_file,
           version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -263,7 +259,6 @@ add_write(path = config_file,
           version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -339,7 +334,6 @@ add_write(path = config_file,
           file_type = "csv")
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -398,7 +392,6 @@ add_read(path = config_file,
          version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -445,7 +438,6 @@ add_read(path = config_file,
          version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -492,7 +484,6 @@ add_read(path = config_file,
          version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
@@ -539,7 +530,6 @@ add_read(path = config_file,
          version = version)
 
 # CLI functions
-fair_pull(config_file)
 fair_run(config_file, skip = TRUE)
 
 # Initialise code run
