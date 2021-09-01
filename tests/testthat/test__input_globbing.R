@@ -27,7 +27,6 @@ add_write(path = config_file,
           file_type = "csv")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
@@ -62,7 +61,6 @@ add_read(path = config_file,
          data_product = data_product3)
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run

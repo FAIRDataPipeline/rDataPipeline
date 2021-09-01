@@ -1,7 +1,5 @@
 # context("Testing patch_data()")
 #
-# run_server()
-#
 # test_user <- "22"
 # test_identifier <- sample(1:1000000, 1, replace=TRUE)
 # datetime <- format(Sys.time(), "%d%m%y%H%M%S")

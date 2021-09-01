@@ -19,7 +19,6 @@ create_config(path = config_file,
               output_namespace = namespace1)
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run

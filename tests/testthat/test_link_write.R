@@ -21,7 +21,6 @@ add_write(path = config_file,
           file_type = "csv")
 
 # CLI functions
-fair_pull(path = config_file)
 fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
