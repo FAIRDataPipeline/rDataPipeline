@@ -9,6 +9,7 @@
 #' @param input_namespace input_namespace field
 #' @param output_namespace output_namespace field
 #' @param write_data_store write_data_store field
+#' @param local_repo local_repo
 #' @param force force
 #'
 #' @export
@@ -26,7 +27,8 @@ create_config <- function(path,
                           input_namespace,
                           output_namespace,
                           write_data_store = "test/datastore/",
-                          force = TRUE) {
+                          force = TRUE,
+                          local_repo = "local_repo") {
 
   if (file.exists(path)) {
     if (force) {
@@ -43,7 +45,7 @@ create_config <- function(path,
                        default_input_namespace = input_namespace,
                        default_output_namespace = output_namespace,
                        write_data_store = write_data_store,
-                       local_repo = "local_repo",
+                       local_repo = local_repo,
                        script = "")
 
   # If directory doesn't exist, create it

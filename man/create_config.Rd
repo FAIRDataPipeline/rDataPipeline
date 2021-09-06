@@ -10,7 +10,8 @@ create_config(
   input_namespace,
   output_namespace,
   write_data_store = "test/datastore/",
-  force = TRUE
+  force = TRUE,
+  local_repo = "local_repo"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ create_config(
 \item{write_data_store}{write_data_store field}
 
 \item{force}{force}
+
+\item{local_repo}{local_repo}
 }
 \description{
 Generates (user generated) config.yaml files for unit tests. Use
