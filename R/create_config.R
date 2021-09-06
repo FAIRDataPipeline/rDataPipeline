@@ -9,6 +9,7 @@
 #' @param input_namespace input_namespace field
 #' @param output_namespace output_namespace field
 #' @param write_data_store write_data_store field
+#' @param force force
 #'
 #' @export
 #'
@@ -24,10 +25,16 @@ create_config <- function(path,
                           description,
                           input_namespace,
                           output_namespace,
-                          write_data_store = "test/datastore/") {
+                          write_data_store = "test/datastore/",
+                          force = TRUE) {
 
-  if (file.exists(path))
-    usethis::ui_stop(paste(usethis::ui_field(path), "already exists"))
+  if (file.exists(path)) {
+    if (force) {
+      file.remove(path)
+    } else {
+      usethis::ui_stop(paste(usethis::ui_field(path), "already exists"))
+    }
+  }
 
   # Generate run_metadata block
   run_metadata <- list(description = description,
