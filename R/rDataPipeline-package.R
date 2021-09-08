@@ -21,5 +21,8 @@
 #' @import usethis
 #' @importFrom utils download.file read.csv unzip write.csv type.convert
 #' @import semver
+#' @import png
+#' @import rsvg
+#' @import XML
 #'
 NULL

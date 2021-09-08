@@ -20,10 +20,13 @@ Imports:
     crayon,
     semver,
     rhdf5,
-    yaml,
+    rsvg,
+    png,
     R6,
     git2r,
-    usethis
+    usethis,
+    yaml,
+    XML
 Suggests:
     units,
     testthat
