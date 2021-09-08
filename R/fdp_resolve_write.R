@@ -70,10 +70,10 @@ fdp_resolve_write <- function(this_write, yaml, endpoint) {
       write_version <- "0.0.1"
 
     } else {
-      write_version <- lapply(entries, function(x) x$version) %>%
+      tmp <- lapply(entries, function(x) x$version) %>%
         unlist() %>%
+        semver::parse_version() %>%
         max()
-      tmp <- semver::parse_version(write_version)
       patch <- tmp[[1]]$patch
       tmp[[1]]$patch <- as.integer(patch + 1)
       write_version <- as.character(tmp)
