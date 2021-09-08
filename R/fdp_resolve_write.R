@@ -74,8 +74,8 @@ fdp_resolve_write <- function(this_write, yaml, endpoint) {
         unlist() %>%
         semver::parse_version() %>%
         max()
-      patch <- tmp[[1]]$patch
-      tmp[[1]]$patch <- as.integer(patch + 1)
+      patch <- tmp$patch
+      tmp$patch <- as.integer(patch + 1)
       write_version <- as.character(tmp)
     }
   }
