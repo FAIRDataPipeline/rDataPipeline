@@ -4,7 +4,7 @@
 \alias{resolve_read}
 \title{resolve_read}
 \usage{
-resolve_read(handle, data_product, component = NA, endpoint)
+resolve_read(handle, data_product, component = NA)
 }
 \arguments{
 \item{handle}{\code{fdp} object}
@@ -13,8 +13,6 @@ resolve_read(handle, data_product, component = NA, endpoint)
 
 \item{component}{a \code{string} specifying the name of data product
 component}
-
-\item{endpoint}{endpoint}
 }
 \description{
 resolve_read
