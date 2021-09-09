@@ -154,8 +154,7 @@ fair_run <- function(path = "config.yaml",
       working_write[[index]] <- this_write
 
       tmp_write <- fdp_resolve_write(this_write = this_write,
-                                     yaml = yaml,
-                                     endpoint = endpoint)
+                                     yaml = yaml)
 
       write_dataproduct <- tmp_write$write_dataproduct
       write_public <- tmp_write$write_public
@@ -191,8 +190,7 @@ fair_run <- function(path = "config.yaml",
           working_write[[index]] <- this_subwrite
 
           tmp_subwrite <- fdp_resolve_write(this_write = this_subwrite,
-                                            yaml = yaml,
-                                            endpoint = endpoint)
+                                            yaml = yaml)
 
           subwrite_dataproduct <- tmp_subwrite$write_dataproduct
           subwrite_public <- tmp_subwrite$write_public

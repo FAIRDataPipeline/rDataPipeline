@@ -4,14 +4,12 @@
 \alias{fdp_resolve_write}
 \title{fdp_resolve_write}
 \usage{
-fdp_resolve_write(this_write, yaml, endpoint)
+fdp_resolve_write(this_write, yaml)
 }
 \arguments{
 \item{this_write}{this_write}
 
 \item{yaml}{user written config file}
-
-\item{endpoint}{endpoint}
 }
 \description{
 fdp_resolve_write

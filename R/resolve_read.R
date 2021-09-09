@@ -4,9 +4,8 @@
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying the name of data product
 #' component
-#' @param endpoint endpoint
 #'
-resolve_read <- function(handle, data_product, component = NA, endpoint) {
+resolve_read <- function(handle, data_product, component = NA) {
 
   endpoint <- handle$yaml$run_metadata$local_data_registry_url
   read <- handle$yaml$read

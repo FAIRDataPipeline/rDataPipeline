@@ -2,9 +2,10 @@
 #'
 #' @param this_write this_write
 #' @param yaml user written config file
-#' @param endpoint endpoint
 #'
-fdp_resolve_write <- function(this_write, yaml, endpoint) {
+fdp_resolve_write <- function(this_write, yaml) {
+
+  endpoint <- yaml$run_metadata$local_data_registry_url
 
   # Get alias
   if ("use" %in% names(this_write)) {
