@@ -7,6 +7,7 @@
 #'
 #' @return Returns a \code{list} of fields present in the specified entry
 #'
+#' @export
 #' @family get functions
 #'
 get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
