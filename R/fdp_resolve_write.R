@@ -30,7 +30,7 @@ fdp_resolve_write <- function(this_write, yaml, endpoint) {
   write_namespace_url <- new_namespace(name = write_namespace,
                                        full_name = write_namespace,
                                        endpoint = endpoint)
-  write_namespace_id <- extract_id(write_namespace_url)
+  write_namespace_id <- extract_id(write_namespace_url, endpoint = endpoint)
 
   # Get public flag
   if ("public" %in% names(this_write)) {

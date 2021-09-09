@@ -36,7 +36,7 @@ fdp_resolve_read <- function(this_read, yaml) {
 
     read_namespace_url <- new_namespace(name = read_namespace,
                                         full_name = read_namespace)
-    read_namespace_id <- extract_id(read_namespace_url)
+    read_namespace_id <- extract_id(read_namespace_url, endpoint = endpoint)
 
     entries <- get_entry("data_product",
                          list(name = read_dataproduct,

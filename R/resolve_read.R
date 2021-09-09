@@ -85,7 +85,7 @@ resolve_read <- function(handle, data_product, component = NA, endpoint) {
   # Get data product path
   assertthat::assert_that(length(this_entry) == 1)
   this_object <- get_entity(this_entry[[1]]$object)
-  this_object_id <- extract_id(this_object$url)
+  this_object_id <- extract_id(this_object$url, endpoint = endpoint)
   this_location <- get_entity(this_object$storage_location)
   this_path <- this_location$path
   this_root <- get_entity(this_location$storage_root)$root

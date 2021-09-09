@@ -7,7 +7,7 @@ get_author_url <- function(endpoint) {
                       query = list(username = "admin"),
                       endpoint = endpoint)
   assertthat::assert_that(length(user_url) == 1)
-  user_id <- extract_id(user_url)
+  user_id <- extract_id(user_url, endpoint = endpoint)
   user_author_url <- get_entry("user_author",
                                query = list(user = user_id),
                                endpoint = endpoint)

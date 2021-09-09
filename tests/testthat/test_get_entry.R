@@ -7,7 +7,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 
 object_uri <- post_data("object", data = list(description = description),
                         endpoint = endpoint)
-object_id <- extract_id(object_uri)
+object_id <- extract_id(object_uri, endpoint = endpoint)
 
 test_that("Check Test object Exists", {
   expect_silent(

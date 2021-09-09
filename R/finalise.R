@@ -45,7 +45,7 @@ finalise <- function(handle,
   datastore_root_url <- new_storage_root(root = datastore,
                                          local = TRUE,
                                          endpoint = endpoint)
-  datastore_root_id <- extract_id(datastore_root_url)
+  datastore_root_id <- extract_id(datastore_root_url, endpoint = endpoint)
 
   if (!is.null(handle$outputs)) {
 
@@ -66,7 +66,7 @@ finalise <- function(handle,
       write_namespace_url <- new_namespace(name = write_namespace,
                                            full_name = write_namespace,
                                            endpoint = endpoint)
-      write_namespace_id <- extract_id(write_namespace_url)
+      write_namespace_id <- extract_id(write_namespace_url, endpoint = endpoint)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
@@ -219,7 +219,7 @@ finalise <- function(handle,
       write_version <- this_write$use_version
       write_namespace <- this_write$use_namespace
       object_url <- this_write$data_product_url
-      object_id <- extract_id(object_url)
+      object_id <- extract_id(object_url, endpoint = endpoint)
 
       # Register component in local registry
       if (is.na(write_component)) {

@@ -24,7 +24,7 @@ findme <- function(file, endpoint) {
     this_storagelocation <- storage_location[[y]]
     root <- get_entity(this_storagelocation$storage_root)$root
     msg <- paste(msg, "\nroot:", root)
-    storage_id <- extract_id(this_storagelocation$url)
+    storage_id <- extract_id(this_storagelocation$url, endpoint = endpoint)
     object <- get_entry("object",
                         list(storage_location = storage_id))
     location <- this_storagelocation$path

@@ -11,7 +11,7 @@ register_issue_dataproduct <- function(handle, this_issue) {
   namespace_url <- get_url(table = "namespace",
                            query = list(name = this_issue$use_namespace),
                            endpoint = endpoint)
-  namespace_id <- extract_id(url = namespace_url)
+  namespace_id <- extract_id(url = namespace_url, endpoint = endpoint)
   data_product_entry <- get_entry(table = "data_product",
                                   query = list(name = this_issue$use_data_product,
                                                version = this_issue$use_version,
@@ -20,7 +20,7 @@ register_issue_dataproduct <- function(handle, this_issue) {
 
   assertthat::assert_that(length(data_product_entry) == 1)
   object_url <- data_product_entry[[1]]$object
-  object_id <- extract_id(object_url)
+  object_id <- extract_id(object_url, endpoint = endpoint)
 
   if (is.na(this_issue$use_component)) {
     component_url <- get_url(table = "object_component",

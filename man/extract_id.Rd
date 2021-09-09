@@ -4,10 +4,12 @@
 \alias{extract_id}
 \title{extract_id}
 \usage{
-extract_id(url)
+extract_id(url, endpoint)
 }
 \arguments{
 \item{url}{url}
+
+\item{endpoint}{endpoint}
 }
 \description{
 extract_id

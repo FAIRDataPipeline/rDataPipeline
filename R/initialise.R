@@ -27,7 +27,7 @@ initialise <- function(config, script) {
   config_storageroot_url <- new_storage_root(root = datastore_root,
                                              local = TRUE,
                                              endpoint = endpoint)
-  config_storageroot_id <- extract_id(config_storageroot_url)
+  config_storageroot_id <- extract_id(config_storageroot_url, endpoint = endpoint)
 
   config_hash <- get_file_hash(config)
 
@@ -128,7 +128,7 @@ initialise <- function(config, script) {
   repo_storageroot_url <- new_storage_root(root = repo_root,
                                            local = FALSE,
                                            endpoint = endpoint)
-  repo_storageroot_id <- extract_id(repo_storageroot_url)
+  repo_storageroot_id <- extract_id(repo_storageroot_url, endpoint = endpoint)
 
   sha <- yaml$run_metadata$latest_commit
   repo_name <- gsub(repo_root, "", repo_name)
@@ -156,7 +156,7 @@ initialise <- function(config, script) {
   } else {
     assertthat::assert_that(length(coderepo_exists) == 1)
     coderepo_location_url <- coderepo_exists
-    coderepo_location_id <- extract_id(coderepo_location_url)
+    coderepo_location_id <- extract_id(coderepo_location_url, endpoint = endpoint)
     obj_exists <- get_url(table = "object",
                           query = list(storage_location = coderepo_location_id),
                           endpoint = endpoint)

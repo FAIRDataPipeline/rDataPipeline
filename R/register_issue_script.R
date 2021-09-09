@@ -20,7 +20,7 @@ register_issue_script <- function(handle,
     usethis::ui_stop("Unknown type")
   }
 
-  object_id <- extract_id(object)
+  object_id <- extract_id(object, endpoint = endpoint)
 
   component_url <- get_url(table = "object_component",
                            query = list(object = object_id,
