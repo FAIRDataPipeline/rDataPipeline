@@ -27,8 +27,11 @@ get_provenance <- function(data_product, version, namespace,
   # Get XML
   svg <- httr::GET(api_url) %>%
     httr::content(as = "text", encoding = "UTF-8")
-  if(!isXMLString(svg))
-  stop("XML missing from provenance report.")
+  if(!isXMLString(svg)) {
+    print(svg)
+    stop("XML missing from provenance report.")
+  }
+
   xml <- XML::xmlParse(svg, asText = TRUE)
   assertthat::assert_that(all(class(xml) %in% c("XMLInternalDocument",
                                                 "XMLAbstractDocument")))
