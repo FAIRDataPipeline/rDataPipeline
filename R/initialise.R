@@ -126,45 +126,37 @@ initialise <- function(config, script) {
   # Record code repo location in data registry ------------------------------
 
   repo_name <- yaml$run_metadata$remote_repo
-  repo_root <- gsub("([a-z]*://[a-z]*.[a-z]*/).*", "\\1", repo_name)
 
-  repo_storageroot_url <- new_storage_root(root = repo_root,
-                                           local = FALSE,
-                                           endpoint = endpoint)
-  repo_storageroot_id <- extract_id(repo_storageroot_url, endpoint = endpoint)
+  if (is.null(repo_name)) {
 
-  sha <- yaml$run_metadata$latest_commit
-  repo_name <- gsub(repo_root, "", repo_name)
-
-  coderepo_exists <- get_url(table = "storage_location",
-                             query = list(hash = sha,
-                                          public = TRUE,
-                                          storage_root = repo_storageroot_id),
-                             endpoint = endpoint)
-
-  if (is.null(coderepo_exists)) {
-    coderepo_location_url <- new_storage_location(
-      path = repo_name,
-      hash = sha,
-      public = TRUE,
-      storage_root_url = repo_storageroot_url,
-      endpoint = endpoint)
-
-    coderepo_object_url <- new_object(
-      description = "Analysis / processing script location",
-      storage_location_url = coderepo_location_url,
-      authors_url = list(author_url),
-      endpoint = endpoint)
+    coderepo_object_url <- NA
 
   } else {
-    assertthat::assert_that(length(coderepo_exists) == 1)
-    coderepo_location_url <- coderepo_exists
-    coderepo_location_id <- extract_id(coderepo_location_url, endpoint = endpoint)
-    obj_exists <- get_url(table = "object",
-                          query = list(storage_location = coderepo_location_id),
-                          endpoint = endpoint)
 
-    if (is.null(obj_exists)) {
+    repo_root <- gsub("([a-z]*://[a-z]*.[a-z]*/).*", "\\1", repo_name)
+
+    repo_storageroot_url <- new_storage_root(root = repo_root,
+                                             local = FALSE,
+                                             endpoint = endpoint)
+    repo_storageroot_id <- extract_id(repo_storageroot_url, endpoint = endpoint)
+
+    sha <- yaml$run_metadata$latest_commit
+    repo_name <- gsub(repo_root, "", repo_name)
+
+    coderepo_exists <- get_url(table = "storage_location",
+                               query = list(hash = sha,
+                                            public = TRUE,
+                                            storage_root = repo_storageroot_id),
+                               endpoint = endpoint)
+
+    if (is.null(coderepo_exists)) {
+      coderepo_location_url <- new_storage_location(
+        path = repo_name,
+        hash = sha,
+        public = TRUE,
+        storage_root_url = repo_storageroot_url,
+        endpoint = endpoint)
+
       coderepo_object_url <- new_object(
         description = "Analysis / processing script location",
         storage_location_url = coderepo_location_url,
@@ -172,8 +164,24 @@ initialise <- function(config, script) {
         endpoint = endpoint)
 
     } else {
-      assertthat::assert_that(length(obj_exists) == 1)
-      coderepo_object_url <- obj_exists
+      assertthat::assert_that(length(coderepo_exists) == 1)
+      coderepo_location_url <- coderepo_exists
+      coderepo_location_id <- extract_id(coderepo_location_url, endpoint = endpoint)
+      obj_exists <- get_url(table = "object",
+                            query = list(storage_location = coderepo_location_id),
+                            endpoint = endpoint)
+
+      if (is.null(obj_exists)) {
+        coderepo_object_url <- new_object(
+          description = "Analysis / processing script location",
+          storage_location_url = coderepo_location_url,
+          authors_url = list(author_url),
+          endpoint = endpoint)
+
+      } else {
+        assertthat::assert_that(length(obj_exists) == 1)
+        coderepo_object_url <- obj_exists
+      }
     }
   }
 
@@ -181,14 +189,24 @@ initialise <- function(config, script) {
 
   # Record the code run in the data registry --------------------------------
 
-  coderun_url <- new_code_run(run_date = Sys.time(),
-                              description = yaml$run_metadata$description,
-                              code_repo_url = coderepo_object_url,
-                              model_config_url = config_object_url,
-                              submission_script_url = script_object_url,
-                              inputs_urls = list(),
-                              outputs_urls = list(),
-                              endpoint = endpoint)
+  if (is.na(coderepo_object_url)) {
+    coderun_url <- new_code_run(run_date = Sys.time(),
+                                description = yaml$run_metadata$description,
+                                model_config_url = config_object_url,
+                                submission_script_url = script_object_url,
+                                inputs_urls = list(),
+                                outputs_urls = list(),
+                                endpoint = endpoint)
+  } else {
+    coderun_url <- new_code_run(run_date = Sys.time(),
+                                description = yaml$run_metadata$description,
+                                code_repo_url = coderepo_object_url,
+                                model_config_url = config_object_url,
+                                submission_script_url = script_object_url,
+                                inputs_urls = list(),
+                                outputs_urls = list(),
+                                endpoint = endpoint)
+  }
 
   field <- "code_run"
   cli::cli_alert_success("Writing new {.field {field}} to local registry")
