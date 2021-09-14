@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Validate fields — validate_fields • rDataPipeline</title>
+<title>get_dataproduct — get_dataproduct • rDataPipeline</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Validate fields — validate_fields" />
-<meta property="og:description" content="Function to validate fields in post data" />
+<meta property="og:title" content="get_dataproduct — get_dataproduct" />
+<meta property="og:description" content="get_dataproduct" />
 
 
 
@@ -108,27 +108,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Validate fields</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/validate_fields.R'><code>R/validate_fields.R</code></a></small>
-    <div class="hidden name"><code>validate_fields.Rd</code></div>
+    <h1>get_dataproduct</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/get_dataproduct.R'><code>R/get_dataproduct.R</code></a></small>
+    <div class="hidden name"><code>get_dataproduct.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to validate fields in post data</p>
+    <p>get_dataproduct</p>
     </div>
 
-    <pre class="usage"><span class='fu'>validate_fields</span><span class='op'>(</span><span class='va'>table</span>, <span class='va'>data</span>, <span class='va'>endpoint</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_dataproduct</span><span class='op'>(</span>
+  <span class='va'>data_product</span>,
+  <span class='va'>version</span>,
+  <span class='va'>namespace</span>,
+  endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>table</th>
-      <td><p>table name as character</p></td>
+      <th>data_product</th>
+      <td><p>data_product</p></td>
     </tr>
     <tr>
-      <th>data</th>
-      <td><p>data as a named list</p></td>
+      <th>version</th>
+      <td><p>version</p></td>
+    </tr>
+    <tr>
+      <th>namespace</th>
+      <td><p>namespace</p></td>
     </tr>
     <tr>
       <th>endpoint</th>
@@ -136,12 +145,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
