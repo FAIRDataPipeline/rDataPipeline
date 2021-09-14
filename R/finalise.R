@@ -70,11 +70,11 @@ finalise <- function(handle,
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
-      if (grepl("\\$\\{\\{RUN_ID\\}\\}", write_use_data_product)) {
+      if (grepl("\\$\\{\\{\\s*RUN_ID\\s*\\}\\}", write_use_data_product)) {
         this_coderun <- get_entity(handle$code_run)
         uuid <- this_coderun$uuid
 
-        use_data_product_runid <- gsub("\\$\\{\\{RUN_ID\\}\\}",
+        use_data_product_runid <- gsub("\\$\\{\\{\\s*RUN_ID\\s*\\}\\}",
                                        uuid,
                                        write_use_data_product)
       } else {
