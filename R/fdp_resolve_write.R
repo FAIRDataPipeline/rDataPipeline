@@ -29,7 +29,6 @@ fdp_resolve_write <- function(this_write, yaml) {
   }
 
   write_namespace_url <- new_namespace(name = write_namespace,
-                                       full_name = write_namespace,
                                        endpoint = endpoint)
   write_namespace_id <- extract_id(write_namespace_url, endpoint = endpoint)
 
