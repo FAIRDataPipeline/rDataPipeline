@@ -64,17 +64,16 @@ finalise <- function(handle,
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
       write_namespace_url <- new_namespace(name = write_namespace,
-                                           full_name = write_namespace,
                                            endpoint = endpoint)
       write_namespace_id <- extract_id(write_namespace_url, endpoint = endpoint)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
-      if (grepl("\\$\\{\\{RUN_ID\\}\\}", write_use_data_product)) {
+      if (grepl("\\$\\{\\{\\s*RUN_ID\\s*\\}\\}", write_use_data_product)) {
         this_coderun <- get_entity(handle$code_run)
         uuid <- this_coderun$uuid
 
-        use_data_product_runid <- gsub("\\$\\{\\{RUN_ID\\}\\}",
+        use_data_product_runid <- gsub("\\$\\{\\{\\s*RUN_ID\\s*\\}\\}",
                                        uuid,
                                        write_use_data_product)
       } else {
