@@ -11,8 +11,11 @@
 #'
 initialise <- function(config, script) {
 
-  # Read working config.yaml ------------------------------------------------
   if (!file.exists(config)) usethis::ui_stop("{config} doesn't exist.")
+  if (!file.exists(script)) usethis::ui_stop("{script} doesn't exist.")
+
+  # Read working config.yaml ------------------------------------------------
+
   yaml <- yaml::read_yaml(config)
   contents <- names(yaml)
   run_metadata <- yaml$run_metadata
