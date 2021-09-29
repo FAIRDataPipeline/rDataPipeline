@@ -1,10 +1,8 @@
 context("Testing new_storage_location()")
 
-sleep_time <- 0.5
-
 root_name <- paste0("test_new_storate_location_",
                     openssl::sha1(x = as.character(Sys.time())))
-root <- paste0("https://", root_name, ".com")
+root <- tempdir()
 hash <- openssl::sha1(x = root_name)
 path <- paste0(hash, ".h5")
 
