@@ -27,7 +27,7 @@ create_config <- function(
   description,
   input_namespace,
   output_namespace,
-  write_data_store = "/var/folders/0f/fj5r_1ws15x4jzgnm27h_y6h0000gr/T/tmpyozhkx12/data_store/",
+  write_data_store = "test/data_store/",
   force = TRUE,
   local_repo = "local_repo") {
 
