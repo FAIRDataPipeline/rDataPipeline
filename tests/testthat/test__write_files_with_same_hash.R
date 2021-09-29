@@ -75,13 +75,13 @@ test_that("data registry shows correct path",{
   assertthat::assert_that(length(tmp) == 1)
   root <- get_entity(tmp[[1]]$storage_root)$root
   testthat::expect_equal(paste0(root, tmp[[1]]$path),
-                         paste0("file://", file1))
+                         file1)
   # File 2
   tmp <- get_entry("storage_location", list(hash = hash2))
   assertthat::assert_that(length(tmp) == 1)
   root <- get_entity(tmp[[1]]$storage_root)$root
   testthat::expect_equal(paste0(root, tmp[[1]]$path),
-                         paste0("file://", file1))
+                         file1)
 })
 
 # -------------------------------------------------------------------------
