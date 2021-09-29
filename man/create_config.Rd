@@ -9,7 +9,7 @@ create_config(
   description,
   input_namespace,
   output_namespace,
-  write_data_store = "test/datastore/",
+  write_data_store = "test/data_store/",
   force = TRUE,
   local_repo = "local_repo"
 )
