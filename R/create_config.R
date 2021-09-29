@@ -22,13 +22,14 @@
 #'               output_namespace = "test_user")
 #' }
 #'
-create_config <- function(path,
-                          description,
-                          input_namespace,
-                          output_namespace,
-                          write_data_store = "test/datastore/",
-                          force = TRUE,
-                          local_repo = "local_repo") {
+create_config <- function(
+  path,
+  description,
+  input_namespace,
+  output_namespace,
+  write_data_store = "/var/folders/0f/fj5r_1ws15x4jzgnm27h_y6h0000gr/T/tmpyozhkx12/data_store/",
+  force = TRUE,
+  local_repo = "local_repo") {
 
   if (file.exists(path)) {
     if (force) {
