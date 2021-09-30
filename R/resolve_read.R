@@ -89,6 +89,9 @@ resolve_read <- function(handle, data_product, component = NA) {
   this_path <- this_location$path
   this_root <- get_entity(this_location$storage_root)$root
 
+  if (grepl("^file://", this_root))
+    this_root <- gsub("^file://", "", this_root)
+
   # Get object component URL
   if (is.na(component)) {
     component_url <- get_url("object_component",

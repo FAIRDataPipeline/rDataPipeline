@@ -42,7 +42,13 @@ finalise <- function(handle,
   # Add local data store root to the data registry
 
   datastore <- handle$yaml$run_metadata$write_data_store
-  datastore_root_url <- new_storage_root(root = datastore,
+  if (grepl("^/", datastore)) {
+    appended_datastore <- paste0("file://", datastore)
+  } else {
+    appended_datastore <- datastore
+  }
+
+  datastore_root_url <- new_storage_root(root = appended_datastore,
                                          local = TRUE,
                                          endpoint = endpoint)
   datastore_root_id <- extract_id(datastore_root_url, endpoint = endpoint)
@@ -137,6 +143,7 @@ finalise <- function(handle,
         new_path <- gsub(tmp_filename, new_filename, path)
         file.rename(path, new_path)
         new_storage_location <- gsub(datastore, "", new_path)
+        new_storage_location <- gsub(datastore, "", new_storage_location)
 
         # Record file location in data registry
         storage_location_url <- new_storage_location(
@@ -159,6 +166,8 @@ finalise <- function(handle,
         existing_path <- tmp$path
         existing_root <- get_entity(tmp$storage_root)$root
         replacement_path <- paste0(existing_root, existing_path)
+        if (grepl("^file://", replacement_path))
+          replacement_path <- gsub("file://", "", replacement_path)
         new_path <- replacement_path
       }
 

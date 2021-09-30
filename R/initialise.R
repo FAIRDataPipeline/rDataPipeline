@@ -1,6 +1,7 @@
 #' initialise
 #'
-#' Reads in a working config file and generates new Code Run entry.
+#' Reads in a working config file, generates new Code Run entry, and returns
+#' a handle containing various metadata.
 #'
 #' @param config a \code{string} specifying the location of the working
 #' config file in the data store
@@ -27,6 +28,9 @@ initialise <- function(config, script) {
   # Record config.yaml location in data registry ----------------------------
 
   datastore_root <- yaml$run_metadata$write_data_store
+  if (grepl("^/", datastore_root))
+    datastore_root <- paste0("file://", datastore_root)
+
   config_storageroot_url <- new_storage_root(root = datastore_root,
                                              local = TRUE,
                                              endpoint = endpoint)
@@ -145,15 +149,27 @@ initialise <- function(config, script) {
 
     coderepo_exists <- get_url(table = "storage_location",
                                query = list(hash = sha,
-                                            public = TRUE,
+                                            public = FALSE,
                                             storage_root = repo_storageroot_id),
                                endpoint = endpoint)
+
+    repo_filetype_exists <- get_url(table = "file_type",
+                                    query = list(extension = "git"),
+                                    endpoint = endpoint)
+
+    if (is.null(repo_filetype_exists)) {
+      repo_filetype_url <- new_file_type(name = "git",
+                                         extension = "git",
+                                         endpoint = endpoint)
+    } else {
+      repo_filetype_url <- repo_filetype_exists
+    }
 
     if (is.null(coderepo_exists)) {
       coderepo_location_url <- new_storage_location(
         path = repo_name,
         hash = sha,
-        public = TRUE,
+        public = FALSE,
         storage_root_url = repo_storageroot_url,
         endpoint = endpoint)
 
@@ -161,6 +177,7 @@ initialise <- function(config, script) {
         description = "Analysis / processing script location",
         storage_location_url = coderepo_location_url,
         authors_url = list(author_url),
+        file_type_url = repo_filetype_url,
         endpoint = endpoint)
 
     } else {
@@ -176,6 +193,7 @@ initialise <- function(config, script) {
           description = "Analysis / processing script location",
           storage_location_url = coderepo_location_url,
           authors_url = list(author_url),
+          file_type_url = repo_filetype_url,
           endpoint = endpoint)
 
       } else {

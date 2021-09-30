@@ -14,5 +14,6 @@ config file in the data store}
 script in the data store}
 }
 \description{
-Reads in a working config file and generates new Code Run entry.
+Reads in a working config file, generates new Code Run entry, and returns
+a handle containing various metadata.
 }

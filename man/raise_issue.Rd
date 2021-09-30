@@ -17,23 +17,24 @@ raise_issue(
 )
 }
 \arguments{
-\item{index}{component_id}
+\item{index}{index returned from \verb{link_*()}, \code{read_()}, or \code{write()}}
 
-\item{handle}{handle}
+\item{handle}{\code{fdp} object}
 
-\item{component}{component}
+\item{component}{a \code{string} specifying the component name}
 
-\item{data_product}{data_product}
+\item{data_product}{a \code{string} specifying the data product name}
 
-\item{version}{version}
+\item{version}{a \code{string} specifying the version number}
 
-\item{namespace}{namespace}
+\item{namespace}{a \code{string} specifying the namespace}
 
-\item{issue}{issue}
+\item{issue}{a \code{string} specifying the issue}
 
-\item{severity}{severity}
+\item{severity}{a \code{numeric} value specifying the severity}
 
-\item{whole_object}{whole_object}
+\item{whole_object}{a \code{boolean} flag specifying whether or not to
+reference the whole_object}
 }
 \description{
 raise_issue

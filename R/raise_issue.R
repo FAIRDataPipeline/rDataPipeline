@@ -1,14 +1,15 @@
 #' raise_issue
 #'
-#' @param index component_id
-#' @param handle handle
-#' @param component component
-#' @param data_product data_product
-#' @param version version
-#' @param namespace namespace
-#' @param issue issue
-#' @param severity severity
-#' @param whole_object whole_object
+#' @param index index returned from `link_*()`, `read_()`, or `write()`
+#' @param handle \code{fdp} object
+#' @param component a \code{string} specifying the component name
+#' @param data_product a \code{string} specifying the data product name
+#' @param version a \code{string} specifying the version number
+#' @param namespace a \code{string} specifying the namespace
+#' @param issue a \code{string} specifying the issue
+#' @param severity a \code{numeric} value specifying the severity
+#' @param whole_object a \code{boolean} flag specifying whether or not to
+#' reference the whole_object
 #'
 #' @export
 #'
