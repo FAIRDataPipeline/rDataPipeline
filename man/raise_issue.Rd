@@ -9,8 +9,6 @@ raise_issue(
   handle,
   component = NA,
   data_product,
-  version,
-  namespace,
   issue,
   severity,
   whole_object = FALSE
@@ -24,10 +22,6 @@ raise_issue(
 \item{component}{a \code{string} specifying the component name}
 
 \item{data_product}{a \code{string} specifying the data product name}
-
-\item{version}{a \code{string} specifying the version number}
-
-\item{namespace}{a \code{string} specifying the namespace}
 
 \item{issue}{a \code{string} specifying the issue}
 

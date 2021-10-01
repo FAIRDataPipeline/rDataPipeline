@@ -4,8 +4,6 @@
 #' @param handle \code{fdp} object
 #' @param component a \code{string} specifying the component name
 #' @param data_product a \code{string} specifying the data product name
-#' @param version a \code{string} specifying the version number
-#' @param namespace a \code{string} specifying the namespace
 #' @param issue a \code{string} specifying the issue
 #' @param severity a \code{numeric} value specifying the severity
 #' @param whole_object a \code{boolean} flag specifying whether or not to
@@ -17,21 +15,33 @@ raise_issue <- function(index,
                         handle,
                         component = NA,
                         data_product,
-                        version,
-                        namespace,
                         issue,
                         severity,
                         whole_object = FALSE) {
 
   if (missing(index)) {
     index <- NA
-    use_version <- version
-    use_namespace <- namespace
+    reads <- handle$yaml$read
+    writes <- handle$yaml$write
 
     for (i in seq_along(data_product)) {
       for (j in seq_along(component)) {
+
         this_data_product <- data_product[i]
         this_component <- component[j]
+
+        if (!is.null(reads)) {
+          if (this_data_product %in% unlist(lapply(reads, function(x) x$data_product))) {
+            metadata <- resolve_read(handle, this_data_product)
+          } else if (this_data_product %in% unlist(lapply(writes, function(x) x$data_product))) {
+            metadata <- resolve_write(handle, this_data_product)
+          } else {
+            stop("dataproduct not in config file")
+          }
+        }
+
+        use_version <- metadata$version
+        use_namespace <- metadata$namespace
 
         handle$raise_issue(index = index,
                            type = "data",
@@ -44,11 +54,8 @@ raise_issue <- function(index,
       }
     }
 
-    if (length(data_product) > 1 | length(component) > 1) {
+    if (length(data_product) > 1 | length(component) > 1)
       usethis::ui_done("Recording issues in handle")
-    } else {
-      usethis::ui_done("Recording issue in handle")
-    }
 
   } else {
 

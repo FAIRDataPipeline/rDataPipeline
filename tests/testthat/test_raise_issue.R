@@ -100,8 +100,6 @@ issue <- "another issue"
 severity <- 9
 raise_issue(handle = handle,
             data_product = data_product,
-            version = version,
-            namespace = namespace,
             issue = issue,
             severity = severity)
 
@@ -297,8 +295,6 @@ severity <- 7
 raise_issue(handle = handle,
             data_product = data_product,
             component = c(component, component2),
-            version = version,
-            namespace = namespace,
             issue = issue,
             severity = severity)
 
@@ -360,8 +356,6 @@ issue <- "issue with multiple data products"
 severity <- 9
 raise_issue(handle = handle,
             data_product = c(data_product, data_product2),
-            version = version,
-            namespace = namespace,
             issue = issue,
             severity = severity)
 
@@ -411,8 +405,6 @@ issue <- "issue with multiple data products"
 severity <- 9
 raise_issue(handle = handle,
             data_product = c(data_product, data_product2),
-            version = version,
-            namespace = namespace,
             issue = issue,
             severity = severity)
 
