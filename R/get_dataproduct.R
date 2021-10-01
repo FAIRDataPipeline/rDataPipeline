@@ -28,5 +28,8 @@ get_dataproduct <- function(data_product,
   object <- get_entity(dp_entry[[1]]$object)
   storage_location <- get_entity(object$storage_location)
   storage_root <- get_entity(storage_location$storage_root)
-  file.path(storage_root$root, storage_location$path)
+  storage_root <- storage_root$root
+  storage_root <- gsub("file://", "", storage_root)
+
+  file.path(storage_root, storage_location$path)
 }
