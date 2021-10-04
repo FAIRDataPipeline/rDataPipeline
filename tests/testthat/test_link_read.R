@@ -58,8 +58,15 @@ handle <- initialise(config, script)
 
 # Read data
 test_that("function behaves as it should", {
-  path <- link_read(handle, data_product1)
-  testthat::expect_true(is.character(path))
-  tmp <- read.csv(path)
+  testthat::expect_true(is.null(handle$inputs))
+  path1 <- link_read(handle, data_product1)
+  testthat::expect_true(is.character(path1))
+  testthat::expect_false(is.null(handle$inputs))
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  path2 <- link_read(handle, data_product1)
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(path1, path2)
+  tmp <- read.csv(path1)
   testthat::expect_equal(tmp[,-1], df)
 })
