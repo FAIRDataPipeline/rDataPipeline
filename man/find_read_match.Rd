@@ -4,7 +4,7 @@
 \alias{find_read_match}
 \title{find_read_match}
 \usage{
-find_read_match(handle, data_product = "disease/SARS-CoV-2/input/*")
+find_read_match(handle, data_product)
 }
 \arguments{
 \item{handle}{handle}
@@ -12,5 +12,5 @@ find_read_match(handle, data_product = "disease/SARS-CoV-2/input/*")
 \item{data_product}{data_product}
 }
 \description{
-find_read_match
+Find aliases in working config that match wildcard string
 }
