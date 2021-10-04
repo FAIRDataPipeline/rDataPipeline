@@ -30,11 +30,11 @@ handle <- initialise(config, script)
 
 test_that("function behaves as it should", {
 
-  ind <- write_distribution(handle = handle,
+  ind <- write_distribution(distribution = "Gaussian",
+                            parameters = list(mean = -16.08, SD = 30),
+                            handle = handle,
                             data_product = data_product1,
                             component = "symptom-delay",
-                            distribution = "Gaussian",
-                            parameters = list(mean = -16.08, SD = 30),
                             description = "symptom delay")
 
   tmp <- handle$outputs %>%

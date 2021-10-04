@@ -3,8 +3,8 @@ context("Testing input globbing")
 # Write to registry -------------------------------------------------------
 
 uid <- as.character(random_hash())
-data_product1 <- file.path("real", "data", uid, "1")
-data_product2 <- file.path("real", "data", uid, "thing", "1")
+data_product1 <- file.path("data_product", "read", "wildcard", uid, "1")
+data_product2 <- file.path("data_product", "read", "wildcard", uid, "1", "2")
 coderun_description <- "Register a file in the pipeline"
 dataproduct_description <- "A csv file"
 namespace1 <- "username"
@@ -49,7 +49,7 @@ finalise(handle)
 
 # Input globbing ----------------------------------------------------------
 
-data_product3 <- file.path("real", "data", uid, "*")
+data_product3 <- file.path("data_product", "read", "wildcard", uid, "*")
 
 # User written config file
 config_file <- paste0("config_files/inputglobbing/config2_", uid , ".yaml")
@@ -75,7 +75,10 @@ test_that("data products recorded in working config",{
 
   testthat::expect_equal(reads[[1]]$use$version, "0.0.1")
   testthat::expect_equal(reads[[2]]$use$version, "0.0.1")
-})
 
-path <- link_read(handle, data_product1)
-path <- link_read(handle, data_product2)
+  aliases <- find_read_match(handle, data_product3)
+  testthat::expect_true(all(aliases %in% c(data_product1, data_product2)))
+  })
+
+path <- link_read(handle, aliases[1])
+path <- link_read(handle, aliases[2])
