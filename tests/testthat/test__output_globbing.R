@@ -1,10 +1,10 @@
-context("Testing output globbing")
+context("Testing find_write_match()")
 
 # Write to registry -------------------------------------------------------
 
 uid <- as.character(random_hash())
-data_product1 <- file.path("real", "data", uid, "1")
-data_product2 <- file.path("real", "data", uid, "thing", "1")
+data_product1 <- file.path("data_product", "write", "wildcard", uid, "1")
+data_product2 <- file.path("data_product", "write", "wildcard", uid, "1", "2")
 coderun_description <- "Register a file in the pipeline"
 dataproduct_description <- "A csv file"
 namespace1 <- "username"
@@ -58,7 +58,7 @@ finalise(handle)
 
 # Output globbing ---------------------------------------------------------
 
-data_product3 <- file.path("real", "data", uid, "*")
+data_product3 <- file.path("data_product", "write", "wildcard", uid, "*")
 use_version <- "${{MAJOR}}"
 
 # User written config file
@@ -90,6 +90,9 @@ test_that("data products recorded in working config",{
   testthat::expect_equal(writes[[1]]$use$version, "1.0.0")
   testthat::expect_equal(writes[[2]]$use$version, "1.0.0")
   testthat::expect_equal(writes[[3]]$use$version, "1.0.0")
+
+  aliases <- find_write_match(handle, data_product3)
+  testthat::expect_true(all(aliases %in% c(data_product1, data_product2, data_product3)))
 })
 
 data_product4 <- file.path(dirname(data_product3), "new")
