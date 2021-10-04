@@ -1,21 +1,21 @@
 #' Write distribution-type TOML file
 #'
+#' @param distribution a \code{string} specifying the name of the distribution
+#' @param parameters a \code{list} specifying the distribution parameters
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the toml file
-#' @param distribution a \code{string} specifying the name of the distribution
-#' @param parameters a \code{list} specifying the distribution parameters
 #' @param description a \code{string} describing the data product component
 #'
 #' @family write functions
 #'
 #' @export
 #'
-write_distribution <- function(handle,
+write_distribution <- function(distribution,
+                               parameters,
+                               handle,
                                data_product,
                                component,
-                               distribution,
-                               parameters,
                                description) {
 
   # Get metadata ------------------------------------------------------------

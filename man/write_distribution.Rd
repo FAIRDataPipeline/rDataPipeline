@@ -5,24 +5,24 @@
 \title{Write distribution-type TOML file}
 \usage{
 write_distribution(
+  distribution,
+  parameters,
   handle,
   data_product,
   component,
-  distribution,
-  parameters,
   description
 )
 }
 \arguments{
+\item{distribution}{a \code{string} specifying the name of the distribution}
+
+\item{parameters}{a \code{list} specifying the distribution parameters}
+
 \item{handle}{\code{fdp} object}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
 \item{component}{a \code{string} specifying a location within the toml file}
-
-\item{distribution}{a \code{string} specifying the name of the distribution}
-
-\item{parameters}{a \code{list} specifying the distribution parameters}
 
 \item{description}{a \code{string} describing the data product component}
 }
