@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Post entry to code_repo_release table — new_code_repo_release • rDataPipeline</title>
+<title>find_read_match — find_read_match • rDataPipeline</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Post entry to code_repo_release table — new_code_repo_release" />
-<meta property="og:description" content="Upload information to the code_repo_release table in the data registry" />
+<meta property="og:title" content="find_read_match — find_read_match" />
+<meta property="og:description" content="Find aliases in working config that match wildcard string" />
 
 
 
@@ -108,69 +108,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Post entry to code_repo_release table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/new_code_repo_release.R'><code>R/new_code_repo_release.R</code></a></small>
-    <div class="hidden name"><code>new_code_repo_release.Rd</code></div>
+    <h1>find_read_match</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/find_read_match.R'><code>R/find_read_match.R</code></a></small>
+    <div class="hidden name"><code>find_read_match.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Upload information to the <code>code_repo_release</code> table in the data registry</p>
+    <p>Find aliases in working config that match wildcard string</p>
     </div>
 
-    <pre class="usage"><span class='fu'>new_code_repo_release</span><span class='op'>(</span>
-  <span class='va'>name</span>,
-  <span class='va'>version</span>,
-  <span class='va'>object_url</span>,
-  <span class='va'>website</span>,
-  endpoint <span class='op'>=</span> <span class='st'>"http://localhost:8000/api/"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>find_read_match</span><span class='op'>(</span><span class='va'>handle</span>, <span class='va'>data_product</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>a <code>string</code> specifying the name of an official release of
-code</p></td>
+      <th>handle</th>
+      <td><p>handle</p></td>
     </tr>
     <tr>
-      <th>version</th>
-      <td><p>a <code>string</code> specifying the version release
-(conforming with semantic versioning syntax)</p></td>
-    </tr>
-    <tr>
-      <th>object_url</th>
-      <td><p>a <code>string</code> specifying the URL of an <code>object</code></p></td>
-    </tr>
-    <tr>
-      <th>website</th>
-      <td><p>(optional) a <code>string</code> specifying the URL of the
-website for this code release</p></td>
-    </tr>
-    <tr>
-      <th>endpoint</th>
-      <td><p>a <code>string</code> specifying the registry endpoint</p></td>
+      <th>data_product</th>
+      <td><p>data_product</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other new functions: 
-<code><a href='new_author.html'>new_author</a>()</code>,
-<code><a href='new_code_run.html'>new_code_run</a>()</code>,
-<code><a href='new_data_product.html'>new_data_product</a>()</code>,
-<code><a href='new_external_object.html'>new_external_object</a>()</code>,
-<code><a href='new_file_type.html'>new_file_type</a>()</code>,
-<code><a href='new_issue.html'>new_issue</a>()</code>,
-<code><a href='new_keyword.html'>new_keyword</a>()</code>,
-<code><a href='new_licence.html'>new_licence</a>()</code>,
-<code><a href='new_namespace.html'>new_namespace</a>()</code>,
-<code><a href='new_object_component.html'>new_object_component</a>()</code>,
-<code><a href='new_object.html'>new_object</a>()</code>,
-<code><a href='new_quality_controlled.html'>new_quality_controlled</a>()</code>,
-<code><a href='new_storage_location.html'>new_storage_location</a>()</code>,
-<code><a href='new_storage_root.html'>new_storage_root</a>()</code>,
-<code><a href='new_user_author.html'>new_user_author</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
