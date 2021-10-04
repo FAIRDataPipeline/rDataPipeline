@@ -31,9 +31,9 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-array <- matrix(0, 2, 2)
+array <- matrix(1, 2, 2)
 
-testthat::test_that("write_array() works with pipes", {
+testthat::test_that("read_array() works with pipes", {
   testthat::expect_true(is.null(handle$outputs))
   handle %>% write_array(array = array,
                          handle = .,
@@ -42,9 +42,9 @@ testthat::test_that("write_array() works with pipes", {
                          description = "component description")
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(handle$outputs$data_product, data_product)
-
-  handle %>% finalise()
 })
+
+handle %>% finalise()
 
 # Test read_array() -------------------------------------------------------
 
@@ -68,14 +68,14 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("read_array() works with pipes", {
-  testthat::expect_true(is.null(handle$inputs))
+  testthat::expect_true(is.null(handle$outputs))
   dat <- handle %>% read_array(data_product = data_product,
                                component = "component")
   testthat::expect_false(is.null(handle$inputs))
   testthat::expect_equal(handle$inputs$data_product, data_product)
-
-  handle %>% finalise()
 })
+
+handle %>% finalise()
 
 # Test write_table() -----------------------------------------------------
 
@@ -102,7 +102,7 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-table <- data.frame(0, 2, 2)
+table <- data.frame(1, 2, 2)
 
 testthat::test_that("write_array() works with pipes", {
   testthat::expect_true(is.null(handle$outputs))
@@ -113,7 +113,6 @@ testthat::test_that("write_array() works with pipes", {
                          description = "component description")
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(handle$outputs$data_product, data_product)
-
   handle %>% finalise()
 })
 
@@ -144,7 +143,6 @@ testthat::test_that("read_table() works with pipes", {
                                component = "component")
   testthat::expect_false(is.null(handle$inputs))
   testthat::expect_equal(handle$inputs$data_product, data_product)
-
   handle %>% finalise()
 })
 
