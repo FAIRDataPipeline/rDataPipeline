@@ -78,7 +78,8 @@ test_that("data products recorded in working config",{
 
   aliases <- find_read_match(handle, data_product3)
   testthat::expect_true(all(aliases %in% c(data_product1, data_product2)))
-  })
+  path <- link_read(handle, aliases[1])
+  path <- link_read(handle, aliases[2])
+})
 
-path <- link_read(handle, aliases[1])
-path <- link_read(handle, aliases[2])
+
