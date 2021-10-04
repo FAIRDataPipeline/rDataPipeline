@@ -9,26 +9,15 @@
 #'
 link_read <- function(handle, data_product) {
 
-  # If the data_product is already recorded in the handle, return the path
-  if (!is.null(handle$inputs)) {
-    if (data_product %in% handle$inputs$name) {
-      output <- handle$inputs %>%
-        dplyr::filter(.data$name == data_product) %>%
-        dplyr::select(.data$path) %>%
-        unlist() %>%
-        unname()
-      return(invisible(output))
-    }
-  }
+  # If data product is already recorded in handle return path
+  path <- check_handle(handle, data_product, "inputs")
+  if (!is.null(path)) return(path)
 
-  # If data_product is missing from config file, return an error
-  list_reads <- lapply(handle$yaml$read, function(x) x$data_product) %>% unlist()
-  missing_from_config <- !(data_product %in% list_reads)
-  if (missing_from_config)
-    usethis::ui_stop(paste(usethis::ui_field(data_product),
-                           "missing from config file"))
+  # If data product is missing from config file throw an error
+  check_config(handle, data_product, "read")
 
-  # Get data_product metadata
+  # Get metadata ------------------------------------------------------------
+
   tmp <- resolve_read(handle = handle,
                       data_product = data_product)
   read_dataproduct <- tmp$data_product
@@ -40,7 +29,8 @@ link_read <- function(handle, data_product) {
 
   usethis::ui_info(paste0("Locating ", usethis::ui_value(data_product)))
 
-  # Store metadata in handle
+  # Write to handle ---------------------------------------------------------
+
   handle$input(data_product = data_product,
                use_data_product = read_dataproduct,
                use_component = read_component,
@@ -49,6 +39,7 @@ link_read <- function(handle, data_product) {
                path = read_path,
                component_url = read_component_url)
 
-  # Return storage location
-  read_path
+  # Return storage location -------------------------------------------------
+
+  invisible(read_path)
 }

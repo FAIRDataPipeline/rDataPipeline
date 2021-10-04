@@ -9,20 +9,14 @@
 #'
 link_write <- function(handle, data_product) {
 
+  # If data product is already recorded in handle return path
+  path <- check_handle(handle, data_product, "outputs")
+  if (!is.null(path)) return(path)
+
+  # If data product is missing from config file throw an error
+  check_config(handle, data_product, "write")
+
   # Get metadata ------------------------------------------------------------
-
-  write <- handle$yaml$write
-  index <- get_index(write, data_product)
-
-  this_write <- write[[index]]
-  file_type <- this_write$file_type
-
-  if (is.null(file_type)) {
-    tmp <- "file_type"
-    usethis::ui_stop(paste("Unknown", usethis::ui_field(tmp), "in",
-                           usethis::ui_value(data_product),
-                           "write block, please edit config file"))
-  }
 
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,

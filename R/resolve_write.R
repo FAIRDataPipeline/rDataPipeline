@@ -2,7 +2,8 @@
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
-#' @param file_type a \code{string} specifying the file type
+#' @param file_type (optional) a \code{string} specifying the file type; when
+#' missing, \code{file_type} will be read from the config file
 #'
 resolve_write <- function(handle,
                           data_product,
@@ -15,14 +16,16 @@ resolve_write <- function(handle,
 
   # Get entry
   write <- handle$yaml$write
-  index <- get_index(write = write,
-                     data_product = data_product)
+  index <- get_index(write = write, data_product = data_product)
+  this_write <- write[[index]]
 
-  this_dp <- handle$yaml$write[[index]]
+  if (missing(file_type)) {
+    file_type <- this_write$file_type
+  }
 
   # Get alias
-  if ("use" %in% names(this_dp)) {
-    alias <- this_dp$use
+  if ("use" %in% names(this_write)) {
+    alias <- this_write$use
   } else {
     alias <- list()
   }
@@ -31,7 +34,7 @@ resolve_write <- function(handle,
   if ("data_product" %in% names(alias)) {
     write_dataproduct <- alias$data_product
   } else {
-    write_dataproduct <- this_dp$data_product
+    write_dataproduct <- this_write$data_product
 
     if (basename(write_dataproduct) == "*") {
       write_dataproduct <- data_product
@@ -49,11 +52,11 @@ resolve_write <- function(handle,
   if ("version" %in% names(alias)) {
     version <- alias$version
   } else {
-    version <- this_dp$version
+    version <- this_write$version
   }
 
   # Get public flag
-  public <- this_dp$use$public
+  public <- this_write$use$public
 
   if (is.null(public)) {
     public <- TRUE
@@ -90,7 +93,7 @@ resolve_write <- function(handle,
   }
 
   list(data_product = write_dataproduct,
-       description = this_dp$description,
+       description = this_write$description,
        version = version,
        namespace = namespace,
        public = public,
