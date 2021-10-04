@@ -32,7 +32,7 @@ check_config <- function(handle, data_product, what) {
       usethis::ui_stop(error)
 
     } else {
-      wildcards <- dataproducts[[index]]
+      wildcards <- dataproducts[[any_wildcards]]
 
       wildcard_match <- lapply(wildcards, function(x) {
         regex <- gsub("\\*$", "", x)

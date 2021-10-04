@@ -19,12 +19,7 @@ link_write <- function(handle, data_product) {
   # Get metadata ------------------------------------------------------------
 
   write_metadata <- resolve_write(handle = handle,
-                                  data_product = data_product,
-                                  file_type = file_type)
-  write_data_product <- write_metadata$data_product
-  write_version <- write_metadata$version
-  write_namespace <- write_metadata$namespace
-  write_public <- write_metadata$public
+                                  data_product = data_product)
   path <- write_metadata$path
 
   # Generate directory structure --------------------------------------------
@@ -35,14 +30,14 @@ link_write <- function(handle, data_product) {
   # Write to handle ---------------------------------------------------------
 
   handle$output(data_product = data_product,
-                use_data_product = write_data_product,
+                use_data_product = write_metadata$data_product,
                 use_component = NA,
-                use_version = write_version,
-                use_namespace = write_namespace,
+                use_version = write_metadata$version,
+                use_namespace = write_metadata$namespace,
                 path = path,
-                data_product_description = this_write$description,
+                data_product_description = write_metadata$description,
                 component_description = NA,
-                public = write_public)
+                public = write_metadata$public)
 
   invisible(path)
 }
