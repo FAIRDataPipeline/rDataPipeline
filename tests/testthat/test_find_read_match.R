@@ -1,4 +1,4 @@
-context("Testing input globbing")
+context("Testing find_read_match()")
 
 # Write to registry -------------------------------------------------------
 
