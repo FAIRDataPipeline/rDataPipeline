@@ -1,4 +1,4 @@
-#' Link path for external format data
+#' Link path to external format data
 #'
 #' @param handle an object of class \code{fdp, R6} containing metadata required
 #' by the Data Pipeline API

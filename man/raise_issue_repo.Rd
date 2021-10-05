@@ -7,7 +7,8 @@
 raise_issue_repo(handle, issue, severity)
 }
 \arguments{
-\item{handle}{handle}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{issue}{issue}
 

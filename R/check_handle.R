@@ -1,9 +1,10 @@
 #' check_handle
 #'
-#' @param handle handle
-#' @param data_product data_product
-#' @param what c("inputs", "outputs")
-#' @param component component
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
+#' @param data_product a \code{string} specifying the name of the data product
+#' @param what element in handle -- one of c("inputs", "outputs")
+#' @param component a \code{string} specifying the name of the component
 #'
 check_handle <- function(handle, data_product, what, component) {
 

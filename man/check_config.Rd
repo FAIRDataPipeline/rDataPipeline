@@ -7,7 +7,8 @@
 check_config(handle, data_product, what)
 }
 \arguments{
-\item{handle}{handle}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{data_product}{data_product}
 

@@ -5,7 +5,8 @@
 #' added.
 #'
 #' @param value an object of class \code{numeric}
-#' @param handle \code{fdp} object
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param data_product a \code{string} specifying the name of the data product
 #' @param component a \code{string} specifying a location within the toml file
 #' @param description a \code{string} describing the data product component

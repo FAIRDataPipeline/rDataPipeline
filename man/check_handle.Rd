@@ -7,13 +7,14 @@
 check_handle(handle, data_product, what, component)
 }
 \arguments{
-\item{handle}{handle}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
-\item{data_product}{data_product}
+\item{data_product}{a \code{string} specifying the name of the data product}
 
-\item{what}{c("inputs", "outputs")}
+\item{what}{element in handle -- one of c("inputs", "outputs")}
 
-\item{component}{component}
+\item{component}{a \code{string} specifying the name of the component}
 }
 \description{
 check_handle

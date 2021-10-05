@@ -2,12 +2,13 @@
 % Please edit documentation in R/finalise.R
 \name{finalise}
 \alias{finalise}
-\title{finalise}
+\title{Finalise code run}
 \usage{
 finalise(handle, delete_if_empty = FALSE, delete_if_duplicate = FALSE)
 }
 \arguments{
-\item{handle}{\code{fdp} object}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{delete_if_empty}{(optional) default is \code{FALSE}; see Details}
 

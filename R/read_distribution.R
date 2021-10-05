@@ -2,7 +2,8 @@
 #'
 #' Function to read distribution type data from toml file.
 #'
-#' @param handle \code{fdp} object
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param data_product a \code{string} specifying a data product
 #' @param component a \code{string} specifying a data product component
 #'

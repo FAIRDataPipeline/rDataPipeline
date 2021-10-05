@@ -2,7 +2,7 @@
 % Please edit documentation in R/link_read.R
 \name{link_read}
 \alias{link_read}
-\title{Link path for external format data}
+\title{Link path to external format data}
 \usage{
 link_read(handle, data_product)
 }
@@ -14,5 +14,5 @@ by the Data Pipeline API}
 config.yaml file}
 }
 \description{
-Link path for external format data
+Link path to external format data
 }

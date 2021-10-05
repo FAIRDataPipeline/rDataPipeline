@@ -1,6 +1,7 @@
 #' check_config
 #'
-#' @param handle handle
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param data_product data_product
 #' @param what what
 #'

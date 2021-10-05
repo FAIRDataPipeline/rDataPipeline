@@ -1,4 +1,4 @@
-#' finalise
+#' Finalise code run
 #'
 #' Finalise Code Run and push associated metadata to the local registry.
 #'
@@ -8,7 +8,8 @@
 #' If a data product has the same hash as a previous version, remove it from
 #' the registry when `delete_if_duplicate` is set to `TRUE`.
 #'
-#' @param handle \code{fdp} object
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param delete_if_empty (optional) default is `FALSE`; see Details
 #' @param delete_if_duplicate (optional) default is `FALSE`; see Details
 #'

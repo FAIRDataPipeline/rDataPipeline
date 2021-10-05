@@ -7,7 +7,8 @@
 read_array(handle, data_product, component)
 }
 \arguments{
-\item{handle}{\code{fdp} object}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{data_product}{a \code{string} specifying a data product}
 

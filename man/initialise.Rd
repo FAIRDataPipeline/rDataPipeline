@@ -2,7 +2,7 @@
 % Please edit documentation in R/initialise.R
 \name{initialise}
 \alias{initialise}
-\title{initialise}
+\title{Initialise code run}
 \usage{
 initialise(config, script)
 }
@@ -12,6 +12,10 @@ config file in the data store}
 
 \item{script}{a \code{string} specifying the location of the submission
 script in the data store}
+}
+\value{
+an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API
 }
 \description{
 Reads in a working config file, generates new Code Run entry, and returns

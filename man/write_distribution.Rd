@@ -18,7 +18,8 @@ write_distribution(
 
 \item{parameters}{a \code{list} specifying the distribution parameters}
 
-\item{handle}{\code{fdp} object}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 

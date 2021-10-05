@@ -17,7 +17,8 @@ raise_issue(
 \arguments{
 \item{index}{index returned from \verb{link_*()}, \code{read_()}, or \code{write()}}
 
-\item{handle}{\code{fdp} object}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{component}{a \code{string} specifying the component name}
 

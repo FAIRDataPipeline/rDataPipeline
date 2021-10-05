@@ -1,6 +1,7 @@
 #' raise_issue_script
 #'
-#' @param handle handle
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param issue issue
 #' @param severity severity
 #'

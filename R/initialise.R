@@ -1,4 +1,4 @@
-#' initialise
+#' Initialise code run
 #'
 #' Reads in a working config file, generates new Code Run entry, and returns
 #' a handle containing various metadata.
@@ -7,6 +7,9 @@
 #' config file in the data store
 #' @param script a \code{string} specifying the location of the submission
 #' script in the data store
+#'
+#' @return an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #'
 #' @export
 #'

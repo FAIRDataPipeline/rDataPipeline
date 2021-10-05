@@ -1,7 +1,8 @@
 #' raise_issue
 #'
 #' @param index index returned from `link_*()`, `read_()`, or `write()`
-#' @param handle \code{fdp} object
+#' @param handle an object of class \code{fdp, R6} containing metadata required
+#' by the Data Pipeline API
 #' @param component a \code{string} specifying the component name
 #' @param data_product a \code{string} specifying the data product name
 #' @param issue a \code{string} specifying the issue

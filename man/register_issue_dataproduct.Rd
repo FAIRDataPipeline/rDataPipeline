@@ -7,7 +7,8 @@
 register_issue_dataproduct(handle, this_issue)
 }
 \arguments{
-\item{handle}{handle}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{this_issue}{this_issue}
 }

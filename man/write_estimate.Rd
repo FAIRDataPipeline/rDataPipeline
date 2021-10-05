@@ -9,7 +9,8 @@ write_estimate(value, handle, data_product, component, description)
 \arguments{
 \item{value}{an object of class \code{numeric}}
 
-\item{handle}{\code{fdp} object}
+\item{handle}{an object of class \code{fdp, R6} containing metadata required
+by the Data Pipeline API}
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
