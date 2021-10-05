@@ -8,8 +8,8 @@
 #' @param script a \code{string} specifying the location of the submission
 #' script in the data store
 #'
-#' @return an object of class \code{fdp, R6} containing metadata required
-#' by the Data Pipeline API
+#' @return Returns an object of class \code{fdp, R6} containing metadata
+#' required by the Data Pipeline API
 #'
 #' @export
 #'

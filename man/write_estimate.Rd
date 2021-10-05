@@ -18,6 +18,10 @@ by the Data Pipeline API}
 
 \item{description}{a \code{string} describing the data product component}
 }
+\value{
+Returns a handle index associated with the just written component,
+which can be used to raise an issue if necessary
+}
 \description{
 Function to populate toml file with point-estimate type data. If a file
 already exists at the specified location, an additional component will be

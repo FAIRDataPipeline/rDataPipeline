@@ -13,6 +13,10 @@ by the Data Pipeline API}
 \item{data_product}{a \code{string} representing an external object in the
 config.yaml file}
 }
+\value{
+Returns a \code{string} specifying the location in which the data
+product should be written
+}
 \description{
 Link path for external format data
 }

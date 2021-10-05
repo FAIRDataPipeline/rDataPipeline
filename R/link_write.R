@@ -5,6 +5,9 @@
 #' @param data_product a \code{string} representing an external object in the
 #' config.yaml file
 #'
+#' @return Returns a \code{string} specifying the location in which the data
+#' product should be written
+#'
 #' @export
 #'
 link_write <- function(handle, data_product) {

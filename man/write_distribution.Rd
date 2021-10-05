@@ -27,6 +27,10 @@ by the Data Pipeline API}
 
 \item{description}{a \code{string} describing the data product component}
 }
+\value{
+Returns a handle index associated with the just written component,
+which can be used to raise an issue if necessary
+}
 \description{
 Write distribution component to TOML file
 }

@@ -11,8 +11,10 @@
 #' @param component a \code{string} specifying a location within the toml file
 #' @param description a \code{string} describing the data product component
 #'
-#' @family write functions
+#' @return Returns a handle index associated with the just written component,
+#' which can be used to raise an issue if necessary
 #'
+#' @family write functions
 #' @export
 #'
 write_estimate <- function(value,

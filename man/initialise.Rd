@@ -14,8 +14,8 @@ config file in the data store}
 script in the data store}
 }
 \value{
-an object of class \code{fdp, R6} containing metadata required
-by the Data Pipeline API
+Returns an object of class \code{fdp, R6} containing metadata
+required by the Data Pipeline API
 }
 \description{
 Reads in a working config file, generates new Code Run entry, and returns

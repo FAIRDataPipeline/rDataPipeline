@@ -30,6 +30,10 @@ by the Data Pipeline API}
 
 \item{column_units}{(optional) a \code{vector} comprising column units}
 }
+\value{
+Returns a handle index associated with the just written component,
+which can be used to raise an issue if necessary
+}
 \description{
 Function to populate hdf5 file with array type data.
 }

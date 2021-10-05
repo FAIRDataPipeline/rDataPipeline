@@ -20,8 +20,10 @@
 #' @param units (optional) a \code{string} specifying the units of the data as
 #' a whole
 #'
-#' @family write functions
+#' @return Returns a handle index associated with the just written component,
+#' which can be used to raise an issue if necessary
 #'
+#' @family write functions
 #' @export
 #'
 write_array <- function(array,
