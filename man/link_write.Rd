@@ -2,7 +2,7 @@
 % Please edit documentation in R/link_write.R
 \name{link_write}
 \alias{link_write}
-\title{link_write}
+\title{Link path for external format data}
 \usage{
 link_write(handle, data_product)
 }
@@ -14,5 +14,5 @@ by the Data Pipeline API}
 config.yaml file}
 }
 \description{
-link_write
+Link path for external format data
 }

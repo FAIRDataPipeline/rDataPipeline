@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_estimate.R
 \name{write_estimate}
 \alias{write_estimate}
-\title{Write estimate-type TOML file}
+\title{Write estimate component to TOML file}
 \usage{
 write_estimate(value, handle, data_product, component, description)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_array.R
 \name{read_array}
 \alias{read_array}
-\title{Read component from array-type H5 file}
+\title{Read array component from HDF5 file}
 \usage{
 read_array(handle, data_product, component)
 }

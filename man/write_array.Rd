@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_array.R
 \name{write_array}
 \alias{write_array}
-\title{Create array-type H5 file}
+\title{Write array component to HDF5 file}
 \usage{
 write_array(
   array,

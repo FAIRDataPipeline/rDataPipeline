@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_estimate.R
 \name{read_estimate}
 \alias{read_estimate}
-\title{Read estimate from TOML file}
+\title{Read estimate component from TOML file}
 \usage{
 read_estimate(handle, data_product, component)
 }

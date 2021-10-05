@@ -1,4 +1,4 @@
-#' Write estimate-type TOML file
+#' Write estimate component to TOML file
 #'
 #' Function to populate toml file with point-estimate type data. If a file
 #' already exists at the specified location, an additional component will be

@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_distribution.R
 \name{write_distribution}
 \alias{write_distribution}
-\title{Write distribution-type TOML file}
+\title{Write distribution component to TOML file}
 \usage{
 write_distribution(
   distribution,
@@ -27,7 +27,7 @@ write_distribution(
 \item{description}{a \code{string} describing the data product component}
 }
 \description{
-Write distribution-type TOML file
+Write distribution component to TOML file
 }
 \seealso{
 Other write functions: 

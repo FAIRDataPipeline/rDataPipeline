@@ -1,4 +1,4 @@
-#' Read component from array-type H5 file
+#' Read array component from HDF5 file
 #'
 #' Function to read array type data from hdf5 file.
 #'
