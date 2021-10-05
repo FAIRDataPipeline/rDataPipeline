@@ -1,9 +1,9 @@
 ## rDataPipeline
 
-[![](https://img.shields.io/badge/docs-rDataPipeline-blue)](https://FAIRDataPipeline.github.io/rDataPipeline/)
-[![test-build](https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1)](https://github.com/FAIRDataPipeline/rDataPipeline/actions)
-[![codecov](https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY)](https://codecov.io/gh/FAIRDataPipeline/rDataPipeline)
-[![License: GPL-3.0](https://img.shields.io/badge/licence-GPL--3-yellow)](https://opensource.org/licenses/GPL-3.0)
+[![docs][docs-badge]][docs-url]
+[![test-build][build-badge]][bulid-url]
+[![codecov][codecov-badge]][codecov-url]
+[![License: GPL-3.0][licence-badge]][licence-url]
 [![Zenodo][zenodo-badge]][zenodo-url]
 
 The R implementation of the FAIR Data Pipeline API.
@@ -27,6 +27,14 @@ Example usage can be found [here][SEIRS].
 For more information, please visit the FAIR Data Pipeline 
 [website][FDP].
 
+[docs-badge]: https://img.shields.io/badge/docs-rDataPipeline-blue
+[docs-url]: https://FAIRDataPipeline.github.io/rDataPipeline/
+[build-badge]: https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1
+[bulid-url]: https://github.com/FAIRDataPipeline/rDataPipeline/actions
+[codecov-badge]: https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY
+[codecov-url]: https://codecov.io/gh/FAIRDataPipeline/rDataPipeline
+[licence-badge]: https://img.shields.io/badge/licence-GPL--3-yellow
+[licence-url]: https://opensource.org/licenses/GPL-3.0
 [zenodo-badge]: https://zenodo.org/badge/265575806.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/265575806
 [FDP]: https://fairdatapipeline.github.io
