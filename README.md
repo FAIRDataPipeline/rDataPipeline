@@ -20,12 +20,14 @@ library(rDataPipeline)
 
 ## Usage
 
-Example usage can be found [here][SEIRS]
+Example usage can be found [here][SEIRS].
 
 ## More information
 
-For more information, please visit the FAIR Data Pipeline [website](https://fairdatapipeline.github.io)
+For more information, please visit the FAIR Data Pipeline 
+[website][FDP].
 
 [zenodo-badge]: https://zenodo.org/badge/265575806.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/265575806
+[FDP]: https://fairdatapipeline.github.io
 [SEIRS]: https://www.fairdatapipeline.org/rSimpleModel/articles/SEIRS.html
