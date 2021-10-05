@@ -76,10 +76,19 @@ handle <- initialise(config, script)
 
 # Run tests
 test_that("df is returned", {
-  tmp <- read_table(handle = handle,
-                    data_product = data_product1,
-                    component = component)
-  expect_equivalent(as.data.frame(tmp), df)
+  testthat::expect_true(is.null(handle$inputs))
+  tmp1 <- read_table(handle = handle,
+                     data_product = data_product1,
+                     component = component)
+  testthat::expect_equivalent(as.data.frame(tmp1), df)
+  testthat::expect_false(is.null(handle$inputs))
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  tmp2 <- read_table(handle = handle,
+                     data_product = data_product1,
+                     component = component)
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(tmp1, tmp2)
 })
 
 test_that("df2 is returned", {
