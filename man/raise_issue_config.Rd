@@ -2,7 +2,7 @@
 % Please edit documentation in R/raise_issue_config.R
 \name{raise_issue_config}
 \alias{raise_issue_config}
-\title{raise_issue_config}
+\title{Raise issue with config file}
 \usage{
 raise_issue_config(handle, issue, severity)
 }
@@ -10,10 +10,10 @@ raise_issue_config(handle, issue, severity)
 \item{handle}{an object of class \code{fdp, R6} containing metadata required
 by the Data Pipeline API}
 
-\item{issue}{issue}
+\item{issue}{a \code{string} specifying the issue}
 
-\item{severity}{severity}
+\item{severity}{a \code{numeric} value specifying the severity}
 }
 \description{
-raise_issue_config
+Raise issue with config file
 }

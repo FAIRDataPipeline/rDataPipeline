@@ -1,10 +1,10 @@
-#' find_write_match
+#' Find matching write aliases in config file
 #'
-#' Find aliases in working config that match wildcard string
+#' Find write aliases in working config that match wildcard string
 #'
 #' @param handle an object of class \code{fdp, R6} containing metadata required
 #' by the Data Pipeline API
-#' @param data_product data_product
+#' @param data_product a \code{string} specifying the data product name
 #'
 #' @export
 #'

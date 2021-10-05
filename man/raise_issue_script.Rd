@@ -2,7 +2,7 @@
 % Please edit documentation in R/raise_issue_script.R
 \name{raise_issue_script}
 \alias{raise_issue_script}
-\title{raise_issue_script}
+\title{Raise issue with submission script}
 \usage{
 raise_issue_script(handle, issue, severity)
 }
@@ -10,10 +10,10 @@ raise_issue_script(handle, issue, severity)
 \item{handle}{an object of class \code{fdp, R6} containing metadata required
 by the Data Pipeline API}
 
-\item{issue}{issue}
+\item{issue}{a \code{string} specifying the issue}
 
-\item{severity}{severity}
+\item{severity}{a \code{numeric} value specifying the severity}
 }
 \description{
-raise_issue_script
+Raise issue with submission script
 }
