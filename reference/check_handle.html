@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>resolve_data_product — resolve_write • rDataPipeline</title>
+<title>check_handle — check_handle • rDataPipeline</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="resolve_data_product — resolve_write" />
-<meta property="og:description" content="resolve_data_product" />
+<meta property="og:title" content="check_handle — check_handle" />
+<meta property="og:description" content="check_handle" />
 
 
 
@@ -108,32 +108,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>resolve_data_product</h1>
-    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/resolve_write.R'><code>R/resolve_write.R</code></a></small>
-    <div class="hidden name"><code>resolve_write.Rd</code></div>
+    <h1>check_handle</h1>
+    <small class="dont-index">Source: <a href='https://github.com/FAIRDataPipeline/rDataPipeline/blob/master/R/check_handle.R'><code>R/check_handle.R</code></a></small>
+    <div class="hidden name"><code>check_handle.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>resolve_data_product</p>
+    <p>check_handle</p>
     </div>
 
-    <pre class="usage"><span class='fu'>resolve_write</span><span class='op'>(</span><span class='va'>handle</span>, <span class='va'>data_product</span>, <span class='va'>file_type</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_handle</span><span class='op'>(</span><span class='va'>handle</span>, <span class='va'>data_product</span>, <span class='va'>what</span>, <span class='va'>component</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>handle</th>
-      <td><p><code>fdp</code> object</p></td>
+      <td><p>handle</p></td>
     </tr>
     <tr>
       <th>data_product</th>
-      <td><p>a <code>string</code> specifying the name of the data product</p></td>
+      <td><p>data_product</p></td>
     </tr>
     <tr>
-      <th>file_type</th>
-      <td><p>(optional) a <code>string</code> specifying the file type; when
-missing, <code>file_type</code> will be read from the config file</p></td>
+      <th>what</th>
+      <td><p>c("inputs", "outputs")</p></td>
+    </tr>
+    <tr>
+      <th>component</th>
+      <td><p>component</p></td>
     </tr>
     </table>
 

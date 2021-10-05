@@ -10,6 +10,9 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/add_write.html</loc>
   </url>
   <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_config.html</loc>
+  </url>
+  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/check_dataproduct_exists.html</loc>
   </url>
   <url>
@@ -23,6 +26,9 @@
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/check_fields.html</loc>
+  </url>
+  <url>
+    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_handle.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/check_integer.html</loc>
