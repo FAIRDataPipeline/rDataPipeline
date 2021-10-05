@@ -1,4 +1,4 @@
-#' Write distribution-type TOML file
+#' Write distribution component to TOML file
 #'
 #' @param distribution a \code{string} specifying the name of the distribution
 #' @param parameters a \code{list} specifying the distribution parameters

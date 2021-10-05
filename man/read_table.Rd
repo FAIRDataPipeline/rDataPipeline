@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_table.R
 \name{read_table}
 \alias{read_table}
-\title{Read component from table-type H5 file}
+\title{Read table component from HDF5 file}
 \usage{
 read_table(handle, data_product, component)
 }

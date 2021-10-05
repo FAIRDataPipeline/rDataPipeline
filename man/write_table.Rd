@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_table.R
 \name{write_table}
 \alias{write_table}
-\title{Create table-type H5 file}
+\title{Write tablecomponent to HDF5 file}
 \usage{
 write_table(
   df,

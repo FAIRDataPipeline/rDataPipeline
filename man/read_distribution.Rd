@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_distribution.R
 \name{read_distribution}
 \alias{read_distribution}
-\title{Read distribution from TOML file}
+\title{Read distribution component from TOML file}
 \usage{
 read_distribution(handle, data_product, component)
 }
