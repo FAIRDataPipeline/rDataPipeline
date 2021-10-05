@@ -81,76 +81,10 @@
 install_github("FAIRDataPipeline/rDataPipeline")
 library(rDataPipeline)</a></code></pre>
 </div>
-<div id="user-written-configyaml" class="section level2">
+<div id="usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#user-written-configyaml" class="anchor"></a>User-written <em>config.yaml</em>
-</h2>
-<p>To generate a Code Run, you need to write a <em>config.yaml</em> file. This can be done manually, or automated in the following way:</p>
-<pre class="{r}"><code>config_file &lt;- "config.yaml"
-coderun_description &lt;- "Register a file in the pipeline"
-namespace &lt;- "soniamitchell"
-
-# Generate config.yaml file
-create_config(path = config_file,
-             description = coderun_description,
-             input_namespace = namespace,
-             output_namespace = namespace)
-             
-# Add data product to `write` block
-add_write(path = config_file,
-          data_product = file.path("real", "data", "1"),
-          description = "My first dataset",
-          file_type = "csv")
-                  
-add_write(path = config_file,
-          data_product = file.path("real", "data", "2"),
-          description = "My second dataset",
-          file_type = "csv")</code></pre>
-<p>Similarly, <code><a href="reference/add_read.html">add_read()</a></code> can be used to add data products to the <code>read</code> block.</p>
-</div>
-<div id="fair-datapipeline-cli" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fair-datapipeline-cli" class="anchor"></a>FAIR DataPipeline CLI</h2>
-<p>After having written a <em>config.yaml</em> file, Python-based CLI tools should be used to generate a code run. As these tools are not yet available, temporary functions have been made available in R.</p>
-<p>The R implementation of <code>fair init()</code> is used to register a new user in the local data registry. This only needs to be done once, when the local registry is first installed.</p>
-<pre class="{r}"><code><a href="reference/fair_init.html">fair_init(family_name = "Mitchell",
-          given_name = "Sonia",
-          orcid = "https://orcid.org/0000-0003-1536-2066",
-          organisation = c("University of Glasgow",
-                           "Boydorr Centre for Population and Ecosystem Health"),
-          endpoint = "http://localhost:8000/api/")</a></code></pre>
-<p>The R implementation of <code>fair_pull()</code> is used to register external data products in the local registry and data store.</p>
-<p>Note that the full implementation will also pull data from the remote registry and data store – this has not been implemented in R.</p>
-<pre class="{r}"><code>fair_pull(path = config_file)</code></pre>
-<p>The R implementation of <code><a href="reference/fair_run.html">fair_run()</a></code> will generate a working config file from the user-written <em>config.yaml</em> file, containing information required by the DataPipeline API. This file is saved in the local data store and the directory in which it resides is written to a global variable, <code>FDP_CONFIG_DIR</code>.</p>
-<p>Note that the full implementation will also run the submission script (detailed below) – this has not been implemented in R.</p>
-<pre class="{r}"><code><a href="reference/fair_run.html">fair_run(path = config_file)</a></code></pre>
-</div>
-<div id="submission-script" class="section level2">
-<h2 class="hasAnchor">
-<a href="#submission-script" class="anchor"></a>Submission script</h2>
-<p>It is intended that <code><a href="reference/fair_run.html">fair_run()</a></code> should run generate a Code Run from a submission script. Until the Python-based CLI tools are written, the submission script can be run interactively in R:</p>
-<pre class="{r}"><code># Retrieve location of config file and submission script
-config &lt;- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script &lt;- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
-
-# Initialise code run
-handle &lt;- initialise(config, script)
-
-# Write data
-path1 &lt;- link_write(handle, data_product1)
-uid1 &lt;- paste0(uid, "_1")
-df1 &lt;- data.frame(a = uid1, b = uid1)
-write.csv(df1, path1)
-
-# Write more data
-path2 &lt;- link_write(handle, data_product2)
-uid2 &lt;- paste0(uid, "_2")
-df2 &lt;- data.frame(a = uid2, b = uid2)
-write.csv(df2, path2)
-
-# Finalise code run
-finalise(handle)</code></pre>
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p>Example usage can be found <a href="https://www.fairdatapipeline.org/rSimpleModel/articles/SEIRS.html">here</a></p>
 </div>
 <div id="more-information" class="section level2">
 <h2 class="hasAnchor">
