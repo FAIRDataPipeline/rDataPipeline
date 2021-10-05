@@ -13,8 +13,8 @@ The R implementation of the FAIR Data Pipeline API.
 In R:
 
 ```{r}
-library(devtools)
-install_github("FAIRDataPipeline/rDataPipeline")
+install.packages(devtools)
+devtools::install_github("FAIRDataPipeline/rDataPipeline")
 library(rDataPipeline)
 ```
 
