@@ -34,11 +34,23 @@ df <- data.frame(a = 1:2, b = 3:4)
 rownames(df) <- 1:2
 
 test_that(".h5 file is generated", {
-  ind <- write_table(df = df,
-                     handle = handle,
-                     data_product = data_product1,
-                     component = component1,
-                     description = "Some description")
+  testthat::expect_true(is.null(handle$outputs))
+  ind1 <- write_table(df = df,
+                      handle = handle,
+                      data_product = data_product1,
+                      component = component1,
+                      description = "Some description")
+  testthat::expect_equal(ind1, 1)
+  testthat::expect_false(is.null(handle$outputs))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  ind2 <- write_table(df = df,
+                      handle = handle,
+                      data_product = data_product1,
+                      component = component1,
+                      description = "Some description")
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(ind1, ind2)
 
   filename <- handle$outputs %>%
     dplyr::filter(index == index) %>%

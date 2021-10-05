@@ -35,7 +35,7 @@ write_array <- function(array,
 
   # If data product is already recorded in handle return index
   index <- check_handle(handle, data_product, "outputs", component)
-  if (!is.null(index)) return(index)
+  if (!is.null(index)) return(invisible(index))
 
   # If data product is missing from config file throw an error
   check_config(handle, data_product, "write")

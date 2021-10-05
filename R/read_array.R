@@ -25,7 +25,7 @@ read_array <- function(handle,
   read_version <- tmp$version
   read_namespace <- tmp$namespace
   path <- tmp$path
-
+  print(path)
   if (!file.exists(path)) usethis::ui_stop("File missing from data store")
 
   file.h5 <- rhdf5::h5read(path, read_component)

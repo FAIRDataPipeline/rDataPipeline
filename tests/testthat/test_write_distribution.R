@@ -29,16 +29,28 @@ handle <- initialise(config, script)
 # Run tests ---------------------------------------------------------------
 
 test_that("function behaves as it should", {
-
-  ind <- write_distribution(distribution = "Gaussian",
+  testthat::expect_true(is.null(handle$outputs))
+  ind1 <- write_distribution(distribution = "Gaussian",
                             parameters = list(mean = -16.08, SD = 30),
                             handle = handle,
                             data_product = data_product1,
                             component = "symptom-delay",
                             description = "symptom delay")
+  testthat::expect_equal(ind1, 1)
+  testthat::expect_false(is.null(handle$outputs))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  ind2 <- write_distribution(distribution = "Gaussian",
+                            parameters = list(mean = -16.08, SD = 30),
+                            handle = handle,
+                            data_product = data_product1,
+                            component = "symptom-delay",
+                            description = "symptom delay")
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(ind1, ind2)
 
   tmp <- handle$outputs %>%
-    dplyr::filter(index == ind)
+    dplyr::filter(index == ind1)
   path <- tmp$path
 
   # File should be toml format

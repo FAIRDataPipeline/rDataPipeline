@@ -18,6 +18,13 @@ write_distribution <- function(distribution,
                                component,
                                description) {
 
+  # If data product is already recorded in handle return index
+  index <- check_handle(handle, data_product, "outputs", component)
+  if (!is.null(index)) return(invisible(index))
+
+  # If data product is missing from config file throw an error
+  check_config(handle, data_product, "write")
+
   # Get metadata ------------------------------------------------------------
 
   datastore <- handle$yaml$run_metadata$write_data_store

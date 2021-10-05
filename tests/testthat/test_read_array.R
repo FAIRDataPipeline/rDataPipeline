@@ -32,7 +32,7 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df_v1 <- data.frame(a = 1:2, b = 3:4)
+df_v1 <- data.frame(a = 1:2, b = 8:9)
 rownames(df_v1) <- 1:2
 dimension_names <- list(rowvalue = rownames(df_v1),
                         colvalue = colnames(df_v1))
@@ -52,7 +52,7 @@ write_array(array = as.matrix(df_v1),
 
 # Finalise code run
 finalise(handle)
-
+print(handle$outputs$path)
 # Test use block ----------------------------------------------------------
 
 # User written config file
@@ -78,6 +78,7 @@ handle <- initialise(config, script)
 
 # Run tests
 test_that("df_v1 is returned", {
+  testthat::expect_true(is.null(handle$inputs))
   tmp <- read_array(handle = handle,
                     data_product = data_product1,
                     component = component)

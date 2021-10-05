@@ -29,15 +29,26 @@ handle <- initialise(config, script)
 # Run tests ---------------------------------------------------------------
 
 test_that("function behaves as it should", {
-
-  ind <- write_estimate(value =  192.0,
+  testthat::expect_true(is.null(handle$outputs))
+  ind1 <- write_estimate(value =  192.0,
                         handle = handle,
                         data_product = data_product1,
                         component = "asymptomatic-period",
                         description = "asymptomatic period")
+  testthat::expect_equal(ind1, 1)
+  testthat::expect_false(is.null(handle$outputs))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  ind2 <- write_estimate(value =  192.0,
+                         handle = handle,
+                         data_product = data_product1,
+                         component = "asymptomatic-period",
+                         description = "asymptomatic period")
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(ind1, ind2)
 
   tmp <- handle$outputs %>%
-    dplyr::filter(index == ind)
+    dplyr::filter(index == ind1)
   path <- tmp$path
 
   expect_true(configr::is.toml.file(path))

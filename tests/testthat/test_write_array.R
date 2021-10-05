@@ -106,7 +106,7 @@ test_that("entry is recorded in the handle once", {
                       description = "Some description",
                       dimension_names = list(rowvalue = rownames(df),
                                              colvalue = colnames(df)))
-  testthat::expect_true(is.numeric(ind1))
+  testthat::expect_equal(ind1, 1)
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(nrow(handle$outputs), 1)
   testthat::expect_equal(handle$outputs$data_product, data_product1)
