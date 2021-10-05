@@ -30,8 +30,16 @@ handle <- initialise(config, script)
 
 # Run tests ---------------------------------------------------------------
 
-test_that("function behaves as it should", {
-  tmp <- link_write(handle, data_product1)
-  path <- file.path(namespace1, data_product1)
-  testthat::expect_true(grepl(path, tmp))
+test_that("entry is recorded in the handle once", {
+  testthat::expect_true(is.null(handle$outputs))
+  path1 <- link_write(handle, data_product1)
+  testthat::expect_true(is.character(path1))
+  testthat::expect_false(is.null(handle$outputs))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  path2 <- link_write(handle, data_product1)
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(path1, path2)
+  tmp <- file.path(namespace1, data_product1)
+  testthat::expect_true(grepl(tmp, path1))
 })

@@ -16,6 +16,9 @@ read_array <- function(handle,
                        data_product,
                        component) {
 
+  # If data product is missing from config file throw an error
+  check_config(handle, data_product, "read")
+
   # Read file ---------------------------------------------------------------
 
   tmp <- resolve_read(handle, data_product, component)
@@ -63,13 +66,17 @@ read_array <- function(handle,
 
   # Write to handle ---------------------------------------------------------
 
-  handle$input(data_product = data_product,
-               use_data_product = read_dataproduct,
-               use_component = read_component,
-               use_version = read_version,
-               use_namespace = read_namespace,
-               path = path,
-               component_url = read_component_url)
+  # If data product is already recorded in handle return index
+  index <- check_handle(handle, data_product, "inputs", component)
+
+  if (is.null(index))
+    handle$input(data_product = data_product,
+                 use_data_product = read_dataproduct,
+                 use_component = read_component,
+                 use_version = read_version,
+                 use_namespace = read_namespace,
+                 path = path,
+                 component_url = read_component_url)
 
   cli::cli_alert_success(
     "Reading {.value {read_component}} from {.value {read_dataproduct}}")

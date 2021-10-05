@@ -11,7 +11,8 @@ resolve_write(handle, data_product, file_type)
 
 \item{data_product}{a \code{string} specifying the name of the data product}
 
-\item{file_type}{a \code{string} specifying the file type}
+\item{file_type}{(optional) a \code{string} specifying the file type; when
+missing, \code{file_type} will be read from the config file}
 }
 \description{
 resolve_data_product

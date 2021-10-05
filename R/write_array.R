@@ -33,6 +33,13 @@ write_array <- function(array,
                         dimension_units,
                         units) {
 
+  # If data product is already recorded in handle return index
+  index <- check_handle(handle, data_product, "outputs", component)
+  if (!is.null(index)) return(invisible(index))
+
+  # If data product is missing from config file throw an error
+  check_config(handle, data_product, "write")
+
   # Get metadata ------------------------------------------------------------
 
   write_metadata <- resolve_write(handle = handle,
@@ -45,7 +52,7 @@ write_array <- function(array,
   data_product_decription <- write_metadata$description
   path <- write_metadata$path
 
-  # Checks ------------------------------------------------------------------
+  # Check arguments ---------------------------------------------------------
 
   if (!is.array(array))
     stop("`array` must be an array")
@@ -169,6 +176,8 @@ write_array <- function(array,
                 data_product_description = data_product_decription,
                 component_description = description,
                 public = write_public)
+
+  # Return handle index -----------------------------------------------------
 
   index <- handle$output_index(data_product = write_data_product,
                                component = component,

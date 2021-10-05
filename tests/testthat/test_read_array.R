@@ -32,7 +32,7 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df_v1 <- data.frame(a = 1:2, b = 3:4)
+df_v1 <- data.frame(a = 1:2, b = 8:9)
 rownames(df_v1) <- 1:2
 dimension_names <- list(rowvalue = rownames(df_v1),
                         colvalue = colnames(df_v1))
@@ -78,16 +78,31 @@ handle <- initialise(config, script)
 
 # Run tests
 test_that("df_v1 is returned", {
-  tmp <- read_array(handle = handle,
-                    data_product = data_product1,
-                    component = component)
-  expect_equivalent(as.data.frame(tmp), df_v1)
+  testthat::expect_true(is.null(handle$inputs))
+  tmp1 <- read_array(handle = handle,
+                     data_product = data_product1,
+                     component = component)
+  testthat::expect_equivalent(as.data.frame(tmp1), df_v1)
+  testthat::expect_false(is.null(handle$inputs))
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  tmp2 <- read_array(handle = handle,
+                     data_product = data_product1,
+                     component = component)
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(tmp1, tmp2)
 
-  expect_equivalent(attributes(tmp)$dimnames[[1]], dimension_names$rowvalue )
-  expect_equivalent(attributes(tmp)$dimnames[[2]], dimension_names$colvalue )
-  expect_equivalent(attributes(tmp)$Dimension_1_title, names(dimension_names)[1] )
-  expect_equivalent(attributes(tmp)$Dimension_2_title, names(dimension_names)[2] )
-  expect_equivalent(attributes(tmp)$Dimension_2_units, dimension_units[[2]])
-  expect_equivalent(attributes(tmp)$Dimension_2_values, dimension_values[[2]])
-  expect_equivalent(attributes(tmp)$units, units)
+  testthat::expect_equivalent(attributes(tmp1)$dimnames[[1]],
+                              dimension_names$rowvalue )
+  testthat::expect_equivalent(attributes(tmp1)$dimnames[[2]],
+                              dimension_names$colvalue )
+  testthat::expect_equivalent(attributes(tmp1)$Dimension_1_title,
+                              names(dimension_names)[1] )
+  testthat::expect_equivalent(attributes(tmp1)$Dimension_2_title,
+                              names(dimension_names)[2] )
+  testthat::expect_equivalent(attributes(tmp1)$Dimension_2_units,
+                              dimension_units[[2]])
+  testthat::expect_equivalent(attributes(tmp1)$Dimension_2_values,
+                              dimension_values[[2]])
+  testthat::expect_equivalent(attributes(tmp1)$units, units)
 })

@@ -149,7 +149,7 @@ initialise <- function(config, script) {
 
     coderepo_exists <- get_url(table = "storage_location",
                                query = list(hash = sha,
-                                            public = FALSE,
+                                            public = TRUE,
                                             storage_root = repo_storageroot_id),
                                endpoint = endpoint)
 

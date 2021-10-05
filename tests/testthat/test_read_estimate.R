@@ -90,11 +90,19 @@ test_that("error is thrown when file is missing from data store", {
 })
 
 test_that("component1 is returned", {
-  dat <- read_estimate(handle = handle,
+  testthat::expect_true(is.null(handle$inputs))
+  dat1 <- read_estimate(handle = handle,
                        data_product = data_product1,
                        component = component1)
-
-  testthat::expect_equal(dat, value1)
+  testthat::expect_equal(dat1, value1)
+  testthat::expect_false(is.null(handle$inputs))
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  dat2 <- read_estimate(handle = handle,
+                        data_product = data_product1,
+                        component = component1)
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(dat1, dat2)
 })
 
 test_that("component2 is returned", {

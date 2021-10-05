@@ -70,15 +70,25 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-# test_that("function works correctly", {
-#   tmp <- list(distribution = dat1$distribution,
-#               SD = dat1$parameters$SD,
-#               mean = dat1$parameters$mean)
-#   dist <- read_distribution(handle = handle,
-#                             data_product = data_product1,
-#                             component = component1)
-#   expect_equivalent(dist, tmp)
-# })
+tmp <- list(distribution = dat1$distribution,
+            SD = dat1$parameters$SD,
+            mean = dat1$parameters$mean)
+
+test_that("function works correctly", {
+  testthat::expect_true(is.null(handle$inputs))
+  dist1 <- read_distribution(handle = handle,
+                            data_product = data_product1,
+                            component = component1)
+  testthat::expect_equivalent(dist1, tmp)
+  testthat::expect_false(is.null(handle$inputs))
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  dist2 <- read_distribution(handle = handle,
+                             data_product = data_product1,
+                             component = component1)
+  testthat::expect_equal(nrow(handle$inputs), 1)
+  testthat::expect_equal(dist1, dist2)
+})
 #
 # test_that("function works correctly", {
 #   tmp <- list(distribution = dat2$distribution,

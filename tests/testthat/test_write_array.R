@@ -97,14 +97,31 @@ test_that("incorrect dimension_names length throws error", {
   )
 })
 
+test_that("entry is recorded in the handle once", {
+  testthat::expect_true(is.null(handle$outputs))
+  ind1 <- write_array(array = as.matrix(df),
+                      handle = handle,
+                      data_product = data_product1,
+                      component = component1,
+                      description = "Some description",
+                      dimension_names = list(rowvalue = rownames(df),
+                                             colvalue = colnames(df)))
+  testthat::expect_equal(ind1, 1)
+  testthat::expect_false(is.null(handle$outputs))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  ind2 <- write_array(array = as.matrix(df),
+                      handle = handle,
+                      data_product = data_product1,
+                      component = component1,
+                      description = "Some description",
+                      dimension_names = list(rowvalue = rownames(df),
+                                             colvalue = colnames(df)))
+  testthat::expect_equal(nrow(handle$outputs), 1)
+  testthat::expect_equal(ind1, ind2)
+})
+
 test_that(".h5 file is generated", {
-  ind <- write_array(array = as.matrix(df),
-                     handle = handle,
-                     data_product = data_product1,
-                     component = component1,
-                     description = "Some description",
-                     dimension_names = list(rowvalue = rownames(df),
-                                            colvalue = colnames(df)))
   filename <- handle$outputs %>%
     dplyr::filter(index == index) %>%
     dplyr::select(path) %>%
