@@ -58,9 +58,6 @@
     <loc>https://fairdatapipeline.github.io/rFDP/reference/create_version_number.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/download_data_product.html</loc>
-  </url>
-  <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/download_from_database.html</loc>
   </url>
   <url>
@@ -131,9 +128,6 @@
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_max_version.html</loc>
-  </url>
-  <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_package_info.html</loc>
   </url>
   <url>
     <loc>https://fairdatapipeline.github.io/rFDP/reference/get_storage_location.html</loc>
