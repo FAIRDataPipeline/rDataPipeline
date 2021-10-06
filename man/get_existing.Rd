@@ -34,7 +34,6 @@ Other get functions:
 \code{\link{get_components}()},
 \code{\link{get_entry}()},
 \code{\link{get_file_hash}()},
-\code{\link{get_github_hash}()},
-\code{\link{get_package_info}()}
+\code{\link{get_github_hash}()}
 }
 \concept{get functions}

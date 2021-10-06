@@ -1,4 +1,4 @@
-#' Write tablecomponent to HDF5 file
+#' Write table component to HDF5 file
 #'
 #' Function to populate hdf5 file with array type data.
 #'
