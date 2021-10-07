@@ -13,13 +13,14 @@ storage_root_url <- post_data("storage_root",
                               endpoint = endpoint)
 
 storage_location_url <- post_data("storage_location",
-                                list(path = path,
-                                     hash = hash,
-                                     storage_root = storage_root_url),
-                                endpoint = endpoint)
+                                  list(path = path,
+                                       hash = hash,
+                                       storage_root = storage_root_url),
+                                  endpoint = endpoint)
 
-object_url <- post_data("object", list(desription = "text",
-                                       storage_location_url = storage_location_url),
+object_url <- post_data("object",
+                        list(desription = "text",
+                             storage_location_url = storage_location_url),
                         endpoint = endpoint)
 
 namespace_url <- post_data("namespace",

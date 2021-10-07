@@ -12,7 +12,8 @@ new_quality_controlled(object_url, endpoint = "http://localhost:8000/api/")
 \item{endpoint}{a \code{string} specifying the registry endpoint}
 }
 \description{
-Upload information to the \code{quality_controlled} table in the data registry
+Upload information to the \code{quality_controlled} table in the data
+registry
 }
 \seealso{
 Other new functions: 

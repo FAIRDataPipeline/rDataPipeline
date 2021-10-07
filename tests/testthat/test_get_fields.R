@@ -12,5 +12,6 @@ tables <- get_tables(endpoint = endpoint) %>%
 fields <- lapply(tables, function(x) {
   get_fields(x) %>%
     dplyr::filter(read_only == "FALSE") %>%
-    dplyr::select(data_type)
-}) %>% unlist() %>% unique()
+    dplyr::select(data_type)}) %>%
+  unlist() %>%
+  unique()

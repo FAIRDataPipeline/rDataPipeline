@@ -8,7 +8,7 @@
 #'
 check_handle <- function(handle, data_product, what, component) {
 
-  # link_read() / link_write()
+  # link_read() / link_write() functions
   if (missing(component)) {
     if (!is.null(handle[[what]])) {
       section <- handle[[what]]
@@ -30,7 +30,7 @@ check_handle <- function(handle, data_product, what, component) {
 
       if (data_product %in% section$data_product) {
         index <- which(data_product %in% section$data_product)
-        this_dataproduct <- section[index,]
+        this_dataproduct <- section[index, ]
 
         if (component %in% this_dataproduct$use_component) {
           index <- which(component %in% this_dataproduct$use_component)

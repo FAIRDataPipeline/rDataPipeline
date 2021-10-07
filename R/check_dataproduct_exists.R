@@ -23,6 +23,10 @@ check_dataproduct_exists <- function(write_dataproduct,
                                    "namespace", write_namespace_id)
   write_namespace <- get_entity(write_namespace_url)$name
 
-  if (!is.null(check_exists))
-    usethis::ui_stop("A data product with the same name ({write_dataproduct}), version ({write_version}), and namespace ({write_namespace}) already exists")
+  if (!is.null(check_exists)) {
+    msg <- paste("A data product with the same name ({write_dataproduct}),",
+                 "version ({write_version}), and namespace ({write_namespace})",
+                 "already exists")
+    usethis::ui_stop(msg)
+  }
 }

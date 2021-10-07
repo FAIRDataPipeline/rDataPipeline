@@ -46,58 +46,58 @@ write_table <- function(df,
 
   # Checks ------------------------------------------------------------------
 
-  if(!is.data.frame(df)) stop("df must be a data.frame")
+  if (!is.data.frame(df)) stop("df must be a data.frame")
 
   # Write hdf5 file ---------------------------------------------------------
 
   # Generate directory structure
   directory <- dirname(path)
-  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+  if (!file.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Generate hdf5 file
-  if(file.exists(path)) {
+  if (file.exists(path)) {
     fid <- H5Fopen(path)
-    if(length(h5ls(fid)) == 0) {
-      current.structure <- ""
+    if (length(h5ls(fid)) == 0) {
+      current_structure <- ""
     } else {
-      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
+      current_structure <- gsub("^/", "", unique(h5ls(fid)$group))
     }
     rhdf5::h5closeAll()
 
   } else {
     fid <- rhdf5::h5createFile(path)
-    current.structure <- ""
+    current_structure <- ""
   }
 
   # Generate internal structure
-  if(grepl("/", component)) {
-    directory.structure <- strsplit(component, "/")[[1]]
+  if (grepl("/", component)) {
+    directory_structure <- strsplit(component, "/")[[1]]
   } else {
-    directory.structure <- component
+    directory_structure <- component
   }
 
-  for (i in seq_along(directory.structure)) {
+  for (i in seq_along(directory_structure)) {
     # This structure needs to be added
-    if(i==1) {
-      build.structure <- directory.structure[1]
+    if (i == 1) {
+      build.structure <- directory_structure[1]
     } else {
-      build.structure <- paste0(build.structure, "/", directory.structure[i])
+      build.structure <- paste0(build.structure, "/", directory_structure[i])
     }
     # If the structure doesn't exist make it
-    if(!build.structure %in% current.structure)
+    if (!build.structure %in% current_structure)
       rhdf5::h5createGroup(path, build.structure)
     # Update current structure
-    current.structure <- c(current.structure, build.structure)
+    current_structure <- c(current_structure, build.structure)
   }
 
   # Attach data
   rhdf5::h5write(df, path, paste0(component, "/table"))
 
   # Attach attributes
-  if(!missing(row_names))
+  if (!missing(row_names))
     rhdf5::h5write(row_names, path, paste0(component, "/row_names"))
 
-  if(!missing(column_units))
+  if (!missing(column_units))
     rhdf5::h5write(column_units, path, paste0(component, "/column_units"))
 
   rhdf5::h5closeAll()

@@ -9,7 +9,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 
 object_url <- post_data("object", list(description = name), endpoint = endpoint)
 
-test_that("new entry in code_repo_release returns API URL",{
+test_that("new entry in code_repo_release returns API URL", {
   expect_true(grepl("code_repo_release",
                     new_code_repo_release(name = name,
                                           version = version,

@@ -8,7 +8,7 @@
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
 #'
-get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
+get_fields <- function(table, endpoint = "http://localhost:8000/api/") {
 
   # Add token to options request header
   key <- get_token()
@@ -37,21 +37,21 @@ get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
     read_only <- dplyr::if_else(field[[1]]$read_only, TRUE, FALSE)
     required <- dplyr::if_else(field[[1]]$required, TRUE, FALSE)
 
-    if("min_length" %in% names(field[[1]])) {
+    if ("min_length" %in% names(field[[1]])) {
       min_length <- field[[1]]$min_length
     } else {
       min_length <- NA
     }
 
-    if("max_length" %in% names(field[[1]])) {
+    if ("max_length" %in% names(field[[1]])) {
       max_length <- field[[1]]$max_length
     } else {
       max_length <- NA
     }
 
-    if("choices" %in% names(field[[1]])){
-      if(is.list(field[[1]]$choices)){
-        for(choice in seq_along(field[[1]]$choices)){
+    if ("choices" %in% names(field[[1]])) {
+      if (is.list(field[[1]]$choices)) {
+        for (choice in seq_along(field[[1]]$choices)) {
           choice_values <- dplyr::if_else(
             condition = is.na(choice_values),
             true = as.character(field[[1]]$choices[[choice]]$value),
@@ -60,7 +60,8 @@ get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
           choice_names <- dplyr::if_else(
             condition = is.na(choice_names),
             true = field[[1]]$choices[[choice]]$display_name,
-            false = paste(choice_names, field[[1]]$choices[[choice]]$display_name,
+            false = paste(choice_names,
+                          field[[1]]$choices[[choice]]$display_name,
                           sep = ", "))
         }
       }
@@ -74,6 +75,9 @@ get_fields <- function(table, endpoint = "http://localhost:8000/api/"){
                choice_values = choice_values,
                choice_names = choice_names,
                stringsAsFactors = FALSE)
-  }) %>% (function(x){do.call(rbind.data.frame, x)})
+  }) %>%
+    (function(x) {
+      do.call(rbind.data.frame, x)
+    })
 
 }

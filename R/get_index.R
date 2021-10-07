@@ -6,7 +6,8 @@
 get_index <- function(write, data_product) {
   index <- lapply(write, function(x)
     data_product == x$data_product) %>%
-    unlist() %>% which()
+    unlist() %>%
+    which()
 
   if (length(index) == 0) {
     glob_index <- lapply(write, function(x)

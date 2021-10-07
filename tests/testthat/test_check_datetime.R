@@ -162,4 +162,3 @@ test_that("numeric throws error", {
                    this_query = run_date)
   )
 })
-

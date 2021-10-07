@@ -12,8 +12,8 @@
 #' @param whole_object a \code{boolean} flag specifying whether or not this
 #' \code{object_component} refers to the whole object or not - default is
 #' \code{FALSE}
-#' @param issues_urls (optional) a \code{list} of \code{issues} URLs to associate
-#' with this \code{object}
+#' @param issues_urls (optional) a \code{list} of \code{issues} URLs to
+#' associate with this \code{object}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' Note that the \code{object_component} table contains \code{issues} as an

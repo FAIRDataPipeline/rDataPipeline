@@ -12,7 +12,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/multiversion/config_", uid , ".yaml")
+config_file <- paste0("config_files/multiversion/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -48,7 +48,7 @@ df2 <- data.frame(a = uid2, b = uid2)
 path2 <- link_write(handle, data_product2)
 write.csv(df2, path2)
 
-test_that("data products recorded in working config",{
+test_that("data products recorded in working config", {
   writes <- handle$outputs
   testthat::expect_equal(writes$data_product[1], data_product1)
   testthat::expect_equal(writes$data_product[2], data_product2)
@@ -62,7 +62,7 @@ test_that("data products recorded in working config",{
 
 finalise(handle)
 
-test_that("data products recorded in working config",{
+test_that("data products recorded in working config", {
   versions <- c("0.0.1", "0.0.2")
   for (i in 1:2) {
     output_component_url <- get_entity(handle$code_run)$outputs[[i]]
@@ -78,7 +78,7 @@ test_that("data products recorded in working config",{
 # Read from registry -------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/multiversion/config2_", uid , ".yaml")
+config_file <- paste0("config_files/multiversion/config2_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -103,7 +103,7 @@ handle <- initialise(config, script)
 path1 <- link_read(handle, data_product1)
 path2 <- link_read(handle, data_product2)
 
-test_that("data products recorded in working config",{
+test_that("data products recorded in working config", {
   reads <- handle$inputs
   testthat::expect_equal(reads$data_product[1], data_product1)
   testthat::expect_equal(reads$data_product[2], data_product2)
@@ -114,7 +114,6 @@ test_that("data products recorded in working config",{
   testthat::expect_equal(reads$use_version[1], "0.0.1")
   testthat::expect_equal(reads$use_version[2], "0.0.2")
 
-  testthat::expect_equal(read.csv(path1)[,-1], df)
-  testthat::expect_equal(read.csv(path2)[,-1], df2)
+  testthat::expect_equal(read.csv(path1)[, -1], df)
+  testthat::expect_equal(read.csv(path2)[, -1], df2)
 })
-

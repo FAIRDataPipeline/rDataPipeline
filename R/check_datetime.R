@@ -21,7 +21,7 @@ check_datetime <- function(table,
       NULL
     })
 
-    if (is.na(is_date)){
+    if (is.na(is_date)) {
       usethis::ui_stop(paste(table, "field", usethis::ui_field(this_field),
                              "is incorrectly formatted"))
 

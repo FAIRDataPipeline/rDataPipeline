@@ -12,5 +12,5 @@ get_author_url <- function(endpoint) {
                                query = list(user = user_id),
                                endpoint = endpoint)
   assertthat::assert_that(length(user_author_url) == 1)
-  author_url <- user_author_url[[1]]$author
+  user_author_url[[1]]$author
 }

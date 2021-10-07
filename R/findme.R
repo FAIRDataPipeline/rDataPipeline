@@ -64,7 +64,7 @@ findme <- function(file, endpoint) {
       msg <- paste(msg, "\n  last updated:", data_product$last_updated)
       msg <- paste(msg, "\n  components:")
 
-      for(v in seq_along(components)) {
+      for (v in seq_along(components)) {
         msg <- paste(msg, "\n   -", components[[v]])
         if (!is.null(issues[[v]]))
           msg <- paste(msg, "\n     issues:", issues[[v]])

@@ -15,11 +15,11 @@ test_that("incorrect tables produce and error", {
   expect_error(post_data(NULL, data = list(), endpoint = endpoint))
 })
 
-test_that("post_data works with all tables",{
-  for(i in seq_along(tables)) {
+test_that("post_data works with all tables", {
+  for (i in seq_along(tables)) {
     table <- tables[i]
 
-    if(table == "users" | table == "groups") {
+    if (table == "users" | table == "groups") {
       expect_error(post_data(table = tables[i],
                              data = list("username = test"),
                              endpoint = endpoint))
@@ -50,10 +50,10 @@ test_that("post_data works with all tables",{
       } else {
 
         for (ii in seq_along(table.required$field)) {
-          field = table.required$field[ii]
-          data_type = table.required$data_type[ii]
+          field <- table.required$field[ii]
+          data_type <- table.required$data_type[ii]
 
-          max_value = table.required$max_value[ii]
+          max_value <- table.required$max_value[ii]
 
           data_incorrect[[field]] <- dplyr::case_when(
             data_type == "field" ~ "https://not.data.uk",
@@ -79,7 +79,7 @@ test_that("post_data works with all tables",{
             data_correct[[field]] <- NULL
           }
 
-          if(data_type == "string" & !is.null(max_value)) {
+          if (data_type == "string" & !is.null(max_value)) {
             data_incorrect[[field]] <- paste(rep("t", max_value + 1),
                                              collapse = "")
           }

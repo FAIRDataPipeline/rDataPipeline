@@ -9,5 +9,6 @@
 FAIR Data Pipeline API
 }
 \details{
-For more information see \url{https://fairdatapipeline.github.io}
+For more information see
+\url{https://fairdatapipeline.github.io}
 }

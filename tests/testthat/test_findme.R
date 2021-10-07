@@ -16,7 +16,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/findme/config_", uid , ".yaml")
+config_file <- paste0("config_files/findme/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -64,7 +64,7 @@ finalise(handle)
 # Start tests
 file <- unique(handle$outputs$path)
 
-test_that("findme prints output",{
+test_that("findme prints output", {
   tmp <- testthat::capture_output_lines(findme(file = file,
                                                endpoint = endpoint))
   testthat::expect_true(grepl("hash", tmp[1]))
@@ -75,7 +75,7 @@ test_that("findme prints output",{
 # Write v0.2.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/findme/config2_", uid , ".yaml")
+config_file <- paste0("config_files/findme/config2_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -121,7 +121,7 @@ finalise(handle)
 # Start tests
 file <- unique(handle$outputs$path)
 
-test_that("findme lists two data products",{
+test_that("findme lists two data products", {
   tmp <- testthat::capture_output_lines(findme(file = file,
                                                endpoint = endpoint))
   testthat::expect_true(grepl(data_product1, tmp[6]))
@@ -134,7 +134,7 @@ uid <- as.character(random_hash())
 data_product3 <- paste("findme/test/array2", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/findme/config3_", uid , ".yaml")
+config_file <- paste0("config_files/findme/config3_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -188,7 +188,7 @@ finalise(handle)
 # Start tests
 file <- unique(handle$outputs$path)
 
-test_that("findme returns TRUE",{
+test_that("findme returns TRUE", {
   tmp <- findme(file = file, endpoint = endpoint)
   testthat::expect_true(tmp)
 })

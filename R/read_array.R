@@ -36,7 +36,7 @@ read_array <- function(handle,
 
   # Extract data object
   object <- file.h5$array
-  if(is.vector(object)) object <- t(matrix(object))
+  if (is.vector(object)) object <- t(matrix(object))
 
   # Extract dimension names and make sure they're in the right order
   ind <- grep("Dimension_[0-9]*_names", names(file.h5))
@@ -45,10 +45,10 @@ read_array <- function(handle,
   h5file <- h5file[ord]
 
   # Attach dimension names to the object
-  for(i in seq_along(h5file)) {
-    if(i == 1) {
+  for (i in seq_along(h5file)) {
+    if (i == 1) {
       rownames(object) <- h5file[[i]]
-    } else if(i == 2) {
+    } else if (i == 2) {
       colnames(object) <- h5file[[i]]
     } else {
       dimnames(object)[[i]] <- h5file[[i]]
@@ -59,7 +59,7 @@ read_array <- function(handle,
   ind <- grep("Dimension_[0-9]_names|array", names(file.h5))
   h5attr <- file.h5[-ind]
 
-  for(i in seq_along(h5attr)) {
+  for (i in seq_along(h5attr)) {
     attr(object, names(h5attr)[i]) <- h5attr[[i]]
   }
 

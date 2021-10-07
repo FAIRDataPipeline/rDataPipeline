@@ -5,7 +5,7 @@
 #' @return a dataframe of required fields and their properties
 #' @keywords internal
 #'
-get_table_required <- function(table){
+get_table_required <- function(table) {
   # if(! check_table_exists(table))
   #   stop("Unknown Table")
 

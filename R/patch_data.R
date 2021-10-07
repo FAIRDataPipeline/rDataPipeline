@@ -15,7 +15,7 @@ patch_data <- function(url,
                         body = jsonlite::toJSON(data, pretty = T,
                                                 auto_unbox = T,
                                                 force = T),
-                        httr::content_type('application/json'),
+                        httr::content_type("application/json"),
                         httr::add_headers(.headers = h),
                         verbose())
 
@@ -23,6 +23,6 @@ patch_data <- function(url,
     httr::content("text") %>%
     jsonlite::fromJSON(simplifyVector = FALSE)
 
-  if(result$status != 200)
+  if (result$status != 200)
       stop("Adding new data returned non-200 status code:", tmp)
 }

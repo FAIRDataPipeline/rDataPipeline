@@ -7,7 +7,7 @@
 #' @family get functions
 #'
 get_file_hash <- function(filename) {
-  if(!file.exists(filename))
+  if (!file.exists(filename))
     stop(paste0("File ", filename, " does not exist"))
   file(filename) %>%
     openssl::sha1() %>%

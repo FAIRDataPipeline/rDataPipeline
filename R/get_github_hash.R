@@ -14,8 +14,11 @@
 #' }
 #'
 get_github_hash <- function(repo) {
-  if(!grepl("version", system("git --version", intern = TRUE)))
-    stop("git must be installed and located in the system path for this function to work")
+  if (!grepl("version", system("git --version", intern = TRUE))) {
+    msg <- paste("git must be installed and located in the system path",
+                 "for this function to work")
+    stop(msg)
+  }
 
   tmp <- system(paste("git ls-remote -h", repo), intern = TRUE)
 

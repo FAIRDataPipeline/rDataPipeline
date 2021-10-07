@@ -190,8 +190,8 @@ product, used as a reference}
 \item{\code{use_data_product}}{a \code{string} specifying the name of the data
 product, used as output in the \code{code_run}}
 
-\item{\code{use_component}}{a \code{string} specifying the name of the data product component,
-used as output in the \code{code_run}}
+\item{\code{use_component}}{a \code{string} specifying the name of the data
+product component, used as output in the \code{code_run}}
 
 \item{\code{use_version}}{a \code{string} specifying the version of the data
 product, used as output in the \code{code_run}}

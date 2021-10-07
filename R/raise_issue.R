@@ -32,9 +32,11 @@ raise_issue <- function(index,
         this_component <- component[j]
 
         if (!is.null(reads)) {
-          if (this_data_product %in% unlist(lapply(reads, function(x) x$data_product))) {
+          if (this_data_product %in%
+              unlist(lapply(reads, function(x) x$data_product))) {
             metadata <- resolve_read(handle, this_data_product)
-          } else if (this_data_product %in% unlist(lapply(writes, function(x) x$data_product))) {
+          } else if (this_data_product %in%
+                     unlist(lapply(writes, function(x) x$data_product))) {
             metadata <- resolve_write(handle, this_data_product)
           } else {
             stop("dataproduct not in config file")
@@ -66,14 +68,15 @@ raise_issue <- function(index,
       index_outputs <- which(handle$outputs$index %in% this_index)
 
       if (length(index_inputs) != 0) {
-        tmp <- handle$inputs[index_inputs,]
+        tmp <- handle$inputs[index_inputs, ]
 
       } else if (length(index_outputs) != 0) {
-        tmp <- handle$outputs[index_outputs,]
+        tmp <- handle$outputs[index_outputs, ]
 
       } else {
-        usethis::ui_oops(paste("Issue not attached: data must be referenced in the",
-                               usethis::ui_value("config.yaml"), "file"))
+        usethis::ui_oops(
+          paste("Issue not attached: data must be referenced in the",
+                usethis::ui_value("config.yaml"), "file"))
         return(invisible(NULL))
       }
 

@@ -6,7 +6,7 @@
 #' @return Returns a \code{data.frame} of optional fields and their properties
 #' @keywords internal
 #'
-get_table_optional <- function(table, endpoint){
+get_table_optional <- function(table, endpoint) {
   # if(! check_table_exists(table))
   #   stop("Unknown Table")
   optional <- get_fields(table, endpoint) %>%

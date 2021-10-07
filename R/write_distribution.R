@@ -30,8 +30,6 @@ write_distribution <- function(distribution,
 
   # Get metadata ------------------------------------------------------------
 
-  datastore <- handle$yaml$run_metadata$write_data_store
-
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = "toml")
@@ -49,13 +47,13 @@ write_distribution <- function(distribution,
 
   # If path doesn't exist, generate directory structure
   directory <- dirname(path)
-  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+  if (!file.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Write toml file ---------------------------------------------------------
 
   start <- paste0("[", component, "]\n",
                   "type = \"distribution\"\n",
-                  "distribution = \"", distribution,"\"\n")
+                  "distribution = \"", distribution, "\"\n")
 
   end <- vapply(seq_along(parameters), function(x)
     paste0(names(parameters[x]), " = ", parameters[x]),

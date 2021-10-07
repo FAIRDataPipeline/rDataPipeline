@@ -39,12 +39,12 @@ get_existing <- function(table,
       jsonlite::fromJSON(simplifyVector = FALSE)
     results <- output$results
 
-    if(!limit_results) {
+    if (!limit_results) {
       # Get the remaining results by using a while loop to update results
       # from all pages - because pagination is enabled, the next will only be
       # null if there are no more pages (note that next is a reserved word so
       # it must be wrapped in backticks)
-      while(!is.null(output$`next`)){
+      while (!is.null(output$`next`)) {
         tmp_output <- httr::GET(file.path(output$`next`)) %>%
           httr::content(as = "text", encoding = "UTF-8") %>%
           jsonlite::fromJSON(simplifyVector = FALSE)
@@ -54,34 +54,37 @@ get_existing <- function(table,
     }
 
     # Some tables contain lists, flatten them first or bind_rows() will error
-    for(i in seq_along(results)){
-      for(ii in names(results[[i]])){
-        if(is.list(results[[i]][[ii]])){
-          if(!length(results[[i]][[ii]]))
+    for (i in seq_along(results)) {
+      for (ii in names(results[[i]])) {
+        if (is.list(results[[i]][[ii]])) {
+          if (!length(results[[i]][[ii]]))
             results[[i]][[ii]] <- NA
           else
             results[[i]][[ii]] <- paste0(unlist(results[[i]][[ii]]), ",",
-                                         collapse="")}
+                                         collapse = "")
+          }
       }
     }
-  }, error = function(e){
+  }, error = function(e) {
     stop("an api error occured, please try again")
   })
 
   # Convert NULL values to NA to prevent rbind from erroring
   results <- lapply(results, function(x)
-    sapply(x, function(y) if(is.null(y)) NA else y))
+    sapply(x, function(y) if (is.null(y)) NA else y))
 
   # bind the results into a dataframe
   results <- dplyr::bind_rows(results)
 
   # select only url and id if detail is set to "id"
-  if(detail == "id"){
-    if(length(results) > 1)
-      results <- results %>% dplyr::select(url) %>% dplyr::mutate(id = basename(url))
+  if (detail == "id") {
+    if (length(results) > 1)
+      results <- results %>%
+        dplyr::select(url) %>%
+        dplyr::mutate(id = basename(url))
   }
 
-  if(length(results) == 0)
+  if (length(results) == 0)
     message("No results were returned")
   results
 

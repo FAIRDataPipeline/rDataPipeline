@@ -6,7 +6,7 @@
 #'
 #' @return Returns \code{TRUE} if a table exists, \code{FALSE} if it doesn't
 #'
-check_table_exists <- function(table){
+check_table_exists <- function(table) {
   if (!is.character(table))
     stop("Table must be a string")
 

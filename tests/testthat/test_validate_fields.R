@@ -23,7 +23,7 @@ test_that("incorrect tables produce and error", {
                                endpoint = endpoint))
 })
 
-test_that("validate_fields works with all tables",{
+test_that("validate_fields works with all tables", {
   for (i in seq_along(tables)) {
     table <- tables[i]
 
@@ -37,7 +37,7 @@ test_that("validate_fields works with all tables",{
                                            endpoint = endpoint)
       table.required <- get_table_required(table = table)
 
-      if(nrow(table.required)  > 1)
+      if (nrow(table.required)  > 1)
         expect_error(validate_fields(table = table,
                                      data = list(),
                                      endpoint = endpoint))
@@ -51,11 +51,11 @@ test_that("validate_fields works with all tables",{
       data_incorrect_3 <- list()
       data_incorrect_4 <- list()
 
-      for(ii in seq_along(table.writable$field)) {
-        field = table.writable$field[ii]
-        data_type = table.writable$data_type[ii]
+      for (ii in seq_along(table.writable$field)) {
+        field <- table.writable$field[ii]
+        data_type <- table.writable$data_type[ii]
 
-        max_length = table.writable$max_length[ii]
+        max_length <- table.writable$max_length[ii]
 
         data_incorrect[[field]] <- dplyr::case_when(
           data_type == "field" ~ "https://not.data.uk",
@@ -93,18 +93,18 @@ test_that("validate_fields works with all tables",{
         if (data_type == "integer") {
           data_correct_4[[field]] <- 1
           data_incorrect_2[[field]] <- Sys.time()
-          if(!is.na(max_length)) {
+          if (!is.na(max_length)) {
             data_incorrect_3[[field]] <- max_length + 1
           }
-        } else if(data_type == "choice") {
+        } else if (data_type == "choice") {
           data_correct_4[[field]] <- 0
           data_incorrect_2[[field]] <- Sys.time()
           data_incorrect_3[[field]] <- 1000000000000000000000
-        } else if(data_type == "datetime") {
+        } else if (data_type == "datetime") {
           data_correct_4[[field]] <- Sys.time()
           data_incorrect_2[[field]] <- "011110002"
           data_incorrect_3[[field]] <- 1000000000000000000000
-        } else if(data_type == "boolean"){
+        } else if (data_type == "boolean") {
           data_correct_4[[field]] <- TRUE
           data_incorrect_2[[field]] <- Sys.time()
           data_incorrect_3[[field]] <- 1000000000000000000000
@@ -115,10 +115,14 @@ test_that("validate_fields works with all tables",{
         }
 
         if (data_type == "string" & !is.na(max_length)) {
-          data_incorrect[[field]] <- paste(rep("t", max_length + 1), collapse = "")
-          data_incorrect_2[[field]] <- paste(rep("t", max_length + 1), collapse = "")
-          data_incorrect_3[[field]] <- paste(rep("1", max_length + 1), collapse = "")
-          data_incorrect_4[[field]] <- paste(rep("1", max_length + 1), collapse = "")
+          data_incorrect[[field]] <- paste(rep("t", max_length + 1),
+                                           collapse = "")
+          data_incorrect_2[[field]] <- paste(rep("t", max_length + 1),
+                                             collapse = "")
+          data_incorrect_3[[field]] <- paste(rep("1", max_length + 1),
+                                             collapse = "")
+          data_incorrect_4[[field]] <- paste(rep("1", max_length + 1),
+                                             collapse = "")
         }
 
       }

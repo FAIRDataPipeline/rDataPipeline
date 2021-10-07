@@ -13,8 +13,10 @@ query_7 <- list(release_date = Sys.time())
 test_that("clean_query produces correct results", {
   expect_equal(clean_query(data = query_1, endpoint = endpoint), query_2)
   expect_equal(clean_query(data = query_2, endpoint = endpoint), query_2)
-  expect_equal(clean_query(data = query_3, endpoint = endpoint), as.list(query_3))
-  expect_equal(clean_query(data = query_4, endpoint = endpoint), as.list(query_4))
+  expect_equal(clean_query(data = query_3, endpoint = endpoint),
+               as.list(query_3))
+  expect_equal(clean_query(data = query_4, endpoint = endpoint),
+               as.list(query_4))
   expect_equal(clean_query(data = query_5, endpoint = endpoint), as.list(NULL))
   expect_equal(clean_query(data = query_6, endpoint = endpoint), query_6)
   expect_equal(clean_query(data = query_7, endpoint = endpoint), query_7)

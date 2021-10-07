@@ -13,7 +13,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -56,7 +56,7 @@ finalise(handle)
 # Test use block ----------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config6_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config6_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -93,13 +93,13 @@ test_that("df_v1 is returned", {
   testthat::expect_equal(tmp1, tmp2)
 
   testthat::expect_equivalent(attributes(tmp1)$dimnames[[1]],
-                              dimension_names$rowvalue )
+                              dimension_names$rowvalue)
   testthat::expect_equivalent(attributes(tmp1)$dimnames[[2]],
-                              dimension_names$colvalue )
+                              dimension_names$colvalue)
   testthat::expect_equivalent(attributes(tmp1)$Dimension_1_title,
-                              names(dimension_names)[1] )
+                              names(dimension_names)[1])
   testthat::expect_equivalent(attributes(tmp1)$Dimension_2_title,
-                              names(dimension_names)[2] )
+                              names(dimension_names)[2])
   testthat::expect_equivalent(attributes(tmp1)$Dimension_2_units,
                               dimension_units[[2]])
   testthat::expect_equivalent(attributes(tmp1)$Dimension_2_values,

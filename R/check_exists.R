@@ -15,21 +15,25 @@ check_exists <- function(table,
   output <- httr::GET(paste0("http://localhost:8000/api/", table, ""),
                       query = query)
 
-  if(any(names(output) == "status_code")){
-    if(output$status_code == 404)
+  if (any(names(output) == "status_code")) {
+    if (output$status_code == 404)
       stop("Table does not exist")
-    else if(output$status_code == 200){
-      output <- output %>% httr::content(as = "text", encoding = "UTF-8") %>%
+    else if (output$status_code == 200) {
+      output <- output %>%
+        httr::content(as = "text", encoding = "UTF-8") %>%
         jsonlite::fromJSON(simplifyVector = FALSE)
 
-      if(any(names(output) == "detail")){
-        if(grepl("Invalid", output$detail))
-          stop(output["detail"])}
+      if (any(names(output) == "detail")) {
+        if (grepl("Invalid", output$detail))
+          stop(output["detail"])
+        }
 
-      if(any(names(output) == "count"))
-        return(ifelse(output$count > 0, TRUE, FALSE))}
+      if (any(names(output) == "count"))
+        return(ifelse(output$count > 0, TRUE, FALSE))
+      }
     else
-      stop(paste("error: status:", output$status_code, "returned"))}
+      stop(paste("error: status:", output$status_code, "returned"))
+    }
   else
     stop("something went wrong")
 }

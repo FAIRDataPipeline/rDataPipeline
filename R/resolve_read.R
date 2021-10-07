@@ -18,13 +18,14 @@ resolve_read <- function(handle, data_product, component = NA) {
 
   # Find data product in `read:` section of config.yaml
   index <- lapply(read, function(x) x$data_product == data_product) %>%
-    unlist() %>% which()
+    unlist() %>%
+    which()
 
   if (length(index) == 0)
     usethis::ui_stop(paste(usethis::ui_field(data_product),
                            "not found in config file"))
 
-  if(length(index) > 1)
+  if (length(index) > 1)
     usethis::ui_stop("Multiple entries found in config file")
 
   this_read <- read[[index]]

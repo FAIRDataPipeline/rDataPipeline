@@ -14,7 +14,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/samehash/config_", uid , ".yaml")
+config_file <- paste0("config_files/samehash/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -56,25 +56,25 @@ file1 <- file.path(paste0(data_store, namespace1), data_product1,
 file2 <- file.path(paste0(data_store, namespace1), data_product2,
                    paste0(hash2, ".txt"))
 
-test_that("file1 exists in data store",{
+test_that("file1 exists in data store", {
   testthat::expect_true(file.exists(file1))
 })
 
-test_that("file2 doesn't exist in data store",{
+test_that("file2 doesn't exist in data store", {
   testthat::expect_false(file.exists(file2))
 })
 
-test_that("handle shows correct path",{
+test_that("handle shows correct path", {
   testthat::expect_true(handle$outputs$path[1] == file1)
   testthat::expect_true(handle$outputs$path[2] == file1)
 })
 
-test_that("file exists",{
+test_that("file exists", {
   testthat::expect_true(file.exists(handle$outputs$path[1]))
   testthat::expect_true(file.exists(handle$outputs$path[2]))
 })
 
-test_that("data registry shows correct path",{
+test_that("data registry shows correct path", {
   # File 1
   tmp <- get_entry("storage_location", list(hash = hash1))
   testthat::expect_equal(length(tmp), 1)
@@ -92,7 +92,7 @@ test_that("data registry shows correct path",{
 # -------------------------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/samehash2/config_", uid , ".yaml")
+config_file <- paste0("config_files/samehash2/config_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -115,11 +115,10 @@ handle <- initialise(config, script)
 path1 <- link_read(handle, data_product1)
 path2 <- link_read(handle, data_product2)
 
-test_that("paths are correct",{
+test_that("paths are correct", {
   testthat::expect_equal(path1, path2, file1)
 })
 
-test_that("file exists",{
+test_that("file exists", {
   testthat::expect_true(file.exists(path1))
 })
-

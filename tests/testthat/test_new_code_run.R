@@ -13,24 +13,26 @@ code_model_config <- post_data("object", list(description = description),
 code_submission_script <- post_data("object", list(description = description),
                                     endpoint = endpoint)
 
-test_that("new entry in code_run returns API URL",{
+test_that("new entry in code_run returns API URL", {
   expect_true(
-    grepl("code_run", new_code_run(run_date = run_date,
-                                   description = description,
-                                   code_repo_url = code_repo_url,
-                                   model_config_url = code_model_config,
-                                   submission_script_url = code_submission_script,
-                                   endpoint = endpoint))
+    grepl("code_run",
+          new_code_run(run_date = run_date,
+                       description = description,
+                       code_repo_url = code_repo_url,
+                       model_config_url = code_model_config,
+                       submission_script_url = code_submission_script,
+                       endpoint = endpoint))
   )
 })
 
 test_that("existing entry in code_run returns API URL", {
   expect_true(
-    grepl("code_run", new_code_run(run_date = run_date,
-                                   description = description,
-                                   code_repo_url = code_repo_url,
-                                   model_config_url = code_model_config,
-                                   submission_script_url = code_submission_script,
-                                   endpoint = endpoint))
+    grepl("code_run",
+          new_code_run(run_date = run_date,
+                       description = description,
+                       code_repo_url = code_repo_url,
+                       model_config_url = code_model_config,
+                       submission_script_url = code_submission_script,
+                       endpoint = endpoint))
   )
 })

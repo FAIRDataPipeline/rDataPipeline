@@ -18,9 +18,9 @@ get_url <- function(table,
                       query = query,
                       endpoint = endpoint)
 
-  if(length(output) == 1) {
+  if (length(output) == 1) {
     return(output[[1]]$url)
-  } else if(length(output) == 0) {
+  } else if (length(output) == 0) {
     return(NULL)
   } else {
     return(lapply(output, function(x) x$url))

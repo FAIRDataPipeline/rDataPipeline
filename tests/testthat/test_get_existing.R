@@ -12,7 +12,7 @@ lapply(1:100, function(x) new_object(description = x,
 table <- "object"
 
 test_that("Expect Dataframe is returned for each table", {
-  for(i in seq_along(tables))
+  for (i in seq_along(tables))
     expect_true(is.data.frame(get_existing(table = tables[i],
                                            endpoint = endpoint)))
 })

@@ -67,37 +67,43 @@ write_array <- function(array,
       usethis::ui_stop("Elements of dimension_names must be vectors")
 
     # Check number of dimensions
-    if (length(dim(array)) != length(dimension_names))
-      usethis::ui_stop("Length of dimension_names does not equal number of dimensions in array")
+    if (length(dim(array)) != length(dimension_names)) {
+      msg <- paste("Length of dimension_names does not equal number of",
+                   "dimensions in array")
+      usethis::ui_stop(msg)
+    }
 
     # Check length of elements in each dimension
-    if (any(unname(unlist(lapply(dimension_names, length))) != dim(array)))
-      usethis::ui_stop("Number of elements in dimension_names does not equal number of dimensions in array")
+    if (any(unname(unlist(lapply(dimension_names, length))) != dim(array))) {
+      msg <- paste("Number of elements in dimension_names does not equal",
+                   "number of dimensions in array")
+      usethis::ui_stop(msg)
+    }
   }
 
   # Write hdf5 file ---------------------------------------------------------
 
   # Generate directory structure
   directory <- dirname(path)
-  if(!dir.exists(directory)) dir.create(directory, recursive = TRUE)
+  if (!dir.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Write hdf5 file
-  if(file.exists(path)) {
+  if (file.exists(path)) {
     fid <- H5Fopen(path)
-    if(length(h5ls(fid)) == 0) {
-      current.structure <- ""
+    if (length(h5ls(fid)) == 0) {
+      current_structure <- ""
     } else {
-      current.structure <- gsub("^/", "", unique(h5ls(fid)$group))
+      current_structure <- gsub("^/", "", unique(h5ls(fid)$group))
     }
     rhdf5::h5closeAll()
 
   } else {
     fid <- rhdf5::h5createFile(path)
-    current.structure <- ""
+    current_structure <- ""
   }
 
   # Generate internal structure
-  if(grepl("/", component)) {
+  if (grepl("/", component)) {
     directory.structure <- strsplit(component, "/")[[1]]
   } else {
     directory.structure <- component
@@ -105,16 +111,16 @@ write_array <- function(array,
 
   for (i in seq_along(directory.structure)) {
     # This structure needs to be added
-    if(i == 1) {
-      build.structure <- directory.structure[1]
+    if (i == 1) {
+      build_structure <- directory.structure[1]
     } else {
-      build.structure <- paste0(build.structure, "/", directory.structure[i])
+      build_structure <- paste0(build_structure, "/", directory.structure[i])
     }
     # If the structure doesn't exist make it
-    if(!build.structure %in% current.structure)
-      rhdf5::h5createGroup(path, build.structure)
+    if (!build_structure %in% current_structure)
+      rhdf5::h5createGroup(path, build_structure)
     # Update current structure
-    current.structure <- c(current.structure, build.structure)
+    current_structure <- c(current_structure, build_structure)
   }
 
   # Attach data
@@ -126,13 +132,13 @@ write_array <- function(array,
     # Attach dimension titles
     dimension_titles <- names(dimension_names)
 
-    for(i in seq_along(dimension_titles)) {
+    for (i in seq_along(dimension_titles)) {
       attribute_component <- paste0(component, "/Dimension_", i, "_title")
       rhdf5::h5write(dimension_titles[i], path, attribute_component)
     }
 
     # Attach dimension names
-    for(j in seq_along(dimension_names)) {
+    for (j in seq_along(dimension_names)) {
       attribute_component <- paste0(component, "/Dimension_", j, "_names")
       rhdf5::h5write(dimension_names[[j]], path, attribute_component)
     }
@@ -141,7 +147,7 @@ write_array <- function(array,
   # Dimension values and units ----------------------------------------------
 
   # Attach dimension values
-  if(!missing(dimension_values)) {
+  if (!missing(dimension_values)) {
     dimensions.with.values <- which(!is.na(dimension_values))
     for(k in dimensions.with.values) {
       value_component <- paste0(component, "/Dimension_", k, "_values")
@@ -150,16 +156,16 @@ write_array <- function(array,
   }
 
   # Attach dimension units
-  if(!missing(dimension_units)) {
-    dimensions.with.units <- which(!is.na(dimension_units))
-    for(m in dimensions.with.units) {
+  if (!missing(dimension_units)) {
+    dimensions_with_units <- which(!is.na(dimension_units))
+    for (m in dimensions_with_units) {
       unit_component <- paste0(component, "/Dimension_", m, "_units")
       rhdf5::h5write(dimension_units[[m]], path, unit_component)
     }
   }
 
   # Attach units
-  if(!missing(units)) {
+  if (!missing(units)) {
     rhdf5::h5write(units, path, paste0(component, "/units"))
   }
 

@@ -13,7 +13,7 @@ version2 <- "0.2.0"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/write_array/config_", uid , ".yaml")
+config_file <- paste0("config_files/write_array/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -61,6 +61,8 @@ test_that("incorrect dimension_names format throws error", {
   )
 })
 
+msg <- paste("Number of elements in dimension_names does not equal number",
+             "of dimensions in array")
 test_that("incorrect dimension_names length throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
@@ -70,9 +72,11 @@ test_that("incorrect dimension_names length throws error", {
                 description = "Some description",
                 dimension_names = list(rowvalue = 1:3,
                                        colvalue = colnames(df))),
-    regexp = "Number of elements in dimension_names does not equal number of dimensions in array"
+    regexp = msg
   )
 
+  msg <- paste("Number of elements in dimension_names does not equal number",
+               "of dimensions in array")
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
@@ -81,10 +85,13 @@ test_that("incorrect dimension_names length throws error", {
                 description = "Some description",
                 dimension_names = list(rowvalue = rownames(df),
                                        colvalue = 1)),
-    regexp = "Number of elements in dimension_names does not equal number of dimensions in array"
+    regexp = msg
   )
 
+  msg <- paste("Length of dimension_names does not equal number of",
+               "dimensions in array")
   testthat::expect_error(
+    msg <-
     write_array(array = as.matrix(df),
                 handle = handle,
                 data_product = data_product1,
@@ -93,7 +100,7 @@ test_that("incorrect dimension_names length throws error", {
                 dimension_names = list(rowvalue = rownames(df),
                                        colvalue = colnames(df),
                                        othervalue = colnames(df))),
-    regexp = "Length of dimension_names does not equal number of dimensions in array"
+    regexp = msg
   )
 })
 
@@ -125,7 +132,8 @@ test_that(".h5 file is generated", {
   filename <- handle$outputs %>%
     dplyr::filter(index == index) %>%
     dplyr::select(path) %>%
-    unlist() %>% unname()
+    unlist() %>%
+    unname()
 
   testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
 })
@@ -146,7 +154,8 @@ test_that(".h5 file is generated with unit and dimension values", {
   filename <- handle$outputs %>%
     dplyr::filter(index == ind) %>%
     dplyr::select(path) %>%
-    unlist() %>% unname()
+    unlist() %>%
+    unname()
 
   testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
   testthat::expect_equal(get_components(filename), c(component1, component2))

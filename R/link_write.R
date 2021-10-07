@@ -28,7 +28,7 @@ link_write <- function(handle, data_product) {
   # Generate directory structure --------------------------------------------
 
   directory <- dirname(path)
-  if(!file.exists(directory)) dir.create(directory, recursive = TRUE)
+  if (!file.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Write to handle ---------------------------------------------------------
 

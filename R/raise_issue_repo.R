@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-raise_issue_repo<- function(handle,
+raise_issue_repo <- function(handle,
                             issue,
                             severity) {
 

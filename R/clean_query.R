@@ -22,8 +22,5 @@ clean_query <- function(data, endpoint) {
     output
   })
 
-  # if(any(data_tmp == ""))
-  #   data_tmp[[which(data_tmp == "")]] <- NULL
-
   data_tmp
 }

@@ -39,14 +39,14 @@ read_table <- function(handle,
   object <- file.h5$table
 
   # Attach rownames to object
-  if(any("row_names" %in% names(file.h5)))
+  if (any("row_names" %in% names(file.h5)))
     rownames(object) <- file.h5$row_names
 
   # Attach remaining list elements as attributes
   ind <- grep("row_names|table", names(file.h5))
   tmp <- file.h5[-ind]
 
-  for(i in seq_along(tmp)) {
+  for (i in seq_along(tmp)) {
     attr(object, names(tmp)[i]) <- tmp[[i]]
   }
 

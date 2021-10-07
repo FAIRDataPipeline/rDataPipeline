@@ -32,8 +32,6 @@ write_estimate <- function(value,
 
   # Get metadata ------------------------------------------------------------
 
-  datastore <- handle$yaml$run_metadata$write_data_store
-
   write_metadata <- resolve_write(handle = handle,
                                   data_product = data_product,
                                   file_type = "toml")
@@ -51,7 +49,7 @@ write_estimate <- function(value,
 
   # If directory doesn't exist, generate directory structure
   directory <- dirname(path)
-  if(!dir.exists(directory)) dir.create(directory, recursive = TRUE)
+  if (!dir.exists(directory)) dir.create(directory, recursive = TRUE)
 
   # Write toml file ---------------------------------------------------------
 

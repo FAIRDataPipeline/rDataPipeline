@@ -12,7 +12,7 @@ dataproduct_description <- "Test data"
 data_product <- paste("test/array", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -49,7 +49,7 @@ handle %>% finalise()
 # Test read_array() -------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/pipes/config2_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config2_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -83,7 +83,7 @@ dataproduct_description <- "Test data"
 data_product <- paste("test/table", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config3_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config3_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -119,7 +119,7 @@ testthat::test_that("write_array() works with pipes", {
 # Test read_table() -------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/pipes/config4_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config4_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -151,7 +151,7 @@ testthat::test_that("read_table() works with pipes", {
 data_product <- paste("test/link", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config5_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config5_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -185,7 +185,7 @@ testthat::test_that("link_write() works with pipes", {
 data_product <- paste("test/link", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config6_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config6_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -217,7 +217,7 @@ testthat::test_that("link_read() works with pipes", {
 data_product <- paste("test/estimate", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config7_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config7_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -253,7 +253,7 @@ testthat::test_that("write_estimate() works with pipes", {
 data_product <- paste("test/estimate", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config8_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config8_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -285,7 +285,7 @@ testthat::test_that("read_estimate() works with pipes", {
 data_product <- paste("test/distribution", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config9_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config9_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -307,7 +307,8 @@ handle <- initialise(config, script)
 testthat::test_that("write_distribution() works with pipes", {
   testthat::expect_true(is.null(handle$outputs))
   dat <- handle %>% write_distribution(distribution = "Gaussian",
-                                       parameters = list(mean = -16.08, SD = 30),
+                                       parameters = list(mean = -16.08,
+                                                         SD = 30),
                                        handle = .,
                                        data_product = data_product,
                                        component = "component",
@@ -322,7 +323,7 @@ testthat::test_that("write_distribution() works with pipes", {
 data_product <- paste("test/distribution", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/pipes/config10_", uid , ".yaml")
+config_file <- paste0("config_files/pipes/config10_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,

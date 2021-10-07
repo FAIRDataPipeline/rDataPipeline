@@ -28,8 +28,8 @@ description of the \code{object_component}}
 \code{object_component} refers to the whole object or not - default is
 \code{FALSE}}
 
-\item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to associate
-with this \code{object}}
+\item{issues_urls}{(optional) a \code{list} of \code{issues} URLs to
+associate with this \code{object}}
 
 \item{endpoint}{a \code{string} specifying the registry endpoint
 

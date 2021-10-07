@@ -140,7 +140,9 @@ fair_run <- function(path = "config.yaml",
     # Check data_products are unique
 
     test <- lapply(write, function(x) x$data_product) %>%
-      unlist() %>% duplicated() %>% any()
+      unlist() %>%
+      duplicated() %>%
+      any()
     if (test)
       usethis::ui_stop(paste("write block contains multiple",
                              usethis::ui_field("data_product"),
@@ -246,7 +248,8 @@ fair_run <- function(path = "config.yaml",
 
   if (!skip) {
     if ("remote_repo" %in% names(yaml$run_metadata)) {
-      repo_name <- gsub("https://github.com/", "", yaml$run_metadata$remote_repo)
+      repo_name <- gsub("https://github.com/", "",
+                        yaml$run_metadata$remote_repo)
     } else {
       repo_name <- git2r::remote_url(yaml$run_metadata$local_repo)
       if (length(repo_name) > 1) stop("Add remote_repo field")

@@ -26,13 +26,13 @@ post_data <- function(table, data, endpoint) {
                          body = jsonlite::toJSON(data, pretty = T,
                                                  auto_unbox = T,
                                                  force = T),
-                         httr::content_type('application/json'),
+                         httr::content_type("application/json"),
                          httr::add_headers(.headers = h))
     continue <- FALSE
   }
 
   # Status 404: Not Found (table doesn't exist)
-  if(result$status == 404)
+  if (result$status == 404)
     usethis::ui_stop(paste(usethis::ui_field(gsub("_", " ", table)),
                            "does not exist"))
 
@@ -41,15 +41,15 @@ post_data <- function(table, data, endpoint) {
     jsonlite::fromJSON(simplifyVector = FALSE)
 
   # Status 201: Created
-  if(result$status == 201) {
+  if (result$status == 201) {
     return(detail$url)
 
     # Status 400: Bad Request (error in field)
-  } else if(result$status == 400) {
+  } else if (result$status == 400) {
     stop(paste(names(detail), unlist(detail)))
 
     # Status 409: Conflict (entry already exists)
-  } else if(result$status == 409) {
+  } else if (result$status == 409) {
     new_query <- clean_query(data = data,
                              endpoint = endpoint)
     output <- get_entry(table = table,

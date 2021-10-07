@@ -11,7 +11,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/multicoderun/config_", uid , ".yaml")
+config_file <- paste0("config_files/multicoderun/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -40,7 +40,7 @@ for (i in 1:3) {
 
   finalise(handle)
 
-  test_that("data products recorded in working config",{
+  test_that("data products recorded in working config", {
     testthat::expect_equal(handle$outputs$data_product, data_product_x)
     testthat::expect_equal(handle$outputs$use_version, "0.0.1")
   })
@@ -52,7 +52,7 @@ for (i in 1:3) {
   assertthat::assert_that(length(output_dp_url) == 1)
   output_dp_name <- get_entity(output_dp_url[[1]])$name
 
-  test_that("data products recorded in registry",{
+  test_that("data products recorded in registry", {
     testthat::expect_equal(output_dp_name, data_product_x)
   })
 }

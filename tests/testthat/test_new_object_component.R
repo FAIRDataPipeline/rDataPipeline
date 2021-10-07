@@ -7,7 +7,8 @@ UID2 <- paste0(UID, "1")
 endpoint <- Sys.getenv("FDP_endpoint")
 
 object_url <- post_data("object", list(description = UID), endpoint = endpoint)
-object_url2 <- post_data("object", list(description = UID2), endpoint = endpoint)
+object_url2 <- post_data("object", list(description = UID2),
+                         endpoint = endpoint)
 
 test_that("new entry in object_component returns API URL", {
   expect_true(grepl("object_component",

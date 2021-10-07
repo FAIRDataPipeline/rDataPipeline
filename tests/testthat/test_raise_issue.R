@@ -13,7 +13,7 @@ data_product <- paste("findme/test/array", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -42,7 +42,7 @@ component_id <- write_array(array = as.matrix(df),
                             dimension_names = list(rowvalue = rownames(df),
                                                    colvalue = colnames(df)))
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -53,7 +53,7 @@ raise_issue(index = component_id,
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(handle$issues$use_data_product, data_product)
   testthat::expect_equal(handle$issues$use_component, component)
@@ -67,7 +67,7 @@ data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config2_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config2_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -92,7 +92,7 @@ path <- link_write(handle, data_product)
 
 write.csv(df, path)
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -103,7 +103,7 @@ raise_issue(handle = handle,
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(handle$issues$use_data_product, data_product)
   testthat::expect_equal(handle$issues$use_component, NA)
@@ -117,7 +117,7 @@ data_product <- paste("findme/test/array2b", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config2b_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config2b_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -153,7 +153,7 @@ component_id2 <- write_array(array = as.matrix(df),
                              dimension_names = list(rowvalue = rownames(df),
                                                     colvalue = colnames(df)))
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -165,7 +165,7 @@ raise_issue(index = component_id,
             severity = severity,
             whole_object = TRUE)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(handle$issues$use_data_product, data_product)
   testthat::expect_equal(handle$issues$use_component, NA)
@@ -180,7 +180,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config3_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config3_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -219,7 +219,7 @@ component_id2 <- write_array(array = as.matrix(df2),
                              dimension_names = list(rowvalue = rownames(df2),
                                                     colvalue = colnames(df2)))
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -230,7 +230,7 @@ raise_issue(index = c(component_id1, component_id2),
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(unique(handle$issues$use_data_product), data_product)
   testthat::expect_equal(handle$issues$use_component[1], component)
@@ -246,7 +246,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config4_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config4_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -285,7 +285,7 @@ write_array(array = as.matrix(df2),
             dimension_names = list(rowvalue = rownames(df2),
                                    colvalue = colnames(df2)))
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -298,7 +298,7 @@ raise_issue(handle = handle,
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(unique(handle$issues$use_data_product), data_product)
   testthat::expect_equal(handle$issues$use_component[1], component)
@@ -313,7 +313,7 @@ data_product <- paste("findme/test/array5-one", uid, sep = "_")
 data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config5_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config5_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -348,7 +348,7 @@ df <- data.frame(a = uid, b = uid)
 path <- link_write(handle, data_product2)
 write.csv(df, path)
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -359,7 +359,7 @@ raise_issue(handle = handle,
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(handle$issues$use_data_product[1], data_product)
   testthat::expect_equal(handle$issues$use_data_product[2], data_product2)
@@ -373,7 +373,7 @@ finalise(handle)
 # Test writing issues to multiple objects by index ------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config6_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config6_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -397,7 +397,7 @@ handle <- initialise(config, script)
 path <- link_read(handle, data_product)
 path <- link_read(handle, data_product2)
 
-test_that("handle issues is null",{
+test_that("handle issues is null", {
   testthat::expect_true(is.null(handle$issues))
 })
 
@@ -408,7 +408,7 @@ raise_issue(handle = handle,
             issue = issue,
             severity = severity)
 
-test_that("handle contains issues block",{
+test_that("handle contains issues block", {
   testthat::expect_true(is.data.frame(handle$issues))
   testthat::expect_equal(handle$issues$use_data_product[1], data_product)
   testthat::expect_equal(handle$issues$use_data_product[2], data_product2)
@@ -420,7 +420,7 @@ test_that("handle contains issues block",{
 # Test writing issues to config -------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config7_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config7_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -443,7 +443,7 @@ raise_issue_config(handle = handle,
                    issue = config_issue,
                    severity = config_severity)
 
-test_that("config issue is in handle",{
+test_that("config issue is in handle", {
   testthat::expect_equal(handle$issues$type, "config")
   testthat::expect_equal(handle$issues$issue, config_issue)
   testthat::expect_equal(handle$issues$severity, config_severity)
@@ -451,7 +451,7 @@ test_that("config issue is in handle",{
 
 finalise(handle)
 
-test_that("config issue is in registry",{
+test_that("config issue is in registry", {
   component_url <- get_entity(handle$model_config)$components
   testthat::expect_equal(length(component_url), 1)
 
@@ -466,7 +466,7 @@ test_that("config issue is in registry",{
 # Test writing issues to script -------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config8_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config8_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -489,7 +489,7 @@ raise_issue_script(handle = handle,
                    issue = script_issue,
                    severity = script_severity)
 
-test_that("script issue is in handle",{
+test_that("script issue is in handle", {
   testthat::expect_equal(handle$issues$type, "script")
   testthat::expect_equal(handle$issues$issue, script_issue)
   testthat::expect_equal(handle$issues$severity, script_severity)
@@ -497,7 +497,7 @@ test_that("script issue is in handle",{
 
 finalise(handle)
 
-test_that("script issue is in registry",{
+test_that("script issue is in registry", {
   component_url <- get_entity(handle$submission_script)$components
   testthat::expect_equal(length(component_url), 1)
 
@@ -512,7 +512,7 @@ test_that("script issue is in registry",{
 # Test writing issues to GitHub repo --------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config9_", uid , ".yaml")
+config_file <- paste0("config_files/raise_issue/config9_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -535,7 +535,7 @@ raise_issue_repo(handle = handle,
                  issue = repo_issue,
                  severity = repo_severity)
 
-test_that("repo issue is in handle",{
+test_that("repo issue is in handle", {
   testthat::expect_equal(handle$issues$type, "repo")
   testthat::expect_equal(handle$issues$issue, repo_issue)
   testthat::expect_equal(handle$issues$severity, repo_severity)
@@ -543,7 +543,7 @@ test_that("repo issue is in handle",{
 
 finalise(handle)
 
-test_that("repo issue is in registry",{
+test_that("repo issue is in registry", {
   component_url <- get_entity(handle$code_repo)$components
   testthat::expect_equal(length(component_url), 1)
 
@@ -554,4 +554,3 @@ test_that("repo issue is in registry",{
   testthat::expect_equal(tmp$description, repo_issue)
   testthat::expect_equal(tmp$severity, repo_severity)
 })
-

@@ -9,7 +9,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/link_read/config_", uid , ".yaml")
+config_file <- paste0("config_files/link_read/config_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -39,7 +39,7 @@ finalise(handle)
 # Run tests ---------------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/link_read/config2_", uid , ".yaml")
+config_file <- paste0("config_files/link_read/config2_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -68,5 +68,5 @@ test_that("function behaves as it should", {
   testthat::expect_equal(nrow(handle$inputs), 1)
   testthat::expect_equal(path1, path2)
   tmp <- read.csv(path1)
-  testthat::expect_equal(tmp[,-1], df)
+  testthat::expect_equal(tmp[, -1], df)
 })

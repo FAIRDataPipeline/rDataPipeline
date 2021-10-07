@@ -44,7 +44,7 @@ fdp_resolve_write <- function(this_write, yaml) {
   } else if (tolower(write_public) == "false") {
     write_public <- FALSE
   } else {
-    stop ("public value not recognised")
+    stop("public value not recognised")
   }
 
   if ("version" %in% names(this_write)) {

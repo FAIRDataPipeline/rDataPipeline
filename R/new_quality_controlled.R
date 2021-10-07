@@ -1,6 +1,7 @@
 #' Post entry to quality_controlled table
 #'
-#' Upload information to the \code{quality_controlled} table in the data registry
+#' Upload information to the \code{quality_controlled} table in the data
+#' registry
 #'
 #' @param object_url a \code{string} specifying the URL of an \code{object}
 #' @param endpoint a \code{string} specifying the registry endpoint

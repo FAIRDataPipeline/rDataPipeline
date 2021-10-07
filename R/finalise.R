@@ -29,7 +29,7 @@ finalise <- function(handle,
       key <- get_token()
       h <- c(Authorization = paste("token", key))
       result <- httr::DELETE(code_run_url,
-                             httr::content_type('application/json'),
+                             httr::content_type("application/json"),
                              httr::add_headers(.headers = h),
                              verbose())
       return(invisible(NULL))
@@ -65,14 +65,13 @@ finalise <- function(handle,
       index_row <- which(handle$outputs$data_product == data_products[i])
 
       this_write <- handle$outputs[index_row, ]
-      write_data_product <- unique(this_write$data_product)
       write_use_data_product <- unique(this_write$use_data_product)
-      write_dataproduct_description <- unique(this_write$data_product_decription)
+      write_dataproduct_description <- unique(
+        this_write$data_product_decription)
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
       write_namespace_url <- new_namespace(name = write_namespace,
                                            endpoint = endpoint)
-      write_namespace_id <- extract_id(write_namespace_url, endpoint = endpoint)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
@@ -201,17 +200,19 @@ finalise <- function(handle,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      usethis::ui_done(paste("Writing", usethis::ui_value(use_data_product_runid),
-                             "to local registry"))
+      usethis::ui_done(
+        paste("Writing", usethis::ui_value(use_data_product_runid),
+              "to local registry"))
 
       # Update handle
-      handle$finalise_output_hash(use_data_product = write_use_data_product,
-                                  use_data_product_runid = use_data_product_runid,
-                                  use_version = write_version,
-                                  use_namespace = write_namespace,
-                                  hash = hash,
-                                  new_path = new_path,
-                                  data_product_url = object_url)
+      handle$finalise_output_hash(
+        use_data_product = write_use_data_product,
+        use_data_product_runid = use_data_product_runid,
+        use_version = write_version,
+        use_namespace = write_namespace,
+        hash = hash,
+        new_path = new_path,
+        data_product_url = object_url)
     }
 
     # Register components ---------------------------------------------------

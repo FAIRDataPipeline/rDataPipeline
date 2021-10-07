@@ -13,11 +13,12 @@ register_issue_dataproduct <- function(handle, this_issue) {
                            query = list(name = this_issue$use_namespace),
                            endpoint = endpoint)
   namespace_id <- extract_id(url = namespace_url, endpoint = endpoint)
-  data_product_entry <- get_entry(table = "data_product",
-                                  query = list(name = this_issue$use_data_product,
-                                               version = this_issue$use_version,
-                                               namespace = namespace_id),
-                                  endpoint = endpoint)
+  data_product_entry <- get_entry(
+    table = "data_product",
+    query = list(name = this_issue$use_data_product,
+                 version = this_issue$use_version,
+                 namespace = namespace_id),
+    endpoint = endpoint)
 
   assertthat::assert_that(length(data_product_entry) == 1)
   object_url <- data_product_entry[[1]]$object

@@ -20,7 +20,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -63,7 +63,7 @@ finalise(handle)
 # Write test/array v.0.2.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config2_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config2_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -102,7 +102,7 @@ finalise(handle)
 # Write test/array v.0.1.0 'johnsmith' namespace --------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config3_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config3_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace2,
@@ -141,7 +141,7 @@ finalise(handle)
 # Write test/array2 v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config4_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config4_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -180,7 +180,7 @@ finalise(handle)
 # Multiple components -----------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config5_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config5_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -199,7 +199,7 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 comp1 <- data.frame(a = 17:18, b = 19:20)
-rownames(comp1) <-9:10
+rownames(comp1) <- 9:10
 
 write_array(array = as.matrix(comp1),
             handle = handle,
@@ -224,7 +224,7 @@ finalise(handle)
 # Test use block ----------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config6_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config6_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -268,10 +268,12 @@ test_that("df_v1 is returned", {
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_v1)
 
-  expect_equivalent(attributes(tmp)$dimnames[[1]], dimension_names$rowvalue )
-  expect_equivalent(attributes(tmp)$dimnames[[2]], dimension_names$colvalue )
-  expect_equivalent(attributes(tmp)$Dimension_1_title, names(dimension_names)[1] )
-  expect_equivalent(attributes(tmp)$Dimension_2_title, names(dimension_names)[2] )
+  expect_equivalent(attributes(tmp)$dimnames[[1]], dimension_names$rowvalue)
+  expect_equivalent(attributes(tmp)$dimnames[[2]], dimension_names$colvalue)
+  expect_equivalent(attributes(tmp)$Dimension_1_title,
+                    names(dimension_names)[1])
+  expect_equivalent(attributes(tmp)$Dimension_2_title,
+                    names(dimension_names)[2])
   expect_equivalent(attributes(tmp)$Dimension_2_units, dimension_units[[2]])
   expect_equivalent(attributes(tmp)$Dimension_2_values, dimension_values[[2]])
   expect_equivalent(attributes(tmp)$units, units)
@@ -301,7 +303,7 @@ test_that("df2 is returned", {
 # Test multiple components ------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config7_", uid , ".yaml")
+config_file <- paste0("config_files/read_array/config7_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,

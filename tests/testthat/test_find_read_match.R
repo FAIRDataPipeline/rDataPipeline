@@ -12,7 +12,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/inputglobbing/config_", uid , ".yaml")
+config_file <- paste0("config_files/inputglobbing/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -52,7 +52,7 @@ finalise(handle)
 data_product3 <- file.path("data_product", "read", "wildcard", uid, "*")
 
 # User written config file
-config_file <- paste0("config_files/inputglobbing/config2_", uid , ".yaml")
+config_file <- paste0("config_files/inputglobbing/config2_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -68,7 +68,7 @@ config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
 script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
-test_that("data products recorded in working config",{
+test_that("data products recorded in working config", {
   reads <- handle$yaml$read
   testthat::expect_equal(reads[[1]]$data_product, data_product2)
   testthat::expect_equal(reads[[2]]$data_product, data_product1)
@@ -81,5 +81,3 @@ test_that("data products recorded in working config",{
   path <- link_read(handle, aliases[1])
   path <- link_read(handle, aliases[2])
 })
-
-

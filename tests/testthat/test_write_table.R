@@ -11,7 +11,7 @@ version1 <- "0.1.0"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/write_table/config_", uid , ".yaml")
+config_file <- paste0("config_files/write_table/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -55,7 +55,8 @@ test_that(".h5 file is generated", {
   filename <- handle$outputs %>%
     dplyr::filter(index == index) %>%
     dplyr::select(path) %>%
-    unlist() %>% unname()
+    unlist() %>%
+    unname()
 
   testthat::expect_true(is.data.frame(rhdf5::h5ls(filename)))
 })

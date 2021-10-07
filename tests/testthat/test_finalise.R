@@ -11,7 +11,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # delete_if_empty ---------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/finalise/config_", uid , ".yaml")
+config_file <- paste0("config_files/finalise/config_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -31,7 +31,7 @@ finalise(handle, delete_if_empty = TRUE)
 # delete_if_duplicate -----------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/finalise/config2_", uid , ".yaml")
+config_file <- paste0("config_files/finalise/config2_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -60,7 +60,7 @@ finalise(handle)
 # Now try to write a duplicate file!
 
 # User written config file
-config_file <- paste0("config_files/finalise/config3_", uid , ".yaml")
+config_file <- paste0("config_files/finalise/config3_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,
@@ -85,7 +85,7 @@ path1 <- link_write(handle, data_product1)
 df1 <- data.frame(a = uid, b = uid)
 write.csv(df1, path1)
 
-test_that("data products recorded in working config",{
+test_that("data products recorded in working config", {
   reads <- handle$outputs
   testthat::expect_equal(reads$data_product, data_product1)
   testthat::expect_equal(reads$use_version, "0.1.0")
@@ -93,7 +93,7 @@ test_that("data products recorded in working config",{
 
 finalise(handle, delete_if_duplicate = TRUE)
 
-test_that("code run contains no output",{
+test_that("code run contains no output", {
   coderun_url <- get_entity(handle$code_run)
   testthat::expect_equal(coderun_url$outputs, list())
 })

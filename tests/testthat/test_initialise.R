@@ -11,7 +11,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # delete_if_empty ---------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/initialise/config_", uid , ".yaml")
+config_file <- paste0("config_files/initialise/config_", uid, ".yaml")
 
 create_config(path = config_file,
               description = coderun_description,

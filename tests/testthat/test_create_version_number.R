@@ -19,16 +19,22 @@ output <- "0.20200101.0"
 output_1 <- "100000.20200101.100000"
 
 test_that("Sys.Date and Sys.time produce correct results", {
-  testthat::expect_equal(create_version_number(date, "0.1.0"), create_version_number(date, "0.1.0"))
-  testthat::expect_equal(create_version_number(datetime, "0.1.0"), create_version_number(datetime, "0.1.0"))
-  testthat::expect_equal(create_version_number(datetime, "0.1.0"), create_version_number(date, "0.1.0"))
+  testthat::expect_equal(create_version_number(date, "0.1.0"),
+                         create_version_number(date, "0.1.0"))
+  testthat::expect_equal(create_version_number(datetime, "0.1.0"),
+                         create_version_number(datetime, "0.1.0"))
+  testthat::expect_equal(create_version_number(datetime, "0.1.0"),
+                         create_version_number(date, "0.1.0"))
 })
 
-test_that("create_version_number output is as expected",{
-  testthat::expect_equal(create_version_number(date_1, version_1), create_version_number(date_2, version_1))
-  testthat::expect_equal(create_version_number(date_5, version_1), create_version_number(date_6, version_1))
+test_that("create_version_number output is as expected", {
+  testthat::expect_equal(create_version_number(date_1, version_1),
+                         create_version_number(date_2, version_1))
+  testthat::expect_equal(create_version_number(date_5, version_1),
+                         create_version_number(date_6, version_1))
   testthat::expect_warning(
-    testthat::expect_equal(create_version_number(date_3, version_1), create_version_number(date_4, version_1)))
+    testthat::expect_equal(create_version_number(date_3, version_1),
+                           create_version_number(date_4, version_1)))
   testthat::expect_equal(create_version_number(date_1, version_1), output)
   testthat::expect_equal(create_version_number(date_2, version_1), output)
   testthat::expect_equal(create_version_number(date_4, version_1), output)
@@ -37,7 +43,8 @@ test_that("create_version_number output is as expected",{
   testthat::expect_equal(create_version_number(), version_1)
   testthat::expect_equal(create_version_number(date_4, "0"), output)
   testthat::expect_equal(create_version_number(date_4, "0.0"), output)
-  testthat::expect_equal(create_version_number(date_4, major = "0", minor = "0"), output)
+  testthat::expect_equal(create_version_number(date_4, major = "0",
+                                               minor = "0"), output)
 })
 
 test_that("create_version_number validation works as expected", {

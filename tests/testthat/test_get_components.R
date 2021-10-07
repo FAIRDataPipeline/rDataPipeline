@@ -16,7 +16,7 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/get_components/config_", uid , ".yaml")
+config_file <- paste0("config_files/get_components/config_", uid, ".yaml")
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -48,7 +48,7 @@ handle <- initialise(config, script)
 
 # Write data
 df <- data.frame(a = 1:2, b = 3:4)
-rownames(df) <- 1:nrow(df)
+rownames(df) <- seq_len(nrow(df))
 array <- as.matrix(df)
 
 index1 <- write_array(array = array,
@@ -61,7 +61,8 @@ index1 <- write_array(array = array,
 filename1 <- handle$outputs %>%
   dplyr::filter(index == index1) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 index2 <- write_array(array = array,
                       handle = handle,
@@ -73,7 +74,8 @@ index2 <- write_array(array = array,
 filename2 <- handle$outputs %>%
   dplyr::filter(index == index2) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 index3 <- write_array(array = array,
                       handle = handle,
@@ -85,7 +87,8 @@ index3 <- write_array(array = array,
 filename3 <- handle$outputs %>%
   dplyr::filter(index == index3) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 index4 <- write_array(array = array,
                       handle = handle,
@@ -97,7 +100,8 @@ index4 <- write_array(array = array,
 filename4 <- handle$outputs %>%
   dplyr::filter(index == index4) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 index5 <- write_array(array = array,
                       handle = handle,
@@ -109,7 +113,8 @@ index5 <- write_array(array = array,
 filename5 <- handle$outputs %>%
   dplyr::filter(index == index5) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 index6 <- write_array(array = array,
                       handle = handle,
@@ -121,7 +126,8 @@ index6 <- write_array(array = array,
 filename6 <- handle$outputs %>%
   dplyr::filter(index == index6) %>%
   dplyr::select(path) %>%
-  unlist() %>% unname()
+  unlist() %>%
+  unname()
 
 test_that("an error is thrown if file does not exist", {
   testthat::expect_error(get_components("unknown_file.h5"),
