@@ -135,7 +135,7 @@ Additionally, for each question please explain the situation and include any rel
 > - [x] Some work remaining or caveats
 > - [ ] Needs to be addressed
 > 
-> There is a [rDataPipeline][rDataPipeline] that describes how to install the code and user 
+> There is a [readme][rDataPipeline] that describes how to install the code and user 
 > [examples][examples] that show how the API interacts with the Data Pipeline. Additional 
 > documentation exists ([![docs][docs-badge]][docs-url]), however this needs expanded upon. 
 
@@ -181,6 +181,6 @@ Additionally, for each question please explain the situation and include any rel
 [docs-badge]: https://img.shields.io/badge/docs-rDataPipeline-blue
 [docs-url]: https://FAIRDataPipeline.github.io/rDataPipeline/
 
-[licence]: https://raw.githubusercontent.com/FAIRDataPipeline/rDataPipeline/main/LICENCE
+[licence]: https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/LICENSE.md
 [issues]: https://github.com/FAIRDataPipeline/rDataPipeline/issues
-[description]: https://raw.githubusercontent.com/FAIRDataPipeline/rDataPipeline/main/DESCRIPTION
+[description]: https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/DESCRIPTION
