@@ -171,7 +171,7 @@ finalise <- function(handle,
         new_path <- replacement_path
       }
 
-      extension <- strsplit(new_path, "\\.")[[1]][2]
+      extension <- gsub(".*\\.(.*)$", "\\1", new_path)
 
       file_type_exists <- get_url(table = "file_type",
                                   query = list(extension = extension),
