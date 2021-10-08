@@ -1,12 +1,12 @@
 Package: rDataPipeline
 Title: Functions to Interact with the FAIR Data Pipeline
-Version: 0.52.1
+Version: 0.52.2
 Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
                   role = c("cre", "aut"), comment = c(ORCID = "0000-0003-1536-2066")),
              person("Ryan", "Field", role = "ctb", 
                   comment = c(ORCID = "0000-0002-4424-9890")))
 Description: Functions to interact with the FAIR data pipeline.
-License: GPL-3 + file LICENSE
+License: GPL (>= 3)
 Imports:
     assertthat,
     cli,
