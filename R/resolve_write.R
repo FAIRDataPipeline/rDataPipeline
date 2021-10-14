@@ -74,18 +74,12 @@ resolve_write <- function(handle,
   if (is.null(handle$outputs)) {
     file_exists <- FALSE
   } else {
-    # Different versions of the same data product may have the same
-    # write_dataproduct, so filtering by that is not enough
-    file_exists <- handle$outputs %>%
-      filter(.data$data_product == write_dataproduct,
-             .data$use_version == version,
-             .data$use_namespace == namespace)
-    file_exists <- nrow(file_exists) != 0
+    file_exists <- any(data_product == handle$outputs$data_product)
   }
 
   if (file_exists) {
     tmp <- handle$outputs
-    ind <- which(tmp$data_product == data_product)
+    ind <- which(tmp$use_data_product == data_product)
     path <- unique(tmp$path[ind])
 
   } else {
