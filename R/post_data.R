@@ -11,8 +11,8 @@
 post_data <- function(table, data, endpoint) {
 
   key <- get_token()
-  h <- c(Authorization = paste("token", key))
-  v <- c(Accept = 'application/json; version=1.0.0')
+  h <- c(Authorization = paste("token", key),
+         Accept = 'application/json; version=1.0.0')
 
   api_url <- paste0(endpoint, table)
   api_url <- file.path(dirname(api_url), basename(api_url), "")
@@ -28,8 +28,7 @@ post_data <- function(table, data, endpoint) {
                                                  auto_unbox = T,
                                                  force = T),
                          httr::content_type("application/json"),
-                         httr::add_headers(.headers = h),
-                         httr::add_headers(.headers = v))
+                         httr::add_headers(.headers = h))
     continue <- FALSE
   }
 
