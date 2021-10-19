@@ -11,7 +11,8 @@
 post_data <- function(table, data, endpoint) {
 
   key <- get_token()
-  h <- c(Authorization = paste("token", key))
+  h <- c(Authorization = paste("token", key),
+         Accept = 'application/json; version=1.0.0')
 
   api_url <- paste0(endpoint, table)
   api_url <- file.path(dirname(api_url), basename(api_url), "")
