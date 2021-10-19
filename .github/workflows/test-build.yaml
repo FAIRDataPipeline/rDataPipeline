@@ -41,7 +41,7 @@ jobs:
           python-version: '3.x'
           architecture: 'x64'
       - name: Install local registry
-        run: /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
+        run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
       - name: Checkout FAIRDataPipeline/FAIR-CLI
         uses: actions/checkout@v2
         with:
