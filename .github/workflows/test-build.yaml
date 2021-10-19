@@ -38,7 +38,7 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.9'
           architecture: 'x64'
       - name: Install local registry
         run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
@@ -62,6 +62,7 @@ jobs:
           source .venv/bin/activate
           cd ${{ github.workspace }}
           fair init --ci
+          fair registry start
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
