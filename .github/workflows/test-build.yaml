@@ -62,6 +62,8 @@ jobs:
           source .venv/bin/activate
           cd ${{ github.workspace }}
           fair init --ci
+          fair registry stop
+          fair registry start
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
