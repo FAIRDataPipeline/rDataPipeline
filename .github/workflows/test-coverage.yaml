@@ -45,5 +45,7 @@ jobs:
             endpoint = "http://localhost:8000/api/")
         shell: Rscript {0}
       - name: Test coverage
+        env:
+          _RUN_TESTS: true
         run: covr::codecov()
         shell: Rscript {0}
