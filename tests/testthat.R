@@ -1,7 +1,11 @@
 library(testthat)
 library(rDataPipeline)
 
-Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
-endpoint <- Sys.getenv("FDP_endpoint")
+# Don't run tests on CRAN's isolated test rig, since they depend on a local
+# registry and CLI being installed and will therefore fail.
 
-testthat::test_check("rDataPipeline")
+if (Sys.getenv("_RUN_TESTS_") != "") {
+  Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
+  endpoint <- Sys.getenv("FDP_endpoint")
+  testthat::test_check("rDataPipeline")
+}
