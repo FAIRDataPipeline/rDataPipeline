@@ -9,9 +9,8 @@ name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -22,18 +21,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          extra-packages: |
-            covr
-            stringi
+          extra-packages: covr
 
-      - name: Install R API system requirements (ubuntu-20.04)
-        if: matrix.config.os == 'ubuntu-20.04'
-        run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-        shell: bash
       - name: Install local registry
         run: /bin/bash -c "$(curl -fsSL https://data.scrc.uk/static/localregistry.sh)"
       - name: Start registry
