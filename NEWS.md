@@ -1,4 +1,4 @@
 # NEWS
 
-- v0.53.0
+- v0.54.0
   - Initial release
