@@ -11,7 +11,8 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/read_distribution/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_distribution",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -54,7 +55,8 @@ finalise(handle)
 
 # Start tests -------------------------------------------------------------
 
-config_file <- paste0("config_files/read_distribution/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_distribution",
+                         paste0("config2_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -89,13 +91,3 @@ test_that("function works correctly", {
   testthat::expect_equal(nrow(handle$inputs), 1)
   testthat::expect_equal(dist1, dist2)
 })
-#
-# test_that("function works correctly", {
-#   tmp <- list(distribution = dat2$distribution,
-#               SD = dat2$parameters$SD,
-#               mean = dat2$parameters$mean)
-#   dist <- read_distribution(handle = handle,
-#                             data_product = data_product1,
-#                             component = component2)
-#   expect_equivalent(dist, tmp)
-# })

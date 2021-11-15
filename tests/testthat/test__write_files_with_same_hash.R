@@ -14,7 +14,8 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/samehash/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "samehash",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -80,19 +81,20 @@ test_that("data registry shows correct path", {
   testthat::expect_equal(length(tmp), 1)
   root <- get_entity(tmp[[1]]$storage_root)$root
   testthat::expect_equal(paste0(root, tmp[[1]]$path),
-                         file1)
+                         paste0("file://", file1))
   # File 2
   tmp <- get_entry("storage_location", list(hash = hash2))
   testthat::expect_equal(length(tmp), 1)
   root <- get_entity(tmp[[1]]$storage_root)$root
   testthat::expect_equal(paste0(root, tmp[[1]]$path),
-                         file1)
+                         paste0("file://", file1))
 })
 
 # -------------------------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/samehash2/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "samehash",
+                         paste0("config2_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,

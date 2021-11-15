@@ -11,7 +11,8 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # delete_if_empty ---------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/finalise/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "finalise",
+                         paste0("config_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,
@@ -31,7 +32,8 @@ finalise(handle, delete_if_empty = TRUE)
 # delete_if_duplicate -----------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/finalise/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "finalise",
+                         paste0("config2_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,
@@ -60,7 +62,8 @@ finalise(handle)
 # Now try to write a duplicate file!
 
 # User written config file
-config_file <- paste0("config_files/finalise/config3_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "finalise",
+                         paste0("config3_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,

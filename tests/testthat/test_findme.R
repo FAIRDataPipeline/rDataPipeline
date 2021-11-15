@@ -16,7 +16,8 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/findme/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "findme",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -75,7 +76,8 @@ test_that("findme prints output", {
 # Write v0.2.0 of test/array to local registry and data store ---------------
 
 # User written config file
-config_file <- paste0("config_files/findme/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "findme",
+                         paste0("config2_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -134,7 +136,8 @@ uid <- as.character(random_hash())
 data_product3 <- paste("findme/test/array2", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/findme/config3_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "findme",
+                         paste0("config3_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,

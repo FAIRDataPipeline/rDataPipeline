@@ -9,7 +9,8 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/link_read/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "link_read",
+                         paste0("config_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,
@@ -39,7 +40,8 @@ finalise(handle)
 # Run tests ---------------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/link_read/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "link_read",
+                         paste0("config2_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,
