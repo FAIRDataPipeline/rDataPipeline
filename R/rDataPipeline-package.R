@@ -3,7 +3,7 @@
 #' FAIR Data Pipeline API
 #'
 #' For more information see
-#' [https://fairdatapipeline.github.io](https://fairdatapipeline.github.io)
+#' [https://www.fairdatapipeline.org/](https://www.fairdatapipeline.org/)
 #'
 #' @name rDataPipeline-package
 #' @aliases rDataPipeline
