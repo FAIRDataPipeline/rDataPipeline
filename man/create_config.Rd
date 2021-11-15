@@ -9,7 +9,7 @@ create_config(
   description,
   input_namespace,
   output_namespace,
-  write_data_store = "test/data_store/",
+  write_data_store = file.path(tempdir(), "datastore", ""),
   force = TRUE,
   local_repo = "local_repo"
 )
@@ -33,13 +33,4 @@ create_config(
 Generates (user generated) config.yaml files for unit tests. Use
 \code{add_read()} and \code{add_write()} functions to add read and write
 blocks.
-}
-\examples{
-\dontrun{
-create_config("test_config/config.yaml",
-              description = "test",
-              input_namespace = "test_user",
-              output_namespace = "test_user")
-}
-
 }

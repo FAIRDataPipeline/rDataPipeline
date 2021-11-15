@@ -20,7 +20,8 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -63,7 +64,8 @@ finalise(handle)
 # Write test/array v.0.2.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config2_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -102,7 +104,8 @@ finalise(handle)
 # Write test/array v.0.1.0 'johnsmith' namespace --------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config3_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config3_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace2,
@@ -141,7 +144,8 @@ finalise(handle)
 # Write test/array2 v.0.1.0 'username' namespace ---------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config4_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config4_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -180,7 +184,8 @@ finalise(handle)
 # Multiple components -----------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config5_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config5_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -224,7 +229,8 @@ finalise(handle)
 # Test use block ----------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config6_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config6_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,
@@ -303,7 +309,8 @@ test_that("df2 is returned", {
 # Test multiple components ------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/read_array/config7_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "read_array",
+                         paste0("config7_", uid, ".yaml"))
 
 create_config(path = config_file,
               description = coderun_description,

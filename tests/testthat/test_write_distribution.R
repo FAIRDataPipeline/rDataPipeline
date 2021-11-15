@@ -9,7 +9,8 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/write_distribution/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "write_distribution",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,

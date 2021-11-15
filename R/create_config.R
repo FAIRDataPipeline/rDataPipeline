@@ -14,19 +14,12 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' create_config("test_config/config.yaml",
-#'               description = "test",
-#'               input_namespace = "test_user",
-#'               output_namespace = "test_user")
-#' }
-#'
 create_config <- function(path,
                           description,
                           input_namespace,
                           output_namespace,
-                          write_data_store = "test/data_store/",
+                          write_data_store = file.path(tempdir(),
+                                                       "datastore", ""),
                           force = TRUE,
                           local_repo = "local_repo") {
 

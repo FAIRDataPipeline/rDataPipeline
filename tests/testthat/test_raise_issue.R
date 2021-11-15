@@ -13,7 +13,8 @@ data_product <- paste("findme/test/array", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -67,7 +68,8 @@ data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config2_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -117,7 +119,8 @@ data_product <- paste("findme/test/array2b", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config2b_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config2b_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -180,7 +183,8 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config3_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config3_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -246,7 +250,8 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config4_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config4_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -313,7 +318,8 @@ data_product <- paste("findme/test/array5-one", uid, sep = "_")
 data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config5_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config5_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -373,7 +379,8 @@ finalise(handle)
 # Test writing issues to multiple objects by index ------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config6_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config6_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -420,7 +427,8 @@ test_that("handle contains issues block", {
 # Test writing issues to config -------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config7_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config7_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -466,7 +474,8 @@ test_that("config issue is in registry", {
 # Test writing issues to script -------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config8_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config8_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,
@@ -512,7 +521,8 @@ test_that("script issue is in registry", {
 # Test writing issues to GitHub repo --------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/raise_issue/config9_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "raise_issue",
+                         paste0("config9_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace,

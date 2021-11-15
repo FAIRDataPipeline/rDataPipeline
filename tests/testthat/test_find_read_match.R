@@ -12,7 +12,8 @@ namespace1 <- "username"
 endpoint <- Sys.getenv("FDP_endpoint")
 
 # User written config file
-config_file <- paste0("config_files/inputglobbing/config_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "inputglobbing",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -52,7 +53,8 @@ finalise(handle)
 data_product3 <- file.path("data_product", "read", "wildcard", uid, "*")
 
 # User written config file
-config_file <- paste0("config_files/inputglobbing/config2_", uid, ".yaml")
+config_file <- file.path(tempdir(), "config_files", "inputglobbing",
+                         paste0("config2_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,

@@ -11,8 +11,8 @@ endpoint <- Sys.getenv("FDP_endpoint")
 # delete_if_empty ---------------------------------------------------------
 
 # User written config file
-config_file <- paste0("config_files/initialise/config_", uid, ".yaml")
-
+config_file <- file.path(tempdir(), "config_files", "initialise",
+                         paste0("config_", uid, ".yaml"))
 create_config(path = config_file,
               description = coderun_description,
               input_namespace = namespace1,
@@ -27,13 +27,3 @@ script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
 handle <- initialise(config, script)
 
 finalise(handle, delete_if_empty = TRUE)
-
-#
-# SELECT key FROM authtoken_token WHERE user_id=?
-
-# getTwitterData = function(sql) {
-#   db_conn = RSQLite::dbConnect(RSQLite::SQLite(), dbname=dbfn)
-#   dtp = RSQLite::dbGetQuery(db_conn, sql)
-#   RSQLite::dbDisconnect(db_conn)  # clean up
-#   return(dtp)
-# }

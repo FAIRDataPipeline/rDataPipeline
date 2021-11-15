@@ -9,3 +9,9 @@
 ^pkgdown$
 README.md
 ^CRAN-RELEASE$
+^.zenodo.json$
+^.fair$
+^LICENSE.md$
+^config.yaml$
+^cran-comments.md$
+^software-checklist.md$
