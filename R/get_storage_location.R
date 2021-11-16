@@ -6,11 +6,6 @@
 #'
 #' @return Returns a \code{list} of fields associated with the specified entry
 #'
-#' @examples
-#' \dontrun{
-#' get_storage_location("http://localhost:8000/api/storage_location/258/")
-#' }
-#'
 get_storage_location <- function(location) {
   tmp <- get_entity(location)
   path <- tmp$path

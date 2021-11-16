@@ -8,11 +8,6 @@
 #'
 #' @family get functions
 #'
-#' @examples
-#' \dontrun{
-#' get_github_hash("ScottishCovidResponse/SCRCdata")
-#' }
-#'
 get_github_hash <- function(repo) {
   if (!grepl("version", system("git --version", intern = TRUE))) {
     msg <- paste("git must be installed and located in the system path",

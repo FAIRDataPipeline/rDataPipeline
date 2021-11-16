@@ -15,9 +15,3 @@ Returns a \code{list} of fields associated with the specified entry
 \description{
 Get storage location entry
 }
-\examples{
-\dontrun{
-get_storage_location("http://localhost:8000/api/storage_location/258/")
-}
-
-}

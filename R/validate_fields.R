@@ -8,12 +8,6 @@
 #'
 #' @return Returns
 #'
-#' @examples
-#' \dontrun{
-#' validate_fields("author", list(object = 123, family_name = "Smith",
-#'                                personal_name = "S"), key)
-#' }
-#'
 validate_fields <- function(table, data, endpoint) {
 
   table.fields <- get_fields(table, endpoint = endpoint)
