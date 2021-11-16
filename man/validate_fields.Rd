@@ -19,11 +19,3 @@ Returns
 \description{
 Function to validate fields in post data
 }
-\examples{
-\dontrun{
-\donttest{
-validate_fields("author", list(object = 123, family_name = "Smith",
-                               personal_name = "S"), key)
-}}
-
-}

@@ -14,12 +14,6 @@ Get the hash of the latest commit in the master branch of a particular
 repository. This function assumes git is installed and located in the
 System PATH.
 }
-\examples{
-\dontrun{
-get_github_hash("ScottishCovidResponse/SCRCdata")
-}
-
-}
 \seealso{
 Other get functions: 
 \code{\link{get_components}()},
