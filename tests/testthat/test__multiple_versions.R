@@ -2,40 +2,35 @@ context("Allow multiple versions to be read/written from the same config")
 
 # Write to registry -------------------------------------------------------
 
+coderun_description <- "Testing multiple versions"
+dataproduct_description <- "A csv file"
 uid <- as.character(random_hash())
 data_product1 <- file.path("output", "data", paste0(uid, "_1"))
 data_product2 <- file.path("output", "data", paste0(uid, "_2"))
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "A csv file"
-namespace1 <- "username"
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "multiversion",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          file_type = "csv",
-          version = "0.0.1")
-add_write(path = config_file,
-          data_product = data_product2,
-          description = dataproduct_description,
-          file_type = "csv",
-          use_data_product = data_product1,
-          use_version = "0.0.2")
+              script = "echo hello") %>%
+  add_write(data_product = data_product1,
+            description = dataproduct_description,
+            file_type = "csv",
+            version = "0.0.1") %>%
+  add_write(data_product = data_product2,
+            description = dataproduct_description,
+            file_type = "csv",
+            use_data_product = data_product1,
+            use_version = "0.0.2")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 
 handle <- initialise(config, script)
 
@@ -78,27 +73,25 @@ test_that("data products recorded in working config", {
 
 # Read from registry -------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "multiversion",
-                         paste0("config2_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_read(path = config_file,
-         data_product = data_product1,
-         version = "0.0.1")
-add_read(path = config_file,
-         data_product = data_product2,
-         use_data_product = data_product1,
-         version = "0.0.2")
+              script = "echo hello") %>%
+  add_read(data_product = data_product1,
+           version = "0.0.1") %>%
+  add_read(data_product = data_product2,
+           use_data_product = data_product1,
+           version = "0.0.2")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 
 handle <- initialise(config, script)
 
