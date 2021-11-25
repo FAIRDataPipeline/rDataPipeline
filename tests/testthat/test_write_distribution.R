@@ -6,8 +6,9 @@ uid <- random_hash()
 data_product <- paste("test/distribution/symptom-delay", uid, sep = "_")
 
 # Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
-              path = paste0(tempfile(), ".yaml"),
+              path = config_file,
               description = coderun_description,
               script = "echo hello") %>%
 add_write(data_product = data_product,

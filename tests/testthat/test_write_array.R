@@ -9,8 +9,9 @@ version1 <- "0.1.0"
 version2 <- "0.2.0"
 
 # Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
-              path = paste0(tempfile(), ".yaml"),
+              path = config_file,
               description = coderun_description,
               script = "echo hello") %>%
 add_write(data_product = data_product,
