@@ -5,7 +5,7 @@ dataproduct_description <- "A test array"
 uid <- random_hash()
 data_product1 <- paste("test/array", uid, sep = "_")
 data_product2 <- paste("test/array2", uid, sep = "_")
-data_product2 <- paste("test/array3", uid, sep = "_")
+data_product3 <- paste("test/array3", uid, sep = "_")
 component <- "a/b/c/d"
 component2 <- "component2"
 version1 <- "0.1.0"
