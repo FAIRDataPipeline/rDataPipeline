@@ -55,7 +55,7 @@ add_write <- function(path,
   if (!missing(use_component)) new_write$use$component <- use_component
   if (!missing(use_version)) new_write$use$version <- use_version
   if (!missing(use_namespace)) new_write$use$namespace <- use_namespace
-  if (!missing(use_namespace)) new_write$use$public <- use_public
+  if (!missing(use_public)) new_write$use$public <- use_public
 
   # Read file contents
   contents <- configr::read.config(file = path)
