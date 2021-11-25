@@ -3,7 +3,6 @@ context("Testing link_write()")
 coderun_description <- "Testing link_write()"
 dataproduct_description <- "A csv file"
 data_product1 <- paste("test/csv", random_hash(), sep = "_")
-namespace1 <- "username"
 
 # Generate user-written config file
 config_file <- paste0(tempfile(), ".yaml")
@@ -36,6 +35,7 @@ test_that("entry is recorded in the handle once", {
   path2 <- link_write(handle, data_product1)
   testthat::expect_equal(nrow(handle$outputs), 1)
   testthat::expect_equal(path1, path2)
-  tmp <- file.path(namespace1, data_product1)
+  namespace <- handle$yaml$run_metadata$default_output_namespace
+  tmp <- file.path(namespace, data_product1)
   testthat::expect_true(grepl(tmp, path1))
 })
