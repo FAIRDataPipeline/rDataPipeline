@@ -12,6 +12,7 @@
 #' @param use_component (optional) use_component field
 #' @param use_version (optional) use_version field
 #' @param use_namespace (optional) use_namespace field
+#' @param use_public (optional) use_public field
 #'
 #' @export
 #'
@@ -40,7 +41,8 @@ add_write <- function(path,
                       use_data_product,
                       use_component,
                       use_version,
-                      use_namespace) {
+                      use_namespace,
+                      use_public) {
 
   # Generate write block
   new_write <- list()
@@ -53,6 +55,7 @@ add_write <- function(path,
   if (!missing(use_component)) new_write$use$component <- use_component
   if (!missing(use_version)) new_write$use$version <- use_version
   if (!missing(use_namespace)) new_write$use$namespace <- use_namespace
+  if (!missing(use_namespace)) new_write$use$public <- use_public
 
   # Read file contents
   contents <- configr::read.config(file = path)
