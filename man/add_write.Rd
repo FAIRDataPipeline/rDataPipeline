@@ -13,7 +13,8 @@ add_write(
   use_data_product,
   use_component,
   use_version,
-  use_namespace
+  use_namespace,
+  use_public
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ add_write(
 \item{use_version}{(optional) use_version field}
 
 \item{use_namespace}{(optional) use_namespace field}
+
+\item{use_public}{(optional) use_public field}
 }
 \description{
 Add data product to \code{read} block of user-written config file. Used in
