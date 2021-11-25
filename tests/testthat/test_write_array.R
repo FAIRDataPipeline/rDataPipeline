@@ -12,7 +12,7 @@ endpoint <- Sys.getenv("FDP_endpoint")
 
 # Generate user-written config file
 config_file <- create_config(init_yaml = Sys.getenv("INIT_YAML"),
-                             path = "write_array.yaml",
+                             path = "../write_array.yaml",
                              description = coderun_description,
                              script = "")
 add_write(path = config_file,
