@@ -5,6 +5,7 @@ dataproduct_description <- "A test array"
 uid <- random_hash()
 data_product1 <- paste("test/array", uid, sep = "_")
 data_product2 <- paste("test/array2", uid, sep = "_")
+data_product2 <- paste("test/array3", uid, sep = "_")
 component <- "a/b/c/d"
 component2 <- "component2"
 version1 <- "0.1.0"
@@ -175,7 +176,7 @@ create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
               script = "echo hello") %>%
-  add_write(data_product = data_product5,
+  add_write(data_product = data_product3,
             description = dataproduct_description,
             version = version1)
 
@@ -193,7 +194,7 @@ rownames(comp1) <- 9:10
 
 write_array(array = as.matrix(comp1),
             handle = handle,
-            data_product = data_product5,
+            data_product = data_product3,
             component = component,
             description = "component1",
             dimension_names = dimension_names)
@@ -203,7 +204,7 @@ rownames(comp2) <- 11:12
 
 write_array(array = as.matrix(comp2),
             handle = handle,
-            data_product = data_product5,
+            data_product = data_product3,
             component = component2,
             description = "component2",
             dimension_names = dimension_names)
