@@ -82,4 +82,5 @@ add_write <- function(path,
                      file = path)
   }
 
+  invisible(path)
 }
