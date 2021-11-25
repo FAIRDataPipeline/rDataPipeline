@@ -1,4 +1,4 @@
-
+context("Testing get_fields()")
 
 # Make sure no new field types have been added to the registry
 
