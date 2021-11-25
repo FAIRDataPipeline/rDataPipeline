@@ -22,7 +22,7 @@ add_write(path = config_file,
 
 # Generate working config file
 cmd <- paste("fair run", config_file, "--ci")
-system(cmd)
+working_config_dir <- system(cmd, intern = TRUE)
 
 
 

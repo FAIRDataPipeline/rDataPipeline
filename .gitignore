@@ -49,4 +49,4 @@ docs
 /config_files
 /test
 /tests/testthat/test
-sonia.yaml
+/data_store
