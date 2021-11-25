@@ -31,7 +31,6 @@ working_config_dir <- system(cmd, intern = TRUE)
 # Initialise code run
 config <- file.path(working_config_dir, "config.yaml")
 script <- file.path(working_config_dir, "script.sh")
-
 handle <- initialise(config, script)
 
 # Write data
