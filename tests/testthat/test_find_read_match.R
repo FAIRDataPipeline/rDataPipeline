@@ -64,16 +64,16 @@ config <- file.path(working_config_dir, "config.yaml")
 script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
-test_that("data products recorded in working config", {
-  reads <- handle$yaml$read
-  testthat::expect_equal(reads[[1]]$data_product, data_product2)
-  testthat::expect_equal(reads[[2]]$data_product, data_product1)
-
-  testthat::expect_equal(reads[[1]]$use$version, "0.0.1")
-  testthat::expect_equal(reads[[2]]$use$version, "0.0.1")
-
-  aliases <- find_read_match(handle, data_product3)
-  testthat::expect_true(all(aliases %in% c(data_product1, data_product2)))
-  path <- link_read(handle, aliases[1])
-  path <- link_read(handle, aliases[2])
-})
+# test_that("data products recorded in working config", {
+#   reads <- handle$yaml$read
+#   testthat::expect_equal(reads[[1]]$data_product, data_product2)
+#   testthat::expect_equal(reads[[2]]$data_product, data_product1)
+#
+#   testthat::expect_equal(reads[[1]]$use$version, "0.0.1")
+#   testthat::expect_equal(reads[[2]]$use$version, "0.0.1")
+#
+#   aliases <- find_read_match(handle, data_product3)
+#   testthat::expect_true(all(aliases %in% c(data_product1, data_product2)))
+#   path <- link_read(handle, aliases[1])
+#   path <- link_read(handle, aliases[2])
+# })
