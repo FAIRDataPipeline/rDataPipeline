@@ -34,8 +34,6 @@ config <- file.path(working_config_dir, "config.yaml")
 script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
-namespace <- handle$yaml$run_metadata$default_output_namespace
-
 # Write data
 path1 <- link_write(handle, data_product1)
 cat(uid, file = path1)
@@ -49,9 +47,11 @@ finalise(handle)
 data_store <- handle$yaml$run_metadata$write_data_store
 hash1 <- handle$outputs$hash[1]
 hash2 <- handle$outputs$hash[2]
-file1 <- file.path(paste0(data_store, namespace1), data_product1,
+namespace <- handle$yaml$run_metadata$default_output_namespace
+
+file1 <- file.path(paste0(data_store, namespace), data_product1,
                    paste0(hash1, ".txt"))
-file2 <- file.path(paste0(data_store, namespace1), data_product2,
+file2 <- file.path(paste0(data_store, namespace), data_product2,
                    paste0(hash2, ".txt"))
 
 test_that("file1 exists in data store", {
