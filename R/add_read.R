@@ -76,4 +76,5 @@ add_read <- function(path,
                      file = path)
   }
 
+  invisible(path)
 }
