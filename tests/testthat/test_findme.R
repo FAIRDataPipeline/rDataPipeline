@@ -1,6 +1,6 @@
 context("Testing findme()")
 
-coderun_description <- "Register a file in the pipeline"
+coderun_description <- "Testing findme()"
 dataproduct_description <- "a test array"
 uid <- as.character(random_hash())
 data_product1 <- paste("findme/test/array", uid, sep = "_")

@@ -1,6 +1,6 @@
 context("Testing get_components()")
 
-coderun_description <- "Register a file in the pipeline"
+coderun_description <- "Testing get_components()"
 dataproduct_description <- "data product description"
 uid <- random_hash()
 data_product1 <- paste("test/get_components1", uid, sep = "_")
