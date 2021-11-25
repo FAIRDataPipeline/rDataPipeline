@@ -18,7 +18,6 @@
 #' @import jsonlite
 #' @importFrom openssl sha1
 #' @import R6
-#' @import reticulate
 #' @import rhdf5
 #' @import semver
 #' @importFrom stats setNames
