@@ -5,9 +5,6 @@ dataproduct_description <- "A test array"
 uid <- random_hash()
 data_product1 <- paste("test/array", uid, sep = "_")
 data_product2 <- paste("test/array2", uid, sep = "_")
-data_product3 <- paste("test/array3", uid, sep = "_")
-data_product4 <- paste("test/array4", uid, sep = "_")
-data_product5 <- paste("test/array5", uid, sep = "_")
 component <- "a/b/c/d"
 component2 <- "component2"
 version1 <- "0.1.0"
@@ -221,20 +218,20 @@ create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
               script = "echo hello") %>%
-  # Will return v.0.1.0, not v.0.2.0
-  add_read(data_product = data_product1,
+  # Will return test/array v.0.1.0 default namespace
+  add_read(data_product = "one",
+           use_data_product = data_product1,
            use_version = version1) %>%
-  # Will return test/array, but call it test/array2
-  add_read(data_product = data_product2,
+  # Will return test/array v.0.2.0 default namespace
+  add_read(data_product = "two",
            use_data_product = data_product1) %>%
-  # Will return test/array in the johnsmith namespace, but call it test/array3
-  add_read(data_product = data_product3,
+  # Will return test/array v.0.1.0 'johnsmith' namespace
+  add_read(data_product = "three",
            use_data_product = data_product1,
            use_namespace = namespace) %>%
-  # Will return test/array2 v.0.1.0, but call it test/array4
-  add_read(data_product = data_product4,
-           use_data_product = data_product2,
-           use_version = version1)
+  # Will return test/array2 v.0.1.0 default namespace
+  add_read(data_product = "four",
+           use_data_product = data_product2)
 
 # Generate working config file
 cmd <- paste("fair run", config_file, "--ci")
