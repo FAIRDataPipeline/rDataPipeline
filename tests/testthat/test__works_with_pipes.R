@@ -1,35 +1,29 @@
 context("Testing that rDataPipeline works with pipes")
 
+coderun_description <- "Testing that rDataPipeline works with pipes"
 uid <- random_hash()
-coderun_description <- "Test that rDataPipeline works with pipes"
-namespace <- "testing"
-
-endpoint <- Sys.getenv("FDP_endpoint")
 
 # Test write_array() -----------------------------------------------------
 
 dataproduct_description <- "Test data"
 data_product <- paste("test/array", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description)
 
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 array <- matrix(1, 2, 2)
@@ -49,24 +43,21 @@ handle %>% finalise()
 
 # Test read_array() -------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config2_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_read(data_product = data_product)
 
-add_read(path = config_file,
-         data_product = data_product)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("read_array() works with pipes", {
@@ -84,25 +75,22 @@ handle %>% finalise()
 dataproduct_description <- "Test data"
 data_product <- paste("test/table", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config3_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description)
 
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 table <- data.frame(1, 2, 2)
@@ -121,24 +109,21 @@ testthat::test_that("write_array() works with pipes", {
 
 # Test read_table() -------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config4_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_read(data_product = data_product)
 
-add_read(path = config_file,
-         data_product = data_product)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("read_table() works with pipes", {
@@ -154,26 +139,23 @@ testthat::test_that("read_table() works with pipes", {
 
 data_product <- paste("test/link", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config5_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            file_type = "txt")
 
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          file_type = "txt")
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("link_write() works with pipes", {
@@ -189,24 +171,21 @@ testthat::test_that("link_write() works with pipes", {
 
 data_product <- paste("test/link", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config6_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_read(data_product = data_product)
 
-add_read(path = config_file,
-         data_product = data_product)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("link_read() works with pipes", {
@@ -222,25 +201,22 @@ testthat::test_that("link_read() works with pipes", {
 
 data_product <- paste("test/estimate", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config7_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description)
 
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("write_estimate() works with pipes", {
@@ -259,24 +235,21 @@ testthat::test_that("write_estimate() works with pipes", {
 
 data_product <- paste("test/estimate", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config8_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_read(data_product = data_product)
 
-add_read(path = config_file,
-         data_product = data_product)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("read_estimate() works with pipes", {
@@ -292,25 +265,22 @@ testthat::test_that("read_estimate() works with pipes", {
 
 data_product <- paste("test/distribution", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config9_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description)
 
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("write_distribution() works with pipes", {
@@ -331,24 +301,21 @@ testthat::test_that("write_distribution() works with pipes", {
 
 data_product <- paste("test/distribution", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "pipes",
-                         paste0("config10_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
+              script = "echo hello") %>%
+  add_read(data_product = data_product)
 
-add_read(path = config_file,
-         data_product = data_product)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 testthat::test_that("read_distribution() works with pipes", {
