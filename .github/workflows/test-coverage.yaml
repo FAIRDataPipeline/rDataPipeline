@@ -9,6 +9,8 @@ name: test-coverage
 
 jobs:
   test-coverage:
+     # If the commit message isn't [skip ci]
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
