@@ -152,7 +152,7 @@ script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df2 <- data.frame(a = 13:14, b = 15:16)
+df2 <- data.frame(a = sample(2000,2), b = sample(2000,2))
 rownames(df2) <- 7:8
 
 write_array(array = as.matrix(df2),
