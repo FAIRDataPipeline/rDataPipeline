@@ -14,7 +14,7 @@ version1 <- "0.1.0"
 version2 <- "0.2.0"
 namespace <- "johnsmith"
 
-# Write test/array v.0.1.0 'username' namespace ---------------------------
+# Write test/array v.0.1.0 default namespace -------------------------------
 
 config_file <- paste0(tempfile(), ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
@@ -56,7 +56,7 @@ write_array(array = as.matrix(df_v1),
 # Finalise code run
 finalise(handle)
 
-# Write test/array v.0.2.0 'username' namespace ---------------------------
+# Write test/array v.0.2.0 default namespace -------------------------------
 
 config_file <- paste0(tempfile(), ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
@@ -103,7 +103,8 @@ create_config(init_yaml = Sys.getenv("INIT_YAML"),
               script = "echo hello") %>%
   add_write(data_product = data_product1,
             description = dataproduct_description,
-            version = version1)
+            version = version1,
+            use_namespace = namespace)
 
 # Generate working config file
 cmd <- paste("fair run", config_file, "--ci")
@@ -132,7 +133,7 @@ write_array(array = as.matrix(df_js),
 # Finalise code run
 finalise(handle)
 
-# Write test/array2 v.0.1.0 'username' namespace ---------------------------
+# Write test/array2 v.0.1.0 default namespace ------------------------------
 
 config_file <- paste0(tempfile(), ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
