@@ -32,7 +32,7 @@ script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df_v1 <- data.frame(a = 1:2, b = 3:4)
+df_v1 <- data.frame(a = sample(2000,2), b = sample(2000,2))
 rownames(df_v1) <- 1:2
 dimension_names <- list(rowvalue = rownames(df_v1),
                         colvalue = colnames(df_v1))
@@ -74,7 +74,7 @@ script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df_v2 <- data.frame(a = 5:6, b = 7:8)
+df_v2 <- data.frame(a = sample(2000,2), b = sample(2000,2))
 rownames(df_v2) <- 3:4
 
 write_array(array = as.matrix(df_v2),
@@ -113,7 +113,7 @@ script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
-df_js <- data.frame(a = 9:10, b = 11:12)
+df_js <- data.frame(a = sample(2000,2), b = sample(2000,2))
 rownames(df_js) <- 5:6
 
 write_array(array = as.matrix(df_js),
