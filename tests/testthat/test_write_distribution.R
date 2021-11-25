@@ -1,30 +1,25 @@
 context("Testing create_distribution()")
 
-uid <- random_hash()
-data_product1 <- paste("test/distribution/symptom-delay", uid, sep = "_")
-coderun_description <- "Register a file in the pipeline"
+coderun_description <- "Testing create_distribution()"
 dataproduct_description <- "Estimate of symptom delay"
-namespace1 <- "username"
+uid <- random_hash()
+data_product <- paste("test/distribution/symptom-delay", uid, sep = "_")
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "write_distribution",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = paste0(tempfile(), ".yaml"),
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
+              script = "echo hello") %>%
+add_write(data_product = data_product,
           description = dataproduct_description)
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Run tests ---------------------------------------------------------------
@@ -34,17 +29,17 @@ test_that("function behaves as it should", {
   ind1 <- write_distribution(distribution = "Gaussian",
                             parameters = list(mean = -16.08, SD = 30),
                             handle = handle,
-                            data_product = data_product1,
+                            data_product = data_product,
                             component = "symptom-delay",
                             description = "symptom delay")
   testthat::expect_equal(ind1, 1)
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(nrow(handle$outputs), 1)
-  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  testthat::expect_equal(handle$outputs$data_product, data_product)
   ind2 <- write_distribution(distribution = "Gaussian",
                             parameters = list(mean = -16.08, SD = 30),
                             handle = handle,
-                            data_product = data_product1,
+                            data_product = data_product,
                             component = "symptom-delay",
                             description = "symptom delay")
   testthat::expect_equal(nrow(handle$outputs), 1)

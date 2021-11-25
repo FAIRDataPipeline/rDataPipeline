@@ -20,7 +20,8 @@ reticulate::conda_install(envname = "r-reticulate", packages = "fair-cli",
 reticulate::use_condaenv("r-reticulate")
 fair <- reticulate::import("fair")
 
+# Export init.yaml
 system("fair init --ci")
-system("fair init --export ../ci.yaml")
-
-Sys.setenv(INIT_YAML = file.path(here(), "../ci.yaml"))
+init_yaml <- paste0(tempfile(), ".yaml")
+system(paste("fair init --export", init_yaml))
+Sys.setenv(INIT_YAML = file.path(here(), init_yaml))

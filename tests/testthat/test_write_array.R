@@ -1,22 +1,19 @@
 context("Testing write_array()")
 
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "Try to write two components with the same name"
-data_product1 <- paste("test/array", random_hash(), sep = "_")
+coderun_description <- "Testing write_array()"
+dataproduct_description <- "Data product description"
+data_product <- paste("test/array", random_hash(), sep = "_")
 component1 <- "a/b/c/d"
 component2 <- "another/component"
 version1 <- "0.1.0"
 version2 <- "0.2.0"
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
 # Generate user-written config file
-config_file <- create_config(init_yaml = Sys.getenv("INIT_YAML"),
-                             path = "../write_array.yaml",
-                             description = coderun_description,
-                             script = "")
-add_write(path = config_file,
-          data_product = data_product1,
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = paste0(tempfile(), ".yaml"),
+              description = coderun_description,
+              script = "echo hello") %>%
+add_write(data_product = data_product,
           description = dataproduct_description,
           version = version1)
 
@@ -24,14 +21,9 @@ add_write(path = config_file,
 cmd <- paste("fair run", config_file, "--ci")
 working_config_dir <- system(cmd, intern = TRUE)
 
-
-
-# CLI functions
-# fair_run(path = config_file, skip = TRUE)
-
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -42,7 +34,7 @@ test_that("incorrect array format throws error", {
   testthat::expect_error(
     write_array(array = df,
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = rownames(df),
@@ -55,7 +47,7 @@ test_that("incorrect dimension_names format throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = data.frame(rownames(df)),
@@ -70,7 +62,7 @@ test_that("incorrect dimension_names length throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = 1:3,
@@ -83,7 +75,7 @@ test_that("incorrect dimension_names length throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = rownames(df),
@@ -97,7 +89,7 @@ test_that("incorrect dimension_names length throws error", {
     msg <-
       write_array(array = as.matrix(df),
                   handle = handle,
-                  data_product = data_product1,
+                  data_product = data_product,
                   component = component1,
                   description = "Some description",
                   dimension_names = list(rowvalue = rownames(df),
@@ -111,7 +103,7 @@ test_that("entry is recorded in the handle once", {
   testthat::expect_true(is.null(handle$outputs))
   ind1 <- write_array(array = as.matrix(df),
                       handle = handle,
-                      data_product = data_product1,
+                      data_product = data_product,
                       component = component1,
                       description = "Some description",
                       dimension_names = list(rowvalue = rownames(df),
@@ -119,10 +111,10 @@ test_that("entry is recorded in the handle once", {
   testthat::expect_equal(ind1, 1)
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(nrow(handle$outputs), 1)
-  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  testthat::expect_equal(handle$outputs$data_product, data_product)
   ind2 <- write_array(array = as.matrix(df),
                       handle = handle,
-                      data_product = data_product1,
+                      data_product = data_product,
                       component = component1,
                       description = "Some description",
                       dimension_names = list(rowvalue = rownames(df),
@@ -144,7 +136,7 @@ test_that(".h5 file is generated", {
 test_that(".h5 file is generated with unit and dimension values", {
   ind <- write_array(array = as.matrix(df),
                      handle = handle,
-                     data_product = data_product1,
+                     data_product = data_product,
                      component = component2,
                      description = "Some description",
                      dimension_names = list(rowvalue = rownames(df),
