@@ -1,17 +1,6 @@
 library(testthat)
 library(rDataPipeline)
 
-# Don't run tests on CRAN's isolated test rig, since they depend on a local
-# registry and CLI being installed and will therefore fail.
-
-if (Sys.getenv("_RUN_TESTS_") != "") {
-  Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
-  endpoint <- Sys.getenv("FDP_endpoint")
-  testthat::test_check("rDataPipeline")
-}
-
-# Sys.setenv(`_RUN_TESTS_` = "true")
-
 # Activate virtual environment (for fair CLI)
 reticulate::conda_create("r-reticulate", python_version = 3.8)
 Sys.setenv(RETICULATE_PYTHON = file.path("~", "anaconda3", "envs",
@@ -26,3 +15,14 @@ system("fair init --ci")
 init_yaml <- paste0(tempfile(), ".yaml")
 system(paste("fair init --export", init_yaml))
 Sys.setenv(INIT_YAML = init_yaml)
+
+# Sys.setenv(`_RUN_TESTS_` = "true")
+
+# Don't run tests on CRAN's isolated test rig, since they depend on a local
+# registry and CLI being installed and will therefore fail.
+
+if (Sys.getenv("_RUN_TESTS_") != "") {
+  Sys.setenv(FDP_endpoint = "http://localhost:8000/api/")
+  endpoint <- Sys.getenv("FDP_endpoint")
+  testthat::test_check("rDataPipeline")
+}
