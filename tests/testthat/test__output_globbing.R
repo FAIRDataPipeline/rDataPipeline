@@ -70,48 +70,48 @@ create_config(init_yaml = Sys.getenv("INIT_YAML"),
 
 # Generate working config file
 cmd <- paste("fair run", config_file, "--ci")
-working_config_dir <- system(cmd, intern = TRUE)
-
-# Initialise code run
-config <- file.path(working_config_dir, "config.yaml")
-script <- file.path(working_config_dir, "script.sh")
-handle <- initialise(config, script)
-
-test_that("data products recorded in working config", {
-  writes <- handle$yaml$write
-  testthat::expect_equal(writes[[1]]$data_product, data_product3)
-  testthat::expect_equal(writes[[2]]$data_product, data_product2)
-  testthat::expect_equal(writes[[3]]$data_product, data_product1)
-
-  testthat::expect_equal(writes[[1]]$use$version, "1.0.0")
-  testthat::expect_equal(writes[[2]]$use$version, "1.0.0")
-  testthat::expect_equal(writes[[3]]$use$version, "1.0.0")
-
-  aliases <- find_write_match(handle, data_product3)
-  testthat::expect_true(all(aliases %in% c(data_product1, data_product2,
-                                           data_product3)))
-})
-
-data_product4 <- file.path(dirname(data_product3), "new")
-
-# Write data
-path4 <- link_write(handle = handle,
-                    data_product = data_product4)
-uid4 <- paste0(uid, "_1")
-df4 <- data.frame(a = uid4, b = uid4)
-write.csv(df4, path4)
-
-path5 <- link_write(handle = handle,
-                    data_product = data_product2)
-uid5 <- paste0(uid, "_1")
-df5 <- data.frame(a = uid5, b = uid5)
-write.csv(df5, path5)
-
-test_that("data products recorded in working config", {
-  outputs <- handle$outputs
-  testthat::expect_equal(outputs$data_product[1], data_product4)
-  testthat::expect_equal(outputs$data_product[2], data_product2)
-
-  testthat::expect_equal(outputs$use_version[1], "1.0.0")
-  testthat::expect_equal(outputs$use_version[2], "1.0.0")
-})
+# working_config_dir <- system(cmd, intern = TRUE)
+#
+# # Initialise code run
+# config <- file.path(working_config_dir, "config.yaml")
+# script <- file.path(working_config_dir, "script.sh")
+# handle <- initialise(config, script)
+#
+# test_that("data products recorded in working config", {
+#   writes <- handle$yaml$write
+#   testthat::expect_equal(writes[[1]]$data_product, data_product3)
+#   testthat::expect_equal(writes[[2]]$data_product, data_product2)
+#   testthat::expect_equal(writes[[3]]$data_product, data_product1)
+#
+#   testthat::expect_equal(writes[[1]]$use$version, "1.0.0")
+#   testthat::expect_equal(writes[[2]]$use$version, "1.0.0")
+#   testthat::expect_equal(writes[[3]]$use$version, "1.0.0")
+#
+#   aliases <- find_write_match(handle, data_product3)
+#   testthat::expect_true(all(aliases %in% c(data_product1, data_product2,
+#                                            data_product3)))
+# })
+#
+# data_product4 <- file.path(dirname(data_product3), "new")
+#
+# # Write data
+# path4 <- link_write(handle = handle,
+#                     data_product = data_product4)
+# uid4 <- paste0(uid, "_1")
+# df4 <- data.frame(a = uid4, b = uid4)
+# write.csv(df4, path4)
+#
+# path5 <- link_write(handle = handle,
+#                     data_product = data_product2)
+# uid5 <- paste0(uid, "_1")
+# df5 <- data.frame(a = uid5, b = uid5)
+# write.csv(df5, path5)
+#
+# test_that("data products recorded in working config", {
+#   outputs <- handle$outputs
+#   testthat::expect_equal(outputs$data_product[1], data_product4)
+#   testthat::expect_equal(outputs$data_product[2], data_product2)
+#
+#   testthat::expect_equal(outputs$use_version[1], "1.0.0")
+#   testthat::expect_equal(outputs$use_version[2], "1.0.0")
+# })
