@@ -1,55 +1,48 @@
 context("Testing finalise()")
 
-uid <- as.character(random_hash())
-data_product1 <- file.path("real", "data", uid, "1")
-dataproduct_description <- "a nice description"
-coderun_description <- "Do nothing"
-namespace1 <- "username"
-
-endpoint <- Sys.getenv("FDP_endpoint")
+coderun_description <- "Testing finalise()"
+dataproduct_description <- "A nice description"
+data_product1 <- file.path("real", "data", random_hash(), "1")
 
 # delete_if_empty ---------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "finalise",
-                         paste0("config_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
+              script = "echo hello")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 finalise(handle, delete_if_empty = TRUE)
 
 # delete_if_duplicate -----------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "finalise",
-                         paste0("config2_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          file_type = "csv")
+              script = "echo hello") %>%
+  add_write(data_product = data_product1,
+            description = dataproduct_description,
+            file_type = "csv")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -61,26 +54,24 @@ finalise(handle)
 
 # Now try to write a duplicate file!
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "finalise",
-                         paste0("config3_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          file_type = "csv",
-          version = "${{MINOR}}")
+              script = "echo hello") %>%
+  add_write(data_product = data_product1,
+            description = dataproduct_description,
+            file_type = "csv",
+            version = "${{MINOR}}")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
