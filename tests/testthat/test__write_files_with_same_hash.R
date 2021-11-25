@@ -1,43 +1,40 @@
 context("Testing multiple files with the same hash")
 
+coderun_description <- "Testing writing files with the same hash"
+dataproduct_description <- "A test array"
 uid <- as.character(random_hash())
 data_product1 <- paste0("data_product/same_hash/", uid, "/1")
 data_product2 <- paste0("data_product/same_hash/", uid, "/2")
 component <- "component1/a/s/d/f/s"
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "a test array"
-version1 <- "0.1.0"
-namespace1 <- "testing"
-
-endpoint <- Sys.getenv("FDP_endpoint")
+version <- "0.1.0"
 
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "samehash",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          version = version1,
-          file_type = "txt")
-add_write(path = config_file,
-          data_product = data_product2,
-          description = dataproduct_description,
-          version = version1,
-          file_type = "txt")
+              script = "echo hello") %>%
+  add_write(data_product = data_product1,
+            description = dataproduct_description,
+            version = version,
+            file_type = "txt") %>%
+  add_write(data_product = data_product2,
+            description = dataproduct_description,
+            version = version,
+            file_type = "txt")
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
+
+namespace <- handle$yaml$run_metadata$default_output_namespace
 
 # Write data
 path1 <- link_write(handle, data_product1)
@@ -92,26 +89,22 @@ test_that("data registry shows correct path", {
 
 # -------------------------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "samehash",
-                         paste0("config2_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- paste0(tempfile(), ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
+              script = "echo hello") %>%
+  add_read(data_product = data_product1) %>%
+  add_read(data_product = data_product2)
 
-add_read(path = config_file,
-         data_product = data_product1)
-add_read(path = config_file,
-         data_product = data_product2)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 path1 <- link_read(handle, data_product1)
