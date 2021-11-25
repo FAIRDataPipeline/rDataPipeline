@@ -1,10 +1,8 @@
 context("Testing write_array()")
 
-uid <- random_hash()
-namespace1 <- "username"
 coderun_description <- "Register a file in the pipeline"
 dataproduct_description <- "Try to write two components with the same name"
-data_product1 <- paste("test/array", uid, sep = "_")
+data_product1 <- paste("test/array", random_hash(), sep = "_")
 component1 <- "a/b/c/d"
 component2 <- "another/component"
 version1 <- "0.1.0"
@@ -12,20 +10,24 @@ version2 <- "0.2.0"
 
 endpoint <- Sys.getenv("FDP_endpoint")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "write_array",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
-              description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
+# Generate user-written config file
+config_file <- create_config(init_yaml = Sys.getenv("INIT_YAML"),
+                             path = "write_array.yaml",
+                             description = coderun_description,
+                             script = "")
 add_write(path = config_file,
           data_product = data_product1,
           description = dataproduct_description,
           version = version1)
 
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+system(cmd)
+
+
+
 # CLI functions
-fair_run(path = config_file, skip = TRUE)
+# fair_run(path = config_file, skip = TRUE)
 
 # Initialise code run
 config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
@@ -93,14 +95,14 @@ test_that("incorrect dimension_names length throws error", {
                "dimensions in array")
   testthat::expect_error(
     msg <-
-    write_array(array = as.matrix(df),
-                handle = handle,
-                data_product = data_product1,
-                component = component1,
-                description = "Some description",
-                dimension_names = list(rowvalue = rownames(df),
-                                       colvalue = colnames(df),
-                                       othervalue = colnames(df))),
+      write_array(array = as.matrix(df),
+                  handle = handle,
+                  data_product = data_product1,
+                  component = component1,
+                  description = "Some description",
+                  dimension_names = list(rowvalue = rownames(df),
+                                         colvalue = colnames(df),
+                                         othervalue = colnames(df))),
     regexp = msg
   )
 })
