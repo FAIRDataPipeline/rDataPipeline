@@ -245,7 +245,7 @@ handle <- initialise(config, script)
 # Run tests
 test_that("df_v1 is returned", {
   tmp <- read_array(handle = handle,
-                    data_product = data_product1,
+                    data_product = "one",
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_v1)
 
@@ -262,21 +262,21 @@ test_that("df_v1 is returned", {
 
 test_that("df_v2 is returned", {
   tmp <- read_array(handle = handle,
-                    data_product = data_product2,
+                    data_product = "two",
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_v2)
 })
 
 test_that("df_js is returned", {
   tmp <- read_array(handle = handle,
-                    data_product = data_product3,
+                    data_product = "three",
                     component = component)
   expect_equivalent(as.data.frame(tmp), df_js)
 })
 
 test_that("df2 is returned", {
   tmp <- read_array(handle = handle,
-                    data_product = data_product4,
+                    data_product = "four",
                     component = component)
   expect_equivalent(as.data.frame(tmp), df2)
 })
