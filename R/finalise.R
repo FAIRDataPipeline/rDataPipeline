@@ -202,9 +202,8 @@ finalise <- function(handle,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      usethis::ui_done(
-        paste("Writing", usethis::ui_value(use_data_product_runid),
-              "to local registry"))
+      msg <- "Registering {ui_value(use_data_product_runid)} in local registry"
+      usethis::ui_done(msg)
 
       # Update handle
       handle$finalise_output_hash(
@@ -244,10 +243,10 @@ finalise <- function(handle,
         component_url <- new_object_component(name = write_component,
                                               object_url = object_url,
                                               endpoint = endpoint)
-
-        usethis::ui_done(paste("Writing", usethis::ui_value(write_component),
-                               usethis::ui_field("component"),
-                               "to local registry"))
+        field <- "component"
+        msg <- "Registering {ui_value(write_component)} {ui_field(field)}
+        in local registry"
+        usethis::ui_done(msg)
       }
 
       # Update handle
