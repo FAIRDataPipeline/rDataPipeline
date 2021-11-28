@@ -96,7 +96,7 @@ fdp <- R6::R6Class("fdp", list(
       usethis::ui_info("Inputs: {ui_value(msg)}")
 
     } else {
-      cat("\n\n", "Inputs:", "\n")
+      usethis::ui_info("Inputs:")
       self$inputs %>%
         dplyr::select(data_product) %>%
         print()
@@ -107,11 +107,10 @@ fdp <- R6::R6Class("fdp", list(
       usethis::ui_info("Outputs: {ui_value(msg)}")
 
     } else {
-      tmp <- self$outputs %>%
-        dplyr::select(use_data_product, use_component, use_version)
-      usethis::cli_alert_info("Outputs: {ui_value(tmp)}")
-
-
+      usethis::ui_info("Outputs:")
+      self$outputs %>%
+        dplyr::select(use_data_product, use_component, use_version) %>%
+        print()
     }
 
     invisible(self)
