@@ -376,6 +376,8 @@ finalise <- function(handle,
                            outputs = as.list(handle$outputs$component_url)))
   }
 
+  # write code run UUID to coderuns.txt -------------------------------------
+
   code_run_uuid <- get_entity(handle$code_run)$uuid
 
   coderuns_txt <- file.path(handle$fdp_config_dir, paste0("coderuns.txt"))
