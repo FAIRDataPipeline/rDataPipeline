@@ -27,6 +27,7 @@ Imports:
     yaml
 Suggests:
     units,
+    here,
     testthat,
     reticulate
 biocViews: 

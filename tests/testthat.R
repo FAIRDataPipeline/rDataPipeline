@@ -1,5 +1,6 @@
 library(testthat)
 library(rDataPipeline)
+library(here())
 
 # Activate virtual environment (for fair CLI)
 reticulate::conda_create("r-reticulate", python_version = 3.8)
@@ -10,8 +11,9 @@ reticulate::conda_install(envname = "r-reticulate", packages = "fair-cli",
 reticulate::use_condaenv("r-reticulate")
 fair <- reticulate::import("fair")
 
-# Export init.yaml
-system("fair init --ci")
+# If this repository has not yet been initialised by fair CLI, run `init --ci`
+if (!file.exists(file.path(here(), ".fair")))
+  system("fair init --ci")
 init_yaml <- paste0(tempfile(), ".yaml")
 system(paste("fair init --export", init_yaml))
 Sys.setenv(INIT_YAML = init_yaml)
