@@ -16,21 +16,21 @@ add_read(
 )
 }
 \arguments{
-\item{path}{config file path}
+\item{path}{user-written config.yaml file path}
 
-\item{data_product}{data_product field}
+\item{data_product}{\verb{data_product:} field}
 
-\item{component}{component field}
+\item{component}{\verb{component:} field}
 
-\item{version}{(optional) version field}
+\item{version}{(optional) \verb{version:} field}
 
-\item{use_data_product}{(optional) use_data_product field}
+\item{use_data_product}{(optional) \verb{use: data_product:} field}
 
-\item{use_component}{(optional) use_component field}
+\item{use_component}{(optional) \verb{use: component:} field}
 
-\item{use_version}{(optional) use_version field}
+\item{use_version}{(optional) \verb{use: version:} field}
 
-\item{use_namespace}{(optional) use_namespace field}
+\item{use_namespace}{(optional) \verb{use: namespace:} field}
 }
 \description{
 Add data product to \code{read} block of user-written config file. Used in

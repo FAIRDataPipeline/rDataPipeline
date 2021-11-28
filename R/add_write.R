@@ -3,16 +3,16 @@
 #' Add data product to `read` block of user-written config file. Used in
 #' combination with \code{create_config()} for unit testing.
 #'
-#' @param path config file path
-#' @param data_product data_product field
-#' @param description component field
-#' @param version (optional) version field
-#' @param file_type (optional) file type field
-#' @param use_data_product (optional) use_data_product field
-#' @param use_component (optional) use_component field
-#' @param use_version (optional) use_version field
-#' @param use_namespace (optional) use_namespace field
-#' @param use_public (optional) use_public field
+#' @param path user-written config.yaml file path
+#' @param data_product `data_product:` field
+#' @param description `component:` field
+#' @param version (optional) `version:` field
+#' @param file_type (optional) `file_type:` field
+#' @param use_data_product (optional) `use: data_product:` field
+#' @param use_component (optional) `use: component:` field
+#' @param use_version (optional) `use: version:` field
+#' @param use_namespace (optional) `use: namespace:` field
+#' @param use_public (optional) `use: public:` field
 #'
 #' @export
 #' @keywords internal
