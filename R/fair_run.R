@@ -18,7 +18,7 @@ fair_run <- function(path = "config.yaml",
 
   if (file.exists(path)) {
     yaml <- yaml::read_yaml(path)
-    cli::cli_alert_info("Reading {.file {path}}")
+    usethis::ui_info("Reading {ui_path(path)}")
   } else
     usethis::ui_stop(paste(usethis::ui_value(path), "does not exist"))
 
@@ -238,7 +238,7 @@ fair_run <- function(path = "config.yaml",
     sha <- git2r::sha(git2r::last_commit(local_repo))
     run_metadata$latest_commit <- sha
 
-    cli::cli_alert_info("Checking local repository status")
+    usethis::ui_info("Checking local repository status")
 
   } else {
     random_hash <- openssl::sha1(as.character(Sys.time()))
@@ -260,7 +260,7 @@ fair_run <- function(path = "config.yaml",
     }
 
     run_metadata$remote_repo <- repo_name
-    cli::cli_alert_info("Locating remote repository")
+    usethis::ui_info("Locating remote repository")
 
   } else {
     fake_remote_repo <- "https://github.com/fake_org/fake_repo/"
@@ -282,19 +282,19 @@ fair_run <- function(path = "config.yaml",
                        write = working_write)
   yaml::write_yaml(working_yaml, file = config_path)
 
-  cli::cli_alert_success("Writing working {.file {config_file}} to data store")
+  usethis::ui_done("Writing working {ui_path(config_file)} to data store")
 
   # Write submission script to data store -----------------------------------
 
   script_file <- "script.sh"
   submission_script_path <- gsub(config_file, script_file, config_path)
   cat(yaml$run_metadata$script, file = submission_script_path)
-  cli::cli_alert_success("Writing {.file {script_file}} to local data store")
+  usethis::ui_done("Writing {ui_path(script_file)} to local data store")
 
   # Save FDP_CONFIG_DIR in global environment ------------------------------
 
   Sys.setenv(FDP_CONFIG_DIR = configdir)
   variable_name <- "FDP_CONFIG_DIR"
-  cli::cli_alert_success(
-    "Writing {.file {variable_name}} to global environment")
+  usethis::ui_done(
+    "Writing {ui_path(variable_name)} to global environment")
 }

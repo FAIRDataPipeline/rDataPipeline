@@ -69,8 +69,8 @@ read_table <- function(handle,
                  path = path,
                  component_url = read_component_url)
 
-  cli::cli_alert_success(
-    "Reading {.value {read_component}} from {.value {read_dataproduct}}")
+  usethis::ui_done(
+    "Reading {ui_value(read_component)} from {ui_value(read_dataproduct)}")
 
   # Generate output ---------------------------------------------------------
 

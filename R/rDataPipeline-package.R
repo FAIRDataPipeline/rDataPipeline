@@ -10,7 +10,6 @@
 #' @docType package
 #'
 #' @rawNamespace import(assertthat, except = has_name)
-#' @import cli
 #' @import configr
 #' @import dplyr
 #' @importFrom git2r sha last_commit remote_url

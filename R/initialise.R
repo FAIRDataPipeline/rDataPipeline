@@ -27,7 +27,7 @@ initialise <- function(config, script) {
   endpoint <- run_metadata$local_data_registry_url
 
   filename <- basename(config)
-  cli::cli_alert_info("Reading {.file {filename}} from data store")
+  usethis::ui_info("Reading {ui_path(filename)} from data store")
 
   # Record config.yaml location in data registry ----------------------------
 
@@ -83,7 +83,7 @@ initialise <- function(config, script) {
     file_type_url = config_filetype_url,
     endpoint = endpoint)
 
-  cli::cli_alert_success("Writing {.file {config}} to local registry")
+  usethis::ui_done("Writing {ui_path(config)} to local registry")
 
   # Record submission script location in data registry ----------------------
 
@@ -130,7 +130,7 @@ initialise <- function(config, script) {
     file_type_url = script_filetype_url,
     endpoint = endpoint)
 
-  cli::cli_alert_success("Writing {.file {script}} to local registry")
+  usethis::ui_done("Writing {ui_path(script)} to local registry")
 
   # Record code repo location in data registry ------------------------------
 
@@ -210,7 +210,7 @@ initialise <- function(config, script) {
     }
   }
 
-  cli::cli_alert_success("Writing {.file {repo_name}} to local registry")
+  usethis::ui_done("Writing {ui_path(repo_name)} to local registry")
 
   # Record the code run in the data registry --------------------------------
 
@@ -234,7 +234,7 @@ initialise <- function(config, script) {
   }
 
   field <- "code_run"
-  cli::cli_alert_success("Writing new {.field {field}} to local registry")
+  usethis::ui_done("Writing new {ui_field(field)} to local registry")
 
   # Write to handle
   fdp$new(yaml = yaml,

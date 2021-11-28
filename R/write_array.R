@@ -171,8 +171,8 @@ write_array <- function(array,
 
   rhdf5::h5closeAll()
 
-  cli::cli_alert_success(
-    "Writing {.value {component}} to {.value {write_data_product}}")
+  usethis::ui_done(
+    "Writing {ui_value(component)} to {ui_value(write_data_product)}")
 
   # Write to handle ---------------------------------------------------------
 
