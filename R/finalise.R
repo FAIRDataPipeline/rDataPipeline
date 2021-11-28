@@ -202,7 +202,8 @@ finalise <- function(handle,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      msg <- "Registering {ui_value(use_data_product_runid)} in local registry"
+      field <- "data_product"
+      msg <- "Registering {ui_value(use_data_product_runid)} {ui_field(field)} in local registry"
       usethis::ui_done(msg)
 
       # Update handle
@@ -244,8 +245,7 @@ finalise <- function(handle,
                                               object_url = object_url,
                                               endpoint = endpoint)
         field <- "component"
-        msg <- "Registering {ui_value(write_component)} {ui_field(field)}
-        in local registry"
+        msg <- "Registering {ui_value(write_component)} {ui_field(field)} in local registry"
         usethis::ui_done(msg)
       }
 
