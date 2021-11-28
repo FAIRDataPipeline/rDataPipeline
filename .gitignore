@@ -50,3 +50,4 @@ docs
 /test
 /tests/testthat/test
 /data_store
+sandbox.R
