@@ -7,7 +7,7 @@ data_product1 <- file.path("real", "data", random_hash(), "1")
 # delete_if_empty ---------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -27,7 +27,7 @@ finalise(handle, delete_if_empty = TRUE)
 # delete_if_duplicate -----------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -55,7 +55,7 @@ finalise(handle)
 # Now try to write a duplicate file!
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

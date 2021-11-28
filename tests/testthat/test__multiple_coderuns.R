@@ -8,7 +8,7 @@ uid <- as.character(random_hash())
 data_product <- file.path("output", "data", uid, "*")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

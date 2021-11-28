@@ -5,7 +5,7 @@ coderun_description <- "Testing initialise()"
 # delete_if_empty ---------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

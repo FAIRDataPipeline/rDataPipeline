@@ -11,7 +11,7 @@ version <- "0.1.0"
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -90,7 +90,7 @@ test_that("data registry shows correct path", {
 # -------------------------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

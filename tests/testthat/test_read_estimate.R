@@ -9,7 +9,7 @@ component1 <- "asymptomatic-period"
 component2 <- "asymptomatic-period2"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -61,7 +61,7 @@ file.remove(handle$outputs$path[index])
 # Start tests -------------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

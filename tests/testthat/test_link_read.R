@@ -5,7 +5,7 @@ dataproduct_description <- "A csv file"
 data_product <- paste("test/csv", random_hash(), sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -34,7 +34,7 @@ finalise(handle)
 # Run tests ---------------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

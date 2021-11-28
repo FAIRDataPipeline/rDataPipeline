@@ -9,7 +9,7 @@ data_product1 <- file.path("data_product", "read", "wildcard", uid, "1")
 data_product2 <- file.path("data_product", "read", "wildcard", uid, "1", "2")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -48,7 +48,7 @@ finalise(handle)
 data_product3 <- file.path("data_product", "read", "wildcard", uid, "*")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

@@ -11,7 +11,7 @@ data_product <- paste("findme/test/array", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -65,7 +65,7 @@ data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -115,7 +115,7 @@ data_product <- paste("findme/test/array2b", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -178,7 +178,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -244,7 +244,7 @@ component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -311,7 +311,7 @@ data_product <- paste("findme/test/array5-one", uid, sep = "_")
 data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -370,7 +370,7 @@ finalise(handle)
 # Test writing issues to multiple objects by index ------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -416,7 +416,7 @@ test_that("handle contains issues block", {
 # Test writing issues to config -------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -462,7 +462,7 @@ test_that("config issue is in registry", {
 # Test writing issues to script -------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -508,7 +508,7 @@ test_that("script issue is in registry", {
 # Test writing issues to GitHub repo --------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

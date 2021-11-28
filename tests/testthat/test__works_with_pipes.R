@@ -9,7 +9,7 @@ dataproduct_description <- "Test data"
 data_product <- paste("test/array", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -44,7 +44,7 @@ handle %>% finalise()
 # Test read_array() -------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -76,7 +76,7 @@ dataproduct_description <- "Test data"
 data_product <- paste("test/table", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -110,7 +110,7 @@ testthat::test_that("write_array() works with pipes", {
 # Test read_table() -------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -140,7 +140,7 @@ testthat::test_that("read_table() works with pipes", {
 data_product <- paste("test/link", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -172,7 +172,7 @@ testthat::test_that("link_write() works with pipes", {
 data_product <- paste("test/link", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -202,7 +202,7 @@ testthat::test_that("link_read() works with pipes", {
 data_product <- paste("test/estimate", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -236,7 +236,7 @@ testthat::test_that("write_estimate() works with pipes", {
 data_product <- paste("test/estimate", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -266,7 +266,7 @@ testthat::test_that("read_estimate() works with pipes", {
 data_product <- paste("test/distribution", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -302,7 +302,7 @@ testthat::test_that("write_distribution() works with pipes", {
 data_product <- paste("test/distribution", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

@@ -13,7 +13,7 @@ version2 <- "0.2.0"
 # Write v0.1.0 of test/array to local registry and data store ---------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -72,7 +72,7 @@ test_that("findme prints output", {
 # Write v0.2.0 of test/array to local registry and data store ---------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -131,7 +131,7 @@ uid <- as.character(random_hash())
 data_product3 <- paste("findme/test/array2", uid, sep = "_")
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

@@ -9,7 +9,7 @@ data_product1 <- file.path("output", "data", paste0(uid, "_1"))
 data_product2 <- file.path("output", "data", paste0(uid, "_2"))
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -73,7 +73,7 @@ test_that("data products recorded in working config", {
 # Read from registry -------------------------------------------------------
 
 # Generate user-written config file
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,

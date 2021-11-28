@@ -14,7 +14,7 @@ namespace <- "johnsmith"
 
 # Write test/array v.0.1.0 default namespace -------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -56,7 +56,7 @@ finalise(handle)
 
 # Write test/array v.0.2.0 default namespace -------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -94,7 +94,7 @@ finalise(handle)
 
 # Write test/array v.0.1.0 'johnsmith' namespace --------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -133,7 +133,7 @@ finalise(handle)
 
 # Write test/array2 v.0.1.0 default namespace ------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -171,7 +171,7 @@ finalise(handle)
 
 # Multiple components -----------------------------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -214,7 +214,7 @@ finalise(handle)
 
 # Test use block ----------------------------------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
@@ -284,7 +284,7 @@ test_that("df2 is returned", {
 
 # Test multiple components ------------------------------------------------
 
-config_file <- paste0(tempfile(), ".yaml")
+config_file <- tempfile(fileext = ".yaml")
 create_config(init_yaml = Sys.getenv("INIT_YAML"),
               path = config_file,
               description = coderun_description,
