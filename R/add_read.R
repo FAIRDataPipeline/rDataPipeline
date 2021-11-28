@@ -15,23 +15,6 @@
 #' @export
 #' @keywords internal
 #'
-#' @examples
-#' \dontrun{
-#' path <- "test_config/config.yaml"
-#'
-#' # Write run_metadata block
-#' create_config(path = path,
-#'               description = "test",
-#'               input_namespace = "test_user",
-#'               output_namespace = "test_user")
-#'
-#' # Write read block
-#' add_read(path = path,
-#'          data_product = "test/array",
-#'          component = "level/a/s/d/f/s",
-#'          version = "0.2.0")
-#' }
-#'
 add_read <- function(path,
                      data_product,
                      component,
