@@ -14,6 +14,8 @@ fair <- reticulate::import("fair")
 # If this repository has not yet been initialised by fair CLI, run `init --ci`
 if (!file.exists(file.path(here(), ".fair")))
   system("fair init --ci")
+
+# Export init.yaml (change this to `.fair/cli-config.yaml` after CLI updates)
 init_yaml <- paste0(tempfile(), ".yaml")
 system(paste("fair init --export", init_yaml))
 Sys.setenv(INIT_YAML = init_yaml)
