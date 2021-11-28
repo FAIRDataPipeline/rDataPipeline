@@ -12,6 +12,7 @@
 #' attributes, if available
 #'
 #' @export
+#' @family read functions
 #'
 read_array <- function(handle,
                        data_product,

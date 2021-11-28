@@ -11,6 +11,7 @@
 #' attributes, if available
 #'
 #' @export
+#' @family read functions
 #'
 read_table <- function(handle,
                        data_product,

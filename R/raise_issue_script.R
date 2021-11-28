@@ -6,7 +6,7 @@
 #' @param severity a \code{numeric} value specifying the severity
 #'
 #' @export
-#' @family raising issues
+#' @family issue raising functions
 #'
 raise_issue_script <- function(handle,
                                issue,

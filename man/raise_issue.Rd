@@ -35,9 +35,9 @@ reference the whole_object}
 Raise issue with data product object or component
 }
 \seealso{
-Other raising issues: 
+Other issue raising functions: 
 \code{\link{raise_issue_config}()},
 \code{\link{raise_issue_repo}()},
 \code{\link{raise_issue_script}()}
 }
-\concept{raising issues}
+\concept{issue raising functions}

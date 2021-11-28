@@ -14,6 +14,7 @@
 #' @param delete_if_duplicate (optional) default is `FALSE`; see Details
 #'
 #' @export
+#' @family core API functions
 #'
 finalise <- function(handle,
                      delete_if_empty = FALSE,

@@ -21,3 +21,10 @@ required by the Data Pipeline API
 Reads in a working config file, generates new Code Run entry, and returns
 a handle containing various metadata.
 }
+\seealso{
+Other core API functions: 
+\code{\link{finalise}()},
+\code{\link{find_read_match}()},
+\code{\link{find_write_match}()}
+}
+\concept{core API functions}

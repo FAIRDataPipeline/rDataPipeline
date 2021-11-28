@@ -52,6 +52,7 @@ Function to populate hdf5 file with array type data.
 }
 \seealso{
 Other write functions: 
+\code{\link{link_write}()},
 \code{\link{write_distribution}()},
 \code{\link{write_estimate}()},
 \code{\link{write_table}()}

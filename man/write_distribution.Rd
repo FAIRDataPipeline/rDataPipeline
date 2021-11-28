@@ -36,6 +36,7 @@ Write distribution component to TOML file
 }
 \seealso{
 Other write functions: 
+\code{\link{link_write}()},
 \code{\link{write_array}()},
 \code{\link{write_estimate}()},
 \code{\link{write_table}()}

@@ -11,7 +11,7 @@
 #' reference the whole_object
 #'
 #' @export
-#' @family raising issues
+#' @family issue raising functions
 #'
 raise_issue <- function(index,
                         handle,

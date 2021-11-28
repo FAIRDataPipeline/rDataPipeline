@@ -8,6 +8,7 @@
 #' @param component a \code{string} specifying a data product component
 #'
 #' @export
+#' @family read functions
 #'
 read_distribution <- function(handle,
                               data_product,

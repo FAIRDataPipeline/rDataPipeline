@@ -21,3 +21,11 @@ attributes, if available
 \description{
 Function to read table type data from hdf5 file.
 }
+\seealso{
+Other read functions: 
+\code{\link{link_read}()},
+\code{\link{read_array}()},
+\code{\link{read_distribution}()},
+\code{\link{read_estimate}()}
+}
+\concept{read functions}

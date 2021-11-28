@@ -4,6 +4,7 @@
 #'
 #' @name fdp-class
 #' @rdname fdp-class
+#' @keywords internal
 #'
 fdp <- R6::R6Class("fdp", list(
   #' @field yaml a \code{list} containing the contents of the working

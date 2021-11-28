@@ -18,9 +18,9 @@ by the Data Pipeline API}
 Raise issue with submission script
 }
 \seealso{
-Other raising issues: 
+Other issue raising functions: 
 \code{\link{raise_issue_config}()},
 \code{\link{raise_issue_repo}()},
 \code{\link{raise_issue}()}
 }
-\concept{raising issues}
+\concept{issue raising functions}

@@ -12,6 +12,7 @@
 #' required by the Data Pipeline API
 #'
 #' @export
+#' @family core API functions
 #'
 initialise <- function(config, script) {
 

@@ -29,6 +29,7 @@ added.
 }
 \seealso{
 Other write functions: 
+\code{\link{link_write}()},
 \code{\link{write_array}()},
 \code{\link{write_distribution}()},
 \code{\link{write_table}()}
