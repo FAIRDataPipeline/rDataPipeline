@@ -70,8 +70,9 @@ finalise <- function(handle,
         this_write$data_product_decription)
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
-      write_namespace_url <- new_namespace(name = write_namespace,
-                                           endpoint = endpoint)
+      write_namespace_url <- get_url("namespace",
+                                     list(name = write_namespace),
+                                     endpoint = endpoint)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
