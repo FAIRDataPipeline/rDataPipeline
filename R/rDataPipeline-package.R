@@ -25,4 +25,6 @@
 #' @importFrom utils download.file read.csv unzip write.csv type.convert
 #' @import yaml
 #'
+#' @keywords internal
+#'
 NULL

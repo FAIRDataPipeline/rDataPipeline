@@ -7,6 +7,7 @@
 #'
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
+#' @noRd
 #'
 get_fields <- function(table, endpoint = "http://localhost:8000/api/") {
 

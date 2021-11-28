@@ -3,6 +3,7 @@
 #' Searches directory for duplicate files and increments filename.
 #'
 #' @param path path
+#' @noRd
 #'
 increment_filename <- function(path) {
 

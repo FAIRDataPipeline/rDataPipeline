@@ -5,6 +5,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
+#' @keywords internal
 #'
 fair_run <- function(path = "config.yaml",
                      endpoint = "http://localhost:8000/api/",

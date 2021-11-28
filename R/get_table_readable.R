@@ -4,7 +4,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return a dataframe of readable fields and their properties
-#' @keywords internal
+#' @noRd
 #'
 get_table_readable <- function(table, endpoint) {
   # if(! check_table_exists(table))

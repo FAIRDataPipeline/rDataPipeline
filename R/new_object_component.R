@@ -21,7 +21,8 @@
 #' \code{attach_issue()} and associated functionality to attach issues to
 #' objects and object components.
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_object_component <- function(object_url,
                                  name,

@@ -9,7 +9,8 @@
 #' annotation to associate with this \code{keyword}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_keyword <- function(object_url,
                         keyphrase,

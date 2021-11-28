@@ -11,8 +11,7 @@
 #'
 #' @return Returns a \code{data.frame} of entries in table, default is limited
 #' to 100 entries
-#'
-#' @family get functions
+#' @noRd
 #'
 get_existing <- function(table,
                          limit_results = TRUE,

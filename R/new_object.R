@@ -12,7 +12,8 @@
 #' of an entry in the \code{file_type} table
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_object <- function(description,
                        storage_location_url,

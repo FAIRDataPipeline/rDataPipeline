@@ -2,6 +2,8 @@
 #'
 #' @param self self
 #'
+#' @noRd
+#'
 create_index <- function(self) {
 
   tmp <- 1

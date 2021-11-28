@@ -5,10 +5,9 @@
 #' @param filename a \code{string} specifying a filename
 #'
 #' @return Returns the names of the items at the root of the file
-#'
-#' @family get functions
-#'
 #' @export
+#' @family get functions
+#' @keywords internal
 #'
 get_components <- function(filename) {
 

@@ -6,6 +6,7 @@
 #' @param endpoint endpoint
 #'
 #' @export
+#' @keywords internal
 #'
 get_dataproduct <- function(data_product,
                             version,

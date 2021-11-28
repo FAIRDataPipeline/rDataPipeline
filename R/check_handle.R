@@ -6,6 +6,8 @@
 #' @param what element in handle -- one of c("inputs", "outputs")
 #' @param component a \code{string} specifying the name of the component
 #'
+#' @noRd
+#'
 check_handle <- function(handle, data_product, what, component) {
 
   # link_read() / link_write() functions

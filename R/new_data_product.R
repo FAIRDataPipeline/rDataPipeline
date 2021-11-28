@@ -11,7 +11,8 @@
 #' \code{namespace} table
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_data_product <- function(name,
                              version,

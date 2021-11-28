@@ -5,6 +5,8 @@
 #' @param this_issue this_issue
 #' @param type type
 #'
+#' @noRd
+#'
 register_issue_script <- function(handle,
                                   this_issue,
                                   type) {

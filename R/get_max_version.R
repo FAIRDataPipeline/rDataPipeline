@@ -5,6 +5,8 @@
 #' @param data_product data_product
 #' @param namespace_id namespace_id
 #'
+#' @noRd
+#'
 get_max_version <- function(data_product, namespace_id) {
 
   entries <- get_entry("data_product",

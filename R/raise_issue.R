@@ -1,4 +1,4 @@
-#' raise_issue
+#' Raise issue with data product object or component
 #'
 #' @param index index returned from `link_*()`, `read_()`, or `write()`
 #' @param handle an object of class \code{fdp, R6} containing metadata required
@@ -11,6 +11,7 @@
 #' reference the whole_object
 #'
 #' @export
+#' @family raising issues
 #'
 raise_issue <- function(index,
                         handle,

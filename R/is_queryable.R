@@ -9,6 +9,7 @@
 #'
 #' @return Returns \code{TRUE} if the entry is queryable and \code{FALSE} if it
 #' isn't
+#' @noRd
 #'
 is_queryable <- function(table, query, method, endpoint) {
 

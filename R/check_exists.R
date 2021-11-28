@@ -8,6 +8,7 @@
 #'
 #' @return Returns \code{TRUE} if the entry exists and \code{FALSE} if it
 #' doesn't
+#' @noRd
 #'
 check_exists <- function(table,
                          query) {

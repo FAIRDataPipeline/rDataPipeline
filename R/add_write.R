@@ -15,6 +15,7 @@
 #' @param use_public (optional) use_public field
 #'
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

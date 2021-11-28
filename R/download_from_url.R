@@ -9,6 +9,7 @@
 #' the saved file)
 #'
 #' @family download functions
+#' @noRd
 #'
 download_from_url <- function(source_root,
                               source_path,

@@ -9,7 +9,8 @@
 #' which the \code{issue} is associated; this can be an empty list
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_issue <- function(severity,
                       description,

@@ -4,6 +4,8 @@
 #' @param data_product data_product
 #' @param namespace_id namespace_id
 #'
+#' @noRd
+#'
 resolve_version <- function(version, data_product, namespace_id) {
 
   # Escape wildcard

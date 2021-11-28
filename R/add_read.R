@@ -13,6 +13,7 @@
 #' @param use_namespace (optional) use_namespace field
 #'
 #' @export
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

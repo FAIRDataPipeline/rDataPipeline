@@ -8,7 +8,8 @@
 #' \code{author}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_user_author <- function(user_url,
                             author_url,

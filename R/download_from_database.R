@@ -9,6 +9,7 @@
 #' be overwritten if it already exists
 #'
 #' @family download functions
+#' @noRd
 #'
 download_from_database <- function(source_root,
                                    source_path,

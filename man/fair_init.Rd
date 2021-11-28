@@ -19,3 +19,4 @@ identifier (\emph{e.g.} ORCiD or ROR ID) of the \code{author}}
 \description{
 fair_init
 }
+\keyword{internal}

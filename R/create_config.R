@@ -13,6 +13,7 @@
 #' overwritten
 #'
 #' @export
+#' @keywords internal
 #'
 create_config <- function(init_yaml,
                           path,

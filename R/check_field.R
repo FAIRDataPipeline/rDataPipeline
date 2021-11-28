@@ -7,6 +7,8 @@
 #' @param method a \code{string} specifying the method, c("GET", "POST")
 #' @param endpoint endpoint
 #'
+#' @noRd
+#'
 check_field <- function(table,
                         this_field,
                         query_class,

@@ -3,6 +3,7 @@
 #' Generates a random hash
 #'
 #' @export
+#' @noRd
 #'
 random_hash <- function() {
   tmp <- format(Sys.time(), "%Y%m%d%H%M%S%OS3") %>%

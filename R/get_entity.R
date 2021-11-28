@@ -1,6 +1,7 @@
 #' Get entity from url
 #'
 #' @param url a \code{string} specifying the url of an entry
+#' @noRd
 #'
 get_entity <- function(url) {
 

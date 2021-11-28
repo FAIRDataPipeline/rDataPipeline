@@ -2,7 +2,7 @@
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'
-#' @keywords internal
+#' @noRd
 #'
 github_files <- function(repo) {
   req <- httr::GET(paste("https://api.github.com/repos", repo,

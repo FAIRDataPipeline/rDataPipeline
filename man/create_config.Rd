@@ -24,3 +24,4 @@ Generates (user generated) config.yaml files for unit tests. Use
 \code{add_read()} and \code{add_write()} functions to add read and write
 blocks.
 }
+\keyword{internal}

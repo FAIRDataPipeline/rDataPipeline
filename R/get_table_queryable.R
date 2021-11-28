@@ -4,7 +4,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a character vector of queryable fields
-#' @keywords internal
+#' @noRd
 #'
 get_table_queryable <- function(table, endpoint) {
 

@@ -9,6 +9,7 @@
 #'
 #' @return Returns a string or list of strings specifying the URL or URLs of
 #' entries in a table
+#' @noRd
 #'
 get_id <- function(table,
                    query = list(),

@@ -17,3 +17,10 @@ by the Data Pipeline API}
 \description{
 Raise issue with submission script
 }
+\seealso{
+Other raising issues: 
+\code{\link{raise_issue_config}()},
+\code{\link{raise_issue_repo}()},
+\code{\link{raise_issue}()}
+}
+\concept{raising issues}

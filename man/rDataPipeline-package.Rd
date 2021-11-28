@@ -12,3 +12,4 @@ FAIR Data Pipeline API
 For more information see
 \url{https://www.fairdatapipeline.org/}
 }
+\keyword{internal}
