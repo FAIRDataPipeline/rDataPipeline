@@ -91,26 +91,3 @@ test_that("code run contains no output", {
   coderun_url <- get_entity(handle$code_run)
   testthat::expect_equal(coderun_url$outputs, list())
 })
-
-# clean up working config if data products aren't used --------------------
-
-# Generate user-written config file
-config_file <- tempfile(fileext = ".yaml")
-create_config(init_yaml = Sys.getenv("INIT_YAML"),
-              path = config_file,
-              description = coderun_description,
-              script = "echo hello") %>%
-  add_write(data_product = data_product1,
-            description = dataproduct_description,
-            file_type = "csv")
-
-# Generate working config file
-cmd <- paste("fair run", config_file, "--ci")
-working_config_dir <- system(cmd, intern = TRUE)
-
-# Initialise code run
-config <- file.path(working_config_dir, "config.yaml")
-script <- file.path(working_config_dir, "script.sh")
-handle <- initialise(config, script)
-
-finalise(handle)
