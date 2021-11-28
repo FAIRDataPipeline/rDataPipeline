@@ -26,8 +26,7 @@ initialise <- function(config, script) {
   run_metadata <- yaml$run_metadata
   endpoint <- run_metadata$local_data_registry_url
 
-  filename <- basename(config)
-  usethis::ui_info("Reading {ui_path(filename)} from data store")
+  usethis::ui_done("Reading {ui_path(basename(config))} from data store")
 
   # Record config.yaml location in data registry ----------------------------
 
@@ -83,7 +82,7 @@ initialise <- function(config, script) {
     file_type_url = config_filetype_url,
     endpoint = endpoint)
 
-  usethis::ui_done("Writing {ui_path(config)} to local registry")
+  usethis::ui_done("Registering {ui_path(basename(config))} in local registry")
 
   # Record submission script location in data registry ----------------------
 
@@ -130,7 +129,7 @@ initialise <- function(config, script) {
     file_type_url = script_filetype_url,
     endpoint = endpoint)
 
-  usethis::ui_done("Writing {ui_path(script)} to local registry")
+  usethis::ui_done("Registering {ui_path(basename(script))} in local registry")
 
   # Record code repo location in data registry ------------------------------
 
@@ -210,7 +209,7 @@ initialise <- function(config, script) {
     }
   }
 
-  usethis::ui_done("Writing {ui_path(repo_name)} to local registry")
+  usethis::ui_done("Registering {ui_path(repo_name)} in local registry")
 
   # Record the code run in the data registry --------------------------------
 
@@ -234,7 +233,7 @@ initialise <- function(config, script) {
   }
 
   field <- "code_run"
-  usethis::ui_done("Writing new {ui_field(field)} to local registry")
+  usethis::ui_done("Registering new {ui_field(field)} in local registry")
 
   # Write to handle
   fdp$new(yaml = yaml,
