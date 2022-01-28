@@ -16,6 +16,9 @@ post_data <- function(table, data, endpoint) {
 
   api_url <- paste0(endpoint, table)
   api_url <- file.path(dirname(api_url), basename(api_url), "")
+  if(substring(api_url,nchar(api_url)) != "/"){
+    api_url <- paste0(api_url, "/")
+  }
 
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :

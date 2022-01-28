@@ -43,6 +43,9 @@ finalise <- function(handle,
   # Add local data store root to the data registry
 
   datastore <- handle$yaml$run_metadata$write_data_store
+
+  datastore <- gsub  ( "\\\\",  "/", datastore)
+
   if (grepl("^/", datastore)) {
     appended_datastore <- paste0("file://", datastore)
   } else {
