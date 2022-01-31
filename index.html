@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,18 +35,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rDataPipeline</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.54.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.54.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -54,7 +50,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/FAIRDataPipeline/rDataPipeline/">
+  <a href="https://github.com/FAIRDataPipeline/rDataPipeline/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -72,79 +68,91 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="rdatapipeline" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rdatapipeline" class="anchor"></a>rDataPipeline</h2>
+<div class="section level2">
+<h2 id="rdatapipeline">rDataPipeline<a class="anchor" aria-label="anchor" href="#rdatapipeline"></a>
+</h2>
 
 <p>The R implementation of the FAIR Data Pipeline API.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>In R:</p>
-<pre class="{r}"><code>install.packages(devtools)
-devtools::install_github("FAIRDataPipeline/rDataPipeline")
-library(rDataPipeline)</code></pre>
+<pre class="{r}"><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="va">devtools</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"FAIRDataPipeline/rDataPipeline"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.fairdatapipeline.org/rDataPipeline/">rDataPipeline</a></span><span class="op">)</span></code></pre>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>Example usage can be found <a href="https://www.fairdatapipeline.org/rSimpleModel/articles/SEIRS.html">here</a>.</p>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>Example usage can be found <a href="https://www.fairdatapipeline.org/rSimpleModel/articles/SEIRS.html" class="external-link">here</a>.</p>
 </div>
-<div id="more-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-information" class="anchor"></a>More information</h2>
-<p>For more information, please visit the FAIR Data Pipeline <a href="https://fairdatapipeline.github.io">website</a>.</p>
+<div class="section level2">
+<h2 id="more-information">More information<a class="anchor" aria-label="anchor" href="#more-information"></a>
+</h2>
+<p>For more information, please visit the FAIR Data Pipeline <a href="https://fairdatapipeline.github.io" class="external-link">website</a>.</p>
 </div>
 
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/FAIRDataPipeline/rDataPipeline/">https://​github.com/​FAIRDataPipeline/​rDataPipeline/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/FAIRDataPipeline/rDataPipeline/issues">https://​github.com/​FAIRDataPipeline/​rDataPipeline/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=rDataPipeline" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Sonia Mitchell <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0003-1536-2066" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing rDataPipeline</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://FAIRDataPipeline.github.io/rDataPipeline/"><img src="https://img.shields.io/badge/docs-rDataPipeline-blue" alt="docs"></a></li>
-<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/actions"><img src="https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1" alt="test-build"></a></li>
-<li><a href="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline"><img src="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY" alt="codecov"></a></li>
-<li><a href="https://opensource.org/licenses/GPL-3.0"><img src="https://img.shields.io/badge/licence-GPL--3-3891A6" alt="License: GPL-3.0"></a></li>
-<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/software-checklist.md"><img src="https://img.shields.io/badge/software-checklist-3891A6" alt="software-checklist"></a></li>
-<li><a href="https://zenodo.org/badge/latestdoi/265575806"><img src="https://zenodo.org/badge/265575806.svg" alt="Zenodo"></a></li>
+<li>Sonia Mitchell <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0003-1536-2066" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://FAIRDataPipeline.github.io/rDataPipeline/" class="external-link"><img src="https://img.shields.io/badge/docs-rDataPipeline-blue" alt="docs"></a></li>
+<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/actions" class="external-link"><img src="https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1" alt="test-build"></a></li>
+<li><a href="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline" class="external-link"><img src="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY" alt="codecov"></a></li>
+<li><a href="https://opensource.org/licenses/GPL-3.0" class="external-link"><img src="https://img.shields.io/badge/licence-GPL--3-3891A6" alt="License: GPL-3.0"></a></li>
+<li><a href="https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/software-checklist.md" class="external-link"><img src="https://img.shields.io/badge/software-checklist-3891A6" alt="software-checklist"></a></li>
+<li><a href="https://zenodo.org/badge/latestdoi/265575806" class="external-link"><img src="https://zenodo.org/badge/265575806.svg" alt="Zenodo"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Sonia Mitchell.</p>
+  <p></p>
+<p>Developed by Sonia Mitchell.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -152,6 +160,8 @@ library(rDataPipeline)</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

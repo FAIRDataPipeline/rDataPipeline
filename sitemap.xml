@@ -1,297 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/index.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/404.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/add_read.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/add_write.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/authors.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_config.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_dataproduct_exists.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/news/index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_datetime.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/add_read.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_exists.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/add_write.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_field.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_config.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_fields.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_dataproduct_exists.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_handle.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_datetime.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_integer.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_exists.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_local_repo.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_field.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_string.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_fields.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_table_exists.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_handle.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/check_yaml_write.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_integer.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/clean_query.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_local_repo.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/create_config.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_string.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/create_index.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_table_exists.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/create_version_number.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/check_yaml_write.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/download_from_database.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/clean_query.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/download_from_url.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/create_config.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/extract_id.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/create_index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fair_init.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/create_version_number.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fair_run.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/download_from_database.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fdp-class.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/download_from_url.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fdp_resolve_read.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/extract_id.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/fdp_resolve_write.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/fair_init.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/finalise.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/fair_run.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/find_read_match.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/fdp-class.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/find_write_match.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/fdp_resolve_read.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/findme.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/fdp_resolve_write.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_author_url.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/finalise.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_components.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/find_read_match.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_dataproduct.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/find_write_match.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_entity.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/findme.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_entry.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_author_url.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_existing.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_components.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_fields.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_dataproduct.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_file_hash.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_entity.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_github_hash.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_entry.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_id.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_existing.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_index.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_fields.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_max_version.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_file_hash.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_storage_location.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_github_hash.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_table_optional.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_id.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_table_queryable.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_table_readable.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_max_version.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_table_required.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_storage_location.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_table_writable.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_table_optional.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_tables.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_table_queryable.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_token.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_table_readable.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/get_url.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_table_required.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/github_files.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_table_writable.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/increment_filename.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_tables.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/initialise.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_token.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/is_queryable.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/get_url.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/link_read.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/github_files.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/link_write.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/increment_filename.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_author.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_code_repo_release.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/initialise.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_code_run.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/is_queryable.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_data_product.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/link_read.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_external_object.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/link_write.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_file_type.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_author.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_issue.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_code_repo_release.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_keyword.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_code_run.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_licence.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_data_product.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_namespace.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_external_object.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_object.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_file_type.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_object_component.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_issue.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_quality_controlled.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_keyword.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_storage_location.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_licence.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_storage_root.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_namespace.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/new_user_author.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_object.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/paper_exists.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_object_component.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/patch_data.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_quality_controlled.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/post_data.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_storage_location.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/rDataPipeline-package.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_storage_root.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/raise_issue.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/new_user_author.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/raise_issue_config.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/paper_exists.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/raise_issue_repo.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/patch_data.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/raise_issue_script.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/post_data.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/random_hash.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/rDataPipeline-package.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/read_array.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/raise_issue.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/read_distribution.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/raise_issue_config.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/read_estimate.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/raise_issue_repo.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/read_table.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/raise_issue_script.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/register_issue_dataproduct.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/random_hash.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/register_issue_script.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/read_array.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/remove_empty_parents.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/read_distribution.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/resolve_read.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/read_estimate.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/resolve_version.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/read_table.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/resolve_write.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/register_issue_dataproduct.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/validate_fields.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/register_issue_script.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_array.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/remove_empty_parents.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_distribution.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/resolve_read.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_estimate.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/resolve_version.html</loc>
   </url>
   <url>
-    <loc>https://fairdatapipeline.github.io/rFDP/reference/write_table.html</loc>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/resolve_write.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/validate_fields.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/write_array.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/write_distribution.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/write_estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/reference/write_table.html</loc>
+  </url>
+  <url>
+    <loc>https://www.fairdatapipeline.org/rDataPipeline/software-checklist.html</loc>
   </url>
 </urlset>
