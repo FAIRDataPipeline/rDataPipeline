@@ -17,3 +17,11 @@ by the Data Pipeline API}
 \description{
 Function to read point-estimate type data from toml file.
 }
+\seealso{
+Other read functions: 
+\code{\link{link_read}()},
+\code{\link{read_array}()},
+\code{\link{read_distribution}()},
+\code{\link{read_table}()}
+}
+\concept{read functions}

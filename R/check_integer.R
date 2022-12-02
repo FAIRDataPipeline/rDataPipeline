@@ -5,6 +5,8 @@
 #' @param query_class a \code{string} specifying the class of the field
 #' @param this_query a \code{string} specifying the contents of the field
 #'
+#' @noRd
+#'
 check_integer <- function(table,
                           this_field,
                           query_class,

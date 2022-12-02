@@ -2,7 +2,7 @@
 % Please edit documentation in R/raise_issue.R
 \name{raise_issue}
 \alias{raise_issue}
-\title{raise_issue}
+\title{Raise issue with data product object or component}
 \usage{
 raise_issue(
   index,
@@ -32,5 +32,12 @@ by the Data Pipeline API}
 reference the whole_object}
 }
 \description{
-raise_issue
+Raise issue with data product object or component
 }
+\seealso{
+Other issue raising functions: 
+\code{\link{raise_issue_config}()},
+\code{\link{raise_issue_repo}()},
+\code{\link{raise_issue_script}()}
+}
+\concept{issue raising functions}

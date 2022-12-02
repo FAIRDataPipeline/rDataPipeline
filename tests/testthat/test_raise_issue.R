@@ -1,35 +1,32 @@
-context("Testing findme()")
+context("Testing raise_issue()")
 
+coderun_description <- "Testing raise_issue()"
+dataproduct_description <- "a test array"
 uid <- as.character(random_hash())
 version <- "0.1.0"
-namespace <- "username"
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "a test array"
-endpoint <- Sys.getenv("FDP_endpoint")
 
 # Test writing issues to component ----------------------------------------
 
 data_product <- paste("findme/test/array", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -67,25 +64,24 @@ test_that("handle contains issues block", {
 data_product <- paste("findme/test/array2", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config2_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version,
-          file_type = "csv")
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version,
+            file_type = "csv")
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -118,24 +114,23 @@ test_that("handle contains issues block", {
 data_product <- paste("findme/test/array2b", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config2b_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -182,24 +177,23 @@ data_product <- paste("findme/test/array3", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config3_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -249,24 +243,23 @@ data_product <- paste("findme/test/array4", uid, sep = "_")
 component <- "component/a/s/d/f/s"
 component2 <- "component2/a/s/d/f/s"
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config4_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -317,30 +310,28 @@ test_that("handle contains issues block", {
 data_product <- paste("findme/test/array5-one", uid, sep = "_")
 data_product2 <- paste("findme/test/array5-two", uid, sep = "_")
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config5_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_write(path = config_file,
-          data_product = data_product,
-          description = dataproduct_description,
-          version = version,
-          file_type = "csv")
-add_write(path = config_file,
-          data_product = data_product2,
-          description = dataproduct_description,
-          version = version,
-          file_type = "csv")
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version,
+            file_type = "csv") %>%
+  add_write(data_product = data_product2,
+            description = dataproduct_description,
+            version = version,
+            file_type = "csv")
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -378,26 +369,24 @@ finalise(handle)
 
 # Test writing issues to multiple objects by index ------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config6_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_read(path = config_file,
-         data_product = data_product,
-         version = version)
-add_read(path = config_file,
-         data_product = data_product2,
-         version = version)
+              script = "echo hello") %>%
+  add_read(data_product = data_product,
+           version = version) %>%
+  add_read(data_product = data_product2,
+           version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Read data (write to handle)
@@ -426,23 +415,22 @@ test_that("handle contains issues block", {
 
 # Test writing issues to config -------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config7_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_read(path = config_file,
-         data_product = data_product,
-         version = version)
+              script = "echo hello") %>%
+  add_read(data_product = data_product,
+           version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 config_issue <- "issue with config"
@@ -473,23 +461,22 @@ test_that("config issue is in registry", {
 
 # Test writing issues to script -------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config8_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_read(path = config_file,
-         data_product = data_product,
-         version = version)
+              script = "echo hello") %>%
+  add_read(data_product = data_product,
+           version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 script_issue <- "issue with script"
@@ -520,23 +507,22 @@ test_that("script issue is in registry", {
 
 # Test writing issues to GitHub repo --------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "raise_issue",
-                         paste0("config9_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace,
-              output_namespace = namespace)
-add_read(path = config_file,
-         data_product = data_product,
-         version = version)
+              script = "echo hello") %>%
+  add_read(data_product = data_product,
+           version = version)
 
-# CLI functions
-fair_run(config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 repo_issue <- "issue with repo"

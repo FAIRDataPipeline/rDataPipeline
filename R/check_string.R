@@ -4,6 +4,8 @@
 #' @param this_field a \code{string} specifying the name of the field
 #' @param this_query a \code{string} specifying the contents of the field
 #'
+#' @noRd
+#'
 check_string <- function(table,
                          this_field,
                          this_query) {

@@ -22,3 +22,11 @@ attributes, if available
 \description{
 Function to read array type data from hdf5 file.
 }
+\seealso{
+Other read functions: 
+\code{\link{link_read}()},
+\code{\link{read_distribution}()},
+\code{\link{read_estimate}()},
+\code{\link{read_table}()}
+}
+\concept{read functions}

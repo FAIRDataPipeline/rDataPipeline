@@ -16,41 +16,24 @@ add_read(
 )
 }
 \arguments{
-\item{path}{config file path}
+\item{path}{user-written config.yaml file path}
 
-\item{data_product}{data_product field}
+\item{data_product}{\verb{data_product:} field}
 
-\item{component}{component field}
+\item{component}{\verb{component:} field}
 
-\item{version}{(optional) version field}
+\item{version}{(optional) \verb{version:} field}
 
-\item{use_data_product}{(optional) use_data_product field}
+\item{use_data_product}{(optional) \verb{use: data_product:} field}
 
-\item{use_component}{(optional) use_component field}
+\item{use_component}{(optional) \verb{use: component:} field}
 
-\item{use_version}{(optional) use_version field}
+\item{use_version}{(optional) \verb{use: version:} field}
 
-\item{use_namespace}{(optional) use_namespace field}
+\item{use_namespace}{(optional) \verb{use: namespace:} field}
 }
 \description{
 Add data product to \code{read} block of user-written config file. Used in
 combination with \code{create_config()} for unit testing.
 }
-\examples{
-\dontrun{
-path <- "test_config/config.yaml"
-
-# Write run_metadata block
-create_config(path = path,
-              description = "test",
-              input_namespace = "test_user",
-              output_namespace = "test_user")
-
-# Write read block
-add_read(path = path,
-         data_product = "test/array",
-         component = "level/a/s/d/f/s",
-         version = "0.2.0")
-}
-
-}
+\keyword{internal}

@@ -4,7 +4,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a \code{data.frame} of optional fields and their properties
-#' @keywords internal
+#' @noRd
 #'
 get_table_optional <- function(table, endpoint) {
   # if(! check_table_exists(table))

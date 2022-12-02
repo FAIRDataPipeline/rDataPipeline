@@ -6,9 +6,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @return Returns a \code{list} of fields present in the specified entry
-#'
-#' @export
-#' @family get functions
+#' @noRd
 #'
 get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
 

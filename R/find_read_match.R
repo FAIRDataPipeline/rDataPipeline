@@ -7,6 +7,7 @@
 #' @param data_product a \code{string} specifying the data product name
 #'
 #' @export
+#' @family core API functions
 #'
 find_read_match <- function(handle, data_product) {
   working_config_reads <- handle$yaml$read %>%

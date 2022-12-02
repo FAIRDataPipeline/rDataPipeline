@@ -24,3 +24,10 @@ then delete the Code Run entry when \code{delete_if_empty} is set to \code{TRUE}
 If a data product has the same hash as a previous version, remove it from
 the registry when \code{delete_if_duplicate} is set to \code{TRUE}.
 }
+\seealso{
+Other core API functions: 
+\code{\link{find_read_match}()},
+\code{\link{find_write_match}()},
+\code{\link{initialise}()}
+}
+\concept{core API functions}

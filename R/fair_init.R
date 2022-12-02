@@ -8,6 +8,7 @@
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
 #' @export
+#' @keywords internal
 #'
 fair_init <- function(name,
                       identifier,

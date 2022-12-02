@@ -6,6 +6,8 @@
 #' \code{list(field = value)}
 #' @param endpoint endpoint
 #'
+#' @noRd
+#'
 clean_query <- function(data, endpoint) {
 
   data_tmp <- lapply(data, function(x) {

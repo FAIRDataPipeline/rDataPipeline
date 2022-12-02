@@ -70,8 +70,8 @@ write_estimate <- function(value,
     cat(contents, file = path, append = FALSE)
   }
 
-  cli::cli_alert_success(
-    "Writing {.value {write_data_product}} to file")
+  usethis::ui_done(
+    "Writing {ui_value(write_data_product)} to file")
 
   # Write to handle ---------------------------------------------------------
 

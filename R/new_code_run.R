@@ -20,7 +20,8 @@
 #' \code{code_run} outputs
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_code_run <- function(run_date,
                          description,

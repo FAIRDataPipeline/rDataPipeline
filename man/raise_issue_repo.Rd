@@ -17,3 +17,10 @@ by the Data Pipeline API}
 \description{
 Raise issue with remote repository
 }
+\seealso{
+Other issue raising functions: 
+\code{\link{raise_issue_config}()},
+\code{\link{raise_issue_script}()},
+\code{\link{raise_issue}()}
+}
+\concept{issue raising functions}

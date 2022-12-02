@@ -9,6 +9,7 @@
 #' product should be written
 #'
 #' @export
+#' @family write functions
 #'
 link_write <- function(handle, data_product) {
 

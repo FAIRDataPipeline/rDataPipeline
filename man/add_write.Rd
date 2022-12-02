@@ -13,47 +13,33 @@ add_write(
   use_data_product,
   use_component,
   use_version,
-  use_namespace
+  use_namespace,
+  use_public
 )
 }
 \arguments{
-\item{path}{config file path}
+\item{path}{user-written config.yaml file path}
 
-\item{data_product}{data_product field}
+\item{data_product}{\verb{data_product:} field}
 
-\item{description}{component field}
+\item{description}{\verb{component:} field}
 
-\item{version}{(optional) version field}
+\item{version}{(optional) \verb{version:} field}
 
-\item{file_type}{(optional) file type field}
+\item{file_type}{(optional) \verb{file_type:} field}
 
-\item{use_data_product}{(optional) use_data_product field}
+\item{use_data_product}{(optional) \verb{use: data_product:} field}
 
-\item{use_component}{(optional) use_component field}
+\item{use_component}{(optional) \verb{use: component:} field}
 
-\item{use_version}{(optional) use_version field}
+\item{use_version}{(optional) \verb{use: version:} field}
 
-\item{use_namespace}{(optional) use_namespace field}
+\item{use_namespace}{(optional) \verb{use: namespace:} field}
+
+\item{use_public}{(optional) \verb{use: public:} field}
 }
 \description{
 Add data product to \code{read} block of user-written config file. Used in
 combination with \code{create_config()} for unit testing.
 }
-\examples{
-\dontrun{
-path <- "test_config/config.yaml"
-
-# Write run_metadata block
-create_config(path = path,
-              description = "test",
-              input_namespace = "test_user",
-              output_namespace = "test_user")
-
-# Write read block
-add_write(path = path,
-          data_product = "test/array",
-          description = "data product description",
-          version = "0.2.0")
-}
-
-}
+\keyword{internal}

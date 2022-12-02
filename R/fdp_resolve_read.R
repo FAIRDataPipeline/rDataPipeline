@@ -3,6 +3,8 @@
 #' @param this_read this_read
 #' @param yaml user written config file
 #'
+#' @noRd
+#'
 fdp_resolve_read <- function(this_read, yaml) {
 
   endpoint <- yaml$run_metadata$local_data_registry_url

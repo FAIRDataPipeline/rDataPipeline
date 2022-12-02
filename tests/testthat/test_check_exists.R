@@ -1,7 +1,5 @@
 context("Testing check_exists()")
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
 test_that("invalid table throws an error", {
   testthat::expect_error(check_exists(table = "unknown",
                                       query = ""),

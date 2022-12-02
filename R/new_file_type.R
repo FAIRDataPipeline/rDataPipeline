@@ -6,7 +6,8 @@
 #' @param extension a \code{string} specifying the filename extension
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_file_type <- function(name,
                           extension,

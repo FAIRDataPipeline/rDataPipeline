@@ -4,7 +4,7 @@
 #'
 #' @param filename a \code{string} specifying a filename
 #'
-#' @family get functions
+#' @noRd
 #'
 get_file_hash <- function(filename) {
   if (!file.exists(filename))

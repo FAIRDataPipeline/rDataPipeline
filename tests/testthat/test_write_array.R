@@ -1,35 +1,30 @@
 context("Testing write_array()")
 
-uid <- random_hash()
-namespace1 <- "username"
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "Try to write two components with the same name"
-data_product1 <- paste("test/array", uid, sep = "_")
+coderun_description <- "Testing write_array()"
+dataproduct_description <- "Data product description"
+data_product <- paste("test/array", random_hash(), sep = "_")
 component1 <- "a/b/c/d"
 component2 <- "another/component"
 version1 <- "0.1.0"
 version2 <- "0.2.0"
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "write_array",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
+              script = "echo hello") %>%
+add_write(data_product = data_product,
           description = dataproduct_description,
           version = version1)
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -40,7 +35,7 @@ test_that("incorrect array format throws error", {
   testthat::expect_error(
     write_array(array = df,
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = rownames(df),
@@ -53,7 +48,7 @@ test_that("incorrect dimension_names format throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = data.frame(rownames(df)),
@@ -68,7 +63,7 @@ test_that("incorrect dimension_names length throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = 1:3,
@@ -81,7 +76,7 @@ test_that("incorrect dimension_names length throws error", {
   testthat::expect_error(
     write_array(array = as.matrix(df),
                 handle = handle,
-                data_product = data_product1,
+                data_product = data_product,
                 component = component1,
                 description = "Some description",
                 dimension_names = list(rowvalue = rownames(df),
@@ -93,14 +88,14 @@ test_that("incorrect dimension_names length throws error", {
                "dimensions in array")
   testthat::expect_error(
     msg <-
-    write_array(array = as.matrix(df),
-                handle = handle,
-                data_product = data_product1,
-                component = component1,
-                description = "Some description",
-                dimension_names = list(rowvalue = rownames(df),
-                                       colvalue = colnames(df),
-                                       othervalue = colnames(df))),
+      write_array(array = as.matrix(df),
+                  handle = handle,
+                  data_product = data_product,
+                  component = component1,
+                  description = "Some description",
+                  dimension_names = list(rowvalue = rownames(df),
+                                         colvalue = colnames(df),
+                                         othervalue = colnames(df))),
     regexp = msg
   )
 })
@@ -109,7 +104,7 @@ test_that("entry is recorded in the handle once", {
   testthat::expect_true(is.null(handle$outputs))
   ind1 <- write_array(array = as.matrix(df),
                       handle = handle,
-                      data_product = data_product1,
+                      data_product = data_product,
                       component = component1,
                       description = "Some description",
                       dimension_names = list(rowvalue = rownames(df),
@@ -117,10 +112,10 @@ test_that("entry is recorded in the handle once", {
   testthat::expect_equal(ind1, 1)
   testthat::expect_false(is.null(handle$outputs))
   testthat::expect_equal(nrow(handle$outputs), 1)
-  testthat::expect_equal(handle$outputs$data_product, data_product1)
+  testthat::expect_equal(handle$outputs$data_product, data_product)
   ind2 <- write_array(array = as.matrix(df),
                       handle = handle,
-                      data_product = data_product1,
+                      data_product = data_product,
                       component = component1,
                       description = "Some description",
                       dimension_names = list(rowvalue = rownames(df),
@@ -142,7 +137,7 @@ test_that(".h5 file is generated", {
 test_that(".h5 file is generated with unit and dimension values", {
   ind <- write_array(array = as.matrix(df),
                      handle = handle,
-                     data_product = data_product1,
+                     data_product = data_product,
                      component = component2,
                      description = "Some description",
                      dimension_names = list(rowvalue = rownames(df),

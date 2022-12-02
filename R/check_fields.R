@@ -5,6 +5,8 @@
 #' @param method a \code{string} specifying the method, c("GET", "POST")
 #' @param endpoint endpoint
 #'
+#' @noRd
+#'
 check_fields <- function(table, query, method, endpoint) {
 
   fields <- names(query)

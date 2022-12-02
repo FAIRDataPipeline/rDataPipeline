@@ -15,3 +15,10 @@ by the Data Pipeline API}
 \description{
 Find write aliases in working config that match wildcard string
 }
+\seealso{
+Other core API functions: 
+\code{\link{finalise}()},
+\code{\link{find_read_match}()},
+\code{\link{initialise}()}
+}
+\concept{core API functions}

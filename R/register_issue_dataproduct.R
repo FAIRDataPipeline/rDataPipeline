@@ -4,6 +4,8 @@
 #' by the Data Pipeline API
 #' @param this_issue this_issue
 #'
+#' @noRd
+#'
 register_issue_dataproduct <- function(handle, this_issue) {
 
   endpoint <- handle$yaml$run_metadata$local_data_registry_url

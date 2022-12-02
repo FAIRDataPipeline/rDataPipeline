@@ -6,7 +6,7 @@
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'
-#' @family get functions
+#' @noRd
 #'
 get_github_hash <- function(repo) {
   if (!grepl("version", system("git --version", intern = TRUE))) {

@@ -6,6 +6,8 @@
 #' @param component a \code{string} specifying the name of data product
 #' component
 #'
+#' @noRd
+#'
 resolve_read <- function(handle, data_product, component = NA) {
 
   endpoint <- handle$yaml$run_metadata$local_data_registry_url

@@ -3,6 +3,8 @@
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product
 #'
+#' @noRd
+#'
 check_yaml_write <- function(handle, data_product) {
 
   endpoint <- handle$yaml$run_metadata$local_data_registry_url

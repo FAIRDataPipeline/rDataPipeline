@@ -4,6 +4,7 @@
 #'
 #' @name fdp-class
 #' @rdname fdp-class
+#' @keywords internal
 #'
 fdp <- R6::R6Class("fdp", list(
   #' @field yaml a \code{list} containing the contents of the working
@@ -85,32 +86,31 @@ fdp <- R6::R6Class("fdp", list(
   #'
   print = function(...) {
 
-    contains_yaml <- !is.null(self$yaml)
-    contains_dir <- !is.null(self$fdp_config_dir)
-    contains_config <- !is.null(self$model_config)
-    contains_script <- !is.null(self$submission_script)
-    contains_coderun <- !is.null(self$code_run)
+    if (!is.null(self$yaml)) {
+      msg <- "Code run: {ui_value(self$yaml$run_metadata$description)}"
+      usethis::ui_info(msg)
+    }
 
-    cat("Contains:\n")
-    if (contains_yaml) cat("- Config file\n")
-    if (contains_dir) cat("- Config dir\n")
-    if (contains_config) cat("- Config file URL\n")
-    if (contains_script) cat("- Submission script URL\n")
-    if (contains_coderun) cat("- Code run URL\n")
+    if (is.null(self$inputs)) {
+      msg <- "None"
+      usethis::ui_info("Inputs: {ui_value(msg)}")
 
-    if (!is.null(self$inputs)) {
-      cat("\n\n", "Inputs:", "\n")
+    } else {
+      usethis::ui_info("Inputs:")
       self$inputs %>%
         dplyr::select(data_product) %>%
         print()
     }
 
-    if (!is.null(self$outputs)) {
-      cat("\n\n", "outputs:", "\n")
-      tmp <- self$outputs %>%
-        dplyr::select(use_component, use_data_product, use_version)
-      names(tmp) <- gsub("use_", "", names(tmp))
-      print(tmp)
+    if (is.null(self$outputs)) {
+      msg <- "None"
+      usethis::ui_info("Outputs: {ui_value(msg)}")
+
+    } else {
+      usethis::ui_info("Outputs:")
+      self$outputs %>%
+        dplyr::select(use_data_product, use_component, use_version) %>%
+        print()
     }
 
     invisible(self)

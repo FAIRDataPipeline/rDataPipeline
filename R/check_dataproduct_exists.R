@@ -8,6 +8,8 @@
 #' @param write_namespace_id write_namespace_id
 #' @param endpoint endpoint
 #'
+#' @noRd
+#'
 check_dataproduct_exists <- function(write_dataproduct,
                                      write_version,
                                      write_namespace_id,

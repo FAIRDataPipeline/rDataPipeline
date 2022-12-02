@@ -1,5 +1,7 @@
 #' get_token
 #'
+#' @noRd
+#'
 get_token <- function() {
   if (Sys.getenv("FDP_LOCAL_TOKEN") != "") {
     return(Sys.getenv("FDP_LOCAL_TOKEN"))

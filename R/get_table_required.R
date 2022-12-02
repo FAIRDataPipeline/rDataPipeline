@@ -3,7 +3,7 @@
 #' @param table name of table
 #'
 #' @return a dataframe of required fields and their properties
-#' @keywords internal
+#' @noRd
 #'
 get_table_required <- function(table) {
   # if(! check_table_exists(table))

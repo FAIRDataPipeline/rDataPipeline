@@ -1,35 +1,30 @@
 context("Testing read_array()")
 
-uid <- random_hash()
-coderun_description <- "Test read_array"
+coderun_description <- "Testing read_array()"
 dataproduct_description <- "A test array"
-data_product1 <- paste("test/array", uid, sep = "_")
+data_product <- paste("test/array", random_hash(), sep = "_")
 component <- "a/b/c/d"
-version1 <- "0.1.0"
-namespace1 <- "username"
-
-endpoint <- Sys.getenv("FDP_endpoint")
+version <- "0.1.0"
 
 # Write test/array v.0.1.0 'username' namespace ---------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "read_array",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          version = version1)
+              script = "echo hello") %>%
+  add_write(data_product = data_product,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data
@@ -43,7 +38,7 @@ units <- "s"
 
 write_array(array = as.matrix(df_v1),
             handle = handle,
-            data_product = data_product1,
+            data_product = data_product,
             component = component,
             description = "test_read_array - original",
             dimension_names = dimension_names,
@@ -56,40 +51,37 @@ finalise(handle)
 
 # Test use block ----------------------------------------------------------
 
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "read_array",
-                         paste0("config2_", uid, ".yaml"))
-
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
+              script = "echo hello") %>%
+  # Will return v.0.1.0, not v.0.2.0
+  add_read(data_product = data_product,
+           use_version = version)
 
-# Will return v.0.1.0, not v.0.2.0
-add_read(path = config_file,
-         data_product = data_product1,
-         use_version = version1)
-
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Run tests
 test_that("df_v1 is returned", {
   testthat::expect_true(is.null(handle$inputs))
   tmp1 <- read_array(handle = handle,
-                     data_product = data_product1,
+                     data_product = data_product,
                      component = component)
   testthat::expect_equivalent(as.data.frame(tmp1), df_v1)
   testthat::expect_false(is.null(handle$inputs))
   testthat::expect_equal(nrow(handle$inputs), 1)
-  testthat::expect_equal(handle$inputs$data_product, data_product1)
+  testthat::expect_equal(handle$inputs$data_product, data_product)
   tmp2 <- read_array(handle = handle,
-                     data_product = data_product1,
+                     data_product = data_product,
                      component = component)
   testthat::expect_equal(nrow(handle$inputs), 1)
   testthat::expect_equal(tmp1, tmp2)

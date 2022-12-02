@@ -3,34 +3,19 @@
 #' Add data product to `read` block of user-written config file. Used in
 #' combination with \code{create_config()} for unit testing.
 #'
-#' @param path config file path
-#' @param data_product data_product field
-#' @param description component field
-#' @param version (optional) version field
-#' @param file_type (optional) file type field
-#' @param use_data_product (optional) use_data_product field
-#' @param use_component (optional) use_component field
-#' @param use_version (optional) use_version field
-#' @param use_namespace (optional) use_namespace field
+#' @param path user-written config.yaml file path
+#' @param data_product `data_product:` field
+#' @param description `component:` field
+#' @param version (optional) `version:` field
+#' @param file_type (optional) `file_type:` field
+#' @param use_data_product (optional) `use: data_product:` field
+#' @param use_component (optional) `use: component:` field
+#' @param use_version (optional) `use: version:` field
+#' @param use_namespace (optional) `use: namespace:` field
+#' @param use_public (optional) `use: public:` field
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' path <- "test_config/config.yaml"
-#'
-#' # Write run_metadata block
-#' create_config(path = path,
-#'               description = "test",
-#'               input_namespace = "test_user",
-#'               output_namespace = "test_user")
-#'
-#' # Write read block
-#' add_write(path = path,
-#'           data_product = "test/array",
-#'           description = "data product description",
-#'           version = "0.2.0")
-#' }
+#' @keywords internal
 #'
 add_write <- function(path,
                       data_product,
@@ -40,7 +25,8 @@ add_write <- function(path,
                       use_data_product,
                       use_component,
                       use_version,
-                      use_namespace) {
+                      use_namespace,
+                      use_public) {
 
   # Generate write block
   new_write <- list()
@@ -53,6 +39,7 @@ add_write <- function(path,
   if (!missing(use_component)) new_write$use$component <- use_component
   if (!missing(use_version)) new_write$use$version <- use_version
   if (!missing(use_namespace)) new_write$use$namespace <- use_namespace
+  if (!missing(use_public)) new_write$use$public <- use_public
 
   # Read file contents
   contents <- configr::read.config(file = path)
@@ -79,4 +66,5 @@ add_write <- function(path,
                      file = path)
   }
 
+  invisible(path)
 }

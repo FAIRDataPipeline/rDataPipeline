@@ -6,6 +6,8 @@
 #' @param file_type (optional) a \code{string} specifying the file type; when
 #' missing, \code{file_type} will be read from the config file
 #'
+#' @noRd
+#'
 resolve_write <- function(handle,
                           data_product,
                           file_type) {

@@ -12,6 +12,7 @@ fdp-class
 \details{
 Container for class \code{fdp}
 }
+\keyword{internal}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

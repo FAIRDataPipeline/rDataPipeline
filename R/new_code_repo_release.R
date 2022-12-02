@@ -11,7 +11,8 @@
 #' @param object_url a \code{string} specifying the URL of an \code{object}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_code_repo_release <- function(name,
                                   version,

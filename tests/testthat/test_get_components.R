@@ -1,5 +1,7 @@
 context("Testing get_components()")
 
+coderun_description <- "Testing get_components()"
+dataproduct_description <- "data product description"
 uid <- random_hash()
 data_product1 <- paste("test/get_components1", uid, sep = "_")
 data_product2 <- paste("test/get_components2", uid, sep = "_")
@@ -8,43 +10,34 @@ data_product4 <- paste("test/get_components4", uid, sep = "_")
 component1 <- "level1"
 component2 <- "level1/level2"
 component3 <- "level1/level2/level3"
-version1 <- "0.1.0"
-coderun_description <- "Register a file in the pipeline"
-dataproduct_description <- "data product description"
-namespace1 <- "username"
+version <- "0.1.0"
 
-endpoint <- Sys.getenv("FDP_endpoint")
-
-# User written config file
-config_file <- file.path(tempdir(), "config_files", "get_components",
-                         paste0("config_", uid, ".yaml"))
-create_config(path = config_file,
+# Generate user-written config file
+config_file <- tempfile(fileext = ".yaml")
+create_config(init_yaml = Sys.getenv("INIT_YAML"),
+              path = config_file,
               description = coderun_description,
-              input_namespace = namespace1,
-              output_namespace = namespace1)
-add_write(path = config_file,
-          data_product = data_product1,
-          description = dataproduct_description,
-          version = version1)
-add_write(path = config_file,
-          data_product = data_product2,
-          description = dataproduct_description,
-          version = version1)
-add_write(path = config_file,
-          data_product = data_product3,
-          description = dataproduct_description,
-          version = version1)
-add_write(path = config_file,
-          data_product = data_product4,
-          description = dataproduct_description,
-          version = version1)
+              script = "echo hello") %>%
+  add_write(data_product = data_product1,
+            description = dataproduct_description,
+            version = version) %>%
+  add_write(data_product = data_product2,
+            description = dataproduct_description,
+            version = version) %>%
+  add_write(data_product = data_product3,
+            description = dataproduct_description,
+            version = version) %>%
+  add_write(data_product = data_product4,
+            description = dataproduct_description,
+            version = version)
 
-# CLI functions
-fair_run(path = config_file, skip = TRUE)
+# Generate working config file
+cmd <- paste("fair run", config_file, "--ci")
+working_config_dir <- system(cmd, intern = TRUE)
 
 # Initialise code run
-config <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "config.yaml")
-script <- file.path(Sys.getenv("FDP_CONFIG_DIR"), "script.sh")
+config <- file.path(working_config_dir, "config.yaml")
+script <- file.path(working_config_dir, "script.sh")
 handle <- initialise(config, script)
 
 # Write data

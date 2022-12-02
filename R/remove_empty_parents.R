@@ -2,6 +2,8 @@
 #' @param path path
 #' @param root root
 #'
+#' @noRd
+#'
 remove_empty_parents <- function(path, root) {
   root <- gsub("/", "", root)
   directory <- dirname(path)

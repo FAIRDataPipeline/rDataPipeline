@@ -7,6 +7,7 @@
 #' @param endpoint endpoint
 #'
 #' @return Returns
+#' @noRd
 #'
 validate_fields <- function(table, data, endpoint) {
 

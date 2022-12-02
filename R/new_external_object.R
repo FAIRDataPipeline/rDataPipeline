@@ -19,7 +19,8 @@
 #' location of an \code{external_object}
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_external_object <- function(doi_or_unique_name,
                                 primary_not_supplement = TRUE,

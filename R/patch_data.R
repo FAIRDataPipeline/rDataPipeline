@@ -3,7 +3,7 @@
 #' @param url url
 #' @param data data
 #'
-#' @keywords internal
+#' @noRd
 #'
 patch_data <- function(url,
                        data) {

@@ -13,7 +13,8 @@
 #' the \code{storage_root} table
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'
-#' @family new functions
+#' @family add entry to table
+#' @noRd
 #'
 new_storage_location <- function(path,
                                  hash,

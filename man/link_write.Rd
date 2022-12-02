@@ -20,3 +20,11 @@ product should be written
 \description{
 Link path for external format data
 }
+\seealso{
+Other write functions: 
+\code{\link{write_array}()},
+\code{\link{write_distribution}()},
+\code{\link{write_estimate}()},
+\code{\link{write_table}()}
+}
+\concept{write functions}

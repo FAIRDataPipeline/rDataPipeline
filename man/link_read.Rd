@@ -20,3 +20,11 @@ to be read
 \description{
 Link path to external format data
 }
+\seealso{
+Other read functions: 
+\code{\link{read_array}()},
+\code{\link{read_distribution}()},
+\code{\link{read_estimate}()},
+\code{\link{read_table}()}
+}
+\concept{read functions}

@@ -3,6 +3,8 @@
 #' @param this_write this_write
 #' @param yaml user written config file
 #'
+#' @noRd
+#'
 fdp_resolve_write <- function(this_write, yaml) {
 
   endpoint <- yaml$run_metadata$local_data_registry_url

@@ -5,6 +5,8 @@
 #' @param data_product data_product
 #' @param what what
 #'
+#' @noRd
+#'
 check_config <- function(handle, data_product, what) {
 
   error <- paste(usethis::ui_field(data_product), "missing from config file")

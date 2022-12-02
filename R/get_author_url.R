@@ -1,6 +1,7 @@
 #' get_author_url
 #'
 #' @param endpoint a \code{string} specifying the registry endpoint
+#' @noRd
 #'
 get_author_url <- function(endpoint) {
   user_url <- get_url(table = "users",

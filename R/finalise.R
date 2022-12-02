@@ -14,6 +14,7 @@
 #' @param delete_if_duplicate (optional) default is `FALSE`; see Details
 #'
 #' @export
+#' @family core API functions
 #'
 finalise <- function(handle,
                      delete_if_empty = FALSE,
@@ -73,8 +74,9 @@ finalise <- function(handle,
         this_write$data_product_decription)
       write_namespace <- unique(this_write$use_namespace)
       write_version <- unique(this_write$use_version)
-      write_namespace_url <- new_namespace(name = write_namespace,
-                                           endpoint = endpoint)
+      write_namespace_url <- get_url("namespace",
+                                     list(name = write_namespace),
+                                     endpoint = endpoint)
       path <- unique(this_write$path)
       public <- unique(this_write$public)
 
@@ -203,9 +205,9 @@ finalise <- function(handle,
                                            namespace_url = write_namespace_url,
                                            endpoint = endpoint)
 
-      usethis::ui_done(
-        paste("Writing", usethis::ui_value(use_data_product_runid),
-              "to local registry"))
+      field <- "data_product"
+      msg <- "Registering {ui_value(use_data_product_runid)} {ui_field(field)} in local registry"
+      usethis::ui_done(msg)
 
       # Update handle
       handle$finalise_output_hash(
@@ -245,10 +247,9 @@ finalise <- function(handle,
         component_url <- new_object_component(name = write_component,
                                               object_url = object_url,
                                               endpoint = endpoint)
-
-        usethis::ui_done(paste("Writing", usethis::ui_value(write_component),
-                               usethis::ui_field("component"),
-                               "to local registry"))
+        field <- "component"
+        msg <- "Registering {ui_value(write_component)} {ui_field(field)} in local registry"
+        usethis::ui_done(msg)
       }
 
       # Update handle
@@ -376,6 +377,8 @@ finalise <- function(handle,
                data = list(inputs = as.list(handle$inputs$component_url),
                            outputs = as.list(handle$outputs$component_url)))
   }
+
+  # write code run UUID to coderuns.txt -------------------------------------
 
   code_run_uuid <- get_entity(handle$code_run)$uuid
 

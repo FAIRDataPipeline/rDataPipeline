@@ -9,6 +9,7 @@
 #' to be read
 #'
 #' @export
+#' @family read functions
 #'
 link_read <- function(handle, data_product) {
 

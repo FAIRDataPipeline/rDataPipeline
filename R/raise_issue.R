@@ -1,4 +1,4 @@
-#' raise_issue
+#' Raise issue with data product object or component
 #'
 #' @param index index returned from `link_*()`, `read_()`, or `write()`
 #' @param handle an object of class \code{fdp, R6} containing metadata required
@@ -11,6 +11,7 @@
 #' reference the whole_object
 #'
 #' @export
+#' @family issue raising functions
 #'
 raise_issue <- function(index,
                         handle,
@@ -31,16 +32,14 @@ raise_issue <- function(index,
         this_data_product <- data_product[i]
         this_component <- component[j]
 
-        if (!is.null(reads)) {
-          if (this_data_product %in%
-              unlist(lapply(reads, function(x) x$data_product))) {
-            metadata <- resolve_read(handle, this_data_product)
-          } else if (this_data_product %in%
-                     unlist(lapply(writes, function(x) x$data_product))) {
-            metadata <- resolve_write(handle, this_data_product)
-          } else {
-            stop("dataproduct not in config file")
-          }
+        if (!is.null(reads) && this_data_product %in%
+            unlist(lapply(reads, function(x) x$data_product))) {
+          metadata <- resolve_read(handle, this_data_product)
+        } else if (!is.null(writes) && this_data_product %in%
+                   unlist(lapply(writes, function(x) x$data_product))) {
+          metadata <- resolve_write(handle, this_data_product)
+        } else {
+          stop("dataproduct not in config file")
         }
 
         use_version <- metadata$version
