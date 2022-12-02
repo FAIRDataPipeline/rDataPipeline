@@ -30,6 +30,9 @@ jobs:
       - name: Start registry
         run: $HOME/.fair/registry/scripts/start_fair_registry
 
+      - name: Install R API
+        run: Rscript -e 'remotes::install_local(upgrade = "never")'
+
       - name: init
         run: |
           rDataPipeline::fair_init(
