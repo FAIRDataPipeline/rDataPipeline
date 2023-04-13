@@ -30,8 +30,8 @@ For more information, please visit the FAIR Data Pipeline
 
 [docs-badge]: https://img.shields.io/badge/docs-rDataPipeline-blue
 [docs-url]: https://FAIRDataPipeline.github.io/rDataPipeline/
-[build-badge]: https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1
-[bulid-url]: https://github.com/FAIRDataPipeline/rDataPipeline/actions
+[build-badge]:https://github.com/FAIRDataPipeline/rDataPipeline/actions/workflows/test-build.yaml/badge.svg
+[bulid-url]: https://github.com/FAIRDataPipeline/rDataPipeline/actions/workflows/test-build.yaml
 [codecov-badge]: https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY
 [codecov-url]: https://codecov.io/gh/FAIRDataPipeline/rDataPipeline
 [licence-badge]: https://img.shields.io/badge/licence-GPL--3-3891A6
