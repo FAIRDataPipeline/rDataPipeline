@@ -53,26 +53,33 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_issue</span><span class="op">(</span>
-  <span class="va">severity</span>,
-  <span class="va">description</span>,
-  <span class="va">component_issues</span>,
-  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_issue</span><span class="op">(</span></span>
+<span>  <span class="va">severity</span>,</span>
+<span>  <span class="va">description</span>,</span>
+<span>  <span class="va">component_issues</span>,</span>
+<span>  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>severity</dt>
 <dd><p>an <code>integer</code> specifying the severity of the <code>issue</code></p></dd>
+
+
 <dt>description</dt>
 <dd><p>a <code>string</code> containing a free text description of the
 <code>issue</code></p></dd>
+
+
 <dt>component_issues</dt>
 <dd><p>a <code>list</code> of <code>object_component</code> URLs with
 which the <code>issue</code> is associated; this can be an empty list</p></dd>
+
+
 <dt>endpoint</dt>
 <dd><p>a <code>string</code> specifying the registry endpoint</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -106,7 +113,7 @@ which the <code>issue</code> is associated; this can be an empty list</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

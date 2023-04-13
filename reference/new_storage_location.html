@@ -53,13 +53,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_storage_location</span><span class="op">(</span>
-  <span class="va">path</span>,
-  <span class="va">hash</span>,
-  <span class="va">public</span>,
-  <span class="va">storage_root_url</span>,
-  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_storage_location</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  <span class="va">hash</span>,</span>
+<span>  <span class="va">public</span>,</span>
+<span>  <span class="va">storage_root_url</span>,</span>
+<span>  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,17 +68,26 @@
 <dd><p>a <code>string</code> specifying the path from the <code>storage_root</code>
 URI to the item location, which when appended to <code>storage_root</code> URI
 produces a complete URL</p></dd>
+
+
 <dt>hash</dt>
 <dd><p>a <code>string</code> specifying the SHA1 hash of a file stored in
 <code>storage_location</code></p></dd>
+
+
 <dt>public</dt>
 <dd><p>a <code>boolean</code> indicating whether the <code>storage_location</code>
 is public or not (default is <code>TRUE</code>)</p></dd>
+
+
 <dt>storage_root_url</dt>
 <dd><p>a <code>string</code> specifying the URL of an entry in
 the <code>storage_root</code> table</p></dd>
+
+
 <dt>endpoint</dt>
 <dd><p>a <code>string</code> specifying the registry endpoint</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -112,7 +121,7 @@ the <code>storage_root</code> table</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

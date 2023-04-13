@@ -53,14 +53,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_object_component</span><span class="op">(</span>
-  <span class="va">object_url</span>,
-  <span class="va">name</span>,
-  <span class="va">description</span>,
-  whole_object <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">issues_urls</span>,
-  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_object_component</span><span class="op">(</span></span>
+<span>  <span class="va">object_url</span>,</span>
+<span>  <span class="va">name</span>,</span>
+<span>  <span class="va">description</span>,</span>
+<span>  whole_object <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">issues_urls</span>,</span>
+<span>  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,26 +68,37 @@
     <dl><dt>object_url</dt>
 <dd><p>a <code>string</code> specifying the URL of an existing
 <code>object</code></p></dd>
+
+
 <dt>name</dt>
 <dd><p>a <code>string</code> specifying the name of the
 <code>object_component</code>, unique in the context of <code>object_component</code>
 and its <code>object</code> reference</p></dd>
+
+
 <dt>description</dt>
 <dd><p>(optional) a <code>string</code> containing a free text
 description of the <code>object_component</code></p></dd>
+
+
 <dt>whole_object</dt>
 <dd><p>a <code>boolean</code> flag specifying whether or not this
 <code>object_component</code> refers to the whole object or not - default is
 <code>FALSE</code></p></dd>
+
+
 <dt>issues_urls</dt>
 <dd><p>(optional) a <code>list</code> of <code>issues</code> URLs to
 associate with this <code>object</code></p></dd>
+
+
 <dt>endpoint</dt>
 <dd><p>a <code>string</code> specifying the registry endpoint</p>
 <p>Note that the <code>object_component</code> table contains <code>issues</code> as an
 additional optional field. This is not included here. Instead use
 <code>attach_issue()</code> and associated functionality to attach issues to
 objects and object components.</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -121,7 +132,7 @@ objects and object components.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

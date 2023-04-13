@@ -63,13 +63,13 @@ This function prioritizes download date and version over all other parameters</p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_version_number</span><span class="op">(</span>
-  download_date <span class="op">=</span> <span class="cn">NULL</span>,
-  version <span class="op">=</span> <span class="cn">NULL</span>,
-  major <span class="op">=</span> <span class="fl">0</span>,
-  minor <span class="op">=</span> <span class="st">"1"</span>,
-  patch <span class="op">=</span> <span class="fl">0</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_version_number</span><span class="op">(</span></span>
+<span>  download_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  major <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  minor <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>  patch <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,21 +89,39 @@ note: also accepts / delimited dates
 or <code>2020/01/01</code>
 and accepts date without delimiters but assumes ddmmyyyy or yyyymmdd
 <em>e.g.</em> <code>20200201</code></p></dd>
+
+
 <dt>version</dt>
 <dd><p>version number using major.minor.patch numbering
 <em>e.g.</em> <code>0.1.0</code>
 or major.patch
 <em>e.g.</em> <code>0.0</code></p></dd>
+
+
 <dt>major</dt>
 <dd><p>major number if not using <code>version</code></p></dd>
+
+
 <dt>minor</dt>
 <dd><p>minor number if not using <code>date</code></p></dd>
+
+
 <dt>patch</dt>
 <dd><p>patch number if not using <code>version</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>returns a character vector in the format of <code>major.minor.patch</code><em>e.g.</em><code>0.20200101.0</code></p>
+    
+
+<p>returns a character vector in the format of <code>major.minor.patch</code></p>
+
+
+<p><em>e.g.</em></p>
+<p></p>
+<p><code>0.20200101.0</code></p>
+
+
     </div>
 
   </div>
@@ -118,7 +136,7 @@ or major.patch
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

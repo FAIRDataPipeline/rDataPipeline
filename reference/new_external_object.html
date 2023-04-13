@@ -53,16 +53,16 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">new_external_object</span><span class="op">(</span>
-  <span class="va">doi_or_unique_name</span>,
-  primary_not_supplement <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">release_date</span>,
-  <span class="va">title</span>,
-  <span class="va">description</span>,
-  <span class="va">data_product_url</span>,
-  <span class="va">original_store_url</span>,
-  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_external_object</span><span class="op">(</span></span>
+<span>  <span class="va">doi_or_unique_name</span>,</span>
+<span>  primary_not_supplement <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">release_date</span>,</span>
+<span>  <span class="va">title</span>,</span>
+<span>  <span class="va">description</span>,</span>
+<span>  <span class="va">data_product_url</span>,</span>
+<span>  <span class="va">original_store_url</span>,</span>
+<span>  endpoint <span class="op">=</span> <span class="st">"http://localhost:8000/api/"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -70,27 +70,42 @@
     <dl><dt>doi_or_unique_name</dt>
 <dd><p>a <code>string</code> specifying the DOI or name of the
 <code>external_object</code></p></dd>
+
+
 <dt>primary_not_supplement</dt>
 <dd><p>(optional) a boolean flag to indicate
 whether the external object is the primary source (<code>TRUE</code>) or not
 (<code>FALSE</code>)</p></dd>
+
+
 <dt>release_date</dt>
 <dd><p>the date-time that the <code>external_object</code> was
 released <em>e.g.</em> <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time()</a></code> or "2010-07-11 12:15:00 BST"</p></dd>
+
+
 <dt>title</dt>
 <dd><p>a <code>string</code> specifying the title of the <code>external_object</code></p></dd>
+
+
 <dt>description</dt>
 <dd><p>(optional) a <code>string</code> containing a free text
 description of the <code>external_object</code></p></dd>
+
+
 <dt>data_product_url</dt>
 <dd><p>a <code>string</code> specifying the URL of an entry in
 the <code>data_product</code> table</p></dd>
+
+
 <dt>original_store_url</dt>
 <dd><p>(optional) a <code>string</code> specifying the URL of a
 an entry in the <code>storage_location</code> table that references the original
 location of an <code>external_object</code></p></dd>
+
+
 <dt>endpoint</dt>
 <dd><p>a <code>string</code> specifying the registry endpoint</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -124,7 +139,7 @@ location of an <code>external_object</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

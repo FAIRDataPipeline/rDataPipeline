@@ -93,15 +93,12 @@
 <p>Do we have sufficient confidence in the correctness of the software to trust the results?</p>
 <p>This is your overall judgement on the level of confidence based on all the aspects of the checklist. There is no formulaic way to arrive at this overall assessment based on the individual checklist answers but please explain how the measures in place combine to reach this level of confidence and make clear any caveats (eg applies for certain ways of using the software and not others).</p>
 <blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Yes</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Yes</li>
 <li>
-<input type="checkbox" disabled checked>
-Yes, with caveats</li>
+<input type="checkbox" disabled checked>Yes, with caveats</li>
 <li>
-<input type="checkbox" disabled>
-No</li>
+<input type="checkbox" disabled>No</li>
 </ul><p>The code is well written and includes adequate documentation. Unit testing has good coverage and is fully automated via continuous integration. The Data Pipeline is not yet being used in practice and so bugs may yet be revealed. Additionally, further work is required to implement cross validation against the other language implementations.</p>
 </blockquote>
 </div>
@@ -116,18 +113,14 @@ No</li>
 <li>Is sufficient meta-data logged to enable a run to be reproduced: Is the exact code version recorded (and whether the repository was “clean”), including versions of dependent libraries (e.g. an environment.yml file or similar) along with all command line arguments and the content of any configuration files?</li>
 <li>Is there up-to-date documentation which explains precisely how to run the code to reproduce existing results?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 <li>
-<input type="checkbox" disabled checked>
-N/A</li>
+<input type="checkbox" disabled checked>N/A</li>
 </ul></blockquote>
 </div>
 <div class="section level3">
@@ -138,15 +131,12 @@ N/A</li>
 <li>Is there CI?</li>
 <li>Is everything you need to run the tests (including documentation) in the repository (or the data pipeline where appropriate)?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled checked>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled checked>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p>Tests are run via GitHub Actions CI (<a href="https://github.com/FAIRDataPipeline/rDataPipeline/actions" class="external-link"><img src="https://github.com/FAIRDataPipeline/rDataPipeline/workflows/build/badge.svg?=1" alt="test-build"></a>) with good code coverage (<a href="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline" class="external-link"><img src="https://codecov.io/gh/FAIRDataPipeline/rDataPipeline/branch/main/graph/badge.svg?token=xTFk0581AY" alt="codecov"></a>).</p>
 </blockquote>
 </div>
@@ -158,18 +148,14 @@ Needs to be addressed</li>
 <li>Running in debug mode?</li>
 </ul><p>(We don’t require bitwise identical results here, but the broad conclusions after looking at the results of the test case should be the same.)</p>
 <blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 <li>
-<input type="checkbox" disabled checked>
-N/A</li>
+<input type="checkbox" disabled checked>N/A</li>
 </ul></blockquote>
 </div>
 <div class="section level3">
@@ -177,15 +163,12 @@ N/A</li>
 <ul><li>For C++, this might just be the compiler output when run with “all warnings”. It could also be more extensive static analysis. For other languages, it could be e.g. pylint, StaticLint.jl, etc.</li>
 <li>If there are possible issues reported by such a tool, have they all been either fixed or understood to not be important?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled checked>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled checked>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p><code>lintr</code> has identified a number of cosmetic issues that were considered low priority.</p>
 </blockquote>
 </div>
@@ -195,15 +178,12 @@ Needs to be addressed</li>
 <li>Commented where necessary?</li>
 <li>Avoiding red flags such as very long functions, global variables, copy and pasted code, etc.?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled checked>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled checked>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p>Though the code has survived multiple iterations of the project, it is well structured, commented and documented. Further refactoring is required to reduce duplication and improve modularity.</p>
 </blockquote>
 </div>
@@ -215,15 +195,12 @@ Needs to be addressed</li>
 <li>Does the code have algorithm documentation? e.g. something that describes how the model is actually simulated, or inference is performed?</li>
 <li>Is all the documentation up to date?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled checked>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled checked>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p>There is a <a href="https://github.com/FAIRDataPipeline/rDataPipeline" class="external-link">readme</a> that describes how to install the code and user <a href="https://www.fairdatapipeline.org/rSimpleModel/index.html" class="external-link">examples</a> that show how the API interacts with the Data Pipeline. Additional documentation exists (<a href="https://FAIRDataPipeline.github.io/rDataPipeline/" class="external-link"><img src="https://img.shields.io/badge/docs-rDataPipeline-blue" alt="docs"></a>), however this needs expanded upon.</p>
 </blockquote>
 </div>
@@ -234,30 +211,24 @@ Needs to be addressed</li>
 <li>Is an issue tracker used?</li>
 <li>Are there contribution guidelines?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled checked>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled checked>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p>The code is stored in a GitHub <a href="https://github.com/FAIRDataPipeline/rDataPipeline" class="external-link">repository</a>, which includes a <a href="https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/LICENSE.md" class="external-link">licence</a> and <a href="https://github.com/FAIRDataPipeline/rDataPipeline/issues" class="external-link">issue</a> tracking.</p>
 </blockquote>
 </div>
 <div class="section level3">
 <h3 id="are-software-dependencies-listed-and-of-appropriate-quality">Are software dependencies listed and of appropriate quality?<a class="anchor" aria-label="anchor" href="#are-software-dependencies-listed-and-of-appropriate-quality"></a></h3>
 <blockquote>
-<ul><li>
-<input type="checkbox" disabled checked>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled checked>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 </ul><p>Dependencies are listed in the <a href="https://github.com/FAIRDataPipeline/rDataPipeline/blob/main/DESCRIPTION" class="external-link">DESCRIPTION</a> file.</p>
 </blockquote>
 </div>
@@ -266,18 +237,14 @@ Needs to be addressed</li>
 <ul><li>Does the code use the data pipeline for all inputs and outputs?</li>
 <li>Is the code appropriately parameterized (i.e. have hard coded parameters been removed)?</li>
 </ul><blockquote>
-<ul><li>
-<input type="checkbox" disabled>
-Sufficiently addressed</li>
+<ul class="task-list"><li>
+<input type="checkbox" disabled>Sufficiently addressed</li>
 <li>
-<input type="checkbox" disabled>
-Some work remaining or caveats</li>
+<input type="checkbox" disabled>Some work remaining or caveats</li>
 <li>
-<input type="checkbox" disabled>
-Needs to be addressed</li>
+<input type="checkbox" disabled>Needs to be addressed</li>
 <li>
-<input type="checkbox" disabled checked>
-N/A</li>
+<input type="checkbox" disabled checked>N/A</li>
 </ul></blockquote>
 </div>
 </div>
@@ -298,7 +265,7 @@ N/A</li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
