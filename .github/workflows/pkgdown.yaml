@@ -20,6 +20,10 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      - name: prerequisites
+        run: |
+          brew install libgit2
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
