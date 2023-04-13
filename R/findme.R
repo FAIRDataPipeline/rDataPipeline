@@ -2,8 +2,6 @@
 #'
 #' Returns metadata associated with the calculated hash of a target file.
 #' When multiple entries exist in the data registry all are returned.
-#' 
-#' @keywords internal
 #'
 #' @param file file path
 #' @param endpoint endpoint

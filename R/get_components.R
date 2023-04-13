@@ -1,8 +1,6 @@
 #' Get H5 file components
 #'
 #' Returns the names of the items at the root of the file
-#' 
-#' @keywords internal
 #'
 #' @param filename a \code{string} specifying a filename
 #'

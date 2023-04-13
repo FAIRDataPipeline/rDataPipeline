@@ -1,6 +1,4 @@
 #' get_dataproduct
-#' 
-#' @keywords internal
 #'
 #' @param data_product data_product
 #' @param version version

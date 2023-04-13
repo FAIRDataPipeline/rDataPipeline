@@ -27,7 +27,6 @@ reference:
   contents:
   - find_read_match
   - find_write_match
-  - fdp-class
 - title: "internal"
   desc: "Internal functions"
   contents:
@@ -54,6 +53,7 @@ reference:
   - extract_id
   - fair_init
   - fair_run
+  - fdp-class
   - fdp_resolve_read
   - fdp_resolve_write
   - findme

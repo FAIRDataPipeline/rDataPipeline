@@ -1,6 +1,4 @@
 #' fair_init
-#' 
-#' @keywords internal
 #'
 #' @param name a \code{string} specifying the full name or organisation name of
 #' the \code{author}; note that at least one of name or identifier must be
