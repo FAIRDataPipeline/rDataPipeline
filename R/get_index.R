@@ -1,4 +1,6 @@
 #' get_index
+#' 
+#' @keywords internal
 #'
 #' @param write write
 #' @param data_product data_product

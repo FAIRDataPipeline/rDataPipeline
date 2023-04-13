@@ -1,6 +1,8 @@
 #' Validate fields
 #'
 #' Function to validate fields in post data
+#' 
+#' @keywords internal
 #'
 #' @param table table name as character
 #' @param data data as a named list

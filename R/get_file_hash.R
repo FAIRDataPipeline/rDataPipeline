@@ -1,6 +1,8 @@
 #' Calculate hash from file
 #'
 #' Returns the SHA1 hash of a given file
+#' 
+#' @keywords internal
 #'
 #' @param filename a \code{string} specifying a filename
 #'

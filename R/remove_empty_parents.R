@@ -1,4 +1,7 @@
 #' remove_empty_parents
+#' 
+#' @keywords internal
+#' 
 #' @param path path
 #' @param root root
 #'

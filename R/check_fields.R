@@ -1,4 +1,6 @@
 #' check_fields
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing the query

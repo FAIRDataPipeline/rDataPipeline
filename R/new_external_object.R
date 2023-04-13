@@ -1,6 +1,8 @@
 #' Post entry to external_object table
 #'
 #' Upload information to the \code{external_object} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param doi_or_unique_name a \code{string} specifying the DOI or name of the
 #' \code{external_object}

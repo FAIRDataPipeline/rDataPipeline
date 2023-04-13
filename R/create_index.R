@@ -1,4 +1,6 @@
 #' create_index
+#' 
+#' @keywords internal
 #'
 #' @param self self
 #'

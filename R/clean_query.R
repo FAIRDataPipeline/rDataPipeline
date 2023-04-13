@@ -1,6 +1,8 @@
 #' Clean query
 #'
 #' Function to clean a query and return it without an api prefix
+#' 
+#' @keywords internal
 #'
 #' @param data a \code{list} containing a valid query for the table, *e.g.*
 #' \code{list(field = value)}

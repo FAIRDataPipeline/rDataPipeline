@@ -1,6 +1,8 @@
 #' Post entry to code_run table
 #'
 #' Upload information to the \code{code_run} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param run_date the date-time of the \code{code_run}
 #' *e.g.* \code{Sys.time()} or "2010-07-11 12:15:00 BST"

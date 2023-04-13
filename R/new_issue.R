@@ -1,6 +1,8 @@
 #' Post entry to issue table
 #'
 #' Upload information to the \code{issue} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param severity an \code{integer} specifying the severity of the \code{issue}
 #' @param description a \code{string} containing a free text description of the

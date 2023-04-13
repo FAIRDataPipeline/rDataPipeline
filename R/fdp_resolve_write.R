@@ -1,4 +1,6 @@
 #' fdp_resolve_write
+#' 
+#' @keywords internal
 #'
 #' @param this_write this_write
 #' @param yaml user written config file

@@ -2,6 +2,8 @@
 #'
 #' If a data product already exists with the same name, version, and
 #' namespace, throw an error
+#' 
+#' @keywords internal
 #'
 #' @param write_dataproduct write_dataproduct
 #' @param write_version write_version

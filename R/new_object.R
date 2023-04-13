@@ -1,6 +1,8 @@
 #' Post entry to object table
 #'
 #' Upload information to the \code{object} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param description (optional) a \code{string} containing a free text
 #' description of the \code{object}

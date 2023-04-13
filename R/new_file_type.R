@@ -1,6 +1,8 @@
 #' Post entry to file_type table
 #'
 #' Upload information to the \code{file_type} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param name a \code{string} specifying the name of the file type
 #' @param extension a \code{string} specifying the filename extension

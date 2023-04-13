@@ -3,6 +3,8 @@
 #' Get the hash of the latest commit in the master branch of a particular
 #' repository. This function assumes git is installed and located in the
 #' System PATH.
+#' 
+#' @keywords internal
 #'
 #' @param repo a \code{string} specifying the github username/repository
 #'

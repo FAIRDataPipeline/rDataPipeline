@@ -1,6 +1,8 @@
 #' Post entry to storage_root table
 #'
 #' Upload information to the \code{storage_root} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param root a \code{string} specifying the URI of a
 #' \code{storage_location}, which when prepended to a \code{storage_location}

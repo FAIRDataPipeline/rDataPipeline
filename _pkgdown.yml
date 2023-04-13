@@ -27,3 +27,4 @@ reference:
   contents:
   - find_read_match
   - find_write_match
+  - fdp-class

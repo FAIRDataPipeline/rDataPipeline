@@ -1,4 +1,6 @@
 #' get_author_url
+#' 
+#' @keywords internal
 #'
 #' @param endpoint a \code{string} specifying the registry endpoint
 #'

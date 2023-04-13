@@ -1,6 +1,8 @@
 #' Post entry to keyword table
 #'
 #' Upload information to the \code{keyword} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param object_url a \code{string} specifying the URL of an \code{object}
 #' @param keyphrase a \code{string} a \code{string} containing a free text

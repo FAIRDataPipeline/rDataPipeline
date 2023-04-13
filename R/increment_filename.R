@@ -1,6 +1,8 @@
 #' increment_filename
 #'
 #' Searches directory for duplicate files and increments filename.
+#' 
+#' @keywords internal
 #'
 #' @param path path
 #'

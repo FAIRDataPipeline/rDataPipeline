@@ -1,4 +1,6 @@
 #' resolve_version
+#' 
+#' @keywords internal
 #'
 #' @param version version number
 #' @param data_product data_product

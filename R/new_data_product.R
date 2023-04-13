@@ -1,6 +1,8 @@
 #' Post entry to data_product table
 #'
 #' Upload information to the \code{data_product} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param name a \code{string} specifying the name of the \code{data_product}
 #' @param version a \code{string} specifying the version identifier of the

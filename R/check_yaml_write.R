@@ -1,4 +1,6 @@
 #' check_yaml_write
+#' 
+#' @keywords internal
 #'
 #' @param handle \code{fdp} object
 #' @param data_product a \code{string} specifying the name of the data product

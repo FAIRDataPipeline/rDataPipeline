@@ -1,4 +1,6 @@
 #' fair_run
+#' 
+#' @keywords internal
 #'
 #' @param path string
 #' @param skip don't bother checking whether the repo is clean

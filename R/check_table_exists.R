@@ -1,6 +1,8 @@
 #' Check if table exists
 #'
 #' Check if table exists in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #'

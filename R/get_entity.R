@@ -1,4 +1,6 @@
 #' Get entity from url
+#' 
+#' @keywords internal
 #'
 #' @param url a \code{string} specifying the url of an entry
 #'

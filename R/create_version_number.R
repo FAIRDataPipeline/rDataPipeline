@@ -6,6 +6,8 @@
 #' If no parameters are supplied a default version is returned
 #' \code{0.1.0}
 #' This function prioritizes download date and version over all other parameters
+#' 
+#' @keywords internal
 #'
 #' @param download_date (Optional) download_date
 #' This can either be a date or datetime

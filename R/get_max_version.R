@@ -1,6 +1,8 @@
 #' get_max_version
 #'
 #' If entry doesn't exist in the registry, return version 0.0.0
+#' 
+#' @keywords internal
 #'
 #' @param data_product data_product
 #' @param namespace_id namespace_id

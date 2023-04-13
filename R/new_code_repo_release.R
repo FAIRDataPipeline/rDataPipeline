@@ -1,6 +1,8 @@
 #' Post entry to code_repo_release table
 #'
 #' Upload information to the \code{code_repo_release} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param name a \code{string} specifying the name of an official release of
 #' code

@@ -1,4 +1,6 @@
 #' get_token
+#' 
+#' @keywords internal
 #'
 get_token <- function() {
   if (Sys.getenv("FDP_LOCAL_TOKEN") != "") {

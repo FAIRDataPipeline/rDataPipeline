@@ -1,4 +1,6 @@
 #' check_integer
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param this_field a \code{string} specifying the name of the field

@@ -1,6 +1,8 @@
 #' Post entry to licence table
 #'
 #' Upload information to the \code{licence} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param object_url a \code{string} specifying the URL of an \code{object}
 #' @param licence_info a free text \code{string} containing information about

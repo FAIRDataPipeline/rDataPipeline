@@ -1,6 +1,8 @@
 #' Download source file from URL
 #'
 #' This function will download a file from a url
+#' 
+#' @keywords internal
 #'
 #' @param source_root a \code{string} specifying the source root
 #' @param source_path a \code{string} specifying the source path

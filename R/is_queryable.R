@@ -1,6 +1,8 @@
 #' Check whether fields are queryable
 #'
 #' Check whether fields are queryable
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing the query

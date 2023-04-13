@@ -1,6 +1,8 @@
 #' Post entry to user_author table
 #'
 #' Upload information to the \code{user_author} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param user_url a \code{string} specifying the URL of an existing
 #' \code{user}

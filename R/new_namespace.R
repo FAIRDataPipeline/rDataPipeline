@@ -1,6 +1,8 @@
 #' Post entry to namespace table
 #'
 #' Upload information to the \code{namespace} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param name a \code{string} specifying the name of the namespace
 #' @param full_name (optional) a \code{string} specifying the full name of the

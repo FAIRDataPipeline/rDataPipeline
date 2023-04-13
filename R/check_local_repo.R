@@ -1,4 +1,6 @@
 #' check_local_repo
+#' 
+#' @keywords internal
 #'
 #' @param path Local repository file path
 #' @return \code{boolean}, if local repository is clean (TRUE, else FALSE)

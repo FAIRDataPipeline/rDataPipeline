@@ -1,6 +1,8 @@
 #' Post entry to author table
 #'
 #' Upload information to the \code{author} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param name a \code{string} specifying the full name or organisation name of
 #' the \code{author}; note that at least one of name or identifier must be

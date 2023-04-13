@@ -1,6 +1,8 @@
 #' Get storage location from url
 #'
 #' Get storage location entry
+#' 
+#' @keywords internal
 #'
 #' @param location the url of an entry in the storage_location table
 #'

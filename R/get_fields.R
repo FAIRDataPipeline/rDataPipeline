@@ -1,6 +1,8 @@
 #' Get fields from table
 #'
 #' Use API endpoint to produce a list of fields for a table. Requires API key.
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param endpoint a \code{string} specifying the registry endpoint

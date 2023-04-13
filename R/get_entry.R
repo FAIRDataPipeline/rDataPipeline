@@ -1,4 +1,6 @@
 #' Return all fields associated with a table entry in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param table a \code{string} specifying the name of the table
 #' @param query a \code{list} containing a valid query for the table, *e.g.*

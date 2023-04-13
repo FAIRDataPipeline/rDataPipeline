@@ -1,6 +1,8 @@
 #' random_hash
 #'
 #' Generates a random hash
+#' 
+#' @keywords internal
 #'
 #' @export
 #'

@@ -1,4 +1,6 @@
 #' resolve_read
+#' 
+#' @keywords internal
 #'
 #' @param handle an object of class \code{fdp, R6} containing metadata required
 #' by the Data Pipeline API

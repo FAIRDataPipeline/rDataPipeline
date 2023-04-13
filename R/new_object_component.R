@@ -1,6 +1,8 @@
 #' Post entry to object_component table
 #'
 #' Upload information to the \code{object_component} table in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param object_url a \code{string} specifying the URL of an existing
 #' \code{object}

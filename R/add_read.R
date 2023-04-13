@@ -11,6 +11,8 @@
 #' @param use_component (optional) use_component field
 #' @param use_version (optional) use_version field
 #' @param use_namespace (optional) use_namespace field
+#' 
+#' @keywords internal
 #'
 #' @export
 #'

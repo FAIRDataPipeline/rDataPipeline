@@ -1,6 +1,8 @@
 #' Check whether paper exists
 #'
 #' Check whether paper is in the data registry
+#' 
+#' @keywords internal
 #'
 #' @param doi doi
 #'

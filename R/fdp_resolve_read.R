@@ -1,4 +1,6 @@
 #' fdp_resolve_read
+#' 
+#' @keywords internal
 #'
 #' @param this_read this_read
 #' @param yaml user written config file
