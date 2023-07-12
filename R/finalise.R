@@ -48,8 +48,9 @@ finalise <- function(handle,
 
   if (grepl("^/", datastore)) {
     appended_datastore <- paste0("file://", datastore)
+  }
   else if (grepl("\\\\", datastore)) {
-    appended_datastore <- paste0("file://", datastore))
+    appended_datastore <- paste0("file://", datastore)
   } else {
     appended_datastore <- datastore
   }
