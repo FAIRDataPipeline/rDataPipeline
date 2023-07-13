@@ -83,7 +83,7 @@ create_version_number <- function(download_date = NULL,
 
     #  reverse date if dd/mm/yyyy or dd-mm-yyyy
     else if (grepl("[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]", tmp))
-      minor <- paste(strsplit(gsub("[^0-9]", "/", tmp), "/")[[1]][c(1, 2, 3)],
+      minor <- paste(strsplit(gsub("[^0-9]", "/", tmp), "/")[[1]][c(3, 2, 1)],
                      collapse = "/") #  reverse the date
     else if (grepl("[0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9]", tmp))
       minor <- tmp

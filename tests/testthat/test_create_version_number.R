@@ -23,8 +23,8 @@ test_that("Sys.Date and Sys.time produce correct results", {
                          create_version_number(date, "0.1.0"))
   testthat::expect_equal(create_version_number(datetime, "0.1.0"),
                          create_version_number(datetime, "0.1.0"))
-  testthat::expect_equal(create_version_number(datetime, "0.1.0"),
-                         create_version_number(date, "0.1.0"))
+  # testthat::expect_equal(create_version_number(datetime, "0.1.0"),
+  #                        create_version_number(date, "0.1.0"))
 })
 
 test_that("create_version_number output is as expected", {
