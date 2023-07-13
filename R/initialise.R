@@ -30,9 +30,13 @@ initialise <- function(config, script) {
 
   # Record config.yaml location in data registry ----------------------------
 
-  datastore_root <- yaml$run_metadata$write_data_store
+  datastore <- yaml$run_metadata$write_data_store
+  datastore_root <- datastore
   if (grepl("^/", datastore_root))
     datastore_root <- paste0("file://", datastore_root)
+  else if (grepl("\\\\", datastore_root)) {
+    datastore_root <- paste0("file://", datastore_root)
+  }
 
   config_storageroot_url <- new_storage_root(root = datastore_root,
                                              local = TRUE,
@@ -49,8 +53,10 @@ initialise <- function(config, script) {
                            endpoint = endpoint)
 
   if (is.null(config_exists)) {
+    config_path <- gsub(datastore, "", config, fixed = TRUE)
+    config_path <- gsub(datastore, "", config_path, fixed = TRUE)
     config_location_url <- new_storage_location(
-      path = config,
+      path = config_path,
       hash = config_hash,
       public = TRUE,
       storage_root_url = config_storageroot_url,
@@ -98,8 +104,10 @@ initialise <- function(config, script) {
                            endpoint = endpoint)
 
   if (is.null(script_exists)) {
+    script_path <- gsub(datastore, "", script, fixed = TRUE)
+    script_path <- gsub(datastore, "", script_path, fixed = TRUE)
     script_location_url <- new_storage_location(
-      path = script,
+      path = script_path,
       hash = script_hash,
       public = TRUE,
       storage_root_url = script_storageroot_url,
