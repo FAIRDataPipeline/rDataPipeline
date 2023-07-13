@@ -148,8 +148,8 @@ finalise <- function(handle,
         new_filename <- paste(hash, extension, sep = ".")
         new_path <- gsub(tmp_filename, new_filename, path)
         file.rename(path, new_path)
-        new_storage_location <- gsub(datastore, "", new_path)
-        new_storage_location <- gsub(datastore, "", new_storage_location)
+        new_storage_location <- gsub(datastore, "", new_path, fixed = TRUE)
+        new_storage_location <- gsub(datastore, "", new_storage_location, fixed = TRUE)
 
         # Record file location in data registry
         storage_location_url <- new_storage_location(
