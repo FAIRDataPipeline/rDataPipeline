@@ -40,7 +40,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Restore R package cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
@@ -54,13 +54,6 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: init
-        run: |
-          rDataPipeline::fair_init(
-            name = "Sonia Mitchell",
-            identifier = "https://orcid.org/0000-0003-1536-2066",
-            endpoint = "http://localhost:8000/api/")
-        shell: Rscript {0}
       - name: Test coverage
         env:
           _RUN_TESTS_: true
