@@ -22,11 +22,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Sonia Mitchell \email{sonia.mitchell@glasgow.ac.uk} (\href{https://orcid.org/0000-0003-1536-2066}{ORCID})
+\strong{Maintainer}: Ryan Field \email{ryan.field@glasgow.ac.uk} (\href{https://orcid.org/0000-0002-4424-9890}{ORCID})
 
-Other contributors:
+Authors:
 \itemize{
-  \item Ryan Field (\href{https://orcid.org/0000-0002-4424-9890}{ORCID}) [contributor]
+  \item Sonia Mitchell \email{sonia.mitchell@glasgow.ac.uk} (\href{https://orcid.org/0000-0003-1536-2066}{ORCID})
 }
 
 }
