@@ -15,3 +15,4 @@ Returns a \code{list} of fields associated with the specified entry
 \description{
 Get storage location entry
 }
+\keyword{internal}

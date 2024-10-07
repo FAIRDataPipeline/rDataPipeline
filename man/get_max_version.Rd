@@ -14,3 +14,4 @@ get_max_version(data_product, namespace_id)
 \description{
 If entry doesn't exist in the registry, return version 0.0.0
 }
+\keyword{internal}

@@ -16,3 +16,4 @@ resolve_version(version, data_product, namespace_id)
 \description{
 resolve_version
 }
+\keyword{internal}

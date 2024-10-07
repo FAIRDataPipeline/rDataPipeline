@@ -30,10 +30,11 @@ Other new functions:
 \code{\link{new_keyword}()},
 \code{\link{new_licence}()},
 \code{\link{new_namespace}()},
-\code{\link{new_object_component}()},
 \code{\link{new_object}()},
+\code{\link{new_object_component}()},
 \code{\link{new_quality_controlled}()},
 \code{\link{new_storage_location}()},
 \code{\link{new_storage_root}()}
 }
 \concept{new functions}
+\keyword{internal}

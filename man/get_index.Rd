@@ -14,3 +14,4 @@ get_index(write, data_product)
 \description{
 get_index
 }
+\keyword{internal}

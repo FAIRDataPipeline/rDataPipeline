@@ -17,3 +17,4 @@ by the Data Pipeline API}
 \description{
 check_config
 }
+\keyword{internal}

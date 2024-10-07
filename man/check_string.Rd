@@ -16,3 +16,4 @@ check_string(table, this_field, this_query)
 \description{
 check_string
 }
+\keyword{internal}

@@ -14,7 +14,7 @@ check_fields <- function(table, query, method, endpoint) {
   expected_types <- get_fields(table = table, endpoint = endpoint) %>%
     dplyr::filter(.data$field %in% fields) %>%
     dplyr::arrange(factor(.data$field, levels = fields)) %>%
-    dplyr::select(.data$data_type) %>%
+    dplyr::select("data_type") %>%
     unlist() %>%
     unname()
 

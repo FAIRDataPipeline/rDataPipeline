@@ -50,3 +50,5 @@ docs
 /test
 /tests/testthat/test
 sonia.yaml
+/venv
+/check

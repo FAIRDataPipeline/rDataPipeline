@@ -20,3 +20,4 @@ Other get functions:
 \code{\link{get_github_hash}()}
 }
 \concept{get functions}
+\keyword{internal}

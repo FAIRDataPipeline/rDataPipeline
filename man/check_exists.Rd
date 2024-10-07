@@ -19,3 +19,4 @@ doesn't
 \description{
 Check whether an entry already exists in a table (in the data registry)
 }
+\keyword{internal}

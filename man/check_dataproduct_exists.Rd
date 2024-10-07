@@ -24,3 +24,4 @@ check_dataproduct_exists(
 If a data product already exists with the same name, version, and
 namespace, throw an error
 }
+\keyword{internal}

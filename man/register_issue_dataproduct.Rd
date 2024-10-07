@@ -15,3 +15,4 @@ by the Data Pipeline API}
 \description{
 register_issue_dataproduct
 }
+\keyword{internal}

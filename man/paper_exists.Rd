@@ -12,3 +12,4 @@ paper_exists(doi)
 \description{
 Check whether paper is in the data registry
 }
+\keyword{internal}

@@ -12,3 +12,21 @@ FAIR Data Pipeline API
 For more information see
 \url{https://www.fairdatapipeline.org/}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://www.fairdatapipeline.org/rDataPipeline/}
+  \item \url{https://github.com/FAIRDataPipeline/rDataPipeline}
+  \item Report bugs at \url{https://github.com/FAIRDataPipeline/rDataPipeline/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Sonia Mitchell \email{sonia.mitchell@glasgow.ac.uk} (\href{https://orcid.org/0000-0003-1536-2066}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Ryan Field (\href{https://orcid.org/0000-0002-4424-9890}{ORCID}) [contributor]
+}
+
+}
