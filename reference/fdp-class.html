@@ -18,7 +18,7 @@ fdp-class"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rDataPipeline</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.54.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.0</span>
       </span>
     </div>
 
@@ -116,16 +116,16 @@ the <code>code_run</code> table</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>fdp$new()</code></a></p></li>
-<li><p><a href="#method-print"><code>fdp$print()</code></a></p></li>
-<li><p><a href="#method-input"><code>fdp$input()</code></a></p></li>
-<li><p><a href="#method-output"><code>fdp$output()</code></a></p></li>
-<li><p><a href="#method-output_index"><code>fdp$output_index()</code></a></p></li>
-<li><p><a href="#method-raise_issue"><code>fdp$raise_issue()</code></a></p></li>
-<li><p><a href="#method-finalise_output_hash"><code>fdp$finalise_output_hash()</code></a></p></li>
-<li><p><a href="#method-finalise_output_url"><code>fdp$finalise_output_url()</code></a></p></li>
-<li><p><a href="#method-clone"><code>fdp$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-fdp-new"><code>fdp$new()</code></a></p></li>
+<li><p><a href="#method-fdp-print"><code>fdp$print()</code></a></p></li>
+<li><p><a href="#method-fdp-input"><code>fdp$input()</code></a></p></li>
+<li><p><a href="#method-fdp-output"><code>fdp$output()</code></a></p></li>
+<li><p><a href="#method-fdp-output_index"><code>fdp$output_index()</code></a></p></li>
+<li><p><a href="#method-fdp-raise_issue"><code>fdp$raise_issue()</code></a></p></li>
+<li><p><a href="#method-fdp-finalise_output_hash"><code>fdp$finalise_output_hash()</code></a></p></li>
+<li><p><a href="#method-fdp-finalise_output_url"><code>fdp$finalise_output_url()</code></a></p></li>
+<li><p><a href="#method-fdp-clone"><code>fdp$clone()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-fdp-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>fdp</code> object</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -180,15 +180,23 @@ the <code>code_run</code> table</p></dd>
 <p>Returns a new <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-print"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Print method</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">fdp</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+<div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>...</code></dt>
+<dd><p>additional parameters, currently none are used</p></dd>
 
-</div><p></p><hr><a id="method-input"></a><div class="section">
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-fdp-input"></a><div class="section">
 <h3 id="method-input-">Method <code>input()</code><a class="anchor" aria-label="anchor" href="#method-input-"></a></h3>
 <p>Record <code>code_run</code> inputs in <code>fdp</code> object</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
@@ -204,7 +212,7 @@ the <code>code_run</code> table</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>data_product</code></dt>
 <dd><p>a <code>string</code> specifying the name of the data
 product, used as a reference</p></dd>
@@ -247,7 +255,7 @@ in the local data store</p></dd>
 <p>Returns an updated <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-output"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-output"></a><div class="section">
 <h3 id="method-output-">Method <code>output()</code><a class="anchor" aria-label="anchor" href="#method-output-"></a></h3>
 <p>Record <code>code_run</code> outputs in <code>fdp</code> object</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
@@ -265,7 +273,7 @@ in the local data store</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>data_product</code></dt>
 <dd><p>a <code>string</code> specifying the name of the data
 product, used as a reference</p></dd>
@@ -317,7 +325,7 @@ the data product component</p></dd>
 <p>Returns an updated <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-output_index"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-output_index"></a><div class="section">
 <h3 id="method-output-index-">Method <code>output_index()</code><a class="anchor" aria-label="anchor" href="#method-output-index-"></a></h3>
 <p>Return index of data product recorded in <code>fdp</code> object
 so that an issue may be attached</p><div class="section">
@@ -326,7 +334,7 @@ so that an issue may be attached</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>data_product</code></dt>
 <dd><p>a <code>string</code> specifying the name of the data
 product, used as output in the <code>code_run</code></p></dd>
@@ -354,7 +362,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 <p>Returns an index used to identify the data product</p>
 </div>
 
-</div><p></p><hr><a id="method-raise_issue"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-raise_issue"></a><div class="section">
 <h3 id="method-raise-issue-">Method <code><a href="raise_issue.html">raise_issue()</a></code><a class="anchor" aria-label="anchor" href="#method-raise-issue-"></a></h3>
 <p>Record <code>issue</code> in <code>fdp</code> object</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
@@ -371,7 +379,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>index</code></dt>
 <dd><p>a <code>numeric</code> index, used to identify each input and
 output in the <code>fdp</code> object</p></dd>
@@ -419,7 +427,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 <p>Returns an updated <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-finalise_output_hash"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-finalise_output_hash"></a><div class="section">
 <h3 id="method-finalise-output-hash-">Method <code>finalise_output_hash()</code><a class="anchor" aria-label="anchor" href="#method-finalise-output-hash-"></a></h3>
 <p>Record file hash and update path name in <code>fdp</code> object</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
@@ -436,7 +444,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>use_data_product</code></dt>
 <dd><p>a <code>string</code> specifying the name of the data
 product, used as output in the <code>code_run</code></p></dd>
@@ -483,7 +491,7 @@ is now the hash of the file) of the data product in the local data store</p></dd
 <p>Returns an updated <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-finalise_output_url"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-finalise_output_url"></a><div class="section">
 <h3 id="method-finalise-output-url-">Method <code>finalise_output_url()</code><a class="anchor" aria-label="anchor" href="#method-finalise-output-url-"></a></h3>
 <p>Record <code>data_product</code> and component URLs in <code>fdp</code>
 object</p><div class="section">
@@ -498,7 +506,7 @@ object</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>use_data_product</code></dt>
 <dd><p>a <code>string</code> specifying the name of the data
 product, used as output in the <code>code_run</code></p></dd>
@@ -531,7 +539,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 <p>Returns an updated <code>fdp</code> object</p>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-fdp-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
@@ -539,7 +547,7 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -559,11 +567,11 @@ the data product resides, used as input in the <code>code_run</code></p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sonia Mitchell.</p>
+  <p></p><p>Developed by Sonia Mitchell, Ryan Field.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
