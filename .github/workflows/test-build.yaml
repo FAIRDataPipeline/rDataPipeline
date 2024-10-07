@@ -59,7 +59,7 @@ jobs:
           cd ../FAIR-CLI
           poetry install
           source $VENV
-          cd ${{ github.workspace }}
+          cd '${{ github.workspace }}'
           fair registry install --version main
           fair init --ci
           fair registry start
