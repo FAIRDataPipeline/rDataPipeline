@@ -41,8 +41,6 @@ jobs:
         with:
           python-version: '3.12'
           #architecture: 'x64'
-      - name: Install local registry
-        run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
       - name: Checkout FAIRDataPipeline/FAIR-CLI
         uses: actions/checkout@v3
         with:
@@ -62,6 +60,7 @@ jobs:
           poetry install
           source .venv/bin/activate
           cd ${{ github.workspace }}
+          fair registry install --version main
           fair init --ci
           fair registry start
         shell: bash
@@ -69,7 +68,6 @@ jobs:
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
-              rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
       - name: Check
