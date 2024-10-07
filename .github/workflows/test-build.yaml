@@ -17,14 +17,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-#          - {os: windows-latest, r: 'release'}
-#          - {os: macOS-latest, r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-latest, r: 'release'}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -37,7 +37,7 @@ jobs:
             rcmdcheck
             remotes
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           architecture: 'x64'
@@ -64,6 +64,7 @@ jobs:
           cd ${{ github.workspace }}
           fair init --ci
           fair registry start
+        shell: bash
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
@@ -71,14 +72,6 @@ jobs:
               rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-      - name: Install R API system requirements (ubuntu-20.04)
-        if: matrix.config.os == 'ubuntu-20.04'
-        run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
