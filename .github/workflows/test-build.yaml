@@ -54,28 +54,16 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      - name: Install and initialise FAIR CLI on Mac / Ubuntu
+      - name: Install and initialise FAIR CLI
         run: |
           cd ../FAIR-CLI
           poetry install
-          source .venv/bin/activate
+          source $VENV
           cd ${{ github.workspace }}
           fair registry install --version main
           fair init --ci
           fair registry start
-        if: runner.os != 'Windows'
-
-      - name: Install and initialise FAIR CLI on windows
-        run: |
-          cd ../FAIR-CLI
-          poetry install
-          .venv/bin/activate.bat
-          cd ${{ github.workspace }}
-          fair registry install --version main
-          fair init --ci
-          fair registry start
-        if: runner.os == 'Windows'
-        shell: cmd
+        shell: bash
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
