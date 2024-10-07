@@ -4,7 +4,7 @@
 \alias{new_storage_root}
 \title{Post entry to storage_root table}
 \usage{
-new_storage_root(root, local, endpoint = "http://localhost:8000/api/")
+new_storage_root(root, local, endpoint = "http://127.0.0.1:8000:8000/api/")
 }
 \arguments{
 \item{root}{a \code{string} specifying the URI of a

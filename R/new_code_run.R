@@ -31,7 +31,7 @@ new_code_run <- function(run_date,
                          submission_script_url,
                          inputs_urls = list(),
                          outputs_urls = list(),
-                         endpoint = "http://localhost:8000/api/") {
+                         endpoint = "http://127.0.0.1:8000:8000/api/") {
 
   data <- list(run_date = run_date,
                inputs = inputs_urls,

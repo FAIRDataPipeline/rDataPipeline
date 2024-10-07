@@ -19,7 +19,7 @@ new_code_repo_release <- function(name,
                                   version,
                                   object_url,
                                   website,
-                                  endpoint = "http://localhost:8000/api/") {
+                                  endpoint = "http://127.0.0.1:8000:8000/api/") {
 
   data <- list(name = name,
                version = version,

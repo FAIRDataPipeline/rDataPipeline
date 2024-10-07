@@ -4,7 +4,7 @@
 \alias{new_author}
 \title{Post entry to author table}
 \usage{
-new_author(name, identifier, endpoint = "http://localhost:8000/api/")
+new_author(name, identifier, endpoint = "http://127.0.0.1:8000:8000/api/")
 }
 \arguments{
 \item{name}{a \code{string} specifying the full name or organisation name of

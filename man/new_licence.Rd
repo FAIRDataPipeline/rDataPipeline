@@ -4,7 +4,7 @@
 \alias{new_licence}
 \title{Post entry to licence table}
 \usage{
-new_licence(object_url, licence_info, endpoint = "http://localhost:8000/api/")
+new_licence(object_url, licence_info, endpoint = "http://127.0.0.1:8000:8000/api/")
 }
 \arguments{
 \item{object_url}{a \code{string} specifying the URL of an \code{object}}

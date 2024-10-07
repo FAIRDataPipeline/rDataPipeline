@@ -10,7 +10,7 @@
 #' @return Returns a \code{data.frame} of fields and their attributes set to
 #' "none"
 #'
-get_fields <- function(table, endpoint = "http://localhost:8000/api/") {
+get_fields <- function(table, endpoint = "http://127.0.0.1:8000:8000/api/") {
 
   # Add token to options request header
   key <- get_token()

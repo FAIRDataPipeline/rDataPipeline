@@ -19,7 +19,7 @@
 get_existing <- function(table,
                          limit_results = TRUE,
                          detail = "all",
-                         endpoint = "http://localhost:8000/api/") {
+                         endpoint = "http://127.0.0.1:8000:8000/api/") {
 
   if (!check_table_exists(table))
     usethis::ui_stop(paste(

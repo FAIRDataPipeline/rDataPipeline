@@ -21,7 +21,7 @@ new_storage_location <- function(path,
                                  hash,
                                  public,
                                  storage_root_url,
-                                 endpoint = "http://localhost:8000/api/") {
+                                 endpoint = "http://127.0.0.1:8000:8000/api/") {
   data <- list(path = path,
                hash = hash,
                storage_root = storage_root_url)

@@ -30,7 +30,7 @@ new_external_object <- function(doi_or_unique_name,
                                 description,
                                 data_product_url,
                                 original_store_url,
-                                endpoint = "http://localhost:8000/api/") {
+                                endpoint = "http://127.0.0.1:8000:8000/api/") {
 
   data <- list(doi_or_unique_name = doi_or_unique_name,
                release_date = release_date,
