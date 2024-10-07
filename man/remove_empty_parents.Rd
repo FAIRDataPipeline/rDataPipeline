@@ -14,3 +14,4 @@ remove_empty_parents(path, root)
 \description{
 remove_empty_parents
 }
+\keyword{internal}

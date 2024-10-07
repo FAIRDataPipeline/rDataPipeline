@@ -49,20 +49,20 @@ the \code{code_run} table}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{fdp$new()}}
-\item \href{#method-print}{\code{fdp$print()}}
-\item \href{#method-input}{\code{fdp$input()}}
-\item \href{#method-output}{\code{fdp$output()}}
-\item \href{#method-output_index}{\code{fdp$output_index()}}
-\item \href{#method-raise_issue}{\code{fdp$raise_issue()}}
-\item \href{#method-finalise_output_hash}{\code{fdp$finalise_output_hash()}}
-\item \href{#method-finalise_output_url}{\code{fdp$finalise_output_url()}}
-\item \href{#method-clone}{\code{fdp$clone()}}
+\item \href{#method-fdp-new}{\code{fdp$new()}}
+\item \href{#method-fdp-print}{\code{fdp$print()}}
+\item \href{#method-fdp-input}{\code{fdp$input()}}
+\item \href{#method-fdp-output}{\code{fdp$output()}}
+\item \href{#method-fdp-output_index}{\code{fdp$output_index()}}
+\item \href{#method-fdp-raise_issue}{\code{fdp$raise_issue()}}
+\item \href{#method-fdp-finalise_output_hash}{\code{fdp$finalise_output_hash()}}
+\item \href{#method-fdp-finalise_output_url}{\code{fdp$finalise_output_url()}}
+\item \href{#method-fdp-clone}{\code{fdp$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-fdp-new"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{fdp} object
 \subsection{Usage}{
@@ -106,18 +106,25 @@ Returns a new \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-fdp-print"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-print}{}}}
 \subsection{Method \code{print()}}{
 Print method
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{fdp$print(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{additional parameters, currently none are used}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-input"></a>}}
-\if{latex}{\out{\hypertarget{method-input}{}}}
+\if{html}{\out{<a id="method-fdp-input"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-input}{}}}
 \subsection{Method \code{input()}}{
 Record \code{code_run} inputs in \code{fdp} object
 \subsection{Usage}{
@@ -163,8 +170,8 @@ Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-output"></a>}}
-\if{latex}{\out{\hypertarget{method-output}{}}}
+\if{html}{\out{<a id="method-fdp-output"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-output}{}}}
 \subsection{Method \code{output()}}{
 Record \code{code_run} outputs in \code{fdp} object
 \subsection{Usage}{
@@ -217,8 +224,8 @@ Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-output_index"></a>}}
-\if{latex}{\out{\hypertarget{method-output_index}{}}}
+\if{html}{\out{<a id="method-fdp-output_index"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-output_index}{}}}
 \subsection{Method \code{output_index()}}{
 Return index of data product recorded in \code{fdp} object
 so that an issue may be attached
@@ -248,8 +255,8 @@ Returns an index used to identify the data product
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-raise_issue"></a>}}
-\if{latex}{\out{\hypertarget{method-raise_issue}{}}}
+\if{html}{\out{<a id="method-fdp-raise_issue"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-raise_issue}{}}}
 \subsection{Method \code{raise_issue()}}{
 Record \code{issue} in \code{fdp} object
 \subsection{Usage}{
@@ -299,8 +306,8 @@ Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-finalise_output_hash"></a>}}
-\if{latex}{\out{\hypertarget{method-finalise_output_hash}{}}}
+\if{html}{\out{<a id="method-fdp-finalise_output_hash"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-finalise_output_hash}{}}}
 \subsection{Method \code{finalise_output_hash()}}{
 Record file hash and update path name in \code{fdp} object
 \subsection{Usage}{
@@ -349,8 +356,8 @@ Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-finalise_output_url"></a>}}
-\if{latex}{\out{\hypertarget{method-finalise_output_url}{}}}
+\if{html}{\out{<a id="method-fdp-finalise_output_url"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-finalise_output_url}{}}}
 \subsection{Method \code{finalise_output_url()}}{
 Record \code{data_product} and component URLs in \code{fdp}
 object
@@ -389,8 +396,8 @@ Returns an updated \code{fdp} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-fdp-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-fdp-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

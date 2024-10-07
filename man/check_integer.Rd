@@ -18,3 +18,4 @@ check_integer(table, this_field, query_class, this_query)
 \description{
 check_integer
 }
+\keyword{internal}

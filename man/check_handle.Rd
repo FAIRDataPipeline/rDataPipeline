@@ -19,3 +19,4 @@ by the Data Pipeline API}
 \description{
 check_handle
 }
+\keyword{internal}

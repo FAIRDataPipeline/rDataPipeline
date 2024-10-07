@@ -15,3 +15,5 @@ README.md
 ^config.yaml$
 ^cran-comments.md$
 ^software-checklist.md$
+^check$
+^venv$

@@ -5,7 +5,7 @@
 #' @name fdp-class
 #' @rdname fdp-class
 #'
-fdp <- R6::R6Class("fdp", list(
+fdp <- R6::R6Class("fdp", public = list(
   #' @field yaml a \code{list} containing the contents of the working
   #' config.yaml
   #' @field fdp_config_dir a \code{string} specifying the directory passed
@@ -80,7 +80,7 @@ fdp <- R6::R6Class("fdp", list(
   },
 
   #' @description Print method
-  #'
+  #' @param ... additional parameters, currently none are used
   #' @export
   #'
   print = function(...) {

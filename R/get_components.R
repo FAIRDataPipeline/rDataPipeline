@@ -18,7 +18,7 @@ get_components <- function(filename) {
   tmp <- rhdf5::H5Fopen(filename) %>%
     h5ls() %>%
     dplyr::filter(.data$name == "array" | .data$name == "table") %>%
-    dplyr::select(.data$group) %>%
+    dplyr::select("group") %>%
     unlist() %>%
     unname()
 

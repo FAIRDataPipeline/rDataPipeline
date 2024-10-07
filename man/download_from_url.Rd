@@ -24,3 +24,4 @@ Other download functions:
 \code{\link{download_from_database}()}
 }
 \concept{download functions}
+\keyword{internal}

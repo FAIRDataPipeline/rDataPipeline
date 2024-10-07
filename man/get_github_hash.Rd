@@ -22,3 +22,4 @@ Other get functions:
 \code{\link{get_file_hash}()}
 }
 \concept{get functions}
+\keyword{internal}

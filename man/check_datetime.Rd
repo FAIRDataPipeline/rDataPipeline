@@ -18,3 +18,4 @@ check_datetime(table, this_field, query_class, this_query)
 \description{
 check_datetime
 }
+\keyword{internal}

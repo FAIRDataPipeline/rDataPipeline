@@ -14,3 +14,4 @@ check_yaml_write(handle, data_product)
 \description{
 check_yaml_write
 }
+\keyword{internal}

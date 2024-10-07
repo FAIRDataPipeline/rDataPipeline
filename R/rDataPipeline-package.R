@@ -25,4 +25,4 @@
 #' @importFrom utils download.file read.csv unzip write.csv type.convert
 #' @import yaml
 #'
-NULL
+"_PACKAGE"

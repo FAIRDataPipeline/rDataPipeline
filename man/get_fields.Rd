@@ -18,3 +18,4 @@ Returns a \code{data.frame} of fields and their attributes set to
 \description{
 Use API endpoint to produce a list of fields for a table. Requires API key.
 }
+\keyword{internal}

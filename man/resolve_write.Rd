@@ -18,3 +18,4 @@ missing, \code{file_type} will be read from the config file}
 \description{
 resolve_data_product
 }
+\keyword{internal}

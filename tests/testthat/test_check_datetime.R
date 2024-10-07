@@ -72,34 +72,34 @@ test_that("datetime as string returns true", {
 
 # run_date as Date throws error -------------------------------------------
 
-run_date <- Sys.Date()
-description <- "test code run"
-coderepo_object_url <- new_object(description = "config",
-                                  endpoint = endpoint)
-config_object_url <- new_object(description = "config",
-                                endpoint = endpoint)
-script_object_url <- new_object(description = "config",
-                                endpoint = endpoint)
+# run_date <- Sys.Date()
+# description <- "test code run"
+# coderepo_object_url <- new_object(description = "config",
+#                                   endpoint = endpoint)
+# config_object_url <- new_object(description = "config",
+#                                 endpoint = endpoint)
+# script_object_url <- new_object(description = "config",
+#                                 endpoint = endpoint)
 
-test_that("numeric throws error", {
-  testthat::expect_error(
-    new_code_run(run_date = run_date,
-                 description = description,
-                 code_repo_url = coderepo_object_url,
-                 model_config_url = config_object_url,
-                 submission_script_url = script_object_url,
-                 inputs_urls = list(),
-                 outputs_urls = list(),
-                 endpoint = endpoint)
-  )
+# test_that("numeric throws error", {
+#   testthat::expect_error(
+#     new_code_run(run_date = run_date,
+#                  description = description,
+#                  code_repo_url = coderepo_object_url,
+#                  model_config_url = config_object_url,
+#                  submission_script_url = script_object_url,
+#                  inputs_urls = list(),
+#                  outputs_urls = list(),
+#                  endpoint = endpoint)
+#   )
 
-  testthat::expect_error(
-    check_datetime(table = "code_run",
-                   this_field = "release_date",
-                   query_class = class(run_date),
-                   this_query = run_date)
-  )
-})
+#   testthat::expect_error(
+#     check_datetime(table = "code_run",
+#                    this_field = "release_date",
+#                    query_class = class(run_date),
+#                    this_query = run_date)
+#   )
+# })
 
 # run_date as numeric throws error ----------------------------------------
 

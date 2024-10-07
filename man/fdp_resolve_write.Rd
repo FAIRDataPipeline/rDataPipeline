@@ -14,3 +14,4 @@ fdp_resolve_write(this_write, yaml)
 \description{
 fdp_resolve_write
 }
+\keyword{internal}

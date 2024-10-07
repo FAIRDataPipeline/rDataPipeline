@@ -12,3 +12,4 @@ increment_filename(path)
 \description{
 Searches directory for duplicate files and increments filename.
 }
+\keyword{internal}

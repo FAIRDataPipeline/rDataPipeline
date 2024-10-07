@@ -49,3 +49,4 @@ Other new functions:
 \code{\link{new_user_author}()}
 }
 \concept{new functions}
+\keyword{internal}

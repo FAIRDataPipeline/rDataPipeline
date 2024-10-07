@@ -21,3 +21,4 @@ entries in a table
 \description{
 Retrieve IDs for particular entries or all entries in a table
 }
+\keyword{internal}

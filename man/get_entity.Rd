@@ -12,3 +12,4 @@ get_entity(url)
 \description{
 Get entity from url
 }
+\keyword{internal}

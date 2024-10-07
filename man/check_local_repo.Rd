@@ -15,3 +15,4 @@ check_local_repo(path)
 \description{
 check_local_repo
 }
+\keyword{internal}

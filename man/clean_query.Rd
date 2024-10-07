@@ -15,3 +15,4 @@ clean_query(data, endpoint)
 \description{
 Function to clean a query and return it without an api prefix
 }
+\keyword{internal}
