@@ -65,6 +65,13 @@ jobs:
           fair registry start
         shell: bash
 
+      - name: Copy token on windows
+        run: |
+          mkdir -p C:/Users/runneradmin/Documents/.fair/registry/
+          cp C:/Users/runneradmin/.fair/registry/token C:/Users/runneradmin/Documents/.fair/registry/token
+        shell: bash
+        if: runner.os == 'Windows'
+
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
