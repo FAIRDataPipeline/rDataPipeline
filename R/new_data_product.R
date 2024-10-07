@@ -19,7 +19,7 @@ new_data_product <- function(name,
                              version,
                              object_url,
                              namespace_url,
-                             endpoint = "http://127.0.0.1:8000:8000/api/") {
+                             endpoint = "http://127.0.0.1:8000/api/") {
 
   post_data(table = "data_product",
             data =  list(name = name,

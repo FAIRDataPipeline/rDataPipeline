@@ -21,7 +21,7 @@ check_dataproduct_exists <- function(write_dataproduct,
                                  namespace = write_namespace_id),
                             endpoint = endpoint)
 
-  write_namespace_url <- file.path("http://127.0.0.1:8000:8000", "api",
+  write_namespace_url <- file.path("http://127.0.0.1:8000", "api",
                                    "namespace", write_namespace_id)
   write_namespace <- get_entity(write_namespace_url)$name
 

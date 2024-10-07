@@ -20,7 +20,7 @@ new_object <- function(description,
                        storage_location_url,
                        authors_url,
                        file_type_url,
-                       endpoint = "http://127.0.0.1:8000:8000/api/") {
+                       endpoint = "http://127.0.0.1:8000/api/") {
 
   data <- list()
 
