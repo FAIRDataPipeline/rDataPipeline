@@ -26,7 +26,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Sonia Mitchell \email{sonia.mitchell@glasgow.ac.uk} (\href{https://orcid.org/0000-0003-1536-2066}{ORCID})
+  \item Sonia Mitchell (\href{https://orcid.org/0000-0003-1536-2066}{ORCID})
 }
 
 }
