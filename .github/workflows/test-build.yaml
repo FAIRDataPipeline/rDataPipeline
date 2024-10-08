@@ -40,9 +40,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          #architecture: 'x64'
       - name: Checkout FAIRDataPipeline/FAIR-CLI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: FAIRDataPipeline/FAIR-CLI
           path: FAIR-CLI
@@ -86,7 +85,7 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
       - name: Show testthat output
-        if: always()
+        if: ${{ !cancelled() }}
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
       - name: Upload check results
