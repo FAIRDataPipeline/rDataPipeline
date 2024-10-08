@@ -4,7 +4,7 @@
 \alias{new_quality_controlled}
 \title{Post entry to quality_controlled table}
 \usage{
-new_quality_controlled(object_url, endpoint = "http://localhost:8000/api/")
+new_quality_controlled(object_url, endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{object_url}{a \code{string} specifying the URL of an \code{object}}

@@ -33,7 +33,7 @@ create_config <- function(path,
 
   # Generate run_metadata block
   run_metadata <- list(description = description,
-                       local_data_registry_url = "http://localhost:8000/api/",
+                       local_data_registry_url = "http://127.0.0.1:8000/api/",
                        remote_data_registry_url = "https://data.scrc.uk/api/",
                        default_input_namespace = input_namespace,
                        default_output_namespace = output_namespace,

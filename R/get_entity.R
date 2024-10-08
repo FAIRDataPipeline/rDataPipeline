@@ -11,7 +11,7 @@ get_entity <- function(url) {
 
   # Sometimes an error is returned from the local registry:
   #   "Error in curl::curl_fetch_memory(url, handle = handle) :
-  #    Failed to connect to localhost port 8000: Connection refused"
+  #    Failed to connect to 127.0.0.1:8000 port 8000: Connection refused"
   # Repeating the action works eventually...
   continue <- TRUE
   while (continue) {

@@ -4,7 +4,7 @@
 \alias{get_id}
 \title{Get ID}
 \usage{
-get_id(table, query = list(), endpoint = "http://localhost:8000/api/")
+get_id(table, query = list(), endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}

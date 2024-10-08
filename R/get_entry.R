@@ -10,7 +10,7 @@
 #' @export
 #' @family get functions
 #'
-get_entry <- function(table, query, endpoint = "http://localhost:8000/api/") {
+get_entry <- function(table, query, endpoint = "http://127.0.0.1:8000/api/") {
 
   key <- get_token()
   h <- c(Authorization = paste("token", key))

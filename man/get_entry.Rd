@@ -4,7 +4,7 @@
 \alias{get_entry}
 \title{Return all fields associated with a table entry in the data registry}
 \usage{
-get_entry(table, query, endpoint = "http://localhost:8000/api/")
+get_entry(table, query, endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}

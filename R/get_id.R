@@ -14,7 +14,7 @@
 #'
 get_id <- function(table,
                    query = list(),
-                   endpoint = "http://localhost:8000/api/") {
+                   endpoint = "http://127.0.0.1:8000/api/") {
 
   output <- get_entry(table, query, endpoint)
 

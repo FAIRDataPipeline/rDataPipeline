@@ -14,7 +14,7 @@
 #'
 new_user_author <- function(user_url,
                             author_url,
-                            endpoint = "http://localhost:8000/api/") {
+                            endpoint = "http://127.0.0.1:8000/api/") {
 
   data <- list(user = user_url,
                author = author_url)

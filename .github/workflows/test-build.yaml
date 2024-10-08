@@ -3,9 +3,6 @@ on:
     branches:
       - '*'
   workflow_dispatch:
-#  pull_request:
-#    branches:
-#      - master
 
 jobs:
   R-CMD-check:
@@ -17,14 +14,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-#          - {os: windows-latest, r: 'release'}
-#          - {os: macOS-latest, r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-latest, r: 'release'}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -37,14 +34,11 @@ jobs:
             rcmdcheck
             remotes
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
-          architecture: 'x64'
-      - name: Install local registry
-        run: curl -fsSL https://data.scrc.uk/static/localregistry.sh | /bin/bash -s -- -b main
+          python-version: '3.12'
       - name: Checkout FAIRDataPipeline/FAIR-CLI
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: FAIRDataPipeline/FAIR-CLI
           path: FAIR-CLI
@@ -60,25 +54,25 @@ jobs:
         run: |
           cd ../FAIR-CLI
           poetry install
-          source .venv/bin/activate
-          cd ${{ github.workspace }}
+          source $VENV
+          cd '${{ github.workspace }}'
+          fair registry install --version main
           fair init --ci
           fair registry start
+        shell: bash
+
+      - name: Copy token on windows
+        run: |
+          mkdir -p C:/Users/runneradmin/Documents/.fair/registry/
+          cp C:/Users/runneradmin/.fair/registry/token C:/Users/runneradmin/Documents/.fair/registry/token
+        shell: bash
+        if: runner.os == 'Windows'
 
       - name: Install R API system requirements (macOS-latest)
         if: runner.os == 'macOS'
         run : |
-              rm '/usr/local/bin/gfortran'
               brew install hdf5
               brew install gdal
-      - name: Install R API system requirements (ubuntu-20.04)
-        if: matrix.config.os == 'ubuntu-20.04'
-        run: |
-          while read -r cmd
-          do
-            eval sudo $cmd
-          done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "20.04"), sep = "\n")')
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
@@ -88,12 +82,14 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
       - name: Show testthat output
-        if: always()
+        if: ${{ !cancelled() }}
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
       - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+          overwrite: true
+          include-hidden-files: true

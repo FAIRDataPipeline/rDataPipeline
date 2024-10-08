@@ -12,7 +12,7 @@ new_code_run(
   submission_script_url,
   inputs_urls = list(),
   outputs_urls = list(),
-  endpoint = "http://localhost:8000/api/"
+  endpoint = "http://127.0.0.1:8000/api/"
 )
 }
 \arguments{

@@ -9,7 +9,7 @@ new_storage_location(
   hash,
   public,
   storage_root_url,
-  endpoint = "http://localhost:8000/api/"
+  endpoint = "http://127.0.0.1:8000/api/"
 )
 }
 \arguments{

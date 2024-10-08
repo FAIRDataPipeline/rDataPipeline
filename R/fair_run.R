@@ -7,7 +7,7 @@
 #' @export
 #'
 fair_run <- function(path = "config.yaml",
-                     endpoint = "http://localhost:8000/api/",
+                     endpoint = "http://127.0.0.1:8000/api/",
                      skip = FALSE) {
 
   # Save names in data store

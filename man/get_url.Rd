@@ -4,7 +4,7 @@
 \alias{get_url}
 \title{Get URL}
 \usage{
-get_url(table, query = list(), endpoint = "http://localhost:8000/api/")
+get_url(table, query = list(), endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}

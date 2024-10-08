@@ -4,7 +4,7 @@
 \alias{fair_init}
 \title{fair_init}
 \usage{
-fair_init(name, identifier, endpoint = "http://localhost:8000/api/")
+fair_init(name, identifier, endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{name}{a \code{string} specifying the full name or organisation name of

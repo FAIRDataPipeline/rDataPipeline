@@ -4,7 +4,7 @@
 \alias{get_fields}
 \title{Get fields from table}
 \usage{
-get_fields(table, endpoint = "http://localhost:8000/api/")
+get_fields(table, endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{table}{a \code{string} specifying the name of the table}

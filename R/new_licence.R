@@ -13,7 +13,7 @@
 #'
 new_licence <- function(object_url,
                         licence_info,
-                        endpoint = "http://localhost:8000/api/") {
+                        endpoint = "http://127.0.0.1:8000/api/") {
 
   post_data(table = "licence",
             data =  list(object = object_url,

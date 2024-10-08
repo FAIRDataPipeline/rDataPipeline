@@ -4,7 +4,7 @@
 \alias{new_user_author}
 \title{Post entry to user_author table}
 \usage{
-new_user_author(user_url, author_url, endpoint = "http://localhost:8000/api/")
+new_user_author(user_url, author_url, endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{user_url}{a \code{string} specifying the URL of an existing

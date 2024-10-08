@@ -4,7 +4,7 @@
 \alias{get_tables}
 \title{Get tables from registry}
 \usage{
-get_tables(endpoint = "http://localhost:8000/api/")
+get_tables(endpoint = "http://127.0.0.1:8000/api/")
 }
 \arguments{
 \item{endpoint}{a \code{string} specifying the registry endpoint}
