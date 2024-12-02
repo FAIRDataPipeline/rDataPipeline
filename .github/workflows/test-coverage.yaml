@@ -47,7 +47,6 @@ jobs:
           source $VENV
           cd '${{ github.workspace }}'
           fair registry install --version main
-          fair init --ci
           fair registry start
         shell: bash
 
