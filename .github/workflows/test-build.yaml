@@ -1,9 +1,8 @@
-on:
+on: 
   push:
-    branches:
-      - '*'
   workflow_dispatch:
-
+  schedule:
+    - cron: "0 9 * * 1" # Run Every Monday at 9AM
 jobs:
   R-CMD-check:
     # If the commit message isn't [skip ci]
