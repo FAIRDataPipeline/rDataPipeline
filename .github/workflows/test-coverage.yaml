@@ -27,7 +27,7 @@ jobs:
             pkgdown
             remotes
 
-       - name: Checkout FAIRDataPipeline/FAIR-CLI
+      - name: Checkout FAIRDataPipeline/FAIR-CLI
         uses: actions/checkout@v4
         with:
           repository: FAIRDataPipeline/FAIR-CLI
